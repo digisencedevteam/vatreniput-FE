@@ -35,6 +35,7 @@ export const Home = () => {
           <CustomButton
             variant="contained"
             onClick={() => navigate('/login')}
+            color="secondary"
           >
             This is custom button - LOGIN
           </CustomButton>
