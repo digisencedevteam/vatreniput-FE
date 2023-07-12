@@ -1,38 +1,74 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { BsFillLockFill } from 'react-icons/bs';
-import Typography from '@mui/material/Typography';
 import { Helmet } from 'react-helmet';
+import { CssBaseline, Paper, Checkbox } from '@mui/material';
+import { BsFillLockFill } from 'react-icons/bs';
+import { styled } from '@mui/system';
+import BackgroundImage from './../../../assets/img/backgoundLogin.jpg';
+import { Grid, Typography, TextField, Button, Link, FormControlLabel, Avatar } from '@mui/material';
 
-function Copyright(props: any) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  height: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundImage: `url(${BackgroundImage})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+}));
+
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  marginTop: '5%',
+  color: theme.palette.secondary.contrastText,
+}));
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  color: theme.palette.secondary.contrastText,
+  margin: '2%'
+}));
+const StyledTextField = styled(TextField)(({ theme }) => ({
+  width: '100%',
+  color: theme.palette.secondary.contrastText,
+  borderColor: theme.palette.secondary.textFieldBorder,
+}));
+const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
+  color: theme.palette.secondary.contrastText,
+}));
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginTop: '3px',
+  marginBottom: '2px',
+  backgroundColor: theme.palette.secondary.contrastText,
+}));
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: theme.palette.secondary.contrastText,
+}));
+const ToggleButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  border: 'solid',
+  color: theme.palette.secondary.contrastText,
+  cursor: 'pointer',
+  fontSize: 14,
+  outline: 'none',
+  margin: 20,
+  padding: 20,
+}));
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  maxWidth: '400px',
+  paddingLeft: '2%',
+  paddingRight: '2%',
+  backgroundColor: theme.palette.secondary.formBackground,
+  color: theme.palette.secondary.contrastText,
+}));
+
+interface paletteType {
+  isDarkMode: boolean,
+  toggleDarkMode: () => void;
 }
 
-export default function Login() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
+
+  const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
@@ -50,106 +86,63 @@ export default function Login() {
           content="This is the login page of vatreni put application."
         />
       </Helmet>
-      <Grid container component="main" sx={{ height: '100vh' }}>
-        <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundImage:
-              'url(https://source.unsplash.com/random?wallpapers)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light'
-                ? t.palette.grey[50]
-                : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
-        >
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <BsFillLockFill />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Log in
-            </Typography>
-            <Box
-              component="form"
-              noValidate
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox value="remember" color="primary" />
-                }
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Log In
-              </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+      <CssBaseline />
+      <StyledGrid container as="main">
+        <StyledPaper elevation={6}>
+          <StyledAvatar>
+            <BsFillLockFill />
+          </StyledAvatar>
+          <StyledTypography as="h1" variant="h5">
+            Prijava
+          </StyledTypography>
+          <form noValidate onSubmit={handleSubmit}>
+            <StyledTextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Adresa"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <StyledTextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Lozinka"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <StyledFormControlLabel
+              control={<Checkbox value="remember" />}
+              label="Zapamti moju prijavu"
+            />
+            <StyledButton type="submit" fullWidth variant="contained">
+              PRIJAVI SE
+            </StyledButton>
+            <Grid container>
+              <Grid item xs>
+                <StyledLink href="#">
+                  Zaboravljena Lozinka
+                </StyledLink>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
+              <Grid item>
+                <StyledLink href="#">
+                  {"Nemaš račun? Registriraj se!"}
+                </StyledLink>
+              </Grid>
+            </Grid>
+          </form>
+          <ToggleButton onClick={toggleDarkMode}>
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </ToggleButton>
+        </StyledPaper>
+      </StyledGrid>
     </>
   );
-}
+};
+
+export default Login;

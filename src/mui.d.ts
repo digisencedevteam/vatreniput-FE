@@ -1,11 +1,18 @@
-import '@mui/material/styles';
+import { Palette, PaletteColor, PaletteColorOptions } from "@mui/material";
 
-declare module '@mui/material/styles' {
-  interface Palette {
-    custom?: PaletteColor;
-  }
+declare module "@mui/material/styles/createPalette" {
+    interface PaletteColor {
+        formBackground?: string;
+        textFieldBorder?: string;
+    }
+  
+    interface Palette {
+        secondary: PaletteColor;
+        primary: PaletteColor;
+    }
 
-  interface PaletteOptions {
-    custom?: PaletteColorOptions;
-  }
+    interface PaletteOptions {
+        secondary?: PaletteColorOptions & { formBackground?: string; textFieldBorder?: string };
+        primary?: PaletteColorOptions & { formBackground?: string; textFieldBorder?: string };
+    }
 }
