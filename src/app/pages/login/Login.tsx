@@ -3,9 +3,17 @@ import { CssBaseline, Paper, Checkbox } from '@mui/material';
 import { BsFillLockFill } from 'react-icons/bs';
 import { styled } from '@mui/system';
 import BackgroundImage from './../../../assets/img/backgoundLogin.jpg';
-import { Grid, Typography, TextField, Button, Link, FormControlLabel, Avatar } from '@mui/material';
+import {
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  Link,
+  FormControlLabel,
+  Avatar,
+} from '@mui/material';
 
-const StyledGrid = styled(Grid)(({ theme }) => ({
+const StyledGrid = styled(Grid)(() => ({
   height: '100vh',
   display: 'flex',
   alignItems: 'center',
@@ -22,16 +30,18 @@ const StyledAvatar = styled(Avatar)(({ theme }) => ({
 }));
 const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.secondary.contrastText,
-  margin: '2%'
+  margin: '2%',
 }));
 const StyledTextField = styled(TextField)(({ theme }) => ({
   width: '100%',
   color: theme.palette.secondary.contrastText,
   borderColor: theme.palette.secondary.textFieldBorder,
 }));
-const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
-  color: theme.palette.secondary.contrastText,
-}));
+const StyledFormControlLabel = styled(FormControlLabel)(
+  ({ theme }) => ({
+    color: theme.palette.secondary.contrastText,
+  })
+);
 const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: '3px',
   marginBottom: '2px',
@@ -62,12 +72,11 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 interface paletteType {
-  isDarkMode: boolean,
+  isDarkMode: boolean;
   toggleDarkMode: () => void;
 }
 
 const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
-
   const handleSubmit = (event: any) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -125,13 +134,11 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
             </StyledButton>
             <Grid container>
               <Grid item xs>
-                <StyledLink href="#">
-                  Zaboravljena Lozinka
-                </StyledLink>
+                <StyledLink href="#">Zaboravljena Lozinka</StyledLink>
               </Grid>
               <Grid item>
                 <StyledLink href="#">
-                  {"Nemaš račun? Registriraj se!"}
+                  {'Nemaš račun? Registriraj se!'}
                 </StyledLink>
               </Grid>
             </Grid>
