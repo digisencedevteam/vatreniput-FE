@@ -10,8 +10,7 @@ export const lightPalette = {
     contrastText: '#141518',
     formBackground: '#ffffff',
     inputField: 'rgba(0, 0, 0, 0.70)',
-    textFieldBorder: '#141518', 
-
+    textFieldBorder: '#141518',
   },
   custom: {
     light: '#ffffff',

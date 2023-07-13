@@ -1,17 +1,18 @@
 import { Helmet } from 'react-helmet';
-import { CssBaseline, Paper, Checkbox } from '@mui/material';
-import { BsFillLockFill } from 'react-icons/bs';
 import { styled, ThemeProvider, useTheme } from '@mui/system';
-import BackgroundImage from './../../../assets/img/backgoundLogin.jpg';
 import {
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Link,
-  FormControlLabel,
   Avatar,
+  Button,
+  Checkbox,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
 } from '@mui/material';
+import BackgroundImage from './../../../assets/img/backgoundLogin.jpg';
+import { BsFillLockFill } from 'react-icons/bs';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -64,13 +65,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   color: theme.palette.secondary.formBackground,
 }));
 
-const StyledLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.secondary.contrastText,
-}));
-
 const ToggleButton = styled(Button)(({ theme }) => ({
   backgroundColor: 'transparent',
   border: 'solid',
+  background: theme.palette.secondary.formBackground,
   color: theme.palette.secondary.contrastText,
   cursor: 'pointer',
   fontSize: 14,
@@ -95,15 +93,21 @@ interface paletteType {
   toggleDarkMode: () => void;
 }
 
-const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
+const Register = ({ isDarkMode, toggleDarkMode }: paletteType) => {
   const theme = useTheme();
 
   const initialValues = {
+    firstName: '',
+    lastName: '',
+    username: '',
     email: '',
     password: '',
+    confirmPassword: '',
   };
-
   const validationSchema = Yup.object({
+    firstName: Yup.string().required('Ime je potrebno'),
+    lastName: Yup.string().required('Prezime je potrebno'),
+    username: Yup.string().required('Korisničko ime je potrebno'),
     email: Yup.string()
       .email('Potreban validan email format')
       .required('Email je potreban'),
@@ -114,6 +118,9 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
         'Lozinka mora sadržati barem 1 poseban znak'
       )
       .required('Lozinka je potrebna'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Lozinke se ne podudaraju')
+      .required('Potrebno je ponoviti lozinku'),
   });
 
   const formik = useFormik({
@@ -126,14 +133,12 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {' '}
-      {/* Wrap the Login component with ThemeProvider */}
       <>
         <Helmet>
-          <title>Vatreni Put - Log - In</title>
+          <title>Vatreni Put - Registracija</title>
           <meta
             name="description"
-            content="This is the login page of vatreni put application."
+            content="This is the register page of vatreni put application."
           />
         </Helmet>
         <CssBaseline />
@@ -143,9 +148,68 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
               <BsFillLockFill />
             </StyledAvatar>
             <StyledTypography as="h2" variant="h5">
-              Prijava
+              Registracija
             </StyledTypography>
             <form noValidate onSubmit={formik.handleSubmit}>
+              <StyledTextField
+                margin="normal"
+                fullWidth
+                id="firstName"
+                label="Ime"
+                name="firstName"
+                autoComplete="given-name"
+                autoFocus
+                value={formik.values.firstName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  !!(
+                    formik.touched.firstName &&
+                    formik.errors.firstName
+                  )
+                }
+                helperText={
+                  formik.touched.firstName && formik.errors.firstName
+                }
+              />
+              <StyledTextField
+                margin="normal"
+                fullWidth
+                id="lastName"
+                label="Prezime"
+                name="lastName"
+                autoComplete="family-name"
+                value={formik.values.lastName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  !!(
+                    formik.touched.lastName && formik.errors.lastName
+                  )
+                }
+                helperText={
+                  formik.touched.lastName && formik.errors.lastName
+                }
+              />
+              <StyledTextField
+                margin="normal"
+                fullWidth
+                id="username"
+                label="Korisničko ime"
+                name="username"
+                autoComplete="username"
+                value={formik.values.username}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  !!(
+                    formik.touched.username && formik.errors.username
+                  )
+                }
+                helperText={
+                  formik.touched.username && formik.errors.username
+                }
+              />
               <StyledTextField
                 margin="normal"
                 fullWidth
@@ -183,6 +247,28 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
                   formik.touched.password && formik.errors.password
                 }
               />
+              <StyledTextField
+                margin="normal"
+                fullWidth
+                name="confirmPassword"
+                label="Potvrdi lozinku"
+                type="password"
+                id="confirmPassword"
+                autoComplete="confirm-password"
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  !!(
+                    formik.touched.confirmPassword &&
+                    formik.errors.confirmPassword
+                  )
+                }
+                helperText={
+                  formik.touched.confirmPassword &&
+                  formik.errors.confirmPassword
+                }
+              />
               <StyledFormControlLabel
                 control={<Checkbox value="remember" />}
                 label="Zapamti moju prijavu"
@@ -192,20 +278,8 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
                 fullWidth
                 variant="contained"
               >
-                PRIJAVI SE
+                REGISTRIRAJ SE
               </StyledButton>
-              <Grid container>
-                <Grid item xs>
-                  <StyledLink href="#">
-                    Zaboravljena Lozinka
-                  </StyledLink>
-                </Grid>
-                <Grid item>
-                  <StyledLink href="#">
-                    Nemaš račun? Registriraj se!
-                  </StyledLink>
-                </Grid>
-              </Grid>
             </form>
             <ToggleButton onClick={toggleDarkMode}>
               {isDarkMode ? 'Light Mode' : 'Dark Mode'}
@@ -217,4 +291,4 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
   );
 };
 
-export default Login;
+export default Register;
