@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Helmet } from 'react-helmet';
 
+type Props = {
+  onUpdateToken: Function;
+};
+
 // example of custom component
 const CustomButton = styled(Button)({
   // your custom styles go here
@@ -11,8 +15,12 @@ const CustomButton = styled(Button)({
   padding: 8,
 }) as typeof Button;
 
-export const Home = () => {
+export const Home = ({ onUpdateToken }: Props) => {
   const navigate = useNavigate();
+  const logout = () => {
+    onUpdateToken('');
+    navigate('/login');
+  };
   return (
     <>
       <Helmet>
@@ -31,6 +39,9 @@ export const Home = () => {
             onClick={() => navigate('/library')}
           >
             Go To Library
+          </Button>
+          <Button variant="contained" onClick={logout}>
+            Logout
           </Button>
           <CustomButton
             variant="contained"

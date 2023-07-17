@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { CssBaseline, Paper, Checkbox } from '@mui/material';
+import { CssBaseline, Paper, Checkbox, Box } from '@mui/material';
 import { BsFillLockFill } from 'react-icons/bs';
 import { styled, ThemeProvider, useTheme } from '@mui/system';
 import BackgroundImage from './../../../assets/img/backgoundLogin.jpg';
@@ -14,6 +14,10 @@ import {
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuthorizationContext } from '../../../lib/context/AuthorizationContext';
+import { login } from '../../../lib/api/auth/authApi';
 
 const StyledGrid = styled(Grid)(() => ({
   height: '100vh',
@@ -90,13 +94,31 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.secondary.contrastText,
 }));
 
+const ErrorMsg = styled(Box)(({ theme }) => ({
+  borderRadius: theme.shape.borderRadius,
+  color: 'white',
+  backgroundColor: theme.palette.error.light,
+  border: `1px solid ${theme.palette.error.main}`,
+  padding: theme.spacing(1.5, 2),
+  marginBottom: theme.spacing(2),
+}));
+
 interface paletteType {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
+  onUpdateToken: (jwt: string) => void;
 }
 
-const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
+const Login = ({
+  isDarkMode,
+  toggleDarkMode,
+  onUpdateToken,
+}: paletteType) => {
+  const { setJwt } = useAuthorizationContext();
+  const navigate = useNavigate();
   const theme = useTheme();
+  const [remember, setRemember] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const initialValues = {
     email: '',
@@ -108,19 +130,23 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
       .email('Potreban validan email format')
       .required('Email je potreban'),
     password: Yup.string()
-      .min(8, 'Lozinka mora sadržati barem 8 znakova')
-      .matches(
-        /^(?=.*[!@#$%^&*])/,
-        'Lozinka mora sadržati barem 1 poseban znak'
-      )
+      .min(4, 'Lozinka mora sadržati barem 4 znaka')
       .required('Lozinka je potrebna'),
   });
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       console.log(values);
+      try {
+        const loginData = await login(values);
+        const jwt = loginData.accessToken;
+        await onUpdateToken(jwt);
+        navigate('/');
+      } catch (error) {
+        setErrorMsg('Incorrect Login');
+      }
     },
   });
 
@@ -184,7 +210,12 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
                 }
               />
               <StyledFormControlLabel
-                control={<Checkbox value="remember" />}
+                control={
+                  <Checkbox
+                    value={remember}
+                    onChange={() => setRemember(!remember)}
+                  />
+                }
                 label="Zapamti moju prijavu"
               />
               <StyledButton
@@ -207,6 +238,7 @@ const Login = ({ isDarkMode, toggleDarkMode }: paletteType) => {
                 </Grid>
               </Grid>
             </form>
+            {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
             <ToggleButton onClick={toggleDarkMode}>
               {isDarkMode ? 'Light Mode' : 'Dark Mode'}
             </ToggleButton>

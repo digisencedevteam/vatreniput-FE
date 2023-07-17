@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AxiosRequestConfig, Method } from 'axios';
 
-export const requestMbaeethods = {
+export const requestMethods = {
   GET: 'get' as Method,
   POST: 'post' as Method,
   PUT: 'put' as Method,
