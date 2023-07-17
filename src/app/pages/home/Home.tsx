@@ -19,7 +19,7 @@ export const Home = ({ onUpdateToken }: Props) => {
   const navigate = useNavigate();
   const logout = () => {
     onUpdateToken('');
-    navigate('/login');
+    navigate('/');
   };
   return (
     <>
