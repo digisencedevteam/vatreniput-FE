@@ -1,9 +1,15 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { Library } from '../pages/deleteThisLater/DeleteMeLater';
 import { Home } from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import Register from '../pages/Register/Register';
+import { NotFound } from '..//pages/NotFound/NotFound';
 
 interface MainRoutesProps {
   isDarkMode: boolean;
@@ -18,8 +24,18 @@ export const MainRoutes = ({
   onUpdateToken,
   isLoggedIn,
 }: MainRoutesProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (!isLoggedIn && location.pathname !== '/') {
+      navigate('/', { replace: true });
+    }
+  }, [isLoggedIn, location, navigate]);
+
   return (
     <Routes>
+      <Route path="*" element={<NotFound />} />
       {isLoggedIn && (
         <React.Fragment>
           <Route
