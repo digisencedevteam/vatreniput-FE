@@ -9,7 +9,9 @@ import { SplashScreen } from 'src/components/loading-screen';
 
 // JWT
 const JwtLoginPage = lazy(() => import('src/pages/auth/jwt/login'));
-const JwtRegisterPage = lazy(() => import('src/pages/auth/jwt/register'));
+const JwtRegisterPage = lazy(
+  () => import('src/pages/auth/jwt/register')
+);
 
 const authJwt = {
   path: 'jwt',
@@ -24,7 +26,10 @@ const authJwt = {
     {
       path: 'login',
       element: (
-        <AuthClassicLayout title="Doživite vatreni put!" image="/assets/images/shield.png">
+        <AuthClassicLayout
+          title="Doživite vatreni put!"
+          image="/assets/images/shield.png"
+        >
           <JwtLoginPage />
         </AuthClassicLayout>
       ),
@@ -32,7 +37,10 @@ const authJwt = {
     {
       path: 'register',
       element: (
-        <AuthClassicLayout title="Manage the job more effectively with Minimal">
+        <AuthClassicLayout
+          title="Registracija na Vatreni Put"
+          image="/assets/images/shield.png"
+        >
           <JwtRegisterPage />
         </AuthClassicLayout>
       ),

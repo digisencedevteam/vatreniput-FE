@@ -8,14 +8,20 @@ const axiosInstance = axios.create({ baseURL: apiExpress });
 
 axiosInstance.interceptors.response.use(
   (res) => res,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong')
+  (error) =>
+    Promise.reject(
+      (error.response && error.response.data) ||
+        'Something went wrong'
+    )
 );
 
 export default axiosInstance;
 
 // ----------------------------------------------------------------------
 
-export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
+export const fetcher = async (
+  args: string | [string, AxiosRequestConfig]
+) => {
   const [url, config] = Array.isArray(args) ? args : [args];
 
   const res = await axiosInstance.get(url, { ...config });
@@ -27,8 +33,11 @@ export const endpoints = {
   chat: '/api/chat',
   kanban: '/api/kanban',
   calendar: '/api/calendar',
+  album: {
+    validate: '/album/validate/',
+  },
   auth: {
-    me: '/api/auth/me',
+    me: '/auth/user',
     login: '/user/login',
     register: '/api/auth/register',
   },

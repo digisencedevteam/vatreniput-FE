@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -12,9 +12,6 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
-// routes
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 import { useSearchParams, useRouter } from 'src/routes/hooks';
 // config
 import { PATH_AFTER_LOGIN } from 'src/config-global';
@@ -23,6 +20,10 @@ import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import InvalidAlbumPage from 'src/pages/InvalidAlbum';
+// utils
+import axios, { endpoints } from 'src/utils/axios';
+import { LoadingScreen } from 'src/components/loading-screen';
 
 // ----------------------------------------------------------------------
 
@@ -32,6 +33,8 @@ export default function JwtRegisterView() {
   const router = useRouter();
 
   const [errorMsg, setErrorMsg] = useState('');
+  const [isAlbumValid, setIsAlbumValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -42,7 +45,9 @@ export default function JwtRegisterView() {
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email must be a valid email address'),
     password: Yup.string().required('Password is required'),
   });
 
@@ -66,7 +71,12 @@ export default function JwtRegisterView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await register?.(data.email, data.password, data.firstName, data.lastName);
+      await register?.(
+        data.email,
+        data.password,
+        data.firstName,
+        data.lastName
+      );
 
       router.push(returnTo || PATH_AFTER_LOGIN);
     } catch (error) {
@@ -75,17 +85,22 @@ export default function JwtRegisterView() {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
+  const isAlbumCodeValid = async (code: string) => {
+    setIsLoading(true);
+    const response = await axios.get(endpoints.album.validate + code);
+    setIsAlbumValid(response.data.isAlbumValid);
+    setIsLoading(false);
+  };
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-      <Typography variant="h4">Get started absolutely free</Typography>
+      <Typography variant="h4">Registriraj se</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2"> Already have an account? </Typography>
-
-        <Link href={paths.auth.jwt.login} component={RouterLink} variant="subtitle2">
-          Sign in
-        </Link>
+        <Typography variant="body2">
+          {' '}
+          I pokrenite svoj vatreni put!{' '}
+        </Typography>
       </Stack>
     </Stack>
   );
@@ -100,13 +115,13 @@ export default function JwtRegisterView() {
         textAlign: 'center',
       }}
     >
-      {'By signing up, I agree to '}
+      {'Kreiranjem računa upoznat sam sa '}
       <Link underline="always" color="text.primary">
-        Terms of Service
+        Pravilima Korištenja
       </Link>
-      {' and '}
+      {' i '}
       <Link underline="always" color="text.primary">
-        Privacy Policy
+        Politikom Privatnosti
       </Link>
       .
     </Typography>
@@ -132,7 +147,13 @@ export default function JwtRegisterView() {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  <Iconify
+                    icon={
+                      password.value
+                        ? 'solar:eye-bold'
+                        : 'solar:eye-closed-bold'
+                    }
+                  />
                 </IconButton>
               </InputAdornment>
             ),
@@ -152,6 +173,25 @@ export default function JwtRegisterView() {
       </Stack>
     </FormProvider>
   );
+
+  useEffect(() => {
+    const paramValue = searchParams.get('code');
+    isAlbumCodeValid(paramValue || '');
+  }, []);
+
+  if (isLoading)
+    return (
+      <>
+        <LoadingScreen />
+      </>
+    );
+  if (!isAlbumValid) {
+    return (
+      <>
+        <InvalidAlbumPage />
+      </>
+    );
+  }
 
   return (
     <>

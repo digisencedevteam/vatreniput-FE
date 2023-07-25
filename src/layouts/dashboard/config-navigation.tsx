@@ -7,7 +7,10 @@ import SvgColor from 'src/components/svg-color';
 // ----------------------------------------------------------------------
 
 const icon = (name: string) => (
-  <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />
+  <SvgColor
+    src={`/assets/icons/navbar/${name}.svg`}
+    sx={{ width: 1, height: 1 }}
+  />
   // OR
   // <Iconify icon="fluent:mail-24-filled" />
   // https://icon-sets.iconify.design/solar/
@@ -49,10 +52,18 @@ export function useNavData() {
       // OVERVIEW
       // ----------------------------------------------------------------------
       {
-        subheader: 'overview v5.3.0',
+        subheader: 'Izbornik',
         items: [
-          { title: 'one', path: paths.dashboard.root, icon: ICONS.dashboard },
-          { title: 'two', path: paths.dashboard.two, icon: ICONS.ecommerce },
+          {
+            title: 'one',
+            path: paths.dashboard.root,
+            icon: ICONS.dashboard,
+          },
+          {
+            title: 'two',
+            path: paths.dashboard.two,
+            icon: ICONS.ecommerce,
+          },
           {
             title: 'three',
             path: paths.dashboard.three,
@@ -64,7 +75,7 @@ export function useNavData() {
       // MANAGEMENT
       // ----------------------------------------------------------------------
       {
-        subheader: 'management',
+        subheader: 'Zanimljivosti',
         items: [
           {
             title: 'user',
