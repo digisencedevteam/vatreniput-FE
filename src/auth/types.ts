@@ -1,4 +1,8 @@
-import { LogoutOptions, RedirectLoginOptions, PopupLoginOptions } from '@auth0/auth0-react';
+import {
+  LogoutOptions,
+  RedirectLoginOptions,
+  PopupLoginOptions,
+} from '@auth0/auth0-react';
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +33,9 @@ type CanRemove = {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    username: string,
+    code: string
   ) => Promise<void>;
   //
   loginWithGoogle?: () => Promise<void>;
@@ -37,12 +43,18 @@ type CanRemove = {
   loginWithTwitter?: () => Promise<void>;
   //
   loginWithPopup?: (options?: PopupLoginOptions) => Promise<void>;
-  loginWithRedirect?: (options?: RedirectLoginOptions) => Promise<void>;
+  loginWithRedirect?: (
+    options?: RedirectLoginOptions
+  ) => Promise<void>;
   //
   confirmRegister?: (email: string, code: string) => Promise<void>;
   forgotPassword?: (email: string) => Promise<void>;
   resendCodeRegister?: (email: string) => Promise<void>;
-  newPassword?: (email: string, code: string, password: string) => Promise<void>;
+  newPassword?: (
+    email: string,
+    code: string,
+    password: string
+  ) => Promise<void>;
 };
 
 export type JWTContextType = CanRemove & {
@@ -52,7 +64,14 @@ export type JWTContextType = CanRemove & {
   authenticated: boolean;
   unauthenticated: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    username: string,
+    code: string
+  ) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -68,7 +87,12 @@ export type FirebaseContextType = CanRemove & {
   loginWithTwitter: () => Promise<void>;
   forgotPassword?: (email: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ) => Promise<void>;
 };
 
 export type AmplifyContextType = CanRemove & {
@@ -88,7 +112,11 @@ export type AmplifyContextType = CanRemove & {
   confirmRegister: (email: string, code: string) => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   resendCodeRegister: (email: string) => Promise<void>;
-  newPassword: (email: string, code: string, password: string) => Promise<void>;
+  newPassword: (
+    email: string,
+    code: string,
+    password: string
+  ) => Promise<void>;
 };
 
 // ----------------------------------------------------------------------
@@ -100,6 +128,8 @@ export type Auth0ContextType = CanRemove & {
   authenticated: boolean;
   unauthenticated: boolean;
   loginWithPopup: (options?: PopupLoginOptions) => Promise<void>;
-  loginWithRedirect: (options?: RedirectLoginOptions) => Promise<void>;
+  loginWithRedirect: (
+    options?: RedirectLoginOptions
+  ) => Promise<void>;
   logout: (options?: LogoutOptions) => Promise<void>;
 };

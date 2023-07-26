@@ -42,9 +42,12 @@ export default function JwtRegisterView() {
 
   const password = useBoolean();
 
+  const paramValue = searchParams.get('code');
+
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string().required('First name required'),
     lastName: Yup.string().required('Last name required'),
+    username: Yup.string(),
     email: Yup.string()
       .required('Email is required')
       .email('Email must be a valid email address'),
@@ -54,6 +57,7 @@ export default function JwtRegisterView() {
   const defaultValues = {
     firstName: '',
     lastName: '',
+    username: '',
     email: '',
     password: '',
   };
@@ -75,7 +79,9 @@ export default function JwtRegisterView() {
         data.email,
         data.password,
         data.firstName,
-        data.lastName
+        data.lastName,
+        data.username || '',
+        paramValue || ''
       );
 
       router.push(returnTo || PATH_AFTER_LOGIN);
@@ -94,6 +100,9 @@ export default function JwtRegisterView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
+      <Alert severity="success" sx={{ mb: 3 }}>
+        Vaš album je ispravam i spreman za registraciju!
+      </Alert>
       <Typography variant="h4">Registriraj se</Typography>
 
       <Stack direction="row" spacing={0.5}>
@@ -139,6 +148,8 @@ export default function JwtRegisterView() {
 
         <RHFTextField name="email" label="Email address" />
 
+        <RHFTextField name="username" label="Username" />
+
         <RHFTextField
           name="password"
           label="Password"
@@ -175,8 +186,9 @@ export default function JwtRegisterView() {
   );
 
   useEffect(() => {
-    const paramValue = searchParams.get('code');
-    isAlbumCodeValid(paramValue || '');
+    paramValue
+      ? isAlbumCodeValid(paramValue || '')
+      : router.push('/');
   }, []);
 
   if (isLoading)

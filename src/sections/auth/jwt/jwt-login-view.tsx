@@ -24,7 +24,20 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 
-// ----------------------------------------------------------------------
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export default function JwtLoginView() {
   const { login } = useAuthContext();
@@ -39,8 +52,14 @@ export default function JwtLoginView() {
 
   const password = useBoolean();
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email must be a valid email address'),
     password: Yup.string().required('Password is required'),
   });
 
@@ -77,10 +96,10 @@ export default function JwtLoginView() {
       <Typography variant="h4">Prijava u portal</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">New user?</Typography>
+        <Typography variant="body2">Nemate Račun?</Typography>
 
-        <Link component={RouterLink} href={paths.auth.jwt.register} variant="subtitle2">
-          Create an account
+        <Link variant="subtitle2" onClick={handleOpen}>
+          Kako ga napraviti
         </Link>
       </Stack>
     </Stack>
@@ -100,7 +119,13 @@ export default function JwtLoginView() {
           endAdornment: (
             <InputAdornment position="end">
               <IconButton onClick={password.onToggle} edge="end">
-                <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                <Iconify
+                  icon={
+                    password.value
+                      ? 'solar:eye-bold'
+                      : 'solar:eye-closed-bold'
+                  }
+                />
               </IconButton>
             </InputAdornment>
           ),
@@ -138,6 +163,26 @@ export default function JwtLoginView() {
       </Alert> */}
 
       {renderForm}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+          >
+            Kako napraviti račun ?
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Objašnjenje kako napraviti račun
+          </Typography>
+        </Box>
+      </Modal>
     </FormProvider>
   );
 }

@@ -4,7 +4,11 @@ import axios, { endpoints } from 'src/utils/axios';
 //
 import { AuthContext } from './auth-context';
 import { isValidToken, setSession } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
+import {
+  ActionMapType,
+  AuthStateType,
+  AuthUserType,
+} from '../../types';
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +38,8 @@ type Payload = {
   [Types.LOGOUT]: undefined;
 };
 
-type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
+type ActionsType =
+  ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 // ----------------------------------------------------------------------
 
@@ -123,37 +128,52 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(async (email: string, password: string) => {
-    const data = {
-      email,
-      password,
-    };
+  const login = useCallback(
+    async (email: string, password: string) => {
+      const data = {
+        email,
+        password,
+      };
 
-    const response = await axios.post(endpoints.auth.login, data);
+      const response = await axios.post(endpoints.auth.login, data);
 
-    const { accessToken, user } = response.data;
+      const { accessToken, user } = response.data;
 
-    setSession(accessToken);
+      setSession(accessToken);
 
-    dispatch({
-      type: Types.LOGIN,
-      payload: {
-        user,
-      },
-    });
-  }, []);
+      dispatch({
+        type: Types.LOGIN,
+        payload: {
+          user,
+        },
+      });
+    },
+    []
+  );
 
   // REGISTER
   const register = useCallback(
-    async (email: string, password: string, firstName: string, lastName: string) => {
+    async (
+      email: string,
+      password: string,
+      firstName: string,
+      lastName: string,
+      username: string,
+      code: string
+    ) => {
       const data = {
         email,
         password,
         firstName,
         lastName,
+        username,
+        code,
       };
 
-      const response = await axios.post(endpoints.auth.register, data);
+      const response = await axios.post(
+        endpoints.auth.register + code,
+        data
+      );
 
       const { accessToken, user } = response.data;
 
@@ -179,7 +199,9 @@ export function AuthProvider({ children }: Props) {
 
   // ----------------------------------------------------------------------
 
-  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+  const checkAuthenticated = state.user
+    ? 'authenticated'
+    : 'unauthenticated';
 
   const status = state.loading ? 'loading' : checkAuthenticated;
 
@@ -198,5 +220,9 @@ export function AuthProvider({ children }: Props) {
     [login, logout, register, state.user, status]
   );
 
-  return <AuthContext.Provider value={memoizedValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={memoizedValue}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

@@ -8,6 +8,7 @@ import { RouterLink } from 'src/routes/components';
 import { MotionContainer, varBounce } from 'src/components/animate';
 // assets
 import { PageNotFoundIllustration } from 'src/assets/illustrations';
+import Alert from '@mui/material/Alert';
 
 // ----------------------------------------------------------------------
 
@@ -21,11 +22,11 @@ export default function AlbumInvalidView() {
       </m.div>
 
       <m.div variants={varBounce().in}>
-        <Typography sx={{ color: 'text.secondary' }}>
+        <Alert severity="error" sx={{ mb: 3 }}>
           Ipričavamo se ali naš sustav nije pronašao aktivni album
           preko vašeg QR koda. Molimo vas da još jednom provjerite vaš
           album i pokušate ponovno. Hvala!
-        </Typography>
+        </Alert>
       </m.div>
 
       <m.div variants={varBounce().in}>
