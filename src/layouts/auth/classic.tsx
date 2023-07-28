@@ -1,4 +1,4 @@
-// @mui
+import React from 'react';
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -39,7 +39,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       sx={{
         width: 1,
         mx: 'auto',
-        maxWidth: 560,
+        maxWidth: 700,
         px: { xs: 2, md: 8 },
         py: { xs: 15, md: 30 },
       }}
@@ -55,25 +55,42 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       justifyContent="center"
       spacing={10}
       sx={{
+        position: 'relative',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 1.0)' : 'rgba(0, 0, 0, 1.0)', // Setting dark background color with opacity for light mode also
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          backgroundImage: `url(${image || '/assets/background/overlay_2.jpg'})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center center',
+          opacity: 0.3, 
+        },
         ...bgGradient({
           color: alpha(
             theme.palette.background.default,
             theme.palette.mode === 'light' ? 0.88 : 0.94
           ),
-          imgUrl: '/assets/background/overlay_2.jpg',
         }),
       }}
     >
-      <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }}>
-        {title || 'Hi, Welcome back'}
-      </Typography>
-
       <Box
-        component="img"
-        alt="auth"
-        src={image || '/assets/illustrations/illustration_dashboard.png'}
-        sx={{ maxWidth: 720 }}
-      />
+        sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '5%',
+          transform: 'translateY(-180%)',
+          textAlign: 'left',
+          color: '#fff',
+        }}
+      >
+        <Typography variant="h2" sx={{ maxWidth: 600 }}>
+          {title || 'Dobrodošli na Platformu Vatrenog Puta!'}
+        </Typography>
+      </Box>
     </Stack>
   );
 

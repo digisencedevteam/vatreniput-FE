@@ -49,42 +49,52 @@ const ICONS = {
 export function useNavData() {
   const data = useMemo(
     () => [
-      // OVERVIEW
+      // Main navigation
       // ----------------------------------------------------------------------
       {
-        subheader: 'Izbornik',
+        subheader: 'Glavni Izbornik',
         items: [
           {
-            title: 'one',
+            title: 'Početna',
             path: paths.dashboard.root,
             icon: ICONS.dashboard,
           },
           {
-            title: 'two',
+            title: 'Moja Kolekcija',
             path: paths.dashboard.two,
             icon: ICONS.ecommerce,
           },
           {
-            title: 'three',
+            title: 'Kvizovi',
             path: paths.dashboard.three,
             icon: ICONS.analytics,
+          },
+          {
+            title: 'Virtualna Garderoba ( AR )',
+            path: paths.dashboard.four,
+            icon: ICONS.calendar,
+          },
+          {
+            title: 'Glasanje',
+            path: paths.dashboard.five,
+            icon: ICONS.order,
           },
         ],
       },
 
-      // MANAGEMENT
+      // Story Mode
       // ----------------------------------------------------------------------
       {
-        subheader: 'Zanimljivosti',
+        subheader: 'Vatrene Priče',
         items: [
           {
-            title: 'user',
+            title: 'Moje otključane priče',
             path: paths.dashboard.group.root,
             icon: ICONS.user,
             children: [
-              { title: 'four', path: paths.dashboard.group.root },
-              { title: 'five', path: paths.dashboard.group.five },
-              { title: 'six', path: paths.dashboard.group.six },
+              { title: `Zlatna Generacija '98`, path: paths.dashboard.group.root },
+              { title: 'Od Zadra do Madrida', path: paths.dashboard.group.seven },
+              { title: 'Srebrni San 2018', path: paths.dashboard.group.eight },
             ],
           },
         ],

@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-// @mui
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
@@ -10,38 +9,27 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-// hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSearchParams, useRouter } from 'src/routes/hooks';
-// config
 import { PATH_AFTER_LOGIN } from 'src/config-global';
-// auth
 import { useAuthContext } from 'src/auth/hooks';
-// components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import InvalidAlbumPage from 'src/pages/InvalidAlbum';
-// utils
 import axios, { endpoints } from 'src/utils/axios';
 import { LoadingScreen } from 'src/components/loading-screen';
 
-// ----------------------------------------------------------------------
-
 export default function JwtRegisterView() {
   const { register } = useAuthContext();
-
   const router = useRouter();
-
   const [errorMsg, setErrorMsg] = useState('');
   const [isAlbumValid, setIsAlbumValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
-
   const returnTo = searchParams.get('returnTo');
 
   const password = useBoolean();
-
   const paramValue = searchParams.get('code');
 
   const RegisterSchema = Yup.object().shape({
@@ -91,6 +79,7 @@ export default function JwtRegisterView() {
       setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
+
   const isAlbumCodeValid = async (code: string) => {
     setIsLoading(true);
     const response = await axios.get(endpoints.album.validate + code);
@@ -101,7 +90,7 @@ export default function JwtRegisterView() {
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
       <Alert severity="success" sx={{ mb: 3 }}>
-        Vaš album je ispravam i spreman za registraciju!
+        Vaš album je ispravan i spreman za registraciju!
       </Alert>
       <Typography variant="h4">Registriraj se</Typography>
 
@@ -179,24 +168,23 @@ export default function JwtRegisterView() {
           variant="contained"
           loading={isSubmitting}
         >
-          Create account
+          Registriraj se
         </LoadingButton>
       </Stack>
     </FormProvider>
   );
 
   useEffect(() => {
-    paramValue
-      ? isAlbumCodeValid(paramValue || '')
-      : router.push('/');
+    paramValue ? isAlbumCodeValid(paramValue || '') : router.push('/');
   }, []);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <>
         <LoadingScreen />
       </>
     );
+  }
   if (!isAlbumValid) {
     return (
       <>

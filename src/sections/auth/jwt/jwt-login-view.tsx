@@ -11,8 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 // routes
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 import { useSearchParams, useRouter } from 'src/routes/hooks';
 // config
 import { PATH_AFTER_LOGIN } from 'src/config-global';
@@ -64,8 +62,8 @@ export default function JwtLoginView() {
   });
 
   const defaultValues = {
-    email: 'matej@mail.com',
-    password: '1234',
+    email: '',
+    password: '',
   };
 
   const methods = useForm({
@@ -93,12 +91,12 @@ export default function JwtLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">Prijava u portal</Typography>
+      <Typography variant="h4">Prijavi se na platformu!</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">Nemate Račun?</Typography>
+        <Typography variant="body2">Nemate korisnički račun?</Typography>
 
-        <Link variant="subtitle2" onClick={handleOpen}>
+        <Link variant="body2" onClick={handleOpen}>
           Kako ga napraviti
         </Link>
       </Stack>
@@ -156,11 +154,8 @@ export default function JwtLoginView() {
 
   return (
     <FormProvider methods={methods} onSubmit={onSubmit}>
-      {renderHead}
 
-      {/* <Alert severity="info" sx={{ mb: 3 }}>
-        Test podaci : <strong>matej@mail.com</strong> / password :<strong> 1234</strong>
-      </Alert> */}
+      {renderHead}
 
       {renderForm}
 

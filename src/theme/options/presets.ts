@@ -1,7 +1,5 @@
 // @mui
 import { alpha } from '@mui/material/styles';
-// theme
-import { palette as themePalette } from 'src/theme/palette';
 
 // ----------------------------------------------------------------------
 
@@ -22,13 +20,16 @@ export function presets(presetsColor: string) {
 
 // ----------------------------------------------------------------------
 
-const palette = themePalette('light');
-
 export const primaryPresets = [
   // DEFAULT
   {
     name: 'default',
-    ...palette.primary,
+    lighter: '#FFE3D5',
+    light: '#FFC1AC',
+    main: '#B71833',
+    dark: '#FF3037',
+    darker: '#7A0930',
+    contrastText: '#FFFFFF',
   },
   // CYAN
   {
@@ -40,16 +41,6 @@ export const primaryPresets = [
     darker: '#012972',
     contrastText: '#FFFFFF',
   },
-  // PURPLE
-  {
-    name: 'purple',
-    lighter: '#EBD6FD',
-    light: '#B985F4',
-    main: '#7635dc',
-    dark: '#431A9E',
-    darker: '#200A69',
-    contrastText: '#FFFFFF',
-  },
   // BLUE
   {
     name: 'blue',
@@ -58,26 +49,6 @@ export const primaryPresets = [
     main: '#2065D1',
     dark: '#103996',
     darker: '#061B64',
-    contrastText: '#FFFFFF',
-  },
-  // ORANGE
-  {
-    name: 'orange',
-    lighter: '#FEF4D4',
-    light: '#FED680',
-    main: '#fda92d',
-    dark: '#B66816',
-    darker: '#793908',
-    contrastText: palette.grey[800],
-  },
-  // RED
-  {
-    name: 'red',
-    lighter: '#FFE3D5',
-    light: '#FFC1AC',
-    main: '#FF3030',
-    dark: '#B71833',
-    darker: '#7A0930',
     contrastText: '#FFFFFF',
   },
 ];
