@@ -46,7 +46,11 @@ export default function SettingsDrawer() {
 
       <Tooltip title="Reset">
         <IconButton onClick={settings.onReset}>
-          <Badge color="error" variant="dot" invisible={!settings.canReset}>
+          <Badge
+            color="error"
+            variant="dot"
+            invisible={!settings.canReset}
+          >
             <Iconify icon="solar:restart-bold" />
           </Badge>
         </IconButton>
@@ -60,43 +64,40 @@ export default function SettingsDrawer() {
 
   const renderMode = (
     <div>
-      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{ ...labelStyles }}
+      >
         Mode
       </Typography>
 
       <BaseOptions
         value={settings.themeMode}
-        onChange={(newValue: string) => settings.onUpdate('themeMode', newValue)}
+        onChange={(newValue: string) =>
+          settings.onUpdate('themeMode', newValue)
+        }
         options={['light', 'dark']}
         icons={['sun', 'moon']}
       />
     </div>
   );
 
-  const renderContrast = (
-    <div>
-      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
-        Contrast
-      </Typography>
-
-      <BaseOptions
-        value={settings.themeContrast}
-        onChange={(newValue: string) => settings.onUpdate('themeContrast', newValue)}
-        options={['default', 'bold']}
-        icons={['contrast', 'contrast_bold']}
-      />
-    </div>
-  );
-
   const renderDirection = (
     <div>
-      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{ ...labelStyles }}
+      >
         Direction
       </Typography>
 
       <BaseOptions
         value={settings.themeDirection}
-        onChange={(newValue: string) => settings.onUpdate('themeDirection', newValue)}
+        onChange={(newValue: string) =>
+          settings.onUpdate('themeDirection', newValue)
+        }
         options={['ltr', 'rtl']}
         icons={['align_left', 'align_right']}
       />
@@ -105,13 +106,19 @@ export default function SettingsDrawer() {
 
   const renderLayout = (
     <div>
-      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{ ...labelStyles }}
+      >
         Layout
       </Typography>
 
       <LayoutOptions
         value={settings.themeLayout}
-        onChange={(newValue: string) => settings.onUpdate('themeLayout', newValue)}
+        onChange={(newValue: string) =>
+          settings.onUpdate('themeLayout', newValue)
+        }
         options={['vertical', 'horizontal', 'mini']}
       />
     </div>
@@ -130,26 +137,38 @@ export default function SettingsDrawer() {
       >
         Stretch
         <Tooltip title="Only available at large resolutions > 1600px (xl)">
-          <Iconify icon="eva:info-outline" width={16} sx={{ ml: 0.5 }} />
+          <Iconify
+            icon="eva:info-outline"
+            width={16}
+            sx={{ ml: 0.5 }}
+          />
         </Tooltip>
       </Typography>
 
       <StretchOptions
         value={settings.themeStretch}
-        onChange={() => settings.onUpdate('themeStretch', !settings.themeStretch)}
+        onChange={() =>
+          settings.onUpdate('themeStretch', !settings.themeStretch)
+        }
       />
     </div>
   );
 
   const renderPresets = (
     <div>
-      <Typography variant="caption" component="div" sx={{ ...labelStyles }}>
+      <Typography
+        variant="caption"
+        component="div"
+        sx={{ ...labelStyles }}
+      >
         Presets
       </Typography>
 
       <PresetsOptions
         value={settings.themeColorPresets}
-        onChange={(newValue: string) => settings.onUpdate('themeColorPresets', newValue)}
+        onChange={(newValue: string) =>
+          settings.onUpdate('themeColorPresets', newValue)
+        }
       />
     </div>
   );
@@ -164,7 +183,10 @@ export default function SettingsDrawer() {
       }}
       sx={{
         [`& .${drawerClasses.paper}`]: {
-          ...paper({ theme, bgcolor: theme.palette.background.default }),
+          ...paper({
+            theme,
+            bgcolor: theme.palette.background.default,
+          }),
           width: 280,
         },
       }}
@@ -176,8 +198,6 @@ export default function SettingsDrawer() {
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3 }}>
           {renderMode}
-
-          {/* {renderContrast} */}
 
           {renderDirection}
 
