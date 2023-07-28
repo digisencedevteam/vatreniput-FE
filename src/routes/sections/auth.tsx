@@ -26,9 +26,9 @@ const authJwt = {
     {
       path: 'login',
       element: (
-        <AuthClassicLayout
-          title="Doživite vatreni put!"
-          image="/assets/images/shield.png"
+         <AuthClassicLayout
+          title="Dobrodošli na Platformu Vatrenog Puta!"
+          image="/assets/images/vrsaljkoZastava.jpg"
         >
           <JwtLoginPage />
         </AuthClassicLayout>
@@ -39,7 +39,7 @@ const authJwt = {
       element: (
         <AuthClassicLayout
           title="Registracija na Vatreni Put"
-          image="/assets/images/shield.png"
+          image="/assets/images/vrsaljkoZastava.jpg"
         >
           <JwtRegisterPage />
         </AuthClassicLayout>
