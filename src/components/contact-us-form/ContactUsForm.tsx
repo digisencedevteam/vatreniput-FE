@@ -18,7 +18,7 @@ const ContactSchema = Yup.object().shape({
 export default function ContactUsForm() {
     const [open, setOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const { control, handleSubmit, formState: { isSubmitting, errors } } = useForm({
+    const { control, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
         resolver: yupResolver(ContactSchema),
     });
 
@@ -26,6 +26,7 @@ export default function ContactUsForm() {
         console.log(data);
         setSubmitted(true);
         setOpen(false);
+        reset();
     };
 
     const handleClose = () => {
