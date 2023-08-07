@@ -39,7 +39,7 @@ export default function ContactUsForm() {
                 Contact us
             </Button>
             <Button color="inherit" onClick={() => setOpen(true)}>
-                <Link href="/faq">
+                <Link href="/faq" underline="none">
                     Cesta Pitanja
                 </Link>
             </Button>
