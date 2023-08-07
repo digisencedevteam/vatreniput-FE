@@ -18,6 +18,7 @@ import { varHover } from 'src/components/animate';
 import CustomPopover, {
   usePopover,
 } from 'src/components/custom-popover';
+import { paths } from 'src/routes/paths'; // Add this import
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +29,7 @@ const OPTIONS = [
   },
   {
     label: 'Profile',
-    linkTo: '/#1',
+    linkTo: '/dashboard/profile',
   },
   {
     label: 'Settings',
