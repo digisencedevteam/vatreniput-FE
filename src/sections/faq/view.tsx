@@ -8,6 +8,8 @@ import { useSettingsContext } from 'src/components/settings';
 import FAQItem from "./FaqItem";
 import { FAQ } from './Types';
 import React, { FC } from "react";
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 // ----------------------------------------------------------------------
 
 type FaqViewProps = {
@@ -15,6 +17,7 @@ type FaqViewProps = {
 };
 
 const FaqView: FC<FaqViewProps> = ({ faqs }) => {
+    const navigate = useNavigate();
     return (
 
         <Box sx={{ p: 2, borderRadius: 2 }} >
@@ -22,6 +25,9 @@ const FaqView: FC<FaqViewProps> = ({ faqs }) => {
             {faqs.map((faq, index) => (
                 <FAQItem key={index} faq={faq} />
             ))}
+            <Button color="primary" onClick={() => navigate(-1)}>
+                Nazad
+            </Button>
         </Box>
 
     );
