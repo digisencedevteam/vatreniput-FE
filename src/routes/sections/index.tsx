@@ -6,6 +6,7 @@ import { mainRoutes } from './main';
 
 import { authRoutes } from './auth';
 import { dashboardRoutes } from './dashboard';
+import ProfileView from 'src/sections/profile/view';
 
 // ----------------------------------------------------------------------
 

@@ -67,17 +67,17 @@ export function useNavData() {
           {
             title: 'Kvizovi',
             path: paths.dashboard.three,
-            icon: ICONS.analytics,
+            icon: ICONS.booking,
           },
           {
-            title: 'Virtualna Garderoba ( AR )',
+            title: 'Sveti Dres',
             path: paths.dashboard.four,
-            icon: ICONS.calendar,
+            icon: ICONS.kanban,
           },
           {
             title: 'Glasanje',
             path: paths.dashboard.five,
-            icon: ICONS.order,
+            icon: ICONS.tour,
           },
         ],
       },
