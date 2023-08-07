@@ -1,12 +1,13 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import { Alert, Button, Link, MenuItem, Snackbar, TextField } from "@mui/material";
+import { Alert, Button, Link, MenuItem, Snackbar, TextField, useTheme } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+
 import * as Yup from 'yup';
 
 const ContactSchema = Yup.object().shape({
@@ -15,15 +16,22 @@ const ContactSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email must be a valid email address'),
 });
 
+interface ContactFormData {
+    reason: string;
+    message: string;
+    email: string;
+}
+
 export default function ContactUsForm() {
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const { control, handleSubmit, formState: { isSubmitting, errors }, reset } = useForm({
         resolver: yupResolver(ContactSchema),
     });
 
-    const onSubmit = (data: any) => {
-        console.log(data);
+
+    const onSubmit = (data: ContactFormData) => {
         setSubmitted(true);
         setOpen(false);
         reset();
@@ -36,21 +44,26 @@ export default function ContactUsForm() {
     return (
         <div>
             <Button color="inherit" onClick={() => setOpen(true)}>
-                Contact us
+                Kontaktirajte nas
             </Button>
-            <Button color="inherit" onClick={() => setOpen(true)}>
+            <Button color="inherit">
                 <Link href="/faq" underline="none">
                     Cesta Pitanja
                 </Link>
             </Button>
 
-            <Dialog open={open} onClose={handleClose} >
-                <DialogTitle sx={{ background: "#030D25" }}>Contact Support</DialogTitle>
+            <Dialog open={open} onClose={handleClose}
+                PaperProps={{
+                    style: {
+                        width: '100%',
+                        maxWidth: '500px',
+                    }
+                }}>
+                <DialogTitle sx={{ background: theme.palette.background.default }}>Kontaktirajte nas</DialogTitle>
                 <form onSubmit={handleSubmit(onSubmit)} >
-                    <DialogContent sx={{ background: "#030D25" }} >
+                    <DialogContent sx={{ background: theme.palette.background.default, pt: 1 }} >
                         <Controller
                             name="reason"
-
                             control={control}
                             defaultValue=""
                             render={({ field }) => (
@@ -104,17 +117,17 @@ export default function ContactUsForm() {
                         />
                     </DialogContent>
 
-                    <DialogActions sx={{ background: "#030D25" }}>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-                        </Button>
+                    <DialogActions sx={{ background: theme.palette.background.default }}>
                         <LoadingButton
-                            color="primary"
+                            color="inherit"
                             type="submit"
                             loading={isSubmitting}
                         >
                             Submit
                         </LoadingButton>
+                        <Button onClick={handleClose} color="primary">
+                            Cancel
+                        </Button>
                     </DialogActions>
                 </form>
             </Dialog>
@@ -128,6 +141,6 @@ export default function ContactUsForm() {
                     Your message was sent successfully to VatreniPut support!
                 </Alert>
             </Snackbar>
-        </div>
+        </div >
     );
 }
