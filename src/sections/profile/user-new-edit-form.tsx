@@ -34,14 +34,17 @@ interface FormValues {
   [key: string]: string;
 }
 
-export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
+export default function UserNewEditForm({
+  currentUser,
+  avatarOptions,
+}: Props) {
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [isModalOpen, setModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState<string | undefined>(
-    currentUser?.photoURL || undefined
-  );
+  const [selectedAvatar, setSelectedAvatar] = useState<
+    string | undefined
+  >(currentUser?.photoURL || undefined);
   const [originalValues, setOriginalValues] = useState<FormValues>({
     firstName: '',
     lastName: '',
@@ -113,8 +116,10 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
       };
       await axios.put(endpoints.user.user + currentUser._id, payload);
       reset();
-      enqueueSnackbar(currentUser ? 'Uspješna promjena!' : 'Uspješno!');
-      router.push(paths.dashboard.profile);
+      alert('SUCCESS');
+      // enqueueSnackbar(
+      //   currentUser ? 'Uspješna promjena!' : 'Uspješno!'
+      // );
     } catch (error) {
       console.error(error);
     }
@@ -145,7 +150,9 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
 
     let formChanged = false;
     for (const key in originalValues) {
-      if (originalValues[key] !== updatedValues[key as keyof FormValues]) {
+      if (
+        originalValues[key] !== updatedValues[key as keyof FormValues]
+      ) {
         formChanged = true;
         break;
       }
@@ -209,7 +216,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                   }}
                 >
                   <Avatar
-                    alt='Avatar'
+                    alt="Avatar"
                     src={selectedAvatar || 'Moj Avatar'}
                     sx={{
                       width: '100%',
@@ -222,34 +229,38 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
               </Box>
 
               <RHFSwitch
-                name='isVerified'
-                labelPlacement='start'
+                name="isVerified"
+                labelPlacement="start"
                 label={
                   <>
-                    <Typography variant='subtitle2' sx={{ mb: 0.5 }}>
+                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
                       Email Potvrđen...
                     </Typography>
                     <Typography
-                      variant='body2'
+                      variant="body2"
                       sx={{ color: 'text.secondary' }}
                     >
-                      Email će biti automatski poslan ako se deaktivira ova
-                      značajka!
+                      Email će biti automatski poslan ako se
+                      deaktivira ova značajka!
                     </Typography>
                   </>
                 }
-                sx={{ mx: 0, width: 1, justifyContent: 'space-between' }}
+                sx={{
+                  mx: 0,
+                  width: 1,
+                  justifyContent: 'space-between',
+                }}
               />
 
               {currentUser && (
                 <Stack
-                  justifyContent='center'
-                  alignItems='center'
+                  justifyContent="center"
+                  alignItems="center"
                   sx={{ mt: 3 }}
                 >
                   <Button
-                    variant='soft'
-                    color='error'
+                    variant="soft"
+                    color="error"
                     onClick={handleOpenDeleteModal}
                   >
                     Obriši korisnički račun
@@ -270,15 +281,15 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
               <Box
                 rowGap={3}
                 columnGap={2}
-                display='grid'
+                display="grid"
                 gridTemplateColumns={{
                   xs: 'repeat(1, 1fr)',
                   sm: 'repeat(2, 1fr)',
                 }}
               >
                 <RHFTextField
-                  name='firstName'
-                  label='First Name'
+                  name="firstName"
+                  label="First Name"
                   value={values.firstName}
                   onChange={(e) => {
                     handleInputChange('firstName', e.target.value);
@@ -288,8 +299,8 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                   }}
                 />
                 <RHFTextField
-                  name='lastName'
-                  label='Last Name'
+                  name="lastName"
+                  label="Last Name"
                   value={values.lastName}
                   onChange={(e) => {
                     handleInputChange('lastName', e.target.value);
@@ -299,20 +310,22 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                   }}
                 />
                 <RHFTextField
-                  name='email'
-                  label='Email Address'
+                  name="email"
+                  label="Email Address"
                   value={values.email}
                   onChange={(e) => {
                     handleInputChange('email', e.target.value);
-                    setValue('email', e.target.value, { shouldValidate: true });
+                    setValue('email', e.target.value, {
+                      shouldValidate: true,
+                    });
                   }}
                 />
               </Box>
 
-              <Stack alignItems='flex-end' sx={{ mt: 3 }}>
+              <Stack alignItems="flex-end" sx={{ mt: 3 }}>
                 <LoadingButton
-                  type='submit'
-                  variant='contained'
+                  type="submit"
+                  variant="contained"
                   loading={isSubmitting}
                   disabled={!isFormChanged}
                 >

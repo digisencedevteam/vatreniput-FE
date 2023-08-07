@@ -79,16 +79,6 @@ export function useNavData() {
             path: paths.dashboard.five,
             icon: ICONS.tour,
           },
-          {
-            title: 'Virtualna Garderoba ( AR )',
-            path: paths.dashboard.four,
-            icon: ICONS.calendar,
-          },
-          {
-            title: 'Glasanje',
-            path: paths.dashboard.five,
-            icon: ICONS.order,
-          },
         ],
       },
 
@@ -102,9 +92,18 @@ export function useNavData() {
             path: paths.dashboard.group.root,
             icon: ICONS.user,
             children: [
-              { title: `Zlatna Generacija '98`, path: paths.dashboard.group.root },
-              { title: 'Od Zadra do Madrida', path: paths.dashboard.group.seven },
-              { title: 'Srebrni San 2018', path: paths.dashboard.group.eight },
+              {
+                title: `Zlatna Generacija '98`,
+                path: paths.dashboard.group.root,
+              },
+              {
+                title: 'Od Zadra do Madrida',
+                path: paths.dashboard.group.seven,
+              },
+              {
+                title: 'Srebrni San 2018',
+                path: paths.dashboard.group.eight,
+              },
             ],
           },
         ],
