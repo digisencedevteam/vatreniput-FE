@@ -5,8 +5,6 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
 // utils
-import { fData } from 'src/utils/format-number';
-//
 import Iconify from '../iconify';
 import { varFade } from '../animate';
 import FileThumbnail, { fileData } from '../file-thumbnail';
@@ -15,11 +13,16 @@ import { UploadProps } from './types';
 
 // ----------------------------------------------------------------------
 
-export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: UploadProps) {
+export default function MultiFilePreview({
+  thumbnail,
+  files,
+  onRemove,
+  sx,
+}: UploadProps) {
   return (
     <AnimatePresence initial={false}>
       {files?.map((file) => {
-        const { key, name = '', size = 0 } = fileData(file);
+        const { key, name = '' } = fileData(file);
 
         const isNotFormatFile = typeof file === 'string';
 
@@ -39,7 +42,8 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
                 borderRadius: 1.25,
                 overflow: 'hidden',
                 position: 'relative',
-                border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,
+                border: (theme) =>
+                  `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,
                 ...sx,
               }}
             >
@@ -61,9 +65,11 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
                     right: 4,
                     position: 'absolute',
                     color: 'common.white',
-                    bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
+                    bgcolor: (theme) =>
+                      alpha(theme.palette.grey[900], 0.48),
                     '&:hover': {
-                      bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
+                      bgcolor: (theme) =>
+                        alpha(theme.palette.grey[900], 0.72),
                     },
                   }}
                 >
@@ -87,7 +93,8 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
               py: 1,
               px: 1.5,
               borderRadius: 1,
-              border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,
+              border: (theme) =>
+                `solid 1px ${alpha(theme.palette.grey[500], 0.16)}`,
               ...sx,
             }}
           >
@@ -95,7 +102,7 @@ export default function MultiFilePreview({ thumbnail, files, onRemove, sx }: Upl
 
             <ListItemText
               primary={isNotFormatFile ? file : name}
-              secondary={isNotFormatFile ? '' : fData(size)}
+              secondary={''}
               secondaryTypographyProps={{
                 component: 'span',
                 typography: 'caption',

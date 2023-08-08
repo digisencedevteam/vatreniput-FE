@@ -1,14 +1,9 @@
 import { Navigate, useRoutes } from 'react-router-dom';
 // config
 import { PATH_AFTER_LOGIN } from 'src/config-global';
-//
 import { mainRoutes } from './main';
-
 import { authRoutes } from './auth';
 import { dashboardRoutes } from './dashboard';
-import ProfileView from 'src/sections/profile/view';
-
-// ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([

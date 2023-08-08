@@ -19,7 +19,6 @@ import {
   Searchbar,
   AccountPopover,
   SettingsButton,
-  ContactsPopover,
   NotificationsPopover,
 } from '../_common';
 

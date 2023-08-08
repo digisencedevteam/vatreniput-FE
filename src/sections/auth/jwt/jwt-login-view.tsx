@@ -24,19 +24,6 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 import { Box } from '@mui/material';
 
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 export default function JwtLoginView() {
   const { login } = useAuthContext();
 
@@ -49,10 +36,6 @@ export default function JwtLoginView() {
   const returnTo = searchParams.get('returnTo');
 
   const password = useBoolean();
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -139,7 +122,6 @@ export default function JwtLoginView() {
       >
         Prijava
       </LoadingButton>
-
     </Stack>
   );
 
@@ -151,6 +133,5 @@ export default function JwtLoginView() {
       </FormProvider>
       <ContactUsForm />
     </Box>
-
   );
 }
