@@ -6,6 +6,8 @@ import { AuthGuard } from 'src/auth/guard';
 import DashboardLayout from 'src/layouts/dashboard';
 // components
 import { LoadingScreen } from 'src/components/loading-screen';
+import ProfileView from 'src/sections/profile/view';
+import { useAuthContext } from 'src/auth/hooks';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +40,7 @@ export const dashboardRoutes = [
       { path: 'three', element: <PageThree /> },
       { path: 'four', element: <PageFour /> },
       { path: 'five', element: <PageFive /> },
+      { path: 'profile', element: <ProfileView /> },
       {
         path: 'group',
         children: [

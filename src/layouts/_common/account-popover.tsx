@@ -8,12 +8,8 @@ import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-// routes
 import { useRouter } from 'src/routes/hooks';
-// hooks
-// auth
 import { useAuthContext } from 'src/auth/hooks';
-// components
 import { varHover } from 'src/components/animate';
 import CustomPopover, {
   usePopover,
@@ -28,7 +24,7 @@ const OPTIONS = [
   },
   {
     label: 'Profile',
-    linkTo: '/#1',
+    linkTo: '/dashboard/profile',
   },
   {
     label: 'Settings',
