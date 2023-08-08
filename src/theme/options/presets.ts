@@ -5,6 +5,7 @@ import { alpha } from '@mui/material/styles';
 
 export function presets(presetsColor: string) {
   const primary = primaryPresets.find((i) => i.name === presetsColor);
+  if (!primary) return;
 
   const theme = {
     palette: {
