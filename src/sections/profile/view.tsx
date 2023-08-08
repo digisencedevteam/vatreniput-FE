@@ -1,7 +1,6 @@
 import Container from '@mui/material/Container';
 import UserNewEditForm from './user-new-edit-form';
 import { useSettingsContext } from 'src/components/settings';
-import { _userList } from 'src/_mock';
 import { useAuthContext } from 'src/auth/hooks';
 
 export default function ProfileView() {
