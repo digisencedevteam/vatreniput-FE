@@ -6,6 +6,7 @@ import CompactLayout from 'src/layouts/compact';
 // ----------------------------------------------------------------------
 
 const Page404 = lazy(() => import('src/pages/404'));
+const Faq = lazy(() => import('src/pages/Faq'))
 
 // ----------------------------------------------------------------------
 
@@ -16,6 +17,8 @@ export const mainRoutes = [
         <Outlet />
       </CompactLayout>
     ),
-    children: [{ path: '404', element: <Page404 /> }],
+    children: [{ path: '404', element: <Page404 /> },
+    { path: 'faq', element: <Faq /> }
+    ],
   },
 ];
