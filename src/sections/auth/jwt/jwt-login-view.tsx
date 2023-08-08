@@ -21,10 +21,8 @@ import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
-
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
+import { Box } from '@mui/material';
 
 
 const style = {
@@ -94,23 +92,13 @@ export default function JwtLoginView() {
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
       <Typography variant="h4">Prijavi se na platformu!</Typography>
-
-      <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">Nemate korisnički račun?</Typography>
-
-        <Link variant="body2" onClick={handleOpen}>
-          Kako ga napraviti
-        </Link>
-      </Stack>
     </Stack>
   );
 
   const renderForm = (
     <Stack spacing={2.5}>
       {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
-
       <RHFTextField name="email" label="Email" />
-
       <RHFTextField
         name="password"
         label="Lozinka"
@@ -152,38 +140,17 @@ export default function JwtLoginView() {
         Prijava
       </LoadingButton>
 
-      <ContactUsForm />
-
-
     </Stack>
   );
 
   return (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <Box>
+      <FormProvider methods={methods} onSubmit={onSubmit}>
+        {renderHead}
+        {renderForm}
+      </FormProvider>
+      <ContactUsForm />
+    </Box>
 
-      {renderHead}
-
-      {renderForm}
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-          >
-            Kako napraviti račun ?
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Objašnjenje kako napraviti račun
-          </Typography>
-        </Box>
-      </Modal>
-    </FormProvider>
   );
 }

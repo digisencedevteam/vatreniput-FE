@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoadingButton } from "@mui/lab";
-import { Alert, Button, Link, MenuItem, Snackbar, TextField, useTheme } from "@mui/material";
+import { Alert, Box, Button, Link, MenuItem, Snackbar, TextField, useTheme } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -42,7 +42,7 @@ export default function ContactUsForm() {
     };
 
     return (
-        <div>
+        <Box mt={2}>
             <Button color="inherit" onClick={() => setOpen(true)}>
                 Kontaktirajte nas
             </Button>
@@ -136,11 +136,12 @@ export default function ContactUsForm() {
                 open={submitted}
                 autoHideDuration={6000}
                 onClose={() => setSubmitted(false)}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert onClose={() => setSubmitted(false)} severity="success">
                     Your message was sent successfully to VatreniPut support!
                 </Alert>
             </Snackbar>
-        </div >
+        </Box >
     );
 }
