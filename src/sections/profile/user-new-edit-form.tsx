@@ -4,13 +4,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import AvatarModal from 'src/components/avatar-modal/AvatarModal';
 import Box from '@mui/material/Box';
-import { useSnackbar } from 'src/components/snackbar';
 import { useRouter } from 'src/routes/hooks';
 import { paths } from 'src/routes/paths';
 import FormProvider, {
@@ -20,6 +20,7 @@ import FormProvider, {
 import LoadingButton from '@mui/lab/LoadingButton';
 import DeleteAccountModal from 'src/components/delete-account-modal/deleteAccountModal';
 import axios, { endpoints } from 'src/utils/axios';
+import { Alert } from '@mui/material';
 
 type Props = {
   currentUser?: any;
@@ -34,17 +35,14 @@ interface FormValues {
   [key: string]: string;
 }
 
-export default function UserNewEditForm({
-  currentUser,
-  avatarOptions,
-}: Props) {
+export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
   const router = useRouter();
-  const { enqueueSnackbar } = useSnackbar();
+  const [submitted, setSubmitted] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState<
-    string | undefined
-  >(currentUser?.photoURL || undefined);
+  const [selectedAvatar, setSelectedAvatar] = useState<string | undefined>(
+    currentUser?.photoURL || undefined
+  );
   const [originalValues, setOriginalValues] = useState<FormValues>({
     firstName: '',
     lastName: '',
@@ -73,7 +71,6 @@ export default function UserNewEditForm({
       .required('Email is required')
       .email('Email must be a valid address'),
     avatarUrl: Yup.string().required('Avatar is required'),
-    // not required
     status: Yup.string(),
     isVerified: Yup.boolean(),
   });
@@ -96,9 +93,7 @@ export default function UserNewEditForm({
   });
 
   const {
-    reset,
     watch,
-    control,
     setValue,
     handleSubmit,
     formState: { isSubmitting },
@@ -115,11 +110,7 @@ export default function UserNewEditForm({
         photoURL: data.avatarUrl,
       };
       await axios.put(endpoints.user.user + currentUser._id, payload);
-      reset();
-      alert('SUCCESS');
-      // enqueueSnackbar(
-      //   currentUser ? 'Uspješna promjena!' : 'Uspješno!'
-      // );
+      setSubmitted(true)
     } catch (error) {
       console.error(error);
     }
@@ -150,9 +141,7 @@ export default function UserNewEditForm({
 
     let formChanged = false;
     for (const key in originalValues) {
-      if (
-        originalValues[key] !== updatedValues[key as keyof FormValues]
-      ) {
+      if (originalValues[key] !== updatedValues[key as keyof FormValues]) {
         formChanged = true;
         break;
       }
@@ -216,7 +205,7 @@ export default function UserNewEditForm({
                   }}
                 >
                   <Avatar
-                    alt="Avatar"
+                    alt='Avatar'
                     src={selectedAvatar || 'Moj Avatar'}
                     sx={{
                       width: '100%',
@@ -229,19 +218,19 @@ export default function UserNewEditForm({
               </Box>
 
               <RHFSwitch
-                name="isVerified"
-                labelPlacement="start"
+                name='isVerified'
+                labelPlacement='start'
                 label={
                   <>
-                    <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+                    <Typography variant='subtitle2' sx={{ mb: 0.5 }}>
                       Email Potvrđen...
                     </Typography>
                     <Typography
-                      variant="body2"
+                      variant='body2'
                       sx={{ color: 'text.secondary' }}
                     >
-                      Email će biti automatski poslan ako se
-                      deaktivira ova značajka!
+                      Email će biti automatski poslan ako se deaktivira ova
+                      značajka!
                     </Typography>
                   </>
                 }
@@ -254,13 +243,13 @@ export default function UserNewEditForm({
 
               {currentUser && (
                 <Stack
-                  justifyContent="center"
-                  alignItems="center"
+                  justifyContent='center'
+                  alignItems='center'
                   sx={{ mt: 3 }}
                 >
                   <Button
-                    variant="soft"
-                    color="error"
+                    variant='soft'
+                    color='error'
                     onClick={handleOpenDeleteModal}
                   >
                     Obriši korisnički račun
@@ -281,15 +270,15 @@ export default function UserNewEditForm({
               <Box
                 rowGap={3}
                 columnGap={2}
-                display="grid"
+                display='grid'
                 gridTemplateColumns={{
                   xs: 'repeat(1, 1fr)',
                   sm: 'repeat(2, 1fr)',
                 }}
               >
                 <RHFTextField
-                  name="firstName"
-                  label="First Name"
+                  name='firstName'
+                  label='First Name'
                   value={values.firstName}
                   onChange={(e) => {
                     handleInputChange('firstName', e.target.value);
@@ -299,8 +288,8 @@ export default function UserNewEditForm({
                   }}
                 />
                 <RHFTextField
-                  name="lastName"
-                  label="Last Name"
+                  name='lastName'
+                  label='Last Name'
                   value={values.lastName}
                   onChange={(e) => {
                     handleInputChange('lastName', e.target.value);
@@ -310,8 +299,8 @@ export default function UserNewEditForm({
                   }}
                 />
                 <RHFTextField
-                  name="email"
-                  label="Email Address"
+                  name='email'
+                  label='Email Address'
                   value={values.email}
                   onChange={(e) => {
                     handleInputChange('email', e.target.value);
@@ -322,10 +311,10 @@ export default function UserNewEditForm({
                 />
               </Box>
 
-              <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+              <Stack alignItems='flex-end' sx={{ mt: 3 }}>
                 <LoadingButton
-                  type="submit"
-                  variant="contained"
+                  type='submit'
+                  variant='contained'
                   loading={isSubmitting}
                   disabled={!isFormChanged}
                 >
@@ -344,6 +333,15 @@ export default function UserNewEditForm({
         selectedAvatar={selectedAvatar || ''}
         onSelectAvatar={handleSelectAvatar}
       />
+      <Snackbar
+        open={submitted}
+        autoHideDuration={6000}
+        onClose={() => setSubmitted(false)}
+      >
+        <Alert onClose={() => setSubmitted(false)} severity='success'>
+          Korisnički podatci su uspješno promjenjeni!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
