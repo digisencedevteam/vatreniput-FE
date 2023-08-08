@@ -18,6 +18,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import InvalidAlbumPage from 'src/pages/InvalidAlbum';
 import axios, { endpoints } from 'src/utils/axios';
 import { LoadingScreen } from 'src/components/loading-screen';
+import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 
 export default function JwtRegisterView() {
   const { register } = useAuthContext();
@@ -170,6 +171,7 @@ export default function JwtRegisterView() {
         >
           Registriraj se
         </LoadingButton>
+        <ContactUsForm />
       </Stack>
     </FormProvider>
   );

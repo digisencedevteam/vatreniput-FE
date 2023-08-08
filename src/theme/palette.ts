@@ -2,7 +2,13 @@ import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-export type ColorSchema = 'primary' | 'secondary' | 'info' | 'success' | 'warning' | 'error';
+export type ColorSchema =
+  | 'primary'
+  | 'secondary'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'error';
 
 declare module '@mui/material/styles/createPalette' {
   interface TypeBackground {
@@ -37,7 +43,7 @@ const PRIMARY = {
   lighter: '#C8FAD6',
   light: '#5BE49B',
   main: '#00A76F',
-  dark: '#007867',
+  dark: '#030D25',
   darker: '#004B50',
   contrastText: '#FFFFFF',
 };
@@ -81,7 +87,7 @@ const WARNING = {
 const ERROR = {
   lighter: '#FFE9D5',
   light: '#FFAC82',
-  main: '#FF5630',
+  main: '#FF3E3E',
   dark: '#B71D18',
   darker: '#7A0916',
   contrastText: '#FFFFFF',
