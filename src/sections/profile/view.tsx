@@ -2,10 +2,13 @@ import Container from '@mui/material/Container';
 import UserNewEditForm from './user-new-edit-form';
 import { useSettingsContext } from 'src/components/settings';
 import { useAuthContext } from 'src/auth/hooks';
+import { Typography, useTheme } from '@mui/material';
 
 export default function ProfileView() {
   const settings = useSettingsContext();
   const currentUser = useAuthContext();
+  const theme = useTheme();
+  
   const avatarOptions = [
     'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543607/srna_pozdrav_navija%C4%8Di_tcpljm.jpg',
     'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543542/modri%C4%87_6_kopija_zl9wvt.jpg',
@@ -20,6 +23,13 @@ export default function ProfileView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
+      <Typography
+        color={theme.palette.primary.main}
+        variant='h3'
+        sx={{ paddingY: 5 }}
+      >
+        Moj Profil
+      </Typography>
       <UserNewEditForm
         currentUser={currentUser.user}
         avatarOptions={avatarOptions}

@@ -59,5 +59,13 @@ export const endpoints = {
   },
   user: {
     user: '/user/'
+  },
+  card: {
+    collected: '/card/collected/',
+    add: '/card/add/',
+    event: '/card/event'
+  },
+  event: {
+    all: '/event/all'
   }
 };
