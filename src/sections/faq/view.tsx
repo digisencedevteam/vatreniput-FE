@@ -16,7 +16,7 @@ const FaqView = ({ faqs }: FaqViewProps) => {
     const navigate = useNavigate();
     return (
         <Box sx={{ p: 2, borderRadius: 2, textAlign: "left" }} >
-            <Typography variant="h3" >Cesta Pitanja</Typography>
+            <Typography variant="h4" >Česta Pitanja</Typography>
             {faqs.map((faq, index) => (
                 <FAQItem key={index} faq={faq} />
             ))}

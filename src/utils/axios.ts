@@ -11,7 +11,7 @@ axiosInstance.interceptors.response.use(
   (error) =>
     Promise.reject(
       (error.response && error.response.data) ||
-        'Something went wrong'
+      'Something went wrong'
     )
 );
 
@@ -59,5 +59,14 @@ export const endpoints = {
   },
   user: {
     user: '/user/'
+  },
+  card: {
+    collected: '/card/collected/',
+    add: '/card/add/',
+    event: '/card/event',
+    stats: '/card/stats/all'
+  },
+  event: {
+    all: '/event/all'
   }
 };
