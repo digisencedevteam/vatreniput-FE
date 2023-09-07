@@ -18,7 +18,7 @@ import Vesela from 'src/assets/illustrations/vesela.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
-import { CollectionCard, CollectionEvent } from 'src/types';
+import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 
 export default function CollectionView() {
   const settings = useSettingsContext();
@@ -26,22 +26,19 @@ export default function CollectionView() {
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
-  const [events, setEvents] = useState<CollectionEvent[]>([]);
-  const [totalCardCount, setTotalCardCount] = useState<number>(0);
   const [categories, setCategories] = useState<CollectionEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(1)
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
   const itemsPerPage = 6;
-  const totalPages = Math.ceil(totalCardCount / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
   const [loading, setLoading] = useState(true);
+  const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
 
   const fetchCategories = async () => {
     try {
       const response = await axios.get(endpoints.event.all);
-      const myCards = { _id: 9, name: 'Skupljene slicice', }
+      const myCards = { _id: 9, name: 'Moje Skupljene sličice', }
       setCategories([myCards, ...response.data]);
       setIsLoading(false);
     } catch (error) {
@@ -51,20 +48,9 @@ export default function CollectionView() {
     }
   };
 
-  const fetchCollectedCategoryCards = async () => {
-    try {
-      const response = await axios.get(`${endpoints.card.collected}`);
-      return response.data as CollectionEvent[];
-    } catch (error) {
-      console.error(error);
-      return [];
-    }
-  };
-
   const fetchCollectedCards = async () => {
     try {
       let response;
-      console.log(categoryIndex)
       if (categoryIndex === 0) {
         response = await axios.get(
           `${endpoints.card.collected}?page=${currentPage}&limit=${itemsPerPage}`
@@ -78,7 +64,10 @@ export default function CollectionView() {
         }
       }
       if (response) {
+        const totalPages = Math.ceil(response.data.totalCount / itemsPerPage);
+        setTotalPages(totalPages)
         setCollectedCards(response.data.cards);
+        console.log(response.data.cards)
       }
     } catch (error) {
       console.error(error);
@@ -86,11 +75,20 @@ export default function CollectionView() {
     }
   };
 
+  const fetchCollectedStatistic = async () => {
+    try {
+      const response = await axios.get(endpoints.card.stats);
+      setCollectedStatistic(response.data);
+    } catch (error) {
+      console.error('Error fetching collected statistic: ' + error);
+      setCollectedStatistic(null);
+    }
+  };
+
   useEffect(() => {
     fetchCategories()
       .then(() => {
-        console.log('Categories fetched:', categories);
-        return fetchCollectedCategoryCards();
+        fetchCollectedStatistic();
       })
       .then(() => {
         setLoading(false);
@@ -112,12 +110,9 @@ export default function CollectionView() {
   }
 
   const handleArrowClick = (direction: string) => {
+    setCollectedCards([])
     if (categories.length > 0) {
-      console.log(
-        'Before handleArrowClick - currentCategory:',
-        currentCategory
-      );
-
+      setCurrentPage(1)
       if (direction === 'left') {
         setCategoryIndex(
           (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
@@ -145,113 +140,125 @@ export default function CollectionView() {
         Kolekcija
       </Typography>
 
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <React.Fragment>
-          {!isMobile && (
-            <Grid item md={7}>
-              <WelcomeComponent
-                title={`Pozdrav 👋`}
-                description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
-                img={<img src={Vesela} alt='Vesela' />}
-                action={
-                  <Button variant='contained' color='primary'>
-                    Istraži
-                  </Button>
-                }
-              />
-            </Grid>
-          )}
+      <Grid container spacing={1}>
+        {!isMobile && (
+          <Grid item xs={12} md={7}>
+            <WelcomeComponent
+              title={`Pozdrav 👋`}
+              description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+              img={<img src={Vesela} alt='Vesela' />}
+              action={
+                <Button variant='contained' color='primary'>
+                  Istraži
+                </Button>
+              }
+            />
+          </Grid>
+        )}
 
-          <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={isMobile ? 12 : 5}>
+          <Box
+            sx={{
+              display: 'flex',
+              overflowX: 'auto',
+              whiteSpace: 'nowrap',
+              height: '100%',
+              [theme.breakpoints.up('md')]: {
+                scrollbarWidth: 'thin',
+                '&::-webkit-scrollbar': {
+                  width: '5px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  background: '#f1f1f1',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: '#888',
+                },
+                '&::-webkit-scrollbar-thumb:hover': {
+                  background: '#555',
+                },
+              },
+            }}
+          >
+            <CollectedStatisticWidget
+              chart={{
+                series: [
+                  {
+                    label: 'Ukupno Skupljenih',
+                    percent: collectedStatistic?.percentageOfCollectedCards || 0,
+                    total: collectedStatistic?.numberOfCollectedCards || 0,
+                  },
+                ],
+              }}
+              sx={{
+                flex: '0 0 auto',
+                paddingRight: { xs: 1, md: theme.spacing(5) },
+                marginRight: { xs: 1, md: theme.spacing(1) },
+                height: '100%',
+              }}
+            />
+            <SelectionStatistic
+              title='još do otključavanja neke od priča'
+              total={78}
+              icon={<CollectionStatisticIllustration />}
+              sx={{
+                flex: '0 0 auto',
+                paddingRight: { xs: theme.spacing(2), md: theme.spacing(2) },
+                marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
+              }}
+            />
+          </Box>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <SearchCollectionItemBar />
+        </Grid>
+        <Grid item xs={4}>
+          <FilterCollection />
+        </Grid>
+        <Grid item xs={12}>
+          {currentCategory ? (
             <Box
               sx={{
                 display: 'flex',
-                height: { md: '100%' },
-                overflowX: 'auto',
-                '&::-webkit-scrollbar': {
-                  display: 'none',
-                },
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              <CollectedStatisticWidget
-                chart={{
-                  series: [
-                    { label: 'Ukupno Skupljenih', percent: 36, total: 86 },
-                    // { label: 'Pending for payment', percent: 64, total: 400 },
-                  ],
-                }}
-                sx={{
-                  flex: '0 0 auto',
-                  paddingRight: { xs: 1, md: theme.spacing(5) },
-                  marginRight: { xs: 1, md: theme.spacing(1) },
-                  height: '100%',
-                }}
-              />
-              <SelectionStatistic
-                title='još do otključavanja'
-                total={78}
-                icon={<CollectionStatisticIllustration />}
-                sx={{
-                  flex: '0 0 auto',
-                  paddingRight: { xs: theme.spacing(2), md: theme.spacing(2) },
-                  marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
-                }}
-              />
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('left')}
+              >
+                <ArrowLeftIcon />
+              </IconButton>
+              <Typography variant='subtitle1' sx={{ mx: 2 }}>
+                {currentCategory.name}
+              </Typography>
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('right')}
+              >
+                <ArrowRightIcon />
+              </IconButton>
             </Box>
-          </Grid>
+          ) : (
+            <CircularProgress />
+          )}
+        </Grid>
 
-          <Grid container spacing={1}>
-            <Grid item xs={8}>
-              <SearchCollectionItemBar />
-            </Grid>
-            <Grid item xs={4}>
-              <FilterCollection />
-            </Grid>
-            <Grid item xs={12}>
-              {currentCategory ? (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <IconButton
-                    color='primary'
-                    onClick={() => handleArrowClick('left')}
-                  >
-                    <ArrowLeftIcon />
-                  </IconButton>
-                  <Typography variant='subtitle1' sx={{ mx: 2 }}>
-                    {currentCategory.name}
-                  </Typography>
-                  <IconButton
-                    color='primary'
-                    onClick={() => handleArrowClick('right')}
-                  >
-                    <ArrowRightIcon />
-                  </IconButton>
-                </Box>
-              ) : (
-                <CircularProgress />
-              )}
-            </Grid>
-
-            {collectedCards.slice(startIndex, endIndex).map((item) => (
-              <Grid key={item._id} item xs={6} md={3} lg={2}>
-                <CollectionStickerItem item={item} />
-              </Grid>
-            ))}
+        {collectedCards.map((item) => (
+          <Grid key={item._id} item xs={6} md={3} lg={2}>
+            <CollectionStickerItem item={item} />
           </Grid>
-          <PagingComponent
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </React.Fragment>
-      )}
+        ))}
+      </Grid>
+      <PagingComponent
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </Container>
   );
 }

@@ -63,7 +63,8 @@ export const endpoints = {
   card: {
     collected: '/card/collected/',
     add: '/card/add/',
-    event: '/card/event'
+    event: '/card/event',
+    stats: '/card/stats/all'
   },
   event: {
     all: '/event/all'

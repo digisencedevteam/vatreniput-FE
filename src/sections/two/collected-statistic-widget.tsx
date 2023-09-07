@@ -4,7 +4,6 @@ import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import { useResponsive } from 'src/hooks/use-responsive';
-
 import Chart, { useChart } from 'src/components/chart';
 import Iconify from 'src/components/iconify';
 import { Box } from '@mui/material';
@@ -157,7 +156,7 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
                 {item.label}
               </Typography>
 
-              {renderTrending}
+              {/* {renderTrending} */}
             </div>
           </Stack>
         ))}

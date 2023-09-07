@@ -18,7 +18,7 @@ export default function CollectionStickerItem({
   const renderImg = (
     <Image
       alt={item.title}
-      src={item.imageURLs[0]}
+      src={item.isCollected === undefined ? item.imageURLs[0] : item.isCollected ? item.imageURLs[0] : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1692793265/WhatsApp_Image_2023-08-23_at_14.20.09_e3uz5n.jpg'    }
       overlay={`linear-gradient(to bottom, ${alpha(
         theme.palette.grey[900],
         0

@@ -1,3 +1,4 @@
+
 export type FAQ = {
   question: string;
   answer: string;
@@ -26,3 +27,28 @@ export type CardApiResponse = {
   cards: CollectionCard[];
   totalCount: number;
 };
+
+export type CollectedStatistic = {
+  numberOfCollectedCards: number;
+  percentageOfCollectedCards: number;
+  countOfAllCards: number
+}
+
+export type CardTemplate = {
+  title: string
+  description: string;
+  videoLink?: string
+  imageURLS: string[],
+  event: CollectionEvent;
+}
+
+export type PrintedCard = {
+  qrCode: string
+  isScanned: boolean
+  owner: number
+}
+
+export type UserCard = {
+  user: string
+  printedCard: string
+}
