@@ -43,7 +43,6 @@ export default function useChart(options?: ApexOptions) {
     chart: {
       toolbar: { show: false },
       zoom: { enabled: false },
-      // animations: { enabled: false },
       foreColor: theme.palette.text.disabled,
       fontFamily: theme.typography.fontFamily,
     },

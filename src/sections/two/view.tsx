@@ -32,7 +32,6 @@ export default function CollectionView() {
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
   const itemsPerPage = 6;
-  const [loading, setLoading] = useState(true);
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
 
   const fetchCategories = async () => {
@@ -67,7 +66,6 @@ export default function CollectionView() {
         const totalPages = Math.ceil(response.data.totalCount / itemsPerPage);
         setTotalPages(totalPages)
         setCollectedCards(response.data.cards);
-        console.log(response.data.cards)
       }
     } catch (error) {
       console.error(error);
@@ -91,11 +89,9 @@ export default function CollectionView() {
         fetchCollectedStatistic();
       })
       .then(() => {
-        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
-        setLoading(false);
       });
   }, []);
 

@@ -1,12 +1,10 @@
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import { useResponsive } from 'src/hooks/use-responsive';
 import Chart, { useChart } from 'src/components/chart';
-import Iconify from 'src/components/iconify';
-import { Box } from '@mui/material';
 
 const CHART_SIZE = { width: 106, height: 106 };
 
@@ -85,34 +83,6 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
     },
   };
 
-  const renderTrending = (
-    <Stack direction='row' alignItems='center' sx={{ mt: 2, mb: 1 }}>
-      <Iconify
-        // icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'}
-        icon='eva:trending-up-fill'
-        sx={{
-          mr: 1,
-          p: 0.5,
-          width: 24,
-          height: 24,
-          borderRadius: '50%',
-          color: 'success.main',
-          bgcolor: alpha(theme.palette.success.main, 0.16),
-        }}
-      />
-
-      <Typography variant='subtitle2' component='div' noWrap>
-        30%
-        <Box
-          component='span'
-          sx={{ color: 'text.secondary', typography: 'body2' }}
-        >
-          {' od prošlog tjedna'}
-        </Box>
-      </Typography>
-    </Stack>
-  );
-
   return (
     <Card {...other}>
       <Stack
@@ -155,8 +125,6 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
               <Typography variant='body2' sx={{ opacity: 0.72 }}>
                 {item.label}
               </Typography>
-
-              {/* {renderTrending} */}
             </div>
           </Stack>
         ))}

@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import Box, { BoxProps } from '@mui/material/Box';
-import collectionImage from 'src/assets/illustrations/sittingIllustration.png'; // Import your PNG image
+import collectionImage from 'src/assets/illustrations/sittingIllustration.png';
 
-function CollectionStatisticIllustration({ ...other }: BoxProps) {
+const CollectionStatisticIllustration = ({ ...other }: BoxProps) => {
   return (
     <Box
       component="div"
