@@ -1,23 +1,26 @@
 import React from 'react';
-import Container from '@mui/material/Container';
-import { CardSkeleton } from './card-skeleton';
-import CardHero from './card-hero';
 import axios, { endpoints } from 'src/utils/axios';
-import { useParams } from 'react-router-dom';
-import NotFoundPage from 'src/pages/404';
-import Stack from '@mui/material/Stack';
+import { useNavigate, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardActions from '@mui/material/CardActions';
 import Divider from '@mui/material/Divider';
 import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import Button from '@mui/material/Button';
+import Skeleton from '@mui/material/Skeleton';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const CardView = () => {
   const { cardId } = useParams();
   const [cardData, setCardData] = React.useState<any>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
-  const renderSkeleton = <CardSkeleton />;
+  const [errorMessage, setErrorMessage] = React.useState('');
+
+  const navigate = useNavigate();
 
   const fetchCardData = async () => {
     try {
@@ -35,11 +38,13 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     try {
-      const response = await axios.patch(endpoints.card.add, {
+      const res = await axios.patch(endpoints.card.add, {
         cardId,
       });
-      console.log(response);
-      //setCardData(response.data);
+      console.log(res.data, 'BEKEND ODGOVOARA');
+      res.data === 'ok'
+        ? navigate('/dashboard/two')
+        : setErrorMessage(res.data);
     } catch (error) {
       console.error('Error fetching categories' + error);
       setIsError(true);
@@ -53,44 +58,88 @@ export const CardView = () => {
   }, []);
 
   if (isLoading) {
-    return renderSkeleton;
-  }
-  if (isError) {
-    return <NotFoundPage />;
+    return <CircularProgress />;
   }
 
   return (
-    <Container maxWidth={false}>
-      <CardHero coverUrl={cardData ? cardData?.imageURLs[0] : ''} />
-      <Stack
-        sx={{
-          maxWidth: 720,
-          mx: 'auto',
-          mt: { xs: 5, md: 10 },
-        }}
-      >
-        <Chip
-          label={cardData?.event?.name}
-          color="warning"
-          variant="outlined"
-        />
-        <Typography variant="h3" sx={{ mb: 1, mt: 5 }}>
-          {cardData?.title}
-        </Typography>
-        <Divider sx={{ mt: 5, mb: 2 }} />
-        <Typography variant="subtitle1" sx={{ mb: 5 }}>
-          {cardData?.description}
-        </Typography>
-        <Divider sx={{ mt: 5, mb: 2 }} />
-        <IconButton
-          color="primary"
-          aria-label="add to album"
-          onClick={handleAddCardToAlbum}
-        >
-          Dodaj u album
-          <AddCircleIcon />
-        </IconButton>
-      </Stack>
-    </Container>
+    <Card sx={{ maxWidth: 450, margin: 'auto', marginTop: '5%' }}>
+      <CardActionArea>
+        {isError ? (
+          <Skeleton
+            animation="wave"
+            variant="circular"
+            width={40}
+            height={40}
+            style={{ margin: 'auto' }}
+          />
+        ) : (
+          <CardMedia
+            component="img"
+            height="auto"
+            image={cardData ? cardData?.imageURLs[0] : ''}
+            alt="Sličica"
+          />
+        )}
+        {isError ? (
+          <Skeleton
+            sx={{ height: 190 }}
+            animation="wave"
+            variant="rectangular"
+          />
+        ) : (
+          <CardContent>
+            <Typography gutterBottom variant="h4" component="div">
+              {cardData?.number ? cardData.number + '' : ''}{' '}
+              {cardData?.title}
+            </Typography>
+            <Chip
+              label={cardData?.event?.name}
+              color="primary"
+              variant="outlined"
+              style={{ width: '100%', marginTop: 10 }}
+            />
+          </CardContent>
+        )}
+      </CardActionArea>
+
+      <CardActions>
+        {isError ? (
+          <div>
+            <Typography variant="h4" component="div">
+              Sličica sa ovog QR koda nije pronađena ili je već
+              iskorištena.
+            </Typography>
+          </div>
+        ) : (
+          <React.Fragment>
+            <Divider sx={{ mt: 0, mb: 0 }} />
+            {errorMessage === '' ? (
+              <Button
+                size="medium"
+                style={{
+                  color: '#2065D1',
+                }}
+                onClick={handleAddCardToAlbum}
+              >
+                Dodaj U Album
+              </Button>
+            ) : (
+              <Typography variant="h4" component="div">
+                {errorMessage}
+              </Typography>
+            )}
+
+            <Button
+              size="medium"
+              style={{
+                color: '#2065D1',
+              }}
+            >
+              Prijavi se
+            </Button>
+          </React.Fragment>
+        )}
+      </CardActions>
+    </Card>
   );
 };
