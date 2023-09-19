@@ -15,8 +15,8 @@ export const DashboardSectionWrapper = ({ title, children, link, bgcolor }: Sect
         <Box borderRadius={2} p={2} pl={0} my={2} bgcolor={bgcolor}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography variant="h5" p={1}>{title}</Typography>
-                <Button href={link} variant="contained" sx={{ borderRadius: '8px', bgcolor: theme.palette.error.darker }} >
-                    <Typography sx={{ fontSize: '90%', color: theme.palette.primary.light, fontWeight: 800 }}>
+                <Button href={link} variant="contained" color="primary" sx={{ borderRadius: '8px' }} >
+                    <Typography sx={{ fontSize: '90%', fontWeight: 800 }}>
                         Pogledaj Sve
                     </Typography>
                 </Button>
