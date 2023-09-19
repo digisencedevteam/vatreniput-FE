@@ -52,3 +52,18 @@ export type UserCard = {
   user: string
   printedCard: string
 }
+
+export type TopEvent = {
+  name?: string,
+  location?: string,
+  year?: number,
+  percentageCollected?: number
+  imageSrc?: string
+}
+
+export type DashboardStats = {
+  numberOfCollectedCards: number,
+  percentageOfCollectedCards: number,
+  countOfAllCards: number,
+  topEvents: TopEvent[],
+}

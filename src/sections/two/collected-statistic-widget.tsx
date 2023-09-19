@@ -116,7 +116,6 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
               options={index === 1 ? chartOptionsCheckout : chartOptionsCheckIn}
               {...CHART_SIZE}
             />
-
             <div>
               <Typography variant='h4' sx={{ mb: 0.5 }}>
                 {item.total}

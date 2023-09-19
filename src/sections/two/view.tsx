@@ -6,11 +6,8 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
-import CollectedStatisticWidget from './collected-statistic-widget';
 import SearchCollectionItemBar from 'src/components/search-collection-item-bar/search-collection-item-bar';
 import FilterCollection from 'src/components/filter-collection/filter-collection';
-import SelectionStatistic from 'src/components/selection-statistic/selection-statistic';
-import CollectionStatisticIllustration from 'src/assets/illustrations/collection-statistic-illustration';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
@@ -31,7 +28,7 @@ export default function CollectionView() {
   const [totalPages, setTotalPages] = useState(1)
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
-  const itemsPerPage = 6;
+  const itemsPerPage = 9;
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
 
   const fetchCategories = async () => {
@@ -152,7 +149,7 @@ export default function CollectionView() {
           </Grid>
         )}
 
-        <Grid item xs={12} md={isMobile ? 12 : 5}>
+        {/* <Grid item xs={12} md={isMobile ? 12 : 5}>
           <Box
             sx={{
               display: 'flex',
@@ -204,7 +201,7 @@ export default function CollectionView() {
               }}
             />
           </Box>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Grid container spacing={1}>
@@ -245,7 +242,7 @@ export default function CollectionView() {
         </Grid>
 
         {collectedCards.map((item) => (
-          <Grid key={item._id} item xs={6} md={3} lg={2}>
+          <Grid key={item._id} item xs={4} sm={3} md={3} lg={2}>
             <CollectionStickerItem item={item} />
           </Grid>
         ))}
