@@ -34,7 +34,7 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
                             total: collectedStatistic?.numberOfCollectedCards || 0,
                         }],
                     }}
-                    sx={{ flex: '0 0 auto', height: '100%' }}
+                    sx={{ flex: '0 0 auto', height: '100%', bgcolor: theme.palette.background.default }}
                 />
             </Grid>
             <Grid item>

@@ -42,7 +42,7 @@ const HorizontalScrollStatisticCards = ({ collectedStatistic }: StatisticCardsPr
                             total: collectedStatistic?.numberOfCollectedCards || 0,
                         }],
                     }}
-                    sx={{ height: '100%', }} // minWidth is just an example, adjust as necessary
+                    sx={{ height: '100%', width: '80vw', bgcolor: theme.palette.background.default }} // minWidth is just an example, adjust as necessary
                 />
             </Grid>
 
