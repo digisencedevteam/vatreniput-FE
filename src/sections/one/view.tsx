@@ -9,9 +9,6 @@ import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboar
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import CustomCard from 'src/components/custom-card/custom-card';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
-import CollectedStatisticWidget from '../two/collected-statistic-widget';
-import SelectionStatistic from 'src/components/selection-statistic/selection-statistic';
-import CollectionStatisticIllustration from 'src/assets/illustrations/collection-statistic-illustration';
 import { useEffect, useState } from 'react';
 import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
@@ -40,7 +37,7 @@ export default function OneView() {
   useEffect(() => {
     fetchCollectedStatistic()
     fetchDashboardStats()
-  })
+  }, [])
 
   const fetchCollectedStatistic = async () => {
     try {
