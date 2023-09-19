@@ -1,19 +1,22 @@
-import { Box, Divider, Typography, Button } from '@mui/material';
+import { Box, Divider, Typography, Button, useTheme } from '@mui/material';
 import React from 'react';
 
 interface SectionWrapperProps {
     title: string;
     children?: React.ReactNode;
-    link: string
+    link?: string;
+    bgcolor?: string;
 }
 
-export const DashboardSectionWrapper: React.FC<SectionWrapperProps> = ({ title, children, link }) => {
+export const DashboardSectionWrapper = ({ title, children, link, bgcolor }: SectionWrapperProps) => {
+    const theme = useTheme();
+
     return (
-        <Box borderRadius={2} py={2} my={2}>
+        <Box borderRadius={2} p={2} pl={0} my={2} bgcolor={bgcolor}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography variant="h5" p={1}>{title}</Typography>
-                <Button href={link} variant="contained" sx={{ borderRadius: '8px' }}>
-                    <Typography sx={{fontSize: '90%'}}>
+                <Button href={link} variant="contained" sx={{ borderRadius: '8px', bgcolor: theme.palette.error.darker }} >
+                    <Typography sx={{ fontSize: '90%', color: theme.palette.primary.light, fontWeight: 800 }}>
                         Pogledaj Sve
                     </Typography>
                 </Button>

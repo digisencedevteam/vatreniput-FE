@@ -7,7 +7,7 @@ type ScrollableContainerProps = {
     children: React.ReactNode;
 };
 
-const ScrollableContainer: React.FC<ScrollableContainerProps> = ({ children }) => {
+const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
 
     const scrollLeft = () => {
@@ -29,7 +29,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = ({ children }) =
     };
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', overflowY: 'hidden' }}>
             <IconButton onClick={scrollLeft} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>
                 <ArrowBackIosIcon />
             </IconButton>

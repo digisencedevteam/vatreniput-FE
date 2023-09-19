@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card, { CardProps } from '@mui/material/Card';
 
@@ -8,14 +9,16 @@ interface Props extends CardProps {
 }
 
 export default function SelectionStatistic({ title, total, icon, sx, ...other }: Props) {
+  const theme = useTheme();
   return (
     <Card
       sx={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        
-        ...sx,        
+        bgcolor: theme.palette.background.default,
+
+        ...sx,
       }}
       {...other}
     >

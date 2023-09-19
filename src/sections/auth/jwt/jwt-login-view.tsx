@@ -108,6 +108,7 @@ export default function JwtLoginView() {
         color="inherit"
         underline="always"
         sx={{ alignSelf: 'flex-end', cursor: 'pointer' }}
+        href='/forgot-password'
       >
         Zaboravili ste lozinku?
       </Link>

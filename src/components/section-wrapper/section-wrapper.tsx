@@ -6,7 +6,7 @@ interface SectionWrapperProps {
     children: React.ReactNode;
 }
 
-const SectionWrapper: React.FC<SectionWrapperProps> = ({ title, children }) => {
+const SectionWrapper = ({ title, children }: SectionWrapperProps) => {
     return (
         <Box borderRadius={2} p={2} my={2}>
             <Typography variant="h3" p={1}>{title}</Typography>

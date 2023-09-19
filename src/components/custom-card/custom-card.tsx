@@ -4,30 +4,32 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 
 interface CustomCardProps {
+    width?: string;
     height?: string;
     imgUrl: string;
     cardText: string;
     linkTo: string;
 }
 
-const CustomCard: React.FC<CustomCardProps> = ({
+const CustomCard = ({
+    width,
     imgUrl,
     linkTo,
     cardText
-}) => {
+}: CustomCardProps) => {
     return (
         <Card
             sx={{
                 borderRadius: "16px",
                 overflow: "hidden",
-                width: '85%',
+                width: width,
                 flexShrink: 0,
                 display: 'flex',
                 flexDirection: 'column',
-                marginX: '10px'
+                margin: '5px'
             }}
         >
-            <Box sx={{ paddingTop: '50%', position: 'relative' }}>
+            <Box sx={{ paddingTop: '60%', position: 'relative' }}>
                 <CardMedia
                     component="img"
                     style={{ position: "absolute", top: 0, left: 0, width: '100%', height: '100%' }}
@@ -55,8 +57,10 @@ const CustomCard: React.FC<CustomCardProps> = ({
                     flexDirection: "row",
                     justifyContent: 'space-between',
                     alignItems: "center",
+                    padding: '22px'
                 }}
             >
+
                 <Typography variant="h5">{cardText}</Typography>
                 <CardActions sx={{ justifyContent: "center" }}>
                     <Button
@@ -66,9 +70,11 @@ const CustomCard: React.FC<CustomCardProps> = ({
                         color="error"
                         endIcon={<ArrowForwardIcon />}
                         sx={{
-                            borderRadius: "8px",
+                            borderRadius: "999px",
                         }}
                     >
+
+
                     </Button>
                 </CardActions>
             </CardContent>

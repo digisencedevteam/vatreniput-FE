@@ -70,7 +70,7 @@ export default function ThreeView() {
       <SectionWrapper title="Svi kvizovi">
         <Grid container spacing={2}>
           {dummyData.map((data, index) => (
-            <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+            <Grid key={index} item xs={12} sm={6} md={4} lg={4} >
               <CustomCard imgUrl={data.imgUrl} cardText={data.cardText} linkTo={data.linkTo} />
             </Grid>
           ))}

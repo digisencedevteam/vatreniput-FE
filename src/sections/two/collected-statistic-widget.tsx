@@ -84,7 +84,7 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
   };
 
   return (
-    <Card {...other}>
+    <Card {...other} sx={{ bgcolor: theme.palette.background.default }}>
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         divider={

@@ -15,11 +15,13 @@ import CollectionStatisticIllustration from 'src/assets/illustrations/collection
 import { useEffect, useState } from 'react';
 import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
+import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 
 // ----------------------------------------------------------------------
 
 export default function OneView() {
   const settings = useSettingsContext();
+
   const theme = useTheme();
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
@@ -78,7 +80,10 @@ export default function OneView() {
           />
         </Grid>
         <Grid item xs={12} >
-          <Box
+          <Box >
+            <HorizontalScrollStatisticCards collectedStatistic={collectedStatistic} />
+          </Box>
+          {/* <Box
             sx={{
               marginTop: '5%',
               display: 'flex',
@@ -129,7 +134,7 @@ export default function OneView() {
                 marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
               }}
             />
-          </Box>
+          </Box> */}
           {/* <Button
             variant="contained"
             color="primary"

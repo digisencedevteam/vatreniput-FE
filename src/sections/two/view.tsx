@@ -16,6 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
+import StatisticCards from 'src/components/stats-box/statistic-box';
 
 export default function CollectionView() {
   const settings = useSettingsContext();
@@ -149,59 +150,10 @@ export default function CollectionView() {
           </Grid>
         )}
 
-        {/* <Grid item xs={12} md={isMobile ? 12 : 5}>
-          <Box
-            sx={{
-              display: 'flex',
-              overflowX: 'auto',
-              whiteSpace: 'nowrap',
-              height: '100%',
-              [theme.breakpoints.up('md')]: {
-                scrollbarWidth: 'thin',
-                '&::-webkit-scrollbar': {
-                  width: '5px',
-                },
-                '&::-webkit-scrollbar-track': {
-                  background: '#f1f1f1',
-                },
-                '&::-webkit-scrollbar-thumb': {
-                  background: '#888',
-                },
-                '&::-webkit-scrollbar-thumb:hover': {
-                  background: '#555',
-                },
-              },
-            }}
-          >
-            <CollectedStatisticWidget
-              chart={{
-                series: [
-                  {
-                    label: 'Ukupno Skupljenih',
-                    percent: collectedStatistic?.percentageOfCollectedCards || 0,
-                    total: collectedStatistic?.numberOfCollectedCards || 0,
-                  },
-                ],
-              }}
-              sx={{
-                flex: '0 0 auto',
-                paddingRight: { xs: 1, md: theme.spacing(5) },
-                marginRight: { xs: 1, md: theme.spacing(1) },
-                height: '100%',
-              }}
-            />
-            <SelectionStatistic
-              title='još do otključavanja neke od priča'
-              total={78}
-              icon={<CollectionStatisticIllustration />}
-              sx={{
-                flex: '0 0 auto',
-                paddingRight: { xs: theme.spacing(2), md: theme.spacing(2) },
-                marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
-              }}
-            />
-          </Box>
-        </Grid> */}
+        <Grid item xs={12} md={5}>
+          <StatisticCards collectedStatistic={collectedStatistic} />
+        </Grid>
+
       </Grid>
 
       <Grid container spacing={1}>
