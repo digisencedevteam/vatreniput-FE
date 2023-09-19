@@ -18,13 +18,13 @@ export default function CollectionStickerItem({
   const renderImg = (
     <Image
       alt={item.title}
-      src={item.isCollected === undefined ? item.imageURLs[0] : item.isCollected ? item.imageURLs[0] : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'}
+      src={item.isCollected === undefined ? item.imageURLs[0] : item.isCollected ? item.imageURLs[0] : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1692793265/WhatsApp_Image_2023-08-23_at_14.20.09_e3uz5n.jpg'    }
       overlay={`linear-gradient(to bottom, ${alpha(
         theme.palette.grey[900],
         0
       )} 0%, ${theme.palette.grey[900]} 95%)`}
       sx={{
-        height: { xs: 150, sm: 200, md: 250, xl: 300 },
+        height: { xs: 160, sm: 200, md: 250, lg: 250, xl: 300 },
       }}
     />
   );

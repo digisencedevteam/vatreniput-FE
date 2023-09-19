@@ -8,7 +8,7 @@ interface SectionWrapperProps {
 
 const SectionWrapper = ({ title, children }: SectionWrapperProps) => {
     return (
-        <Box borderRadius={2} p={2} my={2}>
+        <Box borderRadius={2} py={2} pl={0} my={2}>
             <Typography variant="h3" p={1}>{title}</Typography>
             <Divider sx={{ margin: "16px 0" }} />
             {children}

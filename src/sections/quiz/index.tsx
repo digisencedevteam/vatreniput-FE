@@ -5,11 +5,14 @@ import QuestionScreen from './QuestionScreen';
 import StartQuizScreen from './StartQuizScreen';
 import EndQuizScreen from './EndQuizScreen';
 import { dummyQuiz } from 'src/lib/constants';
+import { useSettingsContext } from 'src/components/settings';
 
 const QuizApp = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [answers, setAnswers] = useState<Answer[]>([]);
+    const settings = useSettingsContext();
+
 
     const selectedOptions = answers.map(answer => answer.option);
 
@@ -64,7 +67,9 @@ const QuizApp = () => {
     }, [answers]);
 
     return (
+        
         <Container
+            maxWidth={settings.themeStretch ? false : 'xl'}
             style={{
                 display: 'flex',
                 flexDirection: 'column',

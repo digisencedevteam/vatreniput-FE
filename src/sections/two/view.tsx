@@ -16,7 +16,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
-import StatisticCards from 'src/components/stats-box/statistic-box';
+import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 
 export default function CollectionView() {
   const settings = useSettingsContext();
@@ -151,7 +151,7 @@ export default function CollectionView() {
         )}
 
         <Grid item xs={12} md={5}>
-          <StatisticCards collectedStatistic={collectedStatistic} />
+          <HorizontalScrollStatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
 
       </Grid>
@@ -194,7 +194,7 @@ export default function CollectionView() {
         </Grid>
 
         {collectedCards.map((item) => (
-          <Grid key={item._id} item xs={4} sm={3} md={3} lg={2}>
+          <Grid key={item._id} item xs={4} sm={3} md={3} lg={2} >
             <CollectionStickerItem item={item} />
           </Grid>
         ))}

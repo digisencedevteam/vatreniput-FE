@@ -10,12 +10,15 @@ import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import useCardData from 'src/hooks/use-card-data';
 import AppFeatured from 'src/components/feautred-carousel/app-featured';
+import { useSettingsContext } from 'src/components/settings';
 
 type Props = {};
 
 export const DesktopViewOne = (props: Props) => {
     const theme = useTheme();
     const { collectedStatistic, collectedCards } = useCardData();
+    const settings = useSettingsContext();
+
 
     const hardcodedData = [
         { label: 'Prica', value: 60, totalAmount: 6000 },
@@ -41,7 +44,7 @@ export const DesktopViewOne = (props: Props) => {
 
 
     return (
-        <Container>
+        <Container maxWidth={settings.themeStretch ? false : 'xl'}>
             <Grid container spacing={3} >
                 <Grid item xs={8}>
                     <WelcomeComponent
@@ -66,14 +69,14 @@ export const DesktopViewOne = (props: Props) => {
                     <DashboardSectionWrapper title={'Kolekcija'} link='dashboard/two'>
                         <ScrollableContainer>
                             {collectedCards.map((item, index) => (
-                                <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '175px', height: '300px', m: 1 }}>
+                                <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '175px', height: '35vh', m: 1 }}>
                                     <CollectionStickerItem item={item} />
                                 </Box>
                             ))}
                         </ScrollableContainer>
                     </DashboardSectionWrapper>
                 </Grid>
-                <Grid item xs={4} md={5} mt={2}>
+                <Grid item xs={4} md={5} mt={6}>
                     <StatisticCards collectedStatistic={collectedStatistic} />
 
                 </Grid>
