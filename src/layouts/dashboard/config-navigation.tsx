@@ -3,6 +3,12 @@ import { useMemo } from 'react';
 import { paths } from 'src/routes/paths';
 // components
 import SvgColor from 'src/components/svg-color';
+import HomeIcon from '@mui/icons-material/Home';
+import CollectionsIcon from '@mui/icons-material/Collections';
+import QuizIcon from '@mui/icons-material/Quiz';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import HowToVoteIcon from '@mui/icons-material/HowToVote';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +48,7 @@ const ICONS = {
   ecommerce: icon('ic_ecommerce'),
   analytics: icon('ic_analytics'),
   dashboard: icon('ic_dashboard'),
+  home: icon('ic_home'),
 };
 
 // ----------------------------------------------------------------------
@@ -57,27 +64,27 @@ export function useNavData() {
           {
             title: 'Početna',
             path: paths.dashboard.root,
-            icon: ICONS.dashboard,
+            icon: <HomeIcon />,
           },
           {
             title: 'Moja Kolekcija',
             path: paths.dashboard.two,
-            icon: ICONS.ecommerce,
+            icon: <CollectionsIcon />,
           },
           {
             title: 'Kvizovi',
             path: paths.dashboard.three,
-            icon: ICONS.booking,
+            icon: <QuizIcon />,
           },
           {
             title: 'Sveti Dres',
             path: paths.dashboard.four,
-            icon: ICONS.kanban,
+            icon: <AutoAwesomeIcon />,
           },
           {
             title: 'Glasanje',
             path: paths.dashboard.five,
-            icon: ICONS.tour,
+            icon: <HowToVoteIcon />,
           },
         ],
       },
@@ -90,7 +97,7 @@ export function useNavData() {
           {
             title: 'Moje otključane priče',
             path: paths.dashboard.group.root,
-            icon: ICONS.user,
+            icon: <AutoStoriesIcon />,
             children: [
               {
                 title: `Zlatna Generacija '98`,
