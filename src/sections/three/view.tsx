@@ -12,27 +12,27 @@ import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 
 const dummyData = [
   {
-    imgUrl: "/assets/images/mandzukicPerisic.jpg",
+    imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693923677/HRV52006_copy_p8edoc.jpg",
     cardText: "Card 1",
     linkTo: "/dashboard/quiz",
   },
   {
-    imgUrl: "/assets/images/mandzukicPerisic.jpg",
+    imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357090/HRVATSK6_copy_lfy11a.jpg",
     cardText: "Card 2",
     linkTo: "/dashboard/quiz",
   },
   {
-    imgUrl: "/assets/images/mandzukicPerisic.jpg",
+    imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679864/prso_spycher1306_ycclpt.jpg",
     cardText: "Card 2",
     linkTo: "/dashboard/quiz",
   },
   {
-    imgUrl: "/assets/images/mandzukicPerisic.jpg",
+    imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg",
     cardText: "Card 2",
     linkTo: "/dashboard/quiz",
   },
   {
-    imgUrl: "/assets/images/mandzukicPerisic.jpg",
+    imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg",
     cardText: "Card 2",
     linkTo: "/dashboard/quiz",
   }

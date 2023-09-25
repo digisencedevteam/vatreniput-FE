@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
+import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 
 // ----------------------------------------------------------------------
 
@@ -159,8 +160,7 @@ export default function OneView() {
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Preostali Kvizovi' link='dashboard/three'>
             <ScrollableContainer >
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927996/Niko_Kovac%CC%8C_12_i3ct1j.jpg' cardText='Vatreni treneri' linkTo='/dashboard/quiz' />
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679864/prso_spycher1306_ycclpt.jpg' cardText='Vatreni napadači' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927996/Niko_Kovac%CC%8C_12_i3ct1j.jpg' cardText='Vatreni treneri' linkTo='/dashboard/quiz' />              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679864/prso_spycher1306_ycclpt.jpg' cardText='Vatreni napadači' linkTo='/dashboard/quiz' />
               <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg' cardText='Vatreni braniči' linkTo='/dashboard/quiz' />
             </ScrollableContainer>
           </DashboardSectionWrapper>

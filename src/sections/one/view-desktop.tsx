@@ -94,7 +94,7 @@ export const DesktopViewOne = (props: Props) => {
                     }}
                 >
                     <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
-                        <CustomCard imgUrl='assets/images/vrsaljkoZastava.jpg' cardText='text' linkTo='dashboard/six' />
+                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' linkTo='dashboard/six' />
                     </DashboardSectionWrapper>
                 </Grid>
 

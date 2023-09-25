@@ -15,7 +15,8 @@ const CustomCardSmall = ({
     width,
     imgUrl,
     linkTo,
-    cardText
+    cardText,
+    height
 }: CustomCardProps) => {
     return (
         <Card
@@ -23,6 +24,7 @@ const CustomCardSmall = ({
                 borderRadius: "16px",
                 overflow: "hidden",
                 width: width,
+                height: height,
                 flexShrink: 0,
                 display: 'flex',
                 flexDirection: 'column',
@@ -45,7 +47,7 @@ const CustomCardSmall = ({
                             right: 0,
                             bottom: 0,
                             left: 0,
-                            background: "linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%)",
+                            background: "linear-gradient(0deg, rgba(0,0,0,0.7) 30%, transparent 100%)",
                             zIndex: 1,
                         },
                     }}

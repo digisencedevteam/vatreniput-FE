@@ -19,11 +19,11 @@ export default function FiveView() {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const dummyData = [
-    { imgUrl: "/assets/images/mandzukicPerisic.jpg", cardText: "Card 1", linkTo: "/link-1" },
-    { imgUrl: "/assets/images/mandzukicPerisic.jpg", cardText: "Card 2", linkTo: "/link-2" },
-    { imgUrl: "/assets/images/mandzukicPerisic.jpg", cardText: "Card 2", linkTo: "/link-2" },
-    { imgUrl: "/assets/images/mandzukicPerisic.jpg", cardText: "Card 2", linkTo: "/link-2" },
-    { imgUrl: "/assets/images/mandzukicPerisic.jpg", cardText: "Card 2", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg", cardText: "Najbolji igrac", linkTo: "/link-1" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692358241/strini%C4%87_mbappe_guigky.jpg", cardText: "Najbolja utakmica", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692359054/gvardiol_4_rmm414.jpg", cardText: "Najbrzi igrac", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584480/sammir_kamerun_2_w7dryp.jpg", cardText: "Najbolji golman", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584123/livaja_1_a8kxbj.jpg", cardText: "Najbolji napadac", linkTo: "/link-2" },
   ];
 
   const hardcodedData = [
