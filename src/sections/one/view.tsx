@@ -160,15 +160,16 @@ export default function OneView() {
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Preostali Kvizovi' link='dashboard/three'>
             <ScrollableContainer >
-              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927996/Niko_Kovac%CC%8C_12_i3ct1j.jpg' cardText='Vatreni treneri' linkTo='/dashboard/quiz' />              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679864/prso_spycher1306_ycclpt.jpg' cardText='Vatreni napadači' linkTo='/dashboard/quiz' />
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg' cardText='Vatreni braniči' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927996/Niko_Kovac%CC%8C_12_i3ct1j.jpg' cardText='Vatreni treneri' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679864/prso_spycher1306_ycclpt.jpg' cardText='Vatreni napadači' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg' cardText='Vatreni braniči' linkTo='/dashboard/quiz' />
             </ScrollableContainer>
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Rješeni Kvizovi' link='dashboard/three'>
             <ScrollableContainer >
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928447/rebic%CC%81_kopenhagen_1_2_d4fflt.jpg' cardText='Vatreni dribleri' linkTo='/dashboard/quiz' />
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926850/subas%CC%8Cic%CC%81_obrana_1_z9olsm.jpg' cardText='Vatreni golmani' linkTo='/dashboard/quiz' />
-              <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg' cardText='Vatreni vezni' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928447/rebic%CC%81_kopenhagen_1_2_d4fflt.jpg' cardText='Vatreni dribleri' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926850/subas%CC%8Cic%CC%81_obrana_1_z9olsm.jpg' cardText='Vatreni golmani' linkTo='/dashboard/quiz' />
+              <CustomCardSmall width='96%' height='80%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg' cardText='Vatreni vezni' linkTo='/dashboard/quiz' />
             </ScrollableContainer>
           </DashboardSectionWrapper>
         </Grid>

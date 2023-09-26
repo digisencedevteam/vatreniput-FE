@@ -8,6 +8,7 @@ import { useTheme } from '@mui/material/styles';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
+import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 
 
 const dummyData = [
@@ -28,12 +29,12 @@ const dummyData = [
   },
   {
     imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg",
-    cardText: "Legende Hrvatske",
+    cardText: "Klubovi",
     linkTo: "/dashboard/quiz",
   },
   {
     imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg",
-    cardText: "Stadioni i Klubovi",
+    cardText: "Stadioni",
     linkTo: "/dashboard/quiz",
   }
 ];
@@ -49,8 +50,8 @@ export default function ThreeView() {
 
         <ScrollableContainer>
           {dummyData.map((data, index) => (
-            <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '300px' }}>
-              <CustomCard imgUrl={data.imgUrl} cardText={data.cardText} linkTo={data.linkTo} />
+            <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '300px', mx: 1 }}>
+              <CustomCardSmall width='100%' height='90%' imgUrl={data.imgUrl} cardText={data.cardText} linkTo={data.linkTo} />
             </Box>
           ))}
         </ScrollableContainer>
