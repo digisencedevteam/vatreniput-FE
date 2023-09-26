@@ -118,6 +118,5 @@ export function useNavData() {
     ],
     []
   );
-
   return data;
 }

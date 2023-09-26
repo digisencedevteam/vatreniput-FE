@@ -6,7 +6,7 @@ const DashboardCollectionCategory = ({
     name,
     percentageCollected,
 }: TopEvent) => {
-    if(!percentageCollected){
+    if (!percentageCollected) {
         return null
     }
     const percentage = Math.round(percentageCollected)
@@ -18,8 +18,8 @@ const DashboardCollectionCategory = ({
             </Grid>
 
             <Grid item xs={7} >
-                <Typography sx={{  }}>{name}</Typography>
-                <Typography sx={{ fontSize: 13, paddingTop: 1 }}>{percentageCollected}</Typography>
+                <Typography variant="caption" sx={{}}>{name}</Typography>
+                <Typography sx={{ fontSize: 11, paddingTop: 1 }}>{percentageCollected}</Typography>
                 <LinearProgress variant="determinate" value={percentage} />
             </Grid>
         </Grid>

@@ -15,8 +15,8 @@ const CustomCardSmall = ({
     width,
     imgUrl,
     linkTo,
-    cardText,
-    height
+    height,
+    cardText
 }: CustomCardProps) => {
     return (
         <Card
@@ -62,12 +62,11 @@ const CustomCardSmall = ({
                         justifyContent: 'space-between',
                         alignItems: "center",
                         padding: '22px',
-
-                        background: "linear-gradient(0deg, rgba(0,0,0,0.7), transparent)",
+                        background: "linear-gradient(0deg, rgba(0,0,0,0.8), transparent)",
 
                     }}
                 >
-                    <Typography variant="h6" color="common.white">{cardText}</Typography>
+                    <Typography variant="caption" color="common.white">{cardText}</Typography>
                     <CardActions sx={{ justifyContent: "center" }}>
                         <Fab
                             color="error"

@@ -34,7 +34,7 @@ export const DashboardButton = ({ imageSrc, title, link }: ImageandTitleProps) =
       }}
     >
       {imageSrc && <img src={imageSrc} alt={title} style={{ width: '45px', height: '45px', marginBottom: '8px' }} />}
-      <Typography>{title}</Typography>
+      <Typography variant="caption">{title}</Typography>
     </Button>
   );
 };

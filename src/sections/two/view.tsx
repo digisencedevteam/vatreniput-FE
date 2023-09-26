@@ -158,7 +158,6 @@ export default function CollectionView() {
             <StatisticCards collectedStatistic={collectedStatistic} />
           }
         </Grid>
-
       </Grid>
 
       <Grid container spacing={1}>
@@ -183,7 +182,7 @@ export default function CollectionView() {
               >
                 <ArrowLeftIcon />
               </IconButton>
-              <Typography variant='subtitle1' sx={{ mx: 2 }}>
+              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
                 {currentCategory.name}
               </Typography>
               <IconButton

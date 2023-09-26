@@ -29,12 +29,15 @@ declare module '@mui/material/styles' {
 }
 
 const primaryFont = 'Public Sans, sans-serif'; // Google Font
+const secondaryFont = 'Changa One, sans-serif';
+const ternaryFont = 'Anton, sans-serif'
+const quaternaryFont = 'Open Sans, sans-serif'
 // const secondaryFont = 'CircularStd, sans-serif'; // Local Font
 
 // ----------------------------------------------------------------------
 
 export const typography = {
-  fontFamily: primaryFont,
+  fontFamily: quaternaryFont,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,
@@ -95,7 +98,7 @@ export const typography = {
   },
   caption: {
     lineHeight: 1.5,
-    fontSize: pxToRem(12),
+    fontSize: pxToRem(15),
   },
   overline: {
     fontWeight: 700,

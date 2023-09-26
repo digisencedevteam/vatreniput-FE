@@ -19,7 +19,6 @@ export const DesktopViewOne = (props: Props) => {
     const { collectedStatistic, collectedCards } = useCardData();
     const settings = useSettingsContext();
 
-
     const hardcodedData = [
         { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
         { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
@@ -42,7 +41,6 @@ export const DesktopViewOne = (props: Props) => {
         },
     ];
 
-
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
             <Grid container spacing={3} >
@@ -60,10 +58,8 @@ export const DesktopViewOne = (props: Props) => {
                 </Grid>
                 <Grid item xs={4} md={4}>
                     <AppFeatured list={featuredAppsList} />
-
                 </Grid>
             </Grid>
-
             <Grid container spacing={3} >
                 <Grid item xs={8} md={7} >
                     <DashboardSectionWrapper title={'Kolekcija'} link='dashboard/two'>
@@ -78,10 +74,8 @@ export const DesktopViewOne = (props: Props) => {
                 </Grid>
                 <Grid item xs={4} md={5} mt={3}>
                     <StatisticCards collectedStatistic={collectedStatistic} />
-
                 </Grid>
             </Grid>
-
             <Grid container spacing={3} sx={{ justifyContent: 'center', alignContent: 'center' }}>
                 <Grid
                     item
@@ -91,7 +85,7 @@ export const DesktopViewOne = (props: Props) => {
                         bgcolor: theme.palette.background.neutral,
                         m: '4px'
 
-                    }}
+                    }} 
                 >
                     <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
                         <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' linkTo='dashboard/six' />
@@ -123,7 +117,6 @@ export const DesktopViewOne = (props: Props) => {
                         borderRadius: 2,
                         bgcolor: theme.palette.background.neutral,
                         m: '4px'
-
                     }}
                 >
                     <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
@@ -142,7 +135,6 @@ export const DesktopViewOne = (props: Props) => {
                         </Grid>
                     </DashboardSectionWrapper>
                 </Grid>
-
                 <Grid
                     item
                     md={5.9}
