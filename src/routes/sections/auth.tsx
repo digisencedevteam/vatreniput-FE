@@ -26,7 +26,7 @@ const authJwt = {
     {
       path: 'login',
       element: (
-         <AuthClassicLayout
+        <AuthClassicLayout
           title="Dobrodošli na Platformu Vatrenog Puta!"
           image="/assets/images/vrsaljkoZastava.jpg"
         >

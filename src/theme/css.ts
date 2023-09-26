@@ -24,7 +24,8 @@ export const paper = ({
       color: bgcolor,
     }),
   }),
-  backgroundImage: 'url(/assets/cyan-blur.png), url(/assets/red-blur.png)',
+  backgroundImage:
+    'url(/assets/cyan-blur.png), url(/assets/red-blur.png)',
   backgroundRepeat: 'no-repeat, no-repeat',
   backgroundPosition: 'top right, left bottom',
   backgroundSize: '50%, 50%',
@@ -119,6 +120,7 @@ type BgGradientProps = {
   startColor?: string;
   endColor?: string;
   imgUrl?: string;
+  backgroundSize?: string;
 };
 
 export function bgGradient(props?: BgGradientProps) {
@@ -127,13 +129,14 @@ export function bgGradient(props?: BgGradientProps) {
   const endColor = props?.endColor;
   const imgUrl = props?.imgUrl;
   const color = props?.color;
+  const backgroundSize = props?.backgroundSize;
 
   if (imgUrl) {
     return {
-      background: `linear-gradient(${direction}, ${startColor || color}, ${
-        endColor || color
-      }), url(${imgUrl})`,
-      backgroundSize: 'cover',
+      background: `linear-gradient(${direction}, ${
+        startColor || color
+      }, ${endColor || color}), url(${imgUrl})`,
+      backgroundSize: backgroundSize || 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center center',
     };

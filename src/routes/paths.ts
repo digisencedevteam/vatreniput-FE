@@ -29,6 +29,6 @@ export const paths = {
       seven: `${ROOTS.DASHBOARD}/group/seven`,
       eight: `${ROOTS.DASHBOARD}/group/eight`,
     },
-    profile: `${ROOTS.DASHBOARD}/profile`
+    profile: `${ROOTS.DASHBOARD}/profile`,
   },
 };

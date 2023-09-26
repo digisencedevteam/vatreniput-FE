@@ -58,16 +58,17 @@ export const endpoints = {
     search: '/api/product/search',
   },
   user: {
-    user: '/user/'
+    user: '/user/',
   },
   card: {
     collected: '/card/collected/',
     add: '/card/add/',
     event: '/card/event',
     stats: '/card/stats/all',
-    statsDashboard: '/card/stats/dashboard'
+    statsDashboard: '/card/stats/dashboard',
+    details: '/card/details/',
   },
   event: {
-    all: '/event/all'
-  }
+    all: '/event/all',
+  },
 };
