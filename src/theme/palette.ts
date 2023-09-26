@@ -13,7 +13,8 @@ export type ColorSchema =
 declare module '@mui/material/styles/createPalette' {
   interface TypeBackground {
     neutral: string;
-    contrast: string
+    contrast: string;
+    quiz: string;
   }
   interface SimplePaletteColorOptions {
     lighter: string;
@@ -131,8 +132,8 @@ export function palette(mode: 'light' | 'dark') {
       paper: '#FFFFFF',
       default: '#FFFFFF',
       neutral: GREY[200],
-      contast: '#030d25'
-
+      contast: '#030d25',
+      quiz: '#F4F6F8',
     },
     action: {
       ...COMMON.action,
@@ -152,7 +153,8 @@ export function palette(mode: 'light' | 'dark') {
       paper: GREY[800],
       default: '#030d25',
       neutral: alpha(GREY[500], 0.12),
-      contast: '#FFFFFF'
+      contast: '#FFF1FF',
+      quiz: '#fff',
     },
     action: {
       ...COMMON.action,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button, Grid, LinearProgress, Fade, Box, IconButton, Hidden } from '@mui/material';
+import { Typography, Button, Grid, LinearProgress, Fade, Box, IconButton, Hidden, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
@@ -30,6 +30,7 @@ const QuestionScreen = ({
     handleNextQuestion,
     handleSubmitAnswers
 }: QuestionScreenProps) => {
+    const theme = useTheme();
     const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
     return (
@@ -44,7 +45,7 @@ const QuestionScreen = ({
                                 </IconButton>
                             </Link>
                         </Grid>
-                        <Grid item>
+                        <Grid item >
                             <Typography variant="h4">
                                 {title}
                             </Typography>
@@ -62,8 +63,8 @@ const QuestionScreen = ({
             </Grid>
 
 
-            <Grid container item direction="column" justifyContent={'center'} alignItems={'center'} m={0} sx={{ backgroundColor: '#fff', color: "#000", borderRadius: 1 }}>
-                <Grid item >
+            <Grid container item direction="column" justifyContent={'center'} alignItems={'center'} m={0} sx={{ backgroundColor: theme.palette.background.quiz, color: "#000", borderRadius: 1 }}>
+                <Grid item textAlign={'center'} >
                     <Typography variant="h6" style={{ fontWeight: 'bold' }}>
                         {currentQuestion.questionText}
                     </Typography>
@@ -102,7 +103,7 @@ const QuestionScreen = ({
                     <>
                         <Hidden smDown>
                             <Button variant="outlined" color="primary" onClick={handlePreviousQuestion}>
-                                Previous Question
+                                Prošlo pitanje
                             </Button>
                         </Hidden>
                         <Hidden smUp>
@@ -119,7 +120,7 @@ const QuestionScreen = ({
                                 </Button>
                             ) : (
                                 <Button variant="contained" color="primary" onClick={handleNextQuestion}>
-                                    Next Question
+                                    Sljedeće pitanje
                                 </Button>
                             )}
                         </Hidden>

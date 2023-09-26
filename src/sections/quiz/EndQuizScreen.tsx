@@ -13,11 +13,11 @@ const EndQuizScreen = ({ dummyQuiz, answers }: EndQuizScreenProps) => {
     return (
         <>
             <Typography variant="h6">
-                {`You scored ${answers.filter((answer: string, index: any) => answer === dummyQuiz.questions[index]?.correctAnswer).length} out of ${dummyQuiz.questions.length}`}
+                {`Imate ${answers.filter((answer: string, index: any) => answer === dummyQuiz.questions[index]?.correctAnswer).length} točnih od ${dummyQuiz.questions.length}`}
             </Typography>
             <Button component={Link}
                 to={'/dashboard/three'} variant="contained" color="primary" style={{ marginTop: '20px' }}>
-                Finish
+                Završi
             </Button>
         </>
     );

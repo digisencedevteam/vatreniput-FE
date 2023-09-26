@@ -17,6 +17,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
+import StatisticCards from 'src/components/stats-box/statistic-box';
 
 export default function CollectionView() {
   const settings = useSettingsContext();
@@ -128,7 +129,7 @@ export default function CollectionView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography
         color={theme.palette.primary.main}
-        variant='h3'
+        variant='h2'
         sx={{ paddingY: 5 }}
       >
         Kolekcija
@@ -151,7 +152,11 @@ export default function CollectionView() {
         )}
 
         <Grid item xs={12} md={5}>
-          <HorizontalScrollStatisticCards collectedStatistic={collectedStatistic} />
+          {isMobile ?
+            <HorizontalScrollStatisticCards collectedStatistic={collectedStatistic} />
+            :
+            <StatisticCards collectedStatistic={collectedStatistic} />
+          }
         </Grid>
 
       </Grid>
@@ -193,8 +198,8 @@ export default function CollectionView() {
           )}
         </Grid>
 
-        {collectedCards.map((item) => (
-          <Grid key={item._id} item xs={4} sm={3} md={3} lg={2} >
+        {collectedCards.map((item, index) => (
+          <Grid key={index} item xs={4} sm={3} md={3} lg={2} >
             <CollectionStickerItem item={item} />
           </Grid>
         ))}

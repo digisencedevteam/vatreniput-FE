@@ -39,7 +39,7 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
             </Grid>
             <Grid item>
                 <SelectionStatistic
-                    title='još do otključavanja neke od priča'
+                    title='Još do otključavanja neke od priča'
                     total={78}
                     icon={<CollectionStatisticIllustration />}
                     sx={{

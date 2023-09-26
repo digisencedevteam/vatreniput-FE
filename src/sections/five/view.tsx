@@ -5,13 +5,14 @@ import { useSettingsContext } from 'src/components/settings';
 import { Grid, useMediaQuery } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { green, red } from '@mui/material/colors';
+import { green, red, yellow } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import VotingOverview from 'src/components/voting-overview/voting-overview';
 import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
+import { EmojiEvents, SportsSoccer } from '@mui/icons-material';
 
 export default function FiveView() {
   const settings = useSettingsContext();
@@ -19,11 +20,11 @@ export default function FiveView() {
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const dummyData = [
-    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg", cardText: "Najbolji igrac", linkTo: "/link-1" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg", cardText: "Najbolji igrač", linkTo: "/link-1" },
     { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692358241/strini%C4%87_mbappe_guigky.jpg", cardText: "Najbolja utakmica", linkTo: "/link-2" },
-    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692359054/gvardiol_4_rmm414.jpg", cardText: "Najbrzi igrac", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692359054/gvardiol_4_rmm414.jpg", cardText: "Najbrzi igrač", linkTo: "/link-2" },
     { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584480/sammir_kamerun_2_w7dryp.jpg", cardText: "Najbolji golman", linkTo: "/link-2" },
-    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584123/livaja_1_a8kxbj.jpg", cardText: "Najbolji napadac", linkTo: "/link-2" },
+    { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584123/livaja_1_a8kxbj.jpg", cardText: "Najbolji napadač", linkTo: "/link-2" },
   ];
 
   const hardcodedData = [
@@ -34,12 +35,12 @@ export default function FiveView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h2" color="error"> Glasanja </Typography>
+      <Typography variant="h2" color={theme.palette.primary.main}> Glasanja </Typography>
 
       <Box borderRadius={2} p={2} my={2} sx={{ bgcolor: theme.palette.background.default, [theme.breakpoints.up('md')]: { bgcolor: theme.palette.background.neutral } }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500] }} />} number="Luka Modric" text="Najbolji igrac" />
-          <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500] }} />} number="Qatar 2022." text="Najpopularnije prvenstvo" />
+          <StatusCard icon={<EmojiEvents fontSize="large" sx={{ color: yellow[400], display: { xs: 'none', sm: 'inline' } }} />} number="Luka Modric" text="Najbolji igrac" />
+          <StatusCard icon={<SportsSoccer fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number="Qatar 2022." text="Najpopularnije prvenstvo" />
         </Box>
       </Box>
 

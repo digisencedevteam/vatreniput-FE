@@ -29,7 +29,7 @@ export default function SelectionStatistic({ title, total, icon, sx, ...other }:
 
       <Box
         sx={{
-          width: 120,
+          width: 150,
           height: 120,
           lineHeight: 0,
           borderRadius: '50%',
@@ -37,6 +37,8 @@ export default function SelectionStatistic({ title, total, icon, sx, ...other }:
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          m: 2,
+
         }}
       >
         {icon}

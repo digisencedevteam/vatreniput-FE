@@ -21,24 +21,24 @@ export const DesktopViewOne = (props: Props) => {
 
 
     const hardcodedData = [
-        { label: 'Prica', value: 60, totalAmount: 6000 },
-        { label: 'Prica5', value: 40, totalAmount: 4000 },
-        { label: 'Prica 2', value: 20, totalAmount: 2000 },
-        { label: 'Prica 3', value: 40, totalAmount: 4000 },
+        { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
+        { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
+        { label: 'Srebrni San 2018', value: 20, totalAmount: 2000 },
+        { label: 'Put do finala', value: 40, totalAmount: 4000 },
     ];
 
     const featuredAppsList = [
         {
             id: '1',
-            title: 'App 1',
+            title: 'Vatreni Challange',
             coverUrl: 'assets/images/mandzukicPerisic.jpg',
-            description: 'Novi Kviz je dostupan',
+            description: 'Novi Kviz je dostupan!!',
         },
         {
             id: '2',
-            title: 'App 2',
+            title: 'Najbolji golman',
             coverUrl: 'assets/images/doha_medalje.png',
-            description: 'Description for App 2',
+            description: 'Novo Glasanje je dostupno!!',
         },
     ];
 
@@ -76,7 +76,7 @@ export const DesktopViewOne = (props: Props) => {
                         </ScrollableContainer>
                     </DashboardSectionWrapper>
                 </Grid>
-                <Grid item xs={4} md={5} mt={6}>
+                <Grid item xs={4} md={5} mt={3}>
                     <StatisticCards collectedStatistic={collectedStatistic} />
 
                 </Grid>
@@ -133,7 +133,7 @@ export const DesktopViewOne = (props: Props) => {
                                     <Grid item md={6} key={index}>
                                         <CustomCardSmall
                                             imgUrl={'assets/images/navijaci.jpg'}
-                                            cardText={`Dummy text ${index + 1}`}
+                                            cardText={`Kviz ${index + 1}`}
                                             linkTo={`dashboard/dummyLink${index + 1}`}
                                         />
                                     </Grid>
@@ -154,7 +154,7 @@ export const DesktopViewOne = (props: Props) => {
                     }}
                 >
                     <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-                        <CustomCard imgUrl='assets/images/lovrenModric.jpg' cardText='text' linkTo='dashboard/six' />
+                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg' cardText='Najbolji igrač' linkTo='dashboard/six' />
                     </DashboardSectionWrapper>
                 </Grid>
             </Grid>

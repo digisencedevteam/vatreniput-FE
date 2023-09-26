@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import { Answer } from './types';
 import QuestionScreen from './QuestionScreen';
@@ -67,15 +67,17 @@ const QuizApp = () => {
     }, [answers]);
 
     return (
-        
+
         <Container
             maxWidth={settings.themeStretch ? false : 'xl'}
+
             style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '80vh'
+                height: '80vh',
+
             }}
         >
             {currentQuestionIndex === null ? (

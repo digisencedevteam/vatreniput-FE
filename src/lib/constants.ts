@@ -26,52 +26,91 @@ export const FAQs = [
       'Započinjanje kolekcionarstva naljepnica na našoj platformi jednostavno je proces. Prvo, potrebno je kupiti fizički almanah koji sadrži QR kod. Skeneranjem tog QR koda možete se registrirati na platformi. Nakon uspješne registracije, imat ćete pristup funkcijama skupljanja naljepnica, gdje možete skenirati QR kodove sa sličica. Svaka skenirana sličica automatski će se pohraniti na vašem računu na platformi.',
   },
 ];
-
 export const dummyQuiz = {
-  title: 'Sample Quiz',
+  title: 'Kviz o Hrvatskim Nogometašima',
   imageURL: '/assets/images/kvizslika.png',
   description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    'Testirajte svoje znanje o poznatim hrvatskim nogometašima. Otkrijte koliko dobro poznajete naše sportske junake.',
   questions: [
     {
-      questionText: 'What is 2 + 2?',
-      options: ['1', '2', '3', '4'],
-      correctAnswer: '4',
+      questionText: 'Koji hrvatski nogometaš je poznat kao "Vatreni Maestro"?',
+      options: [
+        'Ivan Rakitić',
+        'Luka Modrić',
+        'Mario Mandžukić',
+        'Ivan Perišić',
+      ],
+      correctAnswer: 'Luka Modrić',
     },
     {
-      questionText: 'What is 2 + 3?',
-      options: ['1', '2', '5', '4'],
-      correctAnswer: '5',
+      questionText:
+        'Tko je postigao odlučujući gol za Hrvatsku u polufinalu Svjetskog prvenstva 2018. protiv Engleske?',
+      options: [
+        'Andrej Kramarić',
+        'Ante Rebić',
+        'Domagoj Vida',
+        'Mario Mandžukić',
+      ],
+      correctAnswer: 'Mario Mandžukić',
     },
     {
-      questionText: 'Which animal is known as the king of the jungle?',
-      options: ['Lion', 'Tiger', 'Elephant', 'Cheetah'],
-      correctAnswer: 'Lion',
+      questionText:
+        'Koji hrvatski nogometaš je poznat po svom nadimku "El Toro"?',
+      options: [
+        'Bruno Petković',
+        'Nikola Vlašić',
+        'Marcelo Brozović',
+        'Borna Barišić',
+      ],
+      correctAnswer: 'Bruno Petković',
     },
     {
-      questionText: 'What is 3 + 3?',
-      options: ['6', '7', '3', '9'],
-      correctAnswer: '6',
+      questionText: 'Za koji klub nije igrao Darijo Srna?',
+      options: [
+        'Shakhtar Donetsk',
+        'Dinamo Zagreb',
+        'Hajduk Split',
+        'Cagliari',
+      ],
+      correctAnswer: 'Dinamo Zagreb',
     },
     {
-      questionText: 'Which planet is known as the Red Planet?',
-      options: ['Earth', 'Mars', 'Jupiter', 'Venus'],
-      correctAnswer: 'Mars',
+      questionText: 'Koji hrvatski nogometaš je poznat kao "Mr. No Good"?',
+      options: [
+        'Vedran Ćorluka',
+        'Ivan Rakitić',
+        'Mario Mandžukić',
+        'Marcelo Brozović',
+      ],
+      correctAnswer: 'Marcelo Brozović',
     },
     {
-      questionText: 'What is 4 + 4?',
-      options: ['7', '8', '9', '10'],
-      correctAnswer: '8',
+      questionText:
+        'Tko je bio kapetan hrvatske nogometne reprezentacije tijekom Svjetskog prvenstva 1998. u Francuskoj?',
+      options: [
+        'Zvonimir Boban',
+        'Davor Šuker',
+        'Robert Prosinečki',
+        'Slaven Bilić',
+      ],
+      correctAnswer: 'Zvonimir Boban',
     },
     {
-      questionText: 'What color do you get when you mix red and blue?',
-      options: ['Green', 'Orange', 'Purple', 'Yellow'],
-      correctAnswer: 'Purple',
+      questionText:
+        'Koji hrvatski nogometaš je postigao najviše golova na Svjetskim prvenstvima?',
+      options: ['Ivica Olić', 'Davor Šuker', 'Luka Modrić', 'Ivan Perišić'],
+      correctAnswer: 'Davor Šuker',
     },
     {
-      questionText: 'Which bird is known for its beautiful tail and dance?',
-      options: ['Peacock', 'Ostrich', 'Penguin', 'Sparrow'],
-      correctAnswer: 'Peacock',
+      questionText:
+        'Koji hrvatski nogometaš je poznat po svom nadimku "RoboCop"?',
+      options: [
+        'Vedran Ćorluka',
+        'Domagoj Vida',
+        'Dejan Lovren',
+        'Šime Vrsaljko',
+      ],
+      correctAnswer: 'Vedran Ćorluka',
     },
   ],
 };

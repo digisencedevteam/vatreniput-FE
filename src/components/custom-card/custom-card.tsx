@@ -61,7 +61,7 @@ const CustomCard = ({
                 }}
             >
 
-                <Typography variant="h5">{cardText}</Typography>
+                <Typography variant="h6">{cardText}</Typography>
                 <CardActions sx={{ justifyContent: "center" }}>
                     <Button
                         component={Link}

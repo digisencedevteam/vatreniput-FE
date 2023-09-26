@@ -44,22 +44,22 @@ export default function AppFeatured({ list }: Props) {
 
     return (
         <Card sx={{ position: 'relative', overflow: 'hidden' }}>
-            <AnimatePresence mode='wait'>
-                <m.div
-                    key={currentIndex}
-                    initial={{ x: '100%' }}  // starts from the right
-                    animate={{ x: '0%' }}    // animates to the center
-                    exit={{ x: '-100%' }}   // exits to the left
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                >
+            <m.div
+                key={currentIndex}
+                initial={{ x: '100%' }}  // starts from the right
+                animate={{ x: '0%' }}    // animates to the center
+                exit={{ x: '-100%' }}   // exits to the left
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+                <AnimatePresence mode='wait'>
                     <CardMedia
                         component="img"
                         alt={item.title}
                         height="300"
                         image={item.coverUrl}
                     />
-                </m.div>
-            </AnimatePresence>
+                </AnimatePresence>
+            </m.div>
 
 
             <Stack

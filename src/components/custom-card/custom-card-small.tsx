@@ -67,7 +67,7 @@ const CustomCardSmall = ({
 
                     }}
                 >
-                    <Typography color="common.white">{cardText}</Typography>
+                    <Typography variant="h6" color="common.white">{cardText}</Typography>
                     <CardActions sx={{ justifyContent: "center" }}>
                         <Fab
                             color="error"
