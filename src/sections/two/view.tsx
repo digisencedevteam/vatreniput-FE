@@ -11,7 +11,7 @@ import FilterCollection from 'src/components/filter-collection/filter-collection
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
-import Vesela from 'src/assets/illustrations/vesela.png';
+import Vesela from 'src/assets/illustrations/vesela3.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';

@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid, useTheme } from '@mui/material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
-import Vesela from 'src/assets/illustrations/vesela.png';
+import Vesela from 'src/assets/illustrations/vesela3.png';
 import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
@@ -85,7 +85,7 @@ export const DesktopViewOne = (props: Props) => {
                         bgcolor: theme.palette.background.neutral,
                         m: '4px'
 
-                    }} 
+                    }}
                 >
                     <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
                         <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' linkTo='dashboard/six' />
