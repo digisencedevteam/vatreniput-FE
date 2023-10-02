@@ -1,6 +1,6 @@
 import { Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Quiz } from './types'; // Assuming the Quiz type is in types.ts or types.tsx
+import { Quiz } from './types';
 
 
 interface EndQuizScreenProps {

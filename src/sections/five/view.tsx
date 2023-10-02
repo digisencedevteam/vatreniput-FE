@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Grid, useMediaQuery } from '@mui/material';
+import { Button, Grid, useMediaQuery } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { green, red, yellow } from '@mui/material/colors';
@@ -13,6 +13,7 @@ import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import { EmojiEvents, SportsSoccer } from '@mui/icons-material';
+import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 
 export default function FiveView() {
   const settings = useSettingsContext();
@@ -33,9 +34,25 @@ export default function FiveView() {
     { label: 'Davor Suker', value: 20, totalAmount: 2000 }
   ];
 
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h2" color={theme.palette.primary.main}> Glasanja </Typography>
+
+      {!isMobile && (
+        <Grid item xs={12} md={7}>
+          <WelcomeComponent
+            title={`Pozdrav 👋`}
+            description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696246116/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao.jpg'} alt='Vesela' />}
+            action={
+              <Button variant='contained' color='primary'>
+                Istraži
+              </Button>
+            }
+          />
+        </Grid>
+      )}
 
       <Box borderRadius={2} p={2} my={2} sx={{ bgcolor: theme.palette.background.default, [theme.breakpoints.up('md')]: { bgcolor: theme.palette.background.neutral } }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -44,7 +61,7 @@ export default function FiveView() {
         </Box>
       </Box>
 
-      <SectionWrapper title="Najnoviji">
+      <SectionWrapper title="Najnovije">
         <ScrollableContainer>
           {dummyData.map((data, index) => (
             <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '300px' }}>

@@ -1,5 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid, } from '@mui/material';
+import { Container, Typography, Box, Grid, Button, useMediaQuery, } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -9,6 +9,7 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
+import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 
 
 const dummyData = [
@@ -42,10 +43,26 @@ const dummyData = [
 export default function ThreeView() {
   const settings = useSettingsContext();
   const theme = useTheme();
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+
+      {!isMobile && (
+        <Grid item xs={12} md={7}>
+          <WelcomeComponent
+            title={`Pozdrav 👋`}
+            description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'} alt='Vesela' />}
+            action={
+              <Button variant='contained' color='primary'>
+                Istraži
+              </Button>
+            }
+          />
+        </Grid>
+      )}
       <SectionWrapper title="Najnoviji">
 
         <ScrollableContainer>
