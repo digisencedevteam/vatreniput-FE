@@ -1,5 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid } from '@mui/material';
+import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,6 +13,10 @@ import { useEffect, useState } from 'react';
 import { Quiz } from '../quiz/types';
 import axios, { endpoints } from 'src/utils/axios';
 import PagingComponent from 'src/components/paging/paging-component';
+import { AuthContext } from 'src/auth/context/jwt';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -22,6 +26,7 @@ export default function ThreeView() {
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const itemsPerPage = 5;
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUnresolvedQuizzes = async () => {
@@ -64,7 +69,17 @@ export default function ThreeView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+
+        {auth.user && auth.user.email === 'antonio@test.com' && (
+          <Button variant="contained" color="primary" component={Link}
+            to={'/dashboard/createQuiz '}>
+            Create Quiz
+          </Button>
+        )}
+      </Box>
+
       <SectionWrapper title="Riješeni Kvizovi">
         <ScrollableContainer>
           {Array.isArray(resolvedQuizzes) && resolvedQuizzes.length > 0 ? (

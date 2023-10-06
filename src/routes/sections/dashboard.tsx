@@ -7,6 +7,7 @@ import DashboardLayout from 'src/layouts/dashboard';
 // components
 import { LoadingScreen } from 'src/components/loading-screen';
 import ProfileView from 'src/sections/profile/view';
+import CreateQuiz from 'src/sections/createQuiz/view';
 
 const IndexPage = lazy(() => import('src/pages/dashboard/one'));
 const PageTwo = lazy(() => import('src/pages/dashboard/collections'));
@@ -38,6 +39,8 @@ export const dashboardRoutes = [
       { path: 'five', element: <PageFive /> },
       { path: 'profile', element: <ProfileView /> },
       { path: 'quiz/:quizId', element: <QuizPage /> },
+      { path: 'createQuiz', element: <CreateQuiz /> },
+
       {
         path: 'group',
         children: [
