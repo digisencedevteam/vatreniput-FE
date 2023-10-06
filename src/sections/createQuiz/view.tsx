@@ -202,7 +202,7 @@ const CreateQuiz = () => {
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert onClose={() => { setSubmitted(false); history("/dashboard/three"); }} severity="success">
-                    Quiz successfully created!
+                    Kviz uspjesno kreiran!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
                 </Alert>
             </Snackbar>
 
