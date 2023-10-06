@@ -71,4 +71,9 @@ export const endpoints = {
   event: {
     all: '/event/all',
   },
+  quiz: {
+    details: '/quizzes/',
+    resolved: '/quizzes/resolved',
+    unresolved: '/quizzes/unresolved'
+  }
 };

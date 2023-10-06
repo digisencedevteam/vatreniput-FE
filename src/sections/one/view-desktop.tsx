@@ -12,9 +12,7 @@ import useCardData from 'src/hooks/use-card-data';
 import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
 
-type Props = {};
-
-export const DesktopViewOne = (props: Props) => {
+export const DesktopViewOne = () => {
     const theme = useTheme();
     const { collectedStatistic, collectedCards } = useCardData();
     const settings = useSettingsContext();
@@ -88,7 +86,7 @@ export const DesktopViewOne = (props: Props) => {
                     }}
                 >
                     <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
-                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' linkTo='dashboard/six' />
+                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' cardId='123' />
                     </DashboardSectionWrapper>
                 </Grid>
 
@@ -146,7 +144,7 @@ export const DesktopViewOne = (props: Props) => {
                     }}
                 >
                     <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg' cardText='Najbolji igrač' linkTo='dashboard/six' />
+                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg' cardText='Najbolji igrač' cardId='123' />
                     </DashboardSectionWrapper>
                 </Grid>
             </Grid>

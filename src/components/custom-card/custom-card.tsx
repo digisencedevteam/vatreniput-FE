@@ -8,15 +8,28 @@ interface CustomCardProps {
     height?: string;
     imgUrl: string;
     cardText: string;
-    linkTo: string;
+    cardId: string;
+    availableUntil?: string
 }
 
 const CustomCard = ({
     width,
     imgUrl,
-    linkTo,
-    cardText
+    cardText,
+    cardId,
+    availableUntil
 }: CustomCardProps) => {
+
+    const formattedAvailableUntil = availableUntil
+        ? new Date(availableUntil).toLocaleString("en-GB", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+        })
+        : ""
+
     return (
         <Card
             sx={{
@@ -51,21 +64,26 @@ const CustomCard = ({
                     }}
                 />
             </Box>
+
             <CardContent
                 sx={{
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: "column",
                     justifyContent: 'space-between',
-                    alignItems: "center",
+                    alignItems: "flex-start",
                     padding: '22px'
                 }}
             >
-
+                {availableUntil && (
+                    <Typography variant="subtitle2" sx={{ color: '#999' }}>
+                        Dostupan do {formattedAvailableUntil}
+                    </Typography>
+                )}
                 <Typography variant="h6">{cardText}</Typography>
                 <CardActions sx={{ justifyContent: "center" }}>
                     <Button
                         component={Link}
-                        to={linkTo}
+                        to={'/dashboard/quiz/' + cardId}
                         variant="contained"
                         color="error"
                         endIcon={<ArrowForwardIcon />}
@@ -73,8 +91,6 @@ const CustomCard = ({
                             borderRadius: "999px",
                         }}
                     >
-
-
                     </Button>
                 </CardActions>
             </CardContent>

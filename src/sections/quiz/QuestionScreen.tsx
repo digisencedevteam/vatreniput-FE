@@ -1,4 +1,3 @@
-import React from 'react';
 import { Typography, Button, Grid, LinearProgress, Fade, Box, IconButton, Hidden, useTheme } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -7,7 +6,6 @@ import { Question } from './types';
 import { Link } from 'react-router-dom';
 
 interface QuestionScreenProps {
-
     currentQuestion: Question;
     currentQuestionIndex: number;
     totalQuestions: number;
@@ -17,6 +15,8 @@ interface QuestionScreenProps {
     handlePreviousQuestion: () => void;
     handleNextQuestion: () => void;
     handleSubmitAnswers: () => void;
+    elapsedTime: number;
+
 }
 
 const QuestionScreen = ({
@@ -28,7 +28,8 @@ const QuestionScreen = ({
     handleAnswerSelection,
     handlePreviousQuestion,
     handleNextQuestion,
-    handleSubmitAnswers
+    handleSubmitAnswers,
+    elapsedTime,
 }: QuestionScreenProps) => {
     const theme = useTheme();
     const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
@@ -50,6 +51,11 @@ const QuestionScreen = ({
                                 {title}
                             </Typography>
                         </Grid>
+                        <Grid item>
+                            <Typography variant="h6">
+                                Elapsed Time: {Math.floor(elapsedTime / 60)}:{(elapsedTime % 60).toString().padStart(2, '0')}
+                            </Typography>
+                        </Grid>
                     </Grid>
                     <Typography variant="h5">
                         Pitanje {currentQuestionIndex + 1} / {totalQuestions}
@@ -66,7 +72,7 @@ const QuestionScreen = ({
             <Grid container item direction="column" justifyContent={'center'} alignItems={'center'} m={0} sx={{ backgroundColor: theme.palette.background.quiz, color: "#000", borderRadius: 1 }}>
                 <Grid item textAlign={'center'} >
                     <Typography variant="h6" style={{ fontWeight: 'bold' }}>
-                        {currentQuestion.questionText}
+                        {currentQuestion.text}
                     </Typography>
 
                 </Grid>
@@ -119,12 +125,11 @@ const QuestionScreen = ({
                                     Submit
                                 </Button>
                             ) : (
-                                <Button variant="contained" color="primary" onClick={handleNextQuestion}>
+                                <Button variant="contained" color="primary">
                                     Sljedeće pitanje
                                 </Button>
                             )}
                         </Hidden>
-
                         <Hidden smUp>
                             {currentQuestionIndex === totalQuestions - 1 ? (
                                 <Button variant="contained" color="primary" onClick={handleSubmitAnswers}>
@@ -137,7 +142,6 @@ const QuestionScreen = ({
                             )}
                         </Hidden>
                     </>
-
                 </Grid>
             </Grid>
         </Grid>

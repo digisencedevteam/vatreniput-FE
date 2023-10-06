@@ -67,3 +67,11 @@ export type DashboardStats = {
   countOfAllCards: number,
   topEvents: TopEvent[],
 }
+
+export type FormValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatarUrl: string;
+  [key: string]: string;
+}

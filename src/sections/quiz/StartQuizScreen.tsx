@@ -2,19 +2,18 @@ import { Typography, Button } from '@mui/material';
 import { Quiz } from './types';
 
 interface StartQuizScreenProps {
-    dummyQuiz: Quiz;
+    quiz: Quiz;
     startQuiz: () => void;
 }
-const StartQuizScreen = ({ dummyQuiz, startQuiz }: StartQuizScreenProps) => {
-
+const StartQuizScreen = ({ quiz, startQuiz }: StartQuizScreenProps) => {
     return (
         <>
-            <img src={dummyQuiz.imageURL} alt="Quiz" style={{ maxWidth: '70%', margin: '0' }} />
-            <Typography variant="h4" style={{ textTransform: 'uppercase', fontWeight: 'bold', margin: '10px' }}>
-                {dummyQuiz.title}
+            <img src={quiz?.thumbnail} alt="Quiz" style={{ maxWidth: '90%', margin: '0', borderRadius: 10 }} />
+            <Typography variant="h5" style={{ textTransform: 'uppercase', fontWeight: 'bold', margin: 30, textAlign: 'center' }}>
+                {quiz?.title}
             </Typography>
-            <Typography variant="body2" sx={{ width: '85%', textAlign: 'center' }}>{dummyQuiz.description}</Typography>
-            <Button variant="contained" color="primary" onClick={startQuiz} style={{ marginTop: '20px', width: '75%' }}>
+            <Typography variant="body2" sx={{ width: '80%', textAlign: 'center' }}>{quiz?.description}</Typography>
+            <Button variant="contained" color="primary" onClick={startQuiz} style={{ marginTop: '20px', width: '50%' }}>
                 Start Quiz
             </Button>
         </>

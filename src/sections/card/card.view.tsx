@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios, { endpoints } from 'src/utils/axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
@@ -6,11 +6,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import Skeleton from '@mui/material/Skeleton';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { useSettingsContext } from 'src/components/settings';
@@ -74,7 +71,7 @@ export const CardView = () => {
             <CardMedia
               component="img"
               height="auto"
-              image={cardData ? cardData?.imageURLs[0] : ''}
+              image={cardData ? (Array.isArray(cardData.imageURLs) && cardData.imageURLs.length > 0 ? cardData.imageURLs[0] : '') : ''}
               alt="Sličica"
               sx={{ borderRadius: 2 }}
             />
