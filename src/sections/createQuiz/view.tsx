@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import {
     Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel,
-    Radio, Typography, Container, Grid, Box, useTheme, FilledTextFieldProps, OutlinedTextFieldProps, StandardTextFieldProps, TextFieldVariants, Divider, Snackbar, Alert
+    Radio, Typography, Container, Grid, Box, Divider, Snackbar, Alert
 } from '@mui/material';
 import axiosInstance, { endpoints } from 'src/utils/axios';
 import { useSettingsContext } from 'src/components/settings';
@@ -96,8 +96,7 @@ const CreateQuiz = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',  // Optional: This will center items along the vertical axis as well
-
+                justifyContent: 'center',
             }}>
                 <Typography variant='h3'>Koliko pitanja zelite u kvizu?</Typography>
                 <TextField
@@ -137,8 +136,6 @@ const CreateQuiz = () => {
                         onChange={(newValue) => setAvailableUntil(newValue)}
                     />
                 </LocalizationProvider>
-
-
                 <Box>
                     <Typography variant='h4' m={1}>Pitanje {currentQuestionIndex + 1}</Typography>
                     <Divider />

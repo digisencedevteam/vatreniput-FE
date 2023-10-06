@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
@@ -54,11 +54,11 @@ const CustomCard = ({
             {isQuiz && auth.user && auth.user.email === 'antonio@test.com' && (
                 <Box
                     sx={{
-                        position: 'absolute',  // Absolute positioning
+                        position: 'absolute',
                         top: 8,
                         right: 8,
                         display: 'flex',
-                        gap: '8px',  // Adjust gap between buttons as needed
+                        gap: '8px',
                     }}
                 >
                     <Button
