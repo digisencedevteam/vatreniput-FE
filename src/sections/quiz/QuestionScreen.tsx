@@ -4,6 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Question } from './types';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 interface QuestionScreenProps {
     currentQuestion: Question;
@@ -29,10 +30,22 @@ const QuestionScreen = ({
     handlePreviousQuestion,
     handleNextQuestion,
     handleSubmitAnswers,
-    elapsedTime,
 }: QuestionScreenProps) => {
     const theme = useTheme();
     const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
+    const [elapsedTime, setElapsedTime] = useState(0);
+
+    useEffect(() => {
+        let intervalId: number;
+
+        if (currentQuestionIndex === 0) {
+            intervalId = window.setInterval(() => {
+                setElapsedTime((prevElapsedTime) => prevElapsedTime + 1);
+            }, 1000);
+        }
+
+        return () => clearInterval(intervalId);
+    }, [currentQuestionIndex]);
 
     return (
         <Grid container spacing={2} direction="column" alignItems={'center'} justifyContent="center" m={0} maxWidth={'650px'}>
@@ -52,8 +65,8 @@ const QuestionScreen = ({
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Typography variant="h6">
-                                Elapsed Time: {Math.floor(elapsedTime / 60)}:{(elapsedTime % 60).toString().padStart(2, '0')}
+                            <Typography variant="h6" style={{ fontWeight: 'bold', marginTop: 10, marginBottom: 10 }}>
+                                Vrijeme proteklo {Math.floor(elapsedTime / 60)}:{(elapsedTime % 60).toString().padStart(2, '0')}
                             </Typography>
                         </Grid>
                     </Grid>

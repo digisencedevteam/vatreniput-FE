@@ -14,7 +14,7 @@ const QuizApp = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [answers, setAnswers] = useState<Answer[]>([]);
     const settings = useSettingsContext();
-    const [timer, setTimer] = useState<any>(null);
+    const [startTime, setStartTime] = useState<number | null>(null);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const { quizId } = useParams();
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null)
@@ -30,15 +30,12 @@ const QuizApp = () => {
                 setSelectedQuiz(null);
             }
         };
-
         fetchQuizData();
     }, [quizId]);
 
     const getCorrectAnswer = (question: Question): string => {
         return question.options[question.correctOption];
     };
-
-
 
     const startQuiz = () => {
         setCurrentQuestionIndex(0);
@@ -47,20 +44,16 @@ const QuizApp = () => {
     };
 
     const startTimer = () => {
-        const startTime = Date.now();
-        const intervalId = setInterval(() => {
-            const currentTime = Date.now();
-            const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
-            setElapsedTime(elapsedSeconds | 0);
-        }, 1000);
-
-        setTimer(intervalId);
+        const currentTime = Date.now();
+        setStartTime(currentTime);
     };
 
     const stopTimer = () => {
-        if (timer) {
-            clearInterval(timer);
-            setTimer(null);
+        if (startTime) {
+            const currentTime = Date.now();
+            const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
+            setElapsedTime(elapsedSeconds);
+            setStartTime(null);
         }
     };
 
@@ -153,12 +146,6 @@ const QuizApp = () => {
                 height: '80vh',
             }}
         >
-            {timer !== null && (
-                <div style={{ fontSize: '24px', marginBottom: '20px' }}>
-                    Elapsed Time: {Math.floor(elapsedTime / 60)}:
-                    {(elapsedTime % 60).toString().padStart(2, '0')}
-                </div>
-            )}
             {currentQuestionIndex === null ? (
                 answers.length === selectedQuiz?.questions?.length ? (
                     <EndQuizScreen
