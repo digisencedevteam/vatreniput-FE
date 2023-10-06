@@ -1,5 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid, } from '@mui/material';
+import { Container, Typography, Box, Grid, Button, useMediaQuery, } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
