@@ -1,13 +1,10 @@
-// @mui
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-// components
 import FAQItem from "./FaqItem";
 import { FAQ } from '../../types/index'
 import { useNavigate } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
-// ----------------------------------------------------------------------
 
 type FaqViewProps = {
     faqs: FAQ[];

@@ -16,7 +16,6 @@ import { useMediaQuery, useTheme } from '@mui/material';
 export const CardView = () => {
   const { cardId } = useParams();
   const [cardData, setCardData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -31,8 +30,6 @@ export const CardView = () => {
     } catch (error) {
       setIsError(true);
       setCardData([]);
-    } finally {
-      setIsLoading(false);
     }
   };
 
