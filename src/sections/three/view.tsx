@@ -1,5 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid } from '@mui/material';
+import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,6 +13,9 @@ import { useEffect, useState } from 'react';
 import { Quiz } from '../quiz/types';
 import axios, { endpoints } from 'src/utils/axios';
 import PagingComponent from 'src/components/paging/paging-component';
+import { AuthContext } from 'src/auth/context/jwt';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
 
 export default function ThreeView() {
@@ -25,6 +28,7 @@ export default function ThreeView() {
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const itemsPerPage = 5;
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUnresolvedQuizzes = async () => {
@@ -71,7 +75,17 @@ export default function ThreeView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+
+        {auth.user && auth.user.email === 'antonio@test.com' && (
+          <Button variant="contained" color="primary" component={Link}
+            to={'/dashboard/createQuiz '}>
+            Create Quiz
+          </Button>
+        )}
+      </Box>
+
       <SectionWrapper title="Riješeni Kvizovi">
         <ScrollableContainer>
           {!!resolvedQuizzes?.length && !isLoadingResolved && (
@@ -115,7 +129,7 @@ export default function ThreeView() {
           {!!unresolvedQuizzes?.length && !isLoadingUnresolved && (
             unresolvedQuizzes.map((data, index) => (
               <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} />
+                <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} isQuiz={true} />
               </Grid>
             ))
           )}

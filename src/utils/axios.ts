@@ -10,8 +10,7 @@ axiosInstance.interceptors.response.use(
   (res) => res,
   (error) =>
     Promise.reject(
-      (error.response && error.response.data) ||
-      'Something went wrong'
+      (error.response && error.response.data) || 'Something went wrong'
     )
 );
 
@@ -19,9 +18,7 @@ export default axiosInstance;
 
 // ----------------------------------------------------------------------
 
-export const fetcher = async (
-  args: string | [string, AxiosRequestConfig]
-) => {
+export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
 
   const res = await axiosInstance.get(url, { ...config });
@@ -74,6 +71,7 @@ export const endpoints = {
   quiz: {
     details: '/quizzes/',
     resolved: '/quizzes/resolved',
-    unresolved: '/quizzes/unresolved'
-  }
+    unresolved: '/quizzes/unresolved',
+    new: '/quizzes/new',
+  },
 };
