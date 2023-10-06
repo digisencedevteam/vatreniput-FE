@@ -14,7 +14,7 @@ const QuizApp = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [answers, setAnswers] = useState<Answer[]>([]);
     const settings = useSettingsContext();
-    const [timer, setTimer] = useState<NodeJS.Timer | null>(null);
+    const [timer, setTimer] = useState<any>(null);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const { quizId } = useParams();
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null)
