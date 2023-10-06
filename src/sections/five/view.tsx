@@ -18,6 +18,7 @@ export default function FiveView() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
+  //TODO: implement data from API and remove dummy
   const dummyData = [
     { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg", cardText: "Najbolji igrač", linkTo: "/link-1" },
     { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1692358241/strini%C4%87_mbappe_guigky.jpg", cardText: "Najbolja utakmica", linkTo: "/link-2" },
@@ -26,6 +27,7 @@ export default function FiveView() {
     { imgUrl: "https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584123/livaja_1_a8kxbj.jpg", cardText: "Najbolji napadač", linkTo: "/link-2" },
   ];
 
+  //TODO: implement data from API and remove dummy
   const hardcodedData = [
     { label: 'Luka Modric', value: 60, totalAmount: 6000 },
     { label: 'Mateo Kovacic', value: 40, totalAmount: 4000 },

@@ -1,10 +1,11 @@
 import { Box, Button, Typography, useTheme } from "@mui/material";
+import { SxProps } from '@mui/system';
 
 type ImageandTitleProps = {
   imageSrc?: string;
   title: string;
   link?: string;
-  sx?: any;
+  sx?: SxProps;
 }
 
 export const DashboardButton = ({ imageSrc, title, link }: ImageandTitleProps) => {

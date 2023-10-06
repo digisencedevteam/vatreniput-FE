@@ -1,15 +1,10 @@
 import { lazy } from 'react';
 import { Outlet } from 'react-router-dom';
-// layouts
 import CompactLayout from 'src/layouts/compact';
 import ForgotPassword from 'src/pages/ForgotPassword';
 
-// ----------------------------------------------------------------------
-
 const Page404 = lazy(() => import('src/pages/404'));
 const Faq = lazy(() => import('src/pages/Faq'))
-
-// ----------------------------------------------------------------------
 
 export const mainRoutes = [
   {

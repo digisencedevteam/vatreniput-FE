@@ -26,7 +26,6 @@ const HorizontalScrollStatisticCards = ({ collectedStatistic }: StatisticCardsPr
                 marginLeft: 0,
                 marginRight: 0,
                 width: '99.5%',
-                // marginRight: '24px',
                 overflowX: { xs: "auto", md: "hidden" },
                 '&::-webkit-scrollbar': { display: 'none' },
                 '-ms-overflow-style': 'none',
@@ -42,7 +41,7 @@ const HorizontalScrollStatisticCards = ({ collectedStatistic }: StatisticCardsPr
                             total: collectedStatistic?.numberOfCollectedCards || 0,
                         }],
                     }}
-                    sx={{ height: '100%', width: '80vw', bgcolor: theme.palette.background.default }} // minWidth is just an example, adjust as necessary
+                    sx={{ height: '100%', width: '80vw', bgcolor: theme.palette.background.default }}
                 />
             </Grid>
 
@@ -51,7 +50,7 @@ const HorizontalScrollStatisticCards = ({ collectedStatistic }: StatisticCardsPr
                     title='još do otključavanja neke od priča'
                     total={78}
                     icon={<CollectionStatisticIllustration />}
-                    sx={{ height: '100%', width: '80vw' }} // minWidth is just an example, adjust as necessary
+                    sx={{ height: '100%', width: '80vw' }}
                 />
             </Grid>
         </Grid>

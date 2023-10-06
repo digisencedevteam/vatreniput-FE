@@ -1,12 +1,9 @@
-// @mui
 import Stack from '@mui/material/Stack';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';
 import { Button, useTheme } from '@mui/material';
-
-// ----------------------------------------------------------------------
 
 type ItemProps = {
     label: string;
@@ -37,8 +34,6 @@ export default function VotingOverview({ title, subheader, data, ...other }: Pro
         </Card>
     );
 }
-
-// ----------------------------------------------------------------------
 
 type ProgressItemProps = {
     progress: ItemProps;

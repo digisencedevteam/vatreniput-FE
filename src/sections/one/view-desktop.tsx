@@ -98,7 +98,6 @@ export const DesktopViewOne = () => {
                         bgcolor: theme.palette.background.default,
                         w: '100%',
                         m: '4px',
-
                     }}
                 >
                     <DashboardSectionWrapper title='Ispunjenost prica' link='dashboard/five' >

@@ -1,18 +1,19 @@
 import { Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Answer } from './types';
+import { Answer, Quiz } from './types';
 
 interface EndQuizScreenProps {
-    quiz: any;
+    quiz: Quiz;
     answers: Answer[];
     onQuizFinish: () => void;
     elapsedTime: number;
 }
 
 const EndQuizScreen = ({ quiz, answers, elapsedTime, onQuizFinish }: EndQuizScreenProps) => {
+
     const correctAnswers = answers.filter((answer) => {
         if (quiz) {
-            const question = quiz.questions[answers.indexOf(answer)];
+            const question = quiz.questions?.[answers.indexOf(answer)];
             return question && answer.correct;
         }
         return false;
