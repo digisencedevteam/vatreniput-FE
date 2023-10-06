@@ -119,7 +119,7 @@ export default function ThreeView() {
           {Array.isArray(unresolvedQuizzes) && unresolvedQuizzes.length > 0 ? (
             unresolvedQuizzes.map((data, index) => (
               <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} />
+                <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} isQuiz={true} />
               </Grid>
             ))
           ) : (

@@ -40,8 +40,8 @@ const GREY = {
 };
 
 const BLUE = {
-  main: '#030d25'
-}
+  main: '#030d25',
+};
 
 const PRIMARY = {
   lighter: '#C8FAD6',
@@ -55,7 +55,7 @@ const PRIMARY = {
 const SECONDARY = {
   lighter: '#EFD6FF',
   light: '#C684FF',
-  main: '#8E33FF',
+  main: '#0F44BF',
   dark: '#5119B7',
   darker: '#27097A',
   contrastText: '#FFFFFF',
