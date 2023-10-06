@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-
 export function remToPx(value: string) {
   return Math.round(parseFloat(value) * 16);
 }
@@ -28,10 +26,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const primaryFont = 'Public Sans, sans-serif'; // Google Font
-// const secondaryFont = 'CircularStd, sans-serif'; // Local Font
-
-// ----------------------------------------------------------------------
+const primaryFont = 'Public Sans, sans-serif';
 
 export const typography = {
   fontFamily: primaryFont,
@@ -95,7 +90,7 @@ export const typography = {
   },
   caption: {
     lineHeight: 1.5,
-    fontSize: pxToRem(12),
+    fontSize: pxToRem(15),
   },
   overline: {
     fontWeight: 700,

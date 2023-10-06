@@ -21,19 +21,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import DeleteAccountModal from 'src/components/delete-account-modal/deleteAccountModal';
 import axios, { endpoints } from 'src/utils/axios';
 import { Alert } from '@mui/material';
+import { FormValues } from 'src/types';
 
 type Props = {
   currentUser?: any;
   avatarOptions: string[];
 };
-
-interface FormValues {
-  firstName: string;
-  lastName: string;
-  email: string;
-  avatarUrl: string;
-  [key: string]: string;
-}
 
 export default function UserNewEditForm({
   currentUser,

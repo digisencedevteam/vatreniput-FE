@@ -19,17 +19,16 @@ const FAQItem = ({ faq }: FAQItemProps) => {
 
         <Box sx={{ my: 2, p: 2, borderRadius: 2, background: theme.palette.background.paper }}>
             <Box display="flex" alignItems="center" onClick={handleClick}>
-                <Typography variant="h6">{faq.question}</Typography>
+                <Typography variant="caption">{faq.question}</Typography>
                 <Box flexGrow={1} />
                 <IconButton color="error">
                     {open ? <ExpandLess /> : <ExpandMore />}
                 </IconButton>
             </Box>
             <Collapse in={open}>
-                <Typography py={3}>{faq.answer}</Typography>
+                <Typography variant="caption" py={3}>{faq.answer}</Typography>
             </Collapse>
         </Box>
-
     );
 };
 

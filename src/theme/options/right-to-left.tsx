@@ -21,7 +21,6 @@ export default function RTL({ children, themeDirection }: Props) {
     key: 'rtl',
     prepend: true,
     // @ts-ignore
-    // https://github.com/styled-components/stylis-plugin-rtl/issues/35
     stylisPlugins: [rtlPlugin],
   });
 
