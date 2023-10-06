@@ -1,5 +1,3 @@
-// ----------------------------------------------------------------------
-
 export function remToPx(value: string) {
   return Math.round(parseFloat(value) * 16);
 }
@@ -28,16 +26,10 @@ declare module '@mui/material/styles' {
   }
 }
 
-const primaryFont = 'Public Sans, sans-serif'; // Google Font
-const secondaryFont = 'Changa One, sans-serif';
-const ternaryFont = 'Anton, sans-serif'
-const quaternaryFont = 'Open Sans, sans-serif'
-// const secondaryFont = 'CircularStd, sans-serif'; // Local Font
-
-// ----------------------------------------------------------------------
+const primaryFont = 'Public Sans, sans-serif';
 
 export const typography = {
-  fontFamily: quaternaryFont,
+  fontFamily: primaryFont,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,

@@ -1,16 +1,10 @@
-// @mui
 import { useTheme, styled, Theme, SxProps } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-// theme
 import { bgBlur } from 'src/theme/css';
-//
 import { IconifyProps } from '../iconify';
-//
 import { LeftIcon, RightIcon } from './arrow-icons';
-
-// ----------------------------------------------------------------------
 
 const StyledRoot = styled(Box)(({ theme }) => ({
   ...bgBlur({
@@ -36,12 +30,10 @@ const StyledIconButton = styled(IconButton)({
   '&:hover': { opacity: 1 },
 });
 
-// ----------------------------------------------------------------------
-
 type Props = {
   index: number;
   total: number;
-  icon?: IconifyProps; // Right icon
+  icon?: IconifyProps;
   onNext?: VoidFunction;
   onPrev?: VoidFunction;
   sx?: SxProps<Theme>;

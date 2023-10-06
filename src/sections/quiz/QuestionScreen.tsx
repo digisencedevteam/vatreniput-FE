@@ -125,7 +125,7 @@ const QuestionScreen = ({
                                     Submit
                                 </Button>
                             ) : (
-                                <Button variant="contained" color="primary">
+                                <Button variant="contained" color="primary" onClick={handleNextQuestion}>
                                     Sljedeće pitanje
                                 </Button>
                             )}

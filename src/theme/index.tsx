@@ -1,23 +1,18 @@
 import merge from 'lodash/merge';
 import { useMemo } from 'react';
-// @mui
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider as MuiThemeProvider, ThemeOptions } from '@mui/material/styles';
-// components
 import { useSettingsContext } from 'src/components/settings';
-// system
 import { palette } from './palette';
 import { shadows } from './shadows';
 import { typography } from './typography';
 import { customShadows } from './custom-shadows';
 import { componentsOverrides } from './overrides';
-// options
 import { presets } from './options/presets';
 import { darkMode } from './options/dark-mode';
 import { contrast } from './options/contrast';
 import RTL, { direction } from './options/right-to-left';
 
-// ----------------------------------------------------------------------
 
 type Props = {
   children: React.ReactNode;
@@ -44,8 +39,6 @@ export default function ThemeProvider({ children }: Props) {
     }),
     []
   );
-
-
 
   const memoizedValue = useMemo(
     () =>

@@ -1,5 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid, Button, useMediaQuery, } from '@mui/material';
+import { Container, Typography, Box, Grid } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -24,12 +24,31 @@ export default function ThreeView() {
   const itemsPerPage = 5;
 
   useEffect(() => {
+    const fetchUnresolvedQuizzes = async () => {
+      try {
+        const response = await axios.get(`${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`);
+        setUnresolvedQuizzes(response.data.unresolvedQuizzes);
+      } catch (error) {
+        console.error('Error fetching unresolved quizzes' + error);
+        setUnresolvedQuizzes([]);
+      }
+    };
+
+    const fetchResolvedQuizzes = async () => {
+      try {
+        const response = await axios.get(`${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`);
+        setResolvedQuizzes(response.data.resolvedQuizzes);
+      } catch (error) {
+        console.error('Error fetching resolved quizzes' + error);
+        setResolvedQuizzes([]);
+      }
+    };
+
     fetchResolvedQuizzes();
     fetchUnresolvedQuizzes();
   }, [currentPage]);
 
   useEffect(() => {
-    // Calculating totalPages based on the total number of resolved quizzes
     if (resolvedQuizzes) {
       const totalResolvedQuizzes = resolvedQuizzes.length;
       setTotalPages(Math.ceil(totalResolvedQuizzes / itemsPerPage));
@@ -41,26 +60,6 @@ export default function ThreeView() {
     page: number
   ) => {
     setCurrentPage(page);
-  };
-
-  const fetchUnresolvedQuizzes = async () => {
-    try {
-      const response = await axios.get(`${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`);
-      setUnresolvedQuizzes(response.data.unresolvedQuizzes);
-    } catch (error) {
-      console.error('Error fetching unresolved quizzes' + error);
-      setUnresolvedQuizzes([]);
-    }
-  };
-
-  const fetchResolvedQuizzes = async () => {
-    try {
-      const response = await axios.get(`${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`);
-      setResolvedQuizzes(response.data.resolvedQuizzes);
-    } catch (error) {
-      console.error('Error fetching resolved quizzes' + error);
-      setResolvedQuizzes([]);
-    }
   };
 
   return (

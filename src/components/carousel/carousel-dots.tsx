@@ -1,10 +1,6 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-// @mui
 import { styled, Theme, SxProps } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Box, { BoxProps } from '@mui/material/Box';
-
-// ----------------------------------------------------------------------
 
 type StyledRootProps = {
   rounded: boolean;
@@ -48,9 +44,7 @@ const StyledDot = styled('span')(({ theme }) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.short,
   }),
-}));
-
-// ----------------------------------------------------------------------
+}))
 
 export interface Props extends BoxProps {
   rounded?: boolean;

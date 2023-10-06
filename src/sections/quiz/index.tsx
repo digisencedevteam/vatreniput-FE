@@ -19,9 +19,18 @@ const QuizApp = () => {
     const { quizId } = useParams();
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null)
     const currentUser = useAuthContext();
-    const [score, setScore] = useState(0)
 
     useEffect(() => {
+        const fetchQuizData = async () => {
+            try {
+                const response = await axios.get(endpoints.quiz.details + quizId!);
+                setSelectedQuiz(response.data);
+            } catch (error) {
+                console.error(error);
+                setSelectedQuiz(null);
+            }
+        };
+
         fetchQuizData();
     }, [quizId]);
 
@@ -29,15 +38,7 @@ const QuizApp = () => {
         return question.options[question.correctOption];
     };
 
-    const fetchQuizData = async () => {
-        try {
-            const response = await axios.get(endpoints.quiz.details + quizId!);
-            setSelectedQuiz(response.data);
-        } catch (error) {
-            console.error(error);
-            setSelectedQuiz(null);
-        }
-    };
+
 
     const startQuiz = () => {
         setCurrentQuestionIndex(0);
@@ -102,7 +103,6 @@ const QuizApp = () => {
             }, 0);
 
             const score = (correctCount! / totalQuestions!) * 100;
-            setScore(score);
             return score;
         }
         return 0;
