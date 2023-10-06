@@ -52,8 +52,8 @@ const QuizApp = () => {
         if (startTime) {
             const currentTime = Date.now();
             const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
-            setElapsedTime(elapsedSeconds);
-            setStartTime(null);
+            setElapsedTime(elapsedSeconds)
+            return elapsedSeconds
         }
     };
 
@@ -114,13 +114,11 @@ const QuizApp = () => {
 
                 setAnswers([...answers, newAnswer]);
                 setCurrentQuestionIndex(null);
-                stopTimer();
+                const duration = stopTimer();
 
                 const userId = currentUser.user && currentUser.user._id;
                 const quizId = selectedQuiz!._id;
                 const score = calculateScore();
-                const duration = elapsedTime;
-
                 try {
                     await axios.post(endpoints.quiz.details, {
                         userId,

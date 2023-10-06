@@ -79,8 +79,8 @@ export default function OneView() {
         <Grid item xs={12} >
           {/* TODO: fetch data from API and remove hardcoded data */}
           <DashboardSectionWrapper title='Najvise skupljenih' link='dashboard/two'>
-            <DashboardCollectionCategory imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg' name={dashboardStats?.topEvents[0].name} percentageCollected={dashboardStats?.topEvents[0].percentageCollected} />
-            <DashboardCollectionCategory imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg' name={dashboardStats?.topEvents[1].name} percentageCollected={dashboardStats?.topEvents[1].percentageCollected} />
+            <DashboardCollectionCategory imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg' name={dashboardStats?.topEvents[0].name} percentageCollected={Math.round(dashboardStats?.topEvents[0].percentageCollected || 0)} />
+            <DashboardCollectionCategory imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg' name={dashboardStats?.topEvents[1].name} percentageCollected={Math.round(dashboardStats?.topEvents[1].percentageCollected || 0)} />
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Preostali Kvizovi' link='dashboard/three'>
             <ScrollableContainer >

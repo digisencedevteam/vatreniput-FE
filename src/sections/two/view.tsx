@@ -18,6 +18,7 @@ import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import StatisticCards from 'src/components/stats-box/statistic-box';
+import { LoadingScreen } from 'src/components/loading-screen';
 
 export default function CollectionView() {
   const settings = useSettingsContext();
@@ -101,7 +102,7 @@ export default function CollectionView() {
   }, [currentPage, categoryIndex, categories]);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return <LoadingScreen />;
   }
 
   const handleArrowClick = (direction: string) => {
