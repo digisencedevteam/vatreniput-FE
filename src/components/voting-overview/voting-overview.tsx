@@ -3,7 +3,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';
-import { Button, useTheme } from '@mui/material';
+import { Button } from '@mui/material';
 
 type ItemProps = {
     label: string;
@@ -18,7 +18,6 @@ interface Props extends CardProps {
 }
 
 export default function VotingOverview({ title, subheader, data, ...other }: Props) {
-    const theme = useTheme();
     return (
         <Card {...other} sx={{ mt: 2 }}>
             <CardHeader title={title} subheader={subheader} />

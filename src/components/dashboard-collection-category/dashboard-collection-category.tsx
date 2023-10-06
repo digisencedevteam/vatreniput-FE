@@ -19,7 +19,7 @@ const DashboardCollectionCategory = ({
 
             <Grid item xs={7} >
                 <Typography variant="caption" sx={{}}>{name}</Typography>
-                <Typography sx={{ fontSize: 11, paddingTop: 1 }}>{percentageCollected}</Typography>
+                <Typography sx={{ fontSize: 11, paddingTop: 1 }}>{percentageCollected}%</Typography>
                 <LinearProgress variant="determinate" value={percentage} />
             </Grid>
         </Grid>
