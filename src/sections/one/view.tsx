@@ -12,7 +12,7 @@ import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-
+import QRScanner from 'src/components/qr-scanner/QRScanner';
 export default function OneView() {
   const settings = useSettingsContext();
 
@@ -48,30 +48,16 @@ export default function OneView() {
       console.error('Error fetching dashboard statistics: ' + error);
     }
   }
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const openCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;  // Attach the stream to the video element
-      }
-    } catch (error) {
-      console.error('Error accessing the camera:', error);
-    }
+  const [isScanning, setIsScanning] = useState(false);
+
+  const toggleScanning = () => {
+    setIsScanning(!isScanning);
   };
 
 
   useEffect(() => {
     fetchCollectedStatistic();
     fetchDashboardStats();
-
-    // Return a cleanup function to run when the component unmounts
-    return () => {
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-        tracks.forEach(track => track.stop());
-      }
-    };
   }, []);  // Empty dependency array means this useEffect runs once on mount and the cleanup runs on unmount
 
 
@@ -82,10 +68,9 @@ export default function OneView() {
         <Grid item xs={6} >
           <DashboardButton
             imageSrc={imageSrc}
-            onClick={openCamera}
-            title='Skeniraj novu'
+            title={isScanning ? 'Stop Scanning' : 'Skeniraj novu'}
+            onClick={toggleScanning}
           />
-          <video ref={videoRef} autoPlay playsInline />  {/* Add this line to display the video */}
         </Grid>
         <Grid item xs={6}>
           <DashboardButton
@@ -93,6 +78,10 @@ export default function OneView() {
             title='Moja Kolekcija'
             link='/dashboard/two'
           />
+        </Grid>
+        <Grid item xs={12} >
+          {isScanning && <QRScanner />}
+
         </Grid>
         <Grid item xs={12} >
           <Box >
