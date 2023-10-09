@@ -7,7 +7,7 @@ import { DashboardButton } from 'src/components/dashboard-button/dashboard-butto
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
@@ -48,11 +48,32 @@ export default function OneView() {
       console.error('Error fetching dashboard statistics: ' + error);
     }
   }
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const openCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;  // Attach the stream to the video element
+      }
+    } catch (error) {
+      console.error('Error accessing the camera:', error);
+    }
+  };
+
 
   useEffect(() => {
-    fetchCollectedStatistic()
-    fetchDashboardStats()
-  }, [])
+    fetchCollectedStatistic();
+    fetchDashboardStats();
+
+    // Return a cleanup function to run when the component unmounts
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach(track => track.stop());
+      }
+    };
+  }, []);  // Empty dependency array means this useEffect runs once on mount and the cleanup runs on unmount
+
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -61,8 +82,10 @@ export default function OneView() {
         <Grid item xs={6} >
           <DashboardButton
             imageSrc={imageSrc}
+            onClick={openCamera}
             title='Skeniraj novu'
           />
+          <video ref={videoRef} autoPlay playsInline />  {/* Add this line to display the video */}
         </Grid>
         <Grid item xs={6}>
           <DashboardButton
