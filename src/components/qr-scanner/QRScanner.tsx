@@ -1,19 +1,14 @@
 // src/components/QRScanner.tsx
 import React, { useState } from 'react';
 import QrReader from 'react-qr-reader';
-import { useNavigate } from 'react-router-dom';
 
 
 const QRScanner: React.FC = () => {
-    const [result, setResult] = useState<string | null>(null);
-    const navigate = useNavigate();
-
     const handleScan = (data: string | null) => {
         if (data) {
-            navigate(data);  // Navigate to the scanned URL
+            window.open(data, '_blank');  // This will open the scanned URL in a new tab
         }
     };
-
 
     const handleError = (err: any) => {
         console.error(err);
@@ -27,7 +22,6 @@ const QRScanner: React.FC = () => {
                 onScan={handleScan}
                 style={{ width: '100%' }}
             />
-            <p>{result}</p>
         </div>
     );
 };
