@@ -7,15 +7,15 @@ import { DashboardButton } from 'src/components/dashboard-button/dashboard-butto
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
+
 export default function OneView() {
   const settings = useSettingsContext();
-
   const theme = useTheme();
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
@@ -58,7 +58,7 @@ export default function OneView() {
   useEffect(() => {
     fetchCollectedStatistic();
     fetchDashboardStats();
-  }, []);  // Empty dependency array means this useEffect runs once on mount and the cleanup runs on unmount
+  }, []);
 
 
   return (
