@@ -133,6 +133,7 @@ const CreateQuiz = () => {
                     <DateTimePicker
                         label="Available Until"
                         value={availableUntil}
+                        disablePast
                         onChange={(newValue) => setAvailableUntil(newValue)}
                     />
                 </LocalizationProvider>

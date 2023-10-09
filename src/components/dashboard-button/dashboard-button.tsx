@@ -6,9 +6,10 @@ type ImageandTitleProps = {
   title: string;
   link?: string;
   sx?: SxProps;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;  // Type for the onClick handler
 }
 
-export const DashboardButton = ({ imageSrc, title, link }: ImageandTitleProps) => {
+export const DashboardButton = ({ imageSrc, title, link, onClick }: ImageandTitleProps) => {
   const theme = useTheme();
 
   return (
@@ -16,6 +17,7 @@ export const DashboardButton = ({ imageSrc, title, link }: ImageandTitleProps) =
       variant="contained"
       color="primary"
       href={link}
+      onClick={onClick}
       sx={{
         display: 'flex',
         flexDirection: 'column',
