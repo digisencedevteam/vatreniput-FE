@@ -6,7 +6,7 @@ import QrReader from 'react-qr-reader';
 const QRScanner: React.FC = () => {
     const handleScan = (data: string | null) => {
         if (data) {
-            window.open(data, '_blank');  // This will open the scanned URL in a new tab
+            // window.open(data, '_blank');  // This will open the scanned URL in a new tab
             console.log(data, 'OVO JE LOGCINA');
 
         }
