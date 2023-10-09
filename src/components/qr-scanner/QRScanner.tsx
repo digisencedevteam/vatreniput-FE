@@ -10,7 +10,7 @@ const QRScanner: React.FC = () => {
 
     const handleScan = (data: string | null) => {
         if (data) {
-            navigate(data);  // Navigate to the scanned URL
+            navigate('/card/' + data);  // Navigate to the scanned URL
         }
     };
 
