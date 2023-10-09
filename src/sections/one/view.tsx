@@ -12,7 +12,6 @@ import { CollectedStatistic, DashboardStats } from 'src/types';
 import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import QRScanner from 'src/components/qrscanner/QRScanner';
 
 export default function OneView() {
   const settings = useSettingsContext();
@@ -20,11 +19,7 @@ export default function OneView() {
   const theme = useTheme();
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
-  const [isScanning, setIsScanning] = useState(false);
 
-  const toggleScanning = () => {
-    setIsScanning(!isScanning);
-  };
   const imageSrc =
     theme.palette.mode === "dark"
       ? "https://res.cloudinary.com/dzg5kxbau/image/upload/v1694513740/qr-code-white_kdalqi.png"
@@ -53,12 +48,33 @@ export default function OneView() {
       console.error('Error fetching dashboard statistics: ' + error);
     }
   }
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const openCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;  // Attach the stream to the video element
+      }
+    } catch (error) {
+      console.error('Error accessing the camera:', error);
+    }
+  };
+
 
   useEffect(() => {
     fetchCollectedStatistic();
     fetchDashboardStats();
 
-  }, []);
+    // Return a cleanup function to run when the component unmounts
+    return () => {
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach(track => track.stop());
+      }
+    };
+  }, []);  // Empty dependency array means this useEffect runs once on mount and the cleanup runs on unmount
+
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h3" sx={{ marginY: 1, paddingTop: 2 }}> Bok, Pero 👋 </Typography>
@@ -66,9 +82,10 @@ export default function OneView() {
         <Grid item xs={6} >
           <DashboardButton
             imageSrc={imageSrc}
-            title={isScanning ? 'Stop Scanning' : 'Skeniraj novu'}
-            onClick={toggleScanning}
+            onClick={openCamera}
+            title='Skeniraj novu'
           />
+          <video ref={videoRef} autoPlay playsInline />  {/* Add this line to display the video */}
         </Grid>
         <Grid item xs={6}>
           <DashboardButton
@@ -76,10 +93,6 @@ export default function OneView() {
             title='Moja Kolekcija'
             link='/dashboard/two'
           />
-        </Grid>
-        <Grid item xs={12} >
-          {isScanning && <QRScanner />}
-          {/* ... other JSX */}
         </Grid>
         <Grid item xs={12} >
           <Box >
