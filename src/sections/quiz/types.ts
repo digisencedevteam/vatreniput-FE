@@ -1,28 +1,28 @@
 export type Question = {
   text: string;
   options: string[];
-  image: string
+  image: string;
   correctOption: number;
 };
 
 export type ResolvedQuiz = {
-  count: number
-  resolvedQuizzes: QuizResult[]
-}
+  count: number;
+  resolvedQuizzes: QuizResult[];
+};
 
 export type UnresolvedQuiz = {
-  count: number
-  unresolvedQuizzes: Quiz[]
-}
+  count: number;
+  unresolvedQuizzes: Quiz[];
+};
 
 export type Quiz = {
-  _id: string
+  _id: string;
   title: string;
   description?: string;
   questions?: Question[];
-  thumbnail: string
-  isExpired?: boolean,
-  availableUntil?: string
+  thumbnail: string;
+  isExpired?: boolean;
+  availableUntil?: string;
 };
 export type Answer = {
   option: string;
@@ -30,12 +30,12 @@ export type Answer = {
 };
 
 export type QuizResult = {
-  userId: string
-  quiz: Quiz
-  score: number
-  duration: number
-  dateTaken: string
-}
+  userId: string;
+  quiz: Quiz;
+  score: number;
+  duration: number;
+  dateTaken: string;
+};
 
 export type CustomCardProps = {
   width?: string;
@@ -43,6 +43,6 @@ export type CustomCardProps = {
   imgUrl: string;
   cardText: string;
   linkTo?: string;
+  onCardClick?: () => void;
   quizResults?: QuizResult;
-}
-
+};

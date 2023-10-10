@@ -33,7 +33,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
             <IconButton onClick={scrollLeft} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>
                 <ArrowBackIosIcon />
             </IconButton>
-            <Box ref={scrollContainerRef} sx={{ flex: 1, display: "flex", overflowX: "auto", whiteSpace: "nowrap", scrollSnapType: 'x mandatory' }}>
+            <Box ref={scrollContainerRef} sx={{ flex: 1, display: "flex", overflowX: "auto", whiteSpace: "nowrap", py: 1, scrollSnapType: 'x mandatory' }}>
                 {children}
             </Box>
             <IconButton onClick={scrollRight} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>

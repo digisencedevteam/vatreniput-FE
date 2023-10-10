@@ -26,20 +26,38 @@ export function useNavData() {
             path: paths.dashboard.two,
             icon: <CollectionsIcon />,
           },
-          {
-            title: 'Kvizovi',
-            path: paths.dashboard.three,
-            icon: <QuizIcon />,
-          },
-          {
-            title: 'Sveti Dres',
-            path: paths.dashboard.four,
-            icon: <AutoAwesomeIcon />,
-          },
+
+          // {
+          //   title: 'Sveti Dres',
+          //   path: paths.dashboard.four,
+          //   icon: <AutoAwesomeIcon />,
+          // },
           {
             title: 'Glasanje',
             path: paths.dashboard.five,
             icon: <HowToVoteIcon />,
+          },
+        ],
+      },
+
+      {
+        subheader: '',
+        items: [
+          {
+            title: 'Kvizovi',
+            path: paths.dashboard.quizGroup.root,
+            icon: <QuizIcon />,
+            children: [
+              {
+                title: `Svi Kvizovi`,
+                path: paths.dashboard.quizGroup.root,
+              },
+              {
+                title: 'Rezultati',
+                path: paths.dashboard.quizGroup.results,
+              },
+
+            ],
           },
         ],
       },
@@ -69,6 +87,9 @@ export function useNavData() {
           },
         ],
       },
+
+
+
     ],
     []
   );

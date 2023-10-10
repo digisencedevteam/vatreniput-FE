@@ -15,6 +15,7 @@ interface CustomCardProps {
     cardId: string;
     availableUntil?: string;
     isQuiz?: boolean;
+    linkTo?: string;
 }
 
 const CustomCard = ({
@@ -23,6 +24,7 @@ const CustomCard = ({
     cardText,
     cardId,
     availableUntil,
+    linkTo,
     isQuiz = false
 }: CustomCardProps) => {
     const auth = useContext(AuthContext);
@@ -59,6 +61,7 @@ const CustomCard = ({
                         right: 8,
                         display: 'flex',
                         gap: '8px',
+                        zIndex: 2
                     }}
                 >
                     <Button
