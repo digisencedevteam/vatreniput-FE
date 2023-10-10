@@ -179,7 +179,7 @@ export default function ThreeView() {
                     transform: 'scale(1.05)',
                   }
                 }}>
-                  <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} isQuiz={true} />
+                  <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
                 </Box>
               </Grid>
             ))
