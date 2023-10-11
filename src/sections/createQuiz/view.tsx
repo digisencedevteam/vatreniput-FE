@@ -73,7 +73,7 @@ const CreateQuiz = () => {
             availableUntil: formattedDate,
         };
 
-        if (quizId) {
+        if (!quizId) {
             try {
                 const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
                 if ([200, 201].includes(response.status)) {
