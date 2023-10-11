@@ -17,7 +17,7 @@ export const mainRoutes = [
     children: [{ path: '404', element: <Page404 /> },
     { path: 'faq', element: <Faq /> },
     { path: 'forgot-password', element: <ForgotPassword /> },
-    { path: 'reset-password', element: <ResetPassword /> }
+    { path: 'reset-password/:tokenId', element: <ResetPassword /> }
     ],
   },
 ];

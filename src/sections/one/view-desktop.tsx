@@ -12,6 +12,7 @@ import useCardData from 'src/hooks/use-card-data';
 import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import { useEffect } from 'react';
 
 export const DesktopViewOne = () => {
     const theme = useTheme();
@@ -45,6 +46,12 @@ export const DesktopViewOne = () => {
         unresolvedQuizzes,
         fetchQuizzes
     } = useFetchQuizzes(1, 4);
+
+    useEffect(() => {
+        fetchQuizzes()
+
+    }, [])
+
 
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -130,6 +137,7 @@ export const DesktopViewOne = () => {
                                     <Grid item md={6} key={quiz._id} maxWidth={'260px'}>
                                         <CustomCardSmall
                                             imgUrl={quiz.thumbnail}
+                                            width='100%'
                                             cardText={quiz.title}
                                             linkTo={`/dashboard/quiz/${quiz._id}`}
                                         />

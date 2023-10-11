@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
 
 const ResetPasswordView = () => {
@@ -10,15 +10,46 @@ const ResetPasswordView = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleResetPassword = () => {
+    const { tokenId } = useParams();
+
+    const handleResetPassword = async () => {
         if (password !== confirmPassword) {
             setError("Lozinke se ne podudaraju!");
             return;
         }
-        console.log(password);
 
-        // TODO : HANDLE PASSOWRD RESETiNG LOGIC HERE
-    }
+        try {
+            const response = await fetch('http://localhost:3001/password-reset/reset', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: tokenId,
+                    newPassword: password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                const userConfirmed = window.confirm('Your password has been reset successfully. Would you like to login now?');
+                if (userConfirmed) {
+                    navigate('/auth/jwt/login');
+                }
+            } else {
+                if (data.message === 'Invalid or expired token' || data.error === 'Invalid or expired token') {
+                    setError('Pruženi link je nevažeći');
+                } else {
+                    setError(data.message || 'Something went wrong. Please try again.');
+                }
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('An error occurred. Please try again.');
+        }
+    };
+
 
     return (
         <Box sx={{ p: 3, borderRadius: 2, textAlign: "left", maxWidth: 500, margin: 'auto' }}>
@@ -63,12 +94,6 @@ const ResetPasswordView = () => {
             <Box mt={2}>
                 <Button variant="contained" color="primary" fullWidth onClick={handleResetPassword}>
                     Resetiraj lozinku
-                </Button>
-            </Box>
-
-            <Box mt={2}>
-                <Button color="primary" onClick={() => navigate(-1)}>
-                    Povratak
                 </Button>
             </Box>
         </Box>

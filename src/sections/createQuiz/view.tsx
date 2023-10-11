@@ -44,15 +44,13 @@ const CreateQuiz = () => {
     const { fetchUnresolvedQuizById, unresolvedQuiz } = useFetchQuizzes();
     const [showForm, setShowForm] = useState(true);
 
-
-
     const { quizId } = useParams();
 
     useEffect(() => {
         if (quizId) {
             fetchUnresolvedQuizById(quizId);
         }
-    }, [quizId, fetchUnresolvedQuizById]);
+    }, [quizId]);
 
     useEffect(() => {
         if (!auth.user || auth.user.email !== 'antonio@test.com') {
@@ -63,7 +61,6 @@ const CreateQuiz = () => {
             const dateToEdit = dayjs(unresolvedQuiz.availableUntil)
             setNumQuestions(unresolvedQuiz.questions.length);
             setAvailableUntil(dateToEdit);
-            console.log('OVO JE LOG KOJI MI TREBA', unresolvedQuiz);
         }
 
     }, [auth, history, unresolvedQuiz]);
@@ -75,15 +72,31 @@ const CreateQuiz = () => {
             ...quiz,
             availableUntil: formattedDate,
         };
-        try {
-            const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
-            if ([200, 201].includes(response.status)) {
-                setSubmitted(true);
-            } else {
-                setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
+
+        if (quizId) {
+            try {
+                const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
+                if ([200, 201].includes(response.status)) {
+                    setSubmitted(true);
+                } else {
+                    setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
+                }
+            } catch (error) {
+                setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
             }
-        } catch (error) {
-            setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
+        } else {
+            console.log('update');
+
+            // try {
+            //     const response = await axiosInstance.post(endpoints.quiz.update, quizToSend);
+            //     if ([200, 201].includes(response.status)) {
+            //         setSubmitted(true);
+            //     } else {
+            //         setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
+            //     }
+            // } catch (error) {
+            //     setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
+            // }
         }
     };
 
@@ -149,8 +162,6 @@ const CreateQuiz = () => {
         setCurrentQuestionIndex(prev => prev === newQuestions.length ? prev - 1 : prev);
         setNumQuestions(prev => prev ? prev - 1 : 0);
     };
-
-
 
 
     if (!quiz.questions) {
