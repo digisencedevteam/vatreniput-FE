@@ -1,10 +1,15 @@
-import { useContext } from "react";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { useContext, useState } from "react";
+import {
+    Box, Button, Card, CardActions, CardContent, CardMedia, Collapse, Typography, IconButton,
+    Fade,
+} from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { Link } from "react-router-dom";
 import { AuthContext } from 'src/auth/context/jwt';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from "@mui/icons-material/Close";
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 interface CustomCardProps {
@@ -15,6 +20,9 @@ interface CustomCardProps {
     cardId: string;
     availableUntil?: string;
     isQuiz?: boolean;
+    linkTo?: string;
+    quizId?: string;
+    onDeleteQuiz?: (quizId: string) => void;
 }
 
 const CustomCard = ({
@@ -23,9 +31,17 @@ const CustomCard = ({
     cardText,
     cardId,
     availableUntil,
-    isQuiz = false
+    linkTo,
+    isQuiz = false,
+    quizId,
+    onDeleteQuiz,
 }: CustomCardProps) => {
     const auth = useContext(AuthContext);
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    const handleToggleMenu = () => {
+        setMenuOpen((prev) => !prev);
+    };
 
     const formattedAvailableUntil = availableUntil
         ? new Date(availableUntil).toLocaleString("en-GB", {
@@ -47,45 +63,80 @@ const CustomCard = ({
                 display: 'flex',
                 flexDirection: 'column',
                 margin: '5px',
-                position: 'relative'  // Add relative positioning
+                position: 'relative'
             }}
         >
 
-            {isQuiz && auth.user && auth.user.email === 'antonio@test.com' && (
+            {isQuiz && auth.user && auth.user.email === "antonio@test.com" && (
                 <Box
                     sx={{
-                        position: 'absolute',
+                        position: "absolute",
                         top: 8,
                         right: 8,
-                        display: 'flex',
-                        gap: '8px',
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        zIndex: 2,
                     }}
                 >
+                    <Fade in={menuOpen}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                gap: "8px",
+                            }}
+                        >
+                            {quizId && (
+                                <Button
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => {
+                                        if (onDeleteQuiz) {
+                                            onDeleteQuiz(quizId);
+                                        }
+                                    }}
+                                    sx={{
+                                        borderRadius: "50%",
+                                        padding: "0.8em",
+                                        border: "2px solid white",
+                                        minWidth: 0,
+                                    }}
+                                >
+                                    <DeleteIcon fontSize="inherit" />
+                                </Button>
+                            )}
+                            <Button
+                                href={linkTo}
+                                variant="contained"
+                                color="secondary"
+                                sx={{
+                                    borderRadius: "50%",
+                                    padding: "0.8em",
+                                    border: "2px solid white",
+                                    minWidth: 0,
+                                }}
+                            >
+                                <ModeEditIcon fontSize="inherit" />
+                            </Button>
+
+                        </Box>
+                    </Fade>
                     <Button
+                        onClick={handleToggleMenu}
                         variant="contained"
-                        color="secondary"
+                        color="primary"
                         sx={{
                             borderRadius: "50%",
-                            padding: "1.3em",
+                            padding: "0.8em",
                             border: "2px solid white",
+                            minWidth: 0,
+                            ml: 1,
                         }}
                     >
-                        <ModeEditIcon fontSize="small" />
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="error"
-                        sx={{
-                            borderRadius: "50%",
-                            padding: "1.3em",
-                            border: "2px solid white",
-                        }}
-                    >
-                        <DeleteIcon fontSize="small" />
+                        {menuOpen ? <CloseIcon fontSize="inherit" /> : <MoreHorizIcon fontSize="inherit" />}
                     </Button>
                 </Box>
-
-
             )}
             <Box sx={{ paddingTop: '60%', position: 'relative' }}>
                 <CardMedia

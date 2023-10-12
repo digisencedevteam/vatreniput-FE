@@ -11,6 +11,8 @@ import StatisticCards from 'src/components/stats-box/statistic-box';
 import useCardData from 'src/hooks/use-card-data';
 import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
+import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import { useEffect } from 'react';
 
 export const DesktopViewOne = () => {
     const theme = useTheme();
@@ -38,6 +40,18 @@ export const DesktopViewOne = () => {
             description: 'Novo Glasanje je dostupno!!',
         },
     ];
+
+    const {
+        isLoadingUnresolved,
+        unresolvedQuizzes,
+        fetchQuizzes
+    } = useFetchQuizzes(1, 4);
+
+    useEffect(() => {
+        fetchQuizzes()
+
+    }, [])
+
 
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -119,12 +133,13 @@ export const DesktopViewOne = () => {
                     <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
                         <Grid container spacing={2}>
                             {
-                                Array.from({ length: 4 }).map((_, index) => (
-                                    <Grid item md={6} key={index}>
+                                !isLoadingUnresolved && unresolvedQuizzes?.map((quiz, index) => (
+                                    <Grid item md={6} key={quiz._id} maxWidth={'260px'}>
                                         <CustomCardSmall
-                                            imgUrl={'assets/images/navijaci.jpg'}
-                                            cardText={`Kviz ${index + 1}`}
-                                            linkTo={`dashboard/dummyLink${index + 1}`}
+                                            imgUrl={quiz.thumbnail}
+                                            width='100%'
+                                            cardText={quiz.title}
+                                            linkTo={`/dashboard/quiz/${quiz._id}`}
                                         />
                                     </Grid>
                                 ))

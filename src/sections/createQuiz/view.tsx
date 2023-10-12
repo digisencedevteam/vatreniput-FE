@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import {
     Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel,
-    Radio, Typography, Container, Grid, Box, Divider, Snackbar, Alert
+    Radio, Typography, Container, Grid, Box, Divider, Snackbar, Alert, IconButton, Collapse
 } from '@mui/material';
 import axiosInstance, { endpoints } from 'src/utils/axios';
 import { useSettingsContext } from 'src/components/settings';
@@ -9,12 +9,17 @@ import { AuthContext } from 'src/auth/context/jwt';
 import { useNavigate } from 'react-router-dom';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
+import { useParams } from 'react-router-dom';
+import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import dayjs, { Dayjs } from 'dayjs';
+import { VisibilityOff, Visibility } from '@mui/icons-material';
 
 interface Question {
     text: string;
     image?: string;
     options: string[];
     correctOption: number;
+
 }
 
 interface Quiz {
@@ -33,14 +38,71 @@ const CreateQuiz = () => {
     const history = useNavigate();
     const auth = useContext(AuthContext);
     const [error, setError] = useState(false);
-    const [availableUntil, setAvailableUntil] = useState<Date | null>(null);
+    const [availableUntil, setAvailableUntil] = useState<Date | Dayjs | null>(null);
     const [submitted, setSubmitted] = useState(false);
     const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
+    const { fetchUnresolvedQuizById, unresolvedQuiz } = useFetchQuizzes();
+    const [showForm, setShowForm] = useState(true);
+
+    const { quizId } = useParams();
+
+    useEffect(() => {
+        if (quizId) {
+            fetchUnresolvedQuizById(quizId);
+        }
+    }, [quizId]);
+
     useEffect(() => {
         if (!auth.user || auth.user.email !== 'antonio@test.com') {
             history('/');
         }
-    }, [auth, history]);
+        if (unresolvedQuiz) {
+            setQuiz(unresolvedQuiz);
+            const dateToEdit = dayjs(unresolvedQuiz.availableUntil)
+            if (unresolvedQuiz && unresolvedQuiz.questions) {
+                setNumQuestions(unresolvedQuiz.questions.length);
+            } else {
+                setNumQuestions(0);
+            }
+            setAvailableUntil(dateToEdit);
+        }
+
+    }, [auth, history, unresolvedQuiz]);
+
+
+    const handleSubmit = async () => {
+        const formattedDate = availableUntil?.toISOString() || "";
+        const quizToSend = {
+            ...quiz,
+            availableUntil: formattedDate,
+        };
+
+        if (!quizId) {
+            try {
+                const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
+                if ([200, 201].includes(response.status)) {
+                    setSubmitted(true);
+                } else {
+                    setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
+                }
+            } catch (error) {
+                setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
+            }
+        } else {
+            console.log('update');
+
+            // try {
+            //     const response = await axiosInstance.post(endpoints.quiz.update, quizToSend);
+            //     if ([200, 201].includes(response.status)) {
+            //         setSubmitted(true);
+            //     } else {
+            //         setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
+            //     }
+            // } catch (error) {
+            //     setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
+            // }
+        }
+    };
 
     const handleSetQuestions = (num: number) => {
         if (num > 0) {
@@ -64,23 +126,7 @@ const CreateQuiz = () => {
         setQuiz({ ...quiz, questions: newQuestions });
     };
 
-    const handleSubmit = async () => {
-        const formattedDate = availableUntil?.toISOString() || "";
-        const quizToSend = {
-            ...quiz,
-            availableUntil: formattedDate,
-        };
-        try {
-            const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
-            if ([200, 201].includes(response.status)) {
-                setSubmitted(true);
-            } else {
-                setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
-            }
-        } catch (error) {
-            setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
-        }
-    };
+
 
     const handleQuestionChange = (index: number, key: keyof Question, value: string | number | string[]) => {
         const newQuestions = [...(quiz.questions || [])];
@@ -88,7 +134,38 @@ const CreateQuiz = () => {
         setQuiz({ ...quiz, questions: newQuestions });
     };
 
+    const handleAddOption = (index: number) => {
+        const newQuestions = [...(quiz.questions || [])];
+        newQuestions[index].options = [...newQuestions[index].options, ''];
+        setQuiz({ ...quiz, questions: newQuestions });
+    };
 
+    const handleRemoveOption = (qIndex: number, optIndex: number) => {
+        const newQuestions = [...(quiz.questions || [])];
+        newQuestions[qIndex].options.splice(optIndex, 1);
+        setQuiz({ ...quiz, questions: newQuestions });
+    };
+
+    const handleAddQuestion = () => {
+        const newQuestions = [
+            ...(quiz.questions || []),
+            {
+                text: '',
+                options: [],
+                correctOption: 0,
+            },
+        ];
+        setQuiz({ ...quiz, questions: newQuestions });
+        setNumQuestions(prev => prev ? prev + 1 : 1);
+    };
+
+    const handleRemoveQuestion = (index: number) => {
+        const newQuestions = [...(quiz.questions || [])];
+        newQuestions.splice(index, 1);
+        setQuiz({ ...quiz, questions: newQuestions });
+        setCurrentQuestionIndex(prev => prev === newQuestions.length ? prev - 1 : prev);
+        setNumQuestions(prev => prev ? prev - 1 : 0);
+    };
 
     if (!quiz.questions) {
         return (
@@ -124,21 +201,42 @@ const CreateQuiz = () => {
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
             <Box>
-                <Typography variant='h4'>O Kvizu</Typography>
+                <Typography variant='h4' textAlign={'center'} m={1}> {quizId ? "Azuriraj" : "Stvori novi"} kviz</Typography>
+                <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}>
+                    <Typography variant='h4'>O Kvizu</Typography>
+
+                    <IconButton onClick={() => setShowForm(prev => !prev)}>
+                        {showForm ? <VisibilityOff color={quizId ? 'secondary' : 'primary'} /> : <Visibility color={quizId ? 'secondary' : 'primary'} />}
+                    </IconButton>
+                </Box>
                 <Divider />
-                <TextField sx={{ my: 1 }} label="Naslov Kviza" fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
-                <TextField sx={{ my: 1 }} label="Opis" fullWidth onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
-                <TextField sx={{ my: 1 }} label="Thumbnail URL" fullWidth onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateTimePicker
-                        label="Available Until"
-                        value={availableUntil}
-                        disablePast
-                        onChange={(newValue) => setAvailableUntil(newValue)}
-                    />
-                </LocalizationProvider>
-                <Box>
-                    <Typography variant='h4' m={1}>Pitanje {currentQuestionIndex + 1}</Typography>
+                {showForm && (
+                    <Collapse in={showForm}>
+                        <TextField sx={{ my: 1 }} value={quiz?.title || ''} label="Naslov Kviza" fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
+                        <TextField sx={{ my: 1 }} value={quiz?.description || ''} label="Opis" fullWidth onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
+                        <TextField sx={{ my: 1 }} value={quiz?.thumbnail || ''} label="Thumbnail URL" fullWidth onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateTimePicker
+                                label="Available Until"
+                                value={availableUntil}
+                                disablePast
+                                onChange={(newValue) => setAvailableUntil(newValue)}
+                            />
+                        </LocalizationProvider>
+                    </Collapse>
+                )}
+                <Box >
+
+                    <Box display="flex" flexDirection={'row'} justifyContent="space-between" alignItems="center">
+                        <Typography variant='h5'>Pitanje {currentQuestionIndex + 1} / {quiz.questions.length}</Typography>
+                        <Box display="flex" alignItems="center">
+                            <Button color={quizId ? 'secondary' : 'primary'} onClick={handleAddQuestion}><Typography variant='h2'>+</Typography></Button>
+                            {quiz.questions.length > 1 && (
+                                <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleRemoveQuestion(currentQuestionIndex)}><Typography variant='h2'>-</Typography></Button>
+                            )}
+                        </Box>
+                    </Box>
+
                     <Divider />
                     {currentQuestion.options.length === 0 ? (
                         <Box my={1}>
@@ -153,24 +251,39 @@ const CreateQuiz = () => {
                                 <TextField label="Image URL (optional)" fullWidth sx={{ p: 1 }} value={currentQuestion.image || ''}
                                     onChange={(e) => handleQuestionChange(currentQuestionIndex, 'image', e.target.value)} />
                                 {currentQuestion.options.map((option, optIndex) => (
-                                    <TextField key={optIndex} sx={{ p: 1 }} label={`Opcija ${optIndex + 1}`} fullWidth value={option}
-                                        onChange={(e) => {
-                                            const newOptions = [...currentQuestion.options];
-                                            newOptions[optIndex] = e.target.value;
-                                            handleQuestionChange(currentQuestionIndex, 'options', newOptions);
-                                        }}
-                                    />
+                                    <Box key={optIndex} display="flex" alignItems="center" sx={{ p: 1 }}>
+                                        <TextField
+                                            label={`Opcija ${optIndex + 1}`}
+                                            fullWidth
+                                            value={option}
+
+                                            onChange={(e) => {
+                                                const newOptions = [...currentQuestion.options];
+                                                newOptions[optIndex] = e.target.value;
+                                                handleQuestionChange(currentQuestionIndex, 'options', newOptions);
+                                            }}
+                                        />
+                                        <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleAddOption(currentQuestionIndex)}><Typography variant='h2'>+</Typography></Button>
+                                        {currentQuestion.options.length > 1 && (
+                                            <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleRemoveOption(currentQuestionIndex, optIndex)}><Typography variant='h2'>-</Typography></Button>
+                                        )}
+                                    </Box>
                                 ))}
+
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <FormControl component="fieldset" fullWidth>
 
-                                    <FormLabel component="legend" sx={{ textAlign: 'center' }}>Tocan odgovor</FormLabel>
+                                    <FormLabel color={quizId ? 'secondary' : 'primary'} component="legend" sx={{ textAlign: 'center' }}><Typography mt={2} mb={1} variant='h6'>Tocan odgovor za ovo pitanje</Typography></FormLabel>
                                     <Box display={{ xs: 'flex', md: 'flex' }} justifyContent="center">
                                         <RadioGroup value={currentQuestion.correctOption}
                                             onChange={(e) => handleQuestionChange(currentQuestionIndex, 'correctOption', Number(e.target.value))}>
                                             {currentQuestion.options.map((_, optIndex) => (
-                                                <FormControlLabel key={optIndex} value={optIndex} control={<Radio />}
+                                                <FormControlLabel key={optIndex} value={optIndex} control={<Radio sx={{
+                                                    '& .MuiSvgIcon-root': {
+                                                        fontSize: 28,
+                                                    },
+                                                }} color={quizId ? 'secondary' : 'primary'} />}
                                                     label={`Opcija ${optIndex + 1}`} />
                                             ))}
                                         </RadioGroup>
@@ -187,20 +300,20 @@ const CreateQuiz = () => {
             </Box>
 
             <Box display={{ xs: 'flex', md: 'block' }} justifyContent="center">
-                <Button variant='contained' color='primary' sx={{ m: 1, my: 2 }} onClick={handleSubmit} disabled={!isFormValid()}>Submit new quiz</Button>
+                <Button variant='contained' color={quizId ? 'secondary' : 'primary'} sx={{ m: 1, my: 2 }} onClick={handleSubmit} disabled={!isFormValid()}>
+                    {quizId ? 'Update Quiz' : 'Submit New Quiz'}
+                </Button>
             </Box>
-
             <Snackbar
                 open={submitted}
                 autoHideDuration={6000}
                 onClose={() => {
                     setSubmitted(false);
-
                 }}
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert onClose={() => { setSubmitted(false); history("/dashboard/three"); }} severity="success">
-                    Kviz uspjesno kreiran!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
+                    Kviz uspjesno {quizId ? ' kreiran' : ' azuriran'}!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
                 </Alert>
             </Snackbar>
 
