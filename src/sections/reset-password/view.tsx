@@ -45,7 +45,6 @@ const ResetPasswordView = () => {
                 }
             }
         } catch (error) {
-            console.error('Error:', error);
             setError('An error occurred. Please try again.');
         }
     };

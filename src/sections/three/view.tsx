@@ -18,7 +18,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
 import QuizResultsModal, { QuizResultsModalProps } from 'src/components/quiz-results-modal/QuizResultsModal';
-import axiosInstance from 'src/utils/axios';
+import useFetchQuizzes from 'src/hooks/use-quiz-data';
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -34,6 +34,10 @@ export default function ThreeView() {
   const [refresh, setRefresh] = useState(true);
   const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const {
+    deleteQuiz,
+    isDeleting
+  } = useFetchQuizzes(currentPage, itemsPerPage);
 
   const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
@@ -42,19 +46,6 @@ export default function ThreeView() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const deleteQuiz = async (quizId: string) => {
-    try {
-      await axiosInstance.delete(`${endpoints.quiz.delete}/${quizId}`);
-      setRefresh(!refresh);
-      alert("Quiz deleted successfully!");
-
-
-    } catch (error) {
-      console.error("Error deleting quiz:", error);
-      alert("Failed to delete quiz. Please try again.");
-    }
   };
 
 
@@ -104,8 +95,6 @@ export default function ThreeView() {
 
     }
   }, [resolvedQuizzes]);
-
-
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -204,11 +193,12 @@ export default function ThreeView() {
               Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz.
             </Typography>
           )}
-
           {isLoadingUnresolved && (
             <LoadingScreen />
           )}
-
+          {isDeleting && (
+            <LoadingScreen />
+          )}
         </Grid>
       </SectionWrapper>
 

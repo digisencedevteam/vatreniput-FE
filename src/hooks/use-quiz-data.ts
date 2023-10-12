@@ -6,10 +6,12 @@ type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
   isLoadingUnresolved: boolean;
   resolvedQuizzes: Quiz[] | undefined;
+  isDeleting: boolean;
   unresolvedQuizzes: Quiz[] | undefined;
-  unresolvedQuiz: any;
-  fetchQuizzes: () => void; // You can use this to trigger a fetch manually if needed
+  unresolvedQuiz: Quiz | null | undefined;
+  fetchQuizzes: () => void;
   fetchUnresolvedQuizById: (quizId: string) => Promise<void>;
+  deleteQuiz: (quizId: string) => Promise<void>;
 };
 
 const useFetchQuizzes = (
@@ -21,19 +23,30 @@ const useFetchQuizzes = (
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuiz, setUnresolvedQuiz] = useState<Quiz | null>();
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
     try {
       const response = await axios.get(`${endpoints.quiz.details}${quizId}`);
-      console.log(unresolvedQuiz);
-
       setUnresolvedQuiz(response.data || null);
     } catch (error) {
-      console.error('Error fetching unresolved quiz by ID', error);
       setUnresolvedQuiz(null);
     }
     setIsLoadingUnresolved(false);
+  };
+
+  const deleteQuiz = async (quizId: string) => {
+    setIsDeleting(true);
+    try {
+      await axios.delete(`${endpoints.quiz.delete}/${quizId}`);
+      alert('Quiz deleted successfully!');
+    } catch (error) {
+      alert('Failed to delete quiz. Please try again.');
+    } finally {
+      setIsDeleting(false);
+      fetchQuizzes();
+    }
   };
 
   const fetchQuizzes = async () => {
@@ -45,7 +58,6 @@ const useFetchQuizzes = (
         );
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
       } catch (error) {
-        console.error('Error fetching unresolved quizzes', error);
         setUnresolvedQuizzes([]);
       }
       setIsLoadingUnresolved(false);
@@ -59,7 +71,6 @@ const useFetchQuizzes = (
         );
         setResolvedQuizzes(response.data.resolvedQuizzes);
       } catch (error) {
-        console.error('Error fetching resolved quizzes', error);
         setResolvedQuizzes([]);
       }
       setIsLoadingResolved(false);
@@ -69,9 +80,7 @@ const useFetchQuizzes = (
     fetchUnresolvedQuizzes();
   };
 
-  useEffect(() => {
-    // fetchQuizzes();
-  }, [currentPage]);
+  useEffect(() => {}, [currentPage]);
 
   return {
     isLoadingResolved,
@@ -81,6 +90,8 @@ const useFetchQuizzes = (
     fetchQuizzes,
     fetchUnresolvedQuizById,
     unresolvedQuiz,
+    isDeleting,
+    deleteQuiz,
   };
 };
 

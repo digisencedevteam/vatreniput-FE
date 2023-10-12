@@ -59,7 +59,11 @@ const CreateQuiz = () => {
         if (unresolvedQuiz) {
             setQuiz(unresolvedQuiz);
             const dateToEdit = dayjs(unresolvedQuiz.availableUntil)
-            setNumQuestions(unresolvedQuiz.questions.length);
+            if (unresolvedQuiz && unresolvedQuiz.questions) {
+                setNumQuestions(unresolvedQuiz.questions.length);
+            } else {
+                setNumQuestions(0);
+            }
             setAvailableUntil(dateToEdit);
         }
 

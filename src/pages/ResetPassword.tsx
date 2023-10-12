@@ -5,7 +5,7 @@ export default function ResetPassword() {
     return (
         <>
             <Helmet>
-                <title> Nova Lozinka</title>
+                <title> Promjena lozinke</title>
             </Helmet>
             <ResetPasswordView />
         </>
