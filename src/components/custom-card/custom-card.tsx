@@ -21,6 +21,8 @@ interface CustomCardProps {
     availableUntil?: string;
     isQuiz?: boolean;
     linkTo?: string;
+    quizId?: string;
+    onDeleteQuiz?: (quizId: string) => void;
 }
 
 const CustomCard = ({
@@ -30,7 +32,9 @@ const CustomCard = ({
     cardId,
     availableUntil,
     linkTo,
-    isQuiz = false
+    isQuiz = false,
+    quizId,
+    onDeleteQuiz,
 }: CustomCardProps) => {
     const auth = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -83,18 +87,25 @@ const CustomCard = ({
                                 gap: "8px",
                             }}
                         >
-                            <Button
-                                variant="contained"
-                                color="error"
-                                sx={{
-                                    borderRadius: "50%",
-                                    padding: "0.8em",
-                                    border: "2px solid white",
-                                    minWidth: 0,
-                                }}
-                            >
-                                <DeleteIcon fontSize="inherit" />
-                            </Button>
+                            {quizId && (
+                                <Button
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => {
+                                        if (onDeleteQuiz) {
+                                            onDeleteQuiz(quizId);
+                                        }
+                                    }}
+                                    sx={{
+                                        borderRadius: "50%",
+                                        padding: "0.8em",
+                                        border: "2px solid white",
+                                        minWidth: 0,
+                                    }}
+                                >
+                                    <DeleteIcon fontSize="inherit" />
+                                </Button>
+                            )}
                             <Button
                                 href={linkTo}
                                 variant="contained"

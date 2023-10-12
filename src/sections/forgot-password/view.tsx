@@ -23,7 +23,7 @@ const ForgotPasswordView = () => {
             if (error.response && error.response.data) {
                 console.error("Error: ", error.response.data);
             } else if (error.message) {
-                console.error("Error: ", error.message); // Logging the generic error message
+                console.error("Error: ", error.message);
             }
         }
     };

@@ -163,7 +163,6 @@ const CreateQuiz = () => {
         setNumQuestions(prev => prev ? prev - 1 : 0);
     };
 
-
     if (!quiz.questions) {
         return (
             <Container sx={{

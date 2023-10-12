@@ -56,7 +56,6 @@ const quizResults: QuizResult[] = [
         duration: 30,
         __v: 0,
     },
-    // ... more results
 ];
 
 export default function QuizResults() {

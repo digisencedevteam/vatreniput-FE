@@ -18,6 +18,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
 import QuizResultsModal, { QuizResultsModalProps } from 'src/components/quiz-results-modal/QuizResultsModal';
+import axiosInstance from 'src/utils/axios';
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -30,17 +31,30 @@ export default function ThreeView() {
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
+  const [refresh, setRefresh] = useState(true);
   const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
-
     setIsModalOpen(false);
+  };
+
+  const deleteQuiz = async (quizId: string) => {
+    try {
+      await axiosInstance.delete(`${endpoints.quiz.delete}/${quizId}`);
+      setRefresh(!refresh);
+      alert("Quiz deleted successfully!");
+
+
+    } catch (error) {
+      console.error("Error deleting quiz:", error);
+      alert("Failed to delete quiz. Please try again.");
+    }
   };
 
 
@@ -71,7 +85,7 @@ export default function ThreeView() {
 
     fetchResolvedQuizzes();
     fetchUnresolvedQuizzes();
-  }, [currentPage]);
+  }, [currentPage, refresh]);
 
   const formattedDateTaken = selectedQuizResult
     ? new Date(selectedQuizResult.dateTaken).toLocaleString("en-GB", {
@@ -179,7 +193,7 @@ export default function ThreeView() {
                     transform: 'scale(1.05)',
                   }
                 }}>
-                  <CustomCard imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
+                  <CustomCard quizId={data._id} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
                 </Box>
               </Grid>
             ))
