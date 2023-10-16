@@ -177,8 +177,10 @@ export default function JwtRegisterView() {
   );
 
   useEffect(() => {
-    paramValue ? isAlbumCodeValid(paramValue || '') : router.push('/');
-  }, []);
+    paramValue
+      ? isAlbumCodeValid(paramValue || '')
+      : router.push('/');
+  }, [paramValue, router]);
 
   if (isLoading) {
     return (
