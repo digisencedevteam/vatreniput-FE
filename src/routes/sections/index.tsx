@@ -19,6 +19,8 @@ export default function Router() {
       element: <CardPage />,
     },
 
+
+
     // Auth routes
     ...authRoutes,
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container } from '@mui/material';
 import { Answer, Question, Quiz } from './types';
 import QuestionScreen from './QuestionScreen';
@@ -6,19 +6,28 @@ import StartQuizScreen from './StartQuizScreen';
 import EndQuizScreen from './EndQuizScreen';
 import { useSettingsContext } from 'src/components/settings';
 import axios, { endpoints } from 'src/utils/axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from 'src/auth/hooks';
+import { useTimerContext } from 'src/context/timer-context';
 
 const QuizApp = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
+    // const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [answers, setAnswers] = useState<Answer[]>([]);
+    // const [answers, setAnswers] = useState<Answer[]>([]);
     const settings = useSettingsContext();
-    const [startTime, setStartTime] = useState<number | null>(null);
+    // const [startTime, setStartTime] = useState<number | null>(null);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const { quizId } = useParams();
-    const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null)
+    const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
     const currentUser = useAuthContext();
+    const [quizFinished, setQuizFinished] = useState(false);
+    const navigate = useNavigate();
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    // const { timer, setTimer } = useTimerContext();
+    const {
+        timer, startTime, answers, currentQuestionIndex,
+        startQuiz, setTimer, recordAnswer, setCurrentQuestionIndex
+    } = useTimerContext();
 
     useEffect(() => {
         const fetchQuizData = async () => {
@@ -30,6 +39,7 @@ const QuizApp = () => {
                 setSelectedQuiz(null);
             }
         };
+
         fetchQuizData();
     }, [quizId]);
 
@@ -37,42 +47,26 @@ const QuizApp = () => {
         return question.options[question.correctOption];
     };
 
-    const startQuiz = () => {
-        setCurrentQuestionIndex(0);
-        setAnswers([]);
-        startTimer();
-    };
-
-    const startTimer = () => {
-        const currentTime = Date.now();
-        setStartTime(currentTime);
-    };
-
-    const stopTimer = () => {
-        if (startTime) {
-            const currentTime = Date.now();
-            const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
-            setElapsedTime(elapsedSeconds)
-            return elapsedSeconds
-        }
-    };
-
     const handleAnswerSelection = (option: string) => {
         setSelectedOption(option);
     };
 
     const handleNextQuestion = () => {
-        if (selectedOption !== null && currentQuestionIndex !== null) {
+        if (currentQuestionIndex !== null && selectedQuiz) {
             const currentQuestion = selectedQuiz?.questions?.[currentQuestionIndex];
-            const isCorrect = currentQuestion && selectedOption === getCorrectAnswer(currentQuestion);
+            if (!currentQuestion) return;
+            const isCorrect = selectedOption === getCorrectAnswer(currentQuestion);
             const newAnswer: Answer = {
                 option: selectedOption,
-                correct: isCorrect || false,
+                correct: isCorrect,
             };
-            setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
-            setSelectedOption(null);
-            if (currentQuestionIndex < selectedQuiz!.questions!.length! - 1) {
+
+            recordAnswer(newAnswer, currentQuestionIndex);
+
+            if (currentQuestionIndex < selectedQuiz?.questions!.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
+            } else {
+                // Handle the end of the quiz (e.g., move to a completion screen, submit results, etc.)
             }
         }
     };
@@ -80,8 +74,7 @@ const QuizApp = () => {
     const handlePreviousQuestion = () => {
         if (currentQuestionIndex !== null && currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setAnswers(answers.slice(0, -1));
-            setSelectedOption(answers[answers.length - 1]?.option || null);
+            setSelectedOption(answers[currentQuestionIndex - 1]?.option || null);
         }
     };
 
@@ -101,37 +94,48 @@ const QuizApp = () => {
         return 0;
     };
 
-
     const handleSubmitQuiz = async () => {
-        if (selectedOption !== null && currentQuestionIndex !== null) {
-            if (selectedQuiz) {
-                const currentQuestion = selectedQuiz!.questions![currentQuestionIndex];
-                const isCorrect = selectedOption === getCorrectAnswer(currentQuestion);
+        if (!hasSubmitted) {
+            if (selectedOption !== null && currentQuestionIndex !== null && selectedQuiz) {
+                const currentQuestion = selectedQuiz?.questions?.[currentQuestionIndex];
+                const isCorrect = selectedOption === getCorrectAnswer(currentQuestion!);
                 const newAnswer = {
                     option: selectedOption,
                     correct: isCorrect,
                 };
-
-                setAnswers([...answers, newAnswer]);
-                setCurrentQuestionIndex(null);
-                const duration = stopTimer();
-
-                const userId = currentUser.user && currentUser.user._id;
-                const quizId = selectedQuiz!._id;
-                const score = calculateScore();
-                try {
-                    await axios.post(endpoints.quiz.details, {
-                        userId,
-                        quizId,
-                        score,
-                        duration,
-                    });
-                } catch (error) {
-                    console.error('Error submitting quiz results:', error);
-                }
+                recordAnswer(newAnswer, currentQuestionIndex);
             }
+
+            setCurrentQuestionIndex(null);
+            const duration = 30 - timer;
+
+            const userId = currentUser.user && currentUser.user._id;
+            const quizId = selectedQuiz!._id;
+            const score = calculateScore();
+
+            try {
+                await axios.post(endpoints.quiz.details, {
+                    userId,
+                    quizId,
+                    score,
+                    duration,
+                    answers: answers,
+                });
+                console.log("Quiz submitted");
+            } catch (error) {
+                console.error('Error submitting quiz results:', error);
+            }
+
+            setHasSubmitted(true);
         }
     };
+
+    useEffect(() => {
+        // This effect triggers submission when timer runs out
+        if (timer === 0) {
+            handleSubmitQuiz();
+        }
+    }, [timer]);
 
     return (
         <Container
@@ -151,7 +155,6 @@ const QuizApp = () => {
                         answers={answers}
                         elapsedTime={elapsedTime}
                         onQuizFinish={handleSubmitQuiz}
-
                     />
                 ) : (
                     <StartQuizScreen quiz={selectedQuiz!} startQuiz={startQuiz} />

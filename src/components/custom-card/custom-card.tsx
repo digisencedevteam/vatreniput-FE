@@ -47,7 +47,7 @@ const CustomCard = ({
                 display: 'flex',
                 flexDirection: 'column',
                 margin: '5px',
-                position: 'relative'  // Add relative positioning
+                position: 'relative'
             }}
         >
 
@@ -127,8 +127,7 @@ const CustomCard = ({
                 <Typography variant="h6">{cardText}</Typography>
                 <CardActions sx={{ justifyContent: "center" }}>
                     <Button
-                        component={Link}
-                        to={'/dashboard/quiz/' + cardId}
+                        href={'/quiz/' + cardId}
                         variant="contained"
                         color="error"
                         endIcon={<ArrowForwardIcon />}

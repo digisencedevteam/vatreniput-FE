@@ -10,19 +10,19 @@ interface StatusCardProps {
 const StatusCard: React.FC<StatusCardProps> = ({ icon, number, text }) => {
     return (
         <Card sx={{
-            width: '48%',
+            width: '50%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
             mx: 1,
             height: '150px',
-            pt: 2
+            pt: 1,
         }}>
             {icon}
             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography variant="h4" align="center" fontWeight="bold">{number}</Typography>
-                <Typography variant="subtitle1" align="center">{text}</Typography>
+                <Typography variant="caption" align="center">{text}</Typography>
             </CardContent>
         </Card>
     );

@@ -12,7 +12,7 @@ export interface LogoProps extends BoxProps {
 }
 
 const Logo = forwardRef<HTMLDivElement, LogoProps>(
-  ({ disabledLink = false, sx, ...other }, ref) => {
+  ({ disabledLink = true, sx, ...other }, ref) => {
     // using local png image for the logo
     const logo = (
       <Box

@@ -25,7 +25,7 @@ export type Quiz = {
   availableUntil?: string
 };
 export type Answer = {
-  option: string;
+  option: string | null;
   correct: boolean;
 };
 

@@ -17,6 +17,7 @@ import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
+import { useTimerContext } from 'src/context/timer-context';
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -29,6 +30,14 @@ export default function ThreeView() {
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
+  const [resolvedCount, setResolvedCount] = useState<number>(0);
+  const [unresolvedCount, setUnresolvedCount] = useState<number>(0);
+  const { timer, resetTimer } = useTimerContext()
+
+  useEffect(() => {
+    console.log(timer)
+  }, [timer])
+
 
   useEffect(() => {
     const fetchUnresolvedQuizzes = async () => {
@@ -36,9 +45,11 @@ export default function ThreeView() {
       try {
         const response = await axios.get(`${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`);
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
+        setUnresolvedCount(response.data.unresolvedQuizzes.length);
       } catch (error) {
         console.error('Error fetching unresolved quizzes' + error);
         setUnresolvedQuizzes([]);
+        setUnresolvedCount(0);
       }
       setIsLoadingUnresolved(false);
     };
@@ -48,9 +59,11 @@ export default function ThreeView() {
       try {
         const response = await axios.get(`${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`);
         setResolvedQuizzes(response.data.resolvedQuizzes);
+        setResolvedCount(response.data.resolvedQuizzes.length);
       } catch (error) {
         console.error('Error fetching resolved quizzes' + error);
         setResolvedQuizzes([]);
+        setResolvedCount(0);
       }
       setIsLoadingResolved(false);
     };
@@ -81,7 +94,7 @@ export default function ThreeView() {
         {auth.user && auth.user.email === 'antonio@test.com' && (
           <Button variant="contained" color="primary" component={Link}
             to={'/dashboard/createQuiz '}>
-            Create Quiz
+            Kreiraj Novi Kviz
           </Button>
         )}
       </Box>
@@ -90,7 +103,7 @@ export default function ThreeView() {
         <ScrollableContainer>
           {!!resolvedQuizzes?.length && !isLoadingResolved && (
             resolvedQuizzes.map((data: any, index) => (
-              <Box key={index} sx={{ width: '100%', maxWidth: '300px', mx: 1 }} >
+              <Box key={index} sx={{ width: '100%', maxWidth: '300px', minWidth: '300px', mx: 1 }} >
                 <CustomCardSmall width='100%' height='90%' imgUrl={data?.quiz?.thumbnail} cardText={data?.quiz?.title} quizResults={data} />
               </Box>
             ))
@@ -121,8 +134,8 @@ export default function ThreeView() {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number={21} text="Rjesen!" />
-        <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500], display: { xs: 'none', sm: 'inline' } }} />} number={25} text="Jos Cekaju!" />
+        <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number={resolvedCount} text="Riješenih" />
+        <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500], display: { xs: 'none', sm: 'inline' } }} />} number={unresolvedCount} text="Dostupnih" />
       </Box>
       <SectionWrapper title="Preostali kvizovi">
         <Grid container spacing={2}>
