@@ -11,19 +11,14 @@ import { useAuthContext } from 'src/auth/hooks';
 import { useTimerContext } from 'src/context/timer-context';
 
 const QuizApp = () => {
-    // const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    // const [answers, setAnswers] = useState<Answer[]>([]);
     const settings = useSettingsContext();
-    // const [startTime, setStartTime] = useState<number | null>(null);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const { quizId } = useParams();
     const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
     const currentUser = useAuthContext();
-    const [quizFinished, setQuizFinished] = useState(false);
     const navigate = useNavigate();
     const [hasSubmitted, setHasSubmitted] = useState(false);
-    // const { timer, setTimer } = useTimerContext();
     const {
         timer, startTime, answers, currentQuestionIndex,
         startQuiz, setTimer, recordAnswer, setCurrentQuestionIndex
@@ -42,6 +37,35 @@ const QuizApp = () => {
 
         fetchQuizData();
     }, [quizId]);
+
+
+
+    const saveToLocalStorage = () => {
+        const quizState = {
+            answers,
+            currentQuestionIndex,
+        };
+        localStorage.setItem('quizState', JSON.stringify(quizState));
+    };
+    const retrieveFromLocalStorage = () => {
+        const storedQuizState = localStorage.getItem('quizState');
+        if (storedQuizState) {
+            const { answers, currentQuestionIndex } = JSON.parse(storedQuizState);
+            setCurrentQuestionIndex(currentQuestionIndex);
+            answers.forEach((answer: Answer, index: number) => {
+                recordAnswer(answer, index);
+            });
+        }
+    };
+
+    useEffect(() => {
+        retrieveFromLocalStorage();
+    }, []);
+
+    useEffect(() => {
+        saveToLocalStorage();
+    }, [answers, currentQuestionIndex]);
+
 
     const getCorrectAnswer = (question: Question): string => {
         return question.options[question.correctOption];
@@ -65,8 +89,6 @@ const QuizApp = () => {
 
             if (currentQuestionIndex < selectedQuiz?.questions!.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
-            } else {
-                // Handle the end of the quiz (e.g., move to a completion screen, submit results, etc.)
             }
         }
     };
@@ -93,6 +115,33 @@ const QuizApp = () => {
         }
         return 0;
     };
+
+    useEffect(() => {
+        if (selectedQuiz) {
+            localStorage.setItem('selectedQuiz', JSON.stringify(selectedQuiz));
+        }
+    }, [selectedQuiz]);
+
+    useEffect(() => {
+        const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
+            if (timer <= 28) {
+                handleSubmitQuiz();
+                event.preventDefault();
+                event.returnValue = "Are you sure you want to leave? The quiz will be submitted.";
+            }
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+            localStorage.removeItem('currentQuizId');
+            localStorage.removeItem('quizState');
+            localStorage.removeItem('startTime');
+            localStorage.removeItem('quizInProgress');
+        };
+
+    }, [timer]);
 
     const handleSubmitQuiz = async () => {
         if (!hasSubmitted) {
@@ -122,6 +171,7 @@ const QuizApp = () => {
                     answers: answers,
                 });
                 console.log("Quiz submitted");
+                localStorage.removeItem('quizState');
             } catch (error) {
                 console.error('Error submitting quiz results:', error);
             }
@@ -131,7 +181,14 @@ const QuizApp = () => {
     };
 
     useEffect(() => {
-        // This effect triggers submission when timer runs out
+        localStorage.setItem('currentQuizId', quizId!);
+
+        return () => {
+            localStorage.removeItem('currentQuizId');
+        };
+    }, [quizId]);
+
+    useEffect(() => {
         if (timer === 0) {
             handleSubmitQuiz();
         }
@@ -160,18 +217,20 @@ const QuizApp = () => {
                     <StartQuizScreen quiz={selectedQuiz!} startQuiz={startQuiz} />
                 )
             ) : (
-                <QuestionScreen
-                    currentQuestion={selectedQuiz!.questions![currentQuestionIndex]!}
-                    currentQuestionIndex={currentQuestionIndex}
-                    totalQuestions={selectedQuiz!.questions!.length!}
-                    title={selectedQuiz?.title || ''}
-                    selectedOption={selectedOption}
-                    handleAnswerSelection={handleAnswerSelection}
-                    handlePreviousQuestion={handlePreviousQuestion}
-                    handleNextQuestion={handleNextQuestion}
-                    handleSubmitAnswers={handleSubmitQuiz}
-                    elapsedTime={elapsedTime}
-                />
+                selectedQuiz?.questions && typeof currentQuestionIndex === "number" && selectedQuiz.questions[currentQuestionIndex] ? (
+                    <QuestionScreen
+                        currentQuestion={selectedQuiz.questions[currentQuestionIndex]}
+                        currentQuestionIndex={currentQuestionIndex}
+                        totalQuestions={selectedQuiz!.questions!.length}
+                        title={selectedQuiz.title || ''}
+                        selectedOption={selectedOption}
+                        handleAnswerSelection={handleAnswerSelection}
+                        handlePreviousQuestion={handlePreviousQuestion}
+                        handleNextQuestion={handleNextQuestion}
+                        handleSubmitAnswers={handleSubmitQuiz}
+                        elapsedTime={elapsedTime}
+                    />
+                ) : null
             )}
         </Container>
     );

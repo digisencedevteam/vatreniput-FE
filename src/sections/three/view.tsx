@@ -32,12 +32,6 @@ export default function ThreeView() {
   const auth = useContext(AuthContext);
   const [resolvedCount, setResolvedCount] = useState<number>(0);
   const [unresolvedCount, setUnresolvedCount] = useState<number>(0);
-  const { timer, resetTimer } = useTimerContext()
-
-  useEffect(() => {
-    console.log(timer)
-  }, [timer])
-
 
   useEffect(() => {
     const fetchUnresolvedQuizzes = async () => {
@@ -103,7 +97,7 @@ export default function ThreeView() {
         <ScrollableContainer>
           {!!resolvedQuizzes?.length && !isLoadingResolved && (
             resolvedQuizzes.map((data: any, index) => (
-              <Box key={index} sx={{ width: '100%', maxWidth: '300px', minWidth: '300px', mx: 1 }} >
+              <Box key={index} sx={{ width: '90%', maxWidth: '300px', minWidth: '300px', mx: 1 }} >
                 <CustomCardSmall width='100%' height='90%' imgUrl={data?.quiz?.thumbnail} cardText={data?.quiz?.title} quizResults={data} />
               </Box>
             ))
