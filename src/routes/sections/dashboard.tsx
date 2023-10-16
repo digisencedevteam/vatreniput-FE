@@ -39,7 +39,6 @@ export const dashboardRoutes = [
       { path: 'four', element: <PageFour /> },
       { path: 'five', element: <PageFive /> },
       { path: 'profile', element: <ProfileView /> },
-      { path: 'quiz/:quizId', element: <QuizPage /> },
       { path: 'createQuiz', element: <CreateQuiz /> },
       { path: 'editQuiz/:quizId', element: <CreateQuiz /> },
 

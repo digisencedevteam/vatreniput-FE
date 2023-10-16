@@ -55,9 +55,11 @@ export default function ThreeView() {
       try {
         const response = await axios.get(`${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`);
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
+        setUnresolvedCount(response.data.unresolvedQuizzes.length);
       } catch (error) {
         console.error('Error fetching unresolved quizzes' + error);
         setUnresolvedQuizzes([]);
+        setUnresolvedCount(0);
       }
       setIsLoadingUnresolved(false);
     };
@@ -67,9 +69,11 @@ export default function ThreeView() {
       try {
         const response = await axios.get(`${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`);
         setResolvedQuizzes(response.data.resolvedQuizzes);
+        setResolvedCount(response.data.resolvedQuizzes.length);
       } catch (error) {
         console.error('Error fetching resolved quizzes' + error);
         setResolvedQuizzes([]);
+        setResolvedCount(0);
       }
       setIsLoadingResolved(false);
     };
@@ -117,7 +121,7 @@ export default function ThreeView() {
         {auth.user && auth.user.email === 'antonio@test.com' && (
           <Button variant="contained" color="primary" component={Link}
             to={'/dashboard/createQuiz '}>
-            Create Quiz
+            Kreiraj Novi Kviz
           </Button>
         )}
       </Box>
@@ -168,8 +172,8 @@ export default function ThreeView() {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number={21} text="Rjesen!" />
-        <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500], display: { xs: 'none', sm: 'inline' } }} />} number={25} text="Jos Cekaju!" />
+        <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number={resolvedCount} text="Riješenih" />
+        <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500], display: { xs: 'none', sm: 'inline' } }} />} number={unresolvedCount} text="Dostupnih" />
       </Box>
       <SectionWrapper title="Preostali kvizovi">
         <Grid container spacing={2}>

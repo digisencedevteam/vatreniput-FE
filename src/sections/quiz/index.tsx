@@ -8,17 +8,21 @@ import { useSettingsContext } from 'src/components/settings';
 import axios, { endpoints } from 'src/utils/axios';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from 'src/auth/hooks';
+import { useTimerContext } from 'src/context/timer-context';
+import { TIMER_INITIAL_VALUE } from './quiz-constants';
 
 const QuizApp = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number | null>(null);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
-    const [answers, setAnswers] = useState<Answer[]>([]);
     const settings = useSettingsContext();
-    const [startTime, setStartTime] = useState<number | null>(null);
-    const [elapsedTime, setElapsedTime] = useState<number>(0);
     const { quizId } = useParams();
-    const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null)
+    const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
     const currentUser = useAuthContext();
+    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const {
+        timer, answers, currentQuestionIndex,
+        startQuiz, recordAnswer, setCurrentQuestionIndex
+    } = useTimerContext();
+    const [quizFinished, setQuizFinished] = useState(false);
 
     useEffect(() => {
         const fetchQuizData = async () => {
@@ -30,6 +34,7 @@ const QuizApp = () => {
                 setSelectedQuiz(null);
             }
         };
+
         fetchQuizData();
     }, [quizId]);
 
@@ -37,41 +42,23 @@ const QuizApp = () => {
         return question.options[question.correctOption];
     };
 
-    const startQuiz = () => {
-        setCurrentQuestionIndex(0);
-        setAnswers([]);
-        startTimer();
-    };
-
-    const startTimer = () => {
-        const currentTime = Date.now();
-        setStartTime(currentTime);
-    };
-
-    const stopTimer = () => {
-        if (startTime) {
-            const currentTime = Date.now();
-            const elapsedSeconds = Math.floor((currentTime - startTime) / 1000);
-            setElapsedTime(elapsedSeconds)
-            return elapsedSeconds
-        }
-    };
-
     const handleAnswerSelection = (option: string) => {
         setSelectedOption(option);
     };
 
     const handleNextQuestion = () => {
-        if (selectedOption !== null && currentQuestionIndex !== null) {
+        if (currentQuestionIndex !== null && selectedQuiz) {
             const currentQuestion = selectedQuiz?.questions?.[currentQuestionIndex];
-            const isCorrect = currentQuestion && selectedOption === getCorrectAnswer(currentQuestion);
+            if (!currentQuestion) return;
+            const isCorrect = selectedOption === getCorrectAnswer(currentQuestion);
             const newAnswer: Answer = {
                 option: selectedOption,
-                correct: isCorrect || false,
+                correct: isCorrect,
             };
-            setAnswers((prevAnswers) => [...prevAnswers, newAnswer]);
-            setSelectedOption(null);
-            if (currentQuestionIndex < selectedQuiz!.questions!.length! - 1) {
+
+            recordAnswer(newAnswer, currentQuestionIndex);
+
+            if (currentQuestionIndex < selectedQuiz?.questions!.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
             }
         }
@@ -80,8 +67,7 @@ const QuizApp = () => {
     const handlePreviousQuestion = () => {
         if (currentQuestionIndex !== null && currentQuestionIndex > 0) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
-            setAnswers(answers.slice(0, -1));
-            setSelectedOption(answers[answers.length - 1]?.option || null);
+            setSelectedOption(answers[currentQuestionIndex - 1]?.option || null);
         }
     };
 
@@ -101,37 +87,63 @@ const QuizApp = () => {
         return 0;
     };
 
+    useEffect(() => {
+        const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string; }) => {
+            if (timer <= 28) {
+                handleSubmitQuiz();
+                event.preventDefault();
+                event.returnValue = "Are you sure you want to leave? The quiz will be submitted.";
+            }
+        };
+
+        window.addEventListener("beforeunload", handleBeforeUnload);
+
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+
+    }, [timer]);
 
     const handleSubmitQuiz = async () => {
-        if (selectedOption !== null && currentQuestionIndex !== null) {
-            if (selectedQuiz) {
-                const currentQuestion = selectedQuiz!.questions![currentQuestionIndex];
-                const isCorrect = selectedOption === getCorrectAnswer(currentQuestion);
+        if (!hasSubmitted) {
+            if (selectedOption !== null && currentQuestionIndex !== null && selectedQuiz) {
+                const currentQuestion = selectedQuiz?.questions?.[currentQuestionIndex];
+                const isCorrect = selectedOption === getCorrectAnswer(currentQuestion!);
                 const newAnswer = {
                     option: selectedOption,
                     correct: isCorrect,
                 };
-
-                setAnswers([...answers, newAnswer]);
-                setCurrentQuestionIndex(null);
-                const duration = stopTimer();
-
-                const userId = currentUser.user && currentUser.user._id;
-                const quizId = selectedQuiz!._id;
-                const score = calculateScore();
-                try {
-                    await axios.post(endpoints.quiz.details, {
-                        userId,
-                        quizId,
-                        score,
-                        duration,
-                    });
-                } catch (error) {
-                    console.error('Error submitting quiz results:', error);
-                }
+                recordAnswer(newAnswer, currentQuestionIndex);
             }
+
+            setCurrentQuestionIndex(null);
+            const duration = TIMER_INITIAL_VALUE - timer;
+
+            const userId = currentUser.user && currentUser.user._id;
+            const quizId = selectedQuiz!._id;
+            const score = calculateScore();
+
+            try {
+                await axios.post(endpoints.quiz.details, {
+                    userId,
+                    quizId,
+                    score,
+                    duration,
+                    answers: answers,
+                });
+            } catch (error) {
+                console.error('Error submitting quiz results:', error);
+            }
+            setHasSubmitted(true);
+            setQuizFinished(true);
         }
     };
+
+    useEffect(() => {
+        if (timer === 0 && currentQuestionIndex !== null) {
+            setCurrentQuestionIndex(null);
+        }
+    }, [timer]);
 
     return (
         <Container
@@ -145,33 +157,35 @@ const QuizApp = () => {
             }}
         >
             {currentQuestionIndex === null ? (
-                answers.length === selectedQuiz?.questions?.length ? (
+                quizFinished || answers.length === selectedQuiz?.questions?.length ? (
                     <EndQuizScreen
                         quiz={selectedQuiz!}
                         answers={answers}
-                        elapsedTime={elapsedTime}
+                        elapsedTime={TIMER_INITIAL_VALUE - timer}
                         onQuizFinish={handleSubmitQuiz}
-
                     />
                 ) : (
                     <StartQuizScreen quiz={selectedQuiz!} startQuiz={startQuiz} />
                 )
             ) : (
-                <QuestionScreen
-                    currentQuestion={selectedQuiz!.questions![currentQuestionIndex]!}
-                    currentQuestionIndex={currentQuestionIndex}
-                    totalQuestions={selectedQuiz!.questions!.length!}
-                    title={selectedQuiz?.title || ''}
-                    selectedOption={selectedOption}
-                    handleAnswerSelection={handleAnswerSelection}
-                    handlePreviousQuestion={handlePreviousQuestion}
-                    handleNextQuestion={handleNextQuestion}
-                    handleSubmitAnswers={handleSubmitQuiz}
-                    elapsedTime={elapsedTime}
-                />
+                selectedQuiz?.questions && typeof currentQuestionIndex === "number" && selectedQuiz.questions[currentQuestionIndex] ? (
+                    <QuestionScreen
+                        currentQuestion={selectedQuiz.questions[currentQuestionIndex]}
+                        currentQuestionIndex={currentQuestionIndex}
+                        totalQuestions={selectedQuiz!.questions!.length}
+                        title={selectedQuiz.title || ''}
+                        selectedOption={selectedOption}
+                        handleAnswerSelection={handleAnswerSelection}
+                        handlePreviousQuestion={handlePreviousQuestion}
+                        handleNextQuestion={handleNextQuestion}
+                        handleSubmitAnswers={handleSubmitQuiz}
+                        elapsedTime={TIMER_INITIAL_VALUE}
+                    />
+                ) : null
             )}
         </Container>
     );
+
 };
 
 export default QuizApp;
