@@ -10,8 +10,6 @@ import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import { useEffect, useState } from 'react';
-import { Quiz } from '../quiz/types';
-import axios, { endpoints } from 'src/utils/axios';
 import PagingComponent from 'src/components/paging/paging-component';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
@@ -25,19 +23,20 @@ export default function ThreeView() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isLoadingResolved, setIsLoadingResolved] = useState(false);
-  const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
-  const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
-  const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
-  const [refresh, setRefresh] = useState(true);
   const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
+    isLoadingResolved,
+    isLoadingUnresolved,
+    resolvedQuizzes,
+    unresolvedQuizzes,
     deleteQuiz,
-    isDeleting
+    isDeleting,
+    fetchQuizzes
   } = useFetchQuizzes(currentPage, itemsPerPage);
+
 
   const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
@@ -48,35 +47,10 @@ export default function ThreeView() {
     setIsModalOpen(false);
   };
 
-
   useEffect(() => {
-    const fetchUnresolvedQuizzes = async () => {
-      setIsLoadingUnresolved(true);
-      try {
-        const response = await axios.get(`${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`);
-        setUnresolvedQuizzes(response.data.unresolvedQuizzes);
-      } catch (error) {
-        console.error('Error fetching unresolved quizzes' + error);
-        setUnresolvedQuizzes([]);
-      }
-      setIsLoadingUnresolved(false);
-    };
-
-    const fetchResolvedQuizzes = async () => {
-      setIsLoadingResolved(true);
-      try {
-        const response = await axios.get(`${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`);
-        setResolvedQuizzes(response.data.resolvedQuizzes);
-      } catch (error) {
-        console.error('Error fetching resolved quizzes' + error);
-        setResolvedQuizzes([]);
-      }
-      setIsLoadingResolved(false);
-    };
-
-    fetchResolvedQuizzes();
-    fetchUnresolvedQuizzes();
-  }, [currentPage, refresh]);
+    fetchQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   const formattedDateTaken = selectedQuizResult
     ? new Date(selectedQuizResult.dateTaken).toLocaleString("en-GB", {
