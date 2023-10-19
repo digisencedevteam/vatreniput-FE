@@ -30,7 +30,7 @@ const EndQuizScreen = ({ quiz, answers, elapsedTime, onQuizFinish }: EndQuizScre
                 {`Imate ${correctAnswers.length} točnih od ${quiz.questions!.length}`}
             </Typography>
             <Typography variant="caption">
-                {`Vrijeme: ${Math.floor(elapsedTime / 60)}:${(elapsedTime % 60).toString().padStart(2, '0')}`}
+                {`Vrijeme: ${elapsedTime} sekundi`}
             </Typography>
             <Button component={Link}
                 to={'/dashboard/three'} variant="contained" color="primary" style={{ marginTop: '20px' }}

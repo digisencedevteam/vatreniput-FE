@@ -116,19 +116,6 @@ const CreateQuiz = () => {
           `Error creating quiz: ${JSON.stringify(error.message)}`
         );
       }
-    } else {
-      console.log('update');
-
-      // try {
-      //     const response = await axiosInstance.post(endpoints.quiz.update, quizToSend);
-      //     if ([200, 201].includes(response.status)) {
-      //         setSubmitted(true);
-      //     } else {
-      //         setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
-      //     }
-      // } catch (error) {
-      //     setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
-      // }
     }
   };
 

@@ -16,7 +16,6 @@ import { Question } from './types';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ExitConfirmationModal from './exit-confirmation-dialog';
-import { useTimerContext } from 'src/context/timer-context';
 
 interface QuestionScreenProps {
   currentQuestion: Question;
@@ -29,6 +28,7 @@ interface QuestionScreenProps {
   handleNextQuestion: () => void;
   handleSubmitAnswers: () => void;
   elapsedTime: number;
+  quizId: string
 }
 
 const QuestionScreen = ({
@@ -40,27 +40,50 @@ const QuestionScreen = ({
   handleAnswerSelection,
   handlePreviousQuestion,
   handleNextQuestion,
-  handleSubmitAnswers,
+  quizId
 }: QuestionScreenProps) => {
   const theme = useTheme();
   const progress =
     ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const { timer } = useTimerContext();
+  const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
+  const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
-    if (timer <= 0) {
-      handleSubmitAnswers();
+    const storedStartTime = localStorage.getItem(`quizStartTime_${quizId}`);
+
+    if (storedStartTime) {
+      setQuizStartTime(parseInt(storedStartTime, 10));
+    } else {
+      const currentStartTime = Date.now();
+      setQuizStartTime(currentStartTime);
+
+      localStorage.setItem(`quizStartTime_${quizId}`, currentStartTime.toString());
     }
-  }, [timer, handleSubmitAnswers]);
+  }, [quizId]);
+
+  useEffect(() => {
+    if (quizStartTime) {
+      const initialElapsedTime = Math.floor((Date.now() - quizStartTime) / 1000);
+      setElapsedTime(initialElapsedTime);
+
+      const intervalId = setInterval(() => {
+        const newElapsedTime = Math.floor((Date.now() - quizStartTime) / 1000);
+        setElapsedTime(newElapsedTime);
+      }, 1000);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [quizStartTime]);
 
   const handleModalClose = () => {
     setShowModal(false);
   };
 
   const handleExitConfirmation = () => {
-    handleSubmitAnswers();
     setShowModal(false);
     navigate('/dashboard/three');
   };
@@ -116,7 +139,7 @@ const QuestionScreen = ({
               marginBottom: 10,
             }}
           >
-            Vrijeme proteklo {formatTime(timer)}
+            Vrijeme proteklo {formatTime(elapsedTime)}
           </Typography>
         </Grid>
         <Grid item width={'100%'} m={1} padding={0}>
@@ -218,42 +241,22 @@ const QuestionScreen = ({
           </Hidden>
 
           <Hidden smDown>
-            {currentQuestionIndex === totalQuestions - 1 ? (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmitAnswers}
-              >
-                Submit
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNextQuestion}
-              >
-                Sljedeće pitanje
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNextQuestion}
+            >
+              Sljedeće pitanje
+            </Button>
           </Hidden>
           <Hidden smUp>
-            {currentQuestionIndex === totalQuestions - 1 ? (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmitAnswers}
-              >
-                <ArrowForwardIcon />
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNextQuestion}
-              >
-                <ArrowForwardIcon />
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleNextQuestion}
+            >
+              <ArrowForwardIcon />
+            </Button>
           </Hidden>
         </Grid>
       </Grid>

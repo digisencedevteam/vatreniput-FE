@@ -35,7 +35,7 @@ export const DesktopViewOne = () => {
   const featuredAppsList = [
     {
       id: '1',
-      title: 'Vatreni Challange',
+      title: 'Vatreni Challenge',
       coverUrl: 'assets/images/mandzukicPerisic.jpg',
       description: 'Novi Kviz je dostupan!!',
     },
@@ -52,7 +52,8 @@ export const DesktopViewOne = () => {
 
   useEffect(() => {
     fetchQuizzes();
-  }, [fetchQuizzes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>

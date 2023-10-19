@@ -63,7 +63,8 @@ export default function OneView() {
     fetchCollectedStatistic();
     fetchDashboardStats();
     fetchQuizzes();
-  }, [fetchQuizzes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>

@@ -15,7 +15,7 @@ const StartQuizScreen = ({ quiz, startQuiz }: StartQuizScreenProps) => {
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
             >
                 <Alert severity="warning">
-                    <Typography variant="caption">Kviz sa postojećim odgovorima, biti će automatski poslan ukoliko izađeš iz njega prije završetka</Typography>
+                    <Typography variant="caption">Nagrađuju se korisnici s najviše točnih rješenja u najkraćem vremenu. Vrijeme prolazi iako izađeš iz kviza tako da se zatvaranje kviza ne preporuča!</Typography>
                 </Alert>
             </Snackbar>
             <Typography variant="h5" style={{ textTransform: 'uppercase', fontWeight: 'bold', margin: 30, textAlign: 'center' }}>
