@@ -1,7 +1,7 @@
 export type Question = {
   text: string;
   options: string[];
-  image: string;
+  image?: string;
   correctOption: number;
 };
 

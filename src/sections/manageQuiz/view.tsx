@@ -3,7 +3,6 @@ import {
     Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel,
     Radio, Typography, Container, Grid, Box, Divider, Snackbar, Alert, IconButton, Collapse
 } from '@mui/material';
-import axiosInstance, { endpoints } from 'src/utils/axios';
 import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useNavigate } from 'react-router-dom';
@@ -13,23 +12,9 @@ import { useParams } from 'react-router-dom';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs, { Dayjs } from 'dayjs';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
+import { Quiz, Question } from '../quiz/types';
 
-interface Question {
-    text: string;
-    image?: string;
-    options: string[];
-    correctOption: number;
-
-}
-
-interface Quiz {
-    title: string;
-    description: string;
-    questions: Question[];
-    thumbnail: string;
-}
-
-const CreateQuiz = () => {
+const ManageQuiz = () => {
     const [numQuestions, setNumQuestions] = useState<number | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [quiz, setQuiz] = useState<Partial<Quiz>>({});
@@ -41,7 +26,7 @@ const CreateQuiz = () => {
     const [availableUntil, setAvailableUntil] = useState<Date | Dayjs | null>(null);
     const [submitted, setSubmitted] = useState(false);
     const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
-    const { fetchUnresolvedQuizById, unresolvedQuiz } = useFetchQuizzes();
+    const { fetchUnresolvedQuizById, unresolvedQuiz, createOrUpdateQuiz } = useFetchQuizzes();
     const [showForm, setShowForm] = useState(true);
 
     const { quizId } = useParams();
@@ -50,6 +35,7 @@ const CreateQuiz = () => {
         if (quizId) {
             fetchUnresolvedQuizById(quizId);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quizId]);
 
     useEffect(() => {
@@ -69,38 +55,14 @@ const CreateQuiz = () => {
 
     }, [auth, history, unresolvedQuiz]);
 
-
     const handleSubmit = async () => {
-        const formattedDate = availableUntil?.toISOString() || "";
-        const quizToSend = {
-            ...quiz,
-            availableUntil: formattedDate,
-        };
 
-        if (!quizId) {
-            try {
-                const response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
-                if ([200, 201].includes(response.status)) {
-                    setSubmitted(true);
-                } else {
-                    setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
-                }
-            } catch (error) {
-                setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
-            }
+        const result = await createOrUpdateQuiz(quiz, quizId);
+
+        if (result.success) {
+            setSubmitted(true);
         } else {
-            console.log('update');
-
-            // try {
-            //     const response = await axiosInstance.post(endpoints.quiz.update, quizToSend);
-            //     if ([200, 201].includes(response.status)) {
-            //         setSubmitted(true);
-            //     } else {
-            //         setErrorSnackbar(`Error creating quiz: ${JSON.stringify(response.data)}`);
-            //     }
-            // } catch (error) {
-            //     setErrorSnackbar(`Error creating quiz: ${JSON.stringify(error.message)}`);
-            // }
+            setErrorSnackbar(result.error || "An unknown error occurred");
         }
     };
 
@@ -108,6 +70,7 @@ const CreateQuiz = () => {
         if (num > 0) {
             setError(false);
             setQuiz({
+
                 questions: Array.from({ length: num }, () => ({
                     text: '',
                     options: [],
@@ -125,8 +88,6 @@ const CreateQuiz = () => {
         newQuestions[currentQuestionIndex].options = Array(num).fill('');
         setQuiz({ ...quiz, questions: newQuestions });
     };
-
-
 
     const handleQuestionChange = (index: number, key: keyof Question, value: string | number | string[]) => {
         const newQuestions = [...(quiz.questions || [])];
@@ -220,7 +181,11 @@ const CreateQuiz = () => {
                                 label="Available Until"
                                 value={availableUntil}
                                 disablePast
-                                onChange={(newValue) => setAvailableUntil(newValue)}
+                                onChange={(newValue) => {
+
+                                    setQuiz(prevQuiz => ({ ...prevQuiz, availableUntil: newValue?.toISOString() }));
+
+                                }}
                             />
                         </LocalizationProvider>
                     </Collapse>
@@ -313,7 +278,7 @@ const CreateQuiz = () => {
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert onClose={() => { setSubmitted(false); history("/dashboard/three"); }} severity="success">
-                    Kviz uspjesno {quizId ? ' kreiran' : ' azuriran'}!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
+                    Kviz uspjesno {quizId ? ' azuriran' : ' kreiran'}!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
                 </Alert>
             </Snackbar>
 
@@ -331,4 +296,4 @@ const CreateQuiz = () => {
     );
 };
 
-export default CreateQuiz;
+export default ManageQuiz;

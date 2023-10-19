@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios, { endpoints } from 'src/utils/axios';
 import { Quiz } from 'src/sections/quiz/types';
+import axiosInstance from 'src/utils/axios';
 
 type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
@@ -12,6 +13,10 @@ type FetchQuizzesReturn = {
   fetchQuizzes: () => void;
   fetchUnresolvedQuizById: (quizId: string) => Promise<void>;
   deleteQuiz: (quizId: string) => Promise<void>;
+  createOrUpdateQuiz: (
+    quiz: Partial<Quiz>,
+    quizId?: string
+  ) => Promise<{ success: boolean; error?: string }>;
 };
 
 const useFetchQuizzes = (
@@ -39,13 +44,52 @@ const useFetchQuizzes = (
   const deleteQuiz = async (quizId: string) => {
     setIsDeleting(true);
     try {
-      await axios.delete(`${endpoints.quiz.delete}/${quizId}`);
+      await axios.delete(`${endpoints.quiz.delete}${quizId}`);
       alert('Quiz deleted successfully!');
     } catch (error) {
       alert('Failed to delete quiz. Please try again.');
     } finally {
       setIsDeleting(false);
       fetchQuizzes();
+    }
+  };
+
+  const createOrUpdateQuiz = async (quiz: Partial<Quiz>, quizId?: string) => {
+    const quizToSend = {
+      ...quiz,
+    };
+
+    let response;
+    try {
+      console.log(quizToSend);
+
+      if (quizId) {
+        response = await axiosInstance.put(
+          endpoints.quiz.update + '/' + quizId,
+          quizToSend
+        );
+      } else {
+        response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
+      }
+
+      if ([200, 201].includes(response.status)) {
+        // You can also update any local state here, if required.
+        return { success: true };
+      } else {
+        return {
+          success: false,
+          error: `Error ${
+            quizId ? 'updating' : 'creating'
+          } quiz: ${JSON.stringify(response.data)}`,
+        };
+      }
+    } catch (error) {
+      return {
+        success: false,
+        error: `Error ${
+          quizId ? 'updating' : 'creating'
+        } quiz: ${JSON.stringify(error.message)}`,
+      };
     }
   };
 
@@ -92,6 +136,7 @@ const useFetchQuizzes = (
     unresolvedQuiz,
     isDeleting,
     deleteQuiz,
+    createOrUpdateQuiz,
   };
 };
 
