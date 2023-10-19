@@ -44,7 +44,7 @@ const useFetchQuizzes = (
   const deleteQuiz = async (quizId: string) => {
     setIsDeleting(true);
     try {
-      await axios.delete(`${endpoints.quiz.delete}${quizId}`);
+      await axios.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
       alert('Quiz deleted successfully!');
     } catch (error) {
       alert('Failed to delete quiz. Please try again.');
@@ -61,11 +61,9 @@ const useFetchQuizzes = (
 
     let response;
     try {
-      console.log(quizToSend);
-
       if (quizId) {
         response = await axiosInstance.put(
-          endpoints.quiz.update + '/' + quizId,
+          endpoints.quiz.deleteAndUpdate + quizId,
           quizToSend
         );
       } else {
@@ -73,7 +71,6 @@ const useFetchQuizzes = (
       }
 
       if ([200, 201].includes(response.status)) {
-        // You can also update any local state here, if required.
         return { success: true };
       } else {
         return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StorySection } from 'src/sections/six/view';
+import { StorySection } from 'src/types';
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 
 interface StoryContentProps {

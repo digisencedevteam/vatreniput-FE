@@ -27,7 +27,6 @@ export default function ThreeView() {
   const auth = useContext(AuthContext);
   const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const {
     isLoadingResolved,
     isLoadingUnresolved,

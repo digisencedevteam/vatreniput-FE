@@ -73,8 +73,7 @@ export const endpoints = {
     resolved: '/quizzes/resolved',
     unresolved: '/quizzes/unresolved',
     new: '/quizzes/new',
-    delete: '/quizzes/',
-    update: '/quizzes',
+    deleteAndUpdate: '/quizzes/',
   },
   passwordReset: {
     reqest: '/password-reset/request',

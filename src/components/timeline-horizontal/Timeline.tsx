@@ -1,6 +1,6 @@
 
 import { Button, Typography, LinearProgress, Box, useTheme, useMediaQuery } from '@mui/material';
-import { Story } from 'src/sections/six/view';
+import { Story } from 'src/types';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
