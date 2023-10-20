@@ -16,8 +16,6 @@ import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import { useEffect, useState } from 'react';
-import { Quiz } from '../quiz/types';
-import axios, { endpoints } from 'src/utils/axios';
 import PagingComponent from 'src/components/paging/paging-component';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
@@ -33,27 +31,22 @@ export default function ThreeView() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [isLoadingResolved, setIsLoadingResolved] = useState(false);
-  const [isLoadingUnresolved, setIsLoadingUnresolved] =
-    useState(false);
-  const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
-  const [unresolvedQuizzes, setUnresolvedQuizzes] =
-    useState<Quiz[]>();
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
-  const [resolvedCount, setResolvedCount] = useState<number>(0);
-  const [unresolvedCount, setUnresolvedCount] = useState<number>(0);
-  const [selectedQuizResult, setSelectedQuizResult] =
-    useState<QuizResultsModalProps['quizResults']>();
+  const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { deleteQuiz, isDeleting } = useFetchQuizzes(
-    currentPage,
-    itemsPerPage
-  );
+  const {
+    isLoadingResolved,
+    isLoadingUnresolved,
+    resolvedQuizzes,
+    unresolvedQuizzes,
+    deleteQuiz,
+    isDeleting,
+    fetchQuizzes
+  } = useFetchQuizzes(currentPage, itemsPerPage);
 
-  const openModal = (
-    quizData: QuizResultsModalProps['quizResults']
-  ) => {
+
+  const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
@@ -63,40 +56,8 @@ export default function ThreeView() {
   };
 
   useEffect(() => {
-    const fetchUnresolvedQuizzes = async () => {
-      setIsLoadingUnresolved(true);
-      try {
-        const response = await axios.get(
-          `${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`
-        );
-        setUnresolvedQuizzes(response.data.unresolvedQuizzes);
-        setUnresolvedCount(response.data.unresolvedQuizzes.length);
-      } catch (error) {
-        console.error('Error fetching unresolved quizzes' + error);
-        setUnresolvedQuizzes([]);
-        setUnresolvedCount(0);
-      }
-      setIsLoadingUnresolved(false);
-    };
-
-    const fetchResolvedQuizzes = async () => {
-      setIsLoadingResolved(true);
-      try {
-        const response = await axios.get(
-          `${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`
-        );
-        setResolvedQuizzes(response.data.resolvedQuizzes);
-        setResolvedCount(response.data.resolvedQuizzes.length);
-      } catch (error) {
-        console.error('Error fetching resolved quizzes' + error);
-        setResolvedQuizzes([]);
-        setResolvedCount(0);
-      }
-      setIsLoadingResolved(false);
-    };
-
-    fetchResolvedQuizzes();
-    fetchUnresolvedQuizzes();
+    fetchQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const formattedDateTaken = selectedQuizResult
