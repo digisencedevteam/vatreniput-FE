@@ -23,19 +23,19 @@ export const CardView = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  useEffect(() => {
-    const fetchCardData = async () => {
-      try {
-        const response = await axios.get(
-          endpoints.card.details + cardId
-        );
-        setCardData(response.data);
-      } catch (error) {
-        setIsError(true);
-        setCardData([]);
-      }
-    };
 
+  const fetchCardData = async () => {
+    try {
+      const response = await axios.get(
+        endpoints.card.details + cardId
+      );
+      setCardData(response.data);
+    } catch (error) {
+      setIsError(true);
+      setCardData([]);
+    }
+  };
+  useEffect(() => {
     fetchCardData();
   }, [cardId]);
 
