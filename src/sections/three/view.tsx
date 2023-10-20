@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
 import QuizResultsModal, { QuizResultsModalProps } from 'src/components/quiz-results-modal/QuizResultsModal';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import dayjs from 'dayjs';
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -37,6 +38,8 @@ export default function ThreeView() {
     fetchQuizzes
   } = useFetchQuizzes(currentPage, itemsPerPage);
 
+  const [rewardStatus, setRewardStatus] = useState<Record<string, boolean>>({});
+
 
   const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
@@ -46,6 +49,19 @@ export default function ThreeView() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    if (unresolvedQuizzes) {
+      const newRewardStatus: Record<string, boolean> = {};
+      unresolvedQuizzes.forEach((data) => {
+        const today = dayjs();
+        const createdAt = dayjs(data.createdAt);
+        const diffInDays = today.diff(createdAt, 'day');
+        newRewardStatus[data._id] = diffInDays <= 3;
+      });
+      setRewardStatus(newRewardStatus);
+    }
+  }, [unresolvedQuizzes]);
 
   useEffect(() => {
     fetchQuizzes();
@@ -62,11 +78,12 @@ export default function ThreeView() {
     })
     : "";
 
+
+
   useEffect(() => {
     if (resolvedQuizzes) {
       const totalResolvedQuizzes = resolvedQuizzes.length;
       setTotalPages(Math.ceil(totalResolvedQuizzes / itemsPerPage));
-
     }
   }, [resolvedQuizzes]);
 
@@ -148,17 +165,21 @@ export default function ThreeView() {
       <SectionWrapper title="Preostali kvizovi">
         <Grid container spacing={2}>
           {!!unresolvedQuizzes?.length && !isLoadingUnresolved && (
+
             unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <Box sx={{
-                  transition: 'transform .2s',
-                  "&:hover": {
-                    transform: 'scale(1.05)',
-                  }
-                }}>
-                  <CustomCard quizId={data._id} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
-                </Box>
-              </Grid>
+              <>
+
+                <Grid key={data._id} item xs={12} sm={6} md={4} lg={4}>
+                  <Box sx={{
+                    transition: 'transform .2s',
+                    "&:hover": {
+                      transform: 'scale(1.05)',
+                    }
+                  }}>
+                    <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
+                  </Box>
+                </Grid>
+              </>
             ))
           )}
 

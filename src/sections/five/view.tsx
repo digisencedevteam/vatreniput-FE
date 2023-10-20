@@ -44,7 +44,7 @@ export default function FiveView() {
           <WelcomeComponent
             title={`Pozdrav 👋`}
             description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
-            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696246116/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao.jpg'} alt='Vesela' />}
+            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png'} alt='Vesela' />}
             action={
               <Button variant='contained' color='primary'>
                 Istraži

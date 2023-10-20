@@ -1,6 +1,4 @@
-// Import necessary MUI components
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, alpha } from '@mui/material';
-// Other imports
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
