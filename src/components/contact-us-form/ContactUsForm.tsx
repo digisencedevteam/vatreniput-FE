@@ -76,9 +76,9 @@ export default function ContactUsForm() {
                                     error={!!errors.reason}
                                     helperText={errors.reason?.message}
                                 >
-                                    <MenuItem value="problem">I'm having a problem</MenuItem>
-                                    <MenuItem value="question">I have a question</MenuItem>
-                                    <MenuItem value="other">Other</MenuItem>
+                                    <MenuItem value="problem">Imam problem</MenuItem>
+                                    <MenuItem value="question">Imam pitanje</MenuItem>
+                                    <MenuItem value="other">Ostalo</MenuItem>
                                 </TextField>
                             )}
                         />
@@ -123,10 +123,10 @@ export default function ContactUsForm() {
                             type="submit"
                             loading={isSubmitting}
                         >
-                            Submit
+                            Pošalji
                         </LoadingButton>
                         <Button onClick={handleClose} color="primary">
-                            Cancel
+                            Odustani
                         </Button>
                     </DialogActions>
                 </form>
@@ -139,7 +139,7 @@ export default function ContactUsForm() {
                 anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
             >
                 <Alert onClose={() => setSubmitted(false)} severity="success">
-                    Your message was sent successfully to VatreniPut support!
+                    Vaša poruka je uspješno poslana podršci Vatrenog Puta!
                 </Alert>
             </Snackbar>
         </Box >

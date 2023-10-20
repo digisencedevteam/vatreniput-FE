@@ -55,7 +55,7 @@ const QuizResultsModal: React.FC<QuizResultsModalProps> = ({ isModalOpen, closeM
                         />
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', m: 5 }}>
                             <Typography variant="caption" id="quiz-results-description">
-                                Riješenost kviza: {quizResults.score}%
+                                Riješenost kviza: {Math.round(quizResults.score)}%
                             </Typography>
                             <Typography variant="caption">
                                 Kviz riješen za {quizResults.duration} sekundi
