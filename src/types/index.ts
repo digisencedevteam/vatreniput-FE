@@ -1,4 +1,3 @@
-
 export type FAQ = {
   question: string;
   answer: string;
@@ -31,42 +30,42 @@ export type CardApiResponse = {
 export type CollectedStatistic = {
   numberOfCollectedCards: number;
   percentageOfCollectedCards: number;
-  countOfAllCards: number
-}
+  countOfAllCards: number;
+};
 
 export type CardTemplate = {
-  title: string
+  title: string;
   description: string;
-  videoLink?: string
-  imageURLS: string[],
+  videoLink?: string;
+  imageURLS: string[];
   event: CollectionEvent;
-}
+};
 
 export type PrintedCard = {
-  qrCode: string
-  isScanned: boolean
-  owner: number
-}
+  qrCode: string;
+  isScanned: boolean;
+  owner: number;
+};
 
 export type UserCard = {
-  user: string
-  printedCard: string
-}
+  user: string;
+  printedCard: string;
+};
 
 export type TopEvent = {
-  name?: string,
-  location?: string,
-  year?: number,
-  percentageCollected?: number
-  imageSrc?: string
-}
+  name?: string;
+  location?: string;
+  year?: number;
+  percentageCollected?: number;
+  imageSrc?: string;
+};
 
 export type DashboardStats = {
-  numberOfCollectedCards: number,
-  percentageOfCollectedCards: number,
-  countOfAllCards: number,
-  topEvents: TopEvent[],
-}
+  numberOfCollectedCards: number;
+  percentageOfCollectedCards: number;
+  countOfAllCards: number;
+  topEvents: TopEvent[];
+};
 
 export type FormValues = {
   firstName: string;
@@ -74,4 +73,15 @@ export type FormValues = {
   email: string;
   avatarUrl: string;
   [key: string]: string;
+};
+
+export interface StorySection {
+  storyTitle?: string;
+  imageUrl: string;
+  title: string;
+  content: string;
+}
+
+export interface Story {
+  sections: StorySection[];
 }
