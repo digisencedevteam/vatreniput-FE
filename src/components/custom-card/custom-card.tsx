@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import dayjs from "dayjs";
 import Label from "../label";
+import DeleteModal from "../delete-modal/deleteModal";
 
 interface CustomCardProps {
     width?: string;
@@ -45,15 +46,24 @@ const CustomCard = ({
     const isAdmin = auth.user && auth.user.email === "antonio@test.com";
     const rewardedUntil = dayjs(createdAt).add(3, 'day');
     const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
+    const handleConfirmDelete = () => {
+        if (onDeleteQuiz && quizId) {
+            onDeleteQuiz(quizId);
+        }
+        setDeleteModalOpen(false);
+    };
+
 
     return (
-        <Card sx={{ borderWidth: 2, overflow: "hidden", width, flexShrink: 0, display: 'flex', flexDirection: 'column', margin: '5px', position: 'relative' }}>
+        <>        <Card sx={{ borderWidth: 2, overflow: "hidden", width, flexShrink: 0, display: 'flex', flexDirection: 'column', margin: '5px', position: 'relative' }}>
             {isQuiz && isAdmin && (
                 <Box sx={{ position: "absolute", top: 8, right: 8, display: "flex", flexDirection: "row", alignItems: "center", zIndex: 2 }}>
                     <Fade in={menuOpen}>
                         <Box sx={{ display: "flex", flexDirection: "row", gap: "8px" }}>
                             {quizId && (
-                                <Button variant="contained" color="error" onClick={() => onDeleteQuiz && onDeleteQuiz(quizId)} sx={{ borderRadius: "50%", padding: "0.8em", border: "2px solid white", minWidth: 0 }}>
+                                <Button variant="contained" color="error" onClick={() => setDeleteModalOpen(true)} sx={{ borderRadius: "50%", padding: "0.8em", border: "2px solid white", minWidth: 0 }}>
                                     <DeleteIcon fontSize="inherit" />
                                 </Button>
                             )}
@@ -86,6 +96,15 @@ const CustomCard = ({
                 </Box>
             </CardContent>
         </Card>
+            <DeleteModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setDeleteModalOpen(false)}
+                onConfirmDelete={handleConfirmDelete}
+                modalText="Jeste li sigurni da želite izbrisati kviz?"
+                confirmButtonText="Izbriši"
+            />
+        </>
+
     );
 };
 

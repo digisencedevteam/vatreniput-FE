@@ -29,6 +29,7 @@ const ManageQuiz = () => {
     const { fetchUnresolvedQuizById, unresolvedQuiz, createOrUpdateQuiz } = useFetchQuizzes();
     const [showForm, setShowForm] = useState(true);
 
+
     const { quizId } = useParams();
 
     useEffect(() => {
@@ -173,9 +174,9 @@ const ManageQuiz = () => {
                 <Divider />
                 {showForm && (
                     <Collapse in={showForm}>
-                        <TextField sx={{ my: 1 }} value={quiz?.title || ''} label="Naslov Kviza" fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
-                        <TextField sx={{ my: 1 }} value={quiz?.description || ''} label="Opis" fullWidth onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
-                        <TextField sx={{ my: 1 }} value={quiz?.thumbnail || ''} label="Thumbnail URL" fullWidth onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
+                        <TextField sx={{ my: 1 }} value={quiz?.title || ''} label="Naslov Kviza" required fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
+                        <TextField sx={{ my: 1 }} value={quiz?.description || ''} label="Opis" fullWidth required onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
+                        <TextField sx={{ my: 1 }} value={quiz?.thumbnail || ''} label="Thumbnail URL" fullWidth required onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                 label="Available Until"
@@ -205,15 +206,15 @@ const ManageQuiz = () => {
                     <Divider />
                     {currentQuestion.options.length === 0 ? (
                         <Box my={1}>
-                            <TextField type="number" label="Broj ponudenih odgovora" fullWidth onChange={(e) => setTempOptions(parseInt(e.target.value, 10))} />
+                            <TextField type="number" label="Broj ponudenih odgovora" required fullWidth onChange={(e) => setTempOptions(parseInt(e.target.value, 10))} />
                             <Button variant='contained' color='secondary' sx={{ m: 1, mb: 2 }} onClick={() => handleSetOptionsForCurrentQuestion(tempOptions!)}>Postavi opcije</Button>
                         </Box>
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={12} md={6}>
-                                <TextField label="Text pitanja" fullWidth sx={{ p: 1 }} value={currentQuestion.text}
+                                <TextField label="Text pitanja" required fullWidth sx={{ p: 1 }} value={currentQuestion.text}
                                     onChange={(e) => handleQuestionChange(currentQuestionIndex, 'text', e.target.value)} />
-                                <TextField label="Image URL (optional)" fullWidth sx={{ p: 1 }} value={currentQuestion.image || ''}
+                                <TextField label="Image URL (optional)" required fullWidth sx={{ p: 1 }} value={currentQuestion.image || ''}
                                     onChange={(e) => handleQuestionChange(currentQuestionIndex, 'image', e.target.value)} />
                                 {currentQuestion.options.map((option, optIndex) => (
                                     <Box key={optIndex} display="flex" alignItems="center" sx={{ p: 1 }}>

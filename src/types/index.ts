@@ -85,3 +85,19 @@ export interface StorySection {
 export interface Story {
   sections: StorySection[];
 }
+
+export type QuizResult = {
+  _id: string;
+  userId: {
+    _id: string;
+    email: string;
+    password: string;
+    username: string;
+    __v: number;
+  };
+  quizId: string;
+  score: number;
+  dateTaken: string;
+  duration: number;
+  __v: number;
+};

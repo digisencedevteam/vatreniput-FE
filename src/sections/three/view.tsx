@@ -167,19 +167,16 @@ export default function ThreeView() {
           {!!unresolvedQuizzes?.length && !isLoadingUnresolved && (
 
             unresolvedQuizzes.map((data, index) => (
-              <>
-
-                <Grid key={data._id} item xs={12} sm={6} md={4} lg={4}>
-                  <Box sx={{
-                    transition: 'transform .2s',
-                    "&:hover": {
-                      transform: 'scale(1.05)',
-                    }
-                  }}>
-                    <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
-                  </Box>
-                </Grid>
-              </>
+              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                <Box sx={{
+                  transition: 'transform .2s',
+                  "&:hover": {
+                    transform: 'scale(1.05)',
+                  }
+                }}>
+                  <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
+                </Box>
+              </Grid>
             ))
           )}
 
