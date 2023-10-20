@@ -6,6 +6,8 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
+import SearchCollectionItemBar from 'src/components/search-collection-item-bar/search-collection-item-bar';
+import FilterCollection from 'src/components/filter-collection/filter-collection';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
@@ -54,6 +56,34 @@ export default function CollectionView() {
     }
   };
 
+  const fetchCollectedCards = async () => {
+    try {
+      let response;
+      if (categoryIndex === 0) {
+        response = await axios.get(
+          `${endpoints.card.collected}?page=${currentPage}&limit=${itemsPerPage}`
+        );
+      } else {
+        const categoryId = categories[categoryIndex]?._id;
+        if (categoryId) {
+          response = await axios.get(
+            `${endpoints.card.event}/${categoryId}?page=${currentPage}&limit=${itemsPerPage}`
+          );
+        }
+      }
+      if (response) {
+        const totalPages = Math.ceil(
+          response.data.totalCount / itemsPerPage
+        );
+        setTotalPages(totalPages);
+        setCollectedCards(response.data.cards);
+      }
+    } catch (error) {
+      console.error(error);
+      setCollectedCards([]);
+    }
+  };
+
   const fetchCollectedStatistic = async () => {
     try {
       const response = await axios.get(endpoints.card.stats);
@@ -76,34 +106,6 @@ export default function CollectionView() {
   }, []);
 
   useEffect(() => {
-    const fetchCollectedCards = async () => {
-      try {
-        let response;
-        if (categoryIndex === 0) {
-          response = await axios.get(
-            `${endpoints.card.collected}?page=${currentPage}&limit=${itemsPerPage}`
-          );
-        } else {
-          const categoryId = categories[categoryIndex]?._id;
-          if (categoryId) {
-            response = await axios.get(
-              `${endpoints.card.event}/${categoryId}?page=${currentPage}&limit=${itemsPerPage}`
-            );
-          }
-        }
-        if (response) {
-          const totalPages = Math.ceil(
-            response.data.totalCount / itemsPerPage
-          );
-          setTotalPages(totalPages);
-          setCollectedCards(response.data.cards);
-        }
-      } catch (error) {
-        console.error(error);
-        setCollectedCards([]);
-      }
-    };
-
     if (categories.length > 0) {
       fetchCollectedCards();
     }
