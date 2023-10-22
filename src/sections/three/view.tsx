@@ -78,8 +78,6 @@ export default function ThreeView() {
     })
     : "";
 
-
-
   useEffect(() => {
     if (resolvedQuizzes) {
       const totalResolvedQuizzes = resolvedQuizzes.length;

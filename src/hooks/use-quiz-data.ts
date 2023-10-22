@@ -53,12 +53,14 @@ const useFetchQuizzes = (
   };
 
   const fetchAllQuizzes = async () => {
+    setIsLoadingResolved(true);
     try {
       const response = await axios.get(`${endpoints.quiz.all}`);
       setAllQuizzes(response.data);
     } catch (error) {
       setAllQuizzes([]);
     }
+    setIsLoadingResolved(false);
   };
 
   const getResultsById = async (

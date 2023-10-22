@@ -77,6 +77,9 @@ export const endpoints = {
     results: '/quizzes/results',
     all: '/quizzes/all',
   },
+  votings: {
+    all: '/votings/',
+  },
   passwordReset: {
     reqest: '/password-reset/request',
     reset: '/password-reset/reset',
