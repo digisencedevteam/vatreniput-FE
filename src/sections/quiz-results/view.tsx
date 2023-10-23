@@ -9,13 +9,15 @@ import {
     Container,
     Typography,
     Select,
-    MenuItem
+    MenuItem,
+    Avatar
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useSettingsContext } from 'src/components/settings';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { QuizResult } from 'src/types';
+import icon from '../../assets/illustrations/vatroslav_upute_2.jpg'
 
 export default function QuizResults() {
     const settings = useSettingsContext();
@@ -56,13 +58,14 @@ export default function QuizResults() {
                     </MenuItem>
                 ))}
             </Select>
-            <Typography variant="h3" color={'primary'}>{quizName}</Typography>
+
             <Box sx={{ mt: 2 }}>
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>User</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>Username</TableCell>
                                 <TableCell>Score</TableCell>
                                 <TableCell>Date Taken</TableCell>
                                 <TableCell>Duration</TableCell>
@@ -71,11 +74,20 @@ export default function QuizResults() {
                         <TableBody>
                             {selectedQuiz ? (
                                 resultsById?.map((result: QuizResult) => (
-                                    <TableRow key={result._id}>
+                                    <TableRow key={result._id} >
+                                        <TableCell >
+                                            <Box display={'flex'} justifyContent={'center'}>
+                                                <Avatar
+                                                    src={result.userId.photoURL ? result.userId.photoURL : icon}
+                                                    alt="User Image"
+                                                    sx={{ width: 45, height: 45, border: '2px solid white' }}
+                                                />
+                                            </Box>
+                                        </TableCell>
                                         <TableCell>{result.userId.username}</TableCell>
                                         <TableCell>{result.score} %</TableCell>
                                         <TableCell>{dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}</TableCell>
-                                        <TableCell>{result.duration}</TableCell>
+                                        <TableCell>{result.duration} s</TableCell>
                                     </TableRow>
                                 ))
                             ) : (
