@@ -25,9 +25,6 @@ export default function OneView() {
 
   const { votings } = useVoting();
 
-
-
-
   const imageSrc =
     theme.palette.mode === "dark"
       ? "https://res.cloudinary.com/dzg5kxbau/image/upload/v1694513740/qr-code-white_kdalqi.png"
@@ -68,13 +65,11 @@ export default function OneView() {
     fetchQuizzes
   } = useFetchQuizzes(1, 7);
 
-
   useEffect(() => {
     fetchCollectedStatistic();
     fetchDashboardStats();
     fetchQuizzes();
   }, []);
-
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>

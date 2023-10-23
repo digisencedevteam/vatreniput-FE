@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 import {
     Box,
     Button,
@@ -8,16 +8,16 @@ import {
     Typography,
     Fade,
 } from '@mui/material';
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from "react-router-dom";
 import { AuthContext } from 'src/auth/context/jwt';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import dayjs from "dayjs";
-import Label from "../label";
-import DeleteModal from "../delete-modal/deleteModal";
+import dayjs from 'dayjs';
+import Label from '../label';
+import DeleteModal from '../delete-modal/deleteModal';
 
 interface CustomCardProps {
     width?: string;
