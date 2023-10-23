@@ -91,6 +91,7 @@ export interface QuizResult {
   userId: {
     _id: string;
     username: string;
+    photoURL?: string;
   };
   quizId: string;
   score: number;

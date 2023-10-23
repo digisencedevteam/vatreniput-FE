@@ -172,7 +172,7 @@ export default function ThreeView() {
                     transform: 'scale(1.05)',
                   }
                 }}>
-                  <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/editQuiz/${data?._id}`} isQuiz={true} />
+                  <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/quiz/${data?._id}`} isQuiz={true} />
                 </Box>
               </Grid>
             ))
