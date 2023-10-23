@@ -23,6 +23,7 @@ export type Quiz = {
   thumbnail: string;
   isExpired?: boolean;
   availableUntil?: string;
+  createdAt?: string;
 };
 export type Answer = {
   option: string | null;

@@ -13,11 +13,13 @@ import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { useEffect } from 'react';
+import useVoting from 'src/hooks/use-voting-data';
 
 export const DesktopViewOne = () => {
   const theme = useTheme();
   const { collectedStatistic, collectedCards } = useCardData();
   const settings = useSettingsContext();
+
 
   const hardcodedData = [
     { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
@@ -40,6 +42,8 @@ export const DesktopViewOne = () => {
       description: 'Novo Glasanje je dostupno!!',
     },
   ];
+  const { votings } = useVoting();
+  const voting = votings && votings[1];
 
   const {
     isLoadingUnresolved,
@@ -158,7 +162,14 @@ export const DesktopViewOne = () => {
           }}
         >
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-            <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg' cardText='Najbolji igrač' cardId='123' />
+            {voting &&
+              <CustomCard
+                cardId={voting._id}
+                width='96%' height='100%'
+                imgUrl={voting.thumbnail}
+                cardText={voting.title}
+                linkTo={`/dashboard/voting/${voting._id}`} />
+            }
           </DashboardSectionWrapper>
         </Grid>
       </Grid>

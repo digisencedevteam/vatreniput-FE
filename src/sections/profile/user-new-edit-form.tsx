@@ -18,7 +18,7 @@ import FormProvider, {
   RHFTextField,
 } from 'src/components/hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
-import DeleteAccountModal from 'src/components/delete-account-modal/deleteAccountModal';
+import DeleteModal from 'src/components/delete-modal/deleteModal';
 import axios, { endpoints } from 'src/utils/axios';
 import { Alert } from '@mui/material';
 import { FormValues } from 'src/types';
@@ -256,7 +256,9 @@ export default function UserNewEditForm({
                 </Stack>
               )}
 
-              <DeleteAccountModal
+              <DeleteModal
+                modalText=' Jeste li sigurni da želite obrisati korisnički račun?'
+                confirmButtonText='Obriši korisnički račun'
                 isOpen={isDeleteModalOpen}
                 onClose={handleCloseDeleteModal}
                 onConfirmDelete={handleDeleteAccount}

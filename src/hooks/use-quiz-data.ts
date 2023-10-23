@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios, { endpoints } from 'src/utils/axios';
 import { Quiz } from 'src/sections/quiz/types';
 import axiosInstance from 'src/utils/axios';
+import { QuizResult } from 'src/types';
 
 type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
@@ -9,7 +10,9 @@ type FetchQuizzesReturn = {
   resolvedQuizzes: Quiz[] | undefined;
   isDeleting: boolean;
   unresolvedQuizzes: Quiz[] | undefined;
+  allQuizzes: Quiz[] | undefined;
   unresolvedQuiz: Quiz | null | undefined;
+  fetchAllQuizzes: () => void;
   fetchQuizzes: () => void;
   fetchUnresolvedQuizById: (quizId: string) => Promise<void>;
   deleteQuiz: (quizId: string) => Promise<void>;
@@ -17,6 +20,12 @@ type FetchQuizzesReturn = {
     quiz: Partial<Quiz>,
     quizId?: string
   ) => Promise<{ success: boolean; error?: string }>;
+  resultsById: QuizResult[] | null;
+  getResultsById: (
+    quizId: string,
+    page: number,
+    limit: number
+  ) => Promise<void>;
 };
 
 const useFetchQuizzes = (
@@ -26,9 +35,11 @@ const useFetchQuizzes = (
   const [isLoadingResolved, setIsLoadingResolved] = useState(false);
   const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
+  const [allQuizzes, setAllQuizzes] = useState<Quiz[]>();
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuiz, setUnresolvedQuiz] = useState<Quiz | null>();
   const [isDeleting, setIsDeleting] = useState(false);
+  const [resultsById, setResultsById] = useState<QuizResult[] | null>(null);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
@@ -41,13 +52,37 @@ const useFetchQuizzes = (
     setIsLoadingUnresolved(false);
   };
 
+  const fetchAllQuizzes = async () => {
+    setIsLoadingResolved(true);
+    try {
+      const response = await axios.get(`${endpoints.quiz.all}`);
+      setAllQuizzes(response.data);
+    } catch (error) {
+      setAllQuizzes([]);
+    }
+    setIsLoadingResolved(false);
+  };
+
+  const getResultsById = async (
+    quizId: string,
+    page: number,
+    limit: number
+  ) => {
+    try {
+      const response = await axiosInstance.get(
+        `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
+      );
+      setResultsById(response.data.quizResults || null);
+    } catch (error) {
+      console.error('Error fetching results by ID:', error);
+      setResultsById(null);
+    }
+  };
   const deleteQuiz = async (quizId: string) => {
     setIsDeleting(true);
     try {
-      await axios.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
-      alert('Quiz deleted successfully!');
+      await axiosInstance.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
     } catch (error) {
-      alert('Failed to delete quiz. Please try again.');
     } finally {
       setIsDeleting(false);
       fetchQuizzes();
@@ -97,6 +132,7 @@ const useFetchQuizzes = (
         const response = await axios.get(
           `${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
+
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
       } catch (error) {
         setUnresolvedQuizzes([]);
@@ -110,6 +146,7 @@ const useFetchQuizzes = (
         const response = await axios.get(
           `${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
+
         setResolvedQuizzes(response.data.resolvedQuizzes);
       } catch (error) {
         setResolvedQuizzes([]);
@@ -121,19 +158,25 @@ const useFetchQuizzes = (
     fetchUnresolvedQuizzes();
   };
 
-  useEffect(() => {}, [currentPage]);
+  useEffect(() => {
+    fetchAllQuizzes();
+  }, [currentPage]);
 
   return {
     isLoadingResolved,
     isLoadingUnresolved,
     resolvedQuizzes,
     unresolvedQuizzes,
+    allQuizzes,
     fetchQuizzes,
     fetchUnresolvedQuizById,
     unresolvedQuiz,
     isDeleting,
     deleteQuiz,
     createOrUpdateQuiz,
+    fetchAllQuizzes,
+    resultsById,
+    getResultsById,
   };
 };
 

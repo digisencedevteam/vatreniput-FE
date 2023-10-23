@@ -9,12 +9,16 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onConfirmDelete: () => void;
+  modalText: string,
+  confirmButtonText: string;
 }
 
-export default function DeleteAccountModal({
+export default function DeleteModal({
+  modalText,
   isOpen,
   onClose,
   onConfirmDelete,
+  confirmButtonText
 }: Props) {
   return (
     <Modal open={isOpen} onClose={onClose}>
@@ -33,7 +37,7 @@ export default function DeleteAccountModal({
         }}
       >
         <Typography variant="h6" gutterBottom>
-          Jeste li sigurni da želite obrisati korisnički račun?
+          {modalText}
         </Typography>
         <Box
           sx={{
@@ -50,7 +54,7 @@ export default function DeleteAccountModal({
             Otkaži
           </Button>
           <Button variant="contained" onClick={onConfirmDelete} color="error">
-            Obriši korisnički račun
+            {confirmButtonText}
           </Button>
         </Box>
         <IconButton

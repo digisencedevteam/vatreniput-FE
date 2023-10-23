@@ -8,6 +8,7 @@ import DashboardLayout from 'src/layouts/dashboard';
 import { LoadingScreen } from 'src/components/loading-screen';
 import ProfileView from 'src/sections/profile/view';
 import ManageQuiz from 'src/sections/manageQuiz/view';
+import ManageVoting from 'src/sections/manageVoting/view';
 
 const IndexPage = lazy(() => import('src/pages/dashboard/one'));
 const PageTwo = lazy(() => import('src/pages/dashboard/collections'));
@@ -18,9 +19,8 @@ const PageSix = lazy(() => import('src/pages/dashboard/six'));
 const PageSeven = lazy(() => import('src/pages/dashboard/seven'));
 const PageEight = lazy(() => import('src/pages/dashboard/eight'));
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
-const QuizResults = lazy(
-  () => import('src/sections/quiz-results/view')
-);
+const VotingPage = lazy(() => import('src/sections/voting/index'));
+const QuizResults = lazy(() => import('src/sections/quiz-results/view'));
 
 export const dashboardRoutes = [
   {
@@ -42,8 +42,11 @@ export const dashboardRoutes = [
       { path: 'five', element: <PageFive /> },
       { path: 'profile', element: <ProfileView /> },
       { path: 'quiz/:quizId', element: <QuizPage /> },
+      { path: 'voting/:votingId', element: <VotingPage /> },
       { path: 'createQuiz', element: <ManageQuiz /> },
       { path: 'editQuiz/:quizId', element: <ManageQuiz /> },
+      { path: 'editVoting/:votingId', element: <ManageVoting /> },
+      { path: 'createVoting', element: <ManageVoting /> },
 
       {
         path: 'group',

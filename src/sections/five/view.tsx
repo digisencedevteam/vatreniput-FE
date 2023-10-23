@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Button, Grid, useMediaQuery } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { green, yellow } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import VotingOverview from 'src/components/voting-overview/voting-overview';
@@ -12,11 +12,18 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import { EmojiEvents, SportsSoccer } from '@mui/icons-material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
+import useVoting from 'src/hooks/use-voting-data';
+import { LoadingScreen } from 'src/components/loading-screen';
+import { useResponsive } from 'src/hooks/use-responsive';
+import { useContext } from 'react';
+import { AuthContext } from 'src/auth/context/jwt';
+import { Link } from 'react-router-dom';
+import CustomCard from 'src/components/custom-card/custom-card';
 
 export default function FiveView() {
   const settings = useSettingsContext();
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
 
   //TODO: implement data from API and remove dummy
   const dummyData = [
@@ -33,18 +40,35 @@ export default function FiveView() {
     { label: 'Mateo Kovacic', value: 40, totalAmount: 4000 },
     { label: 'Davor Suker', value: 20, totalAmount: 2000 }
   ];
+  const isDesktop = useResponsive('up', 'md');
+  const isMobile = useResponsive('down', 'md');
+  const { votings, isLoading } = useVoting();
+  const auth = useContext(AuthContext);
+  const isAdmin = auth.user && auth.user.email === "antonio@test.com";
 
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
+
+  if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h2" color={theme.palette.primary.main}> Glasanja </Typography>
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h2" color={theme.palette.primary.main}>Glasanja</Typography>
 
+        {isAdmin && (
+          <Button variant="contained" color="primary" component={Link}
+            to={'/dashboard/createVoting '}>
+            Novo glasanje
+          </Button>
+        )}
+      </Box>
       {!isMobile && (
         <Grid item xs={12} md={7}>
           <WelcomeComponent
             title={`Pozdrav 👋`}
             description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
-            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696246116/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao.jpg'} alt='Vesela' />}
+            img={<img src={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png'} alt='Vesela' />}
             action={
               <Button variant='contained' color='primary'>
                 Istraži
@@ -77,9 +101,14 @@ export default function FiveView() {
 
       <SectionWrapper title="Sva glasanja">
         <Grid container spacing={2}>
-          {dummyData.map((data, index) => (
+          {votings && votings.map((voting, index) => (
             <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-              <CustomCardSmall imgUrl={data.imgUrl} cardText={data.cardText} linkTo={data.linkTo} />
+              <CustomCard
+                isQuiz={true}
+                cardId={voting._id}
+                imgUrl={voting.thumbnail}
+                cardText={voting.title}
+                linkTo={`/voting/${voting._id}`} />
             </Grid>
           ))}
         </Grid>

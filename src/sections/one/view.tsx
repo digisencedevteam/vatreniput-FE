@@ -14,12 +14,15 @@ import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-b
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import useVoting from 'src/hooks/use-voting-data';
 
 export default function OneView() {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
+
+  const { votings } = useVoting();
 
   const imageSrc =
     theme.palette.mode === "dark"
@@ -61,13 +64,11 @@ export default function OneView() {
     fetchQuizzes
   } = useFetchQuizzes(1, 7);
 
-
   useEffect(() => {
     fetchCollectedStatistic();
     fetchDashboardStats();
     fetchQuizzes();
   }, []);
-
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -120,9 +121,14 @@ export default function OneView() {
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <ScrollableContainer >
-              <CustomCardSmall width='96%' height='100%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928447/rebic%CC%81_kopenhagen_1_2_d4fflt.jpg' cardText='Vatreni dribleri' linkTo='/dashboard/quiz' />
-              <CustomCardSmall width='96%' height='100%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926850/subas%CC%8Cic%CC%81_obrana_1_z9olsm.jpg' cardText='Vatreni golmani' linkTo='/dashboard/quiz' />
-              <CustomCardSmall width='96%' height='100%' imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg' cardText='Vatreni vezni' linkTo='/dashboard/quiz' />
+              {votings && votings.map((voting, index) => (
+                <CustomCardSmall
+                  key={index}
+                  width='96%' height='100%'
+                  imgUrl={voting.thumbnail}
+                  cardText={voting.title}
+                  linkTo={`/dashboard/voting/${voting._id}`} />
+              ))}
             </ScrollableContainer>
           </DashboardSectionWrapper>
         </Grid>
