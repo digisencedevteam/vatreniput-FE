@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from 'src/auth/context/jwt';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from '@mui/icons-material/Close';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import dayjs from "dayjs";
 import Label from "../label";

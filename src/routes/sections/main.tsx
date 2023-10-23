@@ -5,7 +5,8 @@ import ForgotPassword from 'src/pages/ForgotPassword';
 import ResetPassword from 'src/pages/ResetPassword';
 
 const Page404 = lazy(() => import('src/pages/404'));
-const Faq = lazy(() => import('src/pages/Faq'));
+const Faq = lazy(() => import('src/pages/Faq'))
+const QuizPage = lazy(() => import('src/sections/quiz/index'));
 
 export const mainRoutes = [
   {
@@ -17,7 +18,11 @@ export const mainRoutes = [
     children: [{ path: '404', element: <Page404 /> },
     { path: 'faq', element: <Faq /> },
     { path: 'forgot-password', element: <ForgotPassword /> },
-    { path: 'reset-password/:tokenId', element: <ResetPassword /> }
+    { path: 'reset-password/:tokenId', element: <ResetPassword /> },
+    {
+      path: 'quiz/:quizId',
+      element: <QuizPage />
+    },
     ],
   },
 ];

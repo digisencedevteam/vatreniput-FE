@@ -63,7 +63,6 @@ export const dashboardRoutes = [
           { element: <PageThree />, index: true },
           { path: 'three', element: <PageThree /> },
           { path: 'results', element: <QuizResults /> },
-
         ],
       },
     ],

@@ -26,7 +26,7 @@ export type Quiz = {
   createdAt?: string;
 };
 export type Answer = {
-  option: string;
+  option: string | null;
   correct: boolean;
 };
 

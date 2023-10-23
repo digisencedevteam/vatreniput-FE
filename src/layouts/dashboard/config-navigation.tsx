@@ -5,7 +5,6 @@ import { paths } from 'src/routes/paths';
 import HomeIcon from '@mui/icons-material/Home';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import QuizIcon from '@mui/icons-material/Quiz';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
@@ -56,7 +55,6 @@ export function useNavData() {
                 title: 'Rezultati',
                 path: paths.dashboard.quizGroup.results,
               },
-
             ],
           },
         ],
@@ -87,9 +85,6 @@ export function useNavData() {
           },
         ],
       },
-
-
-
     ],
     []
   );
