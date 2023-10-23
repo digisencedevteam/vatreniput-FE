@@ -1,4 +1,16 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Container, Typography, Select, MenuItem } from '@mui/material';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Box,
+    Container,
+    Typography,
+    Select,
+    MenuItem
+} from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useSettingsContext } from 'src/components/settings';
