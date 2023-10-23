@@ -39,7 +39,7 @@ const useVoting = (): UseVotingReturn => {
     setIsLoading(false);
   };
 
-  // Popraviti kada ce se raditi Update, treba popraviti instancu i dodati body koji ce se slati
+  // TODO: Popraviti kada ce se raditi Update, treba popraviti instancu i dodati body koji ce se slati
 
   const createVoting = async (voting: Partial<Voting>) => {
     try {

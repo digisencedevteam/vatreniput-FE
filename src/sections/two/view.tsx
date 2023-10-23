@@ -97,7 +97,6 @@ export default function CollectionView() {
       .then(() => {
         fetchCollectedStatistic();
       })
-      .then(() => { })
       .catch((error) => {
         console.error(error);
       });

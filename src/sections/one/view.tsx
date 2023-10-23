@@ -16,7 +16,6 @@ import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import useVoting from 'src/hooks/use-voting-data';
 
-
 export default function OneView() {
   const settings = useSettingsContext();
   const theme = useTheme();
