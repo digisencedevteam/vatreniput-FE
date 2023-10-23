@@ -38,9 +38,6 @@ export default function QuizResults() {
             })();
         }
     }, [selectedQuiz]);
-    {
-        console.log('jdklakfjsaasf', selectedQuiz);
-    }
 
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
