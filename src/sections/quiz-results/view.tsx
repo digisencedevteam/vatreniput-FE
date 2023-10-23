@@ -37,22 +37,19 @@ export default function QuizResults() {
         }
     }, [selectedQuiz]);
 
-    useEffect(() => {
-        if (allQuizzes && allQuizzes.length > 0) {
-            setSelectedQuiz(allQuizzes[allQuizzes.length - 1]._id);
-        }
-    }, [allQuizzes]);
-
     return (
         <Container maxWidth={settings.themeStretch ? false : 'xl'}>
             <Typography variant="h3" color={'primary'}>Rezultati Kviza</Typography>
-
             <Select
+                displayEmpty
                 value={selectedQuiz}
                 onChange={e => setSelectedQuiz(e.target.value as string)}
                 variant="outlined"
                 size="small"
             >
+                <MenuItem value="" disabled>
+                    Izaberi svoj kviz
+                </MenuItem>
                 {allQuizzes?.map(quiz => (
                     <MenuItem key={quiz._id} onClick={() => { setQuizName(quiz.title) }} value={quiz._id}>
                         {quiz.title}
@@ -61,8 +58,6 @@ export default function QuizResults() {
             </Select>
             <Typography variant="h3" color={'primary'}>{quizName}</Typography>
             <Box sx={{ mt: 2 }}>
-
-
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -74,15 +69,22 @@ export default function QuizResults() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {resultsById?.map((result: QuizResult) => (
-
-                                <TableRow key={result._id}>
-                                    <TableCell>{result.userId.username}</TableCell>
-                                    <TableCell>{result.score} %</TableCell>
-                                    <TableCell>{dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}</TableCell>
-                                    <TableCell>{result.duration}</TableCell>
+                            {selectedQuiz ? (
+                                resultsById?.map((result: QuizResult) => (
+                                    <TableRow key={result._id}>
+                                        <TableCell>{result.userId.username}</TableCell>
+                                        <TableCell>{result.score} %</TableCell>
+                                        <TableCell>{dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}</TableCell>
+                                        <TableCell>{result.duration}</TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={4} align="center">
+                                        Izaberi kviz da vidiš rezultate
+                                    </TableCell>
                                 </TableRow>
-                            ))}
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>

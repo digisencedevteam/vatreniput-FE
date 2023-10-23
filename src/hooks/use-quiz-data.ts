@@ -69,15 +69,8 @@ const useFetchQuizzes = (
     limit: number
   ) => {
     try {
-      const response = await axios.get(
-        `http://localhost:3001/quizzes/results`,
-        {
-          params: {
-            quizId,
-            page,
-            limit,
-          },
-        }
+      const response = await axiosInstance.get(
+        `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
       );
       setResultsById(response.data.quizResults || null);
     } catch (error) {
@@ -88,7 +81,7 @@ const useFetchQuizzes = (
   const deleteQuiz = async (quizId: string) => {
     setIsDeleting(true);
     try {
-      await axios.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
+      await axiosInstance.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
     } catch (error) {
     } finally {
       setIsDeleting(false);
