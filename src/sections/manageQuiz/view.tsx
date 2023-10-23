@@ -1,30 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import {
-  Button,
-  TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Typography,
-  Container,
-  Grid,
-  Box,
-  Divider,
-  Snackbar,
-  Alert,
-  IconButton,
-  Collapse,
+  Button, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel,
+  Radio, Typography, Container, Grid, Box, Divider, Snackbar, Alert, IconButton, Collapse
 } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useNavigate } from 'react-router-dom';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {
-  LocalizationProvider,
-  DateTimePicker,
-} from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { useParams } from 'react-router-dom';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs, { Dayjs } from 'dayjs';
@@ -32,9 +15,7 @@ import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Quiz, Question } from '../quiz/types';
 
 const ManageQuiz = () => {
-  const [numQuestions, setNumQuestions] = useState<number | null>(
-    null
-  );
+  const [numQuestions, setNumQuestions] = useState<number | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quiz, setQuiz] = useState<Partial<Quiz>>({});
   const settings = useSettingsContext();
@@ -42,22 +23,14 @@ const ManageQuiz = () => {
   const history = useNavigate();
   const auth = useContext(AuthContext);
   const [error, setError] = useState(false);
-  const [availableUntil, setAvailableUntil] = useState<
-    Date | Dayjs | null
-  >(null);
+  const [availableUntil, setAvailableUntil] = useState<Date | Dayjs | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(
-    null
-  );
-  const {
-    fetchUnresolvedQuizById,
-    unresolvedQuiz,
-    createOrUpdateQuiz,
-  } = useFetchQuizzes();
+  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
+  const { fetchUnresolvedQuizById, unresolvedQuiz, createOrUpdateQuiz } = useFetchQuizzes();
   const [showForm, setShowForm] = useState(true);
 
 
-    const { quizId } = useParams();
+  const { quizId } = useParams();
 
   useEffect(() => {
     if (quizId) {
@@ -72,7 +45,7 @@ const ManageQuiz = () => {
     }
     if (unresolvedQuiz) {
       setQuiz(unresolvedQuiz);
-      const dateToEdit = dayjs(unresolvedQuiz.availableUntil);
+      const dateToEdit = dayjs(unresolvedQuiz.availableUntil)
       if (unresolvedQuiz && unresolvedQuiz.questions) {
         setNumQuestions(unresolvedQuiz.questions.length);
       } else {
@@ -80,32 +53,25 @@ const ManageQuiz = () => {
       }
       setAvailableUntil(dateToEdit);
     }
+
   }, [auth, history, unresolvedQuiz]);
 
   const handleSubmit = async () => {
+
     const result = await createOrUpdateQuiz(quiz, quizId);
 
-                    <IconButton onClick={() => setShowForm(prev => !prev)}>
-                        {showForm ? <VisibilityOff color={quizId ? 'secondary' : 'primary'} /> : <Visibility color={quizId ? 'secondary' : 'primary'} />}
-                    </IconButton>
-                </Box>
-                <Divider />
-                {showForm && (
-                    <Collapse in={showForm}>
-                        <TextField sx={{ my: 1 }} value={quiz?.title || ''} label="Naslov Kviza" required fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
-                        <TextField sx={{ my: 1 }} value={quiz?.description || ''} label="Opis" fullWidth required onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
-                        <TextField sx={{ my: 1 }} value={quiz?.thumbnail || ''} label="Thumbnail URL" fullWidth required onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                                label="Available Until"
-                                value={availableUntil}
-                                disablePast
-                                onChange={(newValue) => {
+    if (result.success) {
+      setSubmitted(true);
+    } else {
+      setErrorSnackbar(result.error || "An unknown error occurred");
+    }
+  };
 
   const handleSetQuestions = (num: number) => {
     if (num > 0) {
       setError(false);
       setQuiz({
+
         questions: Array.from({ length: num }, () => ({
           text: '',
           options: [],
@@ -124,35 +90,17 @@ const ManageQuiz = () => {
     setQuiz({ ...quiz, questions: newQuestions });
   };
 
-  const handleQuestionChange = (
-    index: number,
-    key: keyof Question,
-    value: string | number | string[]
-  ) => {
+  const handleQuestionChange = (index: number, key: keyof Question, value: string | number | string[]) => {
     const newQuestions = [...(quiz.questions || [])];
     newQuestions[index] = { ...newQuestions[index], [key]: value };
     setQuiz({ ...quiz, questions: newQuestions });
   };
 
-                    <Divider />
-                    {currentQuestion.options.length === 0 ? (
-                        <Box my={1}>
-                            <TextField type="number" label="Broj ponudenih odgovora" required fullWidth onChange={(e) => setTempOptions(parseInt(e.target.value, 10))} />
-                            <Button variant='contained' color='secondary' sx={{ m: 1, mb: 2 }} onClick={() => handleSetOptionsForCurrentQuestion(tempOptions!)}>Postavi opcije</Button>
-                        </Box>
-                    ) : (
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} md={6}>
-                                <TextField label="Text pitanja" required fullWidth sx={{ p: 1 }} value={currentQuestion.text}
-                                    onChange={(e) => handleQuestionChange(currentQuestionIndex, 'text', e.target.value)} />
-                                <TextField label="Image URL (optional)" required fullWidth sx={{ p: 1 }} value={currentQuestion.image || ''}
-                                    onChange={(e) => handleQuestionChange(currentQuestionIndex, 'image', e.target.value)} />
-                                {currentQuestion.options.map((option, optIndex) => (
-                                    <Box key={optIndex} display="flex" alignItems="center" sx={{ p: 1 }}>
-                                        <TextField
-                                            label={`Opcija ${optIndex + 1}`}
-                                            fullWidth
-                                            value={option}
+  const handleAddOption = (index: number) => {
+    const newQuestions = [...(quiz.questions || [])];
+    newQuestions[index].options = [...newQuestions[index].options, ''];
+    setQuiz({ ...quiz, questions: newQuestions });
+  };
 
   const handleRemoveOption = (qIndex: number, optIndex: number) => {
     const newQuestions = [...(quiz.questions || [])];
@@ -170,32 +118,26 @@ const ManageQuiz = () => {
       },
     ];
     setQuiz({ ...quiz, questions: newQuestions });
-    setNumQuestions((prev) => (prev ? prev + 1 : 1));
+    setNumQuestions(prev => prev ? prev + 1 : 1);
   };
 
   const handleRemoveQuestion = (index: number) => {
     const newQuestions = [...(quiz.questions || [])];
     newQuestions.splice(index, 1);
     setQuiz({ ...quiz, questions: newQuestions });
-    setCurrentQuestionIndex((prev) =>
-      prev === newQuestions.length ? prev - 1 : prev
-    );
-    setNumQuestions((prev) => (prev ? prev - 1 : 0));
+    setCurrentQuestionIndex(prev => prev === newQuestions.length ? prev - 1 : prev);
+    setNumQuestions(prev => prev ? prev - 1 : 0);
   };
 
   if (!quiz.questions) {
     return (
-      <Container
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Typography variant="h3">
-          Koliko pitanja zelite u kvizu?
-        </Typography>
+      <Container sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <Typography variant='h3'>Koliko pitanja zelite u kvizu?</Typography>
         <TextField
           type="number"
           label="Broj pitanja"
@@ -203,127 +145,60 @@ const ManageQuiz = () => {
           error={error}
           helperText={error ? 'Molimo unesite broj pitanja' : ''}
           sx={{ width: '90%', my: 2 }}
-          onChange={(e) =>
-            setNumQuestions(parseInt(e.target.value, 10))
-          }
+          onChange={(e) => setNumQuestions(parseInt(e.target.value, 10))}
         />
         <Box>
-          <Button
-            variant="outlined"
-            onClick={() => handleSetQuestions(numQuestions!)}
-          >
-            Postavi pitanja
-          </Button>
+          <Button variant='outlined' onClick={() => handleSetQuestions(numQuestions!)}>Postavi pitanja</Button>
         </Box>
       </Container>
+
     );
   }
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const isFormValid = () => {
-    return (
-      quiz.title &&
-      quiz.description &&
-      quiz.questions?.every((q) => q.text && q.options.length > 0)
-    );
+    return quiz.title && quiz.description && quiz.questions?.every(q => q.text && q.options.length > 0);
   };
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Box>
-        <Typography variant="h4" textAlign={'center'} m={1}>
-          {' '}
-          {quizId ? 'Azuriraj' : 'Stvori novi'} kviz
-        </Typography>
-        <Box
-          display={'flex'}
-          flexDirection={'row'}
-          justifyContent={'space-between'}
-        >
-          <Typography variant="h4">O Kvizu</Typography>
+        <Typography variant='h4' textAlign={'center'} m={1}> {quizId ? "Azuriraj" : "Stvori novi"} kviz</Typography>
+        <Box display={'flex'} flexDirection={'row'} justifyContent={'space-between'}>
+          <Typography variant='h4'>O Kvizu</Typography>
 
-          <IconButton onClick={() => setShowForm((prev) => !prev)}>
-            {showForm ? (
-              <VisibilityOff
-                color={quizId ? 'secondary' : 'primary'}
-              />
-            ) : (
-              <Visibility color={quizId ? 'secondary' : 'primary'} />
-            )}
+          <IconButton onClick={() => setShowForm(prev => !prev)}>
+            {showForm ? <VisibilityOff color={quizId ? 'secondary' : 'primary'} /> : <Visibility color={quizId ? 'secondary' : 'primary'} />}
           </IconButton>
         </Box>
         <Divider />
         {showForm && (
           <Collapse in={showForm}>
-            <TextField
-              sx={{ my: 1 }}
-              value={quiz?.title || ''}
-              label="Naslov Kviza"
-              fullWidth
-              onChange={(e) =>
-                setQuiz({ ...quiz, title: e.target.value })
-              }
-            />
-            <TextField
-              sx={{ my: 1 }}
-              value={quiz?.description || ''}
-              label="Opis"
-              fullWidth
-              onChange={(e) =>
-                setQuiz({ ...quiz, description: e.target.value })
-              }
-            />
-            <TextField
-              sx={{ my: 1 }}
-              value={quiz?.thumbnail || ''}
-              label="Thumbnail URL"
-              fullWidth
-              onChange={(e) =>
-                setQuiz({ ...quiz, thumbnail: e.target.value })
-              }
-            />
+            <TextField sx={{ my: 1 }} value={quiz?.title || ''} label="Naslov Kviza" required fullWidth onChange={(e) => setQuiz({ ...quiz, title: e.target.value })} />
+            <TextField sx={{ my: 1 }} value={quiz?.description || ''} label="Opis" fullWidth required onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
+            <TextField sx={{ my: 1 }} value={quiz?.thumbnail || ''} label="Thumbnail URL" fullWidth required onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })} />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
                 label="Available Until"
                 value={availableUntil}
                 disablePast
                 onChange={(newValue) => {
-                  setQuiz((prevQuiz) => ({
-                    ...prevQuiz,
-                    availableUntil: newValue?.toISOString(),
-                  }));
+
+                  setQuiz(prevQuiz => ({ ...prevQuiz, availableUntil: newValue?.toISOString() }));
+
                 }}
               />
             </LocalizationProvider>
           </Collapse>
         )}
-        <Box>
-          <Box
-            display="flex"
-            flexDirection={'row'}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography variant="h5">
-              Pitanje {currentQuestionIndex + 1} /{' '}
-              {quiz.questions.length}
-            </Typography>
+        <Box >
+
+          <Box display="flex" flexDirection={'row'} justifyContent="space-between" alignItems="center">
+            <Typography variant='h5'>Pitanje {currentQuestionIndex + 1} / {quiz.questions.length}</Typography>
             <Box display="flex" alignItems="center">
-              <Button
-                color={quizId ? 'secondary' : 'primary'}
-                onClick={handleAddQuestion}
-              >
-                <Typography variant="h2">+</Typography>
-              </Button>
+              <Button color={quizId ? 'secondary' : 'primary'} onClick={handleAddQuestion}><Typography variant='h2'>+</Typography></Button>
               {quiz.questions.length > 1 && (
-                <Button
-                  color={quizId ? 'secondary' : 'primary'}
-                  onClick={() =>
-                    handleRemoveQuestion(currentQuestionIndex)
-                  }
-                >
-                  <Typography variant="h2">-</Typography>
-                </Button>
+                <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleRemoveQuestion(currentQuestionIndex)}><Typography variant='h2'>-</Typography></Button>
               )}
             </Box>
           </Box>
@@ -331,142 +206,51 @@ const ManageQuiz = () => {
           <Divider />
           {currentQuestion.options.length === 0 ? (
             <Box my={1}>
-              <TextField
-                type="number"
-                label="Broj ponudenih odgovora"
-                fullWidth
-                onChange={(e) =>
-                  setTempOptions(parseInt(e.target.value, 10))
-                }
-              />
-              <Button
-                variant="contained"
-                color="secondary"
-                sx={{ m: 1, mb: 2 }}
-                onClick={() =>
-                  handleSetOptionsForCurrentQuestion(tempOptions!)
-                }
-              >
-                Postavi opcije
-              </Button>
+              <TextField type="number" label="Broj ponudenih odgovora" required fullWidth onChange={(e) => setTempOptions(parseInt(e.target.value, 10))} />
+              <Button variant='contained' color='secondary' sx={{ m: 1, mb: 2 }} onClick={() => handleSetOptionsForCurrentQuestion(tempOptions!)}>Postavi opcije</Button>
             </Box>
           ) : (
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
-                <TextField
-                  label="Text pitanja"
-                  fullWidth
-                  sx={{ p: 1 }}
-                  value={currentQuestion.text}
-                  onChange={(e) =>
-                    handleQuestionChange(
-                      currentQuestionIndex,
-                      'text',
-                      e.target.value
-                    )
-                  }
-                />
-                <TextField
-                  label="Image URL (optional)"
-                  fullWidth
-                  sx={{ p: 1 }}
-                  value={currentQuestion.image || ''}
-                  onChange={(e) =>
-                    handleQuestionChange(
-                      currentQuestionIndex,
-                      'image',
-                      e.target.value
-                    )
-                  }
-                />
+                <TextField label="Text pitanja" required fullWidth sx={{ p: 1 }} value={currentQuestion.text}
+                  onChange={(e) => handleQuestionChange(currentQuestionIndex, 'text', e.target.value)} />
+                <TextField label="Image URL (optional)" required fullWidth sx={{ p: 1 }} value={currentQuestion.image || ''}
+                  onChange={(e) => handleQuestionChange(currentQuestionIndex, 'image', e.target.value)} />
                 {currentQuestion.options.map((option, optIndex) => (
-                  <Box
-                    key={optIndex}
-                    display="flex"
-                    alignItems="center"
-                    sx={{ p: 1 }}
-                  >
+                  <Box key={optIndex} display="flex" alignItems="center" sx={{ p: 1 }}>
                     <TextField
                       label={`Opcija ${optIndex + 1}`}
                       fullWidth
                       value={option}
+
                       onChange={(e) => {
-                        const newOptions = [
-                          ...currentQuestion.options,
-                        ];
+                        const newOptions = [...currentQuestion.options];
                         newOptions[optIndex] = e.target.value;
-                        handleQuestionChange(
-                          currentQuestionIndex,
-                          'options',
-                          newOptions
-                        );
+                        handleQuestionChange(currentQuestionIndex, 'options', newOptions);
                       }}
                     />
-                    <Button
-                      color={quizId ? 'secondary' : 'primary'}
-                      onClick={() =>
-                        handleAddOption(currentQuestionIndex)
-                      }
-                    >
-                      <Typography variant="h2">+</Typography>
-                    </Button>
+                    <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleAddOption(currentQuestionIndex)}><Typography variant='h2'>+</Typography></Button>
                     {currentQuestion.options.length > 1 && (
-                      <Button
-                        color={quizId ? 'secondary' : 'primary'}
-                        onClick={() =>
-                          handleRemoveOption(
-                            currentQuestionIndex,
-                            optIndex
-                          )
-                        }
-                      >
-                        <Typography variant="h2">-</Typography>
-                      </Button>
+                      <Button color={quizId ? 'secondary' : 'primary'} onClick={() => handleRemoveOption(currentQuestionIndex, optIndex)}><Typography variant='h2'>-</Typography></Button>
                     )}
                   </Box>
                 ))}
+
               </Grid>
               <Grid item xs={12} md={6}>
                 <FormControl component="fieldset" fullWidth>
-                  <FormLabel
-                    color={quizId ? 'secondary' : 'primary'}
-                    component="legend"
-                    sx={{ textAlign: 'center' }}
-                  >
-                    <Typography mt={2} mb={1} variant="h6">
-                      Tocan odgovor za ovo pitanje
-                    </Typography>
-                  </FormLabel>
-                  <Box
-                    display={{ xs: 'flex', md: 'flex' }}
-                    justifyContent="center"
-                  >
-                    <RadioGroup
-                      value={currentQuestion.correctOption}
-                      onChange={(e) =>
-                        handleQuestionChange(
-                          currentQuestionIndex,
-                          'correctOption',
-                          Number(e.target.value)
-                        )
-                      }
-                    >
+
+                  <FormLabel color={quizId ? 'secondary' : 'primary'} component="legend" sx={{ textAlign: 'center' }}><Typography mt={2} mb={1} variant='h6'>Tocan odgovor za ovo pitanje</Typography></FormLabel>
+                  <Box display={{ xs: 'flex', md: 'flex' }} justifyContent="center">
+                    <RadioGroup value={currentQuestion.correctOption}
+                      onChange={(e) => handleQuestionChange(currentQuestionIndex, 'correctOption', Number(e.target.value))}>
                       {currentQuestion.options.map((_, optIndex) => (
-                        <FormControlLabel
-                          key={optIndex}
-                          value={optIndex}
-                          control={
-                            <Radio
-                              sx={{
-                                '& .MuiSvgIcon-root': {
-                                  fontSize: 28,
-                                },
-                              }}
-                              color={quizId ? 'secondary' : 'primary'}
-                            />
-                          }
-                          label={`Opcija ${optIndex + 1}`}
-                        />
+                        <FormControlLabel key={optIndex} value={optIndex} control={<Radio sx={{
+                          '& .MuiSvgIcon-root': {
+                            fontSize: 28,
+                          },
+                        }} color={quizId ? 'secondary' : 'primary'} />}
+                          label={`Opcija ${optIndex + 1}`} />
                       ))}
                     </RadioGroup>
                   </Box>
@@ -475,44 +259,14 @@ const ManageQuiz = () => {
             </Grid>
           )}
         </Box>
-        <Box
-          display={{ xs: 'flex', md: 'block' }}
-          justifyContent="center"
-        >
-          <Button
-            variant="outlined"
-            sx={{ ml: 1 }}
-            disabled={currentQuestionIndex === 0}
-            onClick={() =>
-              setCurrentQuestionIndex((prev) => prev - 1)
-            }
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outlined"
-            sx={{ mx: 1 }}
-            disabled={currentQuestionIndex === numQuestions! - 1}
-            onClick={() =>
-              setCurrentQuestionIndex((prev) => prev + 1)
-            }
-          >
-            Next
-          </Button>
+        <Box display={{ xs: 'flex', md: 'block' }} justifyContent="center">
+          <Button variant='outlined' sx={{ ml: 1 }} disabled={currentQuestionIndex === 0} onClick={() => setCurrentQuestionIndex((prev) => prev - 1)}>Previous</Button>
+          <Button variant='outlined' sx={{ mx: 1 }} disabled={currentQuestionIndex === (numQuestions! - 1)} onClick={() => setCurrentQuestionIndex((prev) => prev + 1)}>Next</Button>
         </Box>
       </Box>
 
-      <Box
-        display={{ xs: 'flex', md: 'block' }}
-        justifyContent="center"
-      >
-        <Button
-          variant="contained"
-          color={quizId ? 'secondary' : 'primary'}
-          sx={{ m: 1, my: 2 }}
-          onClick={handleSubmit}
-          disabled={!isFormValid()}
-        >
+      <Box display={{ xs: 'flex', md: 'block' }} justifyContent="center">
+        <Button variant='contained' color={quizId ? 'secondary' : 'primary'} sx={{ m: 1, my: 2 }} onClick={handleSubmit} disabled={!isFormValid()}>
           {quizId ? 'Update Quiz' : 'Submit New Quiz'}
         </Button>
       </Box>
@@ -524,15 +278,8 @@ const ManageQuiz = () => {
         }}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert
-          onClose={() => {
-            setSubmitted(false);
-            history('/dashboard/three');
-          }}
-          severity="success"
-        >
-          Kviz uspjesno {quizId ? ' azuriran' : ' kreiran'}!🎉🎉🥳{' '}
-          <br /> Zatvori me da se vratis na kvizove
+        <Alert onClose={() => { setSubmitted(false); history("/dashboard/three"); }} severity="success">
+          Kviz uspjesno {quizId ? ' azuriran' : ' kreiran'}!🎉🎉🥳 <br /> Zatvori me da se vratis na kvizove
         </Alert>
       </Snackbar>
 
@@ -542,10 +289,7 @@ const ManageQuiz = () => {
         onClose={() => setErrorSnackbar(null)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert
-          onClose={() => setErrorSnackbar(null)}
-          severity="error"
-        >
+        <Alert onClose={() => setErrorSnackbar(null)} severity="error">
           {errorSnackbar}
         </Alert>
       </Snackbar>

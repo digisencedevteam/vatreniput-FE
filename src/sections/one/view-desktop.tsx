@@ -21,32 +21,32 @@ export const DesktopViewOne = () => {
   const settings = useSettingsContext();
 
 
-    const hardcodedData = [
-        { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
-        { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
-        { label: 'Srebrni San 2018', value: 20, totalAmount: 2000 },
-        { label: 'Put do finala', value: 40, totalAmount: 4000 },
-    ];
+  const hardcodedData = [
+    { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
+    { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
+    { label: 'Srebrni San 2018', value: 20, totalAmount: 2000 },
+    { label: 'Put do finala', value: 40, totalAmount: 4000 },
+  ];
 
-    const featuredAppsList = [
-        {
-            id: '1',
-            title: 'Vatreni Challange',
-            coverUrl: 'assets/images/mandzukicPerisic.jpg',
-            description: 'Novi Kviz je dostupan!!',
-        },
-        {
-            id: '2',
-            title: 'Najbolji golman',
-            coverUrl: 'assets/images/doha_medalje.png',
-            description: 'Novo Glasanje je dostupno!!',
-        },
-    ];
-    const { votings, fetchAllVotings, isLoading } = useVoting();
-    const voting = votings && votings[1]
+  const featuredAppsList = [
     {
-        console.log('voting', voting);
-    }
+      id: '1',
+      title: 'Vatreni Challange',
+      coverUrl: 'assets/images/mandzukicPerisic.jpg',
+      description: 'Novi Kviz je dostupan!!',
+    },
+    {
+      id: '2',
+      title: 'Najbolji golman',
+      coverUrl: 'assets/images/doha_medalje.png',
+      description: 'Novo Glasanje je dostupno!!',
+    },
+  ];
+  const { votings, fetchAllVotings, isLoading } = useVoting();
+  const voting = votings && votings[1]
+  {
+    console.log('voting', voting);
+  }
 
   const {
     isLoadingUnresolved,
@@ -165,84 +165,18 @@ export const DesktopViewOne = () => {
           }}
         >
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-            <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg' cardText='Najbolji igrač' cardId='123' />
+            {voting &&
+              <CustomCard
+                cardId={voting._id}
+                width='96%' height='100%'
+                imgUrl={voting.thumbnail}
+                cardText={voting.title}
+                linkTo={`/dashboard/voting/${voting._id}`} />
+            }
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
 
-                    }}
-                >
-                    <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
-                        <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' cardId='123' />
-                    </DashboardSectionWrapper>
-                </Grid>
-
-                <Grid
-                    item
-                    xs={6.9}
-                    sx={{
-                        borderRadius: 2,
-                        bgcolor: theme.palette.background.default,
-                        w: '100%',
-                        m: '4px',
-                    }}
-                >
-                    <DashboardSectionWrapper title='Ispunjenost prica' link='dashboard/five' >
-                        <VotingOverview data={hardcodedData} />
-                    </DashboardSectionWrapper>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
-                <Grid
-                    item
-                    xs={5.9}
-                    sx={{
-                        borderRadius: 2,
-                        bgcolor: theme.palette.background.neutral,
-                        m: '4px'
-                    }}
-                >
-                    <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
-                        <Grid container spacing={2}>
-                            {
-                                !isLoadingUnresolved && unresolvedQuizzes?.map((quiz, index) => (
-                                    <Grid item md={6} key={quiz._id} maxWidth={'260px'}>
-                                        <CustomCardSmall
-                                            imgUrl={quiz.thumbnail}
-                                            width='100%'
-                                            cardText={quiz.title}
-                                            linkTo={`/dashboard/quiz/${quiz._id}`}
-                                        />
-                                    </Grid>
-                                ))
-                            }
-                        </Grid>
-                    </DashboardSectionWrapper>
-                </Grid>
-                <Grid
-                    item
-                    md={5.9}
-                    sx={{
-                        borderRadius: 2,
-                        bgcolor: theme.palette.background.neutral,
-                        w: '100%',
-                        m: '4px'
-                    }}
-                >
-                    <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-                        {voting &&
-                            <CustomCard
-                                cardId={voting._id}
-                                width='96%' height='100%'
-                                imgUrl={voting.thumbnail}
-                                cardText={voting.title}
-                                linkTo={`/dashboard/voting/${voting._id}`} />
-                        }
-                    </DashboardSectionWrapper>
-                </Grid>
-            </Grid>
-
-        </Container>
-    );
+    </Container>
+  );
 }

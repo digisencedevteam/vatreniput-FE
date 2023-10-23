@@ -45,7 +45,7 @@ export default function FiveView() {
   const { votings, fetchAllVotings, isLoading } = useVoting();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.email === "antonio@test.com";
-  { console.log('ovo su votingsi', votings); }
+
 
   if (isLoading) {
     return <LoadingScreen />;
