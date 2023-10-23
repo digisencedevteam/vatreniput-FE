@@ -1,14 +1,12 @@
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Box, Container, Typography, Select, MenuItem } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Container, Typography, Select, MenuItem } from '@mui/material';
 import dayjs from 'dayjs';
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from 'src/auth/context/jwt';
+import { useEffect, useState } from 'react';
 import { useSettingsContext } from 'src/components/settings';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { QuizResult } from 'src/types';
 
 export default function QuizResults() {
     const settings = useSettingsContext();
-    const auth = useContext(AuthContext);
     const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById } = useFetchQuizzes();
     const [selectedQuiz, setSelectedQuiz] = useState('');
     const [quizName, setQuizName] = useState('');

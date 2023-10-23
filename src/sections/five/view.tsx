@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Button, Grid, useMediaQuery } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { green, yellow } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import VotingOverview from 'src/components/voting-overview/voting-overview';
@@ -42,7 +42,7 @@ export default function FiveView() {
   ];
   const isDesktop = useResponsive('up', 'md');
   const isMobile = useResponsive('down', 'md');
-  const { votings, fetchAllVotings, isLoading } = useVoting();
+  const { votings, isLoading } = useVoting();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.email === "antonio@test.com";
 

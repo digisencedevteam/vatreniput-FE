@@ -42,11 +42,8 @@ export const DesktopViewOne = () => {
       description: 'Novo Glasanje je dostupno!!',
     },
   ];
-  const { votings, fetchAllVotings, isLoading } = useVoting();
-  const voting = votings && votings[1]
-  {
-    console.log('voting', voting);
-  }
+  const { votings } = useVoting();
+  const voting = votings && votings[1];
 
   const {
     isLoadingUnresolved,

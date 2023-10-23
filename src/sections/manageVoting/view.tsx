@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import {
-    Button, TextField, Typography, Container, Box, Divider, Snackbar, Alert, IconButton, Collapse
+    Button, TextField, Typography, Container, Box, Divider
 } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { useParams } from 'react-router-dom';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 
 interface Voting {
@@ -24,8 +24,6 @@ const ManageVoting = () => {
     const settings = useSettingsContext();
     const history = useNavigate();
     const auth = useContext(AuthContext);
-    const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
-    const [showForm, setShowForm] = useState(true);
     const { votingId } = useParams();
     const isAdmin = auth.user && auth.user.email === "antonio@test.com";
 
@@ -33,7 +31,7 @@ const ManageVoting = () => {
     //if it exits fill the form with the data of that voting so we can update it, 
     // if votingId does not exits it is a form to create a new voting.
 
-    if (isAdmin) {
+    if (!isAdmin) {
         history('/');
     }
 

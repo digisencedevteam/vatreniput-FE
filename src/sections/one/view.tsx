@@ -15,7 +15,7 @@ import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import useVoting from 'src/hooks/use-voting-data';
-import { LoadingScreen } from 'src/components/loading-screen';
+
 
 export default function OneView() {
   const settings = useSettingsContext();
@@ -23,8 +23,8 @@ export default function OneView() {
   const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
   const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(null)
 
-  const { votings, fetchAllVotings, isLoading } = useVoting();
-  { console.log('ovo su votingsi', votings); }
+  const { votings } = useVoting();
+
 
 
 

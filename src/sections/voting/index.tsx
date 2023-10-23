@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { useParams } from 'react-router-dom';
-import { useAuthContext } from 'src/auth/hooks';
+
 
 const VotingApp = () => {
 
@@ -10,7 +9,6 @@ const VotingApp = () => {
 
     const { votingId } = useParams();
 
-    const currentUser = useAuthContext();
 
 
     return (
