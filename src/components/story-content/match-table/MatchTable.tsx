@@ -1,30 +1,12 @@
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
-import { useEffect, useState } from 'react';
-import { MatchTableProps } from 'src/types';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
+import { MatchTableProps, Team } from 'src/types';
 
 
 function MatchTable({ data }: MatchTableProps) {
 
     const theme = useTheme();
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const tableMaxWidth = windowWidth * 0.9;
     return (
-
-
-        <TableContainer component={Paper} sx={{ maxWidth: tableMaxWidth, mt: 1.5, bgcolor: theme.palette.background.paper }} >
+        <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: theme.palette.background.paper, boxShadow: theme => theme.customShadows.z8, }} >
             <Table>
                 <TableHead>
                     <TableRow sx={{ bgcolor: 'white' }}>
@@ -37,7 +19,7 @@ function MatchTable({ data }: MatchTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.Teams.map((team: any, index: number) => (
+                    {data.map((team: Team, index: number) => (
                         <TableRow
                             key={team.TeamName}
                             sx={team.TeamName === 'Hrvatska' ? { bgcolor: theme.palette.error.darker } : {}}

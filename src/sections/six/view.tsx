@@ -12,23 +12,12 @@ export default function SixView() {
 
   const currentStory = STORIES.find(story => story.storyId === Number(storyId));
   return (
-    <Container maxWidth="xl">
-      <Box mt={5} display="flex" flexDirection="column" alignItems="center">
-
-        <Typography variant="h4" gutterBottom pb={4}>
-          🔥 Vatrene price 🔥
-        </Typography>
-
-
+    <Container maxWidth='xl'>
+      <Box mt={3} display="flex" flexDirection="column" alignItems="center">
         <Timeline
           stories={STORIES}
         />
-
         {currentStory && <StoryContent story={currentStory.story} />}
-
-
-
-
       </Box>
     </Container>
   );

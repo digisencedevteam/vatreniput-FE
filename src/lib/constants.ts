@@ -274,32 +274,37 @@ export const STORIES = [
                 { Player: 'Pivarić', Result: '-' },
                 { Player: 'Rakitić', Result: '+' },
               ],
+            },
 
-              QuarterFinal: {
-                Match: 'RUSIJA – HRVATSKA',
-                Score: '2 : 2',
-                GoalScorers: ['Kramarić 39`', 'Vida 101`'],
-                Penalties: '3 : 4',
-                PenaltyShootout: [
-                  { Player: 'Brozović', Result: '+' },
-                  { Player: 'Kovačić', Result: '-' },
-                  { Player: 'Modrić', Result: '+' },
-                  { Player: 'Vida', Result: '+' },
-                  { Player: 'Rakitić', Result: '+' },
-                ],
-              },
-              SemiFinal: {
-                Match: 'HRVATSKA – ENGLESKA',
-                Score: '2 : 1',
-                GoalScorers: ['Perišić 68`', 'Mandžukić 109`'],
-              },
-              Final: {
-                Match: 'FRANCUSKA – HRVATSKA',
-                Score: '4 : 2',
-                GoalScorers: ['Perišić 28`', 'Mandžukić 69`'],
-              },
+            QuarterFinal: {
+              Match: 'RUSIJA – HRVATSKA',
+              Score: '2 : 2',
+              GoalScorers: ['Kramarić 39`', 'Vida 101`'],
+              Penalties: '3 : 4',
+              PenaltyShootout: [
+                { Player: 'Brozović', Result: '+' },
+                { Player: 'Kovačić', Result: '-' },
+                { Player: 'Modrić', Result: '+' },
+                { Player: 'Vida', Result: '+' },
+                { Player: 'Rakitić', Result: '+' },
+              ],
+            },
+            SemiFinal: {
+              Match: 'HRVATSKA – ENGLESKA',
+              Score: '2 : 1',
+              GoalScorers: ['Perišić 68`', 'Mandžukić 109`'],
+            },
+            Final: {
+              Match: 'FRANCUSKA – HRVATSKA',
+              Score: '4 : 2',
+              GoalScorers: ['Perišić 28`', 'Mandžukić 69`'],
             },
           },
+        },
+        Summary:
+          'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su. Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom',
+
+        Champ: {
           Winner: 'FRANCUSKA',
           TopScorer: {
             Player: 'Harry Kane',
@@ -307,15 +312,239 @@ export const STORIES = [
             Goals: 6,
           },
         },
+      },
 
+      Highlights: [
+        {
+          Title: 'QR KOD - SP 2018 - Pogodak Luke Modrića protiv Argentine',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
+          Description:
+            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+        },
+        {
+          Title: 'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
+          Description:
+            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+        },
+        // Add other highlights here...
+      ],
+      Izbornik: {
+        Name: 'Zlatko Dalić',
+        DOB: '26. listopada 1966.',
+        CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
+        imgUrl:
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
+        StoryText:
+          'Najveći i najuspješniji izbornik u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni izbornik velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
+      },
+      Zanimljivosti: [
+        'Hrvatska je s prosječnom visinom igrača od 185,2 cm bila najviša reprezentacija na Svjetskom prvenstvu.',
+        'Prvi put u povijesti Hrvatska je u kvalifikacijama igrala protiv Kosova. U dvije utakmice zabilježene su dvije pobjede.',
+        'Najveći poraz u povijesti Hrvatske zabilježen je protiv Španjolske 2018. godine (6:0).',
+        'Hrvatska je postala druga reprezentacija u povijesti Svjetskog prvenstva koja je igrala tri produžetka na jednom turniru.',
+      ],
+    },
+  },
+  {
+    storyTitle: '2012',
+    storyId: 1,
+    story: {
+      storyTitle: 'WorldCup2018',
+      Qualifications: {
+        Description:
+          'Borba za put u Rusiju nije bila jednostavna, dapače. Kvalifikacije je Hrvatska počela dobro, ali porazi od Islanda i Turske, te remi s Finskom značili su odlazak Ante Čačića s izborničke klupe. Na njegovo mjesto došao je Zlatko Dalić. U tom trenutku počela je nova era reprezentacije Hrvatske - najljepša era. Hrvatska je odmah ostvarila ključnu pobjedu nad Ukrajinom, a zatim kroz dodatne kvalifikacije  prošla Grčku i "stigla" u Rusiju.',
+        Teams: [
+          {
+            TeamName: 'Island',
+            MatchesPlayed: 7,
+            Wins: 1,
+            Draws: 2,
+            Losses: 2,
+            Points: 5,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 6,
+            Wins: 2,
+            Draws: 2,
+            Losses: 2,
+            Points: 8,
+          },
+          {
+            TeamName: 'Ukraina',
+            MatchesPlayed: 5,
+            Wins: 2,
+            Draws: 3,
+            Losses: 1,
+            Points: 9,
+          },
+          {
+            TeamName: 'Turska',
+            MatchesPlayed: 4,
+            Wins: 3,
+            Draws: 3,
+            Losses: 1,
+            Points: 12,
+          },
+          {
+            TeamName: 'Finska',
+            MatchesPlayed: 2,
+            Wins: 3,
+            Draws: 5,
+            Losses: 9,
+            Points: 14,
+          },
+          {
+            TeamName: 'Kosovo',
+            MatchesPlayed: 0,
+            Wins: 1,
+            Draws: 9,
+            Losses: 1,
+            Points: 12,
+          },
+        ],
+      },
+      AdditionalQualifications: {
+        FirstMatch: {
+          Teams: 'HRVATSKA - GRČKA',
+          Score: '4 : 1',
+          Scorers: [
+            "Modrić 13' (pen.)",
+            "N. Kalinić 19'",
+            "Perišić  33'",
+            'Kramarić 49`',
+          ],
+        },
+        SecondMatch: {
+          Teams: 'GRČKA – HRVATSKA',
+          Score: '0 : 0',
+        },
+      },
+
+      Prvenstvo: {
+        Skupina: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 3,
+            Draws: 0,
+            Losses: 0,
+            Points: 9,
+          },
+          {
+            TeamName: 'Argentina',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'Nigerija',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 0,
+            Losses: 2,
+            Points: 3,
+          },
+          {
+            TeamName: 'Island',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 1,
+            Losses: 2,
+            Points: 1,
+          },
+        ],
+
+        Matches: {
+          GroupStage: [
+            {
+              Round: '1. kolo',
+              Match: 'HRVATSKA – NIGERIJA',
+              Score: '2 : 0',
+              GoalScorers: ['Etebo 32` (a.g.)', 'Modrić 71` pen'],
+            },
+            {
+              Round: '2. kolo',
+              Match: 'ARGENTINA – HRVATSKA',
+              Score: '0 : 3',
+              GoalScorers: ['Rebić 53`', 'Modrić 80`', 'Rakitić 90+1`'],
+            },
+            {
+              Round: '3. kolo',
+              Match: 'ISLAND – HRVATSKA',
+              Score: '1 : 2',
+              GoalScorers: ['Badelj 53`', 'Perišić 90`'],
+            },
+          ],
+          Finals: {
+            RoundOf16: {
+              Match: 'HRVATSKA – DANSKA',
+              Score: '1 : 1',
+              GoalScorers: ['Mandžukić 4`'],
+              Penalties: '3 : 2',
+              PenaltyShootout: [
+                { Player: 'Badelj', Result: '-' },
+                { Player: 'Kramarić', Result: '+' },
+                { Player: 'Modrić', Result: '+' },
+                { Player: 'Pivarić', Result: '-' },
+                { Player: 'Rakitić', Result: '+' },
+              ],
+            },
+
+            QuarterFinal: {
+              Match: 'RUSIJA – HRVATSKA',
+              Score: '2 : 2',
+              GoalScorers: ['Kramarić 39`', 'Vida 101`'],
+              Penalties: '3 : 4',
+              PenaltyShootout: [
+                { Player: 'Brozović', Result: '+' },
+                { Player: 'Kovačić', Result: '-' },
+                { Player: 'Modrić', Result: '+' },
+                { Player: 'Vida', Result: '+' },
+                { Player: 'Rakitić', Result: '+' },
+              ],
+            },
+            SemiFinal: {
+              Match: 'HRVATSKA – ENGLESKA',
+              Score: '2 : 1',
+              GoalScorers: ['Perišić 68`', 'Mandžukić 109`'],
+            },
+            Final: {
+              Match: 'FRANCUSKA – HRVATSKA',
+              Score: '4 : 2',
+              GoalScorers: ['Perišić 28`', 'Mandžukić 69`'],
+            },
+          },
+        },
         Summary:
           'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su. Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom',
+
+        Champ: {
+          Winner: 'FRANCUSKA',
+          TopScorer: {
+            Player: 'Harry Kane',
+            Team: 'Engleska',
+            Goals: 6,
+          },
+        },
       },
-      QrCode: {
-        Title: 'QR KOD - SP 2018 - Pogodak Luke Modrića protiv Argentine',
-        Description:
-          'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
-      },
+
+      Highlights: [
+        {
+          Title: 'QR KOD - SP 2018 - Pogodak Luke Modrića protiv Argentine',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928183/vida_pozdravlja_navijac%CC%8Ce_3_vx3a9w.jpg',
+          Description:
+            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+        },
+        // Add other highlights here...
+      ],
       Izbornik: {
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
@@ -331,12 +560,6 @@ export const STORIES = [
         'Hrvatska je postala druga reprezentacija u povijesti Svjetskog prvenstva koja je igrala tri produžetka na jednom turniru.',
       ],
     },
-  },
-
-  {
-    storyTitle: '2012',
-    storyId: 1,
-    story: {},
   },
   {
     storyTitle: '3',

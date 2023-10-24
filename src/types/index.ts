@@ -110,6 +110,31 @@ export type Team = {
 
 export type MatchTableProps = {
   data: {
-    Teams: Team[];
+    [x: string]: any;
+    TeamName: string;
+    Wins: number;
+    Losses: number;
+    Draws: number;
+    Points: number;
   };
+};
+
+export type PenaltyShootout = {
+  Player: string;
+  Result: string;
+};
+
+export type Match = {
+  Match: string;
+  Score: string;
+  GoalScorers: string[];
+  Penalties?: string;
+  PenaltyShootout?: PenaltyShootout[];
+};
+
+export type Finals = {
+  RoundOf16: Match;
+  QuarterFinal: Match;
+  SemiFinal: Match;
+  Final: Match;
 };
