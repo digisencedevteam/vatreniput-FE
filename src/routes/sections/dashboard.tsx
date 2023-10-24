@@ -47,15 +47,16 @@ export const dashboardRoutes = [
       { path: 'editQuiz/:quizId', element: <ManageQuiz /> },
       { path: 'editVoting/:votingId', element: <ManageVoting /> },
       { path: 'createVoting', element: <ManageVoting /> },
+      { path: 'story/:storyId', element: <PageSix /> },
 
-      {
-        path: 'group',
-        children: [
-          { element: <PageSix />, index: true },
-          { path: 'seven', element: <PageSeven /> },
-          { path: 'eight', element: <PageEight /> },
-        ],
-      },
+      // {
+      //   path: 'story',
+      //   children: [
+      //     { element: <PageSix />, index: true },
+      //     { path: '0', element: <PageSix /> },
+      //     { path: '1', element: <PageSix /> },
+      //   ],
+      // },
 
       {
         path: 'quizGroup',

@@ -29,11 +29,27 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
     };
 
     return (
-        <Box sx={{ display: 'flex', alignItems: 'center', overflowY: 'hidden' }}>
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            overflowY: 'hidden'
+        }}>
             <IconButton onClick={scrollLeft} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>
                 <ArrowBackIosIcon />
             </IconButton>
-            <Box ref={scrollContainerRef} sx={{ flex: 1, display: "flex", overflowX: "auto", whiteSpace: "nowrap", py: 1, scrollSnapType: 'x mandatory' }}>
+            <Box ref={scrollContainerRef} sx={{
+                flex: 1,
+                display: "flex",
+                overflowX: "auto",
+                whiteSpace: "nowrap",
+                py: 1,
+                scrollSnapType: 'x mandatory',
+                '&::-webkit-scrollbar': {
+                    display: 'none'
+                },
+                scrollbarWidth: 'none',
+                '-ms-overflow-style': 'none'
+            }}>
                 {children}
             </Box>
             <IconButton onClick={scrollRight} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>

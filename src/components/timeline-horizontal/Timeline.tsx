@@ -1,26 +1,40 @@
 
 import { Button, Typography, LinearProgress, Box, useTheme, useMediaQuery } from '@mui/material';
-import { Story } from 'src/types';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useParams, useRouter } from 'src/routes/hooks';
 
 interface TimelineProps {
-    stories: Story[];
-    currentStoryIndex: number;
-    handleNextStory: () => void;
-    handlePreviousStory: () => void;
+    stories: any;
 }
 
 const Timeline = ({
     stories,
-    currentStoryIndex,
-    handleNextStory,
-    handlePreviousStory
 }: TimelineProps) => {
+
+    const { storyId } = useParams();
+    const currentStoryIndex = stories.findIndex((stories: { storyId: number; }) => stories.storyId === Number(storyId));
+    const router = useRouter();
     const generateFillPositions = (length: number): number[] => {
         const sequence = [20, 50, 80];
         const numSequences = Math.ceil(length / sequence.length);
         return Array.from({ length: numSequences * sequence.length }, (_, i) => sequence[i % sequence.length]);
+    };
+
+    const nextStory = () => {
+        const nextIndex = currentStoryIndex + 1;
+        if (nextIndex < stories.length) {
+            router.push(`/dashboard/story/${stories[nextIndex].storyId}`);
+        }
+    };
+
+    const prevStory = () => {
+        const prevIndex = currentStoryIndex - 1;
+        if (prevIndex >= 0) {
+            router.push(`/dashboard/story/${stories[prevIndex].storyId}`);
+
+
+        }
     };
 
     const fillPositions = generateFillPositions(stories.length);
@@ -34,7 +48,7 @@ const Timeline = ({
             <Button
                 variant="contained"
                 color="primary"
-                onClick={handlePreviousStory}
+                onClick={prevStory}
                 disabled={currentStoryIndex === 0}
                 style={{
                     position: 'absolute',
@@ -61,7 +75,7 @@ const Timeline = ({
                     }}
                 />
             </Box>
-            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((story, index) => (
+            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((story: any, index: any) => (
                 <Typography
                     key={index}
                     variant="subtitle1"
@@ -73,10 +87,10 @@ const Timeline = ({
                         transform: 'translateX(-50%)',
                     }}
                 >
-                    {story.sections[0].storyTitle}
+                    {story.storyTitle}
                 </Typography>
             ))}
-            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((_, index) => (
+            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((_: any, index: any) => (
                 <Box
                     key={index}
                     style={{
@@ -109,7 +123,7 @@ const Timeline = ({
             <Button
                 variant="contained"
                 color="primary"
-                onClick={handleNextStory}
+                onClick={nextStory}
                 disabled={currentStoryIndex === stories.length - 1}
                 sx={{
                     position: 'absolute',

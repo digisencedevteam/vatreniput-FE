@@ -99,3 +99,17 @@ export interface QuizResult {
   dateTaken: string;
   __v: number;
 }
+
+export type Team = {
+  TeamName: string;
+  Wins: number;
+  Losses: number;
+  Draws: number;
+  Points: number;
+};
+
+export type MatchTableProps = {
+  data: {
+    Teams: Team[];
+  };
+};

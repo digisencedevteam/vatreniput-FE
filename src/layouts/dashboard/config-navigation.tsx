@@ -66,20 +66,20 @@ export function useNavData() {
         items: [
           {
             title: 'Moje otključane priče',
-            path: paths.dashboard.group.root,
+            path: paths.dashboard.story.root,
             icon: <AutoStoriesIcon />,
             children: [
               {
                 title: `Zlatna Generacija '98`,
-                path: paths.dashboard.group.root,
+                path: paths.dashboard.story.root,
               },
               {
                 title: 'Od Zadra do Madrida',
-                path: paths.dashboard.group.seven,
+                path: paths.dashboard.story.seven,
               },
               {
                 title: 'Srebrni San 2018',
-                path: paths.dashboard.group.eight,
+                path: paths.dashboard.story.eight,
               },
             ],
           },

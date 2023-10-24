@@ -24,10 +24,10 @@ export const paths = {
     three: `${ROOTS.DASHBOARD}/three`,
     four: `${ROOTS.DASHBOARD}/four`,
     five: `${ROOTS.DASHBOARD}/five`,
-    group: {
-      root: `${ROOTS.DASHBOARD}/group`,
-      seven: `${ROOTS.DASHBOARD}/group/seven`,
-      eight: `${ROOTS.DASHBOARD}/group/eight`,
+    story: {
+      root: `${ROOTS.DASHBOARD}/story/0`,
+      seven: `${ROOTS.DASHBOARD}/story/1`,
+      eight: `${ROOTS.DASHBOARD}/story/2`,
     },
     quizGroup: {
       root: `${ROOTS.DASHBOARD}/three`,

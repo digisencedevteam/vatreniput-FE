@@ -41,6 +41,7 @@ const GREY = {
 
 const BLUE = {
   main: '#030d25',
+  secondary: '#1A2339',
 };
 
 const PRIMARY = {
@@ -152,7 +153,7 @@ export function palette(mode: 'light' | 'dark') {
       disabled: GREY[600],
     },
     background: {
-      paper: GREY[800],
+      paper: BLUE.secondary,
       default: BLUE.main,
       neutral: alpha(GREY[500], 0.12),
       contast: '#FFF1FF',

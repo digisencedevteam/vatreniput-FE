@@ -1,37 +1,16 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import Timeline from 'src/components/timeline-horizontal/Timeline';
 import StoryContent from 'src/components/story-content/StoryContent';
-import { stories } from 'src/lib/constants';
-
-
+import Timeline from 'src/components/timeline-horizontal/Timeline';
+import { STORIES } from 'src/lib/constants';
+import { useParams } from 'src/routes/hooks';
 
 export default function SixView() {
-  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
 
-  const handleNextStory = () => {
-    setCurrentStoryIndex((prevIndex) => (prevIndex + 1) % stories.length);
-  };
-  const handlePreviousStory = () => {
-    if (currentStoryIndex > 0) {
-      setCurrentStoryIndex(prevIndex => prevIndex - 1);
-    }
-  };
+  let { storyId } = useParams();
 
-  const currentStory = stories[currentStoryIndex];
-  const generateFillPositions = (length: number): number[] => {
-    const sequence = [20, 50, 80];
-    const numSequences = Math.ceil(length / sequence.length);
-    return Array.from({ length: numSequences * sequence.length }, (_, i) => sequence[i % sequence.length]);
-  };
-
-
-  const fillPositions = generateFillPositions(stories.length);
-
-  const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
-
+  const currentStory = STORIES.find(story => story.storyId === Number(storyId));
   return (
     <Container maxWidth="xl">
       <Box mt={5} display="flex" flexDirection="column" alignItems="center">
@@ -40,14 +19,16 @@ export default function SixView() {
           🔥 Vatrene price 🔥
         </Typography>
 
+
         <Timeline
-          stories={stories}
-          currentStoryIndex={currentStoryIndex}
-          handleNextStory={handleNextStory}
-          handlePreviousStory={handlePreviousStory}
+          stories={STORIES}
         />
 
-        <StoryContent sections={currentStory.sections} />
+        {currentStory && <StoryContent story={currentStory.story} />}
+
+
+
+
       </Box>
     </Container>
   );
