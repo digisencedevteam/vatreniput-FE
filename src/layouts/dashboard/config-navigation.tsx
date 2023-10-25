@@ -25,12 +25,6 @@ export function useNavData() {
             path: paths.dashboard.two,
             icon: <CollectionsIcon />,
           },
-
-          // {
-          //   title: 'Sveti Dres',
-          //   path: paths.dashboard.four,
-          //   icon: <AutoAwesomeIcon />,
-          // },
           {
             title: 'Glasanje',
             path: paths.dashboard.five,

@@ -1,45 +1,34 @@
 import { Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Answer, Quiz } from './types';
+import { Quiz } from './types';
+import { useNavigate } from 'react-router-dom';
 
 interface EndQuizScreenProps {
-    quiz: Quiz;
-    answers: Answer[];
-    onQuizFinish: () => void;
-    elapsedTime: number;
+  quiz: Quiz | null;
+  score: number;
+  elapsedTime: number;
 }
 
-const EndQuizScreen = ({ quiz, answers, elapsedTime, onQuizFinish }: EndQuizScreenProps) => {
-
-    const correctAnswers = answers.filter((answer) => {
-        if (quiz) {
-            const question = quiz.questions?.[answers.indexOf(answer)];
-            return question && answer.correct;
-        }
-        return false;
-    });
-
-    const handleFinishQuiz = async () => {
-        if (typeof onQuizFinish === 'function') {
-            await onQuizFinish();
-        }
-    };
-    return (
-        <>
-            <Typography variant="h6">
-                {`Imate ${correctAnswers.length} točnih od ${quiz.questions!.length}`}
-            </Typography>
-            <Typography variant="caption">
-                {`Vrijeme: ${elapsedTime} sekundi`}
-            </Typography>
-            <Button component={Link}
-                to={'/dashboard/three'} variant="contained" color="primary" style={{ marginTop: '20px' }}
-                onClick={handleFinishQuiz}
-            >
-                Završi
-            </Button>
-        </>
-    );
+const EndQuizScreen = ({ quiz, score, elapsedTime }: EndQuizScreenProps) => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <Typography variant='h6'>{`Rezultat: ${Math.round(score)}%`}</Typography>
+      <Typography variant='caption'>
+        {`Vrijeme: ${elapsedTime} sekundi`}
+      </Typography>
+      <Button
+        component={Link}
+        to={'/dashboard/three'}
+        variant='contained'
+        color='primary'
+        style={{ marginTop: '20px' }}
+        onClick={() => navigate(-1)}
+      >
+        Završi
+      </Button>
+    </>
+  );
 };
 
 export default EndQuizScreen;

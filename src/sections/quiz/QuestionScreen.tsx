@@ -15,7 +15,8 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Question } from './types';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import ExitConfirmationModal from './exit-confirmation-dialog';
+import { formatTime } from 'src/utils/format-time';
+import DeleteModal from 'src/components/delete-modal/deleteModal';
 
 interface QuestionScreenProps {
   currentQuestion: Question;
@@ -26,9 +27,8 @@ interface QuestionScreenProps {
   handleAnswerSelection: (option: string) => void;
   handlePreviousQuestion: () => void;
   handleNextQuestion: () => void;
-  handleSubmitAnswers: () => void;
-  elapsedTime: number;
-  quizId: string
+  quizId: string;
+  startedTime: number;
 }
 
 const QuestionScreen = ({
@@ -40,32 +40,30 @@ const QuestionScreen = ({
   handleAnswerSelection,
   handlePreviousQuestion,
   handleNextQuestion,
-  quizId
+  quizId,
+  startedTime,
 }: QuestionScreenProps) => {
   const theme = useTheme();
-  const progress =
-    ((currentQuestionIndex + 1) / totalQuestions) * 100;
+  const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {
-    const storedStartTime = localStorage.getItem(`quizStartTime_${quizId}`);
-
-    if (storedStartTime) {
-      setQuizStartTime(parseInt(storedStartTime, 10));
+    if (startedTime) {
+      setQuizStartTime(startedTime);
     } else {
       const currentStartTime = Date.now();
       setQuizStartTime(currentStartTime);
-
-      localStorage.setItem(`quizStartTime_${quizId}`, currentStartTime.toString());
     }
-  }, [quizId]);
+  }, [quizId, startedTime]);
 
   useEffect(() => {
     if (quizStartTime) {
-      const initialElapsedTime = Math.floor((Date.now() - quizStartTime) / 1000);
+      const initialElapsedTime = Math.floor(
+        (Date.now() - quizStartTime) / 1000
+      );
       setElapsedTime(initialElapsedTime);
 
       const intervalId = setInterval(() => {
@@ -79,6 +77,21 @@ const QuestionScreen = ({
     }
   }, [quizStartTime]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const elapsedTime = calculateElapsedTime(startedTime);
+      setElapsedTime(elapsedTime);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [startedTime]);
+
+  const calculateElapsedTime = (startedTime: number) => {
+    const currentTime = new Date().getTime();
+    const elapsedTime = Math.floor((currentTime - startedTime) / 60000);
+    return elapsedTime;
+  };
+
   const handleModalClose = () => {
     setShowModal(false);
   };
@@ -88,35 +101,24 @@ const QuestionScreen = ({
     navigate('/dashboard/three');
   };
 
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
   return (
     <Grid
       container
       spacing={2}
-      direction="column"
+      direction='column'
       alignItems={'center'}
-      justifyContent="center"
+      justifyContent='center'
       m={0}
       maxWidth={'500px'}
     >
-      <Grid
-        container
-        direction="column"
-        alignItems="center"
-        spacing={1}
-      >
+      <Grid container direction='column' alignItems='center' spacing={1}>
         <Grid item width={'100%'} padding={0}>
-          <Grid container alignItems="center">
+          <Grid container alignItems='center'>
             <Grid item>
               <IconButton
-                edge="start"
-                color="primary"
-                aria-label="back to dashboard"
+                edge='start'
+                color='primary'
+                aria-label='back to dashboard'
                 onClick={(e: any) => {
                   e.preventDefault();
                   setShowModal(true);
@@ -126,13 +128,13 @@ const QuestionScreen = ({
               </IconButton>
             </Grid>
             <Grid item xs>
-              <Typography variant="h4">{title}</Typography>
+              <Typography variant='h4'>{title}</Typography>
             </Grid>
           </Grid>
         </Grid>
         <Grid item width={'100%'} m={1} padding={0}>
           <Typography
-            variant="h6"
+            variant='h6'
             style={{
               fontWeight: 'bold',
               marginTop: 10,
@@ -143,11 +145,11 @@ const QuestionScreen = ({
           </Typography>
         </Grid>
         <Grid item width={'100%'} m={1} padding={0}>
-          <Typography variant="h5">
+          <Typography variant='h5'>
             Pitanje {currentQuestionIndex + 1} / {totalQuestions}
           </Typography>
           <LinearProgress
-            variant="determinate"
+            variant='determinate'
             value={progress}
             sx={{ width: '97%' }}
           />
@@ -157,7 +159,7 @@ const QuestionScreen = ({
       <Grid
         container
         item
-        direction="column"
+        direction='column'
         justifyContent={'center'}
         alignItems={'center'}
         m={0}
@@ -168,7 +170,7 @@ const QuestionScreen = ({
         }}
       >
         <Grid item textAlign={'center'}>
-          <Typography variant="h6" style={{ fontWeight: 'bold' }}>
+          <Typography variant='h6' style={{ fontWeight: 'bold' }}>
             {currentQuestion.text}
           </Typography>
         </Grid>
@@ -176,14 +178,11 @@ const QuestionScreen = ({
           {currentQuestion.options.map((option) => (
             <Grid item key={option}>
               <Button
-                variant={
-                  selectedOption === option ? 'contained' : 'outlined'
-                }
-                color="primary"
+                variant={selectedOption === option ? 'contained' : 'outlined'}
+                color='primary'
                 sx={{
                   borderRadius: '6px',
-                  color:
-                    selectedOption === option ? 'white' : 'inherit',
+                  color: selectedOption === option ? 'white' : 'inherit',
                   width: '13rem',
                   textAlign: 'center',
                   margin: 1,
@@ -206,7 +205,7 @@ const QuestionScreen = ({
         <Grid item sx={{ marginTop: 2 }}>
           <img
             src={'/assets/images/kviz.png'}
-            alt="Question Illustration"
+            alt='Question Illustration'
             style={{
               width: '100%',
               maxHeight: '200px',
@@ -218,13 +217,13 @@ const QuestionScreen = ({
         <Grid
           container
           item
-          justifyContent="space-between"
+          justifyContent='space-between'
           style={{ width: '60%', margin: '20px' }}
         >
           <Hidden smDown>
             <Button
-              variant="outlined"
-              color="primary"
+              variant='outlined'
+              color='primary'
               onClick={handlePreviousQuestion}
             >
               Prošlo pitanje
@@ -232,8 +231,8 @@ const QuestionScreen = ({
           </Hidden>
           <Hidden smUp>
             <Button
-              variant="outlined"
-              color="primary"
+              variant='outlined'
+              color='primary'
               onClick={handlePreviousQuestion}
             >
               <ArrowBackIcon />
@@ -242,8 +241,8 @@ const QuestionScreen = ({
 
           <Hidden smDown>
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               onClick={handleNextQuestion}
             >
               Sljedeće pitanje
@@ -251,8 +250,8 @@ const QuestionScreen = ({
           </Hidden>
           <Hidden smUp>
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               onClick={handleNextQuestion}
             >
               <ArrowForwardIcon />
@@ -260,10 +259,12 @@ const QuestionScreen = ({
           </Hidden>
         </Grid>
       </Grid>
-      <ExitConfirmationModal
-        open={showModal}
+      <DeleteModal
+        isOpen={showModal}
         onClose={handleModalClose}
-        onConfirm={handleExitConfirmation}
+        onConfirmDelete={handleExitConfirmation}
+        modalText='Jeste li sigurni da želite izaći iz kviza? Vrijeme nastavlja teći iako izađeš!'
+        confirmButtonText='Izađi'
       />
     </Grid>
   );

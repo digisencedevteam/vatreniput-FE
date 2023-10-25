@@ -16,6 +16,8 @@ export type UnresolvedQuiz = {
 };
 
 export type Quiz = {
+  duration: number;
+  score: number;
   _id: string;
   title: string;
   description?: string;
@@ -24,7 +26,10 @@ export type Quiz = {
   isExpired?: boolean;
   availableUntil?: string;
   createdAt?: string;
+  status?: QuizStatus[] | any
+  isResolved?: boolean; 
 };
+
 export type Answer = {
   option: string | null;
   correct: boolean;
@@ -47,3 +52,10 @@ export type CustomCardProps = {
   onCardClick?: () => void;
   quizResults?: QuizResult;
 };
+
+export interface QuizStatus {
+  userId: string;
+  quizId: string;
+  status: string | null;
+  startTime: string;
+}
