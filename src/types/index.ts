@@ -163,3 +163,22 @@ export type Finals = {
   SemiFinal: Match;
   Final: Match;
 };
+
+export type ItemProps = {
+  label: LabelInfo;
+  totalAmount: number;
+  value: number;
+};
+
+export type QuizInfo = {
+  _id: string | Object;
+  title: string;
+  thumbnail: string;
+};
+
+export type LabelInfo = {
+  score: number;
+  duration: number;
+  dateTaken: string;
+  quiz: QuizInfo;
+};
