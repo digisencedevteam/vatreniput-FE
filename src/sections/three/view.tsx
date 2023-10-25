@@ -19,7 +19,7 @@ import QuizResultsModal, {
 } from 'src/components/quiz-results-modal/QuizResultsModal';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs from 'dayjs';
-import QuizBestOverview from 'src/components/quiz-results-modal/quiz-best-overview';
+import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-overview';
 
 export default function ThreeView() {
   const settings = useSettingsContext();

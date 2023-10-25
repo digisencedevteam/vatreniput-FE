@@ -178,12 +178,6 @@ export default function CollectionView() {
       </Grid>
       <div ref={myRef}>
         <Grid container spacing={1}>
-          {/* <Grid item xs={8}>
-          <SearchCollectionItemBar />
-        </Grid>
-        <Grid item xs={4}>
-          <FilterCollection />
-        </Grid> */}
           <Grid item xs={12} mt={3}>
             {currentCategory ? (
               <Box

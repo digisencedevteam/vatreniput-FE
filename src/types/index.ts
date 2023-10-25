@@ -101,7 +101,7 @@ export interface QuizResult {
 }
 
 export type QuizInfo = {
-  _id: string | {};
+  _id: string | Object;
   title: string;
   thumbnail: string;
 };

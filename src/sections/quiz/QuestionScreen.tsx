@@ -15,8 +15,8 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Question } from './types';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import ExitConfirmationModal from './exit-confirmation-dialog';
 import { formatTime } from 'src/utils/format-time';
+import DeleteModal from 'src/components/delete-modal/deleteModal';
 
 interface QuestionScreenProps {
   currentQuestion: Question;
@@ -259,10 +259,12 @@ const QuestionScreen = ({
           </Hidden>
         </Grid>
       </Grid>
-      <ExitConfirmationModal
-        open={showModal}
+      <DeleteModal
+        isOpen={showModal}
         onClose={handleModalClose}
-        onConfirm={handleExitConfirmation}
+        onConfirmDelete={handleExitConfirmation}
+        modalText='Jeste li sigurni da želite izaći iz kviza? Vrijeme nastavlja teći iako izađeš!'
+        confirmButtonText='Izađi'
       />
     </Grid>
   );

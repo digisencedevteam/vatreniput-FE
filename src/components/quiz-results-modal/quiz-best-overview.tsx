@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import Stack from '@mui/material/Stack';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
@@ -13,19 +12,13 @@ interface Props extends CardProps {
   data: ItemProps[] | any;
 }
 type ProgressItemProps = {
-  progress: any;
+  progress: ItemProps;
 };
 
-export default function QuizBestOverview({
-  title,
-  subheader,
-  data = [],
-  ...other
-}: Props) {
+export const QuizBestOverview = ({ title, subheader, data = [] }: Props) => {
   const theme = useTheme();
-  useEffect(() => {});
   return (
-    <Card {...other} sx={{ bgcolor: theme.palette.background.neutral }}>
+    <Card sx={{ bgcolor: theme.palette.background.neutral }}>
       <CardHeader title={title} subheader={subheader} />
       <Stack spacing={4} sx={{ px: 3, pt: 3, pb: 5 }}>
         {data.map((progress: ItemProps) => (
@@ -34,9 +27,9 @@ export default function QuizBestOverview({
       </Stack>
     </Card>
   );
-}
+};
 
-function ProgressItem({ progress }: ProgressItemProps) {
+const ProgressItem = ({ progress }: ProgressItemProps) => {
   return (
     <Stack spacing={1}>
       <Stack direction='row' alignItems='center'>
@@ -59,4 +52,4 @@ function ProgressItem({ progress }: ProgressItemProps) {
       )}
     </Stack>
   );
-}
+};
