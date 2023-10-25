@@ -99,3 +99,22 @@ export interface QuizResult {
   dateTaken: string;
   __v: number;
 }
+
+export type QuizInfo = {
+  _id: string | Object;
+  title: string;
+  thumbnail: string;
+};
+
+export type LabelInfo = {
+  score: number;
+  duration: number;
+  dateTaken: string;
+  quiz: QuizInfo;
+};
+
+export type ItemProps = {
+  label: LabelInfo;
+  totalAmount: number;
+  value: number;
+};

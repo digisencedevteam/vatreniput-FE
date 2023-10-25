@@ -1,28 +1,16 @@
-// @mui
 import { useTheme } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-// theme
 import { bgBlur } from 'src/theme/css';
-// hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
-// components
 import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
-//
 import { HEADER, NAV } from '../config-layout';
-import {
-  Searchbar,
-  AccountPopover,
-  SettingsButton,
-  NotificationsPopover,
-} from '../_common';
-
-// ----------------------------------------------------------------------
+import { Searchbar, AccountPopover, SettingsButton } from '../_common';
 
 type Props = {
   onOpenNav?: VoidFunction;
@@ -30,51 +18,34 @@ type Props = {
 
 export default function Header({ onOpenNav }: Props) {
   const theme = useTheme();
-
   const settings = useSettingsContext();
-
   const isNavHorizontal = settings.themeLayout === 'horizontal';
-
   const isNavMini = settings.themeLayout === 'mini';
-
   const lgUp = useResponsive('up', 'lg');
-
   const offset = useOffSetTop(HEADER.H_DESKTOP);
-
   const offsetTop = offset && !isNavHorizontal;
-
   const renderContent = (
     <>
       {lgUp && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
 
       {!lgUp && (
         <IconButton onClick={onOpenNav}>
-          <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
+          <SvgColor src='/assets/icons/navbar/ic_menu_item.svg' />
         </IconButton>
       )}
-
       <Searchbar />
-
       <Stack
         flexGrow={1}
-        direction="row"
-        alignItems="center"
-        justifyContent="flex-end"
+        direction='row'
+        alignItems='center'
+        justifyContent='flex-end'
         spacing={{ xs: 0.5, sm: 1 }}
       >
-        {/* <LanguagePopover /> */}
-
-        <NotificationsPopover />
-
-        {/* <ContactsPopover /> */}
-
         <SettingsButton />
-
         <AccountPopover />
       </Stack>
     </>
   );
-
   return (
     <AppBar
       sx={{
