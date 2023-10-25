@@ -20,7 +20,6 @@ export const DesktopViewOne = () => {
   const { collectedStatistic, collectedCards } = useCardData();
   const settings = useSettingsContext();
 
-
   const hardcodedData = [
     { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
     { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
@@ -45,21 +44,17 @@ export const DesktopViewOne = () => {
   const { votings } = useVoting();
   const voting = votings && votings[1];
 
-  const {
-    isLoadingUnresolved,
-    unresolvedQuizzes,
-    fetchQuizzes
-  } = useFetchQuizzes(1, 4);
+  const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
+    useFetchQuizzes(1, 4);
 
   useEffect(() => {
-    fetchQuizzes()
-
-  }, [])
-
+    fetchQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Grid container spacing={3} >
+      <Grid container spacing={3}>
         <Grid item xs={8}>
           <WelcomeComponent
             title={`Pozdrav 👋`}
@@ -76,12 +71,21 @@ export const DesktopViewOne = () => {
           <AppFeatured list={featuredAppsList} />
         </Grid>
       </Grid>
-      <Grid container spacing={3} >
-        <Grid item xs={8} md={7} >
+      <Grid container spacing={3}>
+        <Grid item xs={8} md={7}>
           <DashboardSectionWrapper title={'Kolekcija'} link='dashboard/two'>
             <ScrollableContainer>
               {collectedCards.map((item, index) => (
-                <Box key={index} sx={{ flex: '0 0 auto', width: '60%', maxWidth: '175px', height: '35vh', m: 1 }}>
+                <Box
+                  key={index}
+                  sx={{
+                    flex: '0 0 auto',
+                    width: '60%',
+                    maxWidth: '175px',
+                    height: '35vh',
+                    m: 1,
+                  }}
+                >
                   <CollectionStickerItem item={item} />
                 </Box>
               ))}
@@ -92,19 +96,29 @@ export const DesktopViewOne = () => {
           <StatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
       </Grid>
-      <Grid container spacing={3} sx={{ justifyContent: 'center', alignContent: 'center' }}>
+      <Grid
+        container
+        spacing={3}
+        sx={{ justifyContent: 'center', alignContent: 'center' }}
+      >
         <Grid
           item
           md={4.9}
           sx={{
             borderRadius: 2,
             bgcolor: theme.palette.background.neutral,
-            m: '4px'
-
+            m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Zadnje otkljucana prica' link='dashboard/five'>
-            <CustomCard imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg' cardText='Zlatna Generacija' cardId='123' />
+          <DashboardSectionWrapper
+            title='Zadnje otkljucana prica'
+            link='dashboard/five'
+          >
+            <CustomCard
+              imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg'
+              cardText='Zlatna Generacija'
+              cardId='123'
+            />
           </DashboardSectionWrapper>
         </Grid>
 
@@ -118,7 +132,10 @@ export const DesktopViewOne = () => {
             m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Ispunjenost prica' link='dashboard/five' >
+          <DashboardSectionWrapper
+            title='Ispunjenost prica'
+            link='dashboard/five'
+          >
             <VotingOverview data={hardcodedData} />
           </DashboardSectionWrapper>
         </Grid>
@@ -131,13 +148,13 @@ export const DesktopViewOne = () => {
           sx={{
             borderRadius: 2,
             bgcolor: theme.palette.background.neutral,
-            m: '4px'
+            m: '4px',
           }}
         >
           <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
             <Grid container spacing={2}>
-              {
-                !isLoadingUnresolved && unresolvedQuizzes?.map((quiz, index) => (
+              {!isLoadingUnresolved &&
+                unresolvedQuizzes?.map((quiz, index) => (
                   <Grid item md={6} key={quiz._id} maxWidth={'260px'}>
                     <CustomCardSmall
                       imgUrl={quiz.thumbnail}
@@ -146,8 +163,7 @@ export const DesktopViewOne = () => {
                       linkTo={`/dashboard/quiz/${quiz._id}`}
                     />
                   </Grid>
-                ))
-              }
+                ))}
             </Grid>
           </DashboardSectionWrapper>
         </Grid>
@@ -158,22 +174,23 @@ export const DesktopViewOne = () => {
             borderRadius: 2,
             bgcolor: theme.palette.background.neutral,
             w: '100%',
-            m: '4px'
+            m: '4px',
           }}
         >
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-            {voting &&
+            {voting && (
               <CustomCard
                 cardId={voting._id}
-                width='96%' height='100%'
+                width='96%'
+                height='100%'
                 imgUrl={voting.thumbnail}
                 cardText={voting.title}
-                linkTo={`/dashboard/voting/${voting._id}`} />
-            }
+                linkTo={`/dashboard/voting/${voting._id}`}
+              />
+            )}
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
-
     </Container>
   );
-}
+};

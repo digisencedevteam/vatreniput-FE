@@ -1,5 +1,4 @@
 import { m } from 'framer-motion';
-// @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -11,28 +10,22 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'src/routes/hooks';
 import { useAuthContext } from 'src/auth/hooks';
 import { varHover } from 'src/components/animate';
-import CustomPopover, {
-  usePopover,
-} from 'src/components/custom-popover';
-
-// ----------------------------------------------------------------------
+import CustomPopover, { usePopover } from 'src/components/custom-popover';
 
 const OPTIONS = [
   {
-    label: 'Home',
+    label: 'Početna',
     linkTo: '/',
   },
   {
-    label: 'Profile',
+    label: 'Profil',
     linkTo: '/dashboard/profile',
   },
   {
-    label: 'Settings',
+    label: 'Postavke',
     linkTo: '/#2',
   },
 ];
-
-// ----------------------------------------------------------------------
 
 export default function AccountPopover() {
   const router = useRouter();
@@ -62,8 +55,8 @@ export default function AccountPopover() {
     <>
       <IconButton
         component={m.button}
-        whileTap="tap"
-        whileHover="hover"
+        whileTap='tap'
+        whileHover='hover'
         variants={varHover(1.05)}
         onClick={popover.onOpen}
         sx={{
@@ -82,8 +75,7 @@ export default function AccountPopover() {
           sx={{
             width: 36,
             height: 36,
-            border: (theme) =>
-              `solid 2px ${theme.palette.background.default}`,
+            border: (theme) => `solid 2px ${theme.palette.background.default}`,
           }}
         />
       </IconButton>
@@ -94,15 +86,11 @@ export default function AccountPopover() {
         sx={{ width: 200, p: 0 }}
       >
         <Box sx={{ p: 2, pb: 1.5 }}>
-          <Typography variant="subtitle2" noWrap>
+          <Typography variant='subtitle2' noWrap>
             {user?.firstName} {user?.lastName}
           </Typography>
 
-          <Typography
-            variant="body2"
-            sx={{ color: 'text.secondary' }}
-            noWrap
-          >
+          <Typography variant='body2' sx={{ color: 'text.secondary' }} noWrap>
             {user?.email}
           </Typography>
         </Box>
@@ -130,7 +118,7 @@ export default function AccountPopover() {
             color: 'error.main',
           }}
         >
-          Logout
+          Odjava
         </MenuItem>
       </CustomPopover>
     </>

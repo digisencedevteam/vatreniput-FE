@@ -3,7 +3,6 @@ import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
-import { green, red } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import StatusCard from 'src/components/status-card/status-card';
@@ -15,9 +14,12 @@ import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { LoadingScreen } from 'src/components/loading-screen';
-import QuizResultsModal, { QuizResultsModalProps } from 'src/components/quiz-results-modal/QuizResultsModal';
+import QuizResultsModal, {
+  QuizResultsModalProps,
+} from 'src/components/quiz-results-modal/QuizResultsModal';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs from 'dayjs';
+import QuizBestOverview from 'src/components/quiz-results-modal/quiz-best-overview';
 
 export default function ThreeView() {
   const settings = useSettingsContext();
@@ -26,7 +28,8 @@ export default function ThreeView() {
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 5;
   const auth = useContext(AuthContext);
-  const [selectedQuizResult, setSelectedQuizResult] = useState<QuizResultsModalProps['quizResults']>();
+  const [selectedQuizResult, setSelectedQuizResult] =
+    useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     isLoadingResolved,
@@ -35,17 +38,15 @@ export default function ThreeView() {
     unresolvedQuizzes,
     deleteQuiz,
     isDeleting,
-    fetchQuizzes
+    fetchQuizzes,
   } = useFetchQuizzes(currentPage, itemsPerPage);
-
   const [rewardStatus, setRewardStatus] = useState<Record<string, boolean>>({});
-
-
+  const totalResolved = resolvedQuizzes ? resolvedQuizzes.length : 0;
+  const totalUnresolved = unresolvedQuizzes ? unresolvedQuizzes.length : 0;
   const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
-
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -62,6 +63,11 @@ export default function ThreeView() {
       setRewardStatus(newRewardStatus);
     }
   }, [unresolvedQuizzes]);
+  const _ecommerceSalesOverview = resolvedQuizzes?.map((quiz, index) => ({
+    label: quiz,
+    totalAmount: quiz.score,
+    value: quiz.duration,
+  }));
 
   useEffect(() => {
     fetchQuizzes();
@@ -69,14 +75,14 @@ export default function ThreeView() {
   }, [currentPage]);
 
   const formattedDateTaken = selectedQuizResult
-    ? new Date(selectedQuizResult.dateTaken).toLocaleString("en-GB", {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    })
-    : "";
+    ? new Date(selectedQuizResult.dateTaken).toLocaleString('en-GB', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+    : '';
 
   useEffect(() => {
     if (resolvedQuizzes) {
@@ -100,45 +106,109 @@ export default function ThreeView() {
         quizResults={selectedQuizResult}
         formattedDateTaken={formattedDateTaken}
       />
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h2" color={theme.palette.primary.main}>Kvizovi</Typography>
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+        sx={{ marginTop: 1 }}
+      >
+        <Typography
+          sx={{ margin: 1 }}
+          variant='h2'
+          color={theme.palette.primary.main}
+        >
+          Kvizovi
+        </Typography>
 
         {auth.user && auth.user.email === 'antonio@test.com' && (
-          <Button variant="contained" color="primary" component={Link}
-            to={'/dashboard/createQuiz '}>
-            Create Quiz
+          <Button
+            variant='contained'
+            color='primary'
+            component={Link}
+            to={'/dashboard/createQuiz '}
+          >
+            Kreiraj novi kviz
           </Button>
         )}
       </Box>
-
-      <SectionWrapper title="Riješeni Kvizovi">
+      <Grid item xs={12} md={6} lg={8} sx={{ marginTop: 5 }}>
+        <QuizBestOverview
+          title='Najnoviji rezultati'
+          data={_ecommerceSalesOverview}
+        />
+      </Grid>
+      <Box
+        borderRadius={2}
+        p={2}
+        sx={{
+          bgcolor: theme.palette.background.default,
+          [theme.breakpoints.up('md')]: {
+            bgcolor: theme.palette.background.neutral,
+          },
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <StatusCard
+          icon={
+            <CheckIcon
+              fontSize='large'
+              sx={{ display: { xs: 'none', sm: 'inline' } }}
+            />
+          }
+          number={totalResolved}
+          text='Riješenih!'
+        />
+        <StatusCard
+          icon={
+            <CloseIcon
+              fontSize='large'
+              sx={{ display: { xs: 'none', sm: 'inline' } }}
+            />
+          }
+          number={totalUnresolved}
+          text='Dostupnih!'
+        />
+      </Box>
+      <SectionWrapper title='Riješeni'>
         <ScrollableContainer>
-          {!!resolvedQuizzes?.length && !isLoadingResolved && (
+          {!!resolvedQuizzes?.length &&
+            !isLoadingResolved &&
             resolvedQuizzes.map((data: any, index) => (
-              <Box key={index} sx={{
-                flex: '0 0 auto', m: 0, width: '100%', maxWidth: '250px', transition: 'transform .2s',
-                "&:hover": {
-                  transform: 'scale(1.05)',
-                }
-              }}>
+              <Box
+                key={index}
+                sx={{
+                  flex: '0 0 auto',
+                  m: 0,
+                  width: '100%',
+                  maxWidth: '250px',
+                  transition: 'transform .2s',
+                  '&:hover': {
+                    transform: 'scale(1.05)',
+                  },
+                }}
+              >
                 <CustomCardSmall
-                  width='96%' height='100%'
+                  width='96%'
+                  height='100%'
                   imgUrl={data?.quiz?.thumbnail}
                   cardText={data?.quiz?.title}
                   onCardClick={() => openModal(data)}
                 />
               </Box>
-
-            ))
-          )}
+            ))}
           {!resolvedQuizzes?.length && !isLoadingResolved && (
-            <Typography variant="body1" align="center" color="textSecondary" m={5}>
+            <Typography
+              variant='body1'
+              align='center'
+              color='textSecondary'
+              m={5}
+            >
               Zasada nema riješenih kvizova!
             </Typography>
           )}
-          {isLoadingResolved && (
-            <LoadingScreen />
-          )}
+          {isLoadingResolved && <LoadingScreen />}
         </ScrollableContainer>
         {totalPages > 1 && (
           <PagingComponent
@@ -148,50 +218,62 @@ export default function ThreeView() {
           />
         )}
       </SectionWrapper>
-      <Box borderRadius={2} p={2} mt={2} sx={{
-        bgcolor: theme.palette.background.default,
-        [theme.breakpoints.up('md')]: {
-          bgcolor: theme.palette.background.neutral
-        },
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <StatusCard icon={<CheckIcon fontSize="large" sx={{ color: green[500], display: { xs: 'none', sm: 'inline' } }} />} number={21} text="Rjesen!" />
-        <StatusCard icon={<CloseIcon fontSize="large" sx={{ color: red[500], display: { xs: 'none', sm: 'inline' } }} />} number={25} text="Jos Cekaju!" />
-      </Box>
-      <SectionWrapper title="Preostali kvizovi">
+      <SectionWrapper title='Dostupni'>
         <Grid container spacing={2}>
-          {!!unresolvedQuizzes?.length && !isLoadingUnresolved && (
-
-            unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <Box sx={{
-                  transition: 'transform .2s',
-                  "&:hover": {
-                    transform: 'scale(1.05)',
-                  }
-                }}>
-                  <CustomCard isRewarded={rewardStatus} quizId={data._id} createdAt={data.createdAt} onDeleteQuiz={deleteQuiz} imgUrl={data.thumbnail} cardText={data.title!} cardId={data?._id} availableUntil={data.availableUntil} linkTo={`/dashboard/quiz/${data?._id}`} isQuiz={true} />
-                </Box>
-              </Grid>
-            ))
-          )}
+          {!!unresolvedQuizzes?.length &&
+            !isLoadingUnresolved &&
+            unresolvedQuizzes.map((data, index) => {
+              return (
+                <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                  <Box
+                    sx={{
+                      transition: 'transform .2s',
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                      },
+                    }}
+                  >
+                    <CustomCard
+                      quizId={data._id}
+                      onDeleteQuiz={deleteQuiz}
+                      imgUrl={data.thumbnail}
+                      cardText={data.title!}
+                      cardId={data?._id}
+                      availableUntil={data.availableUntil}
+                      linkTo={`/dashboard/editQuiz/${data?._id}`}
+                      isQuiz={true}
+                      status={
+                        data.status && data.status.length > 0
+                          ? data.status[0].status
+                          : undefined
+                      }
+                      startTime={
+                        data.status && data.status.length > 0
+                          ? data.status[0].startTime
+                          : undefined
+                      }
+                      isRewarded={rewardStatus}
+                    />
+                  </Box>
+                </Grid>
+              );
+            })}
 
           {!unresolvedQuizzes?.length && !isLoadingUnresolved && (
-            <Typography variant="body1" align="center" color="textSecondary" m={5}>
-              Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz.
+            <Typography
+              variant='body1'
+              align='center'
+              color='textSecondary'
+              m={5}
+            >
+              Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe
+              novi kviz.
             </Typography>
           )}
-          {isLoadingUnresolved && (
-            <LoadingScreen />
-          )}
-          {isDeleting && (
-            <LoadingScreen />
-          )}
+          {isLoadingUnresolved && <LoadingScreen />}
+          {isDeleting && <LoadingScreen />}
         </Grid>
       </SectionWrapper>
-
     </Container>
   );
 }

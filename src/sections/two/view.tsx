@@ -13,11 +13,7 @@ import Vesela from 'src/assets/illustrations/vesela3.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
-import {
-  CollectedStatistic,
-  CollectionCard,
-  CollectionEvent,
-} from 'src/types';
+import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
@@ -27,19 +23,18 @@ export default function CollectionView() {
   const theme = useTheme();
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [collectedCards, setCollectedCards] = useState<
-    CollectionCard[]
-  >([]);
+  const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [categories, setCategories] = useState<CollectionEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
-  const isMobile = useMediaQuery((theme: any) =>
-    theme.breakpoints.down('md')
-  );
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
   const itemsPerPage = 9;
   const [collectedStatistic, setCollectedStatistic] =
     useState<CollectedStatistic | null>(null);
+  const myRef = React.useRef<HTMLDivElement>(null);
+  const [isFirstVisit, setIsFirstVisit] = useState(true);
 
   const fetchCategories = async () => {
     try {
@@ -70,11 +65,10 @@ export default function CollectionView() {
         }
       }
       if (response) {
-        const totalPages = Math.ceil(
-          response.data.totalCount / itemsPerPage
-        );
+        const totalPages = Math.ceil(response.data.totalCount / itemsPerPage);
         setTotalPages(totalPages);
         setCollectedCards(response.data.cards);
+        setIsDataLoaded(true);
       }
     } catch (error) {
       console.error(error);
@@ -106,7 +100,20 @@ export default function CollectionView() {
     if (categories.length > 0) {
       fetchCollectedCards();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, categoryIndex, categories]);
+
+  useEffect(() => {
+    if (myRef.current && isDataLoaded) {
+      if (!isFirstVisit) {
+        myRef.current.scrollIntoView();
+      } else {
+        setIsFirstVisit(false);
+      }
+      setIsDataLoaded(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryIndex, isDataLoaded]);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -118,13 +125,10 @@ export default function CollectionView() {
       setCurrentPage(1);
       if (direction === 'left') {
         setCategoryIndex(
-          (prevIndex) =>
-            (prevIndex - 1 + categories.length) % categories.length
+          (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
         );
       } else if (direction === 'right') {
-        setCategoryIndex(
-          (prevIndex) => (prevIndex + 1) % categories.length
-        );
+        setCategoryIndex((prevIndex) => (prevIndex + 1) % categories.length);
       }
     }
   };
@@ -140,7 +144,7 @@ export default function CollectionView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography
         color={theme.palette.primary.main}
-        variant="h2"
+        variant='h2'
         sx={{ paddingY: 5 }}
       >
         Kolekcija
@@ -151,10 +155,10 @@ export default function CollectionView() {
           <Grid item xs={12} md={7}>
             <WelcomeComponent
               title={`Pozdrav 👋`}
-              description="Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!"
-              img={<img src={Vesela} alt="Vesela" />}
+              description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+              img={<img src={Vesela} alt='Vesela' />}
               action={
-                <Button variant="contained" color="primary">
+                <Button variant='contained' color='primary'>
                   Istraži
                 </Button>
               }
@@ -172,58 +176,55 @@ export default function CollectionView() {
           )}
         </Grid>
       </Grid>
-
-      <Grid container spacing={1}>
-        {/* <Grid item xs={8}>
+      <div ref={myRef}>
+        <Grid container spacing={1}>
+          {/* <Grid item xs={8}>
           <SearchCollectionItemBar />
         </Grid>
         <Grid item xs={4}>
           <FilterCollection />
         </Grid> */}
-        <Grid item xs={12} mt={3}>
-          {currentCategory ? (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <IconButton
-                color="primary"
-                onClick={() => handleArrowClick('left')}
+          <Grid item xs={12} mt={3}>
+            {currentCategory ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
               >
-                <ArrowLeftIcon />
-              </IconButton>
-              <Typography
-                variant="h6"
-                sx={{ mx: 4, textAlign: 'center' }}
-              >
-                {currentCategory.name}
-              </Typography>
-              <IconButton
-                color="primary"
-                onClick={() => handleArrowClick('right')}
-              >
-                <ArrowRightIcon />
-              </IconButton>
-            </Box>
-          ) : (
-            <CircularProgress />
-          )}
-        </Grid>
-
-        {collectedCards.map((item, index) => (
-          <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
-            <CollectionStickerItem item={item} />
+                <IconButton
+                  color='primary'
+                  onClick={() => handleArrowClick('left')}
+                >
+                  <ArrowLeftIcon />
+                </IconButton>
+                <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+                  {currentCategory.name}
+                </Typography>
+                <IconButton
+                  color='primary'
+                  onClick={() => handleArrowClick('right')}
+                >
+                  <ArrowRightIcon />
+                </IconButton>
+              </Box>
+            ) : (
+              <CircularProgress />
+            )}
           </Grid>
-        ))}
-      </Grid>
-      <PagingComponent
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+          {collectedCards.map((item, index) => (
+            <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+              <CollectionStickerItem item={item} />
+            </Grid>
+          ))}
+        </Grid>
+        <PagingComponent
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </Container>
   );
 }
