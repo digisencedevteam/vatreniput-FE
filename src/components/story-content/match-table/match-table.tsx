@@ -19,7 +19,7 @@ function MatchTable({ data }: MatchTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((team: Team, index: number) => (
+                    {data?.map((team: Team, index: number) => (
                         <TableRow
                             key={team.TeamName}
                             sx={team.TeamName === 'Hrvatska' ? { bgcolor: theme.palette.error.darker } : {}}

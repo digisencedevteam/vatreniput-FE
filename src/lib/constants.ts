@@ -316,18 +316,39 @@ export const STORIES = [
 
       Highlights: [
         {
-          Title: 'QR KOD - SP 2018 - Pogodak Luke Modrića protiv Argentine',
+          Title: ' SP 2018 - Pogodak Luke Modrića protiv Argentine',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
           Description:
-            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
         },
         {
           Title: 'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
-            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+            'Osmina   finala.   Danska.   Sjevernjaci   već   godinama   dižu   igru   i   na   ovom   Svjetskomprvenstvu   također   su   tražili   novi   veliki   rezultat.   Izjednačena   utakmica   otišla   je   doraspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovureprezentaciju   krasilo   u   godinama   koje   su   slijedile.   Nevjerojatna   unutarnja   snaga,samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama–  Dalićevi dečki  su   pronalazili   posebne   spremnike   snage   i   umijeća   te   izlazili   kaopobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiić!“ ušao   je   u   svaki   hrvatski   dom',
+        },
+        {
+          Title: 'SP 2018 – pobjednički 11-erac protiv Rusije (Rakitić) ',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698231320/rakiti%C4%87_sbxpsr.jpg',
+          Description:
+            '  Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog  unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda.  Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
+        },
+        {
+          Title: 'SP 2018 – pogodak Mandžukića protiv Engleske u polufinalu',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
+          Description:
+            ' Polufinale.   Znali   smo   da   neće   biti   lako.   S   druge   strane   stajala   je   Engleska.   Svjetskinogometni   gigant   željan   naslova,   željan   konačno   nekakvog   uspjeha.     Ali,   Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali,   polako. Dalić Boysi  se   ne   predaju.   Ivan   Perišić   je   izjednačio   sredinom   drugogpoluvremena.   A   zatim,   u   produžetku   –   Mario   Mandžukić   zabio   je   za   finale.   Ekstaza,urnebes, suze, smijeh... Sve',
+        },
+        {
+          Title: 'Reportaza Rusija',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
+          Description:
+            'Hrvatska je u finalu Svjetskog prvenstva 2018.  Naslovnice se mijenjaju.  Englezi idu kućiplačući. U Moskvu dolazi "pola" Hrvatske.Finale. Francuska. Naš kriptonit. Golovi Perišića i Mandžukića dali su nadu. Ali, kazneni udarac nakon Perišićeve ruke i pogodak nakon prekršaja koji nije postojao rano su usmjerili finalni susret. Hrvatska je druga na svijetu, planetu i kugli zemaljskoj. Hrvatska je ušla u elitni nogometni razred među velikane ove igre. I, ondje je namjeravala ostati.',
         },
         // Add other highlights here...
       ],
@@ -350,10 +371,10 @@ export const STORIES = [
     },
   },
   {
-    storyTitle: '2012',
+    storyTitle: '1999',
     storyId: 1,
     story: {
-      storyTitle: 'WorldCup2018',
+      storyTitle: 'Neki drugi',
       Qualifications: {
         Description:
           'Borba za put u Rusiju nije bila jednostavna, dapače. Kvalifikacije je Hrvatska počela dobro, ali porazi od Islanda i Turske, te remi s Finskom značili su odlazak Ante Čačića s izborničke klupe. Na njegovo mjesto došao je Zlatko Dalić. U tom trenutku počela je nova era reprezentacije Hrvatske - najljepša era. Hrvatska je odmah ostvarila ključnu pobjedu nad Ukrajinom, a zatim kroz dodatne kvalifikacije  prošla Grčku i "stigla" u Rusiju.',
@@ -539,9 +560,16 @@ export const STORIES = [
         {
           Title: 'QR KOD - SP 2018 - Pogodak Luke Modrića protiv Argentine',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928183/vida_pozdravlja_navijac%CC%8Ce_3_vx3a9w.jpg',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
           Description:
-            'Bijes i muka  Gauchosa  bili su šećer na kraju jedne predivne pobjede. Hrvatska je tada "objavila" svijetu: Došli smo po medalju. Ali, euforija se stvorila samo u domovini. Rukopis Zlatka Dalića od prvog dana utkao je skromnost u našu nacionalnu selekciju. Pao je i Island u trećem kolu. Hrvatska je kao prvoplasirana prošla skupinu. Osmina finala. Danska. Sjevernjaci već godinama dižu igru i na ovom Svjetskom prvenstvu također su tražili novi veliki rezultat. Izjednačena utakmica otišla je do raspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovu reprezentaciju krasilo u godinama koje su slijedile. Nevjerojatna unutarnja snaga, samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama –  Dalićevi dečki  su pronalazili posebne spremnike snage i umijeća te izlazili kao pobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiiiić“! ostaće upamćen u historiji Hrvatskog nogometa.',
+            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
+        },
+        {
+          Title: 'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
+          Description:
+            'Osmina   finala.   Danska.   Sjevernjaci   već   godinama   dižu   igru   i   na   ovom   Svjetskomprvenstvu   također   su   tražili   novi   veliki   rezultat.   Izjednačena   utakmica   otišla   je   doraspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovureprezentaciju   krasilo   u   godinama   koje   su   slijedile.   Nevjerojatna   unutarnja   snaga,samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama–  Dalićevi dečki  su   pronalazili   posebne   spremnike   snage   i   umijeća   te   izlazili   kaopobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiić!“ ušao   je   u   svaki   hrvatski   dom',
         },
         // Add other highlights here...
       ],
@@ -550,8 +578,10 @@ export const STORIES = [
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
         MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
+        imgUrl:
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
-          'Najveći i najuspješniji izbornik u povijesti  hrvatske reprezentacije. Era Zlatka  ',
+          'Najveći i najuspješniji izbornik u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni izbornik velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
       Zanimljivosti: [
         'Hrvatska je s prosječnom visinom igrača od 185,2 cm bila najviša reprezentacija na Svjetskom prvenstvu.',
@@ -561,19 +591,25 @@ export const STORIES = [
       ],
     },
   },
-  {
-    storyTitle: '3',
-    storyId: 2,
-    story: {},
-  },
+  // {
+  //   storyTitle: '2012',
+  //   storyId: 1,
+  //   story: {},
+  // },
 
-  // ... more sections for the third story
+  // {
+  //   storyTitle: '3',
+  //   storyId: 2,
+  //   story: {},
+  // },
 
-  {
-    storyTitle: '4',
-    storyId: 3,
-    story: {},
-  },
+  // // ... more sections for the third story
+
+  // {
+  //   storyTitle: '4',
+  //   storyId: 3,
+  //   story: {},
+  // },
 
   // ... more stories
 ];

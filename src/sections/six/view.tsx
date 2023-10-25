@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import StoryContent from 'src/components/story-content/StoryContent';
 import Timeline from 'src/components/timeline-horizontal/Timeline';
 import { STORIES } from 'src/lib/constants';

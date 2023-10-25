@@ -50,7 +50,6 @@ const CustomCard = ({
     const auth = useContext(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
     const handleToggleMenu = () => setMenuOpen(prev => !prev);
-    const formattedCreatedAt = createdAt ? new Date(createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }) : '';
     const isAdmin = auth.user && auth.user.email === 'antonio@test.com';
     const rewardedUntil = dayjs(createdAt).add(3, 'day');
     const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');

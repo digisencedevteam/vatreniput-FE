@@ -75,17 +75,6 @@ export type FormValues = {
   [key: string]: string;
 };
 
-export interface StorySection {
-  storyTitle?: string;
-  imageUrl: string;
-  title: string;
-  content: string;
-}
-
-export interface Story {
-  sections: StorySection[];
-}
-
 export interface QuizResult {
   _id: string;
   userId: {
@@ -100,6 +89,49 @@ export interface QuizResult {
   __v: number;
 }
 
+export interface MatchData {
+  Matches: any;
+  Finals?: {
+    RoundOf16?: any;
+    QuarterFinal?: any;
+    SemiFinal?: any;
+    Final?: any;
+  };
+  Skupina: any;
+  Champ: any;
+  Summary: string;
+}
+
+export interface HighlightData {
+  Title: string;
+  imgUrl: string;
+  Description: string;
+}
+
+export interface IzbornikData {
+  Name: string;
+  DOB: string;
+  CoachingCareer: string;
+  MajorAchievements: string[];
+  imgUrl: string;
+  StoryText: string;
+}
+
+export interface Story {
+  storyTitle?: string;
+  Prvenstvo: MatchData;
+  Qualifications: {
+    Description: string;
+    Teams: any;
+  };
+  Highlights: HighlightData[];
+  Izbornik: IzbornikData;
+  Zanimljivosti: (string | number | boolean | React.ReactElement)[];
+}
+
+export interface StoryContentProps {
+  story?: Story;
+}
 export type Team = {
   TeamName: string;
   Wins: number;
@@ -109,14 +141,7 @@ export type Team = {
 };
 
 export type MatchTableProps = {
-  data: {
-    [x: string]: any;
-    TeamName: string;
-    Wins: number;
-    Losses: number;
-    Draws: number;
-    Points: number;
-  };
+  data?: Team[] | undefined;
 };
 
 export type PenaltyShootout = {

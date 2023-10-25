@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Divider, Typography, IconButton } from '@mui/material';
+import { Box, Divider, Typography, IconButton, Collapse } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 interface StoryWrapperProps {
@@ -19,14 +19,19 @@ export const StorySectionWrapper = ({ title, children, isCollapsable }: StoryWra
     return (
         <Box borderRadius={2} p={2} pl={0} mt={2} mb={1}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Typography variant="h3" color={'primary'} p={1}>{title}</Typography>
-                {isCollapsable && <IconButton onClick={handleToggle} sx={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-180deg)', transition: 'transform 0.3s', color: 'white' }}>
-                    <ArrowDropDownIcon />
-                </IconButton>}
-
+                <Typography variant="h3" color={'primary'} py={1}>{title}</Typography>
+                {isCollapsable &&
+                    <IconButton onClick={handleToggle} sx={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-180deg)', transition: 'transform 0.3s', color: 'white' }}>
+                        <ArrowDropDownIcon />
+                    </IconButton>
+                }
             </Box>
             <Divider sx={{ margin: "8px 0" }} />
-            {isOpen && children}
+
+            <Collapse in={isOpen}>
+                {children}
+            </Collapse>
         </Box>
     );
+
 }

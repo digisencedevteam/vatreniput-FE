@@ -13,11 +13,11 @@ interface DataProp {
 }
 
 interface ChampionCardProps {
-    data: DataProp;
+    data?: DataProp;
 }
 
 const ChampionCard = ({ data }: ChampionCardProps) => {
-    const { Winner, TopScorer } = data;
+    const { Winner = '', TopScorer = { Player: '', Team: '', Goals: 0 } } = data || {};
     return (
         <Box
             sx={{
