@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    Avatar,
     Box,
     Card,
     CardMedia,
@@ -14,7 +13,6 @@ import {
     Tab,
     Tabs,
     Typography,
-    useTheme
 } from '@mui/material';
 import MatchTable from './match-table/match-table';
 import { StorySectionWrapper } from '../section-wrapper/story-wrapper';
@@ -32,9 +30,6 @@ const StoryContent = ({ story }: StoryContentProps) => {
     const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setCurrentTab(newValue);
     };
-
-    const theme = useTheme();
-
     function TabOneContent({ story }: StoryContentProps) {
         return (
             <>
@@ -44,8 +39,11 @@ const StoryContent = ({ story }: StoryContentProps) => {
                     </StorySectionWrapper>
                 )}
                 {story?.Prvenstvo?.Summary && (
-                    <StorySectionWrapper title='Skupina'>
+                    <StorySectionWrapper title='Skupina' isCollapsable={true}>
                         <MatchTable data={story?.Prvenstvo.Skupina} />
+                        {story?.Prvenstvo?.Matches.GroupStage && (
+                            <QualificationMatchDetails matches={story?.Prvenstvo?.Matches.GroupStage.matches || []} />
+                        )}
                     </StorySectionWrapper>
                 )}
 
@@ -54,31 +52,25 @@ const StoryContent = ({ story }: StoryContentProps) => {
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.RoundOf16} />
                     </StorySectionWrapper>
                 }
-
-
                 {story?.Prvenstvo?.Matches?.Finals?.QuarterFinal &&
                     <StorySectionWrapper title='Cetvrt Finala' isCollapsable={true}>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.QuarterFinal} />
                     </StorySectionWrapper>
                 }
-
                 {story?.Prvenstvo?.Matches.Finals?.SemiFinal &&
                     <StorySectionWrapper title='Polu Finale' >
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.SemiFinal} />
                     </StorySectionWrapper>
                 }
-
                 {story?.Prvenstvo?.Matches.Finals?.Final &&
                     <StorySectionWrapper title='Finale'>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.Final} />
                     </StorySectionWrapper>
                 }
                 {story?.Prvenstvo?.Champ && <ChampionCard data={story?.Prvenstvo.Champ} />}
-
             </>
         );
     }
-
     const slideVariants = varFade();
     return (
         <Container>
@@ -89,7 +81,8 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 <Grid item>
                     <Typography variant="h2" color={'primary'}>{story?.storyTitle}</Typography>
                 </Grid>
-            </Grid>            <Tabs
+            </Grid>
+            <Tabs
                 value={currentTab}
                 onChange={handleTabChange}
                 variant="scrollable"
@@ -105,32 +98,27 @@ const StoryContent = ({ story }: StoryContentProps) => {
             <MotionContainer key={currentTab} variants={slideVariants.inUp}>
                 {currentTab === 0 && (
                     <>
-                        {story?.Qualifications?.Description && (
+                        {story?.Qualifications?.Description && story?.Prvenstvo?.Matches.GroupStage && (
                             <StorySectionWrapper title='Kvalifikacije'>
                                 <Typography variant="body1">{story.Qualifications.Description}</Typography>
                                 {story?.Qualifications?.Teams && <MatchTable data={story.Qualifications.Teams} />}
+
+
                             </StorySectionWrapper>
                         )}
-
 
                         {story?.AdditionalQualifications && (
                             <StorySectionWrapper title='Dodatne Kvalifikacije' isCollapsable={true}>
                                 <QualificationMatchDetails matches={story.AdditionalQualifications} />
                             </StorySectionWrapper>
                         )}
-
                     </>
                 )}
-
                 {currentTab === 1 &&
-
                     <TabOneContent story={story} />
                 }
-
                 {currentTab === 2 && (
-
                     <StorySectionWrapper title='Highlights'>
-
                         {story?.Highlights &&
                             <Grid container spacing={2}>
                                 {story?.Highlights.map((highlight: { Title: string; imgUrl: string; Description: string; }, index: React.Key | null | undefined) => (
@@ -142,12 +130,10 @@ const StoryContent = ({ story }: StoryContentProps) => {
                         }
                     </StorySectionWrapper>
                 )}
-
                 {currentTab === 3 && story?.Izbornik && (
                     <StorySectionWrapper title='Izbornik'>
-
                         <Box sx={{ display: 'flex', flexDirection: ['column', 'row'], gap: '1rem' }}>
-                            <Box sx={{ flex: 1, padding: '1rem', borderRadius: 2, boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', bgcolor: theme.palette.background.paper }}>
+                            <Box sx={{ flex: 1, padding: '1rem', borderRadius: 2, boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', bgcolor: 'background.paper' }}>
                                 <Typography variant="h3" color={'primary'} component="div" mb={2}>
                                     {story?.Izbornik.Name}
                                 </Typography>
@@ -165,25 +151,20 @@ const StoryContent = ({ story }: StoryContentProps) => {
                                 <img src={story?.Izbornik.imgUrl} alt={story?.Izbornik.Name} style={{ width: '100%' }} />
                             </Box>
                         </Box>
-
                         <Typography variant="body1" mt={2}>
                             {story?.Izbornik.StoryText}
                         </Typography>
-
                     </StorySectionWrapper>
-
                 )}
                 {currentTab === 4 && (
                     <StorySectionWrapper title='Reprezentacija'>
                         {['Vratari', 'Branici', 'Vezni', 'Napadaci'].map(category => (
                             <Box key={category}>
-                                <Typography variant="h6" my={2}>{category}</Typography>
+                                <Typography variant="h4" my={2}>{category}</Typography>
                                 <Divider sx={{ my: 2 }} />
                                 <ScrollableContainer>
-
                                     {story?.Reprezentacija && story?.Reprezentacija[category]?.map((player, index) => (
-
-                                        <Card sx={{
+                                        <Card key={index} sx={{
                                             boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
                                             m: 2,
                                             minWidth: 250,
@@ -201,15 +182,11 @@ const StoryContent = ({ story }: StoryContentProps) => {
                                                 {player.name}
                                             </Typography>
                                         </Card>
-
                                     ))}
-
                                 </ScrollableContainer>
                             </Box>
                         ))}
-
                     </StorySectionWrapper>
-
                 )}
                 {currentTab === 5 && story?.Zanimljivosti && (
                     <StorySectionWrapper title='Zanimljivosti'>
@@ -225,14 +202,11 @@ const StoryContent = ({ story }: StoryContentProps) => {
                                         </Typography>
                                     </ListItemText>
                                 </ListItem>
-
                             ))}
                         </List>
                     </StorySectionWrapper>
                 )}
             </MotionContainer>
-
-
         </Container>
     );
 };

@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Divider, Typography, IconButton, Collapse } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-
-interface StoryWrapperProps {
-    title: string;
-    children?: React.ReactNode;
-    isCollapsable?: boolean
-
-}
+import { StoryWrapperProps } from 'src/types';
 
 export const StorySectionWrapper = ({ title, children, isCollapsable }: StoryWrapperProps) => {
     const [isOpen, setIsOpen] = useState(true);
-
     const handleToggle = () => {
         setIsOpen(prev => !prev);
     };
@@ -27,7 +20,6 @@ export const StorySectionWrapper = ({ title, children, isCollapsable }: StoryWra
                 }
             </Box>
             <Divider sx={{ margin: "8px 0" }} />
-
             <Collapse in={isOpen}>
                 {children}
             </Collapse>

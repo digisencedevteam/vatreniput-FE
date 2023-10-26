@@ -1,11 +1,10 @@
-import { Box, Typography, Divider, useTheme } from '@mui/material';
+import { Box, Typography, Divider } from '@mui/material';
 import SportsIcon from '@mui/icons-material/Sports';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { MatchDetailsProps } from 'src/types';
 import PenaltyShootoutTable from '../penalty-table/penatly-table';
 
 const MatchDetails = ({ matchData }: MatchDetailsProps) => {
-
     return (
         <Box >
             <Box bgcolor={'background.paper'} p={1} borderRadius={1} sx={{ boxShadow: theme => theme.customShadows.z8, }}>

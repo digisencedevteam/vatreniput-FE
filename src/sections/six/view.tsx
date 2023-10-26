@@ -6,10 +6,9 @@ import { STORIES } from 'src/lib/constants';
 import { useParams } from 'src/routes/hooks';
 
 export default function SixView() {
-
   let { storyId } = useParams();
-
   const currentStory = STORIES.find(story => story.storyId === Number(storyId));
+
   return (
     <Container maxWidth='xl'>
       <Box mt={3} display="flex" flexDirection="column" alignItems="center">

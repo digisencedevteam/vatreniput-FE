@@ -134,9 +134,7 @@ export interface FinalMatchDetail {
 export interface MatchData {
   Matches: {
     GroupStage: {
-      Kolo1: FinalMatchDetail;
-      Kolo2: FinalMatchDetail;
-      Kolo3: FinalMatchDetail;
+      matches: QualificationMatch[];
     };
     Finals?: {
       RoundOf16?: FinalMatchDetail;
@@ -239,6 +237,19 @@ export interface HighlightProps {
     imgUrl: string;
     Description: string;
   };
+}
+
+export interface StoryWrapperProps {
+  title: string;
+  children?: React.ReactNode;
+  isCollapsable?: boolean;
+}
+
+export interface PenaltyShootoutProps {
+  data?: {
+    Player: string;
+    Result: string;
+  }[];
 }
 
 // STORY TYPES END

@@ -1,20 +1,21 @@
 
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material';
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+} from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { PenaltyShootoutProps } from 'src/types';
 
-interface PenaltyShootoutProps {
-    data?: {
-        Player: string;
-        Result: string;
-    }[];
-}
-
-const PenaltyShootoutTable: React.FC<PenaltyShootoutProps> = ({ data }) => {
-    const theme = useTheme();
+const PenaltyShootoutTable = ({ data }: PenaltyShootoutProps) => {
 
     return (
-        <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: theme.palette.background.paper, boxShadow: theme => theme.customShadows.z8, }} >
+        <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: 'background.paper', boxShadow: theme => theme.customShadows.z8, }} >
             <Table>
                 <TableHead>
                     <TableRow>

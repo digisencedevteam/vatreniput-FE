@@ -3,12 +3,10 @@ import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { HighlightProps } from 'src/types';
 
-
 const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');
     const imageHeight = isDesktop ? "375" : "200";
     const isReportaza = data.Title.includes('Reportaza');
-
     return (
         <Card style={{ marginBottom: '20px', minHeight: 700 }}>
             <div style={{ position: 'relative' }}>
