@@ -16,7 +16,7 @@ const Highlight = ({ data }: HighlightProps) => {
     const isReportaza = data.Title.includes('Reportaza');
 
     return (
-        <Card style={{ marginBottom: '20px' }}>
+        <Card style={{ marginBottom: '20px', minHeight: 700 }}>
             <div style={{ position: 'relative' }}>
                 <CardMedia
                     component="img"

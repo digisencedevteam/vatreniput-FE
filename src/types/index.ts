@@ -119,14 +119,30 @@ export interface IzbornikData {
 
 export interface Story {
   storyTitle?: string;
-  Prvenstvo: MatchData;
-  Qualifications: {
+  storyLogo?: string;
+  Reprezentacija?: GalleryImages;
+  Prvenstvo?: MatchData;
+  Qualifications?: {
     Description: string;
     Teams: any;
   };
-  Highlights: HighlightData[];
-  Izbornik: IzbornikData;
-  Zanimljivosti: (string | number | boolean | React.ReactElement)[];
+  Highlights?: HighlightData[];
+  Izbornik?: IzbornikData;
+  Zanimljivosti?: (string | number | boolean | React.ReactElement)[];
+  AdditionalQualifications?: QualificationMatch[];
+}
+interface GalleryImages {
+  galleryImages: string[];
+}
+
+interface QualificationMatch {
+  Teams: string;
+  Score: string;
+  Scorers?: string[];
+}
+
+export interface QualificationMatchDetailsProps {
+  matches?: QualificationMatch[];
 }
 
 export interface StoryContentProps {

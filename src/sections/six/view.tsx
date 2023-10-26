@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import { MotionContainer, varFade } from 'src/components/animate';
 import StoryContent from 'src/components/story-content/StoryContent';
 import Timeline from 'src/components/timeline-horizontal/Timeline';
 import { STORIES } from 'src/lib/constants';
@@ -8,6 +9,7 @@ import { useParams } from 'src/routes/hooks';
 export default function SixView() {
 
   let { storyId } = useParams();
+  const slideVariants = varFade();
 
   const currentStory = STORIES.find(story => story.storyId === Number(storyId));
   return (
@@ -16,7 +18,13 @@ export default function SixView() {
         <Timeline
           stories={STORIES}
         />
-        {currentStory && <StoryContent story={currentStory.story} />}
+
+        {currentStory &&
+
+          <StoryContent story={currentStory.story} />
+
+        }
+
       </Box>
     </Container>
   );

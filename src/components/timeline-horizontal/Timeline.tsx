@@ -56,8 +56,8 @@ const Timeline = ({
                     left: 0,
                     transform: 'translateY(-50%)',
                     borderRadius: '50%',
-                    width: isMobile ? '25px' : '40px',
-                    height: isMobile ? '25px' : '40px',
+                    width: '40px',
+                    height: '40px',
                     minWidth: 'auto',
                     padding: 0,
                 }}
@@ -131,8 +131,8 @@ const Timeline = ({
                     right: 0,
                     transform: 'translateY(-50%)',
                     borderRadius: '50%',
-                    width: isMobile ? '25px' : '40px',
-                    height: isMobile ? '25px' : '40px',
+                    width: '40px',
+                    height: '40px',
                     minWidth: 'auto',
                     padding: 0,
                 }}

@@ -68,12 +68,28 @@ export function useNavData() {
                 path: paths.dashboard.story.root,
               },
               {
-                title: 'Od Zadra do Madrida',
+                title: 'Svjetsko prvenstvo 1998',
                 path: paths.dashboard.story.seven,
               },
               {
-                title: 'Srebrni San 2018',
+                title: 'Svjetsko prvenstvo 2002',
                 path: paths.dashboard.story.eight,
+              },
+              {
+                title: 'Euro 2004',
+                path: paths.dashboard.story.nine,
+              },
+              {
+                title: 'Svjetsko prvenstvo 2006',
+                path: paths.dashboard.story.ten,
+              },
+              {
+                title: 'Euro 2008',
+                path: paths.dashboard.story.eleven,
+              },
+              {
+                title: 'Svjetsko prvenstvo 2012',
+                path: paths.dashboard.story.twelve,
               },
             ],
           },

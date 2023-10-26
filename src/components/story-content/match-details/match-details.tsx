@@ -11,10 +11,10 @@ interface MatchDetailsProps {
 
 
 const MatchDetails = ({ matchData }: MatchDetailsProps) => {
-    const theme = useTheme();
+
     return (
         <Box >
-            <Box bgcolor={theme.palette.background.paper} p={1} borderRadius={1} sx={{ boxShadow: theme => theme.customShadows.z8, }}>
+            <Box bgcolor={'background.paper'} p={1} borderRadius={1} sx={{ boxShadow: theme => theme.customShadows.z8, }}>
                 <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={2}>
                     <Typography variant="h5">{matchData.Match} {matchData.Score}</Typography>
                 </Box>

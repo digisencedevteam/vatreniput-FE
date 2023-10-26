@@ -1,0 +1,45 @@
+import { Box, Typography, useTheme } from '@mui/material';
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import SportsIcon from '@mui/icons-material/Sports'; // Importing the penalty icon
+import { QualificationMatchDetailsProps } from 'src/types';
+import React from 'react';
+
+const QualificationMatchDetails = ({ matches }: QualificationMatchDetailsProps) => {
+    const theme = useTheme();
+
+    return (
+        <Box>
+            {matches?.map((matchData, index) => {
+                const regularScorers = matchData.Scorers?.filter(scorer => !scorer.includes('(pen.)')) || [];
+                const penaltyScorers = matchData.Scorers?.filter(scorer => scorer.includes('(pen.)')).map(scorer => scorer.replace('(pen.)', 'Panal')) || [];
+
+                return (
+                    <Box key={index} bgcolor={'background.paper'} p={1} borderRadius={1} my={2} sx={{ boxShadow: theme => theme.customShadows.z8 }}>
+                        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" mb={2}>
+                            <Typography variant="h5">{matchData.Teams} {matchData.Score}</Typography>
+                        </Box>
+                        {regularScorers.length > 0 && (
+                            <Box display="flex" justifyContent={'center'} alignItems="center" my={2}>
+                                <SportsSoccerIcon color="primary" />
+                                <Typography variant="body1" ml={1}>
+                                    Golovi: {regularScorers.join(', ')}
+                                </Typography>
+                            </Box>
+                        )}
+                        {penaltyScorers.length > 0 && (
+                            <Box display="flex" justifyContent={'center'} alignItems="center" my={2}>
+                                <SportsIcon color="error" fontSize="small" style={{ marginRight: '8px' }} />
+                                <Typography variant="body1">
+                                    {penaltyScorers.join(', ')}
+                                </Typography>
+                            </Box>
+                        )}
+                    </Box>
+                )
+            })}
+        </Box>
+    );
+};
+
+export default QualificationMatchDetails;
+

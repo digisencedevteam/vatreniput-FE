@@ -6,7 +6,7 @@ function MatchTable({ data }: MatchTableProps) {
 
     const theme = useTheme();
     return (
-        <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: theme.palette.background.paper, boxShadow: theme => theme.customShadows.z8, }} >
+        <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: 'background.paper', boxShadow: theme => theme.customShadows.z8, }} >
             <Table>
                 <TableHead>
                     <TableRow sx={{ bgcolor: 'white' }}>
@@ -22,7 +22,7 @@ function MatchTable({ data }: MatchTableProps) {
                     {data?.map((team: Team, index: number) => (
                         <TableRow
                             key={team.TeamName}
-                            sx={team.TeamName === 'Hrvatska' ? { bgcolor: theme.palette.error.darker } : {}}
+                            sx={team.TeamName === 'Hrvatska' ? { bgcolor: 'error.darker' } : {}}
                         >
                             <TableCell align="center"> {index + 1}</TableCell>
                             <TableCell align="center">{team.TeamName}</TableCell>
