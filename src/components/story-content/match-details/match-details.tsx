@@ -1,14 +1,8 @@
 import { Box, Typography, Divider, useTheme } from '@mui/material';
 import SportsIcon from '@mui/icons-material/Sports';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import { Match } from 'src/types';
+import { MatchDetailsProps } from 'src/types';
 import PenaltyShootoutTable from '../penalty-table/penatly-table';
-
-interface MatchDetailsProps {
-    matchData: Match;
-}
-
-
 
 const MatchDetails = ({ matchData }: MatchDetailsProps) => {
 
@@ -20,7 +14,7 @@ const MatchDetails = ({ matchData }: MatchDetailsProps) => {
                 </Box>
                 <Box display="flex" justifyContent={'center'} alignItems="center" mb={2}>
                     <SportsSoccerIcon color="primary" />
-                    <Typography variant="body1" ml={1}>Golovi: {matchData.GoalScorers.join(', ')}</Typography>
+                    <Typography variant="body1" ml={1}>Golovi: {matchData.GoalScorers && matchData.GoalScorers.join(', ')}</Typography>
                 </Box>
                 {matchData.Penalties && (<>
                     <Box display="flex" alignItems="center" justifyContent={'center'} mb={2}>
@@ -31,7 +25,6 @@ const MatchDetails = ({ matchData }: MatchDetailsProps) => {
             </Box>
             {
                 matchData.Penalties && (
-
                     <>
                         <Divider sx={{ margin: "16px 0" }} />
                         <PenaltyShootoutTable data={matchData.PenaltyShootout} />

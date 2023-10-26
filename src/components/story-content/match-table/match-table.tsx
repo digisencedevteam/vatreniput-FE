@@ -1,10 +1,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
-import { MatchTableProps, Team } from 'src/types';
-
+import { MatchTableProps, TeamStat } from 'src/types';
 
 function MatchTable({ data }: MatchTableProps) {
-
-    const theme = useTheme();
     return (
         <TableContainer component={Paper} sx={{ mt: 1.5, bgcolor: 'background.paper', boxShadow: theme => theme.customShadows.z8, }} >
             <Table>
@@ -19,7 +16,7 @@ function MatchTable({ data }: MatchTableProps) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data?.map((team: Team, index: number) => (
+                    {data?.map((team: TeamStat, index: number) => (
                         <TableRow
                             key={team.TeamName}
                             sx={team.TeamName === 'Hrvatska' ? { bgcolor: 'error.darker' } : {}}

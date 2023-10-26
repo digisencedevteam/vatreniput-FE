@@ -243,26 +243,23 @@ export const STORIES = [
         ],
 
         Matches: {
-          GroupStage: [
-            {
-              Round: '1. kolo',
+          GroupStage: {
+            Kolo1: {
               Match: 'HRVATSKA – NIGERIJA',
               Score: '2 : 0',
               GoalScorers: ['Etebo 32` (a.g.)', 'Modrić 71` pen'],
             },
-            {
-              Round: '2. kolo',
+            Kolo2: {
               Match: 'ARGENTINA – HRVATSKA',
               Score: '0 : 3',
               GoalScorers: ['Rebić 53`', 'Modrić 80`', 'Rakitić 90+1`'],
             },
-            {
-              Round: '3. kolo',
+            Kolo3: {
               Match: 'ISLAND – HRVATSKA',
               Score: '1 : 2',
               GoalScorers: ['Badelj 53`', 'Perišić 90`'],
             },
-          ],
+          },
           Finals: {
             RoundOf16: {
               Match: 'HRVATSKA – DANSKA',

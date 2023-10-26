@@ -1,20 +1,24 @@
 
-import { Button, Typography, LinearProgress, Box, useTheme, useMediaQuery } from '@mui/material';
+import {
+    Button,
+    Typography,
+    LinearProgress,
+    Box,
+    useTheme,
+    useMediaQuery
+} from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useParams, useRouter } from 'src/routes/hooks';
-
-interface TimelineProps {
-    stories: any;
-}
+import { TimelineProps } from 'src/types';
 
 const Timeline = ({
     stories,
 }: TimelineProps) => {
-
     const { storyId } = useParams();
     const currentStoryIndex = stories.findIndex((stories: { storyId: number; }) => stories.storyId === Number(storyId));
     const router = useRouter();
+
     const generateFillPositions = (length: number): number[] => {
         const sequence = [20, 50, 80];
         const numSequences = Math.ceil(length / sequence.length);
@@ -32,8 +36,6 @@ const Timeline = ({
         const prevIndex = currentStoryIndex - 1;
         if (prevIndex >= 0) {
             router.push(`/dashboard/story/${stories[prevIndex].storyId}`);
-
-
         }
     };
 
@@ -42,6 +44,7 @@ const Timeline = ({
     const currentStory = stories[currentStoryIndex];
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 
     return (
         <Box mt={3} position="relative" width="100%">

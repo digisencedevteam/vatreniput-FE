@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Card, CardMedia, Container, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Tab, Tabs, Typography, useTheme } from '@mui/material';
+import { Avatar, Box, Card, CardMedia, Container, Divider, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Tab, Tabs, Typography, useTheme } from '@mui/material';
 import MatchTable from './match-table/match-table';
 import { StorySectionWrapper } from '../section-wrapper/story-wrapper';
 import MatchDetails from './match-details/match-details';
 import ChampionCard from './champ-card/champion-card';
 import Highlight from './highlight/highlight';
-import { StoryContentProps } from 'src/types';
+
 import { MotionContainer, varFade } from '../animate';
 import QualificationMatchDetails from './match-details/qualification-match-details';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-
-
-
+import { StoryContentProps } from 'src/types';
 
 const StoryContent = ({ story }: StoryContentProps) => {
     const [currentTab, setCurrentTab] = useState(0);
@@ -24,8 +22,6 @@ const StoryContent = ({ story }: StoryContentProps) => {
     };
 
     const theme = useTheme();
-
-
 
     function TabOneContent({ story }: StoryContentProps) {
         return (
@@ -41,26 +37,26 @@ const StoryContent = ({ story }: StoryContentProps) => {
                     </StorySectionWrapper>
                 )}
 
-                {story?.Prvenstvo?.Skupina &&
+                {story?.Prvenstvo?.Matches?.Finals?.RoundOf16 &&
                     <StorySectionWrapper title='Osmina Finala' isCollapsable={true}>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.RoundOf16} />
                     </StorySectionWrapper>
                 }
 
 
-                {story?.Prvenstvo?.Skupina &&
+                {story?.Prvenstvo?.Matches?.Finals?.QuarterFinal &&
                     <StorySectionWrapper title='Cetvrt Finala' isCollapsable={true}>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.QuarterFinal} />
                     </StorySectionWrapper>
                 }
 
-                {story?.Prvenstvo?.Skupina &&
+                {story?.Prvenstvo?.Matches.Finals?.SemiFinal &&
                     <StorySectionWrapper title='Polu Finale' >
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.SemiFinal} />
                     </StorySectionWrapper>
                 }
 
-                {story?.Prvenstvo?.Skupina &&
+                {story?.Prvenstvo?.Matches.Finals?.Final &&
                     <StorySectionWrapper title='Finale'>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.Final} />
                     </StorySectionWrapper>
@@ -125,11 +121,13 @@ const StoryContent = ({ story }: StoryContentProps) => {
                             </StorySectionWrapper>
                         )}
 
+
                         {story?.AdditionalQualifications && (
                             <StorySectionWrapper title='Dodatne Kvalifikacije' isCollapsable={true}>
                                 <QualificationMatchDetails matches={story.AdditionalQualifications} />
                             </StorySectionWrapper>
                         )}
+
                     </>
                 )}
 
@@ -187,7 +185,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 {currentTab === 4 && (
                     <StorySectionWrapper title='Reprezentacija'>
                         <Grid container spacing={2}>
-                            {story?.Reprezentacija?.galleryImages.map((imgUrl, index) => (
+                            {story?.Reprezentacija?.galleryImages.map((imgUrl: string | undefined, index: number) => (
                                 <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
                                     <Card onClick={() => handleOpenModal(index)}>
                                         <CardMedia
