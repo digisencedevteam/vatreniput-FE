@@ -172,8 +172,17 @@ export interface IzbornikData {
   StoryText: string;
 }
 
-export interface GalleryImages {
-  galleryImages: string[];
+interface Player {
+  name: string;
+  imgurl: string;
+}
+
+export interface Reprezentacija {
+  Vratari: Player[];
+  Branici: Player[];
+  Vezni: Player[];
+  Napadaci: Player[];
+  [key: string]: Player[];
 }
 
 export interface QualificationMatch {
@@ -185,7 +194,7 @@ export interface QualificationMatch {
 export interface Story {
   storyTitle?: string;
   storyLogo?: string;
-  Reprezentacija?: GalleryImages;
+  Reprezentacija?: Reprezentacija;
   Prvenstvo?: MatchData;
   Qualifications?: {
     Description: string;

@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Card, CardMedia, Container, Divider, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Tab, Tabs, Typography, useTheme } from '@mui/material';
+import {
+    Avatar,
+    Box,
+    Card,
+    CardMedia,
+    Container,
+    Divider,
+    Grid,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Tab,
+    Tabs,
+    Typography,
+    useTheme
+} from '@mui/material';
 import MatchTable from './match-table/match-table';
 import { StorySectionWrapper } from '../section-wrapper/story-wrapper';
 import MatchDetails from './match-details/match-details';
 import ChampionCard from './champ-card/champion-card';
 import Highlight from './highlight/highlight';
-
 import { MotionContainer, varFade } from '../animate';
 import QualificationMatchDetails from './match-details/qualification-match-details';
-import StarRateIcon from '@mui/icons-material/StarRate';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import CircleIcon from '@mui/icons-material/Circle';
 import { StoryContentProps } from 'src/types';
+import ScrollableContainer from '../scrollable-container/scrollable-container';
 
 const StoryContent = ({ story }: StoryContentProps) => {
     const [currentTab, setCurrentTab] = useState(0);
-    const [openModal, setOpenModal] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setCurrentTab(newValue);
     };
@@ -67,25 +79,6 @@ const StoryContent = ({ story }: StoryContentProps) => {
         );
     }
 
-    const handleOpenModal = (index: number) => {
-        setCurrentImageIndex(index);
-        setOpenModal(true);
-    };
-
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-
-    const handleNextImage = () => {
-        setCurrentImageIndex((prevIndex: number) => (prevIndex + 1) % (story?.Reprezentacija?.galleryImages?.length || 1));
-    };
-
-    const handlePrevImage = () => {
-        setCurrentImageIndex((prevIndex: number) => (prevIndex - 1 + (story?.Reprezentacija?.galleryImages?.length || 1)) % (story?.Reprezentacija?.galleryImages?.length || 1));
-    };
-
-
-
     const slideVariants = varFade();
     return (
         <Container>
@@ -109,8 +102,6 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 <Tab label="Reprezentacija" />
                 <Tab label="Zanimljvosti" />
             </Tabs>
-
-            {/* TODO: MAKE COMPONONETS FOR IZBORNIK AND ZANIMLJIVOSTI, CHECK FOR HIGHLIGHT IF TEXT IS CONNECTED TO THE IMAGE, IMPLEMENT GALLERY TAB */}
             <MotionContainer key={currentTab} variants={slideVariants.inUp}>
                 {currentTab === 0 && (
                     <>
@@ -184,52 +175,41 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 )}
                 {currentTab === 4 && (
                     <StorySectionWrapper title='Reprezentacija'>
-                        <Grid container spacing={2}>
-                            {story?.Reprezentacija?.galleryImages.map((imgUrl: string | undefined, index: number) => (
-                                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                                    <Card onClick={() => handleOpenModal(index)}>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image={imgUrl}
-                                            alt={`Gallery image ${index + 1}`}
-                                        />
-                                    </Card>
+                        {['Vratari', 'Branici', 'Vezni', 'Napadaci'].map(category => (
+                            <Box key={category}>
+                                <Typography variant="h6" my={2}>{category}</Typography>
+                                <Divider sx={{ my: 2 }} />
+                                <ScrollableContainer>
 
-                                </Grid>
-                            ))}
-                        </Grid>
-                        <Modal
-                            open={openModal}
-                            onClose={handleCloseModal}
-                            aria-labelledby="modal-modal-title"
-                            aria-describedby="modal-modal-description"
+                                    {story?.Reprezentacija && story?.Reprezentacija[category]?.map((player, index) => (
 
-                        >
-                            <Box sx={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                bgcolor: 'background.paper',
-                                boxShadow: 24,
-                                p: 4,
-                                width: '100%',
-                                maxWidth: 800
+                                        <Card sx={{
+                                            boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
+                                            m: 2,
+                                            minWidth: 250,
+                                            borderRadius: 1
+                                        }}>
+                                            <CardMedia
+                                                component="img"
+                                                height="250"
+                                                width={250}
+                                                image={player.imgurl}
+                                                alt={player.name}
+                                                sx={{ bgcolor: 'warning.main' }}
+                                            />
+                                            <Typography variant="subtitle1" align="center" sx={{ p: 2 }}>
+                                                {player.name}
+                                            </Typography>
+                                        </Card>
 
-                            }}>
-                                {story?.Reprezentacija?.galleryImages[currentImageIndex] && (
-                                    <img
-                                        src={story.Reprezentacija.galleryImages[currentImageIndex]}
-                                        alt={`Gallery image ${currentImageIndex + 1}`}
-                                        style={{ width: '100%', cursor: 'pointer' }}
-                                    />
-                                )}
-                                <IconButton onClick={handlePrevImage}><NavigateBeforeIcon /></IconButton>
-                                <IconButton onClick={handleNextImage}><NavigateNextIcon /></IconButton>
+                                    ))}
+
+                                </ScrollableContainer>
                             </Box>
-                        </Modal>
+                        ))}
+
                     </StorySectionWrapper>
+
                 )}
                 {currentTab === 5 && story?.Zanimljivosti && (
                     <StorySectionWrapper title='Zanimljivosti'>
@@ -237,9 +217,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
                             {story?.Zanimljivosti.map((fact: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined, index: React.Key | null | undefined) => (
                                 <ListItem key={index} >
                                     <ListItemAvatar>
-                                        <Avatar>
-                                            <StarRateIcon />
-                                        </Avatar>
+                                        <CircleIcon color='error' />
                                     </ListItemAvatar>
                                     <ListItemText  >
                                         <Typography variant="h6" align="left">

@@ -32,7 +32,6 @@ function MatchTable({ data }: MatchTableProps) {
                 </TableBody>
             </Table>
         </TableContainer>
-
     )
 }
 

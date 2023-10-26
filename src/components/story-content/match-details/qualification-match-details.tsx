@@ -22,11 +22,8 @@ const QualificationMatchDetails = ({ matches }: QualificationMatchDetailsProps) 
                                     <Typography variant="body1" ml={1}>
                                         Golovi: {regularScorers.join(', ')}
                                     </Typography>
-
                                 </Box>
-
                             )}
-
                             {penaltyScorers.length > 0 && (
                                 <Box display="flex" justifyContent={'center'} alignItems="center" my={2}>
                                     <SportsIcon color="error" fontSize="small" style={{ marginRight: '8px' }} />
@@ -35,7 +32,6 @@ const QualificationMatchDetails = ({ matches }: QualificationMatchDetailsProps) 
                                     </Typography>
                                 </Box>
                             )}
-
                         </Box>
                         <Divider sx={{ margin: "8px 0" }} />
                     </>

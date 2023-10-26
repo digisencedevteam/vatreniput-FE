@@ -312,24 +312,131 @@ export const STORIES = [
           },
         },
       },
-
       Reprezentacija: {
-        galleryImages: [
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698231320/rakiti%C4%87_sbxpsr.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693928395/pas%CC%8Calic%CC%81_neymar_bltmeb.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927515/xavi_vukojevic_mhuovp.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926650/vlas%CC%8Cic%CC%81_kopija_2_p8nanz.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926526/kramaric%CC%81_busquets_wcqcdg.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926246/sosa_1_3_tfsxnb.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926810/badelj_danska_zeyvjn.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926850/subas%CC%8Cic%CC%81_obrana_1_z9olsm.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693832188/kalinix_j5radr.jpg',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693830952/pletikosa_cisptn.webp',
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693585325/vlas%CC%8Cic%CC%81_kopija_2_mg8cni.jpg',
+        Vratari: [
+          {
+            name: 'Danijel Subašić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016132_556_400_cut.jpg',
+          },
+          {
+            name: 'Lovre Kalinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040898_556_400_cut.jpg',
+          },
+          {
+            name: 'Dominik Livaković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044714_0_380.png',
+          },
+        ],
+        Branici: [
+          {
+            name: 'Dejan Lovren',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040889_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Strinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016507_556_400_cut.jpg',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+          {
+            name: 'Šime Vrsaljko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+          {
+            name: 'Vedran Ćorluka',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Pivarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016196_556_400_cut.jpg',
+          },
+          {
+            name: 'Duje Ćaleta-Car',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032723_556_400_cut.jpg',
+          },
+          {
+            name: 'Tin Jedvaj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032751_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Ivan Rakitić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023572_556_400_cut.jpg',
+          },
+          {
+            name: 'Marcelo Brozović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044723_0_380.png',
+          },
+          {
+            name: 'Mateo Kovačić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044727_0_380.png',
+          },
+          {
+            name: 'Milan Badelj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032741_556_400_cut.jpg',
+          },
+          {
+            name: 'Filip Bradarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023569_556_400_cut.jpg',
+          },
+        ],
+        Napadaci: [
+          {
+            name: 'Andrej Kramarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044707_0_380.png',
+          },
+          {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Mario Mandžukić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016176_556_400_cut.jpg',
+          },
+          {
+            name: 'Ante Rebić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032712_556_400_cut.jpg',
+          },
+          {
+            name: 'Marko Pjaca',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023583_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikola Kalinic',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016188_556_400_cut.jpg',
+          },
         ],
       },
-
       Highlights: [
         {
           Title: ' SP 2018 - Pogodak Luke Modrića protiv Argentine',
