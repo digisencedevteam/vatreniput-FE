@@ -40,6 +40,7 @@ const useFetchQuizzes = (
   const [unresolvedQuiz, setUnresolvedQuiz] = useState<Quiz | null>();
   const [isDeleting, setIsDeleting] = useState(false);
   const [resultsById, setResultsById] = useState<QuizResult[] | null>(null);
+  const [isLastPage, setIsLastPage] = useState(false);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
@@ -72,12 +73,19 @@ const useFetchQuizzes = (
       const response = await axiosInstance.get(
         `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
       );
-      setResultsById(response.data.quizResults || null);
+      const quizResults = response.data.quizResults;
+      setResultsById(quizResults || null);
+      if (quizResults && quizResults.length < limit) {
+        setIsLastPage(true);
+      } else {
+        setIsLastPage(false);
+      }
     } catch (error) {
       console.error('Error fetching results by ID:', error);
       setResultsById(null);
     }
   };
+
   const deleteQuiz = async (quizId: string) => {
     setIsDeleting(true);
     try {
