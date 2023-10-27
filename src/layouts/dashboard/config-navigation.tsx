@@ -6,7 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import QuizIcon from '@mui/icons-material/Quiz';
 import HowToVoteIcon from '@mui/icons-material/HowToVote';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 
 export function useNavData() {
   const data = useMemo(
@@ -59,9 +59,9 @@ export function useNavData() {
         subheader: 'Vatrene Priče',
         items: [
           {
-            title: 'Moje otključane priče',
+            title: 'Vatrene Priče',
             path: paths.dashboard.story.root,
-            icon: <AutoStoriesIcon />,
+            icon: <LocalFireDepartmentIcon />,
             children: [
               {
                 title: `Euro 1996`,
@@ -90,6 +90,18 @@ export function useNavData() {
               {
                 title: 'Svjetsko prvenstvo 2012',
                 path: paths.dashboard.story.twelve,
+              },
+              {
+                title: 'Svjetsko prvenstvo 2014',
+                path: paths.dashboard.story.thirteen,
+              },
+              {
+                title: 'Euro 2016',
+                path: paths.dashboard.story.fourteen,
+              },
+              {
+                title: 'Svjetsko prvenstvo 2018',
+                path: paths.dashboard.story.fifthteen,
               },
             ],
           },

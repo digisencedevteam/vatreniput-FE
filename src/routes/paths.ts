@@ -32,6 +32,9 @@ export const paths = {
       ten: `${ROOTS.DASHBOARD}/story/4`,
       eleven: `${ROOTS.DASHBOARD}/story/5`,
       twelve: `${ROOTS.DASHBOARD}/story/6`,
+      thirteen: `${ROOTS.DASHBOARD}/story/7`,
+      fourteen: `${ROOTS.DASHBOARD}/story/8`,
+      fifthteen: `${ROOTS.DASHBOARD}/story/9`,
     },
     quizGroup: {
       root: `${ROOTS.DASHBOARD}/three`,

@@ -76,12 +76,12 @@ export default function ThreeView() {
 
   const formattedDateTaken = selectedQuizResult
     ? new Date(selectedQuizResult.dateTaken).toLocaleString('en-GB', {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      })
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    })
     : '';
 
   useEffect(() => {
@@ -242,6 +242,7 @@ export default function ThreeView() {
                       availableUntil={data.availableUntil}
                       linkTo={`/dashboard/editQuiz/${data?._id}`}
                       isQuiz={true}
+                      createdAt={data?.createdAt}
                       status={
                         data.status && data.status.length > 0
                           ? data.status[0].status
