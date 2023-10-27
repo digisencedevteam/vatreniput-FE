@@ -64,7 +64,7 @@ export function useNavData() {
             icon: <AutoStoriesIcon />,
             children: [
               {
-                title: `Zlatna Generacija '98`,
+                title: `Euro 1996`,
                 path: paths.dashboard.story.root,
               },
               {

@@ -53,12 +53,12 @@ const StoryContent = ({ story }: StoryContentProps) => {
                     </StorySectionWrapper>
                 }
                 {story?.Prvenstvo?.Matches?.Finals?.QuarterFinal &&
-                    <StorySectionWrapper title='Cetvrt Finala' isCollapsable={true}>
+                    <StorySectionWrapper title='Četvrt Finala' isCollapsable={true}>
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.QuarterFinal} />
                     </StorySectionWrapper>
                 }
                 {story?.Prvenstvo?.Matches.Finals?.SemiFinal &&
-                    <StorySectionWrapper title='Polu Finale' >
+                    <StorySectionWrapper title='Polufinale' >
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.SemiFinal} />
                     </StorySectionWrapper>
                 }
@@ -79,7 +79,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
                     <img src={story?.storyLogo} alt="Logo_Prvenstva" style={{ height: '60px' }} />
                 </Grid>
                 <Grid item>
-                    <Typography variant="h2" color={'primary'}>{story?.storyTitle}</Typography>
+                    <Typography variant="h4" color={'primary'}>{story?.storyTitle}</Typography>
                 </Grid>
             </Grid>
             <Tabs

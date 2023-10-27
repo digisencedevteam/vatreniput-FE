@@ -132,7 +132,88 @@ export const STORIES = [
     storyTitle: '1996',
     storyId: 0,
     story: {
-      storyTitle: 'WorldCup2018',
+      storyTitle: 'Euro 1996',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1996_euro_y7tail.png',
+    },
+  },
+  {
+    storyTitle: '1998',
+    storyId: 1,
+    story: {
+      storyTitle: 'Svjetsko prvenstvo 1998',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1998_wc_pdsxag.png',
+    },
+  },
+  {
+    storyTitle: '2002',
+    storyId: 2,
+    story: {
+      storyTitle: 'Svjetsko prvenstvo 2002',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/2002_wc_ca6nnn.png',
+    },
+  },
+  {
+    storyTitle: '2004',
+    storyId: 3,
+    story: {
+      storyTitle: 'Euro 2004',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2004_euro_pvdhs9.png',
+    },
+  },
+  {
+    storyTitle: '2006',
+    storyId: 4,
+    story: {
+      storyTitle: 'Svjetsko prvenstvo 2006',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2006_wc_cimqsj.png',
+    },
+  },
+  {
+    storyTitle: '2008',
+    storyId: 5,
+    story: {
+      storyTitle: 'Euro 2008',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2008_euro_aaiz5c.png',
+    },
+  },
+  {
+    storyTitle: '2012',
+    storyId: 6,
+    story: {
+      storyTitle: 'Svjetsko prvenstvo 2012',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2012_euro_sfutx2.png',
+    },
+  },
+  {
+    storyTitle: '2014',
+    storyId: 7,
+    story: {
+      storyTitle: 'Svjetsko prvenstvo 2014',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2014_wc_uauv0h.png',
+    },
+  },
+  {
+    storyTitle: '2016',
+    storyId: 8,
+    story: {
+      storyTitle: 'Euro 2016',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2016_euro_hzfjkn.png',
+    },
+  },
+  {
+    storyTitle: '2018',
+    storyId: 9,
+    story: {
+      storyTitle: 'Svjetsko Prvesntsvo 2018',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2018_wc_byzpqe.png',
       Qualifications: {
@@ -495,87 +576,6 @@ export const STORIES = [
         'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
         'U samim završnicama utakmica (u 90. minuti + nadoknada) postignuta su 23 gola — što čini nevjerojatnih 15 posto svih postignutih golova.',
       ],
-    },
-  },
-  {
-    storyTitle: '1998',
-    storyId: 1,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 1998',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1998_wc_pdsxag.png',
-    },
-  },
-  {
-    storyTitle: '2002',
-    storyId: 2,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 2002',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/2002_wc_ca6nnn.png',
-    },
-  },
-  {
-    storyTitle: '2004',
-    storyId: 3,
-    story: {
-      storyTitle: 'Euro 2004',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2004_euro_pvdhs9.png',
-    },
-  },
-  {
-    storyTitle: '2006',
-    storyId: 4,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 2006',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2006_wc_cimqsj.png',
-    },
-  },
-  {
-    storyTitle: '2008',
-    storyId: 5,
-    story: {
-      storyTitle: 'Euro 2008',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2008_euro_aaiz5c.png',
-    },
-  },
-  {
-    storyTitle: '2012',
-    storyId: 6,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 2012',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2012_euro_sfutx2.png',
-    },
-  },
-  {
-    storyTitle: '2014',
-    storyId: 7,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 2014',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2014_wc_uauv0h.png',
-    },
-  },
-  {
-    storyTitle: '2016',
-    storyId: 8,
-    story: {
-      storyTitle: 'Euro 2016',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2016_euro_hzfjkn.png',
-    },
-  },
-  {
-    storyTitle: '2018',
-    storyId: 9,
-    story: {
-      storyTitle: 'Svjetsko prvenstvo 2018',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2018_wc_byzpqe.png',
     },
   },
   {
