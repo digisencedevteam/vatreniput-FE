@@ -45,7 +45,8 @@ export const dummyQuiz: any = {
     'Testirajte svoje znanje o poznatim hrvatskim nogometašima. Otkrijte koliko dobro poznajete naše sportske junake.',
   questions: [
     {
-      questionText: 'Koji hrvatski nogometaš je poznat kao "Vatreni Maestro"?',
+      questionText:
+        'Koji hrvatski nogometaš je poznat kao "Vatreni Maestro"?',
       options: [
         'Ivan Rakitić',
         'Luka Modrić',
@@ -87,7 +88,8 @@ export const dummyQuiz: any = {
       correctAnswer: 'Dinamo Zagreb',
     },
     {
-      questionText: 'Koji hrvatski nogometaš je poznat kao "Mr. No Good"?',
+      questionText:
+        'Koji hrvatski nogometaš je poznat kao "Mr. No Good"?',
       options: [
         'Vedran Ćorluka',
         'Ivan Rakitić',
@@ -110,7 +112,12 @@ export const dummyQuiz: any = {
     {
       questionText:
         'Koji hrvatski nogometaš je postigao najviše golova na Svjetskim prvenstvima?',
-      options: ['Ivica Olić', 'Davor Šuker', 'Luka Modrić', 'Ivan Perišić'],
+      options: [
+        'Ivica Olić',
+        'Davor Šuker',
+        'Luka Modrić',
+        'Ivan Perišić',
+      ],
       correctAnswer: 'Davor Šuker',
     },
     {
@@ -529,21 +536,24 @@ export const STORIES = [
             'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
         },
         {
-          Title: 'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
+          Title:
+            'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
             'Osmina   finala.   Danska.   Sjevernjaci   već   godinama   dižu   igru   i   na   ovom   Svjetskomprvenstvu   također   su   tražili   novi   veliki   rezultat.   Izjednačena   utakmica   otišla   je   doraspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovureprezentaciju   krasilo   u   godinama   koje   su   slijedile.   Nevjerojatna   unutarnja   snaga,samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama–  Dalićevi dečki  su   pronalazili   posebne   spremnike   snage   i   umijeća   te   izlazili   kaopobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiić!“ ušao   je   u   svaki   hrvatski   dom',
         },
         {
-          Title: 'SP 2018 – pobjednički 11-erac protiv Rusije (Rakitić) ',
+          Title:
+            'SP 2018 – pobjednički 11-erac protiv Rusije (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698231320/rakiti%C4%87_sbxpsr.jpg',
           Description:
             '  Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog  unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda.  Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
         },
         {
-          Title: 'SP 2018 – pogodak Mandžukića protiv Engleske u polufinalu',
+          Title:
+            'SP 2018 – pogodak Mandžukića protiv Engleske u polufinalu',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
           Description:
@@ -562,7 +572,10 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
+        MajorAchievements: [
+          '2. mjesto na SP 2018',
+          'Prvak Azije s Al Ainom',
+        ],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
@@ -608,3 +621,7 @@ export const STORIES = [
 
   // ... more stories
 ];
+export const userRoles = {
+  admin: 'admin',
+  regular: 'regular',
+};
