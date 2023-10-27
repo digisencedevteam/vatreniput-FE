@@ -30,7 +30,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
     const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setCurrentTab(newValue);
     };
-    function TabOneContent({ story }: StoryContentProps) {
+    const TabOneContent = ({ story }: StoryContentProps) => {
         return (
             <>
                 {story?.Prvenstvo?.Summary && (

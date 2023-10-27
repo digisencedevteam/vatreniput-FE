@@ -8,7 +8,7 @@ import {
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useParams, useRouter } from 'src/routes/hooks';
-import { TimelineProps } from 'src/types';
+import { Story, TimelineProps } from 'src/types';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 const Timeline = ({
@@ -74,7 +74,7 @@ const Timeline = ({
                     }}
                 />
             </Box>
-            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((story: any, index: any) => (
+            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((story: Story, index: number) => (
                 <Typography
                     key={index}
                     variant="subtitle1"
@@ -89,7 +89,7 @@ const Timeline = ({
                     {story.storyTitle}
                 </Typography>
             ))}
-            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((_: any, index: any) => (
+            {stories.slice(startDisplayIndex, startDisplayIndex + 3).map((_: any, index: number) => (
                 <Box
                     key={index}
                     style={{
