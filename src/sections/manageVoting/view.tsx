@@ -74,7 +74,7 @@ const ManageVoting = () => {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Box>
-        <Typography variant="h4" textAlign={'center'} m={1}>
+        <Typography variant='h4' textAlign={'center'} m={1}>
           {' '}
           {votingId ? 'Azuriraj' : 'Stvori novi'} glasanje
         </Typography>
@@ -82,7 +82,7 @@ const ManageVoting = () => {
         <TextField
           sx={{ my: 1 }}
           value={voting.title || ''}
-          label="Naslov"
+          label='Naslov'
           fullWidth
           onChange={(e) =>
             setVoting({ ...voting, title: e.target.value })
@@ -91,7 +91,7 @@ const ManageVoting = () => {
         <TextField
           sx={{ my: 1 }}
           value={voting.description || ''}
-          label="Opis"
+          label='Opis'
           fullWidth
           onChange={(e) =>
             setVoting({ ...voting, description: e.target.value })
@@ -100,7 +100,7 @@ const ManageVoting = () => {
         <TextField
           sx={{ my: 1 }}
           value={voting.thumbnail || ''}
-          label="Thumbnail URL"
+          label='Thumbnail URL'
           fullWidth
           onChange={(e) =>
             setVoting({ ...voting, thumbnail: e.target.value })
@@ -108,7 +108,7 @@ const ManageVoting = () => {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
-            label="Available Until"
+            label='Available Until'
             value={dayjs(voting.availableUntil || undefined)}
             disablePast
             onChange={(newValue) => {
@@ -120,7 +120,7 @@ const ManageVoting = () => {
           />
         </LocalizationProvider>
         {voting.votingOptions?.map((option, index) => (
-          <Box key={index} display="flex" alignItems="center">
+          <Box key={index} display='flex' alignItems='center'>
             <TextField
               label={`Opcija ${index + 1}`}
               fullWidth
@@ -135,7 +135,7 @@ const ManageVoting = () => {
           </Box>
         ))}
         <Button onClick={handleAddOption}>Dodaj opciju</Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button variant='contained' onClick={handleSubmit}>
           Potvrdi
         </Button>
       </Box>
