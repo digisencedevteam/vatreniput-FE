@@ -16,8 +16,6 @@ const PageThree = lazy(() => import('src/pages/dashboard/three'));
 const PageFour = lazy(() => import('src/pages/dashboard/four'));
 const PageFive = lazy(() => import('src/pages/dashboard/five'));
 const PageSix = lazy(() => import('src/pages/dashboard/six'));
-const PageSeven = lazy(() => import('src/pages/dashboard/seven'));
-const PageEight = lazy(() => import('src/pages/dashboard/eight'));
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
 const VotingPage = lazy(() => import('src/sections/voting/index'));
 const QuizResults = lazy(() => import('src/sections/quiz-results/view'));
@@ -47,15 +45,7 @@ export const dashboardRoutes = [
       { path: 'editQuiz/:quizId', element: <ManageQuiz /> },
       { path: 'editVoting/:votingId', element: <ManageVoting /> },
       { path: 'createVoting', element: <ManageVoting /> },
-
-      {
-        path: 'group',
-        children: [
-          { element: <PageSix />, index: true },
-          { path: 'seven', element: <PageSeven /> },
-          { path: 'eight', element: <PageEight /> },
-        ],
-      },
+      { path: 'story/:storyId', element: <PageSix /> },
 
       {
         path: 'quizGroup',

@@ -41,7 +41,8 @@ const GREY = {
 
 const BLUE = {
   main: '#030d25',
-  lighter: '#040140'
+  lighter: '#040140',
+  secondary: '#1A2339',
 };
 
 const PRIMARY = {
@@ -120,7 +121,7 @@ const COMMON = {
     hoverOpacity: 0.08,
     disabledOpacity: 0.48,
   },
-  blue: BLUE
+  blue: BLUE,
 };
 
 export function palette(mode: 'light' | 'dark') {
@@ -154,7 +155,7 @@ export function palette(mode: 'light' | 'dark') {
       disabled: GREY[600],
     },
     background: {
-      paper: GREY[800],
+      paper: BLUE.secondary,
       default: BLUE.main,
       neutral: alpha(GREY[500], 0.12),
       contast: '#FFF1FF',
