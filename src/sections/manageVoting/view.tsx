@@ -6,14 +6,18 @@ import {
   Container,
   Box,
   Divider,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import useVoting from 'src/hooks/use-voting-data';
 import dayjs from 'dayjs';
+import { userRoles } from 'src/lib/constants';
+import { useRouter } from 'src/routes/hooks';
 
 interface Voting {
   title: string;
@@ -26,15 +30,16 @@ interface Voting {
 const ManageVoting = () => {
   const [voting, setVoting] = useState<Partial<Voting>>({ votingOptions: [] });
   const { createOrUpdateVoting, fetchVotingById } = useVoting();
-  const settings = useSettingsContext();
-  const history = useNavigate();
-  const auth = useContext(AuthContext);
   const { votingId } = useParams();
-  const isAdmin = auth.user && auth.user.email === 'antonio@test.com';
-  const navigate = useNavigate();
+  const settings = useSettingsContext();
+  const auth = useContext(AuthContext);
+  const isAdmin = auth.user && auth.user.role === userRoles.admin;
+  const router = useRouter();
+  const [submitted, setSubmitted] = useState(false);
+  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
 
   if (!isAdmin) {
-    history('/');
+    router.push('/dashboard/one');
   }
 
   const fetchData = async () => {
@@ -45,19 +50,18 @@ const ManageVoting = () => {
       }
     }
   };
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votingId]);
 
   const handleSubmit = async () => {
-    console.log('tu am ' + JSON.stringify(voting));
-
-    const { success, error } = await createOrUpdateVoting(voting, votingId);
-
-    if (success) {
-      navigate('/dashboard/five');
+    const result = await createOrUpdateVoting(voting, votingId);
+    if (result.success) {
+      setSubmitted(true);
     } else {
-      console.error('Error:', error);
+      setErrorSnackbar(result.error || 'Naišli smo na grešku...');
     }
   };
 
@@ -165,9 +169,39 @@ const ManageVoting = () => {
             !voting.thumbnail
           }
         >
-          Potvrdi
+          {votingId ? 'Ažuriraj' : 'Kreiraj'}
         </Button>
       </Box>
+      <Snackbar
+        open={submitted}
+        autoHideDuration={6000}
+        onClose={() => {
+          setSubmitted(false);
+        }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => {
+            setSubmitted(false);
+            router.push('/dashboard/five');
+          }}
+          severity='success'
+        >
+          Kviz uspješno {votingId ? ' azuriran' : ' kreiran'}!🎉🎉🥳 <br />{' '}
+          Zatvori me za povratak na glasanja
+        </Alert>
+      </Snackbar>
+
+      <Snackbar
+        open={!!errorSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setErrorSnackbar(null)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert onClose={() => setErrorSnackbar(null)} severity='error'>
+          {errorSnackbar}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

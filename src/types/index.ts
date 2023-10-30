@@ -263,7 +263,7 @@ export interface TimelineProps {
   stories: TimelineStory[];
 }
 export type VotingOption = {
-  _id: string;
+  _id?: string;
   text: string;
 };
 
@@ -298,3 +298,12 @@ export type VotingResultStat = {
   results: VotingResult[]
 }
 
+export type AdminActionButtonsProps = {
+  linkToEdit: string;
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirmDelete: () => void;
+  handleOpenDeleteModal: () => void;
+  modalText: string;
+  confirmButtonText: string;
+};

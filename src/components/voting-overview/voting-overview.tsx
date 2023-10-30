@@ -9,7 +9,7 @@ interface Props extends CardProps {
   data: VotingResult[] | undefined;
 }
 
-export default function VotingOverview({ data }: Props) {
+export const VotingOverview = ({ data }: Props) => {
   const theme = useTheme();
   return (
     <Card sx={{ mt: 2, bgcolor: theme.palette.background.neutral }}>
@@ -26,13 +26,13 @@ export default function VotingOverview({ data }: Props) {
       ></Stack>
     </Card>
   );
-}
+};
 
 type ProgressItemProps = {
   progress: VotingResult;
 };
 
-function ProgressItem({ progress }: ProgressItemProps) {
+export const ProgressItem = ({ progress }: ProgressItemProps) => {
   return (
     <Stack spacing={1}>
       <Stack direction='row' alignItems='center'>
@@ -55,4 +55,4 @@ function ProgressItem({ progress }: ProgressItemProps) {
       />
     </Stack>
   );
-}
+};

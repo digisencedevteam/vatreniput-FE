@@ -45,7 +45,7 @@ export const dashboardRoutes = [
       { path: 'editQuiz/:quizId', element: <ManageQuiz /> },
       { path: 'editVoting/:votingId', element: <ManageVoting /> },
       { path: 'createVoting', element: <ManageVoting /> },
-{ path: 'story/:storyId', element: <PageSix /> },
+      { path: 'story/:storyId', element: <PageSix /> },
       {
         path: 'votingResults/:votingId/:votingTitle',
         element: <VotingResults />,

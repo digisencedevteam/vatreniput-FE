@@ -11,11 +11,12 @@ import { useRouter } from 'src/routes/hooks';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useContext, useState } from 'react';
 import DeleteModal from '../delete-modal/deleteModal';
+import useVoting from 'src/hooks/use-voting-data';
+import { userRoles } from 'src/lib/constants';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import useVoting from 'src/hooks/use-voting-data';
 
 type ItemProps = {
   item: Voting;
@@ -25,13 +26,14 @@ type ItemProps = {
 
 export const VoteItem = ({ item, onDeleteVoting, linkToEdit }: ItemProps) => {
   const { title, description, availableUntil, thumbnail } = item;
+  const { deleteVoting } = useVoting();
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
   const auth = useContext(AuthContext);
-  const isAdmin = auth.user && auth.user.email === 'antonio@test.com';
+
+  const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const handleToggleMenu = () => setMenuOpen((prev) => !prev);
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
-  const { deleteVoting } = useVoting();
 
   const handleConfirmDelete = async () => {
     if (item._id) {
@@ -166,7 +168,7 @@ export const VoteItem = ({ item, onDeleteVoting, linkToEdit }: ItemProps) => {
           position: 'absolute',
         }}
       >
-        {title && '🔥 Glasaj sada'}
+        🔥 Glasaj sada
       </Label>
       <Box sx={{ p: 1, position: 'relative' }}>
         <Image

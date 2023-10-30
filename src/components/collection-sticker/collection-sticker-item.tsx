@@ -10,11 +10,8 @@ type CollectionStickerItemProps = {
   item: CollectionCard;
 };
 
-export default function CollectionStickerItem({
-  item,
-}: CollectionStickerItemProps) {
+export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
   const theme = useTheme();
-
   const renderImg = (
     <Image
       alt={item.title}
@@ -64,4 +61,4 @@ export default function CollectionStickerItem({
       </Box>
     </Card>
   );
-}
+};

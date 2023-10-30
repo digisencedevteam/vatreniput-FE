@@ -19,6 +19,7 @@ import { AuthContext } from 'src/auth/context/jwt';
 import { Link } from 'react-router-dom';
 import { VoteItem } from 'src/components/available-votes/available-votes';
 import { useRouter } from 'src/routes/hooks';
+import { userRoles } from 'src/lib/constants';
 
 export default function FiveView() {
   const settings = useSettingsContext();
@@ -27,7 +28,7 @@ export default function FiveView() {
   const isMobile = useResponsive('down', 'md');
   const { votings, isLoading, fetchAllVotings } = useVoting();
   const auth = useContext(AuthContext);
-  const isAdmin = auth.user && auth.user.email === 'antonio@test.com';
+  const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const votedVotings = votings
     ? votings.filter((voting) => voting.isVoted === true)
     : [];
@@ -83,7 +84,7 @@ export default function FiveView() {
               />
             }
             action={
-              <Button variant="contained" color="primary">
+              <Button variant='contained' color='primary'>
                 Istraži
               </Button>
             }

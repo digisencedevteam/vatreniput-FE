@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useVoting from 'src/hooks/use-voting-data';
 import { useSettingsContext } from 'src/components/settings';
 import { useParams } from 'react-router';
-import VotingOverview from 'src/components/voting-overview/voting-overview';
+import { VotingOverview } from 'src/components/voting-overview/voting-overview';
 import { VotingResultStat } from 'src/types';
 
 const VotingResultsScreen = () => {

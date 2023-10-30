@@ -44,7 +44,7 @@ const VotingApp = () => {
   }, [votingId]);
 
   if (!voting || !voting.votingOptions) {
-    return null;
+    router.push('/404');
   }
 
   return (
@@ -64,7 +64,7 @@ const VotingApp = () => {
             color='primary'
             aria-label='back to dashboard'
             onClick={() => {
-              router.back();
+              router.push('/dashboard/five');
             }}
           >
             <ArrowBackIcon />
@@ -83,26 +83,28 @@ const VotingApp = () => {
         }}
       >
         <Typography sx={{ marginTop: 2 }} variant='h3' gutterBottom>
-          {voting.title}
+          {voting && voting.title}
         </Typography>
         <Typography variant='body1' gutterBottom>
-          {voting.description}
+          {voting && voting.description}
         </Typography>
         <Grid container spacing={2} sx={{ my: 5 }}>
-          {voting.votingOptions.map((option: any) => (
-            <Grid
-              item
-              xs={6}
-              key={option.text}
-              sx={{ display: 'flex', justifyContent: 'center' }}
-            >
-              <VotingOptionItem
-                option={option}
-                selected={selectedOption === option._id}
-                onSelect={setSelectedOption}
-              />
-            </Grid>
-          ))}
+          {voting &&
+            voting.votingOptions &&
+            voting.votingOptions.map((option: any) => (
+              <Grid
+                item
+                xs={6}
+                key={option.text}
+                sx={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <VotingOptionItem
+                  option={option}
+                  selected={selectedOption === option._id}
+                  onSelect={setSelectedOption}
+                />
+              </Grid>
+            ))}
         </Grid>
         <Box
           sx={{

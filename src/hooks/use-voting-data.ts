@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { VotingResultStat } from 'src/types';
+import { VotingOption, VotingResultStat } from 'src/types';
 import axiosInstance, { endpoints } from 'src/utils/axios';
 
 type Voting = {
@@ -8,7 +8,7 @@ type Voting = {
   description: string;
   availableUntil: string;
   thumbnail: string;
-  votingOptions: any[];
+  votingOptions: VotingOption[];
   isVoted: boolean
 };
 

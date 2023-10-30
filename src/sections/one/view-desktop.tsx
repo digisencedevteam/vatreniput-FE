@@ -1,7 +1,7 @@
 import { Box, Button, Container, Grid, useTheme } from '@mui/material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import Vesela from 'src/assets/illustrations/vesela3.png';
-import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
+import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';

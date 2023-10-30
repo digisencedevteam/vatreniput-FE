@@ -4,15 +4,22 @@ import IconButton from '@mui/material/IconButton';
 import ArrowForwardIos from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIos from '@mui/icons-material/ArrowBackIos';
 
+type CarouselProps = {
+  children: React.ReactElement[];
+  currentIndex: number;
+  isMobile: boolean;
+  isTablet: boolean;
+  isDesktop: boolean;
+};
+
 export const Carousel = ({
   children,
   currentIndex,
   isMobile,
   isTablet,
   isDesktop,
-}: any) => {
+}: CarouselProps) => {
   const itemsPerSlide = isMobile ? 1 : isTablet ? 3 : isDesktop ? 4 : 1;
-
   return (
     <Box display='flex' overflow='hidden' width={'100vw'}>
       <Box
