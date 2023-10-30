@@ -11,10 +11,9 @@ import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useVoting from 'src/hooks/use-voting-data';
 import dayjs from 'dayjs';
-import { useNavigate } from 'react-router-dom';
 
 interface Voting {
   title: string;
@@ -156,7 +155,16 @@ const ManageVoting = () => {
         <Button sx={{ mx: 3, my: 1 }} onClick={handleAddOption}>
           Dodaj opciju
         </Button>
-        <Button variant='contained' onClick={handleSubmit}>
+        <Button
+          variant='contained'
+          onClick={handleSubmit}
+          disabled={
+            !voting.title ||
+            !voting.description ||
+            !voting.votingOptions ||
+            !voting.thumbnail
+          }
+        >
           Potvrdi
         </Button>
       </Box>

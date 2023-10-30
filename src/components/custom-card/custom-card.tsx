@@ -19,6 +19,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import dayjs from 'dayjs';
 import DeleteModal from '../delete-modal/deleteModal';
 import { formatTime } from 'src/utils/format-time';
+import { userRoles } from 'src/lib/constants';
 
 interface CustomCardProps {
   width?: string;
@@ -59,16 +60,20 @@ const CustomCard = ({
   const [timer, setTimer] = useState<number>(0);
   const theme = useTheme();
   const handleToggleMenu = () => setMenuOpen((prev) => !prev);
-  const isAdmin = auth.user && auth.user.email === 'antonio@test.com';
+  const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const rewardedUntil = dayjs(createdAt).add(3, 'day');
-  const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
+  const formattedRewarded = dayjs(rewardedUntil).format(
+    'DD/MM/YYYY-hh:mm'
+  );
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
     if (status === 'inProgress') {
-      const startTimeStamp = startTime ? new Date(startTime).getTime() : 0;
+      const startTimeStamp = startTime
+        ? new Date(startTime).getTime()
+        : 0;
       const currentTime = new Date().getTime();
       setTimer(Math.floor((currentTime - startTimeStamp) / 1000));
 
@@ -129,8 +134,8 @@ const CustomCard = ({
               >
                 {quizId && (
                   <Button
-                    variant='contained'
-                    color='error'
+                    variant="contained"
+                    color="error"
                     onClick={() => setDeleteModalOpen(true)}
                     sx={{
                       borderRadius: '50%',
@@ -139,7 +144,7 @@ const CustomCard = ({
                       minWidth: 0,
                     }}
                   >
-                    <DeleteIcon fontSize='inherit' />
+                    <DeleteIcon fontSize="inherit" />
                   </Button>
                 )}
                 <Button
@@ -153,14 +158,14 @@ const CustomCard = ({
                     minWidth: 0,
                   }}
                 >
-                  <ModeEditIcon fontSize='inherit' />
+                  <ModeEditIcon fontSize="inherit" />
                 </Button>
               </Box>
             </Fade>
             <Button
               onClick={handleToggleMenu}
-              variant='contained'
-              color='primary'
+              variant="contained"
+              color="primary"
               sx={{
                 borderRadius: '50%',
                 padding: '0.8em',
@@ -170,16 +175,16 @@ const CustomCard = ({
               }}
             >
               {menuOpen ? (
-                <CloseIcon fontSize='inherit' />
+                <CloseIcon fontSize="inherit" />
               ) : (
-                <MoreHorizIcon fontSize='inherit' />
+                <MoreHorizIcon fontSize="inherit" />
               )}
             </Button>
           </Box>
         )}
         <Box sx={{ paddingTop: '60%', position: 'relative' }}>
           <CardMedia
-            component='img'
+            component="img"
             sx={{
               position: 'absolute',
               top: 0,
@@ -200,7 +205,7 @@ const CustomCard = ({
               },
             }}
             image={imgUrl}
-            alt='Card Image'
+            alt="Card Image"
           />
         </Box>
         <CardContent
@@ -231,7 +236,9 @@ const CustomCard = ({
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.35)',
                 }}
               >
-                <Typography variant='subtitle2'>Kviz u tijeku</Typography>
+                <Typography variant="subtitle2">
+                  Kviz u tijeku
+                </Typography>
               </Box>
             )}
             {isRewarded && isRewarded[cardId] && (
@@ -245,17 +252,17 @@ const CustomCard = ({
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.35)',
                 }}
               >
-                <Typography variant='subtitle2'>Nagradan</Typography>
+                <Typography variant="subtitle2">Nagradan</Typography>
               </Box>
             )}
           </Box>
           {status === 'inProgress' && (
-            <Typography variant='subtitle2'>{`Vrijeme proteklo ${formatTime(
+            <Typography variant="subtitle2">{`Vrijeme proteklo ${formatTime(
               timer
             )}`}</Typography>
           )}
           {availableUntil && (
-            <Typography variant='subtitle2' sx={{ color: '#999' }}>
+            <Typography variant="subtitle2" sx={{ color: '#999' }}>
               Nagradan do {formattedRewarded}
             </Typography>
           )}
@@ -267,14 +274,14 @@ const CustomCard = ({
               width: '100%',
             }}
           >
-            <Typography variant='h6'>{cardText}</Typography>
+            <Typography variant="h6">{cardText}</Typography>
             {linkTo && (
               <Button
                 component={Link}
                 to={linkTo}
                 endIcon={<ArrowForwardIcon />}
-                variant='contained'
-                color='primary'
+                variant="contained"
+                color="primary"
                 sx={{ mt: 2 }}
               >
                 Otvori
@@ -287,8 +294,8 @@ const CustomCard = ({
         isOpen={isDeleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
         onConfirmDelete={handleConfirmDelete}
-        modalText='Jeste li sigurni da želite izbrisati kviz?'
-        confirmButtonText='Izbriši'
+        modalText="Jeste li sigurni da želite izbrisati kviz?"
+        confirmButtonText="Izbriši"
       />
     </>
   );
