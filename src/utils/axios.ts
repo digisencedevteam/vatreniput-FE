@@ -79,6 +79,7 @@ export const endpoints = {
   },
   votings: {
     all: '/votings/',
+    submitAndDelete: '/votings/vote'
   },
   passwordReset: {
     reqest: '/password-reset/request',

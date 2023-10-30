@@ -4,7 +4,7 @@ import { useSettingsContext } from 'src/components/settings';
 import { Box, Button, Grid, IconButton } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
+import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
@@ -18,7 +18,7 @@ import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-b
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
 
-export default function CollectionView() {
+export const CollectionView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [categoryIndex, setCategoryIndex] = useState(0);
@@ -221,4 +221,4 @@ export default function CollectionView() {
       </div>
     </Container>
   );
-}
+};

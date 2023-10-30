@@ -1,10 +1,9 @@
 import { Box, Button, Container, Grid, useTheme } from '@mui/material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import Vesela from 'src/assets/illustrations/vesela3.png';
-import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
+import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
-import VotingOverview from 'src/components/voting-overview/voting-overview';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import StatisticCards from 'src/components/stats-box/statistic-box';
@@ -19,14 +18,6 @@ export const DesktopViewOne = () => {
   const theme = useTheme();
   const { collectedStatistic, collectedCards } = useCardData();
   const settings = useSettingsContext();
-
-  const hardcodedData = [
-    { label: 'Zlatna Generacija 98', value: 60, totalAmount: 6000 },
-    { label: 'Od Zadra do Madrida', value: 40, totalAmount: 4000 },
-    { label: 'Srebrni San 2018', value: 20, totalAmount: 2000 },
-    { label: 'Put do finala', value: 40, totalAmount: 4000 },
-  ];
-
   const featuredAppsList = [
     {
       id: '1',
@@ -109,19 +100,7 @@ export const DesktopViewOne = () => {
             bgcolor: theme.palette.background.neutral,
             m: '4px',
           }}
-        >
-          <DashboardSectionWrapper
-            title='Zadnje otkljucana prica'
-            link='dashboard/five'
-          >
-            <CustomCard
-              imgUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1693924116/vlaovic2_copy_l1j3rf.jpg'
-              cardText='Zlatna Generacija'
-              cardId='123'
-            />
-          </DashboardSectionWrapper>
-        </Grid>
-
+        ></Grid>
         <Grid
           item
           xs={6.9}
@@ -135,12 +114,9 @@ export const DesktopViewOne = () => {
           <DashboardSectionWrapper
             title='Ispunjenost prica'
             link='dashboard/five'
-          >
-            <VotingOverview data={hardcodedData} />
-          </DashboardSectionWrapper>
+          ></DashboardSectionWrapper>
         </Grid>
       </Grid>
-
       <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
         <Grid
           item
@@ -186,6 +162,7 @@ export const DesktopViewOne = () => {
                 imgUrl={voting.thumbnail}
                 cardText={voting.title}
                 linkTo={`/dashboard/voting/${voting._id}`}
+                linkToEdit={`/dashboard/voting/${voting._id}`}
               />
             )}
           </DashboardSectionWrapper>
