@@ -35,6 +35,7 @@ interface CustomCardProps {
   status?: string;
   createdAt?: string;
   isRewarded?: Record<string, boolean>;
+  linkToEdit: string;
 }
 
 const CustomCard = ({
@@ -44,13 +45,14 @@ const CustomCard = ({
   cardId,
   availableUntil,
   linkTo,
-  isQuiz = false,
+  isQuiz,
   quizId,
   onDeleteQuiz,
   status,
   startTime,
   createdAt,
   isRewarded,
+  linkToEdit,
 }: CustomCardProps) => {
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -141,7 +143,7 @@ const CustomCard = ({
                   </Button>
                 )}
                 <Button
-                  href={linkTo}
+                  href={linkToEdit}
                   variant='contained'
                   color='secondary'
                   sx={{
@@ -269,7 +271,7 @@ const CustomCard = ({
             {linkTo && (
               <Button
                 component={Link}
-                to={'/dashboard/quiz/' + quizId}
+                to={linkTo}
                 endIcon={<ArrowForwardIcon />}
                 variant='contained'
                 color='primary'

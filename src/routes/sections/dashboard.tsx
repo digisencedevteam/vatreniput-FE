@@ -1,10 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-// auth
 import { AuthGuard } from 'src/auth/guard';
-// layouts
 import DashboardLayout from 'src/layouts/dashboard';
-// components
 import { LoadingScreen } from 'src/components/loading-screen';
 import ProfileView from 'src/sections/profile/view';
 import ManageQuiz from 'src/sections/manageQuiz/view';
@@ -21,6 +18,9 @@ const PageEight = lazy(() => import('src/pages/dashboard/eight'));
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
 const VotingPage = lazy(() => import('src/sections/voting/index'));
 const QuizResults = lazy(() => import('src/sections/quiz-results/view'));
+const VotingResults = lazy(
+  () => import('src/sections/voting/voting-results-screen')
+);
 
 export const dashboardRoutes = [
   {
@@ -47,6 +47,10 @@ export const dashboardRoutes = [
       { path: 'editQuiz/:quizId', element: <ManageQuiz /> },
       { path: 'editVoting/:votingId', element: <ManageVoting /> },
       { path: 'createVoting', element: <ManageVoting /> },
+      {
+        path: 'votingResults/:votingId/:votingTitle',
+        element: <VotingResults />,
+      },
 
       {
         path: 'group',

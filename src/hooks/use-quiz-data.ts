@@ -98,11 +98,11 @@ const useFetchQuizzes = (
     try {
       if (quizId) {
         response = await axiosInstance.put(
-          endpoints.quiz.deleteAndUpdate + quizId,
+          endpoints.votings.all + quizId,
           quizToSend
         );
       } else {
-        response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
+        response = await axiosInstance.post(endpoints.votings.all, quizToSend);
       }
 
       if ([200, 201].includes(response.status)) {

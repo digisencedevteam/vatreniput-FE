@@ -4,10 +4,10 @@ import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import Image from 'src/components/image';
-import { CollectionCard } from 'src/types/'
+import { CollectionCard } from 'src/types/';
 
 type CollectionStickerItemProps = {
-  item: CollectionCard
+  item: CollectionCard;
 };
 
 export default function CollectionStickerItem({
@@ -18,7 +18,13 @@ export default function CollectionStickerItem({
   const renderImg = (
     <Image
       alt={item.title}
-      src={item.isCollected === undefined ? item.imageURLs[0] : item.isCollected ? item.imageURLs[0] : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'}
+      src={
+        item.isCollected === undefined
+          ? item.imageURLs[0]
+          : item.isCollected
+          ? item.imageURLs[0]
+          : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'
+      }
       overlay={`linear-gradient(to bottom, ${alpha(
         theme.palette.grey[900],
         0
@@ -36,20 +42,20 @@ export default function CollectionStickerItem({
         '&:hover': {
           transform: 'scale(1.05)',
         },
-        border: 1,
-        borderColor: theme.palette.primary.main,
         top: 20,
       }}
     >
       <Box sx={{ position: 'relative' }}>
         <CardContent
           sx={{
+            px: 0,
             left: 0,
             width: 1,
             bottom: 0,
             zIndex: 9,
             position: 'absolute',
             color: 'common.white',
+            textAlign: 'center',
           }}
         >
           <Typography variant='subtitle2'>{item.title}</Typography>

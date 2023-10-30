@@ -32,10 +32,10 @@ const StatusCard: React.FC<StatusCardProps> = ({ icon, number, text }) => {
           justifyContent: 'center',
         }}
       >
-        <Typography variant='h4' align='center' fontWeight='bold'>
+        <Typography variant='h6' align='center' fontWeight='bold'>
           {number}
         </Typography>
-        <Typography variant='caption' align='center'>
+        <Typography variant='subtitle2' align='center'>
           {text}
         </Typography>
       </CardContent>

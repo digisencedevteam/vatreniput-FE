@@ -118,3 +118,39 @@ export type ItemProps = {
   totalAmount: number;
   value: number;
 };
+
+export type VotingOption = {
+  _id: string;
+  text: string;
+};
+
+export type Voting = {
+  _id: string;
+  title: string;
+  description: string;
+  availableUntil: string;
+  thumbnail: string;
+  votingOptions: VotingOption[];
+  linkToEdit?: string
+};
+
+export type UseVotingReturn = {
+  isLoading: boolean;
+  votings: Voting[] | undefined;
+  createVoting: (
+    voting: Partial<Voting>
+  ) => Promise<{ success: boolean; error?: string }>;
+  fetchAllVotings: () => void;
+};
+
+export type VotingResult = {
+  votingOptionText: string
+  votingOptionThumbnail: string
+  count: number
+  percentage: string
+}
+
+export type VotingResultStat = {
+  totalVotes: number
+  results: VotingResult[]
+}
