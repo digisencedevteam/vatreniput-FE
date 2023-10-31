@@ -6,8 +6,10 @@ import { paths } from 'src/routes/paths';
 
 export const HOST_API = process.env.REACT_APP_HOST_API;
 
-export const isEnvDevelopment = process.env.REACT_APP_ENV === 'development';
-export const isEnvProduction = process.env.REACT_APP_ENV === 'production';
+export const isEnvDevelopment =
+  process.env.REACT_APP_ENV === 'development';
+export const isEnvProduction =
+  process.env.REACT_APP_ENV === 'production';
 
 type AtEnvProps = {
   defaultValue: string;
@@ -16,7 +18,11 @@ type AtEnvProps = {
   production?: string | undefined;
 };
 
-export const atEnv = ({ defaultValue, development, production }: AtEnvProps) => {
+export const atEnv = ({
+  defaultValue,
+  development,
+  production,
+}: AtEnvProps) => {
   if (isEnvDevelopment) {
     return development || defaultValue;
   }
@@ -39,14 +45,16 @@ export const FIREBASE_API = {
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  messagingSenderId:
+    process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APPID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 export const AMPLIFY_API = {
   userPoolId: process.env.REACT_APP_AWS_AMPLIFY_USER_POOL_ID,
-  userPoolWebClientId: process.env.REACT_APP_AWS_AMPLIFY_USER_POOL_WEB_CLIENT_ID,
+  userPoolWebClientId:
+    process.env.REACT_APP_AWS_AMPLIFY_USER_POOL_WEB_CLIENT_ID,
   region: process.env.REACT_APP_AWS_AMPLIFY_REGION,
 };
 

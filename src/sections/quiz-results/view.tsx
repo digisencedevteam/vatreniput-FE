@@ -45,26 +45,26 @@ export default function QuizResults() {
   const NoResultLayout = ({ message }: { message: string }) => {
     return (
       <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        height="100%"
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        justifyContent='center'
+        height='100%'
         padding={2}
       >
         <Box mb={2}>
           <img
-            src="https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png"
-            alt="Instruction"
+            src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
+            alt='Instruction'
             style={{ width: '200px', height: 'auto' }}
           />
         </Box>
-        <Typography variant="h3" color="primary">
+        <Typography variant='h3' color='primary'>
           {message}
         </Typography>
       </Box>
     );
-  }
+  };
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -134,14 +134,14 @@ export default function QuizResults() {
                 ) : (
                   <TableRow>
                     <TableCell colSpan={5} align='center'>
-                      <NoResultLayout message="Kviz nema rezultate" />
+                      <NoResultLayout message='Kviz nema rezultate' />
                     </TableCell>
                   </TableRow>
                 )
               ) : (
                 <TableRow>
                   <TableCell colSpan={5} align='center'>
-                    <NoResultLayout message="Izaberi kviz da vidiš rezultate" />
+                    <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
                   </TableCell>
                 </TableRow>
               )}

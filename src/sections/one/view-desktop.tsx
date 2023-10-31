@@ -95,7 +95,6 @@ export const DesktopViewOne = () => {
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
-
       <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
         <Grid
           item

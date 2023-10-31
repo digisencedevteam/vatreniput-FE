@@ -3,212 +3,200 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
 import { Button, Grid } from '@mui/material';
-import { green, yellow } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
-import VotingOverview from 'src/components/voting-overview/voting-overview';
-import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import { EmojiEvents, SportsSoccer } from '@mui/icons-material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import useVoting from 'src/hooks/use-voting-data';
-import { LoadingScreen } from 'src/components/loading-screen';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from 'src/auth/context/jwt';
 import { Link } from 'react-router-dom';
-import CustomCard from 'src/components/custom-card/custom-card';
+import { useRouter } from 'src/routes/hooks';
 import { userRoles } from 'src/lib/constants';
+import CustomCard from 'src/components/custom-card/custom-card';
+import { LoadingScreen } from 'src/components/loading-screen';
+import { paths } from 'src/routes/paths';
 
-export default function FiveView() {
+const FiveView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
-
-  //TODO: implement data from API and remove dummy
-  const dummyData = [
-    {
-      imgUrl:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1692357089/SLAVLJE4_copy_g1wd89.jpg',
-      cardText: 'Najbolji igrač',
-      linkTo: '/link-1',
-    },
-    {
-      imgUrl:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1692358241/strini%C4%87_mbappe_guigky.jpg',
-      cardText: 'Najbolja utakmica',
-      linkTo: '/link-2',
-    },
-    {
-      imgUrl:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1692359054/gvardiol_4_rmm414.jpg',
-      cardText: 'Najbrzi igrač',
-      linkTo: '/link-2',
-    },
-    {
-      imgUrl:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584480/sammir_kamerun_2_w7dryp.jpg',
-      cardText: 'Najbolji golman',
-      linkTo: '/link-2',
-    },
-    {
-      imgUrl:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693584123/livaja_1_a8kxbj.jpg',
-      cardText: 'Najbolji napadač',
-      linkTo: '/link-2',
-    },
-  ];
-
-  //TODO: implement data from API and remove dummy
-  const hardcodedData = [
-    { label: 'Luka Modric', value: 60, totalAmount: 6000 },
-    { label: 'Mateo Kovacic', value: 40, totalAmount: 4000 },
-    { label: 'Davor Suker', value: 20, totalAmount: 2000 },
-  ];
-  const isDesktop = useResponsive('up', 'md');
+  const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-  const { votings, isLoading } = useVoting();
+  const { votings, fetchAllVotings, deleteVoting, isLoading } = useVoting();
   const auth = useContext(AuthContext);
-  const isAdmin = auth.user && auth.user.role === userRoles.admin;
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  const isAdmin = auth.user && auth.user.role === userRoles.admin;
+  const votedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === true)
+    : [];
+  const notVotedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === false)
+    : [];
+  const fetchData = async () => {
+    await fetchAllVotings();
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Typography variant="h2" color={theme.palette.primary.main}>
-          Glasanja
-        </Typography>
-
-        {isAdmin && (
-          <Button
-            variant="contained"
-            color="primary"
-            component={Link}
-            to={'/dashboard/createVoting '}
+      {isLoading ? (
+        <LoadingScreen sx={{ mt: '50%' }} />
+      ) : (
+        <>
+          <Box
+            display='flex'
+            justifyContent='space-between'
+            alignItems='center'
+            sx={{ m: 1 }}
           >
-            Novo glasanje
-          </Button>
-        )}
-      </Box>
-      {!isMobile && (
-        <Grid item xs={12} md={7}>
-          <WelcomeComponent
-            title={`Pozdrav 👋`}
-            description="Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!"
-            img={
-              <img
-                src={
-                  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png'
-                }
-                alt="Vesela"
-              />
-            }
-            action={
-              <Button variant="contained" color="primary">
-                Istraži
+            <Typography variant='h2' color={theme.palette.primary.main}>
+              Glasanja
+            </Typography>
+
+            {isAdmin && (
+              <Button
+                variant='contained'
+                color='primary'
+                component={Link}
+                to={`${paths.dashboard.voting.createVoting}`}
+              >
+                Novo glasanje
               </Button>
-            }
-          />
-        </Grid>
-      )}
-
-      <Box
-        borderRadius={2}
-        p={2}
-        my={2}
-        sx={{
-          bgcolor: theme.palette.background.default,
-          [theme.breakpoints.up('md')]: {
-            bgcolor: theme.palette.background.neutral,
-          },
-        }}
-      >
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <StatusCard
-            icon={
-              <EmojiEvents
-                fontSize="large"
-                sx={{
-                  color: yellow[400],
-                  display: { xs: 'none', sm: 'inline' },
-                }}
+            )}
+          </Box>
+          {!isMobile && (
+            <Grid item xs={12} md={7}>
+              <WelcomeComponent
+                title={`Pozdrav 👋`}
+                description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+                img={
+                  <img
+                    src={
+                      'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png'
+                    }
+                    alt='Vesela'
+                  />
+                }
               />
-            }
-            number="Luka Modric"
-            text="Najbolji igrac"
-          />
-          <StatusCard
-            icon={
-              <SportsSoccer
-                fontSize="large"
-                sx={{
-                  color: green[500],
-                  display: { xs: 'none', sm: 'inline' },
-                }}
-              />
-            }
-            number="Qatar 2022."
-            text="Najpopularnije prvenstvo"
-          />
-        </Box>
-      </Box>
-
-      <SectionWrapper title="Najnovije">
-        <ScrollableContainer>
-          {dummyData.map((data, index) => (
+            </Grid>
+          )}
+          <SectionWrapper title='Dostupna glasanja'>
+            <Grid container>
+              {!notVotedVotings?.length ? (
+                <Typography
+                  variant='caption'
+                  align='center'
+                  color='textSecondary'
+                  m={1}
+                >
+                  Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim
+                  izađe novo glasanje.
+                </Typography>
+              ) : (
+                <Grid container spacing={2}>
+                  {votings &&
+                    votings.map((voting, index) => (
+                      <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                        <CustomCard
+                          cardId={voting._id}
+                          votingId={voting._id}
+                          imgUrl={voting.thumbnail}
+                          cardText={voting.title}
+                          onDelete={deleteVoting}
+                          linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
+                          linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
+                        />
+                      </Grid>
+                    ))}
+                </Grid>
+              )}
+            </Grid>
+          </SectionWrapper>
+          <SectionWrapper title='Već glasani'>
+            {!votedVotings?.length ? (
+              <Typography
+                variant='caption'
+                align='center'
+                color='textSecondary'
+                m={1}
+              >
+                Za sada nema ispunjenih glasanja!
+              </Typography>
+            ) : (
+              <ScrollableContainer>
+                {votedVotings.map((data, index) => (
+                  <Box
+                    key={index}
+                    sx={{ flex: '0 0 auto', width: '60%', maxWidth: '300px' }}
+                  >
+                    <CustomCardSmall
+                      imgUrl={data.thumbnail}
+                      cardText={data.title}
+                      onCardClick={() =>
+                        router.push(
+                          `${paths.dashboard.voting.votingResults}/${data._id}/${data.title}`
+                        )
+                      }
+                    />
+                  </Box>
+                ))}
+              </ScrollableContainer>
+            )}
+          </SectionWrapper>
+          {/*  TODO: Implement some statistics to replace this 
+          <Box
+            borderRadius={2}
+            p={2}
+            my={2}
+            sx={{
+              bgcolor: theme.palette.background.default,
+              [theme.breakpoints.up('md')]: {
+                bgcolor: theme.palette.background.neutral,
+              },
+            }}
+          >
             <Box
-              key={index}
-              sx={{
-                flex: '0 0 auto',
-                width: '60%',
-                maxWidth: '300px',
-              }}
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
             >
-              <CustomCardSmall
-                imgUrl={data.imgUrl}
-                cardText={data.cardText}
-                linkTo={data.linkTo}
+              <StatusCard
+                icon={
+                  <EmojiEvents
+                    fontSize='medium'
+                    sx={{
+                      color: yellow[400],
+                      display: { xs: 'none', sm: 'inline' },
+                    }}
+                  />
+                }
+                number='Luka Modrić'
+                text='Najbolji igrač'
+              />
+              <StatusCard
+                icon={
+                  <SportsSoccer
+                    fontSize='medium'
+                    sx={{
+                      color: green[500],
+                      display: { xs: 'none', sm: 'inline' },
+                    }}
+                  />
+                }
+                number='Qatar 2022.'
+                text='Najpopularnije prvenstvo'
               />
             </Box>
-          ))}
-        </ScrollableContainer>
-      </SectionWrapper>
-
-      {isDesktop && (
-        <VotingOverview
-          title="Najbolji od najboljih"
-          subheader="Rezultat Glasanja"
-          data={hardcodedData}
-        />
+          </Box> */}
+        </>
       )}
-
-      <SectionWrapper title="Sva glasanja">
-        <Grid container spacing={2}>
-          {votings &&
-            votings.map((voting, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <CustomCard
-                  isQuiz={true}
-                  cardId={voting._id}
-                  imgUrl={voting.thumbnail}
-                  cardText={voting.title}
-                  linkTo={`/voting/${voting._id}`}
-                />
-              </Grid>
-            ))}
-        </Grid>
-      </SectionWrapper>
     </Container>
   );
-}
+};
+export default FiveView;

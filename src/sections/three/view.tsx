@@ -1,11 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import {
-  Container,
-  Typography,
-  Box,
-  Grid,
-  Button,
-} from '@mui/material';
+import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -27,8 +21,9 @@ import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs from 'dayjs';
 import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-overview';
 import { userRoles } from 'src/lib/constants';
+import { paths } from 'src/routes/paths';
 
-export default function ThreeView() {
+const ThreeView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
@@ -47,16 +42,10 @@ export default function ThreeView() {
     isDeleting,
     fetchQuizzes,
   } = useFetchQuizzes(currentPage, itemsPerPage);
-  const [rewardStatus, setRewardStatus] = useState<
-    Record<string, boolean>
-  >({});
+  const [rewardStatus, setRewardStatus] = useState<Record<string, boolean>>({});
   const totalResolved = resolvedQuizzes ? resolvedQuizzes.length : 0;
-  const totalUnresolved = unresolvedQuizzes
-    ? unresolvedQuizzes.length
-    : 0;
-  const openModal = (
-    quizData: QuizResultsModalProps['quizResults']
-  ) => {
+  const totalUnresolved = unresolvedQuizzes ? unresolvedQuizzes.length : 0;
+  const openModal = (quizData: QuizResultsModalProps['quizResults']) => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
@@ -76,13 +65,11 @@ export default function ThreeView() {
       setRewardStatus(newRewardStatus);
     }
   }, [unresolvedQuizzes]);
-  const _ecommerceSalesOverview = resolvedQuizzes?.map(
-    (quiz, index) => ({
-      label: quiz,
-      totalAmount: quiz.score,
-      value: quiz.duration,
-    })
-  );
+  const resolvedQuiz = resolvedQuizzes?.map((quiz, index) => ({
+    label: quiz,
+    totalAmount: quiz.score,
+    value: quiz.duration,
+  }));
 
   useEffect(() => {
     fetchQuizzes();
@@ -122,14 +109,14 @@ export default function ThreeView() {
         formattedDateTaken={formattedDateTaken}
       />
       <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
         sx={{ marginTop: 1 }}
       >
         <Typography
           sx={{ margin: 1 }}
-          variant="h2"
+          variant='h2'
           color={theme.palette.primary.main}
         >
           Kvizovi
@@ -137,20 +124,17 @@ export default function ThreeView() {
 
         {auth.user && auth.user.role === userRoles.admin && (
           <Button
-            variant="contained"
-            color="primary"
+            variant='contained'
+            color='primary'
             component={Link}
-            to={'/dashboard/createQuiz '}
+            to={`${paths.dashboard.quizGroup.createQuiz}`}
           >
             Kreiraj novi kviz
           </Button>
         )}
       </Box>
-      <Grid item xs={12} md={6} lg={8} sx={{ marginTop: 5 }}>
-        <QuizBestOverview
-          title="Najnoviji rezultati"
-          data={_ecommerceSalesOverview}
-        />
+      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
+        <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
       </Grid>
       <Box
         borderRadius={2}
@@ -168,25 +152,25 @@ export default function ThreeView() {
         <StatusCard
           icon={
             <CheckIcon
-              fontSize="large"
+              fontSize='large'
               sx={{ display: { xs: 'none', sm: 'inline' } }}
             />
           }
           number={totalResolved}
-          text="Riješenih!"
+          text='Riješenih!'
         />
         <StatusCard
           icon={
             <CloseIcon
-              fontSize="large"
+              fontSize='large'
               sx={{ display: { xs: 'none', sm: 'inline' } }}
             />
           }
           number={totalUnresolved}
-          text="Dostupnih!"
+          text='Dostupnih!'
         />
       </Box>
-      <SectionWrapper title="Riješeni">
+      <SectionWrapper title='Riješeni'>
         <ScrollableContainer>
           {!!resolvedQuizzes?.length &&
             !isLoadingResolved &&
@@ -205,8 +189,8 @@ export default function ThreeView() {
                 }}
               >
                 <CustomCardSmall
-                  width="96%"
-                  height="100%"
+                  width='96%'
+                  height='100%'
                   imgUrl={data?.quiz?.thumbnail}
                   cardText={data?.quiz?.title}
                   onCardClick={() => openModal(data)}
@@ -215,12 +199,12 @@ export default function ThreeView() {
             ))}
           {!resolvedQuizzes?.length && !isLoadingResolved && (
             <Typography
-              variant="body1"
-              align="center"
-              color="textSecondary"
+              variant='body1'
+              align='center'
+              color='textSecondary'
               m={5}
             >
-              Zasada nema riješenih kvizova!
+              Za sada nema riješenih kvizova!
             </Typography>
           )}
           {isLoadingResolved && <LoadingScreen />}
@@ -233,7 +217,7 @@ export default function ThreeView() {
           />
         )}
       </SectionWrapper>
-      <SectionWrapper title="Dostupni">
+      <SectionWrapper title='Dostupni'>
         <Grid container spacing={2}>
           {!!unresolvedQuizzes?.length &&
             !isLoadingUnresolved &&
@@ -250,13 +234,13 @@ export default function ThreeView() {
                   >
                     <CustomCard
                       quizId={data._id}
-                      onDeleteQuiz={deleteQuiz}
+                      onDelete={deleteQuiz}
                       imgUrl={data.thumbnail}
                       cardText={data.title!}
                       cardId={data?._id}
                       availableUntil={data.availableUntil}
-                      linkTo={`/dashboard/editQuiz/${data?._id}`}
-                      isQuiz={true}
+                      linkTo={`${paths.dashboard.quizGroup.quiz}/${data?._id}`}
+                      linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data?._id}`}
                       createdAt={data?.createdAt}
                       status={
                         data.status && data.status.length > 0
@@ -277,13 +261,13 @@ export default function ThreeView() {
 
           {!unresolvedQuizzes?.length && !isLoadingUnresolved && (
             <Typography
-              variant="body1"
-              align="center"
-              color="textSecondary"
+              variant='body1'
+              align='center'
+              color='textSecondary'
               m={5}
             >
-              Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te
-              čim izađe novi kviz.
+              Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe
+              novi kviz.
             </Typography>
           )}
           {isLoadingUnresolved && <LoadingScreen />}
@@ -292,4 +276,5 @@ export default function ThreeView() {
       </SectionWrapper>
     </Container>
   );
-}
+};
+export default ThreeView;

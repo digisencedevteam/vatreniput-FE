@@ -28,14 +28,15 @@ interface CustomCardProps {
   cardText: string;
   cardId: string;
   availableUntil?: string;
-  isQuiz?: boolean;
   linkTo?: string;
   quizId?: string;
-  onDeleteQuiz?: (quizId: string) => void;
+  votingId?: string;
+  onDelete?: (id: string) => void;
   startTime?: string;
   status?: string;
   createdAt?: string;
   isRewarded?: Record<string, boolean>;
+  linkToEdit: string;
 }
 
 const CustomCard = ({
@@ -45,13 +46,14 @@ const CustomCard = ({
   cardId,
   availableUntil,
   linkTo,
-  isQuiz = false,
   quizId,
-  onDeleteQuiz,
+  votingId,
+  onDelete,
   status,
   startTime,
   createdAt,
   isRewarded,
+  linkToEdit,
 }: CustomCardProps) => {
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -60,21 +62,15 @@ const CustomCard = ({
   const handleToggleMenu = () => setMenuOpen((prev) => !prev);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const rewardedUntil = dayjs(createdAt).add(3, 'day');
-  const formattedRewarded = dayjs(rewardedUntil).format(
-    'DD/MM/YYYY-hh:mm'
-  );
+  const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-
     if (status === 'inProgress') {
-      const startTimeStamp = startTime
-        ? new Date(startTime).getTime()
-        : 0;
+      const startTimeStamp = startTime ? new Date(startTime).getTime() : 0;
       const currentTime = new Date().getTime();
       setTimer(Math.floor((currentTime - startTimeStamp) / 1000));
-
       interval = setInterval(() => {
         const currentTime = new Date().getTime();
         setTimer(Math.floor((currentTime - startTimeStamp) / 1000));
@@ -89,8 +85,13 @@ const CustomCard = ({
   }, [status]);
 
   const handleConfirmDelete = () => {
-    if (onDeleteQuiz && quizId) {
-      onDeleteQuiz(quizId);
+    if (onDelete) {
+      if (quizId) {
+        onDelete(quizId);
+      }
+      if (votingId) {
+        onDelete(votingId);
+      }
     }
     setDeleteModalOpen(false);
   };
@@ -111,7 +112,7 @@ const CustomCard = ({
           bgcolor: theme.palette.background.neutral,
         }}
       >
-        {isQuiz && isAdmin && (
+        {isAdmin && (
           <Box
             sx={{
               position: 'absolute',
@@ -131,25 +132,10 @@ const CustomCard = ({
                   gap: '8px',
                 }}
               >
-                {quizId && (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={() => setDeleteModalOpen(true)}
-                    sx={{
-                      borderRadius: '50%',
-                      padding: '0.8em',
-                      border: '2px solid white',
-                      minWidth: 0,
-                    }}
-                  >
-                    <DeleteIcon fontSize="inherit" />
-                  </Button>
-                )}
                 <Button
-                  href={linkTo}
-                  variant="contained"
-                  color="secondary"
+                  variant='contained'
+                  color='error'
+                  onClick={() => setDeleteModalOpen(true)}
                   sx={{
                     borderRadius: '50%',
                     padding: '0.8em',
@@ -157,14 +143,27 @@ const CustomCard = ({
                     minWidth: 0,
                   }}
                 >
-                  <ModeEditIcon fontSize="inherit" />
+                  <DeleteIcon fontSize='inherit' />
+                </Button>
+                <Button
+                  href={linkToEdit}
+                  variant='contained'
+                  color='secondary'
+                  sx={{
+                    borderRadius: '50%',
+                    padding: '0.8em',
+                    border: '2px solid white',
+                    minWidth: 0,
+                  }}
+                >
+                  <ModeEditIcon fontSize='inherit' />
                 </Button>
               </Box>
             </Fade>
             <Button
               onClick={handleToggleMenu}
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               sx={{
                 borderRadius: '50%',
                 padding: '0.8em',
@@ -174,16 +173,16 @@ const CustomCard = ({
               }}
             >
               {menuOpen ? (
-                <CloseIcon fontSize="inherit" />
+                <CloseIcon fontSize='inherit' />
               ) : (
-                <MoreHorizIcon fontSize="inherit" />
+                <MoreHorizIcon fontSize='inherit' />
               )}
             </Button>
           </Box>
         )}
         <Box sx={{ paddingTop: '60%', position: 'relative' }}>
           <CardMedia
-            component="img"
+            component='img'
             sx={{
               position: 'absolute',
               top: 0,
@@ -204,7 +203,7 @@ const CustomCard = ({
               },
             }}
             image={imgUrl}
-            alt="Card Image"
+            alt='Card Image'
           />
         </Box>
         <CardContent
@@ -235,9 +234,7 @@ const CustomCard = ({
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.35)',
                 }}
               >
-                <Typography variant="subtitle2">
-                  Kviz u tijeku
-                </Typography>
+                <Typography variant='subtitle2'>Kviz u tijeku</Typography>
               </Box>
             )}
             {isRewarded && isRewarded[cardId] && (
@@ -251,17 +248,17 @@ const CustomCard = ({
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.35)',
                 }}
               >
-                <Typography variant="subtitle2">Nagradan</Typography>
+                <Typography variant='subtitle2'>Nagradan</Typography>
               </Box>
             )}
           </Box>
           {status === 'inProgress' && (
-            <Typography variant="subtitle2">{`Vrijeme proteklo ${formatTime(
+            <Typography variant='subtitle2'>{`Vrijeme proteklo ${formatTime(
               timer
             )}`}</Typography>
           )}
           {availableUntil && (
-            <Typography variant="subtitle2" sx={{ color: '#999' }}>
+            <Typography variant='subtitle2' sx={{ color: '#999' }}>
               Nagradan do {formattedRewarded}
             </Typography>
           )}
@@ -273,14 +270,14 @@ const CustomCard = ({
               width: '100%',
             }}
           >
-            <Typography variant="h6">{cardText}</Typography>
+            <Typography variant='h6'>{cardText}</Typography>
             {linkTo && (
               <Button
                 component={Link}
-                to={'/dashboard/quiz/' + quizId}
+                to={linkTo}
                 endIcon={<ArrowForwardIcon />}
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 sx={{ mt: 2 }}
               >
                 Otvori
@@ -293,8 +290,8 @@ const CustomCard = ({
         isOpen={isDeleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
         onConfirmDelete={handleConfirmDelete}
-        modalText="Jeste li sigurni da želite izbrisati kviz?"
-        confirmButtonText="Izbriši"
+        modalText='Jeste li sigurni da želite izbrisati kviz?'
+        confirmButtonText='Izbriši'
       />
     </>
   );

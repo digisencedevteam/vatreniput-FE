@@ -21,21 +21,20 @@ import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useNavigate } from 'react-router-dom';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {
-  LocalizationProvider,
-  DateTimePicker,
-} from '@mui/x-date-pickers';
+import { LocalizationProvider, DateTimePicker } from '@mui/x-date-pickers';
 import { useParams } from 'react-router-dom';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs, { Dayjs } from 'dayjs';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Quiz, Question } from '../quiz/types';
 import { userRoles } from 'src/lib/constants';
+import { useRouter } from 'src/routes/hooks';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { LoadingScreen } from 'src/components/loading-screen';
+import { paths } from 'src/routes/paths';
 
 const ManageQuiz = () => {
-  const [numQuestions, setNumQuestions] = useState<number | null>(
-    null
-  );
+  const [numQuestions, setNumQuestions] = useState<number | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [quiz, setQuiz] = useState<Partial<Quiz>>({});
   const settings = useSettingsContext();
@@ -43,20 +42,19 @@ const ManageQuiz = () => {
   const history = useNavigate();
   const auth = useContext(AuthContext);
   const [error, setError] = useState(false);
-  const [availableUntil, setAvailableUntil] = useState<
-    Date | Dayjs | null
-  >(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(
+  const [availableUntil, setAvailableUntil] = useState<Date | Dayjs | null>(
     null
   );
+  const [submitted, setSubmitted] = useState(false);
+  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
   const {
     fetchUnresolvedQuizById,
     unresolvedQuiz,
     createOrUpdateQuiz,
+    isLoadingUnresolved,
   } = useFetchQuizzes();
   const [showForm, setShowForm] = useState(true);
-
+  const router = useRouter();
   const { quizId } = useParams();
 
   useEffect(() => {
@@ -67,8 +65,8 @@ const ManageQuiz = () => {
   }, [quizId]);
 
   useEffect(() => {
-    if (!auth.user || auth.user.email !== userRoles.admin) {
-      history('/');
+    if (!auth.user || auth.user.role !== userRoles.admin) {
+      router.push(`${paths.dashboard.five}`);
     }
     if (unresolvedQuiz) {
       setQuiz(unresolvedQuiz);
@@ -80,6 +78,7 @@ const ManageQuiz = () => {
       }
       setAvailableUntil(dateToEdit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, history, unresolvedQuiz]);
 
   const handleSubmit = async () => {
@@ -126,10 +125,7 @@ const ManageQuiz = () => {
 
   const handleAddOption = (index: number) => {
     const newQuestions = [...(quiz.questions || [])];
-    newQuestions[index].options = [
-      ...newQuestions[index].options,
-      '',
-    ];
+    newQuestions[index].options = [...newQuestions[index].options, ''];
     setQuiz({ ...quiz, questions: newQuestions });
   };
 
@@ -172,28 +168,42 @@ const ManageQuiz = () => {
           justifyContent: 'center',
         }}
       >
-        <Typography variant='h3'>
-          Koliko pitanja želite u kvizu?
-        </Typography>
-        <TextField
-          type='number'
-          label='Broj pitanja'
-          required
-          error={error}
-          helperText={error ? 'Molimo unesite broj pitanja' : ''}
-          sx={{ width: '90%', my: 2 }}
-          onChange={(e) =>
-            setNumQuestions(parseInt(e.target.value, 10))
-          }
-        />
-        <Box>
-          <Button
-            variant='outlined'
-            onClick={() => handleSetQuestions(numQuestions!)}
-          >
-            Postavi pitanja
-          </Button>
-        </Box>
+        {isLoadingUnresolved ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <Grid item sx={{ m: 3, alignSelf: 'start' }}>
+              <IconButton
+                edge='start'
+                color='primary'
+                aria-label='back to dashboard'
+                onClick={() => {
+                  router.push('/dashboard/five');
+                }}
+              >
+                <ArrowBackIcon />
+              </IconButton>
+            </Grid>
+            <Typography variant='h3'>Koliko pitanja želite u kvizu?</Typography>
+            <TextField
+              type='number'
+              label='Broj pitanja'
+              required
+              error={error}
+              helperText={error ? 'Molimo unesite broj pitanja' : ''}
+              sx={{ width: '90%', my: 2 }}
+              onChange={(e) => setNumQuestions(parseInt(e.target.value, 10))}
+            />
+            <Box>
+              <Button
+                variant='outlined'
+                onClick={() => handleSetQuestions(numQuestions!)}
+              >
+                Postavi pitanja
+              </Button>
+            </Box>
+          </>
+        )}
       </Container>
     );
   }
@@ -223,9 +233,7 @@ const ManageQuiz = () => {
 
           <IconButton onClick={() => setShowForm((prev) => !prev)}>
             {showForm ? (
-              <VisibilityOff
-                color={quizId ? 'secondary' : 'primary'}
-              />
+              <VisibilityOff color={quizId ? 'secondary' : 'primary'} />
             ) : (
               <Visibility color={quizId ? 'secondary' : 'primary'} />
             )}
@@ -239,9 +247,7 @@ const ManageQuiz = () => {
               value={quiz?.title || ''}
               label='Naslov Kviza'
               fullWidth
-              onChange={(e) =>
-                setQuiz({ ...quiz, title: e.target.value })
-              }
+              onChange={(e) => setQuiz({ ...quiz, title: e.target.value })}
             />
             <TextField
               sx={{ my: 1 }}
@@ -257,9 +263,7 @@ const ManageQuiz = () => {
               value={quiz?.thumbnail || ''}
               label='Thumbnail URL'
               fullWidth
-              onChange={(e) =>
-                setQuiz({ ...quiz, thumbnail: e.target.value })
-              }
+              onChange={(e) => setQuiz({ ...quiz, thumbnail: e.target.value })}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DateTimePicker
@@ -284,8 +288,7 @@ const ManageQuiz = () => {
             alignItems='center'
           >
             <Typography variant='h6'>
-              Pitanje {currentQuestionIndex + 1} /{' '}
-              {quiz.questions.length}
+              Pitanje {currentQuestionIndex + 1} / {quiz.questions.length}
             </Typography>
             <Box display='flex' alignItems='center'>
               <Button
@@ -297,9 +300,7 @@ const ManageQuiz = () => {
               {quiz.questions.length > 1 && (
                 <Button
                   color={quizId ? 'secondary' : 'primary'}
-                  onClick={() =>
-                    handleRemoveQuestion(currentQuestionIndex)
-                  }
+                  onClick={() => handleRemoveQuestion(currentQuestionIndex)}
                 >
                   <Typography variant='h2'>-</Typography>
                 </Button>
@@ -314,17 +315,13 @@ const ManageQuiz = () => {
                 type='number'
                 label='Broj ponudenih odgovora'
                 fullWidth
-                onChange={(e) =>
-                  setTempOptions(parseInt(e.target.value, 10))
-                }
+                onChange={(e) => setTempOptions(parseInt(e.target.value, 10))}
               />
               <Button
                 variant='contained'
                 color='secondary'
                 sx={{ m: 1, mb: 2 }}
-                onClick={() =>
-                  handleSetOptionsForCurrentQuestion(tempOptions!)
-                }
+                onClick={() => handleSetOptionsForCurrentQuestion(tempOptions!)}
               >
                 Postavi opcije
               </Button>
@@ -370,9 +367,7 @@ const ManageQuiz = () => {
                       fullWidth
                       value={option}
                       onChange={(e) => {
-                        const newOptions = [
-                          ...currentQuestion.options,
-                        ];
+                        const newOptions = [...currentQuestion.options];
                         newOptions[optIndex] = e.target.value;
                         handleQuestionChange(
                           currentQuestionIndex,
@@ -383,9 +378,7 @@ const ManageQuiz = () => {
                     />
                     <Button
                       color={quizId ? 'secondary' : 'primary'}
-                      onClick={() =>
-                        handleAddOption(currentQuestionIndex)
-                      }
+                      onClick={() => handleAddOption(currentQuestionIndex)}
                     >
                       <Typography variant='h2'>+</Typography>
                     </Button>
@@ -393,10 +386,7 @@ const ManageQuiz = () => {
                       <Button
                         color={quizId ? 'secondary' : 'primary'}
                         onClick={() =>
-                          handleRemoveOption(
-                            currentQuestionIndex,
-                            optIndex
-                          )
+                          handleRemoveOption(currentQuestionIndex, optIndex)
                         }
                       >
                         <Typography variant='h2'>-</Typography>
@@ -454,17 +444,12 @@ const ManageQuiz = () => {
             </Grid>
           )}
         </Box>
-        <Box
-          display={{ xs: 'flex', md: 'block' }}
-          justifyContent='center'
-        >
+        <Box display={{ xs: 'flex', md: 'block' }} justifyContent='center'>
           <Button
             variant='outlined'
             sx={{ ml: 1 }}
             disabled={currentQuestionIndex === 0}
-            onClick={() =>
-              setCurrentQuestionIndex((prev) => prev - 1)
-            }
+            onClick={() => setCurrentQuestionIndex((prev) => prev - 1)}
           >
             Prethodni
           </Button>
@@ -472,25 +457,20 @@ const ManageQuiz = () => {
             variant='outlined'
             sx={{ mx: 1 }}
             disabled={currentQuestionIndex === numQuestions! - 1}
-            onClick={() =>
-              setCurrentQuestionIndex((prev) => prev + 1)
-            }
+            onClick={() => setCurrentQuestionIndex((prev) => prev + 1)}
           >
             Sljedeći
           </Button>
         </Box>
       </Box>
 
-      <Box
-        display={{ xs: 'flex', md: 'block' }}
-        justifyContent='center'
-      >
+      <Box display={{ xs: 'flex', md: 'block' }} justifyContent='center'>
         <Button
           variant='contained'
           color={quizId ? 'secondary' : 'primary'}
           sx={{ m: 1, my: 2 }}
           onClick={handleSubmit}
-          disabled={!isFormValid()}
+          disabled={!isFormValid() || isLoadingUnresolved}
         >
           {quizId ? 'Update Quiz' : 'Submit New Quiz'}
         </Button>
@@ -510,8 +490,8 @@ const ManageQuiz = () => {
           }}
           severity='success'
         >
-          Kviz uspješno {quizId ? ' azuriran' : ' kreiran'}!🎉🎉🥳{' '}
-          <br /> Zatvori me za povratak na kvizove
+          Kviz uspješno {quizId ? ' azuriran' : ' kreiran'}!🎉🎉🥳 <br />{' '}
+          Zatvori me za povratak na kvizove
         </Alert>
       </Snackbar>
 
@@ -521,10 +501,7 @@ const ManageQuiz = () => {
         onClose={() => setErrorSnackbar(null)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert
-          onClose={() => setErrorSnackbar(null)}
-          severity='error'
-        >
+        <Alert onClose={() => setErrorSnackbar(null)} severity='error'>
           {errorSnackbar}
         </Alert>
       </Snackbar>
