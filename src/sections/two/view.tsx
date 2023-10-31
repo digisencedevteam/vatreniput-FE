@@ -6,6 +6,11 @@ import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
+import CollectedStatisticWidget from './collected-statistic-widget';
+import SearchCollectionItemBar from 'src/components/search-collection-item-bar/search-collection-item-bar';
+import FilterCollection from 'src/components/filter-collection/filter-collection';
+import SelectionStatistic from 'src/components/selection-statistic/selection-statistic';
+import CollectionStatisticIllustration from 'src/assets/illustrations/collection-statistic-illustration';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
@@ -30,11 +35,8 @@ export default function CollectionView() {
   const [totalPages, setTotalPages] = useState(1);
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
-  const itemsPerPage = 9;
-  const [collectedStatistic, setCollectedStatistic] =
-    useState<CollectedStatistic | null>(null);
-  const myRef = React.useRef<HTMLDivElement>(null);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const itemsPerPage = 6;
+  const [collectedStatistic, setCollectedStatistic] = useState<CollectedStatistic | null>(null);
 
   const fetchCategories = async () => {
     try {
@@ -166,59 +168,109 @@ export default function CollectionView() {
           </Grid>
         )}
 
-        <Grid item xs={12} md={5}>
-          {isMobile ? (
-            <HorizontalScrollStatisticCards
-              collectedStatistic={collectedStatistic}
+        <Grid item xs={12} md={isMobile ? 12 : 5}>
+          <Box
+            sx={{
+              display: 'flex',
+              overflowX: 'auto',
+              whiteSpace: 'nowrap',
+              height: '100%',
+              [theme.breakpoints.up('md')]: {
+                scrollbarWidth: 'thin',
+                '&::-webkit-scrollbar': {
+                  width: '5px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  background: '#f1f1f1',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  background: '#888',
+                },
+                '&::-webkit-scrollbar-thumb:hover': {
+                  background: '#555',
+                },
+              },
+            }}
+          >
+            <CollectedStatisticWidget
+              chart={{
+                series: [
+                  {
+                    label: 'Ukupno Skupljenih',
+                    percent: collectedStatistic?.percentageOfCollectedCards || 0,
+                    total: collectedStatistic?.numberOfCollectedCards || 0,
+                  },
+                ],
+              }}
+              sx={{
+                flex: '0 0 auto',
+                paddingRight: { xs: 1, md: theme.spacing(5) },
+                marginRight: { xs: 1, md: theme.spacing(1) },
+                height: '100%',
+              }}
             />
-          ) : (
-            <StatisticCards collectedStatistic={collectedStatistic} />
-          )}
+            <SelectionStatistic
+              title='još do otključavanja neke od priča'
+              total={78}
+              icon={<CollectionStatisticIllustration />}
+              sx={{
+                flex: '0 0 auto',
+                paddingRight: { xs: theme.spacing(2), md: theme.spacing(2) },
+                marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
+              }}
+            />
+          </Box>
         </Grid>
       </Grid>
-      <div ref={myRef}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} mt={3}>
-            {currentCategory ? (
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <IconButton
-                  color='primary'
-                  onClick={() => handleArrowClick('left')}
-                >
-                  <ArrowLeftIcon />
-                </IconButton>
-                <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
-                  {currentCategory.name}
-                </Typography>
-                <IconButton
-                  color='primary'
-                  onClick={() => handleArrowClick('right')}
-                >
-                  <ArrowRightIcon />
-                </IconButton>
-              </Box>
-            ) : (
-              <CircularProgress />
-            )}
-          </Grid>
-          {collectedCards.map((item, index) => (
-            <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
-              <CollectionStickerItem item={item} />
-            </Grid>
-          ))}
+
+      <Grid container spacing={1}>
+        <Grid item xs={8}>
+          <SearchCollectionItemBar />
         </Grid>
-        <PagingComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
+        <Grid item xs={4}>
+          <FilterCollection />
+        </Grid>
+        <Grid item xs={12}>
+          {currentCategory ? (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('left')}
+              >
+                <ArrowLeftIcon />
+              </IconButton>
+              <Typography variant='subtitle1' sx={{ mx: 2 }}>
+                {currentCategory.name}
+              </Typography>
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('right')}
+              >
+                <ArrowRightIcon />
+              </IconButton>
+            </Box>
+          ) : (
+            <CircularProgress />
+          )}
+        </Grid>
+
+        {collectedCards.map((item) => (
+          <Grid key={item._id} item xs={6} md={3} lg={2}>
+            <CollectionStickerItem item={item} />
+          </Grid>
+        ))}
+      </Grid>
+      <PagingComponent
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </Container>
   );
 }
