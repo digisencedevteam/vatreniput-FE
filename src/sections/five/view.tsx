@@ -19,7 +19,7 @@ import CustomCard from 'src/components/custom-card/custom-card';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { paths } from 'src/routes/paths';
 
-export const FiveView = () => {
+const FiveView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const router = useRouter();
@@ -199,3 +199,4 @@ export const FiveView = () => {
     </Container>
   );
 };
+export default FiveView;
