@@ -28,6 +28,10 @@ import dayjs, { Dayjs } from 'dayjs';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { Quiz, Question } from '../quiz/types';
 import { userRoles } from 'src/lib/constants';
+import { useRouter } from 'src/routes/hooks';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { LoadingScreen } from 'src/components/loading-screen';
+import { paths } from 'src/routes/paths';
 
 const ManageQuiz = () => {
   const [numQuestions, setNumQuestions] = useState<number | null>(null);
@@ -43,10 +47,14 @@ const ManageQuiz = () => {
   );
   const [submitted, setSubmitted] = useState(false);
   const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
-  const { fetchUnresolvedQuizById, unresolvedQuiz, createOrUpdateQuiz } =
-    useFetchQuizzes();
+  const {
+    fetchUnresolvedQuizById,
+    unresolvedQuiz,
+    createOrUpdateQuiz,
+    isLoadingUnresolved,
+  } = useFetchQuizzes();
   const [showForm, setShowForm] = useState(true);
-
+  const router = useRouter();
   const { quizId } = useParams();
 
   useEffect(() => {
@@ -57,8 +65,8 @@ const ManageQuiz = () => {
   }, [quizId]);
 
   useEffect(() => {
-    if (!auth.user || auth.user.email !== userRoles.admin) {
-      history('/');
+    if (!auth.user || auth.user.role !== userRoles.admin) {
+      router.push(`${paths.dashboard.five}`);
     }
     if (unresolvedQuiz) {
       setQuiz(unresolvedQuiz);
@@ -70,6 +78,7 @@ const ManageQuiz = () => {
       }
       setAvailableUntil(dateToEdit);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, history, unresolvedQuiz]);
 
   const handleSubmit = async () => {
@@ -159,24 +168,42 @@ const ManageQuiz = () => {
           justifyContent: 'center',
         }}
       >
-        <Typography variant='h3'>Koliko pitanja želite u kvizu?</Typography>
-        <TextField
-          type='number'
-          label='Broj pitanja'
-          required
-          error={error}
-          helperText={error ? 'Molimo unesite broj pitanja' : ''}
-          sx={{ width: '90%', my: 2 }}
-          onChange={(e) => setNumQuestions(parseInt(e.target.value, 10))}
-        />
-        <Box>
-          <Button
-            variant='outlined'
-            onClick={() => handleSetQuestions(numQuestions!)}
-          >
-            Postavi pitanja
-          </Button>
-        </Box>
+        {isLoadingUnresolved ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <Grid item sx={{ m: 3, alignSelf: 'start' }}>
+              <IconButton
+                edge='start'
+                color='primary'
+                aria-label='back to dashboard'
+                onClick={() => {
+                  router.push('/dashboard/five');
+                }}
+              >
+                <ArrowBackIcon />
+              </IconButton>
+            </Grid>
+            <Typography variant='h3'>Koliko pitanja želite u kvizu?</Typography>
+            <TextField
+              type='number'
+              label='Broj pitanja'
+              required
+              error={error}
+              helperText={error ? 'Molimo unesite broj pitanja' : ''}
+              sx={{ width: '90%', my: 2 }}
+              onChange={(e) => setNumQuestions(parseInt(e.target.value, 10))}
+            />
+            <Box>
+              <Button
+                variant='outlined'
+                onClick={() => handleSetQuestions(numQuestions!)}
+              >
+                Postavi pitanja
+              </Button>
+            </Box>
+          </>
+        )}
       </Container>
     );
   }
@@ -443,7 +470,7 @@ const ManageQuiz = () => {
           color={quizId ? 'secondary' : 'primary'}
           sx={{ m: 1, my: 2 }}
           onClick={handleSubmit}
-          disabled={!isFormValid()}
+          disabled={!isFormValid() || isLoadingUnresolved}
         >
           {quizId ? 'Update Quiz' : 'Submit New Quiz'}
         </Button>

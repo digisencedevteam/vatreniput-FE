@@ -40,7 +40,16 @@ export const paths = {
       root: `${ROOTS.DASHBOARD}/three`,
       seven: `${ROOTS.DASHBOARD}/group/svi-kvizovi`,
       results: `${ROOTS.DASHBOARD}/quizGroup/results`,
+      quiz: `${ROOTS.DASHBOARD}/quiz`,
+      editQuiz: `${ROOTS.DASHBOARD}/editQuiz`,
+      createQuiz: `${ROOTS.DASHBOARD}/createQuiz`
     },
     profile: `${ROOTS.DASHBOARD}/profile`,
+    voting: {
+      vote: `${ROOTS.DASHBOARD}/voting`,
+      editVoting: `${ROOTS.DASHBOARD}/editVoting`,
+      votingResults: `${ROOTS.DASHBOARD}/votingResults`,
+      createVoting: `${ROOTS.DASHBOARD}/createVoting`
+    }
   },
 };
