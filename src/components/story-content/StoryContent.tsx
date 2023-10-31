@@ -67,7 +67,10 @@ const StoryContent = ({ story }: StoryContentProps) => {
                         <MatchDetails matchData={story?.Prvenstvo.Matches.Finals.Final} />
                     </StorySectionWrapper>
                 }
-                {story?.Prvenstvo?.Champ && <ChampionCard data={story?.Prvenstvo.Champ} />}
+                {
+                    story?.Prvenstvo?.Champ && story?.Prvenstvo?.Champ.Winner && story?.Prvenstvo?.Champ.TopScorer &&
+                    <ChampionCard data={story.Prvenstvo.Champ} />
+                }
             </>
         );
     }
@@ -95,6 +98,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 <Tab label="Reprezentacija" />
                 <Tab label="Zanimljvosti" />
             </Tabs>
+
             <MotionContainer key={currentTab} variants={slideVariants.inUp}>
                 {currentTab === 0 && (
                     <>

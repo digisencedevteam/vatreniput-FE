@@ -7,6 +7,8 @@ const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');
     const imageHeight = isDesktop ? "375" : "200";
     const isReportaza = data.Title.includes('Reportaza');
+    const videoHref = data.videoLink || 'www.google.com';
+
     return (
         <Card style={{ marginBottom: '20px', minHeight: 700 }}>
             <div style={{ position: 'relative' }}>
@@ -28,9 +30,16 @@ const Highlight = ({ data }: HighlightProps) => {
                         justifyContent: 'center',
                         alignItems: 'center'
                     }}>
-                        <IconButton color="primary" size="large">
+                        <IconButton
+                            color="primary"
+                            size="large"
+                            href={videoHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
                             <PlayCircleOutlineIcon fontSize="large" />
                         </IconButton>
+
                     </div>
                 )}
             </div>
@@ -47,3 +56,6 @@ const Highlight = ({ data }: HighlightProps) => {
 };
 
 export default Highlight;
+
+
+

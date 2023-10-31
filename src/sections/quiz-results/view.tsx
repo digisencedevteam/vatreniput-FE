@@ -12,6 +12,7 @@ import {
   MenuItem,
   Avatar,
   Button,
+  Pagination,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -22,23 +23,23 @@ import icon from '../../assets/illustrations/vatroslav_upute_2.jpg';
 
 export default function QuizResults() {
   const settings = useSettingsContext();
-  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById } =
-    useFetchQuizzes();
-  const [selectedQuiz, setSelectedQuiz] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById, totalPages } = useFetchQuizzes(currentPage, 5); // setting itemsPerPage to 5
+  const [selectedQuiz, setSelectedQuiz] = useState('');
+
 
   useEffect(() => {
     (async () => {
       await fetchAllQuizzes();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (selectedQuiz) {
       getResultsById(selectedQuiz, currentPage, 5);
     }
+
   }, [selectedQuiz, currentPage]);
 
   const NoResultLayout = ({ message }: { message: string }) => {
@@ -127,7 +128,7 @@ export default function QuizResults() {
                       <TableCell>
                         {dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}
                       </TableCell>
-                      <TableCell>{result.duration} s</TableCell>
+                      <TableCell>{Math.round(result.duration / 60)} m</TableCell>
                     </TableRow>
                   ))
                 ) : (
@@ -147,7 +148,12 @@ export default function QuizResults() {
             </TableBody>
           </Table>
         </TableContainer>
-
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Pagination
+            count={Number.isInteger(totalPages) ? totalPages : 1}
+            page={currentPage}
+            onChange={(event, value) => setCurrentPage(value)}
+          />        </Box>
 
       </Box>
     </Container>

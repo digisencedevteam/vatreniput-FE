@@ -32,6 +32,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
         <Box sx={{
             display: 'flex',
             alignItems: 'center',
+            width: '100%',
             overflowY: 'hidden'
         }}>
             <IconButton onClick={scrollLeft} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>
@@ -48,7 +49,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
                     display: 'none'
                 },
                 scrollbarWidth: 'none',
-                '-ms-overflow-style': 'none'
+                msOverflowStyle: 'none'
             }}>
                 {children}
             </Box>

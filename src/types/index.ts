@@ -4,6 +4,7 @@ export type FAQ = {
 };
 
 export type CollectionEvent = {
+  percentageCollected: any;
   _id: string;
   name: string;
   location?: string;
@@ -28,6 +29,7 @@ export type CardApiResponse = {
 };
 
 export type CollectedStatistic = {
+  topEvents: CollectedStatistic | null;
   numberOfCollectedCards: number;
   percentageOfCollectedCards: number;
   countOfAllCards: number;
@@ -144,21 +146,22 @@ export interface MatchData {
     };
   };
   Skupina: TeamStat[];
-  Champ: {
-    Winner: string;
-    TopScorer: {
+  Champ?: {
+    Winner?: string;
+    TopScorer?: {
       Player: string;
       Team: string;
       Goals: number;
     };
   };
-  Summary: string;
+  Summary?: string;
 }
 
 export interface HighlightData {
   Title: string;
   imgUrl: string;
   Description: string;
+  videoLink?: string;
 }
 
 export interface IzbornikData {
@@ -212,11 +215,11 @@ export interface QualificationMatchDetailsProps {
 }
 
 export interface DataProp {
-  Winner: string;
-  TopScorer: {
-    Player: string;
-    Team: string;
-    Goals: number;
+  Winner?: string;
+  TopScorer?: {
+    Player?: string;
+    Team?: string;
+    Goals?: number;
   };
 }
 
@@ -236,6 +239,7 @@ export interface HighlightProps {
     Title: string;
     imgUrl: string;
     Description: string;
+    videoLink?: string;
   };
 }
 
@@ -252,8 +256,6 @@ export interface PenaltyShootoutProps {
   }[];
 }
 
-// STORY TYPES END
-
 interface TimelineStory {
   storyId: number;
   storyTitle: string;
@@ -262,3 +264,4 @@ interface TimelineStory {
 export interface TimelineProps {
   stories: TimelineStory[];
 }
+// STORY TYPES END

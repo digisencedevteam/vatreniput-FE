@@ -26,6 +26,7 @@ type FetchQuizzesReturn = {
     page: number,
     limit: number
   ) => Promise<void>;
+  totalPages: number;
 };
 
 const useFetchQuizzes = (
@@ -41,6 +42,8 @@ const useFetchQuizzes = (
   const [isDeleting, setIsDeleting] = useState(false);
   const [resultsById, setResultsById] = useState<QuizResult[] | null>(null);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
@@ -73,7 +76,11 @@ const useFetchQuizzes = (
       const response = await axiosInstance.get(
         `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
       );
-      const quizResults = response.data.quizResults;
+      const { quizResults, totalCount } = response.data;
+
+      const computedTotalPages = Math.ceil(totalCount / limit);
+      setTotalPages(computedTotalPages);
+
       setResultsById(quizResults || null);
       if (quizResults && quizResults.length < limit) {
         setIsLastPage(true);
@@ -82,6 +89,7 @@ const useFetchQuizzes = (
       }
     } catch (error) {
       console.error('Error fetching results by ID:', error);
+      setError('Failed to fetch quiz results. Please try again.');
       setResultsById(null);
     }
   };
@@ -185,6 +193,7 @@ const useFetchQuizzes = (
     fetchAllQuizzes,
     resultsById,
     getResultsById,
+    totalPages,
   };
 };
 

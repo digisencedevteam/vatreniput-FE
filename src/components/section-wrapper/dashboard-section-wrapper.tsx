@@ -11,7 +11,7 @@ interface SectionWrapperProps {
 export const DashboardSectionWrapper = ({ title, children, link, bgcolor }: SectionWrapperProps) => {
 
     return (
-        <Box borderRadius={2} p={2} pl={0} my={2} bgcolor={bgcolor}>
+        <Box p={2} my={2} bgcolor={bgcolor} width={'100%'}>
             <Box display="flex" justifyContent="space-between" alignItems="center">
                 <Typography variant="h5" p={1}>{title}</Typography>
                 <Button href={link} variant="contained" color="primary" sx={{ borderRadius: '8px' }} >
