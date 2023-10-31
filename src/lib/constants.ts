@@ -265,9 +265,9 @@ export const STORIES = [
         {
           Title: 'Reportaza Francuska',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698699632/HRV52006_copy_fhkd8k.jpg',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
           Description:
-            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+            'Pogledajte izvješće s Svjetskog prvenstva 1998. u Francuskoj! Pridružite nam se u preispitivanju nekih od najupečatljivijih trenutaka, ekskluzivnih intervjua s igračima te osvrta na najzanimljivije utakmice. Tko može zaboraviti uzbuđenje i strasti koje su obilježile to prvenstvo? Francuska je tada ostavila neizbrisiv trag u povijesti nogometa. Kliknite dolje i zaronite u sjećanja na jedan od najlegendarnijih nogometnih događaja!',
           videoLink:
             'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
@@ -284,7 +284,6 @@ export const STORIES = [
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698705071/HRV31207_copy_l7simf.jpg',
         StoryText: '',
       },
-      Zanimljivosti: [''],
     },
   },
   {
@@ -556,7 +555,6 @@ export const STORIES = [
         StoryText:
           'Naslijedio je Niku Kovača u vrijeme kvalifikacija za  Euro 2016. i uspješno odradio posao te se s Hrvatskom plasirao na to veliko natjecanje kojemu je domaćin bila Francuska. Ondje je naša reprezentacija igrala jako dobro. Pobijedila je Tursku, odigrala 2 : 2 protiv Češke u susretu koji su obilježili neredi huligana i prekid utakmice. Ali, nakon toga Hrvatska je pokazala moć pobjedom nad Španjolcima.  U osmini finala teška utakmica protiv Portugala i bolan poraz u produžetku.',
       },
-      Zanimljivosti: [''],
     },
   },
   {
@@ -951,11 +949,19 @@ export const STORIES = [
         {
           Title: 'Reportaza Qatar',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
-          Description: '',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785502/WhatsApp_Image_2023-10-31_at_4.19.16_PM_vihqgc.jpg',
+          Description:
+            'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
           videoLink: 'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
         },
-        // Add other highlights here...
+      ],
+      Zanimljivosti: [
+        'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
+        'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
+        'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
+        'FIFA je prvi put uvela VAR na Svjetskom prvenstvu u nogometu 2018.',
+        'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
+        'U samim završnicama utakmica (u 90. minuti + nadoknada) postignuta su 23 gola — što čini nevjerojatnih 15 posto svih postignutih golova.',
       ],
       Izbornik: {
         Name: 'Zlatko Dalić',
