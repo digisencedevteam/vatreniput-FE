@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useSearchParams, useRouter } from 'src/routes/hooks';
-import { PATH_AFTER_LOGIN } from 'src/config-global';
 import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -19,6 +18,7 @@ import InvalidAlbumPage from 'src/pages/InvalidAlbum';
 import axios, { endpoints } from 'src/utils/axios';
 import { LoadingScreen } from 'src/components/loading-screen';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
+import { paths } from 'src/routes/paths';
 
 export default function JwtRegisterView() {
   const { register } = useAuthContext();
@@ -28,19 +28,18 @@ export default function JwtRegisterView() {
   const [isLoading, setIsLoading] = useState(false);
 
   const searchParams = useSearchParams();
-  const returnTo = searchParams.get('returnTo');
 
   const password = useBoolean();
   const paramValue = searchParams.get('code');
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string().required('First name required'),
-    lastName: Yup.string().required('Last name required'),
-    username: Yup.string(),
+    firstName: Yup.string().required('Ime je obvezno.'),
+    lastName: Yup.string().required('Prezime je obvezno.'),
+    username: Yup.string().required('Korisničko ime je obvezno.'),
     email: Yup.string()
-      .required('Email is required')
-      .email('Email must be a valid email address'),
-    password: Yup.string().required('Password is required'),
+      .required('Email je obvezan.')
+      .email('Email mora biti u odgovarajućem formatu.'),
+    password: Yup.string().required('Lozinka je obvezna.'),
   });
 
   const defaultValues = {
@@ -73,7 +72,7 @@ export default function JwtRegisterView() {
         paramValue || ''
       );
 
-      router.push(returnTo || PATH_AFTER_LOGIN);
+      router.push(paths.emailVerification);
     } catch (error) {
       console.error(error);
       reset();
@@ -90,13 +89,13 @@ export default function JwtRegisterView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-      <Alert severity="success" sx={{ mb: 3 }}>
+      <Alert severity='success' sx={{ mb: 3 }}>
         Vaš album je ispravan i spreman za registraciju!
       </Alert>
-      <Typography variant="h4">Registriraj se</Typography>
+      <Typography variant='h4'>Registriraj se</Typography>
 
-      <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">
+      <Stack direction='row' spacing={0.5}>
+        <Typography variant='body2'>
           {' '}
           I pokrenite svoj vatreni put!{' '}
         </Typography>
@@ -106,7 +105,7 @@ export default function JwtRegisterView() {
 
   const renderTerms = (
     <Typography
-      component="div"
+      component='div'
       sx={{
         color: 'text.secondary',
         mt: 2.5,
@@ -115,11 +114,11 @@ export default function JwtRegisterView() {
       }}
     >
       {'Kreiranjem računa upoznat sam sa '}
-      <Link underline="always" color="text.primary">
+      <Link underline='always' color='text.primary'>
         Pravilima Korištenja
       </Link>
       {' i '}
-      <Link underline="always" color="text.primary">
+      <Link underline='always' color='text.primary'>
         Politikom Privatnosti
       </Link>
       .
@@ -129,25 +128,25 @@ export default function JwtRegisterView() {
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5}>
-        {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+        {!!errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
 
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <RHFTextField name="firstName" label="First name" />
-          <RHFTextField name="lastName" label="Last name" />
+          <RHFTextField name='firstName' label='Ime' />
+          <RHFTextField name='lastName' label='Prezime' />
         </Stack>
 
-        <RHFTextField name="email" label="Email address" />
+        <RHFTextField name='email' label='Email adresa' />
 
-        <RHFTextField name="username" label="Username" />
+        <RHFTextField name='username' label='Korisničko Ime' />
 
         <RHFTextField
-          name="password"
-          label="Password"
+          name='password'
+          label='Lozinka'
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
+              <InputAdornment position='end'>
+                <IconButton onClick={password.onToggle} edge='end'>
                   <Iconify
                     icon={
                       password.value
@@ -163,10 +162,10 @@ export default function JwtRegisterView() {
 
         <LoadingButton
           fullWidth
-          color="inherit"
-          size="large"
-          type="submit"
-          variant="contained"
+          color='inherit'
+          size='large'
+          type='submit'
+          variant='contained'
           loading={isSubmitting}
         >
           Registriraj se
