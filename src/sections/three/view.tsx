@@ -23,7 +23,7 @@ import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-ov
 import { userRoles } from 'src/lib/constants';
 import { paths } from 'src/routes/paths';
 
-export const ThreeView = () => {
+const ThreeView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
@@ -277,3 +277,4 @@ export const ThreeView = () => {
     </Container>
   );
 };
+export default ThreeView;
