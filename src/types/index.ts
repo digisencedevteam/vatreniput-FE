@@ -328,3 +328,20 @@ export type AdminActionButtonsProps = {
   modalText: string;
   confirmButtonText: string;
 };
+
+export type Event = {
+  _id: any;
+  name: string;
+  location: string;
+  year: number;
+  percentageCollected: number;
+};
+
+export type DashboardData = {
+  topEvents: Event[];
+};
+
+export type ChartData = {
+  categories: string[];
+  series: number[];
+};

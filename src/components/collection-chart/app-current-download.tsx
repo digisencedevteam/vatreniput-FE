@@ -1,12 +1,8 @@
 
 import { ApexOptions } from 'apexcharts';
-// @mui
 import { useTheme, styled } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
-// utils
-
-// components
 import Chart, { useChart } from 'src/components/chart';
 import { fNumber } from 'src/utils/format-number';
 import { CircularProgress, Skeleton } from '@mui/material';
@@ -27,8 +23,6 @@ const StyledChart = styled(Chart)(({ theme }) => ({
         top: `calc(${CHART_HEIGHT - LEGEND_HEIGHT}px) !important`,
     },
 }));
-
-// ----------------------------------------------------------------------
 
 interface Props extends CardProps {
     title?: string;

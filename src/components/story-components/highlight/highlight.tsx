@@ -7,7 +7,7 @@ const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');
     const imageHeight = isDesktop ? "375" : "200";
     const isReportaza = data.Title.includes('Reportaža');
-    const videoHref = data.videoLink || 'www.google.com';
+    const videoHref = data.videoLink || '';
 
     return (
         <Card style={{ marginBottom: '20px', minHeight: 700 }}>
@@ -55,6 +55,3 @@ const Highlight = ({ data }: HighlightProps) => {
 };
 
 export default Highlight;
-
-
-

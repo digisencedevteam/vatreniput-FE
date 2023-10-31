@@ -1,19 +1,6 @@
 import { useState, useEffect } from 'react';
+import { ChartData, DashboardData, Event } from 'src/types';
 import axiosInstance, { endpoints } from 'src/utils/axios';
-
-type Event = {
-  name: string;
-  percentageCollected: number;
-};
-
-type DashboardData = {
-  topEvents: Event[];
-};
-
-type ChartData = {
-  categories: string[];
-  series: number[];
-};
 
 const useDashboardData = () => {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(
