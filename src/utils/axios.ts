@@ -62,6 +62,8 @@ export const endpoints = {
     add: '/card/add/',
     event: '/card/event',
     stats: '/card/stats/all',
+    statsDashboard: '/card/stats/dashboard',
+    details: '/card/details/',
   },
   event: {
     all: '/event/all',
