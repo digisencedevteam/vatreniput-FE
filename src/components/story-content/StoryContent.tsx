@@ -22,8 +22,6 @@ import { HighlightContent } from './story-tab-content/highlight-content';
 import { IzbornikContent } from './story-tab-content/izbornik-content';
 import { RepkaContent } from './story-tab-content/repka-content';
 
-
-
 const StoryContent = ({ story }: StoryContentProps) => {
     const [currentTab, setCurrentTab] = useState(0);
     const slideVariants = varFade();

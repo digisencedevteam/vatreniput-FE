@@ -20,7 +20,7 @@ import { paths } from 'src/routes/paths';
 
 export const DesktopViewOne = () => {
   const { collectedCards, isCardLoading, fetchCollectedCards } = useCardData();
-  const { dashboardData, chartData, isDashboardLoading, fetchDashboardData } = useDashboardData();
+  const { chartData, fetchDashboardData } = useDashboardData();
   const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
     useFetchQuizzes(1, 4);
   const { votings, fetchAllVotings, deleteVoting } = useVoting();
@@ -41,6 +41,7 @@ export const DesktopViewOne = () => {
     },
   ];
 
+  // Kada zavrsimo dashboard endpoint u backend cemo ovo refactorat da je sve jedan call
   useEffect(() => {
     fetchDashboardData();
     fetchCollectedCards();

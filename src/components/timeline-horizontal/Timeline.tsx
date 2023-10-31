@@ -1,4 +1,3 @@
-
 import {
     Button,
     Typography,
@@ -10,7 +9,6 @@ import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlin
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import { useParams, useRouter } from 'src/routes/hooks';
 import { Story, TimelineProps } from 'src/types';
-import { useResponsive } from 'src/hooks/use-responsive';
 
 const Timeline = ({
     stories,
@@ -20,7 +18,6 @@ const Timeline = ({
     const router = useRouter();
     const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
     const currentStory = stories[currentStoryIndex];
-    const isMobile = useResponsive('down', 'sm');
 
     const generateFillPositions = (length: number): number[] => {
         const sequence = [20, 50, 80];

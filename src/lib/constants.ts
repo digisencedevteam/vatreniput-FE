@@ -263,7 +263,7 @@ export const STORIES = [
       },
       Highlights: [
         {
-          Title: 'Reportaza Francuska',
+          Title: 'Reportaža Francuska',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
           Description:
@@ -870,6 +870,15 @@ export const STORIES = [
       },
       Highlights: [
         {
+          Title: 'Reportaža Rusija',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
+          Description:
+            'Hrvatska je u finalu Svjetskog prvenstva 2018.  Naslovnice se mijenjaju.  Englezi idu kućiplačući. U Moskvu dolazi "pola" Hrvatske.Finale. Francuska. Naš kriptonit. Golovi Perišića i Mandžukića dali su nadu. Ali, kazneni udarac nakon Perišićeve ruke i pogodak nakon prekršaja koji nije postojao rano su usmjerili finalni susret. Hrvatska je druga na svijetu, planetu i kugli zemaljskoj. Hrvatska je ušla u elitni nogometni razred među velikane ove igre. I, ondje je namjeravala ostati.',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79213?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79213&authkey=!AA0SR029kQQAv7I&ithint=video',
+        },
+        {
           Title: ' SP 2018 - Pogodak Luke Modrića protiv Argentine',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
@@ -897,16 +906,6 @@ export const STORIES = [
           Description:
             ' Polufinale.   Znali   smo   da   neće   biti   lako.   S   druge   strane   stajala   je   Engleska.   Svjetskinogometni   gigant   željan   naslova,   željan   konačno   nekakvog   uspjeha.     Ali,   Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali,   polako. Dalić Boysi  se   ne   predaju.   Ivan   Perišić   je   izjednačio   sredinom   drugogpoluvremena.   A   zatim,   u   produžetku   –   Mario   Mandžukić   zabio   je   za   finale.   Ekstaza,urnebes, suze, smijeh... Sve',
         },
-        {
-          Title: 'Reportaza Rusija',
-          imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
-          Description:
-            'Hrvatska je u finalu Svjetskog prvenstva 2018.  Naslovnice se mijenjaju.  Englezi idu kućiplačući. U Moskvu dolazi "pola" Hrvatske.Finale. Francuska. Naš kriptonit. Golovi Perišića i Mandžukića dali su nadu. Ali, kazneni udarac nakon Perišićeve ruke i pogodak nakon prekršaja koji nije postojao rano su usmjerili finalni susret. Hrvatska je druga na svijetu, planetu i kugli zemaljskoj. Hrvatska je ušla u elitni nogometni razred među velikane ove igre. I, ondje je namjeravala ostati.',
-          videoLink:
-            'https://photos.onedrive.com/share/E0D40198DCF58846!79213?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79213&authkey=!AA0SR029kQQAv7I&ithint=video',
-        },
-        // Add other highlights here...
       ],
       Izbornik: {
         Name: 'Zlatko Dalić',
@@ -947,7 +946,7 @@ export const STORIES = [
 
       Highlights: [
         {
-          Title: 'Reportaza Qatar',
+          Title: 'Reportaža Qatar',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785502/WhatsApp_Image_2023-10-31_at_4.19.16_PM_vihqgc.jpg',
           Description:

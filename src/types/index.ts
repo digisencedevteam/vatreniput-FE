@@ -273,6 +273,14 @@ export type TabComponents = {
   Zanimljivosti?: JSX.Element;
   [key: string]: JSX.Element | undefined;
 };
+export type FactType =
+  | string
+  | number
+  | boolean
+  | React.ReactElement
+  | Iterable<React.ReactNode>
+  | React.ReactPortal
+  | null;
 
 // STORY TYPES END
 export type VotingOption = {

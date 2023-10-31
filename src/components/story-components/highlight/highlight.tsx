@@ -6,7 +6,7 @@ import { HighlightProps } from 'src/types';
 const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');
     const imageHeight = isDesktop ? "375" : "200";
-    const isReportaza = data.Title.includes('Reportaza');
+    const isReportaza = data.Title.includes('Reportaža');
     const videoHref = data.videoLink || 'www.google.com';
 
     return (
@@ -31,13 +31,12 @@ const Highlight = ({ data }: HighlightProps) => {
                         alignItems: 'center'
                     }}>
                         <IconButton
-                            color="primary"
-                            size="large"
+                            color='primary'
                             href={videoHref}
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <PlayCircleOutlineIcon fontSize="large" />
+                            <PlayCircleOutlineIcon sx={{ fontSize: '250%' }} />
                         </IconButton>
 
                     </div>
