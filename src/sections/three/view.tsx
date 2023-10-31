@@ -255,7 +255,8 @@ export default function ThreeView() {
                       cardText={data.title!}
                       cardId={data?._id}
                       availableUntil={data.availableUntil}
-                      linkTo={`/dashboard/editQuiz/${data?._id}`}
+                      linkTo={`/dashboard/quiz/${data?._id}`}
+                      linkToEdit={`/dashboard/editQuiz/${data?._id}`}
                       isQuiz={true}
                       createdAt={data?.createdAt}
                       status={
