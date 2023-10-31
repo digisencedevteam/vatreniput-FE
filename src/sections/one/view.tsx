@@ -24,7 +24,7 @@ export default function OneView() {
     null
   );
 
-  const { votings } = useVoting();
+  const { votings, fetchAllVotings } = useVoting();
 
   const imageSrc =
     theme.palette.mode === 'dark'
@@ -67,6 +67,7 @@ export default function OneView() {
     fetchCollectedStatistic();
     fetchDashboardStats();
     fetchQuizzes();
+    fetchAllVotings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

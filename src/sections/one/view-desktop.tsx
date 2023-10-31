@@ -1,5 +1,4 @@
 import { Box, Button, Container, Divider, Grid, Skeleton } from '@mui/material';
-import CollectionStickerItem from 'src/components/collection-sticker/collection-sticker-item';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
@@ -15,6 +14,8 @@ import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import AppCurrentDownload from 'src/components/collection-chart/app-current-download';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import useDashboardData from 'src/hooks/use-dashboard-data';
+import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
+import { paths } from 'src/routes/paths';
 
 
 export const DesktopViewOne = () => {
@@ -22,7 +23,7 @@ export const DesktopViewOne = () => {
   const { dashboardData, chartData, isDashboardLoading, fetchDashboardData } = useDashboardData();
   const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
     useFetchQuizzes(1, 4);
-  const { votings } = useVoting();
+  const { votings, fetchAllVotings, deleteVoting } = useVoting();
   const settings = useSettingsContext();
 
   const featuredAppsList = [
@@ -44,6 +45,7 @@ export const DesktopViewOne = () => {
     fetchDashboardData();
     fetchCollectedCards();
     fetchQuizzes();
+    fetchAllVotings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -164,11 +166,12 @@ export const DesktopViewOne = () => {
                   <CustomCard
                     key={index}
                     cardId={voting._id}
-                    width='96%'
-                    height='100%'
+                    votingId={voting._id}
                     imgUrl={voting.thumbnail}
                     cardText={voting.title}
-                    linkTo={`/dashboard/voting/${voting._id}`}
+                    onDelete={deleteVoting}
+                    linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
+                    linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
                   />
                 ))
               ) : (

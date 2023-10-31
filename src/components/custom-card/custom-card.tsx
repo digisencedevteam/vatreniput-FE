@@ -36,7 +36,7 @@ interface CustomCardProps {
   status?: string;
   createdAt?: string;
   isRewarded?: Record<string, boolean>;
-  linkToEdit: string;
+  linkToEdit?: string;
 }
 
 const CustomCard = ({
