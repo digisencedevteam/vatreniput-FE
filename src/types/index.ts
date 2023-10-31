@@ -264,6 +264,16 @@ interface TimelineStory {
 export interface TimelineProps {
   stories: TimelineStory[];
 }
+export type TabComponents = {
+  Kvalifikacije?: JSX.Element;
+  Prvenstvo?: JSX.Element;
+  Highlights?: JSX.Element;
+  Izbornik?: JSX.Element;
+  Reprezentacija?: JSX.Element;
+  Zanimljivosti?: JSX.Element;
+  [key: string]: JSX.Element | undefined;
+};
+
 // STORY TYPES END
 export type VotingOption = {
   _id?: string;
