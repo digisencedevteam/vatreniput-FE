@@ -14,6 +14,7 @@ type Voting = {
 
 type UseVotingReturn = {
   isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
   votings: Voting[] | undefined;
   createOrUpdateVoting: (
     voting: Partial<Voting>,
@@ -70,11 +71,14 @@ const useVoting = (): UseVotingReturn => {
   };
 
   const fetchVotingById = async (votingId: string): Promise<Partial<Voting> | null> => { 
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get(`${endpoints.votings.all}${votingId}`);
+      setIsLoading(false);
       return response.data;
     } catch (error) {
       console.error('Error fetching voting data by ID:', error);
+      setIsLoading(false);
       return null;
     }
   };
@@ -124,6 +128,7 @@ const useVoting = (): UseVotingReturn => {
   return {
     isLoading,
     votings,
+    setIsLoading,
     createOrUpdateVoting,
     fetchAllVotings,
     submitVote,

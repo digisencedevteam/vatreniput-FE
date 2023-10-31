@@ -3,32 +3,28 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
 import { Button, Grid } from '@mui/material';
-import { green, yellow } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
-import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import { EmojiEvents, SportsSoccer } from '@mui/icons-material';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import useVoting from 'src/hooks/use-voting-data';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from 'src/auth/context/jwt';
 import { Link } from 'react-router-dom';
 import { useRouter } from 'src/routes/hooks';
 import { userRoles } from 'src/lib/constants';
 import CustomCard from 'src/components/custom-card/custom-card';
 import { LoadingScreen } from 'src/components/loading-screen';
+import { paths } from 'src/routes/paths';
 
 export const FiveView = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
   const settings = useSettingsContext();
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-  const { votings, fetchAllVotings, deleteVoting } = useVoting();
+  const { votings, fetchAllVotings, deleteVoting, isLoading } = useVoting();
   const auth = useContext(AuthContext);
 
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
@@ -40,7 +36,6 @@ export const FiveView = () => {
     : [];
   const fetchData = async () => {
     await fetchAllVotings();
-    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -69,7 +64,7 @@ export const FiveView = () => {
                 variant='contained'
                 color='primary'
                 component={Link}
-                to={'/dashboard/createVoting '}
+                to={`${paths.dashboard.voting.createVoting}`}
               >
                 Novo glasanje
               </Button>
@@ -87,11 +82,6 @@ export const FiveView = () => {
                     }
                     alt='Vesela'
                   />
-                }
-                action={
-                  <Button variant='contained' color='primary'>
-                    Istraži
-                  </Button>
                 }
               />
             </Grid>
@@ -119,8 +109,8 @@ export const FiveView = () => {
                           imgUrl={voting.thumbnail}
                           cardText={voting.title}
                           onDelete={deleteVoting}
-                          linkTo={`/dashboard/voting/${voting._id}`}
-                          linkToEdit={`/dashboard/editVoting/${voting._id}`}
+                          linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
+                          linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
                         />
                       </Grid>
                     ))}
@@ -136,7 +126,7 @@ export const FiveView = () => {
                 color='textSecondary'
                 m={1}
               >
-                Zasada nema riješenih kvizova!
+                Za sada nema ispunjenih glasanja!
               </Typography>
             ) : (
               <ScrollableContainer>
@@ -150,7 +140,7 @@ export const FiveView = () => {
                       cardText={data.title}
                       onCardClick={() =>
                         router.push(
-                          `/dashboard/votingResults/${data._id}/${data.title}`
+                          `${paths.dashboard.voting.votingResults}/${data._id}/${data.title}`
                         )
                       }
                     />
@@ -159,6 +149,7 @@ export const FiveView = () => {
               </ScrollableContainer>
             )}
           </SectionWrapper>
+          {/*  TODO: Implement some statistics to replace this 
           <Box
             borderRadius={2}
             p={2}
@@ -202,7 +193,7 @@ export const FiveView = () => {
                 text='Najpopularnije prvenstvo'
               />
             </Box>
-          </Box>
+          </Box> */}
         </>
       )}
     </Container>

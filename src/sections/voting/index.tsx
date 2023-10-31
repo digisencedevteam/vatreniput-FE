@@ -15,6 +15,7 @@ import useVoting from 'src/hooks/use-voting-data';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import { Voting } from 'src/types';
+import { paths } from 'src/routes/paths';
 
 const VotingApp = () => {
   const settings = useSettingsContext();
@@ -28,7 +29,7 @@ const VotingApp = () => {
   const handleSubmit = async () => {
     if (votingId && selectedOption) {
       await submitVote(votingId, selectedOption);
-      router.push('/dashboard/five');
+      router.push(`${paths.dashboard.five}`);
     }
   };
 
@@ -42,10 +43,6 @@ const VotingApp = () => {
     fetchAndSetVoting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votingId]);
-
-  if (!voting || !voting.votingOptions) {
-    router.push('/404');
-  }
 
   return (
     <Container

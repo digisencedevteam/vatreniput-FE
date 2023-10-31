@@ -21,6 +21,7 @@ import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs from 'dayjs';
 import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-overview';
 import { userRoles } from 'src/lib/constants';
+import { paths } from 'src/routes/paths';
 
 export const ThreeView = () => {
   const settings = useSettingsContext();
@@ -64,7 +65,7 @@ export const ThreeView = () => {
       setRewardStatus(newRewardStatus);
     }
   }, [unresolvedQuizzes]);
-  const _ecommerceSalesOverview = resolvedQuizzes?.map((quiz, index) => ({
+  const resolvedQuiz = resolvedQuizzes?.map((quiz, index) => ({
     label: quiz,
     totalAmount: quiz.score,
     value: quiz.duration,
@@ -126,17 +127,14 @@ export const ThreeView = () => {
             variant='contained'
             color='primary'
             component={Link}
-            to={'/dashboard/createQuiz'}
+            to={`${paths.dashboard.quizGroup.createQuiz}`}
           >
             Kreiraj novi kviz
           </Button>
         )}
       </Box>
-      <Grid item xs={12} md={6} lg={8} sx={{ marginTop: 5 }}>
-        <QuizBestOverview
-          title='Najnoviji rezultati'
-          data={_ecommerceSalesOverview}
-        />
+      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
+        <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
       </Grid>
       <Box
         borderRadius={2}
@@ -206,7 +204,7 @@ export const ThreeView = () => {
               color='textSecondary'
               m={5}
             >
-              Zasada nema riješenih kvizova!
+              Za sada nema riješenih kvizova!
             </Typography>
           )}
           {isLoadingResolved && <LoadingScreen />}
@@ -241,8 +239,8 @@ export const ThreeView = () => {
                       cardText={data.title!}
                       cardId={data?._id}
                       availableUntil={data.availableUntil}
-                      linkTo={`/dashboard/quiz/${data?._id}`}
-                      linkToEdit={`/dashboard/editQuiz/${data?._id}`}
+                      linkTo={`${paths.dashboard.quizGroup.quiz}/${data?._id}`}
+                      linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data?._id}`}
                       createdAt={data?.createdAt}
                       status={
                         data.status && data.status.length > 0
