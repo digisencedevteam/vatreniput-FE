@@ -8,6 +8,8 @@ import {
   Divider,
   Snackbar,
   Alert,
+  Grid,
+  IconButton,
 } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { AuthContext } from 'src/auth/context/jwt';
@@ -18,6 +20,7 @@ import useVoting from 'src/hooks/use-voting-data';
 import dayjs from 'dayjs';
 import { userRoles } from 'src/lib/constants';
 import { useRouter } from 'src/routes/hooks';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 interface Voting {
   title: string;
@@ -29,6 +32,9 @@ interface Voting {
 
 const ManageVoting = () => {
   const [voting, setVoting] = useState<Partial<Voting>>({ votingOptions: [] });
+  const [initialVoting, setInitialVoting] = useState<Partial<Voting>>({
+    votingOptions: [],
+  });
   const { createOrUpdateVoting, fetchVotingById } = useVoting();
   const { votingId } = useParams();
   const settings = useSettingsContext();
@@ -42,19 +48,31 @@ const ManageVoting = () => {
     router.push('/dashboard/one');
   }
 
-  const fetchData = async () => {
+  const fetchData = async (): Promise<Partial<Voting> | void> => {
     if (votingId) {
       const fetchedVoting = await fetchVotingById(votingId);
       if (fetchedVoting) {
         setVoting(fetchedVoting);
+        return fetchedVoting;
       }
     }
   };
 
   useEffect(() => {
-    fetchData();
+    if (votingId) {
+      fetchData().then((fetchedVoting) => {
+        if (fetchedVoting) {
+          setVoting(fetchedVoting);
+          setInitialVoting(fetchedVoting);
+        }
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votingId]);
+
+  const hasChanges = () => {
+    return JSON.stringify(voting) !== JSON.stringify(initialVoting);
+  };
 
   const handleSubmit = async () => {
     const result = await createOrUpdateVoting(voting, votingId);
@@ -93,8 +111,20 @@ const ManageVoting = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
+      <Grid item sx={{ m: 1, alignSelf: 'start' }}>
+        <IconButton
+          edge='start'
+          color='primary'
+          aria-label='back to dashboard'
+          onClick={() => {
+            router.push('/dashboard/five');
+          }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+      </Grid>
       <Box>
-        <Typography variant='h4' textAlign={'center'} m={1}>
+        <Typography variant='h4' textAlign={'center'} m={3}>
           {votingId ? 'Ažuriraj' : 'Stvori novo'} glasanje
         </Typography>
         <Divider />
@@ -123,6 +153,7 @@ const ManageVoting = () => {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateTimePicker
+            sx={{ my: 2 }}
             label='Available Until'
             value={dayjs(voting.availableUntil || undefined)}
             disablePast
@@ -150,14 +181,22 @@ const ManageVoting = () => {
                 handleOptionChange(index, 'thumbnail', e.target.value)
               }
             />
-            <Button onClick={() => handleRemoveOption(index)}>
-              - Remove Option
+            <Button
+              sx={{ my: 2 }}
+              variant='outlined'
+              onClick={() => handleRemoveOption(index)}
+            >
+              Ukloni Opciju
             </Button>
           </Box>
         ))}
 
-        <Button sx={{ mx: 3, my: 1 }} onClick={handleAddOption}>
-          Dodaj opciju
+        <Button
+          variant='outlined'
+          sx={{ mx: 3, my: 2 }}
+          onClick={handleAddOption}
+        >
+          Dodaj Novu Opciju
         </Button>
         <Button
           variant='contained'
@@ -165,8 +204,9 @@ const ManageVoting = () => {
           disabled={
             !voting.title ||
             !voting.description ||
-            !voting.votingOptions ||
-            !voting.thumbnail
+            !voting?.votingOptions?.[1] ||
+            !voting.thumbnail ||
+            !hasChanges()
           }
         >
           {votingId ? 'Ažuriraj' : 'Kreiraj'}

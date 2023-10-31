@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import ThreeView from 'src/sections/three/view';
+import { ThreeView } from 'src/sections/three/view';
 
-export default function Page() {
+const Page = () => {
   return (
     <>
       <Helmet>
@@ -11,4 +11,5 @@ export default function Page() {
       <ThreeView />
     </>
   );
-}
+};
+export default Page;

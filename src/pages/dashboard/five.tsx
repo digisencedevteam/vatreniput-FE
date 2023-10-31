@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
-import FiveView from 'src/sections/five/view';
+import { FiveView } from 'src/sections/five/view';
 
-export default function Page() {
+const Page = () => {
   return (
     <>
       <Helmet>
@@ -11,4 +11,5 @@ export default function Page() {
       <FiveView />
     </>
   );
-}
+};
+export default Page;

@@ -62,7 +62,7 @@ const VotingApp = () => {
           <IconButton
             edge='start'
             color='primary'
-            aria-label='back to dashboard'
+            aria-label='back to previous page'
             onClick={() => {
               router.push('/dashboard/five');
             }}

@@ -115,6 +115,7 @@ const useVoting = (): UseVotingReturn => {
       await axiosInstance.delete(
         `${endpoints.votings.all}${votingId}`,
       );
+      setVotings(prevVotings => prevVotings?.filter(voting => voting._id !== votingId)); 
     } catch (error) {
       console.error(error)
     }
