@@ -110,7 +110,7 @@ export default function AppCurrentDownload({ title, subheader, chart, ...other }
                 type="donut"
                 series={chartSeries}
                 options={chartOptions}
-                height={280}
+                height={300}
             />
         </Card>
     );

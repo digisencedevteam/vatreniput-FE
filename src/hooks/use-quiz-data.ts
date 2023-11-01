@@ -7,11 +7,13 @@ import { QuizResult } from 'src/types';
 type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
   isLoadingUnresolved: boolean;
+  isResultsLoading: boolean;
   resolvedQuizzes: Quiz[] | undefined;
   isDeleting: boolean;
   unresolvedQuizzes: Quiz[] | undefined;
   allQuizzes: Quiz[] | undefined;
   unresolvedQuiz: Quiz | null | undefined;
+  error: string | null;
   fetchAllQuizzes: () => void;
   fetchQuizzes: () => void;
   fetchUnresolvedQuizById: (quizId: string) => Promise<void>;
@@ -41,9 +43,9 @@ const useFetchQuizzes = (
   const [unresolvedQuiz, setUnresolvedQuiz] = useState<Quiz | null>();
   const [isDeleting, setIsDeleting] = useState(false);
   const [resultsById, setResultsById] = useState<QuizResult[] | null>(null);
-  const [isLastPage, setIsLastPage] = useState(false);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const [isResultsLoading, setIsResultsLoading] = useState(false);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
@@ -73,24 +75,22 @@ const useFetchQuizzes = (
     limit: number
   ) => {
     try {
+      setResultsById(null);
+      setIsResultsLoading(true);
       const response = await axiosInstance.get(
         `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
       );
-      const { quizResults, totalCount } = response.data;
+      const { quizResults, count } = response.data;
 
-      const computedTotalPages = Math.ceil(totalCount / limit);
+      const computedTotalPages = Math.ceil(count / limit);
       setTotalPages(computedTotalPages);
 
       setResultsById(quizResults || null);
-      if (quizResults && quizResults.length < limit) {
-        setIsLastPage(true);
-      } else {
-        setIsLastPage(false);
-      }
     } catch (error) {
-      console.error('Error fetching results by ID:', error);
       setError('Failed to fetch quiz results. Please try again.');
       setResultsById(null);
+    } finally {
+      setIsResultsLoading(false);
     }
   };
 
@@ -181,6 +181,7 @@ const useFetchQuizzes = (
   return {
     isLoadingResolved,
     isLoadingUnresolved,
+    isResultsLoading,
     resolvedQuizzes,
     unresolvedQuizzes,
     allQuizzes,
@@ -194,6 +195,7 @@ const useFetchQuizzes = (
     resultsById,
     getResultsById,
     totalPages,
+    error,
   };
 };
 

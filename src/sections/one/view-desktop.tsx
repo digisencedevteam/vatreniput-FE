@@ -83,8 +83,9 @@ export const DesktopViewOne = () => {
                       flex: '0 0 auto',
                       width: '100%',
                       maxWidth: '175px',
-                      height: '35vh',
+                      height: '26vh',
                       m: 1,
+
                     }}
                   >
                     <CollectionStickerItem item={item} />
@@ -105,6 +106,7 @@ export const DesktopViewOne = () => {
           sx={{
             borderRadius: 2,
             m: '4px',
+            mt: -4
           }}
         >
           {chartData && (
@@ -166,6 +168,7 @@ export const DesktopViewOne = () => {
                 votings.map((voting, index) => (
                   <CustomCard
                     key={index}
+                    width='450px'
                     cardId={voting._id}
                     votingId={voting._id}
                     imgUrl={voting.thumbnail}

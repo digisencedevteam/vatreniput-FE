@@ -11,8 +11,8 @@ import {
   Select,
   MenuItem,
   Avatar,
-  Button,
   Pagination,
+  CircularProgress,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -24,9 +24,8 @@ import icon from '../../assets/illustrations/vatroslav_upute_2.jpg';
 export default function QuizResults() {
   const settings = useSettingsContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById, totalPages } = useFetchQuizzes(currentPage, 5); // setting itemsPerPage to 5
+  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById, totalPages, isResultsLoading } = useFetchQuizzes(currentPage, 5);
   const [selectedQuiz, setSelectedQuiz] = useState('');
-
 
   useEffect(() => {
     (async () => {
@@ -39,7 +38,6 @@ export default function QuizResults() {
     if (selectedQuiz) {
       getResultsById(selectedQuiz, currentPage, 5);
     }
-
   }, [selectedQuiz, currentPage]);
 
   const NoResultLayout = ({ message }: { message: string }) => {
@@ -90,71 +88,76 @@ export default function QuizResults() {
       </Select>
 
       <Box sx={{ mt: 2 }}>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Korisničko Ime</TableCell>
-                <TableCell>Rezultat</TableCell>
-                <TableCell>Riješen</TableCell>
-                <TableCell>Datum</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectedQuiz ? (
-                resultsById && resultsById.length > 0 ? (
-                  resultsById.map((result: QuizResult) => (
-                    <TableRow key={result._id}>
-                      <TableCell>
-                        <Box display={'flex'} justifyContent={'center'}>
-                          <Avatar
-                            src={
-                              result.userId.photoURL
-                                ? result.userId.photoURL
-                                : icon
-                            }
-                            alt='User Image'
-                            sx={{
-                              width: 65,
-                              height: 65,
-                              border: '2px solid white',
-                            }}
-                          />
-                        </Box>
+        {isResultsLoading ? <CircularProgress /> :
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>Korisničko Ime</TableCell>
+                  <TableCell>Rezultat</TableCell>
+                  <TableCell>Riješen</TableCell>
+                  <TableCell>Datum</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {selectedQuiz ? (
+                  resultsById && resultsById.length > 0 ? (
+                    resultsById.map((result: QuizResult) => (
+                      <TableRow key={result._id}>
+                        <TableCell>
+                          <Box display={'flex'} justifyContent={'center'}>
+                            <Avatar
+                              src={
+                                result.userId.photoURL
+                                  ? result.userId.photoURL
+                                  : icon
+                              }
+                              alt='User Image'
+                              sx={{
+                                width: 65,
+                                height: 65,
+                                border: '2px solid white',
+                              }}
+                            />
+                          </Box>
+                        </TableCell>
+                        <TableCell>{result.userId.username}</TableCell>
+                        <TableCell>{Math.round(result.score)} %</TableCell>
+                        <TableCell>
+                          {dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}
+                        </TableCell>
+                        <TableCell>{Math.round(result.duration / 60)} m</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} align='center'>
+                        <NoResultLayout message='Kviz nema rezultate' />
                       </TableCell>
-                      <TableCell>{result.userId.username}</TableCell>
-                      <TableCell>{Math.round(result.score)} %</TableCell>
-                      <TableCell>
-                        {dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}
-                      </TableCell>
-                      <TableCell>{Math.round(result.duration / 60)} m</TableCell>
                     </TableRow>
-                  ))
+                  )
                 ) : (
                   <TableRow>
                     <TableCell colSpan={5} align='center'>
-                      <NoResultLayout message='Kviz nema rezultate' />
+                      <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
                     </TableCell>
                   </TableRow>
-                )
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={5} align='center'>
-                    <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-          <Pagination
-            count={Number.isInteger(totalPages) ? totalPages : 1}
-            page={currentPage}
-            onChange={(event, value) => setCurrentPage(value)}
-          />        </Box>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        }
+        {resultsById && resultsById.length > 0 && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={(event, value) => setCurrentPage(value)}
+            />
 
+          </Box>
+        )}
       </Box>
     </Container>
   );
