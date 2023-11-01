@@ -33,10 +33,10 @@ const StoryContent = ({ story }: StoryContentProps) => {
     const getActiveTabs = (story: StoryContentProps['story']) => {
         return [
             { label: "Kvalifikacije", icon: <Box m={1}><ScheduleIcon color='error' /></Box>, active: !!story?.Qualifications || !!story?.AdditionalQualifications },
-            { label: "Championship", icon: <Box m={1}><SportsSoccerIcon color='error' /> </Box>, active: !!story?.Championship },
+            { label: "Prvenstvo", icon: <Box m={1}><SportsSoccerIcon color='error' /> </Box>, active: !!story?.Championship },
             { label: "Highlights", icon: <Box m={1}> <VideoLibraryOutlinedIcon color='error' /> </Box>, active: !!story?.Highlights?.length },
             { label: "Izbornik", icon: <Box m={1}><PersonIcon color='error' /> </Box>, active: !!story?.Coach },
-            { label: "NationalTeam", icon: <Box m={1}><PeopleIcon color='error' /> </Box>, active: !!story?.NationalTeam },
+            { label: "Reprezentacija", icon: <Box m={1}><PeopleIcon color='error' /> </Box>, active: !!story?.NationalTeam },
             { label: "Zanimljivosti", icon: <Box m={1}> <StarBorderIcon color='error' /> </Box>, active: !!story?.Zanimljivosti?.length }
         ].filter(tab => tab.active);
     };
@@ -44,10 +44,10 @@ const StoryContent = ({ story }: StoryContentProps) => {
 
     const tabContentComponents: TabComponents = {
         "Kvalifikacije": <QualificationsContent story={story} />,
-        "Championship": <ChampionshipContent story={story} />,
+        "Prvenstvo": <ChampionshipContent story={story} />,
         "Highlights": <HighlightContent story={story} />,
         "Izbornik": <CoachContent story={story} />,
-        "NationalTeam": <NationalTeamContent story={story} />,
+        "Reprezentacija": <NationalTeamContent story={story} />,
         "Zanimljivosti": <FactContent story={story} />,
     };
 
