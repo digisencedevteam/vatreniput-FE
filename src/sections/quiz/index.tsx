@@ -125,8 +125,12 @@ const QuizApp = () => {
       newAnswers[currentQuestionIndex] = newAnswer;
       setAnswers(newAnswers);
 
-      if (!currentQuestion || !currentQuestion._id) return null;
-      if (selectedOption === null || isNaN(Number(selectedOption))) {
+      if (
+        selectedOption === null ||
+        isNaN(Number(selectedOption)) ||
+        !currentQuestion ||
+        !currentQuestion._id
+      ) {
         return null;
       }
 
@@ -187,7 +191,7 @@ const QuizApp = () => {
     setIsSubmitting(false);
     setIsQuizCompleted(true);
   };
-  if (selectedQuiz?.isResolved) navigate(`${paths.dashboard.three}`);
+  if (selectedQuiz?.isResolved) navigate(paths.dashboard.three);
 
   return (
     <Container
