@@ -62,6 +62,11 @@ const StoryContent = ({ story }: StoryContentProps) => {
                 </Grid>
             </Grid>
             <Tabs
+                sx={{
+                    width: '105%',
+                    marginLeft: '-2.5%',
+                    marginRight: '-2.5%',
+                }}
                 value={currentTab}
                 onChange={handleTabChange}
                 variant="scrollable"
@@ -82,7 +87,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
             <MotionContainer key={currentTab} variants={slideVariants.inUp}>
                 {activeTabs[currentTab] && tabContentComponents[activeTabs[currentTab].label]}
             </MotionContainer>
-        </Container>
+        </Container >
     );
 };
 

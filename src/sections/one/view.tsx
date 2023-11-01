@@ -7,24 +7,22 @@ import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboar
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { useEffect, useState } from 'react';
-import { CollectedStatistic, DashboardStats } from 'src/types';
-import axios, { endpoints } from 'src/utils/axios';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
-import useFetchQuizzes from 'src/hooks/use-quiz-data';
-import useVoting from 'src/hooks/use-voting-data';
+import useDashboardData from 'src/hooks/use-dashboard-data';
 
 export default function OneView() {
   const settings = useSettingsContext();
   const theme = useTheme();
-  const [collectedStatistic, setCollectedStatistic] =
-    useState<CollectedStatistic | null>(null);
-  const [dashboardStats, setDashboardStats] = useState<DashboardStats | null>(
-    null
-  );
-
-  const { votings, fetchAllVotings } = useVoting();
+  const [isScanning, setIsScanning] = useState(false);
+  const {
+    fetchDashboardData,
+    quizzes,
+    votings,
+    isDashboardLoading,
+    collectedStatistic,
+  } = useDashboardData();
 
   const imageSrc =
     theme.palette.mode === 'dark'
@@ -36,38 +34,12 @@ export default function OneView() {
       ? 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694513743/collection_white_sjtvox.png'
       : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694444294/library_vqp6pn.png';
 
-  const fetchCollectedStatistic = async () => {
-    try {
-      const response = await axios.get(endpoints.card.stats);
-      setCollectedStatistic(response.data);
-    } catch (error) {
-      console.error('Error fetching collected statistic: ' + error);
-      setCollectedStatistic(null);
-    }
-  };
-
-  const fetchDashboardStats = async () => {
-    try {
-      const response = await axios.get(endpoints.card.statsDashboard);
-      setDashboardStats(response.data);
-    } catch (error) {
-      console.error('Error fetching dashboard statistics: ' + error);
-    }
-  };
-  const [isScanning, setIsScanning] = useState(false);
-
   const toggleScanning = () => {
     setIsScanning(!isScanning);
   };
 
-  const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
-    useFetchQuizzes(1, 7);
-
   useEffect(() => {
-    fetchCollectedStatistic();
-    fetchDashboardStats();
-    fetchQuizzes();
-    fetchAllVotings();
+    fetchDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -103,23 +75,22 @@ export default function OneView() {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          {/* TODO: fetch data from API and remove hardcoded data */}
           <DashboardSectionWrapper
             title='Najvise skupljenih'
             link='dashboard/two'
           >
             <DashboardCollectionCategory
               imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
-              name={dashboardStats?.topEvents[0].name}
+              name={collectedStatistic?.topEvents[0].name}
               percentageCollected={Math.round(
-                dashboardStats?.topEvents[0].percentageCollected || 0
+                collectedStatistic?.topEvents[0].percentageCollected || 0
               )}
             />
             <DashboardCollectionCategory
               imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
-              name={dashboardStats?.topEvents[1].name}
+              name={collectedStatistic?.topEvents[1].name}
               percentageCollected={Math.round(
-                dashboardStats?.topEvents[1].percentageCollected || 0
+                collectedStatistic?.topEvents[1].percentageCollected || 0
               )}
             />
           </DashboardSectionWrapper>
@@ -128,8 +99,8 @@ export default function OneView() {
             link='dashboard/three'
           >
             <ScrollableContainer>
-              {!isLoadingUnresolved &&
-                unresolvedQuizzes?.map((quiz, index) => (
+              {!isDashboardLoading &&
+                quizzes?.map((quiz, index) => (
                   <CustomCardSmall
                     key={index}
                     imgUrl={quiz.thumbnail}

@@ -29,10 +29,10 @@ export type CardApiResponse = {
 };
 
 export type CollectedStatistic = {
-  topEvents: CollectedStatistic | null;
   numberOfCollectedCards: number;
   percentageOfCollectedCards: number;
   countOfAllCards: number;
+  topEvents: Event[];
 };
 
 export type CardTemplate = {

@@ -3,12 +3,9 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import useCardData from 'src/hooks/use-card-data';
-import AppFeatured from 'src/components/feautred-carousel/app-featured';
+import AppFeatured, { ItemProps } from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
-import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { useEffect } from 'react';
-import useVoting from 'src/hooks/use-voting-data';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import AppCurrentDownload from 'src/components/collection-chart/app-current-download';
@@ -17,36 +14,36 @@ import useDashboardData from 'src/hooks/use-dashboard-data';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { paths } from 'src/routes/paths';
 
-
 export const DesktopViewOne = () => {
-  const { collectedCards, isCardLoading, fetchCollectedCards } = useCardData();
-  const { chartData, fetchDashboardData, cardCount } = useDashboardData();
-  const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
-    useFetchQuizzes(1, 4);
-  const { votings, fetchAllVotings, deleteVoting } = useVoting();
   const settings = useSettingsContext();
+  const {
+    chartData,
+    fetchDashboardData,
+    cardCount,
+    quizzes,
+    votings,
+    isDashboardLoading,
+    deleteVoting,
+    cards
+  } = useDashboardData();
 
   const featuredAppsList = [
-    {
-      id: '1',
-      title: 'Vatreni Challange',
-      coverUrl: 'assets/images/mandzukicPerisic.jpg',
-      description: 'Novi Kviz je dostupan!!!',
+    quizzes?.length > 0 && {
+      id: quizzes?.[0]._id,
+      title: quizzes?.[0].title,
+      coverUrl: quizzes?.[0].thumbnail,
+      description: 'Novi Kviz je dostupan!!!!',
     },
-    {
-      id: '2',
-      title: 'Najbolji golman',
-      coverUrl: 'assets/images/doha_medalje.png',
+    votings?.length > 0 && {
+      id: votings?.[0]._id,
+      title: votings?.[0].title,
+      coverUrl: votings?.[0].thumbnail,
       description: 'Novo Glasanje je dostupno!!',
     },
-  ];
+  ].filter(Boolean) as ItemProps[];
 
-  // Kada zavrsimo dashboard endpoint u backend cemo ovo refactorat da je sve jedan call
   useEffect(() => {
     fetchDashboardData();
-    fetchCollectedCards();
-    fetchQuizzes();
-    fetchAllVotings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -65,26 +62,29 @@ export const DesktopViewOne = () => {
           />
         </Grid>
         <Grid item xs={4} md={4}>
-          <AppFeatured list={featuredAppsList} />
+          {(quizzes?.length && votings?.length) ? (
+            <AppFeatured list={featuredAppsList} />
+          ) : (
+            <SkeletonDashboardLoader count={1} />
+          )}
         </Grid>
       </Grid>
       <Grid container spacing={3} my={5} alignItems="center" justifyContent="center" borderRadius={1}>
         <Grid item xl={12} container   >
           <DashboardSectionWrapper title={'Kolekcija'} link='dashboard/two'>
             <ScrollableContainer>
-              {isCardLoading ? (
+              {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={8} maxWidth="175px" />
-              ) : collectedCards?.length ? (
-                collectedCards.map((item, index) => (
+              ) : cards?.length ? (
+                cards.map((item, index) => (
                   <Box
                     key={index}
                     sx={{
                       flex: '0 0 auto',
                       width: '100%',
                       maxWidth: '175px',
-                      height: '26vh',
+                      height: '32vh',
                       m: 1,
-
                     }}
                   >
                     <CollectionStickerItem item={item} />
@@ -132,23 +132,24 @@ export const DesktopViewOne = () => {
           }}
         >
           <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
-            <ScrollableContainer>
-              {isLoadingUnresolved ? (
+            <Grid container justifyContent="center" alignItems="center">
+              {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
-              ) : unresolvedQuizzes?.length ? (
-                unresolvedQuizzes.map((quiz, index) => (
-                  <CustomCardSmall
-                    key={index}
-                    imgUrl={quiz.thumbnail}
-                    width='96%'
-                    cardText={quiz.title}
-                    linkTo={`/dashboard/quiz/${quiz._id}`}
-                  />
+              ) : quizzes?.length ? (
+                quizzes.map((quiz, index) => (
+                  <Grid item md={6} key={index} >
+                    <CustomCardSmall
+                      imgUrl={quiz.thumbnail}
+                      width='96%'
+                      cardText={quiz.title}
+                      linkTo={`/dashboard/quiz/${quiz._id}`}
+                    />
+                  </Grid>
                 ))
               ) : (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
               )}
-            </ScrollableContainer>
+            </Grid>
           </DashboardSectionWrapper>
         </Grid>
         <Grid
@@ -161,27 +162,27 @@ export const DesktopViewOne = () => {
           }}
         >
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-            <ScrollableContainer>
-              {isCardLoading ? (
+            <Grid container>
+              {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
               ) : votings?.length ? (
                 votings.map((voting, index) => (
-                  <CustomCard
-                    key={index}
-                    width='450px'
-                    cardId={voting._id}
-                    votingId={voting._id}
-                    imgUrl={voting.thumbnail}
-                    cardText={voting.title}
-                    onDelete={deleteVoting}
-                    linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
-                    linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
-                  />
+                  <Grid item md={6} key={index} >
+                    <CustomCard
+                      cardId={voting._id}
+                      votingId={voting._id}
+                      imgUrl={voting.thumbnail}
+                      cardText={voting.title}
+                      onDelete={deleteVoting}
+                      linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
+                      linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
+                    />
+                  </Grid>
                 ))
               ) : (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
               )}
-            </ScrollableContainer>
+            </Grid>
           </DashboardSectionWrapper>
         </Grid>
       </Grid>

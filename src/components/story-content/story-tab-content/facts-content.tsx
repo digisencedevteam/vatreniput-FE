@@ -18,7 +18,7 @@ export const FactContent = ({ story }: StoryContentProps) => {
                                     <CircleNotifications color='error' />
                                 </ListItemAvatar>
                                 <ListItemText  >
-                                    <Typography variant="h6" align="left">
+                                    <Typography variant="subtitle1" align="left">
                                         {fact}
                                     </Typography>
                                 </ListItemText>
