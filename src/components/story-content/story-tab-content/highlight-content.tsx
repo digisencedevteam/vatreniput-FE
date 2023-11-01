@@ -9,7 +9,7 @@ export const HighlightContent = ({ story }: StoryContentProps) => {
         <StorySectionWrapper title='Highlights'>
             {story?.Highlights &&
                 <Grid container spacing={2}>
-                    {story?.Highlights.map((highlight: HighlightData, index: React.Key | null | undefined) => (
+                    {story?.Highlights.map((highlight: HighlightData, index: React.Key) => (
                         <Grid item xs={12} lg={6} key={index} >
                             <Highlight data={highlight} />
                         </Grid>

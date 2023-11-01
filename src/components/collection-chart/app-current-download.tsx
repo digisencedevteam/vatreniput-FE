@@ -1,16 +1,10 @@
-
 import { ApexOptions } from 'apexcharts';
 import { useTheme, styled } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import Chart, { useChart } from 'src/components/chart';
-
 import { Skeleton } from '@mui/material';
-type InputValue = string | number | null;
-
-const CHART_HEIGHT = 400;
-
-const LEGEND_HEIGHT = 72;
+import { CHART_HEIGHT, LEGEND_HEIGHT } from 'src/lib/constants';
 
 const StyledChart = styled(Chart)(({ theme }) => ({
     height: CHART_HEIGHT,
@@ -38,14 +32,10 @@ interface Props extends CardProps {
     };
 }
 
-export default function AppCurrentDownload({ title, subheader, chart, cardCount, ...other }: Props) {
-
+const AppCurrentDownload = ({ title, subheader, chart, cardCount, ...other }: Props) => {
     const theme = useTheme();
-
-    const { colors = ["#ef0de0", "#d99e3a"], series = [{ label: '', value: 0 }], options = {} } = chart || {};
-
+    const { colors = [theme.palette.secondary.main, theme.palette.warning.main], series = [{ label: '', value: 0 }], options = {} } = chart || {};
     const chartSeries = series.map((i) => i.value);
-
     const chartOptions = useChart({
         chart: {
             sparkline: {
@@ -90,9 +80,9 @@ export default function AppCurrentDownload({ title, subheader, chart, cardCount,
                 },
             },
         },
-
         ...options,
     });
+
     if (!chartSeries.length) {
         return (
             <Card {...other}>
@@ -103,12 +93,9 @@ export default function AppCurrentDownload({ title, subheader, chart, cardCount,
             </Card>
         );
     }
-
     return (
-
         <Card {...other}>
             <CardHeader title={title} subheader={subheader} sx={{ mb: 5 }} />
-
             <StyledChart
                 dir="ltr"
                 type="donut"
@@ -119,7 +106,5 @@ export default function AppCurrentDownload({ title, subheader, chart, cardCount,
         </Card>
     );
 }
-function numeral(number: InputValue) {
-    throw new Error('Function not implemented.');
-}
 
+export default AppCurrentDownload;

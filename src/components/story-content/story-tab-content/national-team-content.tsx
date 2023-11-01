@@ -3,15 +3,15 @@ import ScrollableContainer from "src/components/scrollable-container/scrollable-
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
 import { StoryContentProps } from "src/types";
 
-export const RepkaContent = ({ story }: StoryContentProps) => {
+export const NationalTeamContent = ({ story }: StoryContentProps) => {
     return (
-        <StorySectionWrapper title='Reprezentacija'>
-            {['Vratari', 'Branici', 'Vezni', 'Napadaci'].map(category => (
+        <StorySectionWrapper title='NationalTeam'>
+            {['Vratari', 'Braniči', 'Vezni', 'Napadači'].map(category => (
                 <Box key={category}>
                     <Typography variant="h4" my={2}>{category}</Typography>
                     <Divider sx={{ my: 2 }} />
                     <ScrollableContainer>
-                        {story?.Reprezentacija && story?.Reprezentacija[category]?.map((player, index) => (
+                        {story?.NationalTeam && story?.NationalTeam[category]?.map((player, index) => (
                             <Card key={index} sx={{
                                 boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
                                 m: 2,

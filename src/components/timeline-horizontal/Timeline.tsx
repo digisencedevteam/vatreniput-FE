@@ -42,7 +42,7 @@ const Timeline = ({
     const fillPositions = generateFillPositions(stories.length);
     return (
         <Box mt={3} position="relative" width="100%">
-            <Tooltip title="Previous Story">
+            <Tooltip title="Prošla priča">
                 <Button
                     variant="contained"
                     color="primary"

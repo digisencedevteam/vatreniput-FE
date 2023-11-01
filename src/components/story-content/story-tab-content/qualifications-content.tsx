@@ -4,10 +4,10 @@ import { StoryContentProps } from "src/types";
 import MatchTable from "../../story-components/match-table/match-table";
 import QualificationMatchDetails from "../../story-components/match-details/qualification-match-details";
 
-export const KvalifikacijeContent = ({ story }: StoryContentProps) => {
+export const QualificationsContent = ({ story }: StoryContentProps) => {
     return (
         <>
-            {story?.Qualifications?.Description && story?.Prvenstvo?.Matches.GroupStage && (
+            {story?.Qualifications?.Description && story?.Championship?.Matches.GroupStage && (
                 <StorySectionWrapper title='Kvalifikacije'>
                     <Typography variant="body1">{story.Qualifications.Description}</Typography>
                     {story?.Qualifications?.Teams && <MatchTable data={story.Qualifications.Teams} />}

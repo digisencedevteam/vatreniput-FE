@@ -7,7 +7,7 @@ const useDashboardData = () => {
     null
   );
   const [chartData, setChartData] = useState<ChartData | null>(null);
-  const [isDashboardLoading, setIsDashboardLoading] = useState<boolean>(true);
+  const [isDashboardLoading, setIsDashboardLoading] = useState(true);
   const [cardCount, setCardCount] = useState(0);
 
   const fetchDashboardData = async () => {
@@ -15,10 +15,7 @@ const useDashboardData = () => {
     try {
       const response = await axiosInstance.get(endpoints.card.statsDashboard);
       setDashboardData(response.data);
-
       setCardCount(response.data.numberOfCollectedCards);
-      console.log(cardCount);
-
       const categories: string[] = [];
       const series: number[] = [];
       response.data.topEvents.forEach((event: Event) => {
@@ -27,7 +24,6 @@ const useDashboardData = () => {
       });
       setChartData({ categories, series });
     } catch (error) {
-      console.error('Error fetching collected statistic: ' + error);
       setDashboardData(null);
     } finally {
       setIsDashboardLoading(false);

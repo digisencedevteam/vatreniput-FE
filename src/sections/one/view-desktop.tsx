@@ -1,4 +1,4 @@
-import { Box, Button, Container, Divider, Grid, Skeleton } from '@mui/material';
+import { Box, Button, Container, Divider, Grid } from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';

@@ -21,7 +21,16 @@ import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { QuizResult } from 'src/types';
 import icon from '../../assets/illustrations/vatroslav_upute_2.jpg';
 
-export default function QuizResults() {
+const NoResultLayout = ({ message }: { message: string }) => (
+  <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' height='100%' padding={2}>
+    <Box mb={2}>
+      <img src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png' alt='Instruction' style={{ width: '200px', height: 'auto' }} />
+    </Box>
+    <Typography variant='h3' color='primary'>{message}</Typography>
+  </Box>
+);
+
+const QuizResults = () => {
   const settings = useSettingsContext();
   const [currentPage, setCurrentPage] = useState(1);
   const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById, totalPages, isResultsLoading } = useFetchQuizzes(currentPage, 5);
@@ -39,30 +48,6 @@ export default function QuizResults() {
       getResultsById(selectedQuiz, currentPage, 5);
     }
   }, [selectedQuiz, currentPage]);
-
-  const NoResultLayout = ({ message }: { message: string }) => {
-    return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        height='100%'
-        padding={2}
-      >
-        <Box mb={2}>
-          <img
-            src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
-            alt='Instruction'
-            style={{ width: '200px', height: 'auto' }}
-          />
-        </Box>
-        <Typography variant='h3' color='primary'>
-          {message}
-        </Typography>
-      </Box>
-    );
-  };
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -162,3 +147,5 @@ export default function QuizResults() {
     </Container>
   );
 }
+
+export default QuizResults;

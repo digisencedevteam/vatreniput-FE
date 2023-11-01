@@ -3,7 +3,7 @@ import { List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/m
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
 import { FactType, StoryContentProps } from "src/types";
 
-export const ZanimljivostiContent = ({ story }: StoryContentProps) => {
+export const FactContent = ({ story }: StoryContentProps) => {
     if (!story?.Zanimljivosti) {
         return null;
     }

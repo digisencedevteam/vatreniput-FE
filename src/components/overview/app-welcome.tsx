@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { bgGradient } from 'src/theme/css';
 
-
 interface Props extends StackProps {
   title?: string;
   description?: string;
@@ -11,7 +10,7 @@ interface Props extends StackProps {
   action?: React.ReactNode;
 }
 
-export default function AppWelcome({ title, description, action, img, ...other }: Props) {
+const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
   const theme = useTheme();
 
   return (
@@ -46,7 +45,6 @@ export default function AppWelcome({ title, description, action, img, ...other }
         <Typography variant="h4" sx={{ mb: 2, whiteSpace: 'pre-line' }}>
           {title}
         </Typography>
-
         <Typography
           variant="body2"
           sx={{
@@ -57,10 +55,8 @@ export default function AppWelcome({ title, description, action, img, ...other }
         >
           {description}
         </Typography>
-
         {action && action}
       </Stack>
-
       {img && (
         <Stack
           component="span"
@@ -77,3 +73,5 @@ export default function AppWelcome({ title, description, action, img, ...other }
     </Stack>
   );
 }
+
+export default AppWelcome;

@@ -15,12 +15,12 @@ import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
 import PeopleIcon from '@mui/icons-material/People';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import PersonIcon from '@mui/icons-material/Person';
-import { ZanimljivostiContent } from './story-tab-content/zanimljivosti-content';
-import { KvalifikacijeContent } from './story-tab-content/kvalifikacije-content';
-import { PrvenstvoContent } from './story-tab-content/prvenstvo-content';
+import { FactContent } from './story-tab-content/facts-content';
+import { QualificationsContent } from './story-tab-content/qualifications-content';
+import { ChampionshipContent } from './story-tab-content/championship-content';
 import { HighlightContent } from './story-tab-content/highlight-content';
-import { IzbornikContent } from './story-tab-content/izbornik-content';
-import { RepkaContent } from './story-tab-content/repka-content';
+import { CoachContent } from './story-tab-content/coach-content';
+import { NationalTeamContent } from './story-tab-content/national-team-content';
 
 const StoryContent = ({ story }: StoryContentProps) => {
     const [currentTab, setCurrentTab] = useState(0);
@@ -33,22 +33,22 @@ const StoryContent = ({ story }: StoryContentProps) => {
     const getActiveTabs = (story: StoryContentProps['story']) => {
         return [
             { label: "Kvalifikacije", icon: <Box m={1}><ScheduleIcon color='error' /></Box>, active: !!story?.Qualifications || !!story?.AdditionalQualifications },
-            { label: "Prvenstvo", icon: <Box m={1}><SportsSoccerIcon color='error' /> </Box>, active: !!story?.Prvenstvo },
+            { label: "Championship", icon: <Box m={1}><SportsSoccerIcon color='error' /> </Box>, active: !!story?.Championship },
             { label: "Highlights", icon: <Box m={1}> <VideoLibraryOutlinedIcon color='error' /> </Box>, active: !!story?.Highlights?.length },
-            { label: "Izbornik", icon: <Box m={1}><PersonIcon color='error' /> </Box>, active: !!story?.Izbornik },
-            { label: "Reprezentacija", icon: <Box m={1}><PeopleIcon color='error' /> </Box>, active: !!story?.Reprezentacija },
+            { label: "Izbornik", icon: <Box m={1}><PersonIcon color='error' /> </Box>, active: !!story?.Coach },
+            { label: "NationalTeam", icon: <Box m={1}><PeopleIcon color='error' /> </Box>, active: !!story?.NationalTeam },
             { label: "Zanimljivosti", icon: <Box m={1}> <StarBorderIcon color='error' /> </Box>, active: !!story?.Zanimljivosti?.length }
         ].filter(tab => tab.active);
     };
     const activeTabs = getActiveTabs(story);
 
     const tabContentComponents: TabComponents = {
-        "Kvalifikacije": <KvalifikacijeContent story={story} />,
-        "Prvenstvo": <PrvenstvoContent story={story} />,
+        "Kvalifikacije": <QualificationsContent story={story} />,
+        "Championship": <ChampionshipContent story={story} />,
         "Highlights": <HighlightContent story={story} />,
-        "Izbornik": <IzbornikContent story={story} />,
-        "Reprezentacija": <RepkaContent story={story} />,
-        "Zanimljivosti": <ZanimljivostiContent story={story} />,
+        "Izbornik": <CoachContent story={story} />,
+        "NationalTeam": <NationalTeamContent story={story} />,
+        "Zanimljivosti": <FactContent story={story} />,
     };
 
     return (

@@ -4,7 +4,7 @@ export type FAQ = {
 };
 
 export type CollectionEvent = {
-  percentageCollected: any;
+  percentageCollected: number;
   _id: string;
   name: string;
   location?: string;
@@ -145,7 +145,7 @@ export interface MatchData {
       Final?: FinalMatchDetail;
     };
   };
-  Skupina: TeamStat[];
+  Group: TeamStat[];
   Champ?: {
     Winner?: string;
     TopScorer?: {
@@ -164,7 +164,7 @@ export interface HighlightData {
   videoLink?: string;
 }
 
-export interface IzbornikData {
+export interface CoachData {
   Name: string;
   DOB: string;
   CoachingCareer: string;
@@ -178,11 +178,11 @@ interface Player {
   imgurl: string;
 }
 
-export interface Reprezentacija {
+export interface NationalTeam {
   Vratari: Player[];
-  Branici: Player[];
+  Braniči: Player[];
   Vezni: Player[];
-  Napadaci: Player[];
+  Napadači: Player[];
   [key: string]: Player[];
 }
 
@@ -195,14 +195,14 @@ export interface QualificationMatch {
 export interface Story {
   storyTitle?: string;
   storyLogo?: string;
-  Reprezentacija?: Reprezentacija;
-  Prvenstvo?: MatchData;
+  NationalTeam?: NationalTeam;
+  Championship?: MatchData;
   Qualifications?: {
     Description: string;
     Teams: TeamStat[];
   };
   Highlights?: HighlightData[];
-  Izbornik?: IzbornikData;
+  Coach?: CoachData;
   Zanimljivosti?: (string | number | boolean)[];
   AdditionalQualifications?: QualificationMatch[];
 }
@@ -266,10 +266,10 @@ export interface TimelineProps {
 }
 export type TabComponents = {
   Kvalifikacije?: JSX.Element;
-  Prvenstvo?: JSX.Element;
+  Championship?: JSX.Element;
   Highlights?: JSX.Element;
-  Izbornik?: JSX.Element;
-  Reprezentacija?: JSX.Element;
+  Coach?: JSX.Element;
+  NationalTeam?: JSX.Element;
   Zanimljivosti?: JSX.Element;
   [key: string]: JSX.Element | undefined;
 };
@@ -330,7 +330,7 @@ export type AdminActionButtonsProps = {
 };
 
 export type Event = {
-  _id: any;
+  _id: number;
   name: string;
   location: string;
   year: number;
@@ -344,4 +344,8 @@ export type DashboardData = {
 export type ChartData = {
   categories: string[];
   series: number[];
+};
+
+export type ScrollableContainerProps = {
+  children: React.ReactNode;
 };

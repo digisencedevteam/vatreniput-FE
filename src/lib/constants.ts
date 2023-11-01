@@ -39,6 +39,10 @@ export const FAQs = [
   },
 ];
 
+export const CHART_HEIGHT = 400;
+
+export const LEGEND_HEIGHT = 72;
+
 export const STORIES = [
   {
     storyTitle: '1996',
@@ -53,7 +57,7 @@ export const STORIES = [
     storyTitle: '1998',
     storyId: 1,
     story: {
-      storyTitle: 'Svjetsko Prvenstvo 1998',
+      storyTitle: 'Svjetsko Championship 1998',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1998_wc_pdsxag.png',
       Qualifications: {
@@ -114,8 +118,8 @@ export const STORIES = [
           Scorers: ['Bokšić'],
         },
       ],
-      Prvenstvo: {
-        Skupina: [
+      Championship: {
+        Group: [
           {
             TeamName: 'Argetina',
             MatchesPlayed: 3,
@@ -197,7 +201,7 @@ export const STORIES = [
           },
         },
       },
-      Reprezentacija: {
+      NationalTeam: {
         Vratari: [
           {
             name: 'Dražen Ladić',
@@ -210,7 +214,7 @@ export const STORIES = [
               'https://hns.family/files/images/_resized/0000001259_556_400_cut.jpg',
           },
         ],
-        Branici: [
+        Braniči: [
           {
             name: 'Dario Šimić',
             imgurl:
@@ -248,7 +252,7 @@ export const STORIES = [
             imgurl: 'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
           },
         ],
-        Napadaci: [
+        Napadači: [
           {
             name: 'Davor Šuker',
             imgurl:
@@ -267,15 +271,15 @@ export const STORIES = [
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
           Description:
-            'Pogledajte izvješće s Svjetskog prvenstva 1998. u Francuskoj! Pridružite nam se u preispitivanju nekih od najupečatljivijih trenutaka, ekskluzivnih intervjua s igračima te osvrta na najzanimljivije utakmice. Tko može zaboraviti uzbuđenje i strasti koje su obilježile to prvenstvo? Francuska je tada ostavila neizbrisiv trag u povijesti nogometa. Kliknite dolje i zaronite u sjećanja na jedan od najlegendarnijih nogometnih događaja!',
+            'Pogledajte izvješće s Svjetskog prvenstva 1998. u Francuskoj! Pridružite nam se u preispitivanju nekih od najupečatljivijih trenutaka, ekskluzivnih intervjua s igračima te osvrta na najzanimljivije utakmice. Tko može zaboraviti uzbuđenje i strasti koje su obilježile to Championship? Francuska je tada ostavila neizbrisiv trag u povijesti nogometa. Kliknite dolje i zaronite u sjećanja na jedan od najlegendarnijih nogometnih događaja!',
           videoLink:
             'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
       ],
-      Izbornik: {
+      Coach: {
         Name: 'Miroslav “Ćiro” Blažević',
         DOB: '9. veljače, 1935.',
-        CoachingCareer: 'Prvenstvo Jugoslavije s Dinamom 1982',
+        CoachingCareer: 'Championship Jugoslavije s Dinamom 1982',
         MajorAchievements: [
           'Kup Jugoslavije s Dinamom 1983.',
           'Brončana medalja sa Svjetskog Prvenstva u Francuskoj 1998.',
@@ -290,7 +294,7 @@ export const STORIES = [
     storyTitle: '2002',
     storyId: 2,
     story: {
-      storyTitle: 'Svjetsko prvenstvo 2002',
+      storyTitle: 'Svjetsko Championship 2002',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/2002_wc_ca6nnn.png',
     },
@@ -308,7 +312,7 @@ export const STORIES = [
     storyTitle: '2006',
     storyId: 4,
     story: {
-      storyTitle: 'Svjetsko prvenstvo 2006',
+      storyTitle: 'Svjetsko Championship 2006',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2006_wc_cimqsj.png',
     },
@@ -326,7 +330,7 @@ export const STORIES = [
     storyTitle: '2012',
     storyId: 6,
     story: {
-      storyTitle: 'Svjetsko prvenstvo 2012',
+      storyTitle: 'Svjetsko Championship 2012',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2012_euro_sfutx2.png',
     },
@@ -335,7 +339,7 @@ export const STORIES = [
     storyTitle: '2014',
     storyId: 7,
     story: {
-      storyTitle: 'Svjetsko prvenstvo 2014',
+      storyTitle: 'Svjetsko Championship 2014',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2014_wc_uauv0h.png',
     },
@@ -344,7 +348,7 @@ export const STORIES = [
     storyTitle: '2016.',
     storyId: 13,
     story: {
-      storyTitle: 'Europsko Prvenstvo 2016',
+      storyTitle: 'Europsko Championship 2016',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2016_euro_hzfjkn.png',
       Qualifications: {
@@ -401,8 +405,8 @@ export const STORIES = [
           },
         ],
       },
-      Prvenstvo: {
-        Skupina: [
+      Championship: {
+        Group: [
           {
             TeamName: 'Hrvatska',
             MatchesPlayed: 3,
@@ -476,7 +480,7 @@ export const STORIES = [
           },
         },
       },
-      Reprezentacija: {
+      NationalTeam: {
         Vratari: [
           {
             name: 'Danijel Subašić',
@@ -489,7 +493,7 @@ export const STORIES = [
               'https://hns.family/files/images/_resized/0000028032_800_0.jpg',
           },
         ],
-        Branici: [
+        Braniči: [
           {
             name: 'Dario Srna',
             imgurl:
@@ -528,7 +532,7 @@ export const STORIES = [
               'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709049/brozovic%CC%81_pariz_turska_1_xcxhtm.jpg',
           },
         ],
-        Napadaci: [
+        Napadači: [
           {
             name: 'Mario Mandžukić',
             imgurl:
@@ -542,10 +546,10 @@ export const STORIES = [
         ],
       },
       Highlights: [],
-      Izbornik: {
+      Coach: {
         Name: 'Ante Čačić',
         DOB: '29. rujna 1953. godine.',
-        CoachingCareer: 'Prvenstvo Jugoslavije s Dinamom 1982',
+        CoachingCareer: 'Championship Jugoslavije s Dinamom 1982',
         MajorAchievements: [
           'Kup Jugoslavije s Dinamom 1983.',
           'Brončana medalja sa Svjetskog Prvenstva u Francuskoj 1998.',
@@ -553,7 +557,7 @@ export const STORIES = [
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709446/c%CC%8Cac%CC%8Cic%CC%81_klupa_igrac%CC%8Ci_ouch2k.jpg',
         StoryText:
-          'Naslijedio je Niku Kovača u vrijeme kvalifikacija za  Euro 2016. i uspješno odradio posao te se s Hrvatskom plasirao na to veliko natjecanje kojemu je domaćin bila Francuska. Ondje je naša reprezentacija igrala jako dobro. Pobijedila je Tursku, odigrala 2 : 2 protiv Češke u susretu koji su obilježili neredi huligana i prekid utakmice. Ali, nakon toga Hrvatska je pokazala moć pobjedom nad Španjolcima.  U osmini finala teška utakmica protiv Portugala i bolan poraz u produžetku.',
+          'Naslijedio je Niku Kovača u vrijeme kvalifikacija za  Euro 2016. i uspješno odradio posao te se s Hrvatskom plasirao na to veliko natjecanje kojemu je domaćin bila Francuska. Ondje je naša NationalTeam igrala jako dobro. Pobijedila je Tursku, odigrala 2 : 2 protiv Češke u susretu koji su obilježili neredi huligana i prekid utakmice. Ali, nakon toga Hrvatska je pokazala moć pobjedom nad Španjolcima.  U osmini finala teška utakmica protiv Portugala i bolan poraz u produžetku.',
       },
     },
   },
@@ -635,8 +639,8 @@ export const STORIES = [
         },
       ],
 
-      Prvenstvo: {
-        Skupina: [
+      Championship: {
+        Group: [
           {
             TeamName: 'Hrvatska',
             MatchesPlayed: 3,
@@ -743,7 +747,7 @@ export const STORIES = [
           },
         },
       },
-      Reprezentacija: {
+      NationalTeam: {
         Vratari: [
           {
             name: 'Danijel Subašić',
@@ -761,7 +765,7 @@ export const STORIES = [
               'https://hns.family/files/images/_resized/0000044714_0_380.png',
           },
         ],
-        Branici: [
+        Braniči: [
           {
             name: 'Dejan Lovren',
             imgurl:
@@ -835,7 +839,7 @@ export const STORIES = [
               'https://hns.family/files/images/_resized/0000023569_556_400_cut.jpg',
           },
         ],
-        Napadaci: [
+        Napadači: [
           {
             name: 'Andrej Kramarić',
             imgurl:
@@ -907,7 +911,7 @@ export const STORIES = [
             ' Polufinale.   Znali   smo   da   neće   biti   lako.   S   druge   strane   stajala   je   Engleska.   Svjetskinogometni   gigant   željan   naslova,   željan   konačno   nekakvog   uspjeha.     Ali,   Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali,   polako. Dalić Boysi  se   ne   predaju.   Ivan   Perišić   je   izjednačio   sredinom   drugogpoluvremena.   A   zatim,   u   produžetku   –   Mario   Mandžukić   zabio   je   za   finale.   Ekstaza,urnebes, suze, smijeh... Sve',
         },
       ],
-      Izbornik: {
+      Coach: {
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
@@ -915,11 +919,11 @@ export const STORIES = [
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
-          'Najveći i najuspješniji izbornik u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni izbornik velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
+          'Najveći i najuspješniji Coach u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni Coach velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
       Zanimljivosti: [
         'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
-        'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
+        'Niti jedna NationalTeam nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
         'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
         'FIFA je prvi put uvela VAR na Svjetskom prvenstvu u nogometu 2018.',
         'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
@@ -940,7 +944,7 @@ export const STORIES = [
     storyTitle: '2022',
     storyId: 11,
     story: {
-      storyTitle: 'Svjetsko prvenstvo 2022',
+      storyTitle: 'Svjetsko Championship 2022',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308308/2022_wc_ggfbvt.png',
 
@@ -950,19 +954,19 @@ export const STORIES = [
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785502/WhatsApp_Image_2023-10-31_at_4.19.16_PM_vihqgc.jpg',
           Description:
-            'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
+            'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo Championship. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
           videoLink: 'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
         },
       ],
       Zanimljivosti: [
         'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
-        'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
+        'Niti jedna NationalTeam nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
         'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
         'FIFA je prvi put uvela VAR na Svjetskom prvenstvu u nogometu 2018.',
         'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
         'U samim završnicama utakmica (u 90. minuti + nadoknada) postignuta su 23 gola — što čini nevjerojatnih 15 posto svih postignutih golova.',
       ],
-      Izbornik: {
+      Coach: {
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
@@ -970,7 +974,7 @@ export const STORIES = [
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
-          'Najveći i najuspješniji izbornik u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni izbornik velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
+          'Najveći i najuspješniji Coach u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni Coach velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
     },
   },

@@ -6,7 +6,7 @@ import { HighlightProps } from 'src/types';
 const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');
     const imageHeight = isDesktop ? "375" : "200";
-    const isReportaza = data.Title.includes('Reportaža');
+    const isVideoHighlight = data.Title.includes('Reportaža');
     const videoHref = data.videoLink || '';
 
     return (
@@ -18,7 +18,7 @@ const Highlight = ({ data }: HighlightProps) => {
                     image={data.imgUrl}
                     alt={data.Title}
                 />
-                {isReportaza && (
+                {isVideoHighlight && (
                     <div style={{
                         position: 'absolute',
                         top: 0,
@@ -34,11 +34,9 @@ const Highlight = ({ data }: HighlightProps) => {
                             color='primary'
                             href={videoHref}
                             target="_blank"
-                            rel="noopener noreferrer"
                         >
                             <PlayCircleOutlineIcon sx={{ fontSize: '250%' }} />
                         </IconButton>
-
                     </div>
                 )}
             </div>
