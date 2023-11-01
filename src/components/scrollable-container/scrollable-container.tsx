@@ -48,8 +48,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
                 '&::-webkit-scrollbar': {
                     display: 'none'
                 },
-                scrollbarWidth: 'none',
-                msOverflowStyle: 'none'
+
             }}>
                 {children}
             </Box>
