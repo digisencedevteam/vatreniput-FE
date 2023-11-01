@@ -8,12 +8,16 @@ const useDashboardData = () => {
   );
   const [chartData, setChartData] = useState<ChartData | null>(null);
   const [isDashboardLoading, setIsDashboardLoading] = useState<boolean>(true);
+  const [cardCount, setCardCount] = useState(0);
 
   const fetchDashboardData = async () => {
     setIsDashboardLoading(true);
     try {
       const response = await axiosInstance.get(endpoints.card.statsDashboard);
       setDashboardData(response.data);
+
+      setCardCount(response.data.numberOfCollectedCards);
+      console.log(cardCount);
 
       const categories: string[] = [];
       const series: number[] = [];
@@ -34,7 +38,13 @@ const useDashboardData = () => {
     fetchDashboardData();
   }, []);
 
-  return { dashboardData, chartData, isDashboardLoading, fetchDashboardData };
+  return {
+    dashboardData,
+    chartData,
+    isDashboardLoading,
+    fetchDashboardData,
+    cardCount,
+  };
 };
 
 export default useDashboardData;

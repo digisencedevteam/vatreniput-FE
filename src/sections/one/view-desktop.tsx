@@ -20,7 +20,7 @@ import { paths } from 'src/routes/paths';
 
 export const DesktopViewOne = () => {
   const { collectedCards, isCardLoading, fetchCollectedCards } = useCardData();
-  const { chartData, fetchDashboardData } = useDashboardData();
+  const { chartData, fetchDashboardData, cardCount } = useDashboardData();
   const { isLoadingUnresolved, unresolvedQuizzes, fetchQuizzes } =
     useFetchQuizzes(1, 4);
   const { votings, fetchAllVotings, deleteVoting } = useVoting();
@@ -49,7 +49,6 @@ export const DesktopViewOne = () => {
     fetchAllVotings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid container spacing={3}>
@@ -117,6 +116,7 @@ export const DesktopViewOne = () => {
                   value: chartData.series[index],
                 })),
               }}
+              cardCount={cardCount}
             />
           )}
         </Grid>

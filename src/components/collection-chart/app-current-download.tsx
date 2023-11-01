@@ -27,6 +27,7 @@ const StyledChart = styled(Chart)(({ theme }) => ({
 interface Props extends CardProps {
     title?: string;
     subheader?: string;
+    cardCount: number;
     chart: {
         colors?: string[];
         series: {
@@ -37,7 +38,7 @@ interface Props extends CardProps {
     };
 }
 
-export default function AppCurrentDownload({ title, subheader, chart, ...other }: Props) {
+export default function AppCurrentDownload({ title, subheader, chart, cardCount, ...other }: Props) {
 
     const theme = useTheme();
 
@@ -75,12 +76,14 @@ export default function AppCurrentDownload({ title, subheader, chart, ...other }
                     size: '90%',
                     labels: {
                         value: {
-                            formatter: (value: number | string) => value.toLocaleString(),
+                            formatter: (value: number | string) => {
+                                let numValue = typeof value === "string" ? parseFloat(value) : value;
+                                return numValue.toFixed() + '%';
+                            },
                         },
                         total: {
                             formatter: (w: { globals: { seriesTotals: number[] } }) => {
-                                const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-                                return sum.toLocaleString();
+                                return cardCount.toLocaleString();
                             },
                         },
                     },
