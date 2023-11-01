@@ -1,11 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Box, IconButton } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-
-type ScrollableContainerProps = {
-    children: React.ReactNode;
-};
+import { ScrollableContainerProps } from 'src/types';
 
 const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -32,6 +29,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
         <Box sx={{
             display: 'flex',
             alignItems: 'center',
+            width: '100%',
             overflowY: 'hidden'
         }}>
             <IconButton onClick={scrollLeft} sx={{ '@media (max-width: 600px)': { display: 'none' } }}>
@@ -48,7 +46,7 @@ const ScrollableContainer = ({ children }: ScrollableContainerProps) => {
                     display: 'none'
                 },
                 scrollbarWidth: 'none',
-                '-ms-overflow-style': 'none'
+                msOverflowStyle: 'none'
             }}>
                 {children}
             </Box>

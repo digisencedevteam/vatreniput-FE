@@ -1,15 +1,14 @@
-
 import {
     Button,
     Typography,
     LinearProgress,
-    Box
+    Box,
+    Tooltip
 } from '@mui/material';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined';
+import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import { useParams, useRouter } from 'src/routes/hooks';
 import { Story, TimelineProps } from 'src/types';
-import { useResponsive } from 'src/hooks/use-responsive';
 
 const Timeline = ({
     stories,
@@ -19,7 +18,6 @@ const Timeline = ({
     const router = useRouter();
     const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
     const currentStory = stories[currentStoryIndex];
-    const isMobile = useResponsive('down', 'sm');
 
     const generateFillPositions = (length: number): number[] => {
         const sequence = [20, 50, 80];
@@ -44,25 +42,27 @@ const Timeline = ({
     const fillPositions = generateFillPositions(stories.length);
     return (
         <Box mt={3} position="relative" width="100%">
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={prevStory}
-                disabled={currentStoryIndex === 0}
-                style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: 0,
-                    transform: 'translateY(-50%)',
-                    borderRadius: '50%',
-                    width: '40px',
-                    height: '40px',
-                    minWidth: 'auto',
-                    padding: 0,
-                }}
-            >
-                <ArrowBackIosIcon sx={{ fontSize: isMobile ? '16px' : '24px' }} />
-            </Button>
+            <Tooltip title="Prošla priča">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={prevStory}
+                    disabled={currentStoryIndex === 0}
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: 0,
+                        transform: 'translateY(-50%)',
+                        borderRadius: '50%',
+                        width: '40px',
+                        height: '40px',
+                        minWidth: 'auto',
+                        padding: 0,
+                    }}
+                >
+                    <NavigateBeforeOutlinedIcon sx={{ fontSize: '25px' }} />
+                </Button>
+            </Tooltip>
             <Box position="relative" width="85%" marginLeft="7.5%">
                 <LinearProgress
                     variant="determinate"
@@ -119,25 +119,27 @@ const Timeline = ({
                     )}
                 </Box>
             ))}
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={nextStory}
-                disabled={currentStoryIndex === stories.length - 1}
-                sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    right: 0,
-                    transform: 'translateY(-50%)',
-                    borderRadius: '50%',
-                    width: '40px',
-                    height: '40px',
-                    minWidth: 'auto',
-                    padding: 0,
-                }}
-            >
-                <ArrowForwardIosIcon sx={{ fontSize: isMobile ? '16px' : '24px' }} />
-            </Button>
+            <Tooltip title="Sljedeća priča">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={nextStory}
+                    disabled={currentStoryIndex === stories.length - 1}
+                    sx={{
+                        position: 'absolute',
+                        top: '50%',
+                        right: 0,
+                        transform: 'translateY(-50%)',
+                        borderRadius: '50%',
+                        width: '40px',
+                        height: '40px',
+                        minWidth: 'auto',
+                        padding: 0,
+                    }}
+                >
+                    <NavigateNextOutlinedIcon sx={{ fontSize: '25px' }} />
+                </Button>
+            </Tooltip>
         </Box>
     );
 };

@@ -12,7 +12,7 @@ import {
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { AnimatePresence, m } from 'framer-motion';
 
-type ItemProps = {
+export type ItemProps = {
     id: string;
     title: string;
     coverUrl: string;

@@ -36,7 +36,7 @@ interface CustomCardProps {
   status?: string;
   createdAt?: string;
   isRewarded?: Record<string, boolean>;
-  linkToEdit: string;
+  linkToEdit?: string;
 }
 
 const CustomCard = ({
@@ -101,6 +101,7 @@ const CustomCard = ({
       <Card
         sx={{
           borderRadius: '16px',
+          maxWidth: '500px',
           overflow: 'hidden',
           width: width,
           flexShrink: 0,

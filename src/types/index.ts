@@ -4,6 +4,7 @@ export type FAQ = {
 };
 
 export type CollectionEvent = {
+  percentageCollected: number;
   _id: string;
   name: string;
   location?: string;
@@ -31,6 +32,7 @@ export type CollectedStatistic = {
   numberOfCollectedCards: number;
   percentageOfCollectedCards: number;
   countOfAllCards: number;
+  topEvents: Event[];
 };
 
 export type CardTemplate = {
@@ -144,25 +146,26 @@ export interface MatchData {
       Final?: FinalMatchDetail;
     };
   };
-  Skupina: TeamStat[];
-  Champ: {
-    Winner: string;
-    TopScorer: {
+  Group: TeamStat[];
+  Champ?: {
+    Winner?: string;
+    TopScorer?: {
       Player: string;
       Team: string;
       Goals: number;
     };
   };
-  Summary: string;
+  Summary?: string;
 }
 
 export interface HighlightData {
   Title: string;
   imgUrl: string;
   Description: string;
+  videoLink?: string;
 }
 
-export interface IzbornikData {
+export interface CoachData {
   Name: string;
   DOB: string;
   CoachingCareer: string;
@@ -176,11 +179,11 @@ interface Player {
   imgurl: string;
 }
 
-export interface Reprezentacija {
+export interface NationalTeam {
   Vratari: Player[];
-  Branici: Player[];
+  Braniči: Player[];
   Vezni: Player[];
-  Napadaci: Player[];
+  Napadači: Player[];
   [key: string]: Player[];
 }
 
@@ -193,14 +196,14 @@ export interface QualificationMatch {
 export interface Story {
   storyTitle?: string;
   storyLogo?: string;
-  Reprezentacija?: Reprezentacija;
-  Prvenstvo?: MatchData;
+  NationalTeam?: NationalTeam;
+  Championship?: MatchData;
   Qualifications?: {
     Description: string;
     Teams: TeamStat[];
   };
   Highlights?: HighlightData[];
-  Izbornik?: IzbornikData;
+  Coach?: CoachData;
   Zanimljivosti?: (string | number | boolean)[];
   AdditionalQualifications?: QualificationMatch[];
 }
@@ -213,11 +216,11 @@ export interface QualificationMatchDetailsProps {
 }
 
 export interface DataProp {
-  Winner: string;
-  TopScorer: {
-    Player: string;
-    Team: string;
-    Goals: number;
+  Winner?: string;
+  TopScorer?: {
+    Player?: string;
+    Team?: string;
+    Goals?: number;
   };
 }
 
@@ -237,6 +240,7 @@ export interface HighlightProps {
     Title: string;
     imgUrl: string;
     Description: string;
+    videoLink?: string;
   };
 }
 
@@ -253,8 +257,6 @@ export interface PenaltyShootoutProps {
   }[];
 }
 
-// STORY TYPES END
-
 interface TimelineStory {
   storyId: number;
   storyTitle: string;
@@ -263,6 +265,25 @@ interface TimelineStory {
 export interface TimelineProps {
   stories: TimelineStory[];
 }
+export type TabComponents = {
+  Kvalifikacije?: JSX.Element;
+  Championship?: JSX.Element;
+  Highlights?: JSX.Element;
+  Coach?: JSX.Element;
+  NationalTeam?: JSX.Element;
+  Zanimljivosti?: JSX.Element;
+  [key: string]: JSX.Element | undefined;
+};
+export type FactType =
+  | string
+  | number
+  | boolean
+  | React.ReactElement
+  | Iterable<React.ReactNode>
+  | React.ReactPortal
+  | null;
+
+// STORY TYPES END
 export type VotingOption = {
   _id?: string;
   text: string;
@@ -275,7 +296,7 @@ export type Voting = {
   availableUntil: string;
   thumbnail: string;
   votingOptions: VotingOption[];
-  linkToEdit?: string
+  linkToEdit?: string;
 };
 
 export type UseVotingReturn = {
@@ -288,16 +309,16 @@ export type UseVotingReturn = {
 };
 
 export type VotingResult = {
-  votingOptionText: string
-  votingOptionThumbnail: string
-  count: number
-  percentage: string
-}
+  votingOptionText: string;
+  votingOptionThumbnail: string;
+  count: number;
+  percentage: string;
+};
 
 export type VotingResultStat = {
-  totalVotes: number
-  results: VotingResult[]
-}
+  totalVotes: number;
+  results: VotingResult[];
+};
 
 export type AdminActionButtonsProps = {
   linkToEdit: string;
@@ -307,4 +328,25 @@ export type AdminActionButtonsProps = {
   handleOpenDeleteModal: () => void;
   modalText: string;
   confirmButtonText: string;
+};
+
+export type Event = {
+  _id: number;
+  name: string;
+  location: string;
+  year: number;
+  percentageCollected: number;
+};
+
+export type DashboardData = {
+  topEvents: Event[];
+};
+
+export type ChartData = {
+  categories: string[];
+  series: number[];
+};
+
+export type ScrollableContainerProps = {
+  children: React.ReactNode;
 };

@@ -11,6 +11,8 @@ import {
   Select,
   MenuItem,
   Avatar,
+  Pagination,
+  CircularProgress,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -19,20 +21,27 @@ import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { QuizResult } from 'src/types';
 import icon from '../../assets/illustrations/vatroslav_upute_2.jpg';
 
-export default function QuizResults() {
+const NoResultLayout = ({ message }: { message: string }) => (
+  <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' height='100%' padding={2}>
+    <Box mb={2}>
+      <img src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png' alt='Instruction' style={{ width: '200px', height: 'auto' }} />
+    </Box>
+    <Typography variant='h3' color='primary'>{message}</Typography>
+  </Box>
+);
+
+const QuizResults = () => {
   const settings = useSettingsContext();
-  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById } =
-    useFetchQuizzes();
-  const [selectedQuiz, setSelectedQuiz] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const { fetchAllQuizzes, allQuizzes, getResultsById, resultsById, totalPages, isResultsLoading } = useFetchQuizzes(currentPage, 5);
+  const [selectedQuiz, setSelectedQuiz] = useState('');
 
   useEffect(() => {
     (async () => {
       await fetchAllQuizzes();
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (selectedQuiz) {
@@ -40,30 +49,6 @@ export default function QuizResults() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedQuiz, currentPage]);
-
-  const NoResultLayout = ({ message }: { message: string }) => {
-    return (
-      <Box
-        display='flex'
-        flexDirection='column'
-        alignItems='center'
-        justifyContent='center'
-        height='100%'
-        padding={2}
-      >
-        <Box mb={2}>
-          <img
-            src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
-            alt='Instruction'
-            style={{ width: '200px', height: 'auto' }}
-          />
-        </Box>
-        <Typography variant='h3' color='primary'>
-          {message}
-        </Typography>
-      </Box>
-    );
-  };
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -89,65 +74,79 @@ export default function QuizResults() {
       </Select>
 
       <Box sx={{ mt: 2 }}>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell>Korisničko Ime</TableCell>
-                <TableCell>Rezultat</TableCell>
-                <TableCell>Riješen</TableCell>
-                <TableCell>Datum</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectedQuiz ? (
-                resultsById && resultsById.length > 0 ? (
-                  resultsById.map((result: QuizResult) => (
-                    <TableRow key={result._id}>
-                      <TableCell>
-                        <Box display={'flex'} justifyContent={'center'}>
-                          <Avatar
-                            src={
-                              result.userId.photoURL
-                                ? result.userId.photoURL
-                                : icon
-                            }
-                            alt='User Image'
-                            sx={{
-                              width: 65,
-                              height: 65,
-                              border: '2px solid white',
-                            }}
-                          />
-                        </Box>
+        {isResultsLoading ? <CircularProgress /> :
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>Korisničko Ime</TableCell>
+                  <TableCell>Rezultat</TableCell>
+                  <TableCell>Riješen</TableCell>
+                  <TableCell>Datum</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {selectedQuiz ? (
+                  resultsById && resultsById.length > 0 ? (
+                    resultsById.map((result: QuizResult) => (
+                      <TableRow key={result._id}>
+                        <TableCell>
+                          <Box display={'flex'} justifyContent={'center'}>
+                            <Avatar
+                              src={
+                                result.userId.photoURL
+                                  ? result.userId.photoURL
+                                  : icon
+                              }
+                              alt='User Image'
+                              sx={{
+                                width: 65,
+                                height: 65,
+                                border: '2px solid white',
+                              }}
+                            />
+                          </Box>
+                        </TableCell>
+                        <TableCell>{result.userId.username}</TableCell>
+                        <TableCell>{Math.round(result.score)} %</TableCell>
+                        <TableCell>
+                          {dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}
+                        </TableCell>
+                        <TableCell>{Math.round(result.duration / 60)} m</TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} align='center'>
+                        <NoResultLayout message='Kviz nema rezultate' />
                       </TableCell>
-                      <TableCell>{result.userId.username}</TableCell>
-                      <TableCell>{Math.round(result.score)} %</TableCell>
-                      <TableCell>
-                        {dayjs(result.dateTaken).format('MMMM D, YYYY h:mm A')}
-                      </TableCell>
-                      <TableCell>{result.duration} s</TableCell>
                     </TableRow>
-                  ))
+                  )
                 ) : (
                   <TableRow>
                     <TableCell colSpan={5} align='center'>
-                      <NoResultLayout message='Kviz nema rezultate' />
+                      <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
                     </TableCell>
                   </TableRow>
-                )
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={5} align='center'>
-                    <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        }
+        {resultsById && resultsById.length > 0 && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={(event, value) => setCurrentPage(value)}
+            />
+
+          </Box>
+        )}
       </Box>
     </Container>
   );
 }
+
+export default QuizResults;
