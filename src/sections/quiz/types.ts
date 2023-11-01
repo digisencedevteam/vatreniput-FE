@@ -1,4 +1,5 @@
 export type Question = {
+  _id?: string
   text: string;
   options: string[];
   image?: string;

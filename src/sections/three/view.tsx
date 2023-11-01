@@ -122,16 +122,38 @@ const ThreeView = () => {
           Kvizovi
         </Typography>
 
-        {auth.user && auth.user.role === userRoles.admin && (
-          <Button
-            variant='contained'
-            color='primary'
-            component={Link}
-            to={`${paths.dashboard.quizGroup.createQuiz}`}
-          >
-            Kreiraj novi kviz
-          </Button>
-        )}
+        {auth.user &&
+          (auth.user.role === userRoles.admin ? (
+            <Button
+              variant='contained'
+              color='primary'
+              component={Link}
+              to={`${paths.dashboard.quizGroup.createQuiz}`}
+            >
+              Kreiraj novi kviz
+            </Button>
+          ) : (
+            <Button
+              variant='contained'
+              component={Link}
+              to={`${paths.quizRewardInfo}`}
+              sx={{
+                backgroundColor: (theme) => theme.palette.background.default,
+                textDecoration: 'underline',
+                textUnderlineOffset: '3px',
+                color:
+                  theme.palette.mode === 'dark'
+                    ? theme.palette.text.primary
+                    : theme.palette.text.primary,
+                '&:hover': {
+                  backgroundColor: (theme) => theme.palette.background.default,
+                  opacity: 0.8,
+                },
+              }}
+            >
+              ℹ️ Pravila i Nagrade Kvizova
+            </Button>
+          ))}
       </Box>
       <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
         <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />

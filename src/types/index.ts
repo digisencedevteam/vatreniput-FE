@@ -39,6 +39,7 @@ export type CardTemplate = {
   videoLink?: string;
   imageURLS: string[];
   event: CollectionEvent;
+  number?: number
 };
 
 export type PrintedCard = {

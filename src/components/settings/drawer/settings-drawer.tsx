@@ -69,38 +69,39 @@ export default function SettingsDrawer() {
     </div>
   );
 
-  const renderDirection = (
-    <div>
-      <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
-        Direction
-      </Typography>
+  // TODO: remove this from usage throughout the app
+  // const renderDirection = (
+  //   <div>
+  //     <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
+  //       Direction
+  //     </Typography>
 
-      <BaseOptions
-        value={settings.themeDirection}
-        onChange={(newValue: string) =>
-          settings.onUpdate('themeDirection', newValue)
-        }
-        options={['ltr', 'rtl']}
-        icons={['align_left', 'align_right']}
-      />
-    </div>
-  );
+  //     <BaseOptions
+  //       value={settings.themeDirection}
+  //       onChange={(newValue: string) =>
+  //         settings.onUpdate('themeDirection', newValue)
+  //       }
+  //       options={['ltr', 'rtl']}
+  //       icons={['align_left', 'align_right']}
+  //     />
+  //   </div>
+  // );
 
-  const renderLayout = (
-    <div>
-      <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
-        Layout
-      </Typography>
+  // const renderLayout = (
+  //   <div>
+  //     <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
+  //       Layout
+  //     </Typography>
 
-      <LayoutOptions
-        value={settings.themeLayout}
-        onChange={(newValue: string) =>
-          settings.onUpdate('themeLayout', newValue)
-        }
-        options={['vertical', 'horizontal', 'mini']}
-      />
-    </div>
-  );
+  //     <LayoutOptions
+  //       value={settings.themeLayout}
+  //       onChange={(newValue: string) =>
+  //         settings.onUpdate('themeLayout', newValue)
+  //       }
+  //       options={['vertical', 'horizontal', 'mini']}
+  //     />
+  //   </div>
+  // );
 
   const renderStretch = (
     <div>

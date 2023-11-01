@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from 'src/auth/hooks';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { useNavigate } from 'react-router-dom';
+import { paths } from 'src/routes/paths';
 
 const QuizApp = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -48,7 +49,20 @@ const QuizApp = () => {
       setSelectedQuiz(response.data);
 
       if (response.data?.status?.status === 'inProgress') {
-        setCurrentQuestionIndex(0);
+        const answeredQuestions = response.data.quizzAnswers || [];
+        const lastAnsweredQuestionIndex = answeredQuestions.length - 1;
+
+        if (lastAnsweredQuestionIndex >= 0) {
+          setCurrentQuestionIndex(lastAnsweredQuestionIndex + 1);
+          setAnswers(
+            answeredQuestions.map((answer: any) => ({
+              option: answer.selectedOption,
+              correct: answer.isCorrect,
+            }))
+          );
+        } else {
+          setCurrentQuestionIndex(0);
+        }
         const startedTime = new Date(response.data.status?.startTime).getTime();
         setStartedTime(startedTime);
       }
@@ -67,32 +81,61 @@ const QuizApp = () => {
     return null;
   }
 
-  const getCorrectAnswer = (question: Question): string => {
-    return question.options[question.correctOption];
+  const getCorrectAnswerIndex = (question: Question): string => {
+    return question.correctOption.toString();
   };
 
   const handleAnswerSelection = (option: string) => {
     setSelectedOption(option);
   };
 
-  const handleNextQuestion = () => {
+  const updateQuizProgress = async (
+    quizId: string,
+    questionId: string,
+    selectedOption: number,
+    isCorrect: boolean
+  ) => {
+    try {
+      await axios.post(endpoints.quiz.inProgressQuizUpdate, {
+        quizId,
+        questionId,
+        selectedOption,
+        isCorrect,
+      });
+    } catch (error) {
+      console.error('Error updating quiz progress:', error);
+    }
+  };
+
+  const handleNextQuestion = async () => {
     if (
       currentQuestionIndex !== null &&
       selectedQuiz &&
       selectedQuiz.questions
     ) {
       const currentQuestion = selectedQuiz.questions[currentQuestionIndex];
-      if (!currentQuestion) return null;
-
-      const isCorrect = selectedOption === getCorrectAnswer(currentQuestion);
+      const isCorrect =
+        selectedOption ===
+        getCorrectAnswerIndex(currentQuestion && currentQuestion);
       const newAnswer: Answer = {
         option: selectedOption,
         correct: isCorrect,
       };
-
       const newAnswers = [...answers];
       newAnswers[currentQuestionIndex] = newAnswer;
       setAnswers(newAnswers);
+
+      if (!currentQuestion || !currentQuestion._id) return null;
+      if (selectedOption === null || isNaN(Number(selectedOption))) {
+        return null;
+      }
+
+      await updateQuizProgress(
+        quizId,
+        currentQuestion && currentQuestion._id,
+        parseInt(selectedOption, 10),
+        isCorrect
+      );
 
       if (currentQuestionIndex === selectedQuiz.questions.length - 1) {
         handleSubmitQuiz(newAnswers);
@@ -144,7 +187,7 @@ const QuizApp = () => {
     setIsSubmitting(false);
     setIsQuizCompleted(true);
   };
-  if (selectedQuiz?.isResolved) navigate('/dashboard/three');
+  if (selectedQuiz?.isResolved) navigate(`${paths.dashboard.three}`);
 
   return (
     <Container

@@ -76,6 +76,7 @@ export const endpoints = {
     deleteAndUpdate: '/quizzes/',
     results: '/quizzes/results',
     all: '/quizzes/all',
+    inProgressQuizUpdate: '/quizzes/update-answer'
   },
   votings: {
     all: '/votings/',

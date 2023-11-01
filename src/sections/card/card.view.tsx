@@ -23,12 +23,9 @@ export const CardView = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-
   const fetchCardData = async () => {
     try {
-      const response = await axios.get(
-        endpoints.card.details + cardId
-      );
+      const response = await axios.get(endpoints.card.details + cardId);
       setCardData(response.data);
     } catch (error) {
       setIsError(true);
@@ -55,10 +52,10 @@ export const CardView = () => {
 
   return (
     <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="100vh"
+      display='flex'
+      justifyContent='center'
+      alignItems='center'
+      minHeight='100vh'
       sx={isMobile ? { marginTop: '20px' } : null}
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -66,8 +63,8 @@ export const CardView = () => {
           {/* Image */}
           <Grid item xs={12} md={6}>
             <CardMedia
-              component="img"
-              height="auto"
+              component='img'
+              height='auto'
               image={
                 cardData
                   ? Array.isArray(cardData.imageURLs) &&
@@ -76,7 +73,7 @@ export const CardView = () => {
                     : ''
                   : ''
               }
-              alt="Sličica"
+              alt='Sličica'
               sx={{ borderRadius: 2 }}
             />
           </Grid>
@@ -91,23 +88,23 @@ export const CardView = () => {
             >
               <CardContent>
                 <Typography
-                  variant="caption"
+                  variant='caption'
                   sx={{ my: 2, color: theme.palette.primary.main }}
                 >
                   218
                 </Typography>
-                <Typography gutterBottom variant="h4" component="div">
+                <Typography gutterBottom variant='h4' component='div'>
                   {cardData?.number ? cardData.number + ' ' : ''}{' '}
                   {cardData?.title}
                 </Typography>
-                <Typography gutterBottom variant="h6" component="div">
+                <Typography gutterBottom variant='h6' component='div'>
                   {cardData?.event?.name}
                 </Typography>
               </CardContent>
               <Divider />
               {isError ? (
                 <Box p={2}>
-                  <Typography variant="h4" component="div">
+                  <Typography variant='h4' component='div'>
                     Sličica sa ovog QR koda nije pronađena ili je već
                     iskorištena.
                   </Typography>
@@ -116,23 +113,23 @@ export const CardView = () => {
                 <Box p={3}>
                   {errorMessage === '' ? (
                     <>
-                      <Typography variant="subtitle2" component="div">
-                        Kapetan Hrvatske, Luka Modrić, nedvojbeno je
-                        postigao vrhunac svoje karijere osvojivši
-                        prestižnu titulu najboljeg igrača Svjetskog
-                        prvenstva, gdje je Hrvatska ostvarila zapaženi
-                        uspjeh osvajanjem srebrne medalje. <br />
+                      <Typography variant='subtitle2' component='div'>
+                        Kapetan Hrvatske, Luka Modrić, nedvojbeno je postigao
+                        vrhunac svoje karijere osvojivši prestižnu titulu
+                        najboljeg igrača Svjetskog prvenstva, gdje je Hrvatska
+                        ostvarila zapaženi uspjeh osvajanjem srebrne medalje.{' '}
                         <br />
-                        Luka je predvodio svoju reprezentaciju do
-                        finala Mundijala. <br />
                         <br />
-                        Nakon Svjetskog prvenstva u Rusiji, postalo je
-                        očigledno da je Luka Modrić postao najveći
-                        hrvatski nogometaš u povijesti.
+                        Luka je predvodio svoju reprezentaciju do finala
+                        Mundijala. <br />
+                        <br />
+                        Nakon Svjetskog prvenstva u Rusiji, postalo je očigledno
+                        da je Luka Modrić postao najveći hrvatski nogometaš u
+                        povijesti.
                       </Typography>
                       <Button
-                        variant="contained"
-                        color="success"
+                        variant='contained'
+                        color='success'
                         onClick={handleAddCardToAlbum}
                         sx={{
                           p: 2,
@@ -145,17 +142,13 @@ export const CardView = () => {
                       </Button>
                     </>
                   ) : (
-                    <Typography
-                      variant="h4"
-                      component="div"
-                      color="error"
-                    >
+                    <Typography variant='h4' component='div' color='error'>
                       {errorMessage}
                     </Typography>
                   )}
                   <Button
-                    variant="contained"
-                    color="inherit"
+                    variant='contained'
+                    color='inherit'
                     sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
                   >
                     Prijavi se

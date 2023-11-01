@@ -9,6 +9,7 @@ import ResetPassword from 'src/pages/ResetPassword';
 const Page404 = lazy(() => import('src/pages/404'));
 const Faq = lazy(() => import('src/pages/Faq'));
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
+const RewardPage = lazy(() => import('src/pages/QuizRewardInfo'));
 
 export const mainRoutes = [
   {
@@ -27,6 +28,10 @@ export const mainRoutes = [
       {
         path: 'quiz/:quizId',
         element: <QuizPage />,
+      },
+      {
+        path: 'quiz-reward-info',
+        element: <RewardPage />,
       },
     ],
   },
