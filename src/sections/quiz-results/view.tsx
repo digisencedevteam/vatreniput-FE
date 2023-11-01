@@ -38,6 +38,7 @@ export default function QuizResults() {
     if (selectedQuiz) {
       getResultsById(selectedQuiz, currentPage, 5);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedQuiz, currentPage]);
 
   const NoResultLayout = ({ message }: { message: string }) => {

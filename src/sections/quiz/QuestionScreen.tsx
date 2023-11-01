@@ -175,21 +175,24 @@ const QuestionScreen = ({
           </Typography>
         </Grid>
         <Box sx={{ mt: '3%' }}>
-          {currentQuestion.options.map((option) => (
+          {currentQuestion.options.map((option, index) => (
             <Grid item key={option}>
               <Button
-                variant={selectedOption === option ? 'contained' : 'outlined'}
+                variant={
+                  selectedOption === index.toString() ? 'contained' : 'outlined'
+                }
                 color='primary'
                 sx={{
                   borderRadius: '6px',
-                  color: selectedOption === option ? 'white' : 'inherit',
+                  color:
+                    selectedOption === index.toString() ? 'white' : 'inherit',
                   width: '13rem',
                   textAlign: 'center',
                   margin: 1,
                 }}
-                onClick={() => handleAnswerSelection(option)}
+                onClick={() => handleAnswerSelection(index.toString())}
               >
-                {selectedOption === option ? (
+                {selectedOption === index.toString() ? (
                   <Fade in={true} timeout={650}>
                     <SportsSoccerIcon
                       sx={{ marginRight: 1, fontSize: '20px' }}

@@ -16,6 +16,7 @@ export const paths = {
       register: `${ROOTS.AUTH}/jwt/register`,
     },
   },
+  quizRewardInfo: '/quiz-reward-info',
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
