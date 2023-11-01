@@ -53,7 +53,7 @@ const CustomCardSmall = ({
             sx={{
                 borderRadius: "16px",
                 overflow: "hidden",
-                maxWidth: '450px',
+                maxWidth: '500px',
                 width: width,
                 height: height,
                 flexShrink: 0,

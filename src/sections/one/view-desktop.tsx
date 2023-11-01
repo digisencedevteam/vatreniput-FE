@@ -140,7 +140,7 @@ export const DesktopViewOne = () => {
                   <Grid item md={6} key={index} >
                     <CustomCardSmall
                       imgUrl={quiz.thumbnail}
-                      width='96%'
+                      width='100%'
                       cardText={quiz.title}
                       linkTo={`/dashboard/quiz/${quiz._id}`}
                     />

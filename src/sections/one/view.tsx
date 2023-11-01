@@ -11,6 +11,7 @@ import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-b
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useDashboardData from 'src/hooks/use-dashboard-data';
+import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 
 export default function OneView() {
   const settings = useSettingsContext();
@@ -99,32 +100,34 @@ export default function OneView() {
             link='dashboard/three'
           >
             <ScrollableContainer>
-              {!isDashboardLoading &&
-                quizzes?.map((quiz, index) => (
-                  <CustomCardSmall
-                    key={index}
-                    imgUrl={quiz.thumbnail}
-                    width='96%'
-                    height='100%'
-                    cardText={quiz.title}
-                    linkTo={`/dashboard/quiz/${quiz._id}`}
-                  />
-                ))}
+              {isDashboardLoading || !quizzes?.length ? (
+                <SkeletonDashboardLoader count={1} maxWidth="375px" />
+              ) : quizzes.map((quiz, index) => (
+                <CustomCardSmall
+                  key={index}
+                  imgUrl={quiz.thumbnail}
+                  width='96%'
+                  height='100%'
+                  cardText={quiz.title}
+                  linkTo={`/dashboard/quiz/${quiz._id}`}
+                />
+              ))}
             </ScrollableContainer>
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <ScrollableContainer>
-              {votings &&
-                votings.map((voting, index) => (
-                  <CustomCardSmall
-                    key={index}
-                    width='96%'
-                    height='100%'
-                    imgUrl={voting.thumbnail}
-                    cardText={voting.title}
-                    linkTo={`/dashboard/voting/${voting._id}`}
-                  />
-                ))}
+              {isDashboardLoading || !votings?.length ? (
+                <SkeletonDashboardLoader count={1} maxWidth="375px" />
+              ) : votings.map((voting, index) => (
+                <CustomCardSmall
+                  key={index}
+                  width='96%'
+                  height='100%'
+                  imgUrl={voting.thumbnail}
+                  cardText={voting.title}
+                  linkTo={`/dashboard/voting/${voting._id}`}
+                />
+              ))}
             </ScrollableContainer>
           </DashboardSectionWrapper>
         </Grid>
