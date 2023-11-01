@@ -4,8 +4,8 @@ import { useTheme, styled } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 import Card, { CardProps } from '@mui/material/Card';
 import Chart, { useChart } from 'src/components/chart';
-import { fNumber } from 'src/utils/format-number';
-import { CircularProgress, Skeleton } from '@mui/material';
+
+import { Skeleton } from '@mui/material';
 type InputValue = string | number | null;
 
 const CHART_HEIGHT = 400;
@@ -63,7 +63,7 @@ export default function AppCurrentDownload({ title, subheader, chart, ...other }
         tooltip: {
             fillSeriesColor: false,
             y: {
-                formatter: (value: number) => fNumber(value),
+                formatter: (value: number) => value.toLocaleString(),
                 title: {
                     formatter: (seriesName: string) => `${seriesName}`,
                 },
@@ -75,18 +75,19 @@ export default function AppCurrentDownload({ title, subheader, chart, ...other }
                     size: '90%',
                     labels: {
                         value: {
-                            formatter: (value: number | string) => fNumber(value),
+                            formatter: (value: number | string) => value.toLocaleString(),
                         },
                         total: {
                             formatter: (w: { globals: { seriesTotals: number[] } }) => {
                                 const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
-                                return fNumber(sum);
+                                return sum.toLocaleString();
                             },
                         },
                     },
                 },
             },
         },
+
         ...options,
     });
     if (!chartSeries.length) {
