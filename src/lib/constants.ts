@@ -275,6 +275,24 @@ export const STORIES = [
           videoLink:
             'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
+        {
+          Title: 'Reportaža Stanić zabija za 1:0 protiv Jamajke',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917199/HRJA5150_copy_jn7lw6.jpg',
+          Description:
+            'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
+          videoLink:
+            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177927&parId=E0D40198DCF58846%2177911&o=OneUp',
+        },
+        {
+          Title: 'Reportaža Prosinečki zabija za 1:0 protiv Nizozemske u 13. minuti!',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917360/HRV21107_copy_tvmokl.jpg',
+          Description:
+            'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
+          videoLink:
+            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177928&parId=E0D40198DCF58846%2177911&o=OneUp',
+        },
       ],
       Coach: {
         Name: 'Miroslav “Ćiro” Blažević',
@@ -467,7 +485,6 @@ export const STORIES = [
             },
           },
         },
-
         Summary:
           'Pognutih glava igrači Ante Čačića napustili su Francusku. A tako je malo nedostajalo za veliki rezultat. Hrvatska je igrala jako dobro. Dizala se kroz turnir. Prva, teška pobjeda nad Turskom golom Luke Modrića podsjetila je na slavlje iz 1996. nad istim protivnikom. Češka je također bila nadigrana, ali nakon prekida zbog bakljade, šokirani Vatreni uzeli su samo bod. U trećem kolu potvrda sjajne igre i forme stigla je u vidu pobjede nad braniteljem naslovom – Španjolskom. U osmini finala Hrvatsku je čekala reprezentacija koja joj ne leži. Bio je to neugodni Portugal predvođen Cristianom Ronaldom. Pogotka nije bilo do pred kraj produžetka kad nas je zaledio Ricardo Quaresma, iako je minutu ranije Ivan Perišić pogodio vratnicu. Hrvatska se, tako, nakon zaista dobre igre u grupi od natjecanja oprostila već u osmini finala, dok je ne baš uvjerljivi Portugal na kraju otišao do kraja i osvojio svoju prvu titulu prvaka Europe.',
         Champ: {
@@ -544,7 +561,17 @@ export const STORIES = [
           },
         ],
       },
-      Highlights: [],
+      Highlights: [
+        {
+          Title: 'Reportaža Pogodak Nikole Kalinića u 45. minuti protiv Španjolske',
+          imgUrl:
+            'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          Description:
+            'Majstorski pogodak Kalinića petom za izjednačenje protiv nogometnog diva.',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+        },
+      ],
       Coach: {
         Name: 'Ante Čačić',
         DOB: '29. rujna 1953. godine.',
@@ -887,33 +914,39 @@ export const STORIES = [
             'https://photos.onedrive.com/share/E0D40198DCF58846!79213?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79213&authkey=!AA0SR029kQQAv7I&ithint=video',
         },
         {
-          Title: ' SP 2018 - Pogodak Luke Modrića protiv Argentine',
+          Title: 'Reportaža Pogodak Luke Modrića protiv Argentine',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
           Description:
             'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
-        },
+            videoLink:
+            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177917&parId=E0D40198DCF58846%2177911&o=OneUp',
+          },
         {
-          Title: 'SP 2018 – pobjednički 11-erac proti v Danske (Rakitić) ',
+          Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
             'Osmina   finala.   Danska.   Sjevernjaci   već   godinama   dižu   igru   i   na   ovom   Svjetskomprvenstvu   također   su   tražili   novi   veliki   rezultat.   Izjednačena   utakmica   otišla   je   doraspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovureprezentaciju   krasilo   u   godinama   koje   su   slijedile.   Nevjerojatna   unutarnja   snaga,samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama–  Dalićevi dečki  su   pronalazili   posebne   spremnike   snage   i   umijeća   te   izlazili   kaopobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiić!“ ušao   je   u   svaki   hrvatski   dom',
-        },
+            videoLink:
+            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177916&parId=E0D40198DCF58846%2177911&o=OneUp',
+          },
         {
-          Title: 'SP 2018 – pobjednički 11-erac protiv Rusije (Rakitić) ',
+          Title: 'Pobjednički 11-erac protiv Rusije (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698231320/rakiti%C4%87_sbxpsr.jpg',
           Description:
             '  Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog  unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda.  Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
         },
         {
-          Title: 'SP 2018 – pogodak Mandžukića protiv Engleske u polufinalu',
+          Title: 'Reportaža pogodak Mandžukića protiv Engleske u polufinalu',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
           Description:
             ' Polufinale.   Znali   smo   da   neće   biti   lako.   S   druge   strane   stajala   je   Engleska.   Svjetskinogometni   gigant   željan   naslova,   željan   konačno   nekakvog   uspjeha.     Ali,   Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali,   polako. Dalić Boysi  se   ne   predaju.   Ivan   Perišić   je   izjednačio   sredinom   drugogpoluvremena.   A   zatim,   u   produžetku   –   Mario   Mandžukić   zabio   je   za   finale.   Ekstaza,urnebes, suze, smijeh... Sve',
-        },
+            videoLink:
+            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177918&parId=E0D40198DCF58846%2177911&o=OneUp',
+          },
       ],
       Coach: {
         Name: 'Zlatko Dalić',
@@ -944,43 +977,6 @@ export const STORIES = [
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2020_euro_kds3g9.png',
     },
   },
-  // {
-  //   storyTitle: '2022',
-  //   storyId: 11,
-  //   story: {
-  //     storyTitle: 'Svjetsko Prvenstvo 2022',
-  //     storyLogo:
-  //       'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308308/2022_wc_ggfbvt.png',
-  //     Highlights: [
-  //       {
-  //         Title: 'Reportaža Qatar',
-  //         imgUrl:
-  //           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785502/WhatsApp_Image_2023-10-31_at_4.19.16_PM_vihqgc.jpg',
-  //         Description:
-  //           'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
-  //         videoLink: 'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
-  //       },
-  //     ],
-  //     Zanimljivosti: [
-  //       'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
-  //       'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
-  //       'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
-  //       'FIFA je prvi put uvela VAR na Svjetskom prvenstvu u nogometu 2018.',
-  //       'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
-  //       'U samim završnicama utakmica (u 90. minuti + nadoknada) postignuta su 23 gola — što čini nevjerojatnih 15 posto svih postignutih golova.',
-  //     ],
-  //     Coach: {
-  //       Name: 'Zlatko Dalić',
-  //       DOB: '26. listopada 1966.',
-  //       CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-  //       MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
-  //       imgUrl:
-  //         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
-  //       StoryText:
-  //         'Najveći i najuspješniji trener u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
-  //     },
-  //   },
-  // },
   {
     storyTitle: '2022',
     storyId: 11,
@@ -1279,35 +1275,39 @@ export const STORIES = [
                   'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
                 videoLink: 'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
               },
+              {
+                Title: 'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
+                imgUrl:
+                'https://hns.family/files/images/_resized/0000040888_660_375_cut.jpg',
+                Description:
+                'Genijalni Bruno zabija lijevom nogom za izjednačenje protiv Brazila',
+                videoLink: 'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177922&parId=E0D40198DCF58846%2177911&o=OneUp',
+              },
     {
-    Title: 'Penal Mislava Oršića protiv Brazila',
+    Title: 'Reportaža Penal Mislava Oršića protiv Brazila',
     imgUrl:
     'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698914348/ors%CC%8Cic%CC%81_slavi_jqjag9.jpg',
     Description:
     'Mislav Orišić pogodio je malu mrežicu i osigurao važan pogodak u ključnome trenutku u utakmici s Brazilom.',
     videoLink: 'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177921&parId=E0D40198DCF58846%2177911&o=OneUp',
     },
+    
     {
-    Title: 'Gol Brune Petkovića za izjednačenje protiv Brazila',
+    Title: 'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
     imgUrl:
-    'https://hns.family/files/images/_resized/0000040888_660_375_cut.jpg',
+    'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698916441/pas%CC%8Calic%CC%81_neymar_hz7nf7.jpg',
     Description:
-    'Genijalni Bruno zabija lijevom nogom za izjednačenje protiv Brazila',
-    videoLink: 'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177922&parId=E0D40198DCF58846%2177911&o=OneUp',
+    'Fantastični Mario Pašalić zabija penal za pobjedu i odlazak u četvrtfinale.',
+    videoLink: 'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177923&parId=E0D40198DCF58846%2177911&o=OneUp',  
   },
     {
-    Title: 'SP 2018 – pobjednički 11-erac protiv Rusije (Rakitić) ',
+    Title: 'Reportaža Pogodak Mislava Oršića za ponovno vodstvo nad Portugalom',
     imgUrl:
-    'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698231320/rakiti%C4%87_sbxpsr.jpg',
+    'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
     Description:
-    ' Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda. Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
-    },
-    {
-    Title: 'SP 2018 – pogodak Mandžukića protiv Engleske u polufinalu',
-    imgUrl:
-    'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
-    Description:
-    ' Polufinale. Znali smo da neće biti lako. S druge strane stajala je Engleska. Svjetskinogometni gigant željan naslova, željan konačno nekakvog uspjeha. Ali, Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali, polako. Dalić Boysi se ne predaju. Ivan Perišić je izjednačio sredinom drugogpoluvremena. A zatim, u produžetku – Mario Mandžukić zabio je za finale. Ekstaza,urnebes, suze, smijeh... Sve',
+    'U 42 minuti Oršić zabija fenomenalan gol Portugalu za vraćenu prednost od 2:1!',
+    videoLink: 'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177924&parId=E0D40198DCF58846%2177911&o=OneUp',  
+
     },
     ],
     Coach: {
@@ -1321,12 +1321,12 @@ export const STORIES = [
     'Najveći i najuspješniji trener u povijesti hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa. Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva. Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih. Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce. Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
     },
     Zanimljivosti: [
-    'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
-    'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
-    'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
-    'FIFA je prvi put uvela VAR na Svjetskom prvenstvu u nogometu 2018.',
-    'Dosuđen je rekordan broj od 29 kaznenih udaraca. Od 29 dodijeljenih udaraca s bijele točke, 22 su pretvorena u pogotke.',
-    'U samim završnicama utakmica (u 90. minuti + nadoknada) postignuta su 23 gola — što čini nevjerojatnih 15 posto svih postignutih golova.',
+    'Od posljednjih 25 puta kada je neka momčad zabila prvi gol u nokaut utakmici na Svjetskom prvenstvu, samo četiri momčadi nisu uspjele proći dalje: Rusija u četvrtfinalu 2018., Engleska u polufinalu 2018., Japan u osmini finala 2022. i Brazil u četvrtfinalu 2022. Sve te momčadi eliminirala je Hrvatska!',
+    'Protiv Japana, hrvatski reprezentativac Dominik Livaković postao je treći vratar koji je obranio tri jedanaesteraca u raspucavanju na Svjetskom prvenstvu nakon Portugalca Ricarda 2006. protiv Engleske i hrvatskog Danijela Subašića protiv Danske 2018.',
+    'Dominik Livaković je upisao  najviše obrana u ovom izdanju natjecanja (25). Uz to, obranio je rekordna četiri jedanaesterca u jednom izdanju Svjetskog prvenstva.',
+    'Porazom od Hrvatske na jedanaesterce, Brazil je eliminiran u svakoj od svojih šest utakmica nokaut runde Svjetskog prvenstva protiv europskih strana, otkako je u finalu 2002. pobijedio Njemačku 2 : 0.',
+    'Pogotkom protiv Hrvatske Lionel Messi postao je najbolji strijelac Argentine na Svjetskim  prvenstvima (11) i prvi Argentinac koji je zabio u pet različitih utakmica na jednom turniru. Kasnije je još zabio dva pogotka u finalu.',
+    'Lionel Messi postao je prvi igrač koji je zabio i asistirao u četiri utakmice nekog Svjetskog prvenstva (računajući od  1966.). Učinio je to  to protiv Srbije 2006. i protiv Meksika, Nizozemske i Hrvatske 2022.',
     ],
     },
     },

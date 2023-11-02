@@ -11,9 +11,7 @@ import Iconify from '../../iconify';
 import Scrollbar from '../../scrollbar';
 import { useSettingsContext } from '../context';
 import BaseOptions from './base-option';
-import LayoutOptions from './layout-options';
 import PresetsOptions from './presets-options';
-import StretchOptions from './stretch-options';
 import FullScreenOption from './fullscreen-option';
 
 export default function SettingsDrawer() {

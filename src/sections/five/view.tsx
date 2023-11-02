@@ -18,6 +18,7 @@ import { userRoles } from 'src/lib/constants';
 import CustomCard from 'src/components/custom-card/custom-card';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { paths } from 'src/routes/paths';
+import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 
 const FiveView = () => {
   const settings = useSettingsContext();
@@ -89,19 +90,15 @@ const FiveView = () => {
           <SectionWrapper title='Dostupna glasanja'>
             <Grid container>
               {!notVotedVotings?.length ? (
-                <Typography
-                  variant='caption'
-                  align='center'
-                  color='textSecondary'
-                  m={1}
-                >
-                  Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim
-                  izađe novo glasanje.
-                </Typography>
+                <SkeletonDashboardLoader
+                  message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
+                  isVoting={true}
+                  count={5}
+                />
               ) : (
                 <Grid container spacing={2}>
-                  {votings &&
-                    votings.map((voting, index) => (
+                  {notVotedVotings &&
+                    notVotedVotings.map((voting, index) => (
                       <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
                         <CustomCard
                           cardId={voting._id}
@@ -118,16 +115,14 @@ const FiveView = () => {
               )}
             </Grid>
           </SectionWrapper>
+
           <SectionWrapper title='Već glasani'>
             {!votedVotings?.length ? (
-              <Typography
-                variant='caption'
-                align='center'
-                color='textSecondary'
-                m={1}
-              >
-                Za sada nema ispunjenih glasanja!
-              </Typography>
+              <SkeletonDashboardLoader
+                message='Za sada nema ispunjenih glasanja!'
+                isVoting={true}
+                count={5}
+              />
             ) : (
               <ScrollableContainer>
                 {votedVotings.map((data, index) => (
@@ -149,51 +144,6 @@ const FiveView = () => {
               </ScrollableContainer>
             )}
           </SectionWrapper>
-          {/*  TODO: Implement some statistics to replace this 
-          <Box
-            borderRadius={2}
-            p={2}
-            my={2}
-            sx={{
-              bgcolor: theme.palette.background.default,
-              [theme.breakpoints.up('md')]: {
-                bgcolor: theme.palette.background.neutral,
-              },
-            }}
-          >
-            <Box
-              display='flex'
-              justifyContent='space-between'
-              alignItems='center'
-            >
-              <StatusCard
-                icon={
-                  <EmojiEvents
-                    fontSize='medium'
-                    sx={{
-                      color: yellow[400],
-                      display: { xs: 'none', sm: 'inline' },
-                    }}
-                  />
-                }
-                number='Luka Modrić'
-                text='Najbolji igrač'
-              />
-              <StatusCard
-                icon={
-                  <SportsSoccer
-                    fontSize='medium'
-                    sx={{
-                      color: green[500],
-                      display: { xs: 'none', sm: 'inline' },
-                    }}
-                  />
-                }
-                number='Qatar 2022.'
-                text='Najpopularnije prvenstvo'
-              />
-            </Box>
-          </Box> */}
         </>
       )}
     </Container>

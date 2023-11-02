@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { AnimatePresence, m } from 'framer-motion';
+import { useRouter } from 'src/routes/hooks';
 
 export type ItemProps = {
   id: string;
@@ -25,10 +26,17 @@ interface Props {
 
 export default function AppFeatured({ list }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
+
+  const handleExploreClick = () => {
+    if (currentIndex === 0) {
+      router.push(`/dashboard/quiz/${list[0].id}`); // Navigate to quiz route
+    } else if (currentIndex === 1) {
+      router.push(`/dashboard/voting/${list[1].id}`); // Navigate to voting route
+    }
+  };
 
   useEffect(() => {
-    console.log(list);
-
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex + 1 === list.length ? 0 : prevIndex + 1
@@ -92,8 +100,13 @@ export default function AppFeatured({ list }: Props) {
           alignItems='center'
           justifyContent='space-between'
         >
-          <Button variant='contained' color='primary' sx={{ mt: 2 }}>
-            Explore
+          <Button
+            variant='contained'
+            color='primary'
+            sx={{ mt: 2 }}
+            onClick={handleExploreClick}
+          >
+            Otvori
           </Button>
           <Stack
             spacing={1}
