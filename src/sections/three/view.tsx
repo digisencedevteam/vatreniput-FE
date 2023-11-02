@@ -151,7 +151,7 @@ const ThreeView = () => {
                 },
               }}
             >
-              ℹ️ Pravila i Nagrade Kvizova
+              Pravila i Nagrade Kvizova
             </Button>
           ))}
       </Box>

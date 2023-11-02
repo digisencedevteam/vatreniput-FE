@@ -82,16 +82,16 @@ export default function OneView() {
           >
             <DashboardCollectionCategory
               imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
-              name={collectedStatistic?.topEvents[0].name}
+              name={collectedStatistic?.topEvents[0]?.name}
               percentageCollected={Math.round(
-                collectedStatistic?.topEvents[0].percentageCollected || 0
+                collectedStatistic?.topEvents[0]?.percentageCollected || 0
               )}
             />
             <DashboardCollectionCategory
               imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
-              name={collectedStatistic?.topEvents[1].name}
+              name={collectedStatistic?.topEvents[1]?.name}
               percentageCollected={Math.round(
-                collectedStatistic?.topEvents[1].percentageCollected || 0
+                collectedStatistic?.topEvents[1]?.percentageCollected || 0
               )}
             />
           </DashboardSectionWrapper>
@@ -101,33 +101,37 @@ export default function OneView() {
           >
             <ScrollableContainer>
               {isDashboardLoading || !quizzes?.length ? (
-                <SkeletonDashboardLoader count={1} maxWidth="375px" />
-              ) : quizzes.map((quiz, index) => (
-                <CustomCardSmall
-                  key={index}
-                  imgUrl={quiz.thumbnail}
-                  width='96%'
-                  height='100%'
-                  cardText={quiz.title}
-                  linkTo={`/dashboard/quiz/${quiz._id}`}
-                />
-              ))}
+                <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              ) : (
+                quizzes.map((quiz, index) => (
+                  <CustomCardSmall
+                    key={index}
+                    imgUrl={quiz.thumbnail}
+                    width='96%'
+                    height='100%'
+                    cardText={quiz.title}
+                    linkTo={`/dashboard/quiz/${quiz._id}`}
+                  />
+                ))
+              )}
             </ScrollableContainer>
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <ScrollableContainer>
               {isDashboardLoading || !votings?.length ? (
-                <SkeletonDashboardLoader count={1} maxWidth="375px" />
-              ) : votings.map((voting, index) => (
-                <CustomCardSmall
-                  key={index}
-                  width='96%'
-                  height='100%'
-                  imgUrl={voting.thumbnail}
-                  cardText={voting.title}
-                  linkTo={`/dashboard/voting/${voting._id}`}
-                />
-              ))}
+                <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              ) : (
+                votings.map((voting, index) => (
+                  <CustomCardSmall
+                    key={index}
+                    width='96%'
+                    height='100%'
+                    imgUrl={voting.thumbnail}
+                    cardText={voting.title}
+                    linkTo={`/dashboard/voting/${voting._id}`}
+                  />
+                ))
+              )}
             </ScrollableContainer>
           </DashboardSectionWrapper>
         </Grid>

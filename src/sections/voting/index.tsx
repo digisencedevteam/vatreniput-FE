@@ -6,6 +6,7 @@ import {
   useTheme,
   Grid,
   IconButton,
+  useMediaQuery,
 } from '@mui/material';
 import { useSettingsContext } from 'src/components/settings';
 import { useParams } from 'react-router-dom';
@@ -25,6 +26,7 @@ const VotingApp = () => {
   const { submitVote, fetchVotingById } = useVoting();
   const router = useRouter();
   const [voting, setVoting] = useState<Partial<Voting> | null>(null);
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
 
   const handleSubmit = async () => {
     if (votingId && selectedOption) {
@@ -75,8 +77,9 @@ const VotingApp = () => {
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 3,
-          px: 1,
           bgcolor: theme.palette.background.neutral,
+          mx: isMobile ? 0 : 20,
+          textAlign: 'center',
         }}
       >
         <Typography sx={{ marginTop: 2 }} variant='h3' gutterBottom>
@@ -85,7 +88,7 @@ const VotingApp = () => {
         <Typography variant='body1' gutterBottom>
           {voting && voting.description}
         </Typography>
-        <Grid container spacing={2} sx={{ my: 5 }}>
+        <Grid container spacing={2} sx={{ my: 5, p: isMobile ? 0 : 3 }}>
           {voting &&
             voting.votingOptions &&
             voting.votingOptions.map((option: any) => (
@@ -109,7 +112,12 @@ const VotingApp = () => {
             m: 5,
           }}
         >
-          <Button variant='contained' color='primary' onClick={handleSubmit}>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={handleSubmit}
+            sx={{ px: 5, py: 1 }}
+          >
             Glasaj
           </Button>
         </Box>
