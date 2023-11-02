@@ -77,7 +77,7 @@ export const DesktopViewOne = () => {
         <Grid item xl={12} container>
           <DashboardSectionWrapper
             title={'Najnoviji iz digitalnog albuma'}
-            link='dashboard/two'
+            link={paths.dashboard.two}
           >
             <ScrollableContainer>
               {cards.length === 0 ? (
@@ -153,7 +153,7 @@ export const DesktopViewOne = () => {
             m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
+          <DashboardSectionWrapper title='Kvizovi' link={paths.dashboard.three}>
             <Grid container justifyContent='center' alignItems='center'>
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={4} />
