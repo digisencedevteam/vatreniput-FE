@@ -12,6 +12,7 @@ import {
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { AnimatePresence, m } from 'framer-motion';
 import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths';
 
 export type ItemProps = {
   id: string;
@@ -27,12 +28,14 @@ interface Props {
 export default function AppFeatured({ list }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
+  const item = list[currentIndex];
+  const theme = useTheme();
 
   const handleExploreClick = () => {
     if (currentIndex === 0) {
-      router.push(`/dashboard/quiz/${list[0].id}`); // Navigate to quiz route
+      router.push(`${paths.dashboard.quizGroup.quiz}/${list[0].id}`);
     } else if (currentIndex === 1) {
-      router.push(`/dashboard/voting/${list[1].id}`); // Navigate to voting route
+      router.push(`${paths.dashboard.voting.vote}/${list[1].id}`);
     }
   };
 
@@ -47,9 +50,6 @@ export default function AppFeatured({ list }: Props) {
       clearInterval(timer);
     };
   }, [list]);
-
-  const item = list[currentIndex];
-  const theme = useTheme();
 
   return (
     <Card sx={{ position: 'relative', overflow: 'hidden' }}>
