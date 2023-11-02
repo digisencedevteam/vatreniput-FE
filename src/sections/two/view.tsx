@@ -1,7 +1,7 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Box, Button, Grid, IconButton } from '@mui/material';
+import { Box, Grid, IconButton } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
@@ -11,7 +11,6 @@ import PagingComponent from 'src/components/paging/paging-component';
 import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import Vesela from 'src/assets/illustrations/vesela3.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import CircularProgress from '@mui/material/CircularProgress';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
@@ -35,6 +34,7 @@ export const CollectionView = () => {
     useState<CollectedStatistic | null>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
+  const [isCategoryLoading, setIsCategoryLoading] = useState(false);
 
   const fetchCategories = async () => {
     try {
@@ -50,6 +50,7 @@ export const CollectionView = () => {
   };
 
   const fetchCollectedCards = async () => {
+    setIsCategoryLoading(true);
     try {
       let response;
       if (categoryIndex === 0) {
@@ -74,6 +75,7 @@ export const CollectionView = () => {
       console.error(error);
       setCollectedCards([]);
     }
+    setIsCategoryLoading(false);
   };
 
   const fetchCollectedStatistic = async () => {
@@ -120,6 +122,7 @@ export const CollectionView = () => {
   }
 
   const handleArrowClick = (direction: string) => {
+    setIsCategoryLoading(true);
     setCollectedCards([]);
     if (categories.length > 0) {
       setCurrentPage(1);
@@ -154,14 +157,9 @@ export const CollectionView = () => {
         {!isMobile && (
           <Grid item xs={12} md={7}>
             <WelcomeComponent
-              title={`Pozdrav 👋`}
-              description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+              title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
+              description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
               img={<img src={Vesela} alt='Vesela' />}
-              action={
-                <Button variant='contained' color='primary'>
-                  Istraži
-                </Button>
-              }
             />
           </Grid>
         )}
@@ -204,20 +202,28 @@ export const CollectionView = () => {
                 </IconButton>
               </Box>
             ) : (
-              <CircularProgress />
+              <LoadingScreen />
             )}
           </Grid>
-          {collectedCards.map((item, index) => (
-            <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
-              <CollectionStickerItem item={item} />
+          {isCategoryLoading ? (
+            <Grid item xs={12} style={{ textAlign: 'center' }}>
+              <LoadingScreen />
             </Grid>
-          ))}
+          ) : (
+            collectedCards.map((item, index) => (
+              <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+                <CollectionStickerItem item={item} />
+              </Grid>
+            ))
+          )}
         </Grid>
-        <PagingComponent
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        {collectedCards.length > 0 && (
+          <PagingComponent
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </Container>
   );

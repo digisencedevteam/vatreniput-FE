@@ -57,7 +57,7 @@ export default function WelcomeComponent({
           sx={{
             opacity: 0.8,
             maxWidth: 360,
-            mb: { xs: 2, xl: 5 },
+            mb: { xs: 2, xl: 3 },
           }}
         >
           {description}
@@ -71,9 +71,10 @@ export default function WelcomeComponent({
           component='span'
           justifyContent='center'
           sx={{
-            p: { xs: 3 },
-            maxWidth: { xs: 150, md: 200 },
+            p: { xs: 2 },
+            maxWidth: { xs: 150, md: 180 },
             mx: 'auto',
+            mr: 4,
           }}
         >
           {img}

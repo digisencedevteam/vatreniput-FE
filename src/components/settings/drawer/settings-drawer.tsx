@@ -103,31 +103,31 @@ export default function SettingsDrawer() {
   //   </div>
   // );
 
-  const renderStretch = (
-    <div>
-      <Typography
-        variant='caption'
-        component='div'
-        sx={{
-          ...labelStyles,
-          display: 'inline-flex',
-          alignItems: 'center',
-        }}
-      >
-        Rastegnutost
-        <Tooltip title='Dostupno na velikim rezolucijama > 1600px (xl)'>
-          <Iconify icon='eva:info-outline' width={16} sx={{ ml: 0.5 }} />
-        </Tooltip>
-      </Typography>
+  // const renderStretch = (
+  //   <div>
+  //     <Typography
+  //       variant='caption'
+  //       component='div'
+  //       sx={{
+  //         ...labelStyles,
+  //         display: 'inline-flex',
+  //         alignItems: 'center',
+  //       }}
+  //     >
+  //       Rastegnutost
+  //       <Tooltip title='Dostupno na velikim rezolucijama > 1600px (xl)'>
+  //         <Iconify icon='eva:info-outline' width={16} sx={{ ml: 0.5 }} />
+  //       </Tooltip>
+  //     </Typography>
 
-      <StretchOptions
-        value={settings.themeStretch}
-        onChange={() =>
-          settings.onUpdate('themeStretch', !settings.themeStretch)
-        }
-      />
-    </div>
-  );
+  //     <StretchOptions
+  //       value={settings.themeStretch}
+  //       onChange={() =>
+  //         settings.onUpdate('themeStretch', !settings.themeStretch)
+  //       }
+  //     />
+  //   </div>
+  // );
 
   const renderPresets = (
     <div>
@@ -176,7 +176,7 @@ export default function SettingsDrawer() {
 
           {/* {renderLayout} */}
 
-          {renderStretch}
+          {/* {renderStretch} */}
 
           {renderPresets}
         </Stack>

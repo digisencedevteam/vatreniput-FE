@@ -1,9 +1,18 @@
-import { Box, Button, Container, Divider, Grid } from '@mui/material';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import AppFeatured, { ItemProps } from 'src/components/feautred-carousel/app-featured';
+import AppFeatured, {
+  ItemProps,
+} from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
 import { useEffect } from 'react';
 import AppWelcome from 'src/components/overview/app-welcome';
@@ -24,7 +33,7 @@ export const DesktopViewOne = () => {
     votings,
     isDashboardLoading,
     deleteVoting,
-    cards
+    cards,
   } = useDashboardData();
 
   const featuredAppsList = [
@@ -51,77 +60,94 @@ export const DesktopViewOne = () => {
       <Grid container spacing={3}>
         <Grid item xs={8}>
           <AppWelcome
-            title={`Dobrodošao 👋, \n Matej`}
-            description="If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything."
+            title={`Dobrodošli na digitalnu platformu Vatrenog Almanaha!`}
+            description={`Saznaj što ima novog u Vatrenom svijetu! \n Ne propusti priliku osvojiti vrijedne nagrade.`}
             img={<SeoIllustration />}
-            action={
-              <Button variant="contained" color="primary">
-                Istraži
-              </Button>
-            }
           />
         </Grid>
         <Grid item xs={4} md={4}>
-          {(quizzes?.length && votings?.length) ? (
+          {quizzes?.length && votings?.length ? (
             <AppFeatured list={featuredAppsList} />
           ) : (
             <SkeletonDashboardLoader count={1} />
           )}
         </Grid>
       </Grid>
-      <Grid container spacing={3} my={5} alignItems="center" justifyContent="center" borderRadius={1}>
-        <Grid item xl={12} container   >
-          <DashboardSectionWrapper title={'Kolekcija'} link='dashboard/two'>
+      <Grid
+        container
+        spacing={3}
+        my={5}
+        alignItems='center'
+        justifyContent='center'
+        borderRadius={1}
+      >
+        <Grid item xl={12} container>
+          <DashboardSectionWrapper
+            title={'Najnoviji iz digitalnog albuma'}
+            link='dashboard/two'
+          >
             <ScrollableContainer>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={8} maxWidth="175px" />
-              ) : cards?.length ? (
-                cards.map((item, index) => (
-                  <Box
-                    key={index}
-                    sx={{
-                      flex: '0 0 auto',
-                      width: '100%',
-                      maxWidth: '175px',
-                      height: '32vh',
-                      m: 1,
-                    }}
-                  >
-                    <CollectionStickerItem item={item} />
-                  </Box>
-                ))
+                <SkeletonDashboardLoader count={8} maxWidth='175px' />
               ) : (
-                <SkeletonDashboardLoader count={8} maxWidth="175px" />
+                <>
+                  {cards.map((item, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        flex: '0 0 auto',
+                        width: '100%',
+                        maxWidth: '175px',
+                        height: '32vh',
+                        m: 1,
+                      }}
+                    >
+                      <CollectionStickerItem item={item} />
+                    </Box>
+                  ))}
+                  {cards.length === 0 &&
+                    featuredAppsList[0]?.title === 'Skupljene sličice' && (
+                      <Typography variant='subtitle1'>
+                        Trenutno nema skupljenih slicica, skeniraj QR kod sa
+                        jedne od slicica kako bi ispunio digitalni album.
+                      </Typography>
+                    )}
+                </>
               )}
             </ScrollableContainer>
-            <Divider sx={{ margin: "16px 0" }} />
+
+            <Divider sx={{ margin: '16px 0' }} />
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
-      <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
-        <Grid
-          item
-          xs={12}
-          sx={{
-            borderRadius: 2,
-            m: '4px',
-            mt: -4
-          }}
-        >
-          {chartData && (
-            <AppCurrentDownload
-              chart={{
-                series: chartData.categories.map((category, index) => ({
-                  label: category,
-                  value: chartData.series[index],
-                })),
-              }}
-              cardCount={cardCount}
-            />
-          )}
+      <DashboardSectionWrapper
+        title={'Statistika digitalnog albuma'}
+        link='dashboard/two'
+      >
+        <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              borderRadius: 2,
+              m: '4px',
+              mt: -4,
+            }}
+          >
+            {chartData && (
+              <AppCurrentDownload
+                chart={{
+                  series: chartData.categories.map((category, index) => ({
+                    label: category,
+                    value: chartData.series[index],
+                  })),
+                }}
+                cardCount={cardCount}
+              />
+            )}
+          </Grid>
         </Grid>
-      </Grid>
-
+      </DashboardSectionWrapper>
       <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
         <Grid
           item
@@ -132,12 +158,12 @@ export const DesktopViewOne = () => {
           }}
         >
           <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
-            <Grid container justifyContent="center" alignItems="center">
+            <Grid container justifyContent='center' alignItems='center'>
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
               ) : quizzes?.length ? (
                 quizzes.map((quiz, index) => (
-                  <Grid item md={6} key={index} >
+                  <Grid item md={6} key={index}>
                     <CustomCardSmall
                       imgUrl={quiz.thumbnail}
                       width='100%'
@@ -167,7 +193,7 @@ export const DesktopViewOne = () => {
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
               ) : votings?.length ? (
                 votings.map((voting, index) => (
-                  <Grid item md={6} key={index} >
+                  <Grid item md={6} key={index}>
                     <CustomCard
                       cardId={voting._id}
                       votingId={voting._id}
