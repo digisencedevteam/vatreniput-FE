@@ -1,9 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
 import { ScrollableContainerProps } from "src/types";
 
-const StoryContext = createContext({
+interface StoryContextType {
+    currentStoryIndex: number;
+    setCurrentStoryIndex: Dispatch<SetStateAction<number>>;
+}
+const StoryContext = createContext<StoryContextType>({
     currentStoryIndex: 0,
-    setCurrentStoryIndex: (index: number) => { }
+    setCurrentStoryIndex: () => { }
 });
 
 export const StoryProvider = ({ children }: ScrollableContainerProps) => {

@@ -1,4 +1,3 @@
-// Story Types START
 export interface TeamStat {
   TeamName: string;
   MatchesPlayed: number;
@@ -169,5 +168,3 @@ export type FactType =
   | Iterable<React.ReactNode>
   | React.ReactPortal
   | null;
-
-// STORY TYPES END
