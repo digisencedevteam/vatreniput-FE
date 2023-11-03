@@ -24,19 +24,15 @@ const VotingApp = () => {
   const { votingId } = useParams();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const theme = useTheme();
-  const { submitVote, fetchVotingById, isLoading, setIsLoading } = useVoting();
+  const { submitVote, fetchVotingById, isLoading } = useVoting();
   const router = useRouter();
   const [voting, setVoting] = useState<Partial<Voting> | null>(null);
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     if (votingId && selectedOption) {
       await submitVote(votingId, selectedOption);
-      setIsLoading(false);
       router.push(`${paths.dashboard.five}`);
-    } else {
-      setIsLoading(false);
     }
   };
 
