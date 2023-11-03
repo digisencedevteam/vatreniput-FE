@@ -39,6 +39,10 @@ export default function OneView() {
     setIsScanning(!isScanning);
   };
 
+  const notVotedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === false)
+    : [];
+
   useEffect(() => {
     fetchDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +105,11 @@ export default function OneView() {
           >
             <ScrollableContainer>
               {isDashboardLoading || !quizzes?.length ? (
-                <SkeletonDashboardLoader count={1} maxWidth='375px' />
+                <SkeletonDashboardLoader
+                  count={1}
+                  maxWidth='375px'
+                  message='Čestitam! Svi kvizovi su riješeni!'
+                />
               ) : (
                 quizzes.map((quiz, index) => (
                   <CustomCardSmall
@@ -118,10 +126,10 @@ export default function OneView() {
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <ScrollableContainer>
-              {isDashboardLoading || !votings?.length ? (
+              {isDashboardLoading || !notVotedVotings?.length ? (
                 <SkeletonDashboardLoader count={1} maxWidth='375px' />
               ) : (
-                votings.map((voting, index) => (
+                notVotedVotings.map((voting, index) => (
                   <CustomCardSmall
                     key={index}
                     width='96%'

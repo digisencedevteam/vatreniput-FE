@@ -45,8 +45,8 @@ const useVoting = (): UseVotingReturn => {
 
   const createOrUpdateVoting = async (voting: Partial<Voting>, votingId?: string) => {
     const votingToSend = { ...voting };
-  
     let response;
+    
     try {
       if (votingId) {
         response = await axiosInstance.put(`/votings/${votingId}`, votingToSend);

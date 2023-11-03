@@ -25,7 +25,7 @@ export const SkeletonDashboardLoader = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const adjustedMaxWidth = isMobile ? '100px' : maxWidth;
-  let adjustedCount = isMobile ? 9 : count;
+  let adjustedCount = isMobile ? 3 : count;
 
   if (!!isVoting && isMobile) adjustedCount = 3;
 
