@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Container,
@@ -8,7 +8,7 @@ import {
     Typography,
 } from '@mui/material';
 import { MotionContainer, varFade } from '../animate';
-import { StoryContentProps, TabComponents } from 'src/types';
+import { StoryContentProps, TabComponents } from 'src/types/story';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import VideoLibraryOutlinedIcon from '@mui/icons-material/VideoLibraryOutlined';
@@ -21,8 +21,12 @@ import { ChampionshipContent } from './story-tab-content/championship-content';
 import { HighlightContent } from './story-tab-content/highlight-content';
 import { CoachContent } from './story-tab-content/coach-content';
 import { NationalTeamContent } from './story-tab-content/national-team-content';
+import { useStoryContext } from 'src/context/StoryContext';
+import { useParams } from 'src/routes/hooks';
 
 const StoryContent = ({ story }: StoryContentProps) => {
+    const { storyId } = useParams();
+    const { setCurrentStoryIndex } = useStoryContext();
     const [currentTab, setCurrentTab] = useState(0);
     const slideVariants = varFade();
 
@@ -50,6 +54,15 @@ const StoryContent = ({ story }: StoryContentProps) => {
         "Reprezentacija": <NationalTeamContent story={story} />,
         "Zanimljivosti": <FactContent story={story} />,
     };
+    useEffect(() => {
+        if (storyId !== undefined) {
+            const index = parseInt(storyId, 10);
+            if (!isNaN(index)) {
+                setCurrentStoryIndex(index);
+            }
+        }
+        setCurrentTab(0);
+    }, [storyId, setCurrentStoryIndex]);
 
     return (
         <Container>

@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { PenaltyShootoutProps } from 'src/types';
+import { PenaltyShootoutProps } from 'src/types/story';
 
 const PenaltyShootoutTable = ({ data }: PenaltyShootoutProps) => {
 

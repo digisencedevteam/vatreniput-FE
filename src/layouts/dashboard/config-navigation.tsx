@@ -103,6 +103,18 @@ export function useNavData() {
                 title: 'Svjetsko prvenstvo 2018',
                 path: paths.dashboard.story.fifthteen,
               },
+              {
+                title: 'Euro 2020',
+                path: paths.dashboard.story.sixteen,
+              },
+              {
+                title: 'Svjetsko Prvenstvo, Katar 2022',
+                path: paths.dashboard.story.seventeen,
+              },
+              {
+                title: 'Liga nacija 2023',
+                path: paths.dashboard.story.eighteen,
+              },
             ],
           },
         ],

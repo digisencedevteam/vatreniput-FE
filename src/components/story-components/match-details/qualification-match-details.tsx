@@ -1,7 +1,7 @@
 import { Box, Divider, Typography } from '@mui/material';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import SportsIcon from '@mui/icons-material/Sports';
-import { QualificationMatchDetailsProps } from 'src/types';
+import { QualificationMatchDetailsProps } from 'src/types/story';
 
 const QualificationMatchDetails = ({ matches }: QualificationMatchDetailsProps) => {
     return (

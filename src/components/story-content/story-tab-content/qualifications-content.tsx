@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
-import { StoryContentProps } from "src/types";
+import { StoryContentProps } from "src/types/story";
 import MatchTable from "../../story-components/match-table/match-table";
 import QualificationMatchDetails from "../../story-components/match-details/qualification-match-details";
 
