@@ -55,7 +55,7 @@ export const DesktopViewOne = () => {
           <AppWelcome
             title={`Dobrodošli na digitalnu platformu Vatrenog Almanaha!`}
             description={`Saznaj što ima novog u Vatrenom svijetu! \n Ne propusti priliku osvojiti vrijedne nagrade.`}
-            img={<SeoIllustration />}
+            img={<SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png' />}
           />
         </Grid>
         <Grid item xs={4} md={4}>

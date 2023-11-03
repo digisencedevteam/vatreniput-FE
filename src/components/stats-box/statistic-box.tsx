@@ -22,12 +22,15 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
       bgcolor={theme.palette.background.neutral}
       spacing={3}
       borderRadius={'16px'}
+      justifyContent={'center'}
       overflow='hidden'
       paddingRight={'24px'}
       margin={0}
+      height={'100%'}
     >
-      <Grid item>
+      <Grid item mb={2}>
         <CollectedStatisticWidget
+
           chart={{
             series: [
               {
@@ -38,21 +41,9 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
             ],
           }}
           sx={{
-            flex: '0 0 auto',
             height: '100%',
+            mb: 2,
             bgcolor: theme.palette.background.default,
-          }}
-        />
-      </Grid>
-      <Grid item>
-        <SelectionStatistic
-          title='godina je prošlo od osnutka saveza'
-          total={111}
-          icon={<CollectionStatisticIllustration />}
-          sx={{
-            flex: '0 0 auto',
-            margin: 2,
-            marginRight: { xs: theme.spacing(2), md: theme.spacing(2) },
           }}
         />
       </Grid>
