@@ -13,10 +13,11 @@ import Vesela from 'src/assets/illustrations/vesela3.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
-import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
+import AppWelcome from 'src/components/overview/app-welcome';
+import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -157,22 +158,16 @@ export const CollectionView = () => {
       <Grid container spacing={1}>
         {!isMobile && (
           <Grid item xs={12} md={7}>
-            <WelcomeComponent
+            <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
-              img={<img src={Vesela} alt='Vesela' />}
+              img={<SeoIllustration imageUrl={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1695908111/vesela3_elqpvf.png'} />}
             />
           </Grid>
         )}
 
         <Grid item xs={12} md={5}>
-          {isMobile ? (
-            <HorizontalScrollStatisticCards
-              collectedStatistic={collectedStatistic}
-            />
-          ) : (
-            <StatisticCards collectedStatistic={collectedStatistic} />
-          )}
+          <StatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
       </Grid>
       <div ref={myRef}>

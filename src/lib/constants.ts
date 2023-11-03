@@ -159,11 +159,7 @@ export const STORIES = [
               {
                 Teams: 'JAMAJKA  – HRVATSKA',
                 Score: '1 : 3',
-                Scorers: [
-                  'Stanić 27` ',
-                  'Prosinečki 53`',
-                  'Šuker 68`',
-                ],
+                Scorers: ['Stanić 27` ', 'Prosinečki 53`', 'Šuker 68`'],
               },
               {
                 Teams: 'JAPAN – HRVATSKA',
@@ -186,11 +182,7 @@ export const STORIES = [
             QuarterFinal: {
               Match: 'HRVATSKA – NJEMAČKA',
               Score: '3 : 0',
-              GoalScorers: [
-                'Jarni 45+3`',
-                'Vlaović 80`',
-                'Šuker 85`',
-              ],
+              GoalScorers: ['Jarni 45+3`', 'Vlaović 80`', 'Šuker 85`'],
             },
             SemiFinal: {
               Match: 'HRVATSKA – FRANCUSKA',
@@ -257,8 +249,7 @@ export const STORIES = [
           },
           {
             name: 'Silvio Marić',
-            imgurl:
-              'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
+            imgurl: 'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
           },
         ],
         Napadači: [
@@ -373,7 +364,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2016.',
-    storyId: 13,
+    storyId: 8,
     story: {
       storyTitle: 'Europsko Prvenstvo 2016',
       storyLogo:
@@ -575,8 +566,7 @@ export const STORIES = [
         {
           Title:
             'Reportaža Pogodak Nikole Kalinića u 45. minuti protiv Španjolske',
-          imgUrl:
-            'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Majstorski pogodak Kalinića petom za izjednačenje protiv nogometnog diva.',
           videoLink:
@@ -934,8 +924,7 @@ export const STORIES = [
             'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177917&parId=E0D40198DCF58846%2177911&o=OneUp',
         },
         {
-          Title:
-            'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
+          Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
@@ -951,8 +940,7 @@ export const STORIES = [
             '  Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog  unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda.  Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
         },
         {
-          Title:
-            'Reportaža pogodak Mandžukića protiv Engleske u polufinalu',
+          Title: 'Reportaža pogodak Mandžukića protiv Engleske u polufinalu',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
           Description:
@@ -965,10 +953,7 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: [
-          '2. mjesto na SP 2018',
-          'Prvak Azije s Al Ainom',
-        ],
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
@@ -1100,9 +1085,7 @@ export const STORIES = [
               {
                 Teams: 'HRVATSKA – KANADA',
                 Score: '4 : 1',
-                Scorers: [
-                  'Kramarić 36`, 70`, Livaja 44`, Majer 90+4',
-                ],
+                Scorers: ['Kramarić 36`, 70`, Livaja 44`, Majer 90+4'],
               },
               {
                 Teams: 'HRVATSKA – BELGIJA',
@@ -1293,12 +1276,10 @@ export const STORIES = [
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785502/WhatsApp_Image_2023-10-31_at_4.19.16_PM_vihqgc.jpg',
           Description:
             'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
-          videoLink:
-            'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
+          videoLink: 'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
         },
         {
-          Title:
-            'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
+          Title: 'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
           imgUrl:
             'https://hns.family/files/images/_resized/0000040888_660_375_cut.jpg',
           Description:
@@ -1317,8 +1298,7 @@ export const STORIES = [
         },
 
         {
-          Title:
-            'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
+          Title: 'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698916441/pas%CC%8Calic%CC%81_neymar_hz7nf7.jpg',
           Description:
@@ -1329,8 +1309,7 @@ export const STORIES = [
         {
           Title:
             'Reportaža Pogodak Mislava Oršića za ponovno vodstvo nad Portugalom',
-          imgUrl:
-            'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
           Description:
             'U 42 minuti Oršić zabija fenomenalan gol Portugalu za vraćenu prednost od 2:1!',
           videoLink:
@@ -1341,10 +1320,7 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: [
-          '2. mjesto na SP 2018',
-          'Prvak Azije s Al Ainom',
-        ],
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:

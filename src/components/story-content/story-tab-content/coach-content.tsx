@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
-import { StoryContentProps } from "src/types";
+import { StoryContentProps } from "src/types/story";
 
 export const CoachContent = ({ story }: StoryContentProps) => {
     if (!story?.Coach) {

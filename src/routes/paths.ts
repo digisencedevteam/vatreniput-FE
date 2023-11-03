@@ -36,6 +36,9 @@ export const paths = {
       thirteen: `${ROOTS.DASHBOARD}/story/7`,
       fourteen: `${ROOTS.DASHBOARD}/story/8`,
       fifthteen: `${ROOTS.DASHBOARD}/story/9`,
+      sixteen: `${ROOTS.DASHBOARD}/story/10`,
+      seventeen: `${ROOTS.DASHBOARD}/story/11`,
+      eighteen: `${ROOTS.DASHBOARD}/story/12`,
     },
     quizGroup: {
       root: `${ROOTS.DASHBOARD}/three`,
@@ -43,14 +46,14 @@ export const paths = {
       results: `${ROOTS.DASHBOARD}/quizGroup/results`,
       quiz: `${ROOTS.DASHBOARD}/quiz`,
       editQuiz: `${ROOTS.DASHBOARD}/editQuiz`,
-      createQuiz: `${ROOTS.DASHBOARD}/createQuiz`
+      createQuiz: `${ROOTS.DASHBOARD}/createQuiz`,
     },
     profile: `${ROOTS.DASHBOARD}/profile`,
     voting: {
       vote: `${ROOTS.DASHBOARD}/voting`,
       editVoting: `${ROOTS.DASHBOARD}/editVoting`,
       votingResults: `${ROOTS.DASHBOARD}/votingResults`,
-      createVoting: `${ROOTS.DASHBOARD}/createVoting`
-    }
+      createVoting: `${ROOTS.DASHBOARD}/createVoting`,
+    },
   },
 };

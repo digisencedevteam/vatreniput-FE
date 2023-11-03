@@ -1,7 +1,7 @@
 import { Box, Typography, Divider, Avatar } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { MilitaryTech } from '@mui/icons-material';
-import { ChampionCardProps } from 'src/types';
+import { ChampionCardProps } from 'src/types/story';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 const ChampionCard = ({ data }: ChampionCardProps) => {

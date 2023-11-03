@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Typography, IconButton } from '@mui/material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { HighlightProps } from 'src/types';
+import { HighlightProps } from 'src/types/story';
 
 const Highlight = ({ data }: HighlightProps) => {
     const isDesktop = useResponsive('up', 'md');

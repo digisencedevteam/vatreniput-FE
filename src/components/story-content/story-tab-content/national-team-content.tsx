@@ -1,7 +1,7 @@
 import { Box, Card, CardMedia, Divider, Typography } from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
-import { StoryContentProps } from 'src/types';
+import { StoryContentProps } from 'src/types/story';
 
 export const NationalTeamContent = ({ story }: StoryContentProps) => {
   return (
