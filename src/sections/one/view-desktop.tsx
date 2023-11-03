@@ -44,6 +44,10 @@ export const DesktopViewOne = () => {
     },
   ].filter(Boolean) as ItemProps[];
 
+  const notVotedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === false)
+    : [];
+
   useEffect(() => {
     fetchDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +66,10 @@ export const DesktopViewOne = () => {
           {quizzes?.length && votings?.length ? (
             <AppFeatured list={featuredAppsList} />
           ) : (
-            <SkeletonDashboardLoader count={1} />
+            <SkeletonDashboardLoader
+              count={1}
+              message='Trenutno nema dostupnih!'
+            />
           )}
         </Grid>
       </Grid>
@@ -80,7 +87,9 @@ export const DesktopViewOne = () => {
             link={paths.dashboard.two}
           >
             <ScrollableContainer>
-              {cards.length === 0 ? (
+              {isDashboardLoading ? (
+                <SkeletonDashboardLoader count={5} width='100%' />
+              ) : cards.length === 0 ? (
                 <Box
                   sx={{
                     width: '100%',
@@ -100,7 +109,7 @@ export const DesktopViewOne = () => {
                       key={index}
                       sx={{
                         flex: '0 0 auto',
-                        maxWidth: '125px',
+                        maxWidth: '200px',
                         height: '32vh',
                         m: 1,
                       }}
@@ -156,7 +165,7 @@ export const DesktopViewOne = () => {
           <DashboardSectionWrapper title='Kvizovi' link={paths.dashboard.three}>
             <Grid container justifyContent='center' alignItems='center'>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={4} />
+                <SkeletonDashboardLoader count={3} />
               ) : quizzes?.length ? (
                 quizzes.map((quiz, index) => (
                   <Grid item md={6} key={index}>
@@ -169,7 +178,11 @@ export const DesktopViewOne = () => {
                   </Grid>
                 ))
               ) : (
-                <SkeletonDashboardLoader count={4} maxWidth='320px' />
+                <SkeletonDashboardLoader
+                  count={3}
+                  maxWidth='320px'
+                  message='Trenutno nema dostupnih kvizova!'
+                />
               )}
             </Grid>
           </DashboardSectionWrapper>
@@ -187,8 +200,8 @@ export const DesktopViewOne = () => {
             <Grid container>
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={4} maxWidth='320px' />
-              ) : votings?.length ? (
-                votings.map((voting, index) => (
+              ) : notVotedVotings?.length ? (
+                notVotedVotings.map((voting, index) => (
                   <Grid item md={6} key={index}>
                     <CustomCard
                       cardId={voting._id}
@@ -202,7 +215,11 @@ export const DesktopViewOne = () => {
                   </Grid>
                 ))
               ) : (
-                <SkeletonDashboardLoader count={4} maxWidth='320px' />
+                <SkeletonDashboardLoader
+                  count={3}
+                  maxWidth='320px'
+                  message='Trenutno nema dostupnih glasanja!'
+                />
               )}
             </Grid>
           </DashboardSectionWrapper>

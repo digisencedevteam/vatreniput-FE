@@ -21,10 +21,6 @@ const OPTIONS = [
     label: 'Profil',
     linkTo: '/dashboard/profile',
   },
-  {
-    label: 'Postavke',
-    linkTo: '/#2',
-  },
 ];
 
 export default function AccountPopover() {

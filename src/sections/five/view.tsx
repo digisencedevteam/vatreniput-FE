@@ -97,20 +97,19 @@ const FiveView = () => {
                 />
               ) : (
                 <Grid container spacing={2}>
-                  {notVotedVotings &&
-                    notVotedVotings.map((voting, index) => (
-                      <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                        <CustomCard
-                          cardId={voting._id}
-                          votingId={voting._id}
-                          imgUrl={voting.thumbnail}
-                          cardText={voting.title}
-                          onDelete={deleteVoting}
-                          linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
-                          linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
-                        />
-                      </Grid>
-                    ))}
+                  {notVotedVotings.map((voting, index) => (
+                    <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                      <CustomCard
+                        cardId={voting._id}
+                        votingId={voting._id}
+                        imgUrl={voting.thumbnail}
+                        cardText={voting.title}
+                        onDelete={deleteVoting}
+                        linkTo={`${paths.dashboard.voting.vote}/${voting._id}`}
+                        linkToEdit={`${paths.dashboard.voting.editVoting}/${voting._id}`}
+                      />
+                    </Grid>
+                  ))}
                 </Grid>
               )}
             </Grid>

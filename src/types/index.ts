@@ -124,6 +124,7 @@ export type Voting = {
   thumbnail: string;
   votingOptions: VotingOption[];
   linkToEdit?: string;
+  isVoted?: boolean;
 };
 
 export type UseVotingReturn = {
