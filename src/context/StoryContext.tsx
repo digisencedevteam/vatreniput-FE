@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ScrollableContainerProps } from "src/types";
 
 interface StoryContextType {
     currentStoryIndex: number;
-    setCurrentStoryIndex: Dispatch<SetStateAction<number>>;
+    setCurrentStoryIndex: (index: number) => void;
 }
 const StoryContext = createContext<StoryContextType>({
     currentStoryIndex: 0,
