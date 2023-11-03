@@ -24,20 +24,19 @@ const VotingApp = () => {
   const { votingId } = useParams();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const theme = useTheme();
-  const { submitVote, fetchVotingById } = useVoting();
+  const { submitVote, fetchVotingById, isLoading, setIsLoading } = useVoting();
   const router = useRouter();
   const [voting, setVoting] = useState<Partial<Voting> | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
+    setIsLoading(true);
     if (votingId && selectedOption) {
       await submitVote(votingId, selectedOption);
-      setIsSubmitting(false);
+      setIsLoading(false);
       router.push(`${paths.dashboard.five}`);
     } else {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -69,7 +68,7 @@ const VotingApp = () => {
         alignItems: 'center',
       }}
     >
-      {isSubmitting ? (
+      {isLoading ? (
         <LoadingScreen />
       ) : (
         <>
