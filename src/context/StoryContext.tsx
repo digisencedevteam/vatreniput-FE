@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { ScrollableContainerProps } from "src/types";
 
-const StoryContext = React.createContext({
+const StoryContext = createContext({
     currentStoryIndex: 0,
     setCurrentStoryIndex: (index: number) => { }
 });
@@ -16,4 +16,4 @@ export const StoryProvider = ({ children }: ScrollableContainerProps) => {
     );
 };
 
-export const useStoryContext = () => React.useContext(StoryContext);
+export const useStoryContext = () => useContext(StoryContext);
