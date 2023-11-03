@@ -1,13 +1,5 @@
-import {
-  Typography,
-  Button,
-  Snackbar,
-  Alert,
-  useMediaQuery,
-  Container,
-} from '@mui/material';
+import { Typography, Button, Alert, useMediaQuery } from '@mui/material';
 import { Quiz } from './types';
-import { useSettingsContext } from 'src/components/settings';
 
 interface StartQuizScreenProps {
   quiz: Quiz | null;
@@ -15,7 +7,6 @@ interface StartQuizScreenProps {
 }
 const StartQuizScreen = ({ quiz, startQuiz }: StartQuizScreenProps) => {
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
-  const settings = useSettingsContext();
 
   return (
     <>
@@ -24,26 +15,26 @@ const StartQuizScreen = ({ quiz, startQuiz }: StartQuizScreenProps) => {
         alt='Quiz'
         style={{ maxWidth: isMobile ? '100%' : '45%', borderRadius: 10 }}
       />
+      <Alert severity='info' sx={{ mt: 3, mb: 1, mx: isMobile ? 0 : 10 }}>
+        <Typography variant='caption' textAlign={'center'}>
+          Nagrađuju se korisnici s najviše točnih rješenja u najkraćem vremenu.
+          <br />
+          Vrijeme prolazi iako izađeš iz kviza tako da se zatvaranje kviza NE
+          preporuča!
+        </Typography>
+      </Alert>
       <Typography
         variant='h5'
-        style={{
+        sx={{
           textTransform: 'uppercase',
           fontWeight: 'bold',
-          margin: 30,
+          my: 5,
+          mx: 0,
           textAlign: 'center',
         }}
       >
         {quiz?.title}
       </Typography>
-      <Snackbar open={true} autoHideDuration={6000}>
-        <Alert severity='warning'>
-          <Typography variant='caption'>
-            Nagrađuju se korisnici s najviše točnih rješenja u najkraćem
-            vremenu. Vrijeme prolazi iako izađeš iz kviza tako da se zatvaranje
-            kviza NE preporuča!
-          </Typography>
-        </Alert>
-      </Snackbar>
       <Typography variant='caption' sx={{ width: '90%', textAlign: 'center' }}>
         {quiz?.description}
       </Typography>
@@ -51,9 +42,9 @@ const StartQuizScreen = ({ quiz, startQuiz }: StartQuizScreenProps) => {
         variant='contained'
         color='primary'
         onClick={startQuiz}
-        style={{ marginTop: '20px', width: '50%' }}
+        style={{ marginTop: 40, width: '50%' }}
       >
-        Start Quiz
+        Pokreni Kviz
       </Button>
     </>
   );

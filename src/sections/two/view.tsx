@@ -16,6 +16,7 @@ import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
+import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -217,11 +218,17 @@ export const CollectionView = () => {
             ))
           )}
         </Grid>
-        {collectedCards.length > 0 && (
+        {collectedCards.length > 0 ? (
           <PagingComponent
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
+          />
+        ) : (
+          <SkeletonDashboardLoader
+            count={5}
+            width='100%'
+            message='Trenutno nema sličica u kolekciji, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.'
           />
         )}
       </div>

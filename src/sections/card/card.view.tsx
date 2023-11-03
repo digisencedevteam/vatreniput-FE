@@ -34,6 +34,7 @@ export const CardView = () => {
   };
   useEffect(() => {
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardId]);
 
   const handleAddCardToAlbum = async () => {

@@ -11,6 +11,8 @@ import {
 } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { AnimatePresence, m } from 'framer-motion';
+import { useRouter } from 'src/routes/hooks';
+import { paths } from 'src/routes/paths';
 
 export type ItemProps = {
   id: string;
@@ -25,10 +27,19 @@ interface Props {
 
 export default function AppFeatured({ list }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
+  const item = list[currentIndex];
+  const theme = useTheme();
+
+  const handleExploreClick = () => {
+    if (currentIndex === 0) {
+      router.push(`${paths.dashboard.quizGroup.quiz}/${list[0].id}`);
+    } else if (currentIndex === 1) {
+      router.push(`${paths.dashboard.voting.vote}/${list[1].id}`);
+    }
+  };
 
   useEffect(() => {
-    console.log(list);
-
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex + 1 === list.length ? 0 : prevIndex + 1
@@ -39,9 +50,6 @@ export default function AppFeatured({ list }: Props) {
       clearInterval(timer);
     };
   }, [list]);
-
-  const item = list[currentIndex];
-  const theme = useTheme();
 
   return (
     <Card sx={{ position: 'relative', overflow: 'hidden' }}>
@@ -92,8 +100,13 @@ export default function AppFeatured({ list }: Props) {
           alignItems='center'
           justifyContent='space-between'
         >
-          <Button variant='contained' color='primary' sx={{ mt: 2 }}>
-            Explore
+          <Button
+            variant='contained'
+            color='primary'
+            sx={{ mt: 2 }}
+            onClick={handleExploreClick}
+          >
+            Otvori
           </Button>
           <Stack
             spacing={1}

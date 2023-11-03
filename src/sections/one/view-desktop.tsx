@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { Box, Container, Divider, Grid } from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
@@ -84,11 +77,22 @@ export const DesktopViewOne = () => {
         <Grid item xl={12} container>
           <DashboardSectionWrapper
             title={'Najnoviji iz digitalnog albuma'}
-            link='dashboard/two'
+            link={paths.dashboard.two}
           >
             <ScrollableContainer>
-              {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={8} maxWidth='175px' />
+              {cards.length === 0 ? (
+                <Box
+                  sx={{
+                    width: '100%',
+                    borderRadius: 2,
+                  }}
+                >
+                  <SkeletonDashboardLoader
+                    count={5}
+                    width='100%'
+                    message={`Trenutno nema skupljenih sličica, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.`}
+                  />
+                </Box>
               ) : (
                 <>
                   {cards.map((item, index) => (
@@ -96,8 +100,7 @@ export const DesktopViewOne = () => {
                       key={index}
                       sx={{
                         flex: '0 0 auto',
-                        width: '100%',
-                        maxWidth: '175px',
+                        maxWidth: '125px',
                         height: '32vh',
                         m: 1,
                       }}
@@ -105,13 +108,6 @@ export const DesktopViewOne = () => {
                       <CollectionStickerItem item={item} />
                     </Box>
                   ))}
-                  {cards.length === 0 &&
-                    featuredAppsList[0]?.title === 'Skupljene sličice' && (
-                      <Typography variant='subtitle1'>
-                        Trenutno nema skupljenih slicica, skeniraj QR kod sa
-                        jedne od slicica kako bi ispunio digitalni album.
-                      </Typography>
-                    )}
                 </>
               )}
             </ScrollableContainer>
@@ -157,10 +153,10 @@ export const DesktopViewOne = () => {
             m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
+          <DashboardSectionWrapper title='Kvizovi' link={paths.dashboard.three}>
             <Grid container justifyContent='center' alignItems='center'>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={4} maxWidth='320px' />
+                <SkeletonDashboardLoader count={4} />
               ) : quizzes?.length ? (
                 quizzes.map((quiz, index) => (
                   <Grid item md={6} key={index}>

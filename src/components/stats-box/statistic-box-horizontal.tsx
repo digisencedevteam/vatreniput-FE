@@ -56,8 +56,8 @@ const HorizontalScrollStatisticCards = ({
 
       <Grid item xs={12} md='auto' m={1} mb={3} mr={3}>
         <SelectionStatistic
-          title='još do otključavanja neke od priča'
-          total={78}
+          title='Godina Vatrenih'
+          total={111}
           icon={<CollectionStatisticIllustration />}
           sx={{ height: '100%', width: '80vw' }}
         />

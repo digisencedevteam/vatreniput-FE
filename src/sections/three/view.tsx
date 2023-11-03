@@ -22,6 +22,7 @@ import dayjs from 'dayjs';
 import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-overview';
 import { userRoles } from 'src/lib/constants';
 import { paths } from 'src/routes/paths';
+import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
@@ -220,14 +221,11 @@ const ThreeView = () => {
               </Box>
             ))}
           {!resolvedQuizzes?.length && !isLoadingResolved && (
-            <Typography
-              variant='body1'
-              align='center'
-              color='textSecondary'
-              m={5}
-            >
-              Za sada nema riješenih kvizova!
-            </Typography>
+            <SkeletonDashboardLoader
+              message='Za sada nema riješenih kvizova!'
+              isVoting={false}
+              count={5}
+            />
           )}
           {isLoadingResolved && <LoadingScreen />}
         </ScrollableContainer>
@@ -243,54 +241,48 @@ const ThreeView = () => {
         <Grid container spacing={2}>
           {!!unresolvedQuizzes?.length &&
             !isLoadingUnresolved &&
-            unresolvedQuizzes.map((data, index) => {
-              return (
-                <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                  <Box
-                    sx={{
-                      transition: 'transform .2s',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                      },
-                    }}
-                  >
-                    <CustomCard
-                      quizId={data._id}
-                      onDelete={deleteQuiz}
-                      imgUrl={data.thumbnail}
-                      cardText={data.title!}
-                      cardId={data?._id}
-                      availableUntil={data.availableUntil}
-                      linkTo={`${paths.dashboard.quizGroup.quiz}/${data?._id}`}
-                      linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data?._id}`}
-                      createdAt={data?.createdAt}
-                      status={
-                        data.status && data.status.length > 0
-                          ? data.status[0].status
-                          : undefined
-                      }
-                      startTime={
-                        data.status && data.status.length > 0
-                          ? data.status[0].startTime
-                          : undefined
-                      }
-                      isRewarded={rewardStatus}
-                    />
-                  </Box>
-                </Grid>
-              );
-            })}
+            unresolvedQuizzes.map((data, index) => (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                <Box
+                  sx={{
+                    transition: 'transform .2s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
+                  }}
+                >
+                  <CustomCard
+                    quizId={data._id}
+                    onDelete={deleteQuiz}
+                    imgUrl={data.thumbnail}
+                    cardText={data.title!}
+                    cardId={data?._id}
+                    availableUntil={data.availableUntil}
+                    linkTo={`${paths.dashboard.quizGroup.quiz}/${data?._id}`}
+                    linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data?._id}`}
+                    createdAt={data?.createdAt}
+                    status={
+                      data.status && data.status.length > 0
+                        ? data.status[0].status
+                        : undefined
+                    }
+                    startTime={
+                      data.status && data.status.length > 0
+                        ? data.status[0].startTime
+                        : undefined
+                    }
+                    isRewarded={rewardStatus}
+                  />
+                </Box>
+              </Grid>
+            ))}
 
           {!unresolvedQuizzes?.length && !isLoadingUnresolved && (
-            <Typography
-              variant='body1'
-              align='center'
-              color='textSecondary'
-              m={5}
-            >
-              Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe
-              novi kviz.
-            </Typography>
+            <SkeletonDashboardLoader
+              message='Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz.'
+              isVoting={false}
+              count={5}
+            />
           )}
           {isLoadingUnresolved && <LoadingScreen />}
           {isDeleting && <LoadingScreen />}

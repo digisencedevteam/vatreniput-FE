@@ -10,7 +10,6 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import AvatarModal from 'src/components/avatar-modal/AvatarModal';
 import Box from '@mui/material/Box';
-import { useRouter } from 'src/routes/hooks';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
 import axios, { endpoints } from 'src/utils/axios';
