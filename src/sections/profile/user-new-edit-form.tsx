@@ -12,16 +12,16 @@ import AvatarModal from 'src/components/avatar-modal/AvatarModal';
 import Box from '@mui/material/Box';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
-import axios, { endpoints } from 'src/utils/axios';
 import { Alert } from '@mui/material';
 import { FormValues } from 'src/types';
+import { useAuthContext } from 'src/auth/hooks';
 
 type Props = {
   currentUser?: any;
   avatarOptions: string[];
 };
 
-export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
+const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
   const [submitted, setSubmitted] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | undefined>(
@@ -30,18 +30,22 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
   const [originalValues, setOriginalValues] = useState<FormValues>({
     firstName: '',
     lastName: '',
+    username: '',
     email: '',
     avatarUrl: '',
   });
   const [isFormChanged, setIsFormChanged] = useState(false);
+  const { updateUser } = useAuthContext();
 
   useEffect(() => {
     setOriginalValues({
       firstName: currentUser?.firstName || '',
       lastName: currentUser?.lastName || '',
+      username: currentUser?.username || '',
       email: currentUser?.email || '',
-      avatarUrl: currentUser?.photoURL || '',
+      avatarUrl: currentUser?.avatarUrl || '',
     });
+    setIsFormChanged(false); // Reset the form changed flag
   }, [currentUser]);
 
   const NewUserSchema = Yup.object().shape({
@@ -51,6 +55,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
     lastName: Yup.string()
       .required('Last name is required')
       .matches(/^[^0-9]*$/, 'Last name cannot contain numbers'),
+    username: Yup.string().required('Last name is required'),
     email: Yup.string()
       .required('Email is required')
       .email('Email must be a valid address'),
@@ -63,6 +68,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
     () => ({
       firstName: currentUser?.firstName || '',
       lastName: currentUser?.lastName || '',
+      username: currentUser?.username || '',
       email: currentUser?.email || '',
       avatarUrl: currentUser?.photoURL || '',
       status: currentUser?.status || '',
@@ -91,11 +97,14 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
       const payload = {
         firstName: data.firstName,
         lastName: data.lastName,
+        username: data.username,
         email: data.email,
-        photoURL: data.avatarUrl,
+        avatarUrl: data.avatarUrl,
       };
-      await axios.put(endpoints.user.user + currentUser._id, payload);
+      await updateUser?.(payload);
       setSubmitted(true);
+
+      setIsFormChanged(false);
     } catch (error) {
       console.error(error);
     }
@@ -123,7 +132,6 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
       ...values,
       [name]: value,
     };
-
     let formChanged = false;
     for (const key in originalValues) {
       if (originalValues[key] !== updatedValues[key as keyof FormValues]) {
@@ -131,7 +139,6 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
         break;
       }
     }
-
     setIsFormChanged(formChanged);
   };
 
@@ -140,8 +147,16 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
-            <Card sx={{ pt: 5, pb: 5, px: 3 }}>
-              <Box sx={{ mb: 5 }}>
+            <Card
+              sx={{
+                pt: 5,
+                pb: 5,
+                px: 3,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <Box>
                 <Button
                   onClick={handleOpenModal}
                   sx={{
@@ -151,6 +166,9 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                     width: '160px',
                     height: '160px',
                     border: '2px solid #1976d2',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     '&:hover': {
                       '&::after': {
                         content: `"Promjeni avatara"`,
@@ -199,7 +217,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
               >
                 <RHFTextField
                   name='firstName'
-                  label='First Name'
+                  label='Ime'
                   value={values.firstName}
                   onChange={(e) => {
                     handleInputChange('firstName', e.target.value);
@@ -210,7 +228,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                 />
                 <RHFTextField
                   name='lastName'
-                  label='Last Name'
+                  label='Prezime'
                   value={values.lastName}
                   onChange={(e) => {
                     handleInputChange('lastName', e.target.value);
@@ -220,8 +238,19 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                   }}
                 />
                 <RHFTextField
+                  name='username'
+                  label='Korisničko Ime'
+                  value={values.username}
+                  onChange={(e) => {
+                    handleInputChange('username', e.target.value);
+                    setValue('username', e.target.value, {
+                      shouldValidate: true,
+                    });
+                  }}
+                />
+                <RHFTextField
                   name='email'
-                  label='Email Address'
+                  label='Email Adresa'
                   value={values.email}
                   onChange={(e) => {
                     handleInputChange('email', e.target.value);
@@ -229,9 +258,9 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
                       shouldValidate: true,
                     });
                   }}
+                  disabled
                 />
               </Box>
-
               <Stack alignItems='flex-end' sx={{ mt: 3 }}>
                 <LoadingButton
                   type='submit'
@@ -258,6 +287,7 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
         open={submitted}
         autoHideDuration={6000}
         onClose={() => setSubmitted(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <Alert onClose={() => setSubmitted(false)} severity='success'>
           Korisnički podatci su uspješno promjenjeni!
@@ -265,4 +295,5 @@ export default function UserNewEditForm({ currentUser, avatarOptions }: Props) {
       </Snackbar>
     </>
   );
-}
+};
+export default UserNewEditForm;

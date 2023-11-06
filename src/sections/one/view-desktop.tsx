@@ -1,6 +1,6 @@
 import { Box, Container, Divider, Grid } from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
-import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
+import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import AppFeatured, {
@@ -59,7 +59,9 @@ export const DesktopViewOne = () => {
           <AppWelcome
             title={`Dobrodošli na digitalnu platformu Vatrenog Almanaha!`}
             description={`Saznaj što ima novog u Vatrenom svijetu! \n Ne propusti priliku osvojiti vrijedne nagrade.`}
-            img={<SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png' />}
+            img={
+              <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png' />
+            }
           />
         </Grid>
         <Grid item xs={4} md={4}>
@@ -68,7 +70,10 @@ export const DesktopViewOne = () => {
           ) : (
             <SkeletonDashboardLoader
               count={1}
-              message='Trenutno nema dostupnih!'
+              message='Trenutačno nema novih izazova u obliku kvizova i glasanja!'
+              height='250px'
+              width='350px'
+              maxWidth='350px'
             />
           )}
         </Grid>
@@ -86,7 +91,7 @@ export const DesktopViewOne = () => {
             title={'Najnoviji iz digitalnog albuma'}
             link={paths.dashboard.two}
           >
-            <ScrollableContainer>
+            <ScrollableContainer childrenCount={cards.length}>
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader count={5} width='100%' />
               ) : cards.length === 0 ? (
@@ -97,9 +102,11 @@ export const DesktopViewOne = () => {
                   }}
                 >
                   <SkeletonDashboardLoader
+                    isMobileCount={3}
+                    isTabletCount={4}
                     count={5}
                     width='100%'
-                    message={`Trenutno nema skupljenih sličica, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.`}
+                    message={`Trenutno nema skupljenih, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.`}
                   />
                 </Box>
               ) : (
@@ -125,10 +132,7 @@ export const DesktopViewOne = () => {
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
-      <DashboardSectionWrapper
-        title={'Statistika digitalnog albuma'}
-        link='dashboard/two'
-      >
+      <DashboardSectionWrapper title={'Statistika'} link='dashboard/two'>
         <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
           <Grid
             item
@@ -179,9 +183,10 @@ export const DesktopViewOne = () => {
                 ))
               ) : (
                 <SkeletonDashboardLoader
-                  count={3}
-                  maxWidth='320px'
-                  message='Trenutno nema dostupnih kvizova!'
+                  isMobileCount={3}
+                  isTabletCount={4}
+                  count={5}
+                  message='Trenutno nema dostupnih kvizova, ali ne brini - uskoro dolaze novi. Pripremi se za nadmetanje uma!'
                 />
               )}
             </Grid>
@@ -199,7 +204,7 @@ export const DesktopViewOne = () => {
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <Grid container>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={4} maxWidth='320px' />
+                <SkeletonDashboardLoader count={5} width='100%' />
               ) : notVotedVotings?.length ? (
                 notVotedVotings.map((voting, index) => (
                   <Grid item md={6} key={index}>
@@ -216,9 +221,11 @@ export const DesktopViewOne = () => {
                 ))
               ) : (
                 <SkeletonDashboardLoader
-                  count={3}
-                  maxWidth='320px'
-                  message='Trenutno nema dostupnih glasanja!'
+                  count={5}
+                  isMobileCount={3}
+                  isTabletCount={4}
+                  width='100%'
+                  message='Trenutno nema dostupnih glasanja, ali bez brige! Uskoro ćemo ponovno trebati tvoje mišljenje!'
                 />
               )}
             </Grid>

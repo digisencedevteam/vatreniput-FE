@@ -15,7 +15,9 @@ export const NationalTeamContent = ({ story }: StoryContentProps) => {
             {category}
           </Typography>
           <Divider sx={{ my: 2 }} />
-          <ScrollableContainer>
+          <ScrollableContainer
+            childrenCount={story?.NationalTeam?.[category]?.length || 0}
+          >
             {story?.NationalTeam &&
               story?.NationalTeam[category]?.map((player, index) => (
                 <Card
