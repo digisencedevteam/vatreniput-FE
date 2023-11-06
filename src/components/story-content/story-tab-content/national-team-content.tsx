@@ -8,7 +8,10 @@ export const NationalTeamContent = ({ story }: StoryContentProps) => {
     <StorySectionWrapper title='Reprezentacija'>
       {['Vratari', 'Braniči', 'Vezni', 'Napadači'].map((category) => (
         <Box key={category}>
-          <Typography variant='h4' my={2}>
+          <Typography
+            variant='h4'
+            my={2}
+          >
             {category}
           </Typography>
           <Divider sx={{ my: 2 }} />
@@ -32,7 +35,11 @@ export const NationalTeamContent = ({ story }: StoryContentProps) => {
                     alt={player.name}
                     sx={{ bgcolor: 'warning.main' }}
                   />
-                  <Typography variant='subtitle1' align='center' sx={{ p: 2 }}>
+                  <Typography
+                    variant='subtitle1'
+                    align='center'
+                    sx={{ p: 2 }}
+                  >
                     {player.name}
                   </Typography>
                 </Card>

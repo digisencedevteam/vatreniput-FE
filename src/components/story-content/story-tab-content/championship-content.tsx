@@ -11,13 +11,19 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
     <>
       {story?.Championship?.Summary && (
         <StorySectionWrapper title='O prvenstvu'>
-          <Typography variant='body1' mt={2}>
+          <Typography
+            variant='body1'
+            mt={2}
+          >
             {story?.Championship.Summary}
           </Typography>
         </StorySectionWrapper>
       )}
       {story?.Championship && (
-        <StorySectionWrapper title='Grupna faza' isCollapsable={true}>
+        <StorySectionWrapper
+          title='Grupna faza'
+          isCollapsable={true}
+        >
           <MatchTable data={story?.Championship.Group} />
           {story?.Championship?.Matches.GroupStage && (
             <QualificationMatchDetails
@@ -27,14 +33,20 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
         </StorySectionWrapper>
       )}
       {story?.Championship?.Matches?.Finals?.RoundOf16 && (
-        <StorySectionWrapper title='Osmina Finala' isCollapsable={true}>
+        <StorySectionWrapper
+          title='Osmina Finala'
+          isCollapsable={true}
+        >
           <MatchDetails
             matchData={story?.Championship.Matches.Finals.RoundOf16}
           />
         </StorySectionWrapper>
       )}
       {story?.Championship?.Matches?.Finals?.QuarterFinal && (
-        <StorySectionWrapper title='Četvrtfinale' isCollapsable={true}>
+        <StorySectionWrapper
+          title='Četvrtfinale'
+          isCollapsable={true}
+        >
           <MatchDetails
             matchData={story?.Championship.Matches.Finals.QuarterFinal}
           />
