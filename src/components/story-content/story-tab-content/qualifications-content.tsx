@@ -7,7 +7,7 @@ import QualificationMatchDetails from "../../story-components/match-details/qual
 export const QualificationsContent = ({ story }: StoryContentProps) => {
     return (
         <>
-            {story?.Qualifications?.Description && story?.Championship?.Matches.GroupStage && (
+            {story?.Qualifications?.Description && (
                 <StorySectionWrapper title='Kvalifikacije'>
                     <Typography variant="body1">{story.Qualifications.Description}</Typography>
                     {story?.Qualifications?.Teams && <MatchTable data={story.Qualifications.Teams} />}

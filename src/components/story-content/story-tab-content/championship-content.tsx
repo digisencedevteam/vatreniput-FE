@@ -16,7 +16,7 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
           </Typography>
         </StorySectionWrapper>
       )}
-      {story?.Championship?.Summary && (
+      {story?.Championship && (
         <StorySectionWrapper title='Grupna faza' isCollapsable={true}>
           <MatchTable data={story?.Championship.Group} />
           {story?.Championship?.Matches.GroupStage && (

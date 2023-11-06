@@ -44,7 +44,7 @@ const useDashboardData = () => {
       const series: number[] = [];
       response.data.topEvents.forEach((event: Event) => {
         categories.push(event.name);
-        series.push(event.percentageCollected);
+        series.push(event.numberOfCollected);
       });
       setChartData({ categories, series });
     } catch (error) {

@@ -159,11 +159,7 @@ export const STORIES = [
               {
                 Teams: 'JAMAJKA  – HRVATSKA',
                 Score: '1 : 3',
-                Scorers: [
-                  'Stanić 27` ',
-                  'Prosinečki 53`',
-                  'Šuker 68`',
-                ],
+                Scorers: ['Stanić 27` ', 'Prosinečki 53`', 'Šuker 68`'],
               },
               {
                 Teams: 'JAPAN – HRVATSKA',
@@ -186,11 +182,7 @@ export const STORIES = [
             QuarterFinal: {
               Match: 'HRVATSKA – NJEMAČKA',
               Score: '3 : 0',
-              GoalScorers: [
-                'Jarni 45+3`',
-                'Vlaović 80`',
-                'Šuker 85`',
-              ],
+              GoalScorers: ['Jarni 45+3`', 'Vlaović 80`', 'Šuker 85`'],
             },
             SemiFinal: {
               Match: 'HRVATSKA – FRANCUSKA',
@@ -257,8 +249,7 @@ export const STORIES = [
           },
           {
             name: 'Silvio Marić',
-            imgurl:
-              'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
+            imgurl: 'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
           },
         ],
         Napadači: [
@@ -291,7 +282,7 @@ export const STORIES = [
           Description:
             'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177927&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://player.vimeo.com/video/881635618?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
           Title:
@@ -333,6 +324,205 @@ export const STORIES = [
       storyTitle: 'Euro 2004',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2004_euro_pvdhs9.png',
+      Qualifications: {
+        Description:
+          'Teške kvalifikacije u kojima je Hrvatska imala velikih problema. Pamtimo pobjedu nad BiH u Bologni 4 : 1, pamtimo teški remi sa Slovenijom na Poljudu 3 : 3. Tek u posljednjem kolu, pobjedom nad Slovenijom i obranama Schmeichela protiv Grčke osigurali smo dodatne kvalifikacije. A ondje se dogodila opasna bitka s Ukrajincima i prolazak na prvi Mundijal.',
+        Teams: [
+          {
+            TeamName: 'Bugarska',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 2,
+            Losses: 1,
+            Points: 17,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 3,
+            Losses: 1,
+            Points: 15,
+          },
+          {
+            TeamName: 'Belgija',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 2,
+            Losses: 2,
+            Points: 14,
+          },
+          {
+            TeamName: 'Estonija',
+            MatchesPlayed: 8,
+            Wins: 2,
+            Draws: 2,
+            Losses: 4,
+            Points: 8,
+          },
+          {
+            TeamName: 'Andora',
+            MatchesPlayed: 8,
+            Wins: 0,
+            Draws: 0,
+            Losses: 8,
+            Points: 0,
+          },
+        ],
+      },
+      AdditionalQualifications: [
+        {
+          Teams: 'HRVATSKA – SLOVENIJA',
+          Score: '1 : 1',
+          Scorers: ['Pršo 5`'],
+        },
+        {
+          Teams: 'SLOEVENIJA – HRVATSKA',
+          Score: '0 : 1',
+          Scorers: ['Pršo  61'],
+        },
+      ],
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Francuska',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Engleska',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 0,
+            Losses: 1,
+            Points: 6,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 2,
+            Losses: 1,
+            Points: 2,
+          },
+          {
+            TeamName: 'Švicarska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 1,
+            Losses: 2,
+            Points: 1,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'ŠVICARSKA – HRVATSKA',
+                Score: '0 : 0',
+              },
+              {
+                Teams: 'HRVATSKA – FRANCUSKA',
+                Score: '2 : 2',
+                Scorers: ['Rapaić 48` pen', 'Pršo 52`'],
+              },
+              {
+                Teams: ' HRVATSKA – ENGLESKA',
+                Score: '2 : 4',
+                Scorers: ['N. Kovač 5`', 'Tudor 73'],
+              },
+            ],
+          },
+        },
+        Summary:
+          'Hrvatska se napunila samopouzdanjem nakon uspješnih kvalifikacija. Vidjelo se to i po hrabrim najavama prve utakmice protiv Švicarske. Ali, ćorak! Bez golova, bez igre, bez prepoznatljivog stila. Kruto, tvrdo. Nije bilo ideje i izbornik Barić već se našao pod teškim kritikama. Hrvatska je čak imala i igrača više od 50. minute, ali nije pomoglo. U drugom kolu Hrvatska je pokazala da ipak može. Remi 2 : 2 s Francuskom ponovno je napunio baterije samopouzdanja. Ali, Engleska je bila prejaka. Moćna Tri lava „pojela“ su Hrvatsku s 4 : 2. Scholes, Rooney, Lampard, Gerrard, Owen, Beckham velika su imena koja su vladala europskim nogometom i Hrvatska se oprostila od EURA već u skupini. Razlika pogodaka 4 : 6  i puno zabrinutosti u navijačkim redovima jer nije bilo igre i prepoznatljivog hrvatskog nogometnog „vica“.',
+        Champ: {
+          Winner: 'GRČKA',
+          TopScorer: {
+            Player: 'Milan Baroš',
+            Team: 'Češka',
+            Goals: 5,
+          },
+        },
+      },
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Dražen Ladić',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698699632/HRV52006_copy_fhkd8k.jpg',
+          },
+          {
+            name: 'Vladimir Vasilj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001259_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Dario Šimić',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698699947/simic0306_y4gox2.jpg',
+          },
+          {
+            name: 'Igor Tudor',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698700040/desailly_tudor1706_tspdtf.jpg',
+          },
+          {
+            name: 'Slaven Bilić',
+            imgurl:
+              'https://img.24sata.hr/cs8rHXI8rihrnt-l25IJHkHfflk=/622x0/smart/media/images/2020-29/pxl-120612-1349.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Robert Prosinečki',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693923578/SLAVLJE4_copy_frghmj.jpg',
+          },
+          {
+            name: 'Mario Stanić',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698703499/HRJA5150_copy_sww5bu.jpg',
+          },
+          {
+            name: 'Aljoša Asanović',
+            imgurl:
+              'https://ip.index.hr/remote/bucket.index.hr/b/index/GettyImages-52923716.jpg',
+          },
+          {
+            name: 'Silvio Marić',
+            imgurl: 'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Davor Šuker',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679493/suker_x9j3w8.jpg',
+          },
+          {
+            name: 'Goran Vlaović',
+            imgurl:
+              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698703944/vlaovic2_copy_anvup3.jpg',
+          },
+        ],
+      },
+      Coach: {
+        Name: 'OTTO BARIĆ',
+        DOB: '9. veljače, 1935.',
+        CoachingCareer: '1968. - 2015.',
+        MajorAchievements: [
+          'Brončana medalja sa Svjetskog Prvenstva u Francuskoj 1998.',
+        ],
+        imgUrl:
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698705071/HRV31207_copy_l7simf.jpg',
+        StoryText: '',
+      },
     },
   },
   {
@@ -575,8 +765,7 @@ export const STORIES = [
         {
           Title:
             'Reportaža Pogodak Nikole Kalinića u 45. minuti protiv Španjolske',
-          imgUrl:
-            'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Majstorski pogodak Kalinića petom za izjednačenje protiv nogometnog diva.',
           videoLink:
@@ -595,11 +784,21 @@ export const STORIES = [
         StoryText:
           'Naslijedio je Niku Kovača u vrijeme kvalifikacija za  Euro 2016. i uspješno odradio posao te se s Hrvatskom plasirao na to veliko natjecanje kojemu je domaćin bila Francuska. Ondje je naša reprezentacija igrala jako dobro. Pobijedila je Tursku, odigrala 2 : 2 protiv Češke u susretu koji su obilježili neredi huligana i prekid utakmice. Ali, nakon toga Hrvatska je pokazala moć pobjedom nad Španjolcima.  U osmini finala teška utakmica protiv Portugala i bolan poraz u produžetku.',
       },
-      Zanimljivosti: [
+      Facts: [
         'U dobi od 18 godina i 328 dana Renato Sanches oborio je rekord Cristiana Ronalda (postavljen 2004.) kao najmlađi igrač koji je nastupio u finalu EURA.',
         'Po prvi put su na Euru sudjelovale 24 momčadi što je povećanje u odnosu na format od 16 momčadi koji se koristio od 1996.',
         'Mađarski broj 1 Gábor Király dao je nadu četrdesetogodišnjacima postavivši novi rekord za najstarijeg igrača koji je nastupio na utakmici EURA.',
         'Samo 15 od 51 utakmice na Euru 2016. dobila je momčad koja je imala veći udio u posjedu lopte. Četvrtfinalist Island u prosjeku je imao 36%.',
+      ],
+      Fans: [
+        {
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699263807/navijaci_francuska_2016_xkkqct.jpg',
+        },
+        {
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699263967/navija%C4%8Di_francuska_2016-2_uezvyh.jpg',
+        },
       ],
     },
   },
@@ -934,8 +1133,7 @@ export const STORIES = [
             'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177917&parId=E0D40198DCF58846%2177911&o=OneUp',
         },
         {
-          Title:
-            'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
+          Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
@@ -951,8 +1149,7 @@ export const STORIES = [
             '  Četvrtfinale. Ondje je čekao domaćin, Rusija. Tvrd, razigran, pun samopouzdanja. Ponovno teška utakmica. Ponovno je bila potrebna izuzetna vjera i mirnoća. Pet minuta prije kraja produžetka Hrvatska je primila pogodak. Mnogi, ma većina, bi tada psihološki pali, izgubili kompas. Ali, uslijedila je potvrda nevjerojatnog  unutarnjeg impulsa u teškim trenucima. Novo raspucavanje, nova pobjeda.  Nova bravura Danijela Subašića i novi urlik:„ Rakiiiiitiiiiiić!“',
         },
         {
-          Title:
-            'Reportaža pogodak Mandžukića protiv Engleske u polufinalu',
+          Title: 'Reportaža pogodak Mandžukića protiv Engleske u polufinalu',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926819/mandz%CC%8Cukic%CC%81_peris%CC%8Cic%CC%81_slavlje_1_mcsnzt.jpg',
           Description:
@@ -965,16 +1162,13 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: [
-          '2. mjesto na SP 2018',
-          'Prvak Azije s Al Ainom',
-        ],
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
           'Najveći i najuspješniji trener u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
-      Zanimljivosti: [
+      Facts: [
         'Hrvatska je postala najmanja zemlja koja je stigla do finala Svjetskog prvenstva od 1950. kada je Urugvaj pobijedio Brazil.',
         'Niti jedna reprezentacija nikada nije stigla do finala Svjetskog prvenstva nakon što je igrala tri produžetaka u sve tri prethodne utakmice faze na ispadanje. Osim Hrvatske!',
         'U Rusiji je postignuto rekordnih 12 autogolova u cijelom natjecanju. Hrvatski napadač Mario Mandžukić dospio je na naslovnice nakon što je postao prvi igrač u povijesti Svjetskog prvenstva koji je postigao autogol u finalu. ',
@@ -1100,9 +1294,7 @@ export const STORIES = [
               {
                 Teams: 'HRVATSKA – KANADA',
                 Score: '4 : 1',
-                Scorers: [
-                  'Kramarić 36`, 70`, Livaja 44`, Majer 90+4',
-                ],
+                Scorers: ['Kramarić 36`, 70`, Livaja 44`, Majer 90+4'],
               },
               {
                 Teams: 'HRVATSKA – BELGIJA',
@@ -1294,17 +1486,16 @@ export const STORIES = [
           Description:
             'Pogledajte izvješće s Svjetskog prvenstva 2022. u Kataru! Doživite najbolje trenutke, ekskluzivne intervju s igračima i stručnjacima, te sažetak najuzbudljivijih utakmica. Ne propustite priliku vidjeti povijesne golove i nevjerojatne obrane koje su obilježile ovo prvenstvo. Naša ekipa bila je na licu mjesta. Kliknite na gumb i pridružite nam se u ovom nogometnom spektaklu! ',
           videoLink:
-            'https://1drv.ms/v/s!AkaI9dyYAdTghOxIaegdEpRdSewFIw',
+            'https://player.vimeo.com/video/881628351?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=5847',
         },
         {
-          Title:
-            'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
+          Title: 'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
           imgUrl:
             'https://hns.family/files/images/_resized/0000040888_660_375_cut.jpg',
           Description:
             'Genijalni Bruno zabija lijevom nogom za izjednačenje protiv Brazila',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177922&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://player.vimeo.com/video/881633770?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
           Title: 'Reportaža Penal Mislava Oršića protiv Brazila',
@@ -1317,8 +1508,7 @@ export const STORIES = [
         },
 
         {
-          Title:
-            'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
+          Title: 'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698916441/pas%CC%8Calic%CC%81_neymar_hz7nf7.jpg',
           Description:
@@ -1329,8 +1519,7 @@ export const STORIES = [
         {
           Title:
             'Reportaža Pogodak Mislava Oršića za ponovno vodstvo nad Portugalom',
-          imgUrl:
-            'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
           Description:
             'U 42 minuti Oršić zabija fenomenalan gol Portugalu za vraćenu prednost od 2:1!',
           videoLink:
@@ -1341,16 +1530,13 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: [
-          '2. mjesto na SP 2018',
-          'Prvak Azije s Al Ainom',
-        ],
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
           'Najveći i najuspješniji trener u povijesti hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa. Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva. Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih. Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce. Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
-      Zanimljivosti: [
+      Facts: [
         'Od posljednjih 25 puta kada je neka momčad zabila prvi gol u nokaut utakmici na Svjetskom prvenstvu, samo četiri momčadi nisu uspjele proći dalje: Rusija u četvrtfinalu 2018., Engleska u polufinalu 2018., Japan u osmini finala 2022. i Brazil u četvrtfinalu 2022. Sve te momčadi eliminirala je Hrvatska!',
         'Protiv Japana, hrvatski reprezentativac Dominik Livaković postao je treći vratar koji je obranio tri jedanaesteraca u raspucavanju na Svjetskom prvenstvu nakon Portugalca Ricarda 2006. protiv Engleske i hrvatskog Danijela Subašića protiv Danske 2018.',
         'Dominik Livaković je upisao  najviše obrana u ovom izdanju natjecanja (25). Uz to, obranio je rekordna četiri jedanaesterca u jednom izdanju Svjetskog prvenstva.',

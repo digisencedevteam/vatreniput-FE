@@ -41,7 +41,7 @@ export type CardTemplate = {
   videoLink?: string;
   imageURLS: string[];
   event: CollectionEvent;
-  number?: number
+  number?: number;
 };
 
 export type PrintedCard = {
@@ -204,8 +204,12 @@ export interface Story {
   };
   Highlights?: HighlightData[];
   Coach?: CoachData;
-  Zanimljivosti?: (string | number | boolean)[];
+  Facts?: (string | number | boolean)[];
   AdditionalQualifications?: QualificationMatch[];
+  Fans?: Fan[];
+}
+export interface Fan {
+  imgUrl: string;
 }
 
 export interface StoryContentProps {
@@ -271,7 +275,7 @@ export type TabComponents = {
   Highlights?: JSX.Element;
   Coach?: JSX.Element;
   NationalTeam?: JSX.Element;
-  Zanimljivosti?: JSX.Element;
+  Facts?: JSX.Element;
   [key: string]: JSX.Element | undefined;
 };
 export type FactType =
@@ -336,6 +340,7 @@ export type Event = {
   location: string;
   year: number;
   percentageCollected: number;
+  numberOfCollected: number;
 };
 
 export type DashboardData = {

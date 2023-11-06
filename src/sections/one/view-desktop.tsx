@@ -100,7 +100,7 @@ export const DesktopViewOne = () => {
                       key={index}
                       sx={{
                         flex: '0 0 auto',
-                        maxWidth: '125px',
+                        maxWidth: '155px',
                         height: '32vh',
                         m: 1,
                       }}

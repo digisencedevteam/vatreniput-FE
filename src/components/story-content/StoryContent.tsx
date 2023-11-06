@@ -21,11 +21,12 @@ import { ChampionshipContent } from './story-tab-content/championship-content';
 import { HighlightContent } from './story-tab-content/highlight-content';
 import { CoachContent } from './story-tab-content/coach-content';
 import { NationalTeamContent } from './story-tab-content/national-team-content';
+import GroupsIcon from '@mui/icons-material/Groups';
+import FansContent from './story-tab-content/fans-content';
 
 const StoryContent = ({ story }: StoryContentProps) => {
     const [currentTab, setCurrentTab] = useState(0);
     const slideVariants = varFade();
-
     const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number,) => {
         setCurrentTab(newValue);
     };
@@ -37,7 +38,8 @@ const StoryContent = ({ story }: StoryContentProps) => {
             { label: "Highlights", icon: <Box m={1}> <VideoLibraryOutlinedIcon color='error' /> </Box>, active: !!story?.Highlights?.length },
             { label: "Izbornik", icon: <Box m={1}><PersonIcon color='error' /> </Box>, active: !!story?.Coach },
             { label: "Reprezentacija", icon: <Box m={1}><PeopleIcon color='error' /> </Box>, active: !!story?.NationalTeam },
-            { label: "Zanimljivosti", icon: <Box m={1}> <StarBorderIcon color='error' /> </Box>, active: !!story?.Zanimljivosti?.length }
+            { label: "Zanimljivosti", icon: <Box m={1}> <StarBorderIcon color='error' /> </Box>, active: !!story?.Facts?.length },
+            { label: "Navijači", icon: <Box m={1}> <GroupsIcon color='error' /> </Box>, active: !!story?.Fans?.length }
         ].filter(tab => tab.active);
     };
     const activeTabs = getActiveTabs(story);
@@ -49,6 +51,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
         "Izbornik": <CoachContent story={story} />,
         "Reprezentacija": <NationalTeamContent story={story} />,
         "Zanimljivosti": <FactContent story={story} />,
+        "Navijači": <FansContent story={story} />,
     };
 
     return (

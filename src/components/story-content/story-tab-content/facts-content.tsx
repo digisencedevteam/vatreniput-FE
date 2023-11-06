@@ -4,15 +4,15 @@ import { StorySectionWrapper } from "src/components/section-wrapper/story-wrappe
 import { FactType, StoryContentProps } from "src/types";
 
 export const FactContent = ({ story }: StoryContentProps) => {
-    if (!story?.Zanimljivosti) {
+    if (!story?.Facts) {
         return null;
     }
     return (
         <>
-            {story?.Zanimljivosti &&
+            {story?.Facts &&
                 <StorySectionWrapper title='Zanimljivosti'>
                     <List>
-                        {story?.Zanimljivosti.map((fact: FactType, index: React.Key | null | undefined) => (
+                        {story?.Facts.map((fact: FactType, index: React.Key | null | undefined) => (
                             <ListItem key={index} >
                                 <ListItemAvatar>
                                     <CircleNotifications color='error' />
