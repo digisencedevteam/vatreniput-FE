@@ -282,7 +282,7 @@ export const STORIES = [
           Description:
             'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
           videoLink:
-            'https://player.vimeo.com/video/881635618?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
         },
         {
           Title:
@@ -292,7 +292,7 @@ export const STORIES = [
           Description:
             'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177928&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275704/1998_HRV_NIZ_PROSINECKI_npjfyq.mp4',
         },
       ],
       Coach: {
@@ -541,6 +541,12 @@ export const STORIES = [
       storyTitle: 'Euro 2008',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2008_euro_aaiz5c.png',
+      Fans: [
+        {
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699276379/ds_navijaci_tribina-200608_kgpozw.jpg',
+        },
+      ],
     },
   },
   {
@@ -1130,7 +1136,7 @@ export const STORIES = [
           Description:
             'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177917&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275695/2018_HRV_ARG_MODRIC_ior0ju.mp4',
         },
         {
           Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
@@ -1139,7 +1145,7 @@ export const STORIES = [
           Description:
             'Osmina   finala.   Danska.   Sjevernjaci   već   godinama   dižu   igru   i   na   ovom   Svjetskomprvenstvu   također   su   tražili   novi   veliki   rezultat.   Izjednačena   utakmica   otišla   je   doraspucavanja. Do trilera ili ruleta, kako želite. Tad smo prvi puta vidjeli ono što je ovureprezentaciju   krasilo   u   godinama   koje   su   slijedile.   Nevjerojatna   unutarnja   snaga,samopouzdanje i vjera u pobjedu. U najtežim trenucima, u naoko izgubljenim situacijama–  Dalićevi dečki  su   pronalazili   posebne   spremnike   snage   i   umijeća   te   izlazili   kaopobjednici. Danijel Subašić je briljirao na golu i poslao Dance kući. A, urlik:„Rakiiiiitiiiiiić!“ ušao   je   u   svaki   hrvatski   dom',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177916&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275691/2018_HRV_DAN_RAKITIC_ibgd4h.mp4',
         },
         {
           Title: 'Pobjednički 11-erac protiv Rusije (Rakitić) ',
@@ -1155,7 +1161,7 @@ export const STORIES = [
           Description:
             ' Polufinale.   Znali   smo   da   neće   biti   lako.   S   druge   strane   stajala   je   Engleska.   Svjetskinogometni   gigant   željan   naslova,   željan   konačno   nekakvog   uspjeha.     Ali,   Hrvatska....Hrvatska je postala gigant. Trippier nas je ohladio na samome početku. Englezi su poveli,bile su spremne euforične naslovnice tabloida na Otoku. Počeo se slaviti finale u Londonu.Ali,   polako. Dalić Boysi  se   ne   predaju.   Ivan   Perišić   je   izjednačio   sredinom   drugogpoluvremena.   A   zatim,   u   produžetku   –   Mario   Mandžukić   zabio   je   za   finale.   Ekstaza,urnebes, suze, smijeh... Sve',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177918&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275676/2018_HRV_ENG_MANDZUKIC_qrjnto.mp4',
         },
       ],
       Coach: {
@@ -1495,7 +1501,7 @@ export const STORIES = [
           Description:
             'Genijalni Bruno zabija lijevom nogom za izjednačenje protiv Brazila',
           videoLink:
-            'https://player.vimeo.com/video/881633770?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275715/2022_HRV_BRA_PETKOVIC_j2jxfj.mp4',
         },
         {
           Title: 'Reportaža Penal Mislava Oršića protiv Brazila',
@@ -1514,7 +1520,7 @@ export const STORIES = [
           Description:
             'Fantastični Mario Pašalić zabija penal za pobjedu i odlazak u četvrtfinale.',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177923&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275706/2022_HRV_JAP_PASALIC_vdiuxn.mp4',
         },
         {
           Title:
@@ -1523,7 +1529,7 @@ export const STORIES = [
           Description:
             'U 42 minuti Oršić zabija fenomenalan gol Portugalu za vraćenu prednost od 2:1!',
           videoLink:
-            'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177924&parId=E0D40198DCF58846%2177911&o=OneUp',
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275718/2022_HRV_MAR_ORSIC_jfheps.mp4',
         },
       ],
       Coach: {

@@ -10,7 +10,7 @@ const ScrollableImageContainer = ({ children }: ScrollableContainerProps) => {
     const scrollLeft = () => {
         if (scrollContainerRef.current) {
             scrollContainerRef.current.scrollBy({
-                left: -800,
+                left: -1000,
                 behavior: 'smooth',
             });
         }
@@ -19,7 +19,7 @@ const ScrollableImageContainer = ({ children }: ScrollableContainerProps) => {
     const scrollRight = () => {
         if (scrollContainerRef.current) {
             scrollContainerRef.current.scrollBy({
-                left: 800,
+                left: 1000,
                 behavior: 'smooth',
             });
         }
