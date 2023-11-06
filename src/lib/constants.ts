@@ -273,7 +273,7 @@ export const STORIES = [
           Description:
             'Pogledajte izvješće s Svjetskog prvenstva 1998. u Francuskoj! Pridružite nam se u preispitivanju nekih od najupečatljivijih trenutaka, ekskluzivnih intervjua s igračima te osvrta na najzanimljivije utakmice. Tko može zaboraviti uzbuđenje i strasti koje su obilježile to prvenstvo? Francuska je tada ostavila neizbrisiv trag u povijesti nogometa. Kliknite dolje i zaronite u sjećanja na jedan od najlegendarnijih nogometnih događaja!',
           videoLink:
-            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+            'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
           Title: 'Reportaža Stanić zabija za 1:0 protiv Jamajke',
@@ -1121,7 +1121,7 @@ export const STORIES = [
           Description:
             'Hrvatska je u finalu Svjetskog prvenstva 2018.  Naslovnice se mijenjaju.  Englezi idu kućiplačući. U Moskvu dolazi "pola" Hrvatske.Finale. Francuska. Naš kriptonit. Golovi Perišića i Mandžukića dali su nadu. Ali, kazneni udarac nakon Perišićeve ruke i pogodak nakon prekršaja koji nije postojao rano su usmjerili finalni susret. Hrvatska je druga na svijetu, planetu i kugli zemaljskoj. Hrvatska je ušla u elitni nogometni razred među velikane ove igre. I, ondje je namjeravala ostati.',
           videoLink:
-            'https://photos.onedrive.com/share/E0D40198DCF58846!79213?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79213&authkey=!AA0SR029kQQAv7I&ithint=video',
+            'https://player.vimeo.com/video/881655897?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
           Title: 'Reportaža Pogodak Luke Modrića protiv Argentine',
