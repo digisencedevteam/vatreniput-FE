@@ -1,7 +1,7 @@
 import { CircleNotifications } from "@mui/icons-material";
 import { List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
-import { FactType, StoryContentProps } from "src/types";
+import { FactType, StoryContentProps } from "src/types/story";
 
 export const FactContent = ({ story }: StoryContentProps) => {
     if (!story?.Facts) {

@@ -2,12 +2,13 @@ import { memo } from 'react';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
-//
 import BackgroundShape from './background-shape';
 
-// ----------------------------------------------------------------------
+interface SeoIllustrationProps extends BoxProps {
+  imageUrl: string;
+}
 
-function SeoIllustration({ ...other }: BoxProps) {
+function SeoIllustration({ imageUrl, ...other }: SeoIllustrationProps) {
   const theme = useTheme();
 
   const PRIMARY_LIGHT = theme.palette.primary.light;
@@ -137,7 +138,7 @@ function SeoIllustration({ ...other }: BoxProps) {
         </linearGradient>
       </defs>
 
-      <image href="https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png" height="320" x="130" y="10" />
+      <image href={imageUrl} height="320" x="130" y="10" />
     </Box>
   );
 }

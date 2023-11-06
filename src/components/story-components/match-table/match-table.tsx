@@ -7,7 +7,7 @@ import {
     TableHead,
     TableRow
 } from '@mui/material'
-import { MatchTableProps, TeamStat } from 'src/types';
+import { MatchTableProps, TeamStat } from 'src/types/story';
 
 function MatchTable({ data }: MatchTableProps) {
     return (

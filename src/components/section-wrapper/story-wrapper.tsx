@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Divider, Typography, IconButton, Collapse } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { StoryWrapperProps } from 'src/types';
+import { StoryWrapperProps } from 'src/types/story';
 
 export const StorySectionWrapper = ({
   title,

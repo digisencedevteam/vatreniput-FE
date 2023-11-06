@@ -17,13 +17,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import { Voting } from 'src/types';
 import { paths } from 'src/routes/paths';
+import { LoadingScreen } from 'src/components/loading-screen';
 
 const VotingApp = () => {
   const settings = useSettingsContext();
   const { votingId } = useParams();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const theme = useTheme();
-  const { submitVote, fetchVotingById } = useVoting();
+  const { submitVote, fetchVotingById, isLoading } = useVoting();
   const router = useRouter();
   const [voting, setVoting] = useState<Partial<Voting> | null>(null);
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
@@ -35,16 +36,23 @@ const VotingApp = () => {
     }
   };
 
+  const fetchAndSetVoting = async () => {
+    if (votingId) {
+      const fetchedVoting = await fetchVotingById(votingId);
+      setVoting(fetchedVoting);
+    }
+  };
+
   useEffect(() => {
-    const fetchAndSetVoting = async () => {
-      if (votingId) {
-        const fetchedVoting = await fetchVotingById(votingId);
-        setVoting(fetchedVoting);
-      }
-    };
     fetchAndSetVoting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votingId]);
+
+  useEffect(() => {
+    if (voting && voting.isVoted) {
+      router.push(paths.dashboard.five);
+    }
+  }, [voting, router]);
 
   return (
     <Container
@@ -56,74 +64,79 @@ const VotingApp = () => {
         alignItems: 'center',
       }}
     >
-      <Grid container alignItems='center'>
-        <Grid item sx={{ m: 5 }}>
-          <IconButton
-            edge='start'
-            color='primary'
-            aria-label='back to previous page'
-            onClick={() => {
-              router.push('/dashboard/five');
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <Grid container alignItems='center'>
+            <Grid item sx={{ m: 5 }}>
+              <IconButton
+                edge='start'
+                color='primary'
+                aria-label='back to previous page'
+                onClick={() => {
+                  router.push(paths.dashboard.five);
+                }}
+              >
+                <ArrowBackIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: 3,
+              bgcolor: theme.palette.background.neutral,
+              mx: isMobile ? 0 : 20,
+              textAlign: 'center',
             }}
           >
-            <ArrowBackIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 3,
-          bgcolor: theme.palette.background.neutral,
-          mx: isMobile ? 0 : 20,
-          textAlign: 'center',
-        }}
-      >
-        <Typography sx={{ marginTop: 2 }} variant='h3' gutterBottom>
-          {voting && voting.title}
-        </Typography>
-        <Typography variant='body1' gutterBottom>
-          {voting && voting.description}
-        </Typography>
-        <Grid container spacing={2} sx={{ my: 5, p: isMobile ? 0 : 3 }}>
-          {voting &&
-            voting.votingOptions &&
-            voting.votingOptions.map((option: any) => (
-              <Grid
-                item
-                xs={6}
-                key={option.text}
-                sx={{ display: 'flex', justifyContent: 'center' }}
+            <Typography sx={{ marginTop: 2 }} variant='h3' gutterBottom>
+              {voting && voting.title}
+            </Typography>
+            <Typography variant='body1' gutterBottom>
+              {voting && voting.description}
+            </Typography>
+            <Grid container spacing={2} sx={{ my: 5, p: isMobile ? 0 : 3 }}>
+              {voting &&
+                voting.votingOptions &&
+                voting.votingOptions.map((option: any) => (
+                  <Grid
+                    item
+                    xs={6}
+                    key={option.text}
+                    sx={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    <VotingOptionItem
+                      option={option}
+                      selected={selectedOption === option._id}
+                      onSelect={setSelectedOption}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+            <Box
+              sx={{
+                alignSelf: 'flex-end',
+                m: 5,
+              }}
+            >
+              <Button
+                variant='contained'
+                color='primary'
+                onClick={handleSubmit}
+                sx={{ px: 5, py: 1 }}
               >
-                <VotingOptionItem
-                  option={option}
-                  selected={selectedOption === option._id}
-                  onSelect={setSelectedOption}
-                />
-              </Grid>
-            ))}
-        </Grid>
-        <Box
-          sx={{
-            alignSelf: 'flex-end',
-            m: 5,
-          }}
-        >
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={handleSubmit}
-            sx={{ px: 5, py: 1 }}
-          >
-            Glasaj
-          </Button>
-        </Box>
-      </Box>
+                Glasaj
+              </Button>
+            </Box>
+          </Box>
+        </>
+      )}
     </Container>
   );
 };
-
 export default VotingApp;

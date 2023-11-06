@@ -7,14 +7,14 @@ import {
 } from '@mui/material';
 import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlined';
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
-import { useParams, useRouter } from 'src/routes/hooks';
-import { Story, TimelineProps } from 'src/types';
+import { useRouter } from 'src/routes/hooks';
+import { Story, TimelineProps } from 'src/types/story';
+import { useStoryContext } from 'src/context/StoryContext';
 
 const Timeline = ({
     stories,
 }: TimelineProps) => {
-    const { storyId } = useParams();
-    const currentStoryIndex = stories.findIndex((stories: { storyId: number; }) => stories.storyId === Number(storyId));
+    const { currentStoryIndex, setCurrentStoryIndex } = useStoryContext();
     const router = useRouter();
     const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
     const currentStory = stories[currentStoryIndex];
@@ -27,6 +27,7 @@ const Timeline = ({
 
     const nextStory = () => {
         const nextIndex = currentStoryIndex + 1;
+        setCurrentStoryIndex(nextIndex);
         if (nextIndex < stories.length) {
             router.push(`/dashboard/story/${stories[nextIndex].storyId}`);
         }
@@ -34,6 +35,7 @@ const Timeline = ({
 
     const prevStory = () => {
         const prevIndex = currentStoryIndex - 1;
+        setCurrentStoryIndex(prevIndex);
         if (prevIndex >= 0) {
             router.push(`/dashboard/story/${stories[prevIndex].storyId}`);
         }

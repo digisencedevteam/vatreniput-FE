@@ -56,6 +56,10 @@ const ManageQuiz = () => {
   const [showForm, setShowForm] = useState(true);
   const router = useRouter();
   const { quizId } = useParams();
+  const [initialQuiz, setInitialQuiz] = useState<Partial<Quiz>>({});
+  const hasChanges = () => {
+    return JSON.stringify(quiz) !== JSON.stringify(initialQuiz);
+  };
 
   useEffect(() => {
     if (quizId) {
@@ -70,6 +74,7 @@ const ManageQuiz = () => {
     }
     if (unresolvedQuiz) {
       setQuiz(unresolvedQuiz);
+      setInitialQuiz(unresolvedQuiz);
       const dateToEdit = dayjs(unresolvedQuiz.availableUntil);
       if (unresolvedQuiz && unresolvedQuiz.questions) {
         setNumQuestions(unresolvedQuiz.questions.length);
@@ -79,7 +84,7 @@ const ManageQuiz = () => {
       setAvailableUntil(dateToEdit);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth, history, unresolvedQuiz]);
+  }, [unresolvedQuiz]);
 
   const handleSubmit = async () => {
     const result = await createOrUpdateQuiz(quiz, quizId);
@@ -470,7 +475,7 @@ const ManageQuiz = () => {
           color={quizId ? 'secondary' : 'primary'}
           sx={{ m: 1, my: 2 }}
           onClick={handleSubmit}
-          disabled={!isFormValid() || isLoadingUnresolved}
+          disabled={!isFormValid() || isLoadingUnresolved || !hasChanges()}
         >
           {quizId ? 'Update Quiz' : 'Submit New Quiz'}
         </Button>

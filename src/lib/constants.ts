@@ -563,7 +563,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2016.',
-    storyId: 13,
+    storyId: 8,
     story: {
       storyTitle: 'Europsko Prvenstvo 2016',
       storyLogo:

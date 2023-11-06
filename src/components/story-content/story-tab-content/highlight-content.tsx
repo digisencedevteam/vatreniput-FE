@@ -1,7 +1,7 @@
 
 import { Grid } from "@mui/material";
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
-import { HighlightData, StoryContentProps } from "src/types";
+import { HighlightData, StoryContentProps } from "src/types/story";
 import Highlight from "../../story-components/highlight/highlight";
 
 export const HighlightContent = ({ story }: StoryContentProps) => {

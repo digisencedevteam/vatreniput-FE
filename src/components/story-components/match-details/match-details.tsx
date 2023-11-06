@@ -1,7 +1,7 @@
 import { Box, Typography, Divider } from '@mui/material';
 import SportsIcon from '@mui/icons-material/Sports';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
-import { MatchDetailsProps } from 'src/types';
+import { MatchDetailsProps } from 'src/types/story';
 import PenaltyShootoutTable from '../penalty-table/penatly-table';
 
 const MatchDetails = ({ matchData }: MatchDetailsProps) => {
