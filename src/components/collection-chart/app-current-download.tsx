@@ -79,7 +79,7 @@ const AppCurrentDownload = ({
               formatter: (value: number | string) => {
                 let numValue =
                   typeof value === 'string' ? parseFloat(value) : value;
-                return numValue.toFixed() + '%';
+                return numValue.toFixed();
               },
             },
             total: {

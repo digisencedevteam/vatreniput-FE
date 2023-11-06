@@ -8,8 +8,6 @@ import { CollectionStickerItem } from 'src/components/collection-sticker/collect
 import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
-import WelcomeComponent from 'src/components/welcome-component/welcome-component';
-import Vesela from 'src/assets/illustrations/vesela3.png';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import axios, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
@@ -155,24 +153,48 @@ export const CollectionView = () => {
         Kolekcija
       </Typography>
 
-      <Grid container spacing={1}>
+      <Grid
+        container
+        spacing={1}
+      >
         {!isMobile && (
-          <Grid item xs={12} md={7}>
+          <Grid
+            item
+            xs={12}
+            md={7}
+          >
             <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
-              img={<SeoIllustration imageUrl={'https://res.cloudinary.com/dzg5kxbau/image/upload/v1695908111/vesela3_elqpvf.png'} />}
+              img={
+                <SeoIllustration
+                  imageUrl={
+                    'https://res.cloudinary.com/dzg5kxbau/image/upload/v1695908111/vesela3_elqpvf.png'
+                  }
+                />
+              }
             />
           </Grid>
         )}
 
-        <Grid item xs={12} md={5}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+        >
           <StatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
       </Grid>
       <div ref={myRef}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} mt={3}>
+        <Grid
+          container
+          spacing={1}
+        >
+          <Grid
+            item
+            xs={12}
+            mt={3}
+          >
             {currentCategory ? (
               <Box
                 sx={{
@@ -187,7 +209,10 @@ export const CollectionView = () => {
                 >
                   <ArrowLeftIcon />
                 </IconButton>
-                <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+                <Typography
+                  variant='h6'
+                  sx={{ mx: 4, textAlign: 'center' }}
+                >
                   {currentCategory.name}
                 </Typography>
                 <IconButton
@@ -202,12 +227,23 @@ export const CollectionView = () => {
             )}
           </Grid>
           {isCategoryLoading ? (
-            <Grid item xs={12} style={{ textAlign: 'center' }}>
+            <Grid
+              item
+              xs={12}
+              style={{ textAlign: 'center' }}
+            >
               <LoadingScreen />
             </Grid>
           ) : (
             collectedCards.map((item, index) => (
-              <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+              <Grid
+                key={index}
+                item
+                xs={4}
+                sm={3}
+                md={3}
+                lg={2}
+              >
                 <CollectionStickerItem item={item} />
               </Grid>
             ))

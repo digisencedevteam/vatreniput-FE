@@ -164,6 +164,7 @@ export type Event = {
   location: string;
   year: number;
   percentageCollected: number;
+  numberOfCollected: number;
 };
 
 export type DashboardData = {
