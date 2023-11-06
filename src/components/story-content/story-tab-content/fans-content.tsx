@@ -1,6 +1,6 @@
 import ScrollableImageContainer from "src/components/scrollable-container/scrollable-image-container";
 import { StorySectionWrapper } from "src/components/section-wrapper/story-wrapper";
-import { Fan, StoryContentProps } from "src/types";
+import { Fan, StoryContentProps } from "src/types/story";
 
 const FansContent = ({ story }: StoryContentProps) => {
     if (!story?.Fans) {

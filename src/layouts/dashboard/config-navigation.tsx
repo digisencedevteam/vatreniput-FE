@@ -69,39 +69,39 @@ export function useNavData() {
               },
               {
                 title: 'Svjetsko prvenstvo 1998',
-                path: paths.dashboard.story.seven,
+                path: paths.dashboard.story.sp98,
               },
               {
                 title: 'Svjetsko prvenstvo 2002',
-                path: paths.dashboard.story.eight,
+                path: paths.dashboard.story.sp02,
               },
               {
                 title: 'Euro 2004',
-                path: paths.dashboard.story.nine,
+                path: paths.dashboard.story.euro04,
               },
               {
                 title: 'Svjetsko prvenstvo 2006',
-                path: paths.dashboard.story.ten,
+                path: paths.dashboard.story.sp06,
               },
               {
                 title: 'Euro 2008',
-                path: paths.dashboard.story.eleven,
+                path: paths.dashboard.story.euro08,
               },
               {
                 title: 'Svjetsko prvenstvo 2012',
-                path: paths.dashboard.story.twelve,
+                path: paths.dashboard.story.sp12,
               },
               {
                 title: 'Svjetsko prvenstvo 2014',
-                path: paths.dashboard.story.thirteen,
+                path: paths.dashboard.story.sp14,
               },
               {
                 title: 'Euro 2016',
-                path: paths.dashboard.story.fourteen,
+                path: paths.dashboard.story.euro16,
               },
               {
                 title: 'Svjetsko prvenstvo 2018',
-                path: paths.dashboard.story.fifthteen,
+                path: paths.dashboard.story.sp18,
               },
               {
                 title: 'Euro 2020',

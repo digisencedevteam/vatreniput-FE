@@ -90,8 +90,9 @@ export interface Story {
   };
   Highlights?: HighlightData[];
   Coach?: CoachData;
-  Zanimljivosti?: (string | number | boolean)[];
+  Facts?: (string | number | boolean)[];
   AdditionalQualifications?: QualificationMatch[];
+  Fans?: Fan[];
 }
 
 export interface StoryContentProps {
@@ -157,9 +158,13 @@ export type TabComponents = {
   Highlights?: JSX.Element;
   Coach?: JSX.Element;
   NationalTeam?: JSX.Element;
-  Zanimljivosti?: JSX.Element;
+  Facts?: JSX.Element;
   [key: string]: JSX.Element | undefined;
 };
+
+export interface Fan {
+  imgUrl: string;
+}
 export type FactType =
   | string
   | number
