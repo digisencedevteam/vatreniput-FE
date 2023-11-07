@@ -10,7 +10,7 @@ const FansContent = ({ story }: StoryContentProps) => {
     <>
       {story?.Fans && (
         <StorySectionWrapper title='Navijači'>
-          <ScrollableImageContainer>
+          <ScrollableImageContainer childrenCount={story.Fans.length}>
             {story.Fans.map((fan: Fan, index: number) => (
               <img
                 key={index}

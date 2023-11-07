@@ -12,22 +12,28 @@ type SkeletonDashboardLoaderProps = {
   height?: string;
   maxWidth?: string;
   message?: string;
-  isVoting?: boolean;
+  isMobileCount?: number;
+  isTabletCount?: number;
 };
 
 export const SkeletonDashboardLoader = ({
   count = 4,
   width = '100%',
-  maxWidth = '220px',
+  maxWidth = '170px',
   message,
-  isVoting,
+  height: propHeight,
+  isMobileCount,
+  isTabletCount,
 }: SkeletonDashboardLoaderProps) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const adjustedMaxWidth = isMobile ? '100px' : maxWidth;
-  let adjustedCount = isMobile ? 3 : count;
+  const isTablet = useMediaQuery(theme.breakpoints.between('md', 'lg'));
+  const adjustedMaxWidth = isMobile ? maxWidth || '100px' : maxWidth;
+  const height = isMobile ? propHeight || '160px' : propHeight || '220px';
+  let adjustedCount = isMobile ? isMobileCount : count;
 
-  if (!!isVoting && isMobile) adjustedCount = 3;
+  if (isMobile) adjustedCount = isMobileCount;
+  if (isTablet) adjustedCount = isTabletCount;
 
   return (
     <Box
@@ -48,7 +54,7 @@ export const SkeletonDashboardLoader = ({
             flex: '0 0 auto',
             width: width,
             maxWidth: adjustedMaxWidth,
-            height: isMobile ? '160px' : '220px',
+            height: { height },
             m: 1,
             borderRadius: 2,
           }}
@@ -75,8 +81,9 @@ export const SkeletonDashboardLoader = ({
           }}
         >
           <Typography
-            variant={isMobile ? 'caption' : 'h6'}
-            sx={{ fontWeight: 'bold', letterSpacing: 1 }}
+            variant={isMobile ? 'caption' : 'caption'}
+            sx={{ mx: isMobile ? 3 : 10 }}
+            color='text.secondary'
           >
             {message}
           </Typography>

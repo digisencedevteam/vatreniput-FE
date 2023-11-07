@@ -186,53 +186,40 @@ export const CollectionView = () => {
         </Grid>
       </Grid>
       <div ref={myRef}>
-        <Grid
-          container
-          spacing={1}
-        >
-          <Grid
-            item
-            xs={12}
-            mt={3}
-          >
-            {currentCategory ? (
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
+        <Grid container spacing={1}>
+          <Grid item xs={12} mt={3}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('left')}
               >
-                <IconButton
-                  color='primary'
-                  onClick={() => handleArrowClick('left')}
-                >
-                  <ArrowLeftIcon />
-                </IconButton>
-                <Typography
-                  variant='h6'
-                  sx={{ mx: 4, textAlign: 'center' }}
-                >
-                  {currentCategory.name}
-                </Typography>
-                <IconButton
-                  color='primary'
-                  onClick={() => handleArrowClick('right')}
-                >
-                  <ArrowRightIcon />
-                </IconButton>
-              </Box>
-            ) : (
-              <LoadingScreen />
-            )}
+                <ArrowLeftIcon />
+              </IconButton>
+              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+                {currentCategory.name}
+              </Typography>
+              <IconButton
+                color='primary'
+                onClick={() => handleArrowClick('right')}
+              >
+                <ArrowRightIcon />
+              </IconButton>
+            </Box>
           </Grid>
           {isCategoryLoading ? (
-            <Grid
-              item
-              xs={12}
-              style={{ textAlign: 'center' }}
-            >
-              <LoadingScreen />
+            <Grid item xs={12} style={{ textAlign: 'center' }}>
+              <SkeletonDashboardLoader
+                isMobileCount={3}
+                isTabletCount={4}
+                count={5}
+                width='100%'
+              />
             </Grid>
           ) : (
             collectedCards.map((item, index) => (
@@ -257,9 +244,15 @@ export const CollectionView = () => {
           />
         ) : (
           <SkeletonDashboardLoader
-            count={5}
-            width='100%'
-            message='Trenutno nema sličica u kolekciji, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.'
+            count={6}
+            isMobileCount={6}
+            isTabletCount={4}
+            maxWidth={isMobile ? '100px' : '200px'}
+            message={
+              isCategoryLoading
+                ? undefined
+                : 'Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju digitalnog albuma!'
+            }
           />
         )}
       </div>

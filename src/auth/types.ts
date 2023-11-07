@@ -3,6 +3,7 @@ import {
   RedirectLoginOptions,
   PopupLoginOptions,
 } from '@auth0/auth0-react';
+import { FormValues } from 'src/types';
 
 // ----------------------------------------------------------------------
 
@@ -73,6 +74,7 @@ export type JWTContextType = CanRemove & {
     code: string
   ) => Promise<void>;
   logout: () => Promise<void>;
+  updateUser: (userData: FormValues) => Promise<void>;
 };
 
 export type FirebaseContextType = CanRemove & {
@@ -91,7 +93,8 @@ export type FirebaseContextType = CanRemove & {
     email: string,
     password: string,
     firstName: string,
-    lastName: string
+    lastName: string,
+    username: string
   ) => Promise<void>;
 };
 

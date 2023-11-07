@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
 import { Box, Grid, useTheme } from '@mui/material';
 import { DashboardButton } from 'src/components/dashboard-button/dashboard-button';
-import { DashboardSectionWrapper } from 'src/components/section-wrapper/dashboard-section-wrapper';
+import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-section-wrapper';
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { useEffect, useState } from 'react';
@@ -81,37 +81,42 @@ export default function OneView() {
         </Grid>
         <Grid item xs={12}>
           <DashboardSectionWrapper
-            title='Najvise skupljenih'
+            title='Najviše skupljenih'
             link='dashboard/two'
           >
-            <DashboardCollectionCategory
-              imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
-              name={collectedStatistic?.topEvents[0]?.name}
-              percentageCollected={Math.round(
-                collectedStatistic?.topEvents[0]?.percentageCollected || 0
-              )}
-            />
-            <DashboardCollectionCategory
-              imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
-              name={collectedStatistic?.topEvents[1]?.name}
-              percentageCollected={Math.round(
-                collectedStatistic?.topEvents[1]?.percentageCollected || 0
-              )}
-            />
-          </DashboardSectionWrapper>
-          <DashboardSectionWrapper
-            title='Preostali Kvizovi'
-            link='dashboard/three'
-          >
-            <ScrollableContainer>
-              {isDashboardLoading || !quizzes?.length ? (
-                <SkeletonDashboardLoader
-                  count={1}
-                  maxWidth='375px'
-                  message='Čestitam! Svi kvizovi su riješeni!'
+            {isDashboardLoading ? (
+              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+            ) : !collectedStatistic?.topEvents?.length ? (
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+                message='Tvoj digitalni album još je prazan. Započnite svoju avanturu skeniranjem QR koda s bilo koje sličice i spremite u digitalni album kako bi se prikazala statistika!'
+              />
+            ) : (
+              <>
+                <DashboardCollectionCategory
+                  imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
+                  name={collectedStatistic.topEvents[0]?.name}
+                  percentageCollected={Math.round(
+                    collectedStatistic.topEvents[0]?.percentageCollected || 0
+                  )}
                 />
-              ) : (
-                quizzes.map((quiz, index) => (
+                <DashboardCollectionCategory
+                  imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
+                  name={collectedStatistic.topEvents[1]?.name}
+                  percentageCollected={Math.round(
+                    collectedStatistic.topEvents[1]?.percentageCollected || 0
+                  )}
+                />
+              </>
+            )}
+          </DashboardSectionWrapper>
+          <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
+            {isDashboardLoading ? (
+              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+            ) : quizzes?.length ? (
+              quizzes.map((quiz, index) => (
+                <ScrollableContainer childrenCount={quizzes?.length}>
                   <CustomCardSmall
                     key={index}
                     imgUrl={quiz.thumbnail}
@@ -120,16 +125,22 @@ export default function OneView() {
                     cardText={quiz.title}
                     linkTo={`/dashboard/quiz/${quiz._id}`}
                   />
-                ))
-              )}
-            </ScrollableContainer>
+                </ScrollableContainer>
+              ))
+            ) : (
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+                message='Trenutno nema dostupnih kvizova, ali ne brini - uskoro dolaze novi. Pripremi se za nadmetanje uma!'
+              />
+            )}
           </DashboardSectionWrapper>
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
-            <ScrollableContainer>
-              {isDashboardLoading || !notVotedVotings?.length ? (
-                <SkeletonDashboardLoader count={1} maxWidth='375px' />
-              ) : (
-                notVotedVotings.map((voting, index) => (
+            {isDashboardLoading ? (
+              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+            ) : notVotedVotings?.length ? (
+              notVotedVotings.map((voting, index) => (
+                <ScrollableContainer childrenCount={notVotedVotings?.length}>
                   <CustomCardSmall
                     key={index}
                     width='96%'
@@ -138,9 +149,15 @@ export default function OneView() {
                     cardText={voting.title}
                     linkTo={`/dashboard/voting/${voting._id}`}
                   />
-                ))
-              )}
-            </ScrollableContainer>
+                </ScrollableContainer>
+              ))
+            ) : (
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+                message='Trenutno nema dostupnih glasanja, ali bez brige! Uskoro ćemo ponovno trebati tvoje mišljenje!'
+              />
+            )}
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
