@@ -1,8 +1,4 @@
-import React from 'react';
 import { Grid, useTheme } from '@mui/material';
-
-import SelectionStatistic from 'src/components/selection-statistic/selection-statistic';
-import CollectionStatisticIllustration from 'src/assets/illustrations/collection-statistic-illustration';
 import CollectedStatisticWidget from 'src/sections/two/collected-statistic-widget';
 
 interface StatisticCardsProps {
@@ -30,7 +26,6 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
     >
       <Grid item mb={2}>
         <CollectedStatisticWidget
-
           chart={{
             series: [
               {
@@ -50,5 +45,4 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
     </Grid>
   );
 };
-
 export default StatisticCards;

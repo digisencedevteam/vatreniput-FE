@@ -111,10 +111,12 @@ const AppCurrentDownload = ({
             top='50%'
             left='50%'
             style={{ transform: 'translate(-50%, -50%)' }}
+            textAlign={'center'}
           >
-            <Typography variant='h6' textAlign='center'>
-              Trenutno nema skupljenih sličica. Skeniraj kod s jedne od sličica
-              i spremi u digitalni album kako bi se prikazala statistika.
+            <Typography variant='caption' textAlign='center'>
+              Vaš digitalni album još je prazan. Započnite svoju avanturu
+              skeniranjem QR koda s bilo koje sličice i spremite u digitalni
+              album kako bi se prikazala statistika!
             </Typography>
           </Box>
         </Box>

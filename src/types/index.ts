@@ -73,6 +73,7 @@ export type DashboardStats = {
 export type FormValues = {
   firstName: string;
   lastName: string;
+  username: string
   email: string;
   avatarUrl: string;
   [key: string]: string;
@@ -178,4 +179,5 @@ export type ChartData = {
 
 export type ScrollableContainerProps = {
   children: React.ReactNode;
+  childrenCount: number;
 };

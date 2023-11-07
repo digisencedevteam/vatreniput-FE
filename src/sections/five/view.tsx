@@ -87,13 +87,15 @@ const FiveView = () => {
               />
             </Grid>
           )}
-          <SectionWrapper title='Dostupna glasanja'>
+          <SectionWrapper title='Dostupna'>
             <Grid container>
               {!notVotedVotings?.length ? (
                 <SkeletonDashboardLoader
                   message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
-                  isVoting={true}
-                  count={5}
+                  count={6}
+                  isMobileCount={3}
+                  isTabletCount={4}
+                  maxWidth={isMobile ? '100px' : '200px'}
                 />
               ) : (
                 <Grid container spacing={2}>
@@ -115,15 +117,17 @@ const FiveView = () => {
             </Grid>
           </SectionWrapper>
 
-          <SectionWrapper title='Već glasani'>
+          <SectionWrapper title='Ispunjena'>
             {!votedVotings?.length ? (
               <SkeletonDashboardLoader
-                message='Za sada nema ispunjenih glasanja!'
-                isVoting={true}
-                count={5}
+                message='Za sada nema ispunjenih glasanja! Tvoje mišljenje nam je važno, stoga ne propusti priliku izjasniti se o najboljih 11 svih vremena!'
+                count={6}
+                isMobileCount={3}
+                isTabletCount={4}
+                maxWidth={isMobile ? '100px' : '200px'}
               />
             ) : (
-              <ScrollableContainer>
+              <ScrollableContainer childrenCount={votedVotings.length}>
                 {votedVotings.map((data, index) => (
                   <Box
                     key={index}

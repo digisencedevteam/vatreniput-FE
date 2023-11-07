@@ -1,23 +1,34 @@
-import { createContext, useContext, useState } from "react";
-import { ScrollableContainerProps } from "src/types";
+import { createContext, useContext, useState } from 'react';
 
 interface StoryContextType {
-    currentStoryIndex: number;
-    setCurrentStoryIndex: (index: number) => void;
+  currentStoryIndex: number;
+  setCurrentStoryIndex: (index: number) => void;
+  childrenCount: number;
 }
 const StoryContext = createContext<StoryContextType>({
-    currentStoryIndex: 0,
-    setCurrentStoryIndex: () => { }
+  currentStoryIndex: 0,
+  setCurrentStoryIndex: () => {},
+  childrenCount: 0,
 });
 
-export const StoryProvider = ({ children }: ScrollableContainerProps) => {
-    const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+interface StoryProviderProps {
+  children: React.ReactNode;
+  childrenCount: number;
+}
 
-    return (
-        <StoryContext.Provider value={{ currentStoryIndex, setCurrentStoryIndex }}>
-            {children}
-        </StoryContext.Provider>
-    );
+export const StoryProvider = ({
+  children,
+  childrenCount,
+}: StoryProviderProps) => {
+  const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+
+  return (
+    <StoryContext.Provider
+      value={{ currentStoryIndex, setCurrentStoryIndex, childrenCount }}
+    >
+      {children}
+    </StoryContext.Provider>
+  );
 };
 
 export const useStoryContext = () => useContext(StoryContext);

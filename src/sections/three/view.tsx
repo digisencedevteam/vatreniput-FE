@@ -1,5 +1,12 @@
 import { useSettingsContext } from 'src/components/settings';
-import { Container, Typography, Box, Grid, Button } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Button,
+  useMediaQuery,
+} from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,20 +20,21 @@ import PagingComponent from 'src/components/paging/paging-component';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { LoadingScreen } from 'src/components/loading-screen';
 import QuizResultsModal, {
   QuizResultsModalProps,
 } from 'src/components/quiz-results-modal/QuizResultsModal';
 import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import dayjs from 'dayjs';
-import { QuizBestOverview } from 'src/components/quiz-results-modal/quiz-best-overview';
+import QuizBestOverview from 'src/components/quiz-results-modal/quiz-best-overview';
 import { userRoles } from 'src/lib/constants';
 import { paths } from 'src/routes/paths';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
+import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 5;
@@ -40,7 +48,6 @@ const ThreeView = () => {
     resolvedQuizzes,
     unresolvedQuizzes,
     deleteQuiz,
-    isDeleting,
     fetchQuizzes,
   } = useFetchQuizzes(currentPage, itemsPerPage);
   const [rewardStatus, setRewardStatus] = useState<Record<string, boolean>>({});
@@ -157,7 +164,13 @@ const ThreeView = () => {
           ))}
       </Box>
       <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
-        <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
+        {isLoadingResolved ? (
+          <SkeletonOverviewResults />
+        ) : resolvedQuiz && resolvedQuiz.length > 0 ? (
+          <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
+        ) : (
+          <SkeletonOverviewResults message='Trenutno nema riješenih kvizova. Riješi neki od dostupnih kako bi vidio svoje rezultate!' />
+        )}
       </Grid>
       <Box
         borderRadius={2}
@@ -176,6 +189,7 @@ const ThreeView = () => {
           icon={
             <CheckIcon
               fontSize='large'
+              color='success'
               sx={{ display: { xs: 'none', sm: 'inline' } }}
             />
           }
@@ -186,6 +200,7 @@ const ThreeView = () => {
           icon={
             <CloseIcon
               fontSize='large'
+              color='error'
               sx={{ display: { xs: 'none', sm: 'inline' } }}
             />
           }
@@ -193,10 +208,70 @@ const ThreeView = () => {
           text='Dostupnih!'
         />
       </Box>
+      <SectionWrapper title='Dostupni'>
+        <Grid container spacing={2}>
+          {isLoadingUnresolved ? (
+            <SkeletonDashboardLoader
+              isMobileCount={2}
+              count={5}
+              isTabletCount={3}
+            />
+          ) : !!unresolvedQuizzes?.length ? (
+            unresolvedQuizzes.map((data, index) => (
+              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                <Box
+                  sx={{
+                    transition: 'transform .2s',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                    },
+                  }}
+                >
+                  <CustomCard
+                    quizId={data._id}
+                    onDelete={deleteQuiz}
+                    imgUrl={data.thumbnail}
+                    cardText={data.title}
+                    cardId={data._id}
+                    availableUntil={data.availableUntil}
+                    linkTo={`${paths.dashboard.quizGroup.quiz}/${data._id}`}
+                    linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data._id}`}
+                    createdAt={data.createdAt}
+                    status={
+                      data.status && data.status.length > 0
+                        ? data.status[0].status
+                        : undefined
+                    }
+                    startTime={
+                      data.status && data.status.length > 0
+                        ? data.status[0].startTime
+                        : undefined
+                    }
+                    isRewarded={rewardStatus}
+                  />
+                </Box>
+              </Grid>
+            ))
+          ) : (
+            <SkeletonDashboardLoader
+              message='Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz. Pripremi se za novo nadmetanje uma!'
+              count={6}
+              isMobileCount={3}
+              isTabletCount={4}
+              maxWidth={isMobile ? '100px' : '200px'}
+            />
+          )}
+        </Grid>
+      </SectionWrapper>
       <SectionWrapper title='Riješeni'>
-        <ScrollableContainer>
-          {!!resolvedQuizzes?.length &&
-            !isLoadingResolved &&
+        <ScrollableContainer childrenCount={resolvedQuizzes?.length ?? 0}>
+          {isLoadingResolved ? (
+            <SkeletonDashboardLoader
+              isMobileCount={3}
+              isTabletCount={4}
+              count={5}
+            />
+          ) : !!resolvedQuizzes?.length ? (
             resolvedQuizzes.map((data: any, index) => (
               <Box
                 key={index}
@@ -219,15 +294,15 @@ const ThreeView = () => {
                   onCardClick={() => openModal(data)}
                 />
               </Box>
-            ))}
-          {!resolvedQuizzes?.length && !isLoadingResolved && (
+            ))
+          ) : (
             <SkeletonDashboardLoader
-              message='Za sada nema riješenih kvizova!'
-              isVoting={false}
-              count={5}
+              message='Još nije riješen nijedan kviz! Pokaži što znaš i osvoji fantastične nagrade koje te čekaju.'
+              count={6}
+              isMobileCount={3}
+              maxWidth={isMobile ? '100px' : '200px'}
             />
           )}
-          {isLoadingResolved && <LoadingScreen />}
         </ScrollableContainer>
         {totalPages > 1 && (
           <PagingComponent
@@ -236,57 +311,6 @@ const ThreeView = () => {
             onPageChange={handlePageChange}
           />
         )}
-      </SectionWrapper>
-      <SectionWrapper title='Dostupni'>
-        <Grid container spacing={2}>
-          {!!unresolvedQuizzes?.length &&
-            !isLoadingUnresolved &&
-            unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <Box
-                  sx={{
-                    transition: 'transform .2s',
-                    '&:hover': {
-                      transform: 'scale(1.05)',
-                    },
-                  }}
-                >
-                  <CustomCard
-                    quizId={data._id}
-                    onDelete={deleteQuiz}
-                    imgUrl={data.thumbnail}
-                    cardText={data.title!}
-                    cardId={data?._id}
-                    availableUntil={data.availableUntil}
-                    linkTo={`${paths.dashboard.quizGroup.quiz}/${data?._id}`}
-                    linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${data?._id}`}
-                    createdAt={data?.createdAt}
-                    status={
-                      data.status && data.status.length > 0
-                        ? data.status[0].status
-                        : undefined
-                    }
-                    startTime={
-                      data.status && data.status.length > 0
-                        ? data.status[0].startTime
-                        : undefined
-                    }
-                    isRewarded={rewardStatus}
-                  />
-                </Box>
-              </Grid>
-            ))}
-
-          {!unresolvedQuizzes?.length && !isLoadingUnresolved && (
-            <SkeletonDashboardLoader
-              message='Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz.'
-              isVoting={false}
-              count={5}
-            />
-          )}
-          {isLoadingUnresolved && <LoadingScreen />}
-          {isDeleting && <LoadingScreen />}
-        </Grid>
       </SectionWrapper>
     </Container>
   );

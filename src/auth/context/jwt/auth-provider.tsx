@@ -4,11 +4,8 @@ import axios, { endpoints } from 'src/utils/axios';
 //
 import { AuthContext } from './auth-context';
 import { isValidToken, setSession } from './utils';
-import {
-  ActionMapType,
-  AuthStateType,
-  AuthUserType,
-} from '../../types';
+import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
+import { FormValues } from 'src/types';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +20,7 @@ enum Types {
   LOGIN = 'LOGIN',
   REGISTER = 'REGISTER',
   LOGOUT = 'LOGOUT',
+  UPDATE_USER = 'UPDATE_USER',
 }
 
 type Payload = {
@@ -36,10 +34,12 @@ type Payload = {
     user: AuthUserType;
   };
   [Types.LOGOUT]: undefined;
+  [Types.UPDATE_USER]: {
+    user: AuthUserType;
+  };
 };
 
-type ActionsType =
-  ActionMapType<Payload>[keyof ActionMapType<Payload>];
+type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
 
 // ----------------------------------------------------------------------
 
@@ -71,6 +71,12 @@ const reducer = (state: AuthStateType, action: ActionsType) => {
     return {
       ...state,
       user: null,
+    };
+  }
+  if (action.type === Types.UPDATE_USER) {
+    return {
+      ...state,
+      user: action.payload.user,
     };
   }
   return state;
@@ -128,28 +134,25 @@ export function AuthProvider({ children }: Props) {
   }, [initialize]);
 
   // LOGIN
-  const login = useCallback(
-    async (email: string, password: string) => {
-      const data = {
-        email,
-        password,
-      };
+  const login = useCallback(async (email: string, password: string) => {
+    const data = {
+      email,
+      password,
+    };
 
-      const response = await axios.post(endpoints.auth.login, data);
+    const response = await axios.post(endpoints.auth.login, data);
 
-      const { accessToken, user } = response.data;
+    const { accessToken, user } = response.data;
 
-      setSession(accessToken);
+    setSession(accessToken);
 
-      dispatch({
-        type: Types.LOGIN,
-        payload: {
-          user,
-        },
-      });
-    },
-    []
-  );
+    dispatch({
+      type: Types.LOGIN,
+      payload: {
+        user,
+      },
+    });
+  }, []);
 
   // REGISTER
   const register = useCallback(
@@ -170,10 +173,7 @@ export function AuthProvider({ children }: Props) {
         code,
       };
 
-      const response = await axios.post(
-        endpoints.auth.register + code,
-        data
-      );
+      const response = await axios.post(endpoints.auth.register + code, data);
 
       const { accessToken, user } = response.data;
 
@@ -197,11 +197,34 @@ export function AuthProvider({ children }: Props) {
     });
   }, []);
 
+  // UPDATE
+  const updateUser = useCallback(
+    async (userData: FormValues) => {
+      if (state.user) {
+        try {
+          const response = await axios.put(
+            `${endpoints.user.user}${state.user._id}`,
+            userData
+          );
+          const { user } = response.data;
+
+          dispatch({
+            type: Types.UPDATE_USER,
+            payload: {
+              user,
+            },
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    },
+    [state.user]
+  );
+
   // ----------------------------------------------------------------------
 
-  const checkAuthenticated = state.user
-    ? 'authenticated'
-    : 'unauthenticated';
+  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
 
   const status = state.loading ? 'loading' : checkAuthenticated;
 
@@ -216,8 +239,9 @@ export function AuthProvider({ children }: Props) {
       login,
       register,
       logout,
+      updateUser,
     }),
-    [login, logout, register, state.user, status]
+    [login, logout, register, state.user, status, updateUser]
   );
 
   return (

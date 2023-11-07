@@ -15,12 +15,12 @@ export interface QuizResultsModalProps {
   formattedDateTaken: string;
 }
 
-const QuizResultsModal: React.FC<QuizResultsModalProps> = ({
+const QuizResultsModal = ({
   isModalOpen,
   closeModal,
   quizResults,
   formattedDateTaken,
-}) => {
+}: QuizResultsModalProps) => {
   return (
     <Modal
       open={isModalOpen}
