@@ -114,7 +114,8 @@ export type LabelInfo = {
 
 export type VotingOption = {
   _id?: string;
-  text: string;
+  text?: string;
+  thumbnail?: string
 };
 
 export type Voting = {

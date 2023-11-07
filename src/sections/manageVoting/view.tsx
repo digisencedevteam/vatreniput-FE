@@ -23,92 +23,133 @@ import { useRouter } from 'src/routes/hooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { paths } from 'src/routes/paths';
+import { FormikErrors, useFormik } from 'formik';
+import * as Yup from 'yup';
 
-interface Voting {
-  title: string;
-  description: string;
-  availableUntil: string;
-  thumbnail: string;
-  votingOptions: Array<{ text: string; thumbnail?: string }>;
-}
+const validationSchema = Yup.object().shape({
+  title: Yup.string().required('Naslov je obavezan'),
+  description: Yup.string().required('Opis je obavezan'),
+  thumbnail: Yup.string().required('Slika glasanja je obavezna'),
+  availableUntil: Yup.string().required('Datum kraja dostupnosti je obavezan'),
+  votingOptions: Yup.array()
+    .of(
+      Yup.object().shape({
+        text: Yup.string().required('Tekst je obavezan za svaku opciju'),
+        thumbnail: Yup.string().required(
+          'Thumbnail je obavezan za svaku opciju'
+        ),
+      })
+    )
+    .min(2, 'Potrebno je unijeti barem dvije opcije sa tekstom i slikom'),
+});
 
 const ManageVoting = () => {
-  const [voting, setVoting] = useState<Partial<Voting>>({ votingOptions: [] });
-  const [initialVoting, setInitialVoting] = useState<Partial<Voting>>({
-    votingOptions: [],
-  });
+  const [submitted, setSubmitted] = useState(false);
+  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
   const { createOrUpdateVoting, fetchVotingById, isLoading } = useVoting();
   const { votingId } = useParams();
   const settings = useSettingsContext();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const router = useRouter();
-  const [submitted, setSubmitted] = useState(false);
-  const [errorSnackbar, setErrorSnackbar] = useState<string | null>(null);
 
   if (!isAdmin) {
     router.push(`${paths.dashboard.one}`);
   }
 
-  const fetchData = async (): Promise<Partial<Voting> | void> => {
-    if (votingId) {
-      const fetchedVoting = await fetchVotingById(votingId);
-      if (fetchedVoting) {
-        setVoting(fetchedVoting);
-        return fetchedVoting;
-      }
-    }
+  const initialValues = {
+    title: '',
+    description: '',
+    thumbnail: '',
+    availableUntil: '',
+    votingOptions: [
+      { text: '', thumbnail: '' },
+      { text: '', thumbnail: '' },
+    ],
   };
 
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const result = await createOrUpdateVoting(values, votingId);
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setErrorSnackbar(result.error || 'Naišli smo na grešku...');
+      }
+    },
+  });
+
   useEffect(() => {
-    if (votingId) {
-      fetchData().then((fetchedVoting) => {
+    const fetchData = async () => {
+      if (votingId) {
+        const fetchedVoting = await fetchVotingById(votingId);
         if (fetchedVoting) {
-          setVoting(fetchedVoting);
-          setInitialVoting(fetchedVoting);
+          const transformedOptions = (fetchedVoting.votingOptions || []).map(
+            (option) => ({
+              text: option.text || '',
+              thumbnail: option.thumbnail || '',
+            })
+          );
+          formik.resetForm({
+            values: {
+              title: fetchedVoting.title || '',
+              description: fetchedVoting.description || '',
+              thumbnail: fetchedVoting.thumbnail || '',
+              availableUntil: dayjs(fetchedVoting.availableUntil).format(
+                'YYYY-MM-DDTHH:mm:ss'
+              ),
+              votingOptions: transformedOptions || [
+                { text: '', thumbnail: '' },
+              ],
+            },
+          });
         }
-      });
-    }
+      }
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [votingId]);
 
-  const hasChanges = () => {
-    return JSON.stringify(voting) !== JSON.stringify(initialVoting);
-  };
+  useEffect(() => {
+    formik.setTouched(
+      {
+        title: true,
+        description: true,
+        thumbnail: true,
+        availableUntil: true,
+        votingOptions: formik.values.votingOptions.map(() => ({
+          text: true,
+          thumbnail: true,
+        })),
+      },
+      false
+    );
+  }, []);
 
-  const handleSubmit = async () => {
-    const result = await createOrUpdateVoting(voting, votingId);
-    if (result.success) {
-      setSubmitted(true);
-    } else {
-      setErrorSnackbar(result.error || 'Naišli smo na grešku...');
-    }
-  };
+  const formikErrors = formik.errors as FormikErrors<{
+    title: string;
+    description: string;
+    thumbnail: string;
+    availableUntil: undefined;
+    votingOptions: { text: string; thumbnail: string }[];
+  }>;
+
+  const isButtonDisabled =
+    formik.isSubmitting || !formik.dirty || !formik.isValid;
 
   const handleAddOption = () => {
-    setVoting((prev) => ({
-      ...prev,
-      votingOptions: [
-        ...(prev.votingOptions || []),
-        { text: '', thumbnail: '' },
-      ],
-    }));
+    formik.setFieldValue('votingOptions', [
+      ...formik.values.votingOptions,
+      { text: '', thumbnail: '' },
+    ]);
   };
 
   const handleRemoveOption = (index: number) => {
-    const newOptions = [...(voting.votingOptions || [])];
+    const newOptions = [...formik.values.votingOptions];
     newOptions.splice(index, 1);
-    setVoting({ ...voting, votingOptions: newOptions });
-  };
-
-  const handleOptionChange = (
-    index: number,
-    key: 'text' | 'thumbnail',
-    value: string
-  ) => {
-    const newOptions = [...(voting.votingOptions || [])];
-    newOptions[index][key] = value;
-    setVoting({ ...voting, votingOptions: newOptions });
+    formik.setFieldValue('votingOptions', newOptions);
   };
 
   return (
@@ -134,94 +175,151 @@ const ManageVoting = () => {
               {votingId ? 'Ažuriraj' : 'Stvori novo'} glasanje
             </Typography>
             <Divider />
-            <TextField
-              sx={{ my: 1 }}
-              value={voting.title || ''}
-              label='Naslov'
-              fullWidth
-              onChange={(e) => setVoting({ ...voting, title: e.target.value })}
-            />
-            <TextField
-              sx={{ my: 1 }}
-              value={voting.description || ''}
-              label='Opis'
-              fullWidth
-              onChange={(e) =>
-                setVoting({ ...voting, description: e.target.value })
-              }
-            />
-            <TextField
-              sx={{ my: 1 }}
-              value={voting.thumbnail || ''}
-              label='Thumbnail URL'
-              fullWidth
-              onChange={(e) =>
-                setVoting({ ...voting, thumbnail: e.target.value })
-              }
-            />
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateTimePicker
-                sx={{ my: 2 }}
-                label='Available Until'
-                value={dayjs(voting.availableUntil || undefined)}
-                disablePast
-                onChange={(newValue) => {
-                  setVoting({
-                    ...voting,
-                    availableUntil: newValue?.toISOString(),
-                  });
-                }}
+            <form onSubmit={formik.handleSubmit}>
+              <TextField
+                sx={{ my: 1 }}
+                fullWidth
+                id='title'
+                name='title'
+                label='Naslov'
+                value={formik.values.title}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.title && Boolean(formik.errors.title)}
+                helperText={formik.touched.title && formik.errors.title}
               />
-            </LocalizationProvider>
-            {voting.votingOptions?.map((option, index) => (
-              <Box key={index} display='flex' flexDirection='column' mb={2}>
-                <TextField
-                  label={`Opcija ${index + 1}`}
-                  fullWidth
-                  value={option.text}
-                  onChange={(e) =>
-                    handleOptionChange(index, 'text', e.target.value)
-                  }
-                />
-                <TextField
-                  sx={{ mt: 1 }}
-                  label={`Thumbnail Opcija ${index + 1}`}
-                  fullWidth
-                  value={option.thumbnail || ''}
-                  onChange={(e) =>
-                    handleOptionChange(index, 'thumbnail', e.target.value)
-                  }
-                />
-                <Button
-                  sx={{ my: 2 }}
-                  variant='outlined'
-                  onClick={() => handleRemoveOption(index)}
-                >
-                  Ukloni Opciju
-                </Button>
-              </Box>
-            ))}
+              <TextField
+                sx={{ my: 1 }}
+                fullWidth
+                id='description'
+                name='description'
+                label='Opis'
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
+              />
+              <TextField
+                sx={{ my: 1 }}
+                fullWidth
+                id='thumbnail'
+                name='thumbnail'
+                label='Thumbnail URL'
+                value={formik.values.thumbnail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.thumbnail && Boolean(formik.errors.thumbnail)
+                }
+                helperText={formik.touched.thumbnail && formik.errors.thumbnail}
+              />
 
-            <Button
-              variant='outlined'
-              sx={{ mx: 3, my: 2 }}
-              onClick={handleAddOption}
-            >
-              Dodaj Novu Opciju
-            </Button>
-            <Button
-              variant='contained'
-              onClick={handleSubmit}
-              disabled={
-                !voting.title ||
-                !voting.description ||
-                !voting?.votingOptions?.[1] ||
-                !voting.thumbnail ||
-                !hasChanges()
-              }
-            >
-              {votingId ? 'Ažuriraj' : 'Kreiraj'}
-            </Button>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DateTimePicker
+                  sx={{ my: 2 }}
+                  label='Available Until'
+                  value={dayjs(formik.values.availableUntil)}
+                  disablePast
+                  onChange={(newValue) => {
+                    if (newValue) {
+                      formik.setFieldValue(
+                        'availableUntil',
+                        newValue.format('YYYY-MM-DDTHH:mm:ss')
+                      );
+                    }
+                  }}
+                />
+              </LocalizationProvider>
+              {formik.touched.availableUntil &&
+                formik.errors.availableUntil && (
+                  <Typography variant='caption' color='error'>
+                    {formik.errors.availableUntil}
+                  </Typography>
+                )}
+              {formik.values.votingOptions.map((option, index) => (
+                <Box key={index} display='flex' flexDirection='column' mb={2}>
+                  <TextField
+                    label={`Opcija ${index + 1}`}
+                    fullWidth
+                    name={`votingOptions[${index}].text`}
+                    value={formik.values.votingOptions[index].text}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                    }}
+                    error={Boolean(
+                      (
+                        formikErrors?.votingOptions?.[index] as FormikErrors<{
+                          text: string;
+                          thumbnail: string;
+                        }>
+                      )?.text
+                    )}
+                    helperText={
+                      (
+                        formikErrors?.votingOptions?.[index] as FormikErrors<{
+                          text: string;
+                          thumbnail: string;
+                        }>
+                      )?.text
+                    }
+                  />
+                  <TextField
+                    sx={{ mt: 1 }}
+                    label={`Thumbnail Opcija ${index + 1}`}
+                    fullWidth
+                    name={`votingOptions[${index}].thumbnail`}
+                    value={formik.values.votingOptions[index].thumbnail}
+                    onChange={(e) => {
+                      formik.handleChange(e);
+                    }}
+                    error={Boolean(
+                      (
+                        formikErrors?.votingOptions?.[index] as FormikErrors<{
+                          text: string;
+                          thumbnail: string;
+                        }>
+                      )?.thumbnail
+                    )}
+                    helperText={
+                      (
+                        formikErrors?.votingOptions?.[index] as FormikErrors<{
+                          text: string;
+                          thumbnail: string;
+                        }>
+                      )?.thumbnail
+                    }
+                  />
+                  <Button
+                    sx={{ my: 2 }}
+                    variant='outlined'
+                    onClick={() => handleRemoveOption(index)}
+                  >
+                    Ukloni Opciju
+                  </Button>
+                </Box>
+              ))}
+
+              <Button
+                variant='outlined'
+                sx={{ mx: 3, my: 2 }}
+                onClick={handleAddOption}
+              >
+                Dodaj Novu Opciju
+              </Button>
+              <Button
+                type='submit'
+                variant='contained'
+                disabled={isButtonDisabled}
+              >
+                {votingId ? 'Ažuriraj' : 'Kreiraj'}
+              </Button>
+            </form>
           </Box>
           <Snackbar
             open={submitted}
@@ -234,7 +332,7 @@ const ManageVoting = () => {
             <Alert
               onClose={() => {
                 setSubmitted(false);
-                router.push('/dashboard/five');
+                router.push(paths.dashboard.five);
               }}
               severity='success'
             >
