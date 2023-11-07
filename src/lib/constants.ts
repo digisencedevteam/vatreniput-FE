@@ -48,9 +48,162 @@ export const STORIES = [
     storyTitle: '1996',
     storyId: 0,
     story: {
-      storyTitle: 'Euro 1996',
+      storyTitle: 'Euro 1996.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1996_euro_y7tail.png',
+      Qualifications: {
+        Description:
+          'Hrvatska je na krilima velikog jedinstva i naročito sjajne igre prošla na Euro kao prva u kvalifikacijskoj skupini. Iza je ostala i velika Italija. U tim kvalifikacijama Hrvatska je odigrala i prvu natjecateljsku utakmicu. Pobijedili smo Estoniju u gostima 2 : 0 golovima Davora Šukera. Najviše je, ipak, odjeknula fantastična pobjeda nad Italijom u gostima. U Palermu je Hrvatska slavila 2 : 1. Ponovno je Davor Šuker zabio oba gola i najavio fantastičnu vatrenu karijeru. S 12 postignutih golova bio je ujedno i najbolji strijelac kvalifikacija, što je i danas rekord za hrvatsku reprezentaciju.',
+        Teams: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 10,
+            Wins: 7,
+            Draws: 2,
+            Losses: 1,
+            Points: 23,
+          },
+          {
+            TeamName: 'Italija',
+            MatchesPlayed: 10,
+            Wins: 6,
+            Draws: 4,
+            Losses: 0,
+            Points: 23,
+          },
+          {
+            TeamName: 'Litva',
+            MatchesPlayed: 10,
+            Wins: 5,
+            Draws: 1,
+            Losses: 4,
+            Points: 16,
+          },
+          {
+            TeamName: 'Ukrajina',
+            MatchesPlayed: 10,
+            Wins: 3,
+            Draws: 4,
+            Losses: 3,
+            Points: 13,
+          },
+          {
+            TeamName: 'Slovenija',
+            MatchesPlayed: 10,
+            Wins: 3,
+            Draws: 2,
+            Losses: 5,
+            Points: 11,
+          },
+          {
+            TeamName: 'Estonia',
+            MatchesPlayed: 10,
+            Wins: 0,
+            Draws: 0,
+            Losses: 10,
+            Points: 0,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Portugal',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 0,
+            Losses: 1,
+            Points: 6,
+          },
+          {
+            TeamName: 'Danska',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'Turska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 0,
+            Losses: 3,
+            Points: 0,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'TURSKA – HRVATSKA',
+                Score: '0 : 1',
+                Scorers: ['Vlaović 86`'],
+              },
+              {
+                Teams: 'HRVATSKA – DANSKA',
+                Score: '3 : 0',
+                Scorers: ['Šuker 54`', 'Šuker 90`', 'Boban 81`'],
+              },
+              {
+                Teams: 'HRVATSKA – PORTUGAL',
+                Score: '0 : 3',
+              },
+            ],
+          },
+          Finals: {
+            QuarterFinal: {
+              Match: 'NJEMAČKA – HRVATSKA',
+              Score: '2 : 1',
+              GoalScorers: ['Šuker 51`'],
+            },
+          },
+        },
+        Summary:
+          'Ispadanje u četvrtfinalu protiv Njemačke bilo je bolno. Osjetila se razlika između „malih“ i „velikih“. Kad je borbeni Nikola Jurčević oduzeo loptu, a zatim Davor Šuker „povaljao“ Andreasa Kőpkea i izjednačio na 1 : 1 bilo je jasno da velikan opasno „visi“. Utakmicu je sudio Leif Sundell. Ubrzo je Igor Štimac dobio crveni karton, a švedski sudac je samo nekoliko minuta kasnije pokazao i na bijelu točku s koje je Klinsmann zabio. Ryan Babel vukao je napad po desnoj strani, a u nastavku akcije Sammer je prihvatio loptu, iz neposredne blizine zabio za pobjedu i time odveo Njemačku u polufinale i kasnije do naslova prvaka.        ',
+        Champ: {
+          Winner: 'NJEMAČKA',
+          TopScorer: {
+            Player: 'Alan Shearer',
+            Team: 'Engleska',
+            Goals: 5,
+          },
+        },
+      },
+      Highlights: [
+        {
+          Title: 'Pogodak Gorana Vlaovića protiv Turske',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
+          Description:
+            'Prvo veliko natjecanje hrvatske nogometne reprezentacije. Nacija je „disala“ s momčadi Miroslava Ćire Blaževića. Pratio se svaki korak, gledale su se svake vijesti, čekale novosti s Otoka. Prvi pogodak na nekom velikom natjecanju zabio je Goran Vlaović. Njegov bijeg nakon sjajnog proigravanja Aljoše Asanovića ostao je upamćen kao jedan od najvećih trenutaka našeg reprezentativnog nogometa. Cijela Hrvatska je utihnula, a kad je lopta završila u mreži prolomio se usklik pobjede.',
+          // videoLink:
+          //   'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+        },
+        {
+          Title: 'Lob Davora Šukera protiv Danske',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917199/HRJA5150_copy_jn7lw6.jpg',
+          Description:
+            '„Lomljenje“ Danske u 2. kolu dovelo je Hrvatsku na nogometnu kartu velikana i utjecajnih reprezentacija. Ondje je ostala zauvijek. Posebno pamtimo lob kojim je Davor Šuker matirao Petera Schmeichela i ostavio mu biljeg za sva vremena.',
+          // videoLink:
+          //   'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
+        },
+      ],
+      Facts: [
+        'Paranormalist Uri Geller, koji tvrdi da je mogao mislima savijati žlice, izjavio je da je njegova moć pomaknula loptu prije nego je Škot Gary McAllister obranio jedanaesterac Englezima.',
+        'Alan Shearer završio je kao najbolji strijelac EURA ’96. s pet pogodaka. Još dva na Euru 2000. znače da je engleski as tada bio treći strijelac u povijesti finala iza Michela Platinija i Cristiana Ronalda.',
+        'Finalisti iz 1996. također su se susreli u grupnoj fazi. Njemačka je pobijedila Češku 2 : 0 u grupnoj fazi i 2 : 1 u finalu.',
+        'Idealna momčad EURA: Kopke (Njemačka) – Maldini (Italija), Blanc (Francuska), Desailly (Francuska) – Poborsky (Češka), Elits (Njemačka), Sammer (Njemačka), Gascoigne (Engleska) – Stoičkov (Bugarska) – Shearer (Engleska)',
+      ],
     },
   },
   {
@@ -66,43 +219,43 @@ export const STORIES = [
         Teams: [
           {
             TeamName: 'Danska',
-            MatchesPlayed: 7,
-            Wins: 1,
+            MatchesPlayed: 8,
+            Wins: 5,
             Draws: 2,
-            Losses: 2,
-            Points: 5,
+            Losses: 1,
+            Points: 17,
           },
           {
             TeamName: 'Hrvatska',
-            MatchesPlayed: 6,
-            Wins: 2,
-            Draws: 2,
-            Losses: 2,
-            Points: 8,
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 3,
+            Losses: 1,
+            Points: 15,
           },
           {
             TeamName: 'Grčka',
-            MatchesPlayed: 5,
-            Wins: 2,
-            Draws: 3,
-            Losses: 1,
-            Points: 9,
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 2,
+            Losses: 2,
+            Points: 14,
           },
           {
             TeamName: 'BiH',
-            MatchesPlayed: 4,
+            MatchesPlayed: 8,
             Wins: 3,
-            Draws: 3,
-            Losses: 1,
-            Points: 12,
+            Draws: 0,
+            Losses: 5,
+            Points: 9,
           },
           {
             TeamName: 'Slovenija',
-            MatchesPlayed: 2,
-            Wins: 3,
-            Draws: 5,
-            Losses: 9,
-            Points: 14,
+            MatchesPlayed: 8,
+            Wins: 0,
+            Draws: 1,
+            Losses: 7,
+            Points: 1,
           },
         ],
       },
@@ -169,7 +322,6 @@ export const STORIES = [
               {
                 Teams: 'ARGENTINA - HRVATSKA',
                 Score: '1 : 0',
-                Scorers: [''],
               },
             ],
           },
@@ -275,18 +427,9 @@ export const STORIES = [
           videoLink:
             'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
+
         {
-          Title: 'Reportaža Stanić zabija za 1:0 protiv Jamajke',
-          imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917199/HRJA5150_copy_jn7lw6.jpg',
-          Description:
-            'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
-          videoLink:
-            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
-        },
-        {
-          Title:
-            'Reportaža Prosinečki zabija za 1:0 protiv Nizozemske u 13. minuti!',
+          Title: 'Prosinečki zabija za 1:0 protiv Nizozemske u 13. minuti!',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917360/HRV21107_copy_tvmokl.jpg',
           Description:
@@ -294,13 +437,27 @@ export const STORIES = [
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275704/1998_HRV_NIZ_PROSINECKI_npjfyq.mp4',
         },
+        {
+          Title: 'Stanić zabija za 1:0 protiv Jamajke',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917199/HRJA5150_copy_jn7lw6.jpg',
+          Description:
+            'U osmini finala čekali su nas Rumunji. Puni sebe. Obojanih glava. Samouvjerenost im se odbila o te žute glave. Kazneni udarac za Hrvatsku u smiraj prvog poluvremena. U teškoj, izjednačenoj utakmici trenutak koji usmjerava nogometnu sadašnjost i budućnost. Trenutak koji će donijeti veliko slavlje ili veliku tugu cijeloj domovini. Ondje se ispisuje nova stranica hrvatske nogometne povijesti. Na megdan su ponovno došli Nijemci. Klinsmann i društvo bili su nam dužnici nakon Eura dvije godine ranije. Nismo zaboravili. Nogometne zvijezde na nebu posložile su se drukčije. Juriš Ćirinih vojnika bio je nezaustavljiv. Fantastični, prekrasni golovi Roberta Jarnija s lijeve i Gorana Vlaovića s desne strane igrališta poslali su dva torpeda u njemački brod koji je počeo tonuti.',
+          videoLink:
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
+        },
+      ],
+      Facts: [
+        'SP je obilježio već svima poznati poljubac kojim je Laurent Blanc, za sreću, ljubio ćelavu glavu Fabiena Bartheza uoči svake utakmice Francuske.',
+        'Francusku 1998. pamtimo i po frizerskim eskapadama. Prednjačio je Nigerijac Taribo West sa zelenim pramenovima. Rumunji su se obojili u žuto, kao i Mario Stanić, a Zvonimir Boban na zatiljku je izbrijao broj 10.',
       ],
       Coach: {
         Name: 'Miroslav “Ćiro” Blažević',
         DOB: '9. veljače, 1935.',
         CoachingCareer: '1968. - 2015.',
         MajorAchievements: [
-          'Brončana medalja sa Svjetskog Prvenstva u Francuskoj 1998.',
+          'Najveći uspjeh Čire Blaževića uslijedio je kada je Hrvatsku vodio do trećeg mjesta na SP-u u Francuskoj.',
+          'Ćiro s kapom stradalog francuskog policajca 1998. primjer je njegovog izvrsnog osjećaja za trenutak. Mase su ga obožavale. A, Ćiro se u tome izvrsno snalazio. Preminuo je 8. veljače 2023.',
         ],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698705071/HRV31207_copy_l7simf.jpg',
@@ -309,24 +466,224 @@ export const STORIES = [
     },
   },
   {
-    storyTitle: '2002',
+    storyTitle: '2000',
     storyId: 2,
     story: {
-      storyTitle: 'Svjetsko Prvenstvo 2002',
+      storyTitle: 'Euro 2000.',
       storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/2002_wc_ca6nnn.png',
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699387164/UEFA_Euro_2000_logo.svg_yu5xeu.png',
+      Qualifications: {
+        Description:
+          'Euro 2000. u Belgiji i Nizozemskoj Jedino je europsko prvenstvo na koje se Hrvatska nije plasirala. Svjetski brončani. Nije mala stvar. Ali, bio je to i teret. Ušli smo u kvalifikacije gdje se znalo da će tenzije biti ogromne još otkako su nas kuglice spojile s Jugoslavijom. Poraz od Irske u prvom susretu nas je otrijeznio.',
+        Teams: [
+          {
+            TeamName: 'Jugoslavia',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 2,
+            Losses: 1,
+            Points: 17,
+          },
+          {
+            TeamName: 'Irska',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 1,
+            Losses: 2,
+            Points: 16,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 3,
+            Losses: 1,
+            Points: 15,
+          },
+          {
+            TeamName: 'Makedonija',
+            MatchesPlayed: 8,
+            Wins: 2,
+            Draws: 2,
+            Losses: 4,
+            Points: 8,
+          },
+          {
+            TeamName: 'Malta',
+            MatchesPlayed: 8,
+            Wins: 0,
+            Draws: 0,
+            Losses: 8,
+            Points: 0,
+          },
+        ],
+      },
+      Highlights: [
+        {
+          Title:
+            'Gol Davora Šukera protiv Irske nakon sjajnog dodavanja Roberta Kovača (4. rujna 1999.)',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          Description:
+            'Šukerova genijalnost protiv Irske dovela nas je u situaciju da 9. listopada 1999., protiv Jugoslavije na prepunom Maksimiru tražimo pobjedu za izravan prolaz. I onda bolni remi, 2 : 2. Oni koji su gledali, sjećaju se i danas. Ludnica nakon pogotka Bokšića, dva gola gostiju, crveni karton Mirkoviću, izjednačenje Stanića. Sjećamo se i udarca Šukera za koji smo i dan danas sigurni da je prešao crtu. Nažalost, spektakularna utakmica rezultirala je ostankom bez EURA u Nizozemskoj i Belgiji. Mnogi taj susret označavaju kao početak osipanja legendarne „brončane“ generacije.',
+          // videoLink:
+          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+        },
+      ],
     },
   },
+
+  // 2002
   {
-    storyTitle: '2004',
+    storyTitle: '2002',
     storyId: 3,
     story: {
-      storyTitle: 'Euro 2004',
+      storyTitle: 'Svjetsko Prvenstvo 2002.',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/2002_wc_ca6nnn.png',
+      Qualifications: {
+        Description:
+          'Loš početak kvalifikacija za SP 2002 stajao je posla legendarnog Miroslava Ćiru Blaževića. Reprezentaciju je preuzeo Mirko Jozić. Nakon toga Hrvatska se „probudila“ i mirno odradila posao. Prvo mjesto u skupini ispred Belgije, Škotske, Latvije i San Marina. Boško Balaban bio je najbolji strijelac Hrvatske u tom procesu s 5 pogodaka. Najvažnija utakmica bila je pobjeda nad Belgijom u posljednjem kolu 1 : 0 pogotkom Alena Bokšića. To nam je donijelo prvo mjesto u skupini i direktan plasman na SP',
+        Teams: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 3,
+            Losses: 0,
+            Points: 18,
+          },
+          {
+            TeamName: 'Belgija',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 2,
+            Losses: 1,
+            Points: 17,
+          },
+          {
+            TeamName: 'Škotska',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 3,
+            Losses: 1,
+            Points: 15,
+          },
+          {
+            TeamName: 'Latvia',
+            MatchesPlayed: 8,
+            Wins: 1,
+            Draws: 1,
+            Losses: 6,
+            Points: 4,
+          },
+          {
+            TeamName: 'San Marino',
+            MatchesPlayed: 8,
+            Wins: 0,
+            Draws: 1,
+            Losses: 7,
+            Points: 1,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Meksiko',
+            MatchesPlayed: 2,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Italija',
+            MatchesPlayed: 2,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 2,
+            Wins: 1,
+            Draws: 0,
+            Losses: 2,
+            Points: 3,
+          },
+          {
+            TeamName: 'Ekvador',
+            MatchesPlayed: 2,
+            Wins: 1,
+            Draws: 0,
+            Losses: 2,
+            Points: 3,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'Meksiko - Hrvatska',
+                Score: '1 : 0',
+              },
+              {
+                Teams: 'Italija - Hrvatska',
+                Score: '1 : 2',
+                Scorers: ['Olić 73`, Rapaić 76`'],
+              },
+              {
+                Teams: 'Hrvatska - Ekvador',
+                Score: '0 : 1',
+              },
+            ],
+          },
+        },
+        Champ: {
+          Winner: 'BRAZIL',
+          TopScorer: {
+            Player: 'Ronaldo',
+            Team: 'Brazil',
+            Goals: 8,
+          },
+        },
+        Summary:
+          'Prvo svjetsko prvenstvo organizirano u dvije zemlje. Japan i Južna Koreja bili su divni domaćini, a ovaj Mundijal ostao je upamćen po brojnim iznenađenjima. Odmah na otvaranju Senegal je pobijedio branitelja naslova, Francusku. To je bila najava predstojećeg natjecanja. Po mnogima su Argentina, Francuska i Portugal bili veliki kandidati za naslov. Nitko od njih nije prošao skupinu, kao niti Hrvatska. U prvoj utakmici protiv Meksika u Nigati, Vatreni su pokazali veliku nervozu. Donijelo je to isključenje Borisa Živkovića i kazneni udarac za Meksiko koji je u pogodak i poraz Hrvatske pretvorio Blanco. U sljedećoj utakmici protiv Italije, Hrvatska je ponovno pokazala da nam „Azzurri“ leže. Gubili smo 1 : 0, a tada su slavonske lole Olić i Rapaić preokrenuli i donijeli nadu. No, nogomet latinske Amerike nam ne leži. Ekvador je pobijedio Hrvatsku i poslao ju kući.',
+      },
+      Facts: [
+        'Hrvatski Sabor prekidao je svoj rad zbog utakmica Vatrenih.',
+        'Sjeverna Koreja je na bizaran način prenosila Svjetsko prvenstvo tako da je emitirala samo prvo poluvrijeme utakmice SAD-a i Poljske, u kojem su Amerikanci gubili.',
+        'Ovo prvenstvo je dobilo puno kritika zbog katastrofalnog suđenja. Domaćin, Južna Koreja je na krilima čudnih odluka došla do polufinala.',
+      ],
+
+      Coach: {
+        Name: 'Mirko Jozić',
+        DOB: 'Datum rođenja nije dostupan',
+        CoachingCareer: 'Hrvatska (2000 - 2002)',
+        MajorAchievements: [
+          'Uspješno vođenje hrvatske nogometne reprezentacije tijekom kvalifikacija za Svjetsko prvenstvo 2002.',
+          'Plasman na Svjetsko prvenstvo 2002. godine.',
+          'Vođenje i mentorstvo momčadi koja je uključivala istaknute igrače poput Davora Šukera, Zvonimira Bobana, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog.',
+        ],
+        imgUrl: 'URL slike Mirka Jozića',
+        StoryText:
+          'Mirko Jozić je preuzeo ulogu izbornika Hrvatske nogometne reprezentacije od 2000. do 2002. godine. Prije toga, stekao je ugled osvajanjem Svjetskog nogometnog prvenstva za mlade reprezentacije 1987. godine u Čileu s selekcijom Jugoslavije, u kojoj su igrali igrači poput Zvonimira Bobana, Davora Šukera, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog. Jozićeva era kao izbornika seniorske reprezentacije Hrvatske obilježena je nastojanjima u kvalifikacijama za Svjetsko prvenstvo 2002. godine, no nažalost, Hrvatska nije uspjela proći skupinu na tom turniru. Ova era je počela porazom od Meksika, a uslijedila je pobjeda protiv Italije te poraz od Ekvadora, što je rezultiralo eliminacijom iz turnira.',
+      },
+    },
+  },
+  //
+  //2004
+  {
+    storyTitle: '2004',
+    storyId: 4,
+    story: {
+      storyTitle: 'Euro 2004.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2004_euro_pvdhs9.png',
       Qualifications: {
         Description:
-          'Teške kvalifikacije u kojima je Hrvatska imala velikih problema. Pamtimo pobjedu nad BiH u Bologni 4 : 1, pamtimo teški remi sa Slovenijom na Poljudu 3 : 3. Tek u posljednjem kolu, pobjedom nad Slovenijom i obranama Schmeichela protiv Grčke osigurali smo dodatne kvalifikacije. A ondje se dogodila opasna bitka s Ukrajincima i prolazak na prvi Mundijal.',
+          'Nakon slabog rezultata na SP 2002., Hrvatsku je preuzeo Otto Barić. Zadatak je bio presložiti momčad, pomladiti, stvoriti igru i plasirati se na Euro u Portugal. Kvalifikacije su počele teško. Sa siromašnim remijem 0 : 0 protiv Estonije i s porazom u Bugarskoj 2 : 0. Nije bilo ideje, nije bilo kreativnosti. Alarm se upalio. Her Otto je odlučio „prodrmati“ stvari. Osvježio je momčad igračima koji će u budućnosti igrati važne uloge: Darijo Srna, Dado Pršo, Milan Rapaić i Niko Kovač samo su neka od imena koja su dobila važnije uloge. „Crveni vragovi“ pali su ničice, Hrvatska ih je svladala visokom pobjedom 4 : 0 golovima Srne, Prše, Marića i Leke. Na koncu je Hrvatska završila druga u skupini i kroz dodatne kvalifikacije teškom mukom prošla Sloveniju i izborila nastup na Euru. Dado Pršo zabio je u oba susreta i odveo Hrvatsku u Portugal.',
         Teams: [
           {
             TeamName: 'Bugarska',
@@ -342,7 +699,7 @@ export const STORIES = [
             Wins: 4,
             Draws: 3,
             Losses: 1,
-            Points: 15,
+            Points: 16,
           },
           {
             TeamName: 'Belgija',
@@ -350,7 +707,7 @@ export const STORIES = [
             Wins: 4,
             Draws: 2,
             Losses: 2,
-            Points: 14,
+            Points: 16,
           },
           {
             TeamName: 'Estonija',
@@ -379,7 +736,7 @@ export const STORIES = [
         {
           Teams: 'SLOEVENIJA – HRVATSKA',
           Score: '0 : 1',
-          Scorers: ['Pršo  61'],
+          Scorers: ['Pršo  61`'],
         },
       ],
       Championship: {
@@ -512,6 +869,18 @@ export const STORIES = [
           },
         ],
       },
+      Highlights: [
+        {
+          Title:
+            '2003 - Pogodak Dade Prše protiv Slovenije (gol u dodatnim kvalifikacijama 19.11.2003. na Bežigradu)',
+          imgUrl:
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
+          Description:
+            'Godina 2003. pamti se po povijesnom trenutku kada je Dado Pršo zauvijek ušao u hrvatsku nogometnu legendu. Na dan 19. studenog 2003. na stadionu Bežigrad u Sloveniji, Dado Pršo postigao je nevjerojatan pogodak protiv Slovenije tijekom dodatnih kvalifikacija. Taj trenutak postao je ikoničan, obilježavajući jedan od najvažnijih trenutaka u povijesti hrvatskog nogometa. Pršo je svojim golom donio radost i ponos svim navijačima Hrvatske te ostavio neizbrisiv trag u kolektivnom pamćenju',
+          // videoLink:
+          //   'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+        },
+      ],
       Coach: {
         Name: 'OTTO BARIĆ',
         DOB: '9. veljače, 1935.',
@@ -521,57 +890,704 @@ export const STORIES = [
         ],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698705071/HRV31207_copy_l7simf.jpg',
-        StoryText: '',
+        StoryText:
+          'Herr Otto. Vrsni stručnjak sjajne karijere. Pod Barićevim vodstvom Hrvatska je prošla teške kvalifikacije za Euro 2004. Najviše se pamti dodatno razigravanje protiv Slovenije. Dado Pršo postigao je odlučujući pogodak u gostima u uzvratnom susretu. Na samom Euru u Portugalu Hrvatska je odigrala 0 : 0 sa Švicarskom, remizirala i s braniteljima naslova Francuzima (2 : 2), ali zbog poraza od Engleza 4 : 2 nije prošla u četvrtfinale. Barićev dvogodišnji ugovor istekao je u srpnju 2004.',
       },
     },
   },
+  //2006
   {
     storyTitle: '2006',
-    storyId: 4,
-    story: {
-      storyTitle: 'Svjetsko Prvenstvo 2006',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2006_wc_cimqsj.png',
-    },
-  },
-  {
-    storyTitle: '2008',
     storyId: 5,
     story: {
-      storyTitle: 'Euro 2008',
+      storyTitle: 'Svjetsko Prvenstvo 2006.',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2006_wc_cimqsj.png',
+      Qualifications: {
+        Description:
+          'Zlatko Kranjčar preuzeo je uzde reprezentacije i mirno brodio kvalifikacijama za SP 2006. plasiravši se bez poraza. Odmah na početku sigurna pobjeda protiv Mađarske 3 : 0 i u gostima protiv Švedske 1 : 0. Od ostalih susreta sigurno treba izdvojiti slavlje 3:1 u Sofiji kod Bugarske. Hrvatska je ponovno djelovala kao momčad, a briljirao je Darijo Srna koji je postigao 5 pogodaka u tim kvalifikacijama. Hrvatska i Švedska direktno su se plasirali na svjetsku smotru.',
+        Teams: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 10,
+            Wins: 7,
+            Draws: 3,
+            Losses: 0,
+            Points: 24,
+          },
+          {
+            TeamName: 'Švedska',
+            MatchesPlayed: 10,
+            Wins: 8,
+            Draws: 0,
+            Losses: 2,
+            Points: 24,
+          },
+          {
+            TeamName: 'Bugarska',
+            MatchesPlayed: 10,
+            Wins: 4,
+            Draws: 3,
+            Losses: 3,
+            Points: 15,
+          },
+          {
+            TeamName: 'Mađarska',
+            MatchesPlayed: 10,
+            Wins: 4,
+            Draws: 2,
+            Losses: 4,
+            Points: 14,
+          },
+          {
+            TeamName: 'Island',
+            MatchesPlayed: 10,
+            Wins: 1,
+            Draws: 1,
+            Losses: 8,
+            Points: 4,
+          },
+          {
+            TeamName: 'Malta',
+            MatchesPlayed: 10,
+            Wins: 0,
+            Draws: 3,
+            Losses: 7,
+            Points: 3,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 2,
+            Losses: 1,
+            Points: 2,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'BRAZIL – HRVATSKA',
+                Score: '1 : 0',
+                Scorers: ["Kaká 44'"],
+              },
+              {
+                Teams: 'JAPAN – HRVATSKA',
+                Score: '0 : 0',
+              },
+              {
+                Teams: 'HRVATSKA – AUSTRALIJA',
+                Score: '2 : 2',
+                Scorers: ["Srna 2'", "Kovac 56'"],
+              },
+            ],
+          },
+        },
+        Summary:
+          'Zauvijek ćemo pamtiti svečano otvorenje. Protivnik je bio branitelj naslova, veliki Brazil na Olimpijskom stadionu u Berlinu. Deseci tisuća hrvatskih navijača, dobra igra Vatrenih koji su ugušili sambu. Ali, jedna nesmotrenost i stigao je poraz golom Kake. Japan u drugom kolu u Nürnbergu. Hrvatska opet nije zabila gol. Drugu utakmicu za redom. Darijo Srna nije pogodio s bijele točke. Tako nam je nedostajao „neki“ Šuker da rješava ovakve utakmice. U trećem kolu Hrvatskoj je trebala pobjeda za prolazak. Utakmicu sjajnim pogotkom otvara Darijo Srna iz slobodnog udarca. Ali, tada je Australija preuzela inicijativu. Stjepan Tomas je neoprezno igrao rukom u svom kaznenom prostoru u potpuno bezopasnoj situaciji što je Australiji donijelo kazneni udarac i izjednačenje. Niko Kovač u 56. minuti udarcem s ruba kaznenog prostora pogađa za 2 : 1, ali ponovno se Hrvatska povlači i Harry Kewell iz blizine zabija Pletikosi za 2 : 2. PRVI NASTUP MODRIĆA NA VELIKOM NATJECANJU - 2006. PROTIV JAPANA  Nurnberg, vruće ljetno poslijepodne 2006. Prvi nastup Luke Modrića na velikom natjecanju u dresu Hrvatske. Ušao je u igru umjesto Igora Tudora u 71. minuti protiv Japana u 2. kolu Svjetskog prvenstva. Hrvatska nije mogla do pobjede i kasnije do prolaska skupine, ali Modrić je tu počeo graditi svoj vatreni opus.',
+      },
+      Coach: {
+        Name: 'Zlatko Kranjčar',
+        DOB: '15. studenog 1956.',
+        CoachingCareer:
+          'Prije vođenja hrvatske reprezentacije, Kranjčar je imao uspješnu trenersku karijeru u Hrvatskoj i na Bliskom istoku.',
+        MajorAchievements: [
+          'Kao igrač, Kranjčar je bio dio jugoslavenske reprezentacije koja je osvojila Europsko prvenstvo za igrače do 21 godine 1978. godine. Kao trener, vodio je Hrvatsku na Svjetskom prvenstvu 2006.',
+        ],
+        imgUrl: '',
+        StoryText:
+          'Cico. Omiljeni nogometni velikan zaraznog osmijeha na klupu Hrvatske sjeo je 2004. Bio je izbornik Lijepe naše na Svjetskom prvenstvu u Njemačkoj 2006. Hrvatska je izgubila prvu utakmicu od Brazila 1 : 0, odigrala neodlučeno s Japanom (0 : 0). Treća utakmica, neriješeno s Australijom 2 : 2, u kojoj su čak tri igrača zaradila crvene kartone, značila je ispadanje Hrvatske s još jednog velikog natjecanja u prvom krugu.',
+      },
+      Facts: [
+        'Utakmica protiv Australije ostala je upamćena i po bizarnoj situaciji. Engleski sudac Graham Poll isključio je Šimunića tek nakon trećeg žutog kartona.',
+        'Zinedine Zidane nasrnuo je na talijanskog braniča Marca Materazzija tijekom finalne utakmice udarivši ga glavom. Zidane, koji je alžirskog podrijetla, šokirao je gledatelje i komentatore bizarnim napadom, zbog čega su neki povjerovali da je igrač odgovarao na rasistički napad. Nekoliko dana kasnije, Materazzi je priznao da je vrijeđao Francuzovu sestru.',
+      ],
+    },
+  },
+  //2008
+  {
+    storyTitle: '2008',
+    storyId: 6,
+    story: {
+      storyTitle: 'Europsko Prvenstvo 2008.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2008_euro_aaiz5c.png',
-      Fans: [
+      Qualifications: {
+        Description:
+          'U srpnju 2006. izbornik je postao Slaven Bilić. Zapuhali su novi vjetrovi u svlačionici i krenuo je novi način rada i pristupa igračima. Bilić je stvorio izrazito kohezivnu momčad. Reprezentacija je postala obitelj. Prvi rezultati takvog odnosa bili su jasni u kvalifikacijama za Euro 2008. Mirno, sigurno, uvjerljivo. Kvalifikacije bez stresa i bilo kakvih upitnika. Krenulo je s obećavajućom pobjedom nad Andorom sa 7 : 0, a završilo epskom, opjevanom pobjedom u Londonu nad Engleskom s 3 : 2. Hrvatska je tada već bila osigurala plasman na EP, ali Kranjčar, Olić i Petrić potopili su Engleze na Wembleyu, zavili naciju u crno i pokazalikarakter pobjednika. U našoj kvalifikacijskoj skupini Hrvatska je imala dva najbolja strijelca.Eduardo je zabio 10 pogodaka, a Mladen Petrić 7.',
+        Teams: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 12,
+            Wins: 9,
+            Draws: 2,
+            Losses: 1,
+            Points: 29,
+          },
+          {
+            TeamName: 'Rusija',
+            MatchesPlayed: 12,
+            Wins: 7,
+            Draws: 3,
+            Losses: 2,
+            Points: 24,
+          },
+          {
+            TeamName: 'Engleska',
+            MatchesPlayed: 12,
+            Wins: 7,
+            Draws: 2,
+            Losses: 3,
+            Points: 23,
+          },
+          {
+            TeamName: 'Izrael',
+            MatchesPlayed: 12,
+            Wins: 7,
+            Draws: 2,
+            Losses: 3,
+            Points: 23,
+          },
+          {
+            TeamName: 'Makedonija',
+            MatchesPlayed: 12,
+            Wins: 4,
+            Draws: 2,
+            Losses: 6,
+            Points: 14,
+          },
+          {
+            TeamName: 'Estonija',
+            MatchesPlayed: 12,
+            Wins: 2,
+            Draws: 1,
+            Losses: 9,
+            Points: 7,
+          },
+          {
+            TeamName: 'Andora',
+            MatchesPlayed: 12,
+            Wins: 0,
+            Draws: 0,
+            Losses: 12,
+            Points: 0,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 3,
+            Draws: 0,
+            Losses: 0,
+            Points: 9,
+          },
+          {
+            TeamName: 'Njemačka',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 0,
+            Losses: 1,
+            Points: 6,
+          },
+          {
+            TeamName: 'Austrija',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 1,
+            Losses: 2,
+            Points: 1,
+          },
+          {
+            TeamName: 'Poljska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 1,
+            Losses: 2,
+            Points: 1,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'AUSTRIA – HRVATSKA',
+                Score: '0 : 1',
+                Scorers: ["Modrić 4' (pen)"],
+              },
+              {
+                Teams: 'HRVATSKA – NJEMAČKA',
+                Score: '2 : 1',
+                Scorers: ["Srna 24'", "Olić 62'"],
+              },
+              {
+                Teams: 'POLJSKA – HRVATSKA',
+                Score: '0 : 1',
+                Scorers: ["Klasnić 52'"],
+              },
+            ],
+          },
+          Finals: {
+            QuarterFinal: {
+              Match: 'TURSKA – HRVATSKA',
+              Score: '1 : 1',
+              GoalScorers: ['Klasnić119`'],
+            },
+          },
+        },
+        Summary:
+          'Bila je to sjajna Hrvatska. Luka Modrić polako je preuzimao uzde momčadi. Mlade zvijezde s nekoliko iskusnijih mentora odigrale su sjajan turnir. Na početku teška pobjeda protiv žilavih domaćina Austrijanaca. Zatim, dominantna predstava protiv, uvijek nam dragih, Nijemaca. I zatim slavlje protiv Poljaka gdje je Hrvatska pokazala zrelost i pobijedila u utakmici u kojoj nije bilo imperativa. Nakon toga - horor. Teška, mučna utakmica četvrtfinala protiv Turske i jedan od najbolnijih poraza u našoj nogometnoj povijesti. Ivan Klasnić je zabio u pretposljednjoj minuti produžetka. Slavila je cijela Hrvatska. Mnogi nisu ni vidjeli trenutak kada je Semih Senturk izjednačio. U depresiju je pala i domovina, ali nažalost i igrači koji nisu mogli dobiti rulet raspucavanja. Ogromna tuga okupala je naciju. PRVI NASTUP RAKITIĆ NA VELIKOM NATJECANJU - 2008. PROTIV NJEMAČKE Ivan Rakitić obilježio je vezni red Hrvatske. Profinjeni igrač, španer. Prvi nastup za Vatrene na nekom velikom natjecanju ostvario je na Euru 2008. Bila je to velika pobjeda nad Njemačkom, a Rakitić se odmah našao u prvih 11 Slavena Bilića. Odigrao je sjajnu utakmicu. Sve nakon toga je predivna povijest.',
+        Champ: {
+          Winner: 'ŠPANJOLSKA',
+          TopScorer: {
+            Player: 'David Villa',
+            Team: 'Španjolska',
+            Goals: 5,
+          },
+        },
+      },
+      Coach: {
+        Name: 'Slaven Bilić',
+        DOB: '11. rujna 1968.',
+        CoachingCareer:
+          'Slaven Bilić preuzeo je hrvatsku reprezentaciju 2006. godine nakon Svjetskog prvenstva.',
+        MajorAchievements: [
+          'Pod vodstvom Bilića, Hrvatska je ostvarila svoj najbolji rezultat na Europskom prvenstvu do tada, dosegnuvši četvrtfinale 2008. godine.',
+        ],
+        imgUrl: '',
+        StoryText:
+          'Veliki igrač, vrstan trener i sjajan izbornik. Donio je novi način rada i odnosa u Hrvatskoj reprezentaciji. Moderni izbornik koji je stvorio sjajnu „klapu“ i u kojoj su svi davali svoj maksimum. Reprezentacija je pod Slavenom Bilićem igrala odlično. Imala je prepoznatljivi napadački stil. Pobjede poput one na Wembleyu protiv Engleske 3 : 2 ostaju zauvijek u sjećanju. Na Euru 2008. u Austriji i Švicarskoj Hrvatska je djelovala izuzetno snažno, ali traumatični poraz od Turske u četvrtfinalu ostavile su rane koje nikada nisu zacijelile.',
+      },
+      Facts: [
+        'Za Hrvatsku je zabijao Ivan Klasnić koji je na Euro došao 15 mjeseci nakon dvije transplantacije bubrega.',
+        'Austrijanac Ivica Vastić zabio je jedanaesterac u utakmici grupne faze protiv Poljske i postao najstariji strijelac EURA do tada s 38 godina i 257 dana.',
+        'Više od 100.000 nizozemskih navijača došlo je u Bern na utakmicu Oranjea protiv Francuske, čime se u tom trenutku udvostručio broj stanovnika glavnog grada Švicarske.',
+        'Izbornik Luis Aragonés nije baš odobravao novi španjolski žuti dres, objasnivši: "Ne sviđa mi se ova nova boja, ali sve dok je ja ne moram nositi, igrači mogu. U svakom slučaju, nije žuta, to je senf."',
+      ],
+
+      Highlights: [
         {
-          imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699276379/ds_navijaci_tribina-200608_kgpozw.jpg',
+          Title: 'Pogodak Ivana Klasnića protiv Turske',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          Description:
+            'Ivan Klasnić je zabio u pretposljednjoj minuti produžetka. Slavila je cijela Hrvatska. Mnogi nisu ni vidjeli trenutak kada je Semih Senturk izjednačio. U depresiju je pala i domovina, ali nažalost i igrači koji nisu mogli dobiti rulet raspucavanja. Ogromna tuga okupala je naciju.',
+          // videoLink:
+          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
       ],
     },
   },
   {
-    storyTitle: '2012',
-    storyId: 6,
-    story: {
-      storyTitle: 'Svjetsko Prvenstvo 2012',
-      storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2012_euro_sfutx2.png',
-    },
-  },
-  {
-    storyTitle: '2014',
+    storyTitle: '2010',
     storyId: 7,
     story: {
-      storyTitle: 'Svjetsko Prvenstvo 2014',
+      storyTitle: 'Svjetsko Prvenstvo 2010.',
       storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2014_wc_uauv0h.png',
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699387298/1200px-FIFA_World_Cup_2010_logo.svg_pjaasb.png',
+      Qualifications: {
+        Description:
+          'Svjetsko prvenstvo u Južnoafričkoj Republici pamtimo po mnogočemu. Po groznim vuvuzelama, dobrom nogometu i naslovu španjolske tiki take, ali i po neigranju Hrvatske. Jedino Svjetsko prvenstvo na koje se Vatreni nisu plasirali. Hrvatska je ostala treća u kvalifikacijskoj skupini iza Engleske i Ukrajine. Slaven Bilić ostao je izbornik. Engleska nas je oba puta pobijedila, s Ukrajinom Hrvatska je u oba susreta odigrala neriješeno. Neodlasku u JAR kumovala je i pobjeda Ukrajine nad Englezima pred kraj kvalifikacija. Englezi su nam lijepo „vratili“ neke nedavne dugove.',
+        Teams: [
+          {
+            TeamName: 'Engleska',
+            MatchesPlayed: 10,
+            Wins: 9,
+            Draws: 0,
+            Losses: 1,
+            Points: 27,
+          },
+          {
+            TeamName: 'Ukrajina',
+            MatchesPlayed: 10,
+            Wins: 6,
+            Draws: 3,
+            Losses: 1,
+            Points: 21,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 10,
+            Wins: 6,
+            Draws: 2,
+            Losses: 2,
+            Points: 20,
+          },
+          {
+            TeamName: 'Bjelorusija',
+            MatchesPlayed: 10,
+            Wins: 4,
+            Draws: 1,
+            Losses: 5,
+            Points: 13,
+          },
+          {
+            TeamName: 'Kazahstan',
+            MatchesPlayed: 10,
+            Wins: 2,
+            Draws: 0,
+            Losses: 8,
+            Points: 6,
+          },
+          {
+            TeamName: 'Andora',
+            MatchesPlayed: 10,
+            Wins: 0,
+            Draws: 0,
+            Losses: 10,
+            Points: 0,
+          },
+        ],
+      },
+      Facts: [
+        'Ovo je bilo prvo finale u povijesti Svjetskih prvenstava, a da u njemu nije bilo Brazila, Njemačke, Argentine ili Italije.',
+        'Španjolska je postala svjetski prvak s najmanje zabijenih golova na turniru - samo osam, koja su zabila samo tri igrača, Villa, Iniesta i Puyol. No primili su i najmanji broj golova, samo dva.',
+        'Čak četvorica najboljih strijelaca su bila u JAR-u, ali je Zlatnu kopačku dobio Thomas Müller, koji je uz pet golova imao najviše asistencija, njih tri. Za igrača turnira proglašen je Diego Forlan.',
+      ],
     },
   },
+  // 2012
   {
-    storyTitle: '2016.',
+    storyTitle: '2012',
     storyId: 8,
     story: {
-      storyTitle: 'Europsko Prvenstvo 2016',
+      storyTitle: 'Europsko Prvenstvo 2012.',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2012_euro_sfutx2.png',
+      Qualifications: {
+        Description:
+          'Mučila se Hrvatska u kvalifikacijama za Euro 2012. Poraz od Gruzije bio je znak da bi moglo biti problema i da je itekako upitan direktan plasman. A, čisti i zasluženi poraz u Grčkoj (2 : 0), odveo je Vatrene u rulet dodatnih kvalifikacija. Ondje je momčad Slavena Bilića pokazala unutarnju snagu. Hrvatska je otvorenim gardom napala Turke u Istanbulu i isprašila ih s čistih, sigurnih 3 : 0. Olić, Mandžukić i Ćorluka bili su strijelci, a posebno pamtimo maestralnu izvedbu „Čarlija“ na poziciji lijevog beka. Na uzvratu u Zagrebu s nenametljivih 0 : 0 i Hrvatska je osigurala Euro.',
+        Teams: [
+          {
+            TeamName: 'Grčka',
+            MatchesPlayed: 10,
+            Wins: 7,
+            Draws: 3,
+            Losses: 0,
+            Points: 24,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 10,
+            Wins: 7,
+            Draws: 1,
+            Losses: 2,
+            Points: 22,
+          },
+          {
+            TeamName: 'Izrael',
+            MatchesPlayed: 10,
+            Wins: 5,
+            Draws: 1,
+            Losses: 4,
+            Points: 16,
+          },
+          {
+            TeamName: 'Latvija',
+            MatchesPlayed: 10,
+            Wins: 3,
+            Draws: 2,
+            Losses: 5,
+            Points: 11,
+          },
+          {
+            TeamName: 'Gruzija',
+            MatchesPlayed: 10,
+            Wins: 2,
+            Draws: 4,
+            Losses: 4,
+            Points: 10,
+          },
+          {
+            TeamName: 'Malta',
+            MatchesPlayed: 10,
+            Wins: 0,
+            Draws: 1,
+            Losses: 9,
+            Points: 1,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Španjolska',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Italija',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 2,
+            Losses: 0,
+            Points: 5,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'R. Irska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 0,
+            Losses: 3,
+            Points: 0,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'HRVATSKA – IRSKA',
+                Score: '3 : 1',
+                Scorers: ["Mandžukić 3', 48'", "Jelavić 43'"],
+              },
+              {
+                Teams: 'ITALIJA – HRVATSKA',
+                Score: '1 : 1',
+                Scorers: ["Pirlo 39'", "Mandžukić 72'"],
+              },
+              {
+                Teams: 'HRVATSKA – ŠPANJOLSKA',
+                Score: '0 : 1',
+                Scorers: ["Navas 88'"],
+              },
+            ],
+          },
+        },
+        Champ: {
+          Winner: 'ŠPANJOLSKA',
+          TopScorer: {
+            Player:
+              'Mario Mandžukić, Mario Gómez, Mario Balotelli, Cristiano Ronaldo, Alan Dzagoev, Fernando Torres',
+            Goals: 3,
+            Team: '',
+          },
+        },
+        Summary:
+          'Ponovno je to bila dobra Hrvatska, ponovno je to bila Hrvatska koja se ravnopravno nosila s velikanima europskoga nogometa, ali Vatreni svejedno nisu prošli skupinu. Rutinirana pobjeda nad Republikom Irskom dala je nadu da bi ovo moglo biti izvrsno natjecanje. Remi protiv Italije pokazao je snagu i disciplinu. A tada, sudar sa Španjolcima. Pamtimo Navasov gol u 88. minuti koji nas je bacio u ponor, ali pamtimo i nevjerojatnu obranu Casillasa. Ivan Rakitić je sam bio pred njim, no udarac glavom legendarni vratar skida i odnosi Hrvatskoj četvrtfinale. ',
+      },
+      Coach: {
+        Name: 'Slaven Bilić',
+        DOB: '11. rujna 1968.',
+        CoachingCareer:
+          'Slaven Bilić je nastavio voditi hrvatsku reprezentaciju nakon uspjeha na Europskom prvenstvu 2008.',
+        MajorAchievements: [
+          'Pod vodstvom Bilića, Hrvatska je dosegla grupnu fazu Europskog prvenstva 2012., ali nije uspjela proći u nokaut fazu.',
+        ],
+        imgUrl: '',
+        StoryText:
+          'U Poljskoj i Ukrajini Hrvatska je također igrala jako dobro, ali nije prošla izuzetno tešku skupinu u kojoj su bile Italija, Španjolska i Irska. Na ta dva velika natjecanja nedostajalo je samo malo sreće. Slaven Bilić, kao izbornik, vodio je Hrvatsku na 65 utakmica. Ostvario je učinak od čak 42 pobjede, 15 remija i samo 8 poraza.',
+      },
+      Highlights: [
+        {
+          Title: 'Obrana Casillasa (Rakitić)',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          Description:
+            'Casillas je izvrsno obranio šut Rakitića i spasio gol. Taj trenutak bio je presudan za hrvatsku momčad, jer je očuvao našu nadu u pobjedu protiv Španjolske. Ovaj nevjerojatan trenutak obrane pokazao je Casillasovu briljantnost kao vratara i svu hrabrost naše reprezentacije. Hrvatski navijači pamte ovu situaciju kao jedan od najuzbudljivijih trenutaka u povijesti našeg nogometa',
+          // videoLink:
+          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+        },
+      ],
+      Facts: [
+        'Sa 73 godine i 93 dana Giovanni Trapattoni postao je najstariji izbornik koji je slavio na Euru kada je njegova Italija pobijedila Republiku Irsku s 2 : 0.',
+        'Od 76 pogodaka u 31 utakmici, rekordna 22 bila su glavom, uključujući prvi pogodak u prvoj utakmici Lewandowskog kada je Poljska remizirala s Grčkom.',
+        'Raritet. Španjolska je ostvarila 810 dodavanja naspram irskih 198 u njihovom međusobnom susretu. Sam Xavi Hernández uspio je 127 puta uspješno dodati loptu, što je bio rekord u regularnom vremenu na utakmici EP-a.',
+        'Španjolska je postala prva momčad koja je obranila naslov i zadržala Henri Delaunay kup. U međuvremenu je osvojila i Svjetsko prvenstvo 2010. i postala prva koja je osvojila tri uzastopna velika naslova.',
+        'Fernando Torres postao je prvi igrač koji je postigao pogodak u dva finala EURA.',
+      ],
+    },
+  },
+  //2014
+  {
+    storyTitle: '2014',
+    storyId: 9,
+    story: {
+      storyTitle: 'Svjetsko Prvenstvo 2014.',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308306/2014_wc_uauv0h.png',
+      Qualifications: {
+        Description:
+          'Igor Štimac poveo je Hrvatsku u kvalifikacije za SP 2014. Sa Srbijom protiv koje su utakmice uvijek posebno teške. Start nije bio loš, ali kreću problemi. Neugodan poraz od Škotske, remi sa Srbijom i poraz od Belgije značili su gubitak prvog mjesta i direktnog plasmana na Mundijal. Vrsni obrambeni igrač ostvario je i zapaženu trenersku karijeru. Početkom srpnja 2012. izabran je za izbornika hrvatske nogometne reprezentacije. Kvalifikacijski ciklus za SP počeo je s pet pobjeda u šest utakmica. Ali, u posljednje četiri utakmice osvojen je samo jedan bod. Nakon poraza od Škotske u Glasgowu 15. listopada 2013., ali i izborenog doigravanja za SP u Brazilu, Štimac daje svoj izbornički mandat na raspolaganje. Davor Šuker i HNS prihvaćaju ostavku.',
+        Teams: [
+          {
+            TeamName: 'Belgija',
+            MatchesPlayed: 10,
+            Wins: 8,
+            Draws: 2,
+            Losses: 0,
+            Points: 26,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 10,
+            Wins: 5,
+            Draws: 2,
+            Losses: 3,
+            Points: 17,
+          },
+          {
+            TeamName: 'Srbija',
+            MatchesPlayed: 10,
+            Wins: 4,
+            Draws: 2,
+            Losses: 4,
+            Points: 14,
+          },
+          {
+            TeamName: 'Škotska',
+            MatchesPlayed: 10,
+            Wins: 3,
+            Draws: 2,
+            Losses: 5,
+            Points: 11,
+          },
+          {
+            TeamName: 'Wales',
+            MatchesPlayed: 10,
+            Wins: 3,
+            Draws: 1,
+            Losses: 6,
+            Points: 10,
+          },
+          {
+            TeamName: 'S. Makedonija',
+            MatchesPlayed: 10,
+            Wins: 2,
+            Draws: 1,
+            Losses: 7,
+            Points: 7,
+          },
+        ],
+      },
+      AdditionalQualifications: [
+        {
+          Teams: 'Island – Hrvatska',
+          Score: '0 : 0',
+          Scorers: [],
+        },
+        {
+          Teams: 'Hrvatska – Island',
+          Score: '2 : 0',
+          Scorers: ["Mario Mandžukić - 27'", "Darijo Srna - 47'"],
+        },
+      ],
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Brazil',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Meksiko',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 0,
+            Losses: 2,
+            Points: 3,
+          },
+          {
+            TeamName: 'Kamerun',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 0,
+            Losses: 3,
+            Points: 0,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'Brazil – Hrvatska',
+                Score: '3 : 1',
+                Scorers: ["Marcelo (a.g.) - 12'"],
+              },
+              {
+                Teams: 'Kamerun – Hrvatska',
+                Score: '0 : 4',
+                Scorers: [
+                  "Ivica Olić - 11'",
+                  "Ivan Perišić - 48'",
+                  "Mario Mandžukić - 61'",
+                  "Mario Mandžukić - 73'",
+                ],
+              },
+              {
+                Teams: 'Hrvatska – Meksiko',
+                Score: '1 : 3',
+                Scorers: ["Ivan Perišić - 87'"],
+              },
+            ],
+          },
+        },
+        Summary:
+          'Bio je to spektakl. Otvaranje na Corinthians areni u Sao Paulu i to protiv Brazila. Nogometni svijet gledao je Hrvatsku Nike Kovača. Bilo je to dobro protiv moćnog, jakog Brazila. Ali, individualna kvaliteta Neymara i društva je presudila. Kamerun se nije mogao nositi s Hrvatskom, ali tada je slijedila odlučujuća utakmica protiv Meksika. Nogomet kakav oni igraju nije odgovarao Hrvatskoj, a potvrda je stigla i na samom travnjaku. Taj Mundijal bio je poseban. Igrao se dobar nogomet, rezultati su bili zanimljivi i gledali smo posebne nogometne predstave. Trebalo je neko vrijeme da se slegne prašina, pogotovo ako ste Brazilac. Nakon što je domaćin neslavno uništen u polufinalu od Njemačke (7 : 1), ponovno ih je nadigrala i Nizozemska u susretu za treće mjesto. Njemačka je osvojila svoj prvi naslov Svjetskog prvaka od ponovnog ujedinjenja zemlje, a svoj četvrti naslov ukupno. Argentinci su slomljeni u srcu brazilskog nogometa, na slavnoj Maracani. Navijači Albicelestea, koji su tako radosno uživali u ruganju Brazilu zbog poniženja u polufinalu, i sami su izgubili od izvrsne Njemačke.',
+        Champ: {
+          Winner: 'NJEMAČKA',
+          TopScorer: {
+            Player: 'James Rodriguez ',
+            Team: 'Francuska',
+            Goals: 6,
+          },
+        },
+      },
+      Facts: [
+        'Na Svjetskom prvenstvu 2014. postignut je 171 pogodak, čime je izjednačen rekord sa Svjetskim prvenstvom u Francuskoj 1998.',
+        'Ovo je bilo prvo Svjetsko prvenstvo koje je koristilo tehnologiju gol-linije.',
+        'Samo je jedna reprezentacija bila debitant na SP-u 2014. Bila je to selekcija Bosne i Hercegovine.',
+        'Utakmice SP-a 2014. igrale su se u 12 različitih gradova, više od bilo kojeg drugog Mundijala dotad.',
+        'Najmanji stadion bila je Arena de Baixada koja je primala oko 38.000 gledatelja. Maracana je primala oko 75.000 gledatelja.',
+      ],
+      Coach: {
+        Name: 'Niko Kovač',
+        DOB: '15. listopada 1971.',
+        CoachingCareer:
+          'Počeo kao menadžer 2013. s hrvatskom U21 reprezentacijom, zatim preuzeo seniorsku reprezentaciju Hrvatske, Eintracht Frankfurt, Bayern München i AS Monaco',
+        MajorAchievements: [
+          'Osvojio Bundesligu i DFB-Pokal s Bayernom u sezoni 2018./2019.',
+          'Osvojio Hrvatski nogometni kup s reprezentacijom Hrvatske kao menadžer 2013. godine',
+        ],
+        imgUrl:
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709446/c%CC%8Cac%CC%8Cic%CC%81_klupa_igrac%CC%8Ci_ouch2k.jpg',
+        StoryText:
+          'Bivši kapetan reprezentacije. Igrač i čovjek neograničene ljubavi prema Hrvatskoj. Borac i veliki radnik. Metodičan i pedantan. Niko Kovač preuzima "A" selekciju u doigravanju za SP u Brazilu. Hrvatska je u dvije utakmice doigravanja protiv Islanda izborila odlazak na Mundijal. Ondje je bila dijelom svečanog otvaranja i velikog sudara protiv domaćina, Brazila koji je pobijedio 3 : 1. Hrvatska je nakon toga bla bolja od Kameruna, ali kobni su bili ponovno Meksikanci kao i u Japanu 2002., pobijedivši 3 : 1.',
+      },
+    },
+  },
+  //2016
+  {
+    storyTitle: '2016.',
+    storyId: 10,
+    story: {
+      storyTitle: 'Europsko Prvenstvo 2016.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2016_euro_hzfjkn.png',
       Qualifications: {
@@ -697,7 +1713,7 @@ export const STORIES = [
           Winner: 'PORTUGAL',
           TopScorer: {
             Player: 'Antoine  Griezmann',
-            Team: '(Francuska)',
+            Team: 'Francuska',
             Goals: 6,
           },
         },
@@ -769,8 +1785,7 @@ export const STORIES = [
       },
       Highlights: [
         {
-          Title:
-            'Reportaža Pogodak Nikole Kalinića u 45. minuti protiv Španjolske',
+          Title: 'Pogodak petom Nikole Kalinića na Euru 2016',
           imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Majstorski pogodak Kalinića petom za izjednačenje protiv nogometnog diva.',
@@ -810,7 +1825,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2018',
-    storyId: 9,
+    storyId: 11,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2018.',
       storyLogo:
@@ -1186,18 +2201,157 @@ export const STORIES = [
   },
   {
     storyTitle: '2020',
-    storyId: 10,
+    storyId: 12,
     story: {
-      storyTitle: 'Euro 2020',
+      storyTitle: 'Euro 2020.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2020_euro_kds3g9.png',
+
+      Qualifications: {
+        Description:
+          'Rutina. Hrvatska je stekla naviku pobjeđivanja. U skupini koja nije bila pretjerano teška Hrvatska je pokazala karakter. Jedan poraz od Mađarske koji je upozorio da se igrači ne smiju posve opustiti. U ostalim susretima Hrvatska je igrala koliko treba. Kada je bilo najvažnije, u posljednjem kolu, sigurna i uvjerljiva pobjeda protiv Slovačke 3 : 1. Naš najbolji strijelac kvalifikacijskog procesa bio je Bruno Petković s 4 pogotka.',
+        Teams: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 8,
+            Wins: 5,
+            Draws: 2,
+            Losses: 1,
+            Points: 17,
+          },
+          {
+            TeamName: 'Wales',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 2,
+            Losses: 2,
+            Points: 14,
+          },
+          {
+            TeamName: 'Slovakia',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 1,
+            Losses: 3,
+            Points: 13,
+          },
+          {
+            TeamName: 'Mađarska',
+            MatchesPlayed: 8,
+            Wins: 4,
+            Draws: 0,
+            Losses: 4,
+            Points: 12,
+          },
+          {
+            TeamName: 'Azerbajdžan',
+            MatchesPlayed: 8,
+            Wins: 0,
+            Draws: 1,
+            Losses: 7,
+            Points: 1,
+          },
+        ],
+      },
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Engleska',
+            MatchesPlayed: 3,
+            Wins: 2,
+            Draws: 1,
+            Losses: 0,
+            Points: 7,
+          },
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'Češka',
+            MatchesPlayed: 3,
+            Wins: 1,
+            Draws: 1,
+            Losses: 1,
+            Points: 4,
+          },
+          {
+            TeamName: 'Škotska',
+            MatchesPlayed: 3,
+            Wins: 0,
+            Draws: 1,
+            Losses: 2,
+            Points: 1,
+          },
+        ],
+
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'ENGLESKA – HRVATSKA',
+                Score: '1 : 0',
+              },
+              {
+                Teams: 'HRVATSKA – ČEŠKA',
+                Score: '1 : 1',
+                Scorers: ['Perišić 47`'],
+              },
+              {
+                Teams: 'HRVATSKA – ŠKOTSKA',
+                Score: '3 : 1',
+                Scorers: ['Vlašić 17`', 'Modrić 62`', 'Perišić 77`'],
+              },
+            ],
+          },
+          Finals: {
+            RoundOf16: {
+              Match: 'HRVATSKA – ŠPANJOLSKA',
+              Description:
+                'Uzbudljiva utakmica s mnoštvom preokreta. Hrvatska se vratila u igru nakon što je gubila 3:1, izjednačivši rezultat na 3:3, ali u produžecima Španjolska osigurava pobjedu.',
+              Score: '3 : 5 prod.',
+              GoalScorers: ['Pedri a.g. 20`', 'Oršić 85`', 'Pašalić 90+2`'],
+            },
+          },
+        },
+        Summary:
+          'Za Hrvatsku je Euro 2020. bio svojevrsno tranzicijsko natjecanje. Mladi igrači polako su preuzimali velike uloge. Izbornik Zlatko Dalić slagao je novu veliku priču. Ali, trebalo je puno razumijevanja i vremena za pogreške i nesigurnosti koje su se javljale putom. U skupini smo imali teške dvije utakmice protiv Engleske i Češke. Englezi su kaznili jednu neopreznost, a protiv Češke puno toga nije polazilo za "rukom" našim igračima. Protiv Škotske Hrvatska je pokazala dio svoje moći. Pamtimo fantastičan pogodak Luke Modrića kojim je potvrdio pobjedu i prolazak u osminu finala.',
+        Champ: {
+          Winner: 'ITALIJA',
+          TopScorer: {
+            Player: 'Patrick Schick, Cristiano Ronaldo',
+            Team: 'Češka, Portugal ',
+            Goals: 5,
+          },
+        },
+      },
+      Highlights: [
+        {
+          Title: 'Pogodak Luke Modrića protiv Škotske na EP 2020',
+          imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
+          Description:
+            ' Englezi su kaznili jednu neopreznost, a protiv Češke puno toga nije polazilo za "rukom" našim igračima. Protiv Škotske Hrvatska je pokazala dio svoje moći. Pamtimo fantastičan pogodak Luke Modrića kojim je potvrdio pobjedu i prolazak u osminu finala.',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+        },
+      ],
+      Facts: [
+        'Italija je postala prva momčad koja je pobijedila u dva raspucavanja s bijele točke na jednom završnom turniru EP-a nakon što je pobijedila Španjolsku u polufinalu i Englesku u finalu.',
+        'Italija je podigla svoj drugi trofej pobjednika na EP-u nakon 53 godine (1968.) – što je najduži jaz između naslova za bilo koju naciju u povijesti natjecanja.',
+        'Na Euru 2020. postignuta su 142 gola – najviše od svih prvenstava do tada – s prosjekom od 2,78 golova po utakmici također rekordno visokim.',
+        '7 od 16 jedanaesteraca bilo je obranjeno ili promašeno – ne računajući raspucavanja.',
+      ],
     },
   },
   {
     storyTitle: '2022',
-    storyId: 11,
+    storyId: 13,
     story: {
-      storyTitle: 'Svjetsko Prvenstvo, Katar 2022.',
+      storyTitle: 'Svjetsko Prvenstvo 2022.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2018_wc_byzpqe.png',
       Qualifications: {
@@ -1354,7 +2508,7 @@ export const STORIES = [
           },
         },
         Summary:
-          'Bilo je to sjajno Svjetsko prvenstvo s besprijekornom organizacijom i fantastičnim stadionima. A Hrvatska...maestralna.  Branitelja  srebra nitko više nije podcjenjivao. Protivnici su svoju igru prilagođavali Hrvatskoj. Teško otvaranje. Maroko je bila najbolja afrička zemlja. Pokazalo se to kasnije u turniru kad su došli do polufinala. Nakon remija bez pogodaka protiv Marokanaca slijedila je Kanada. Nogomet je sve popularniji u zemlji hokeja na ledu. Brzina im je bila glavno oružje, ali nogometna mudrost je odnijela pobjedu. Hrvatska je već uvježbano slavila. Tada je slijedio ogled za prolazak protiv Belgije. Momčad Kevina De Bruynea prošla je svoj vrhunac bez ozbiljnijeg rezultata i ovo Svjetsko prvenstvo im je trebalo biti labuđi pjev. Hrvatska je odigrala čvrstu utakmicu. Pamtit ćemo promašaje Romelua Lukakua koji je obuo „krive“ kopačke. Hrvatska je mogla odahnuti. Osmina finala. Japan je u osmini finala bio izuzetno opasan protivnik. Majstori povrataka. U skupini su pokazali da se nikad ne predaju.  Odluka je morala pasti udarcima s bijele točke. A tada na scenu stupa Dominik Livaković. Skida tri jedanaesterca i postaje heroj nacije.',
+          'Bilo je to sjajno Svjetsko prvenstvo s besprijekornom organizacijom i fantastičnim stadionima. A Hrvatska...maestralna.  Branitelja  srebra nitko više nije podcjenjivao. Protivnici su svoju igru prilagođavali Hrvatskoj. Teško otvaranje. Maroko je bila najbolja afrička zemlja. Pokazalo se to kasnije u turniru kad su došli do polufinala. Nakon remija bez pogodaka protiv Marokanaca slijedila je Kanada. Nogomet je sve popularniji u zemlji hokeja na ledu. Brzina im je bila glavno oružje, ali nogometna mudrost je odnijela pobjedu. Hrvatska je već uvježbano slavila. Tada je slijedio ogled za prolazak protiv Belgije. Momčad Kevina De Bruynea prošla je svoj vrhunac bez ozbiljnijeg rezultata i ovo Svjetsko prvenstvo im je trebalo biti labuđi pjev. Hrvatska je odigrala čvrstu utakmicu. Pamtit ćemo promašaje Romelua Lukakua koji je obuo „krive“ kopačke. Hrvatska je mogla odahnuti. Osmina finala. Japan je u osmini finala bio izuzetno opasan protivnik. Majstori povrataka. U skupini su pokazali da se nikad ne predaju.  Odluka je morala pasti udarcima s bijele točke. A tada na scenu stupa Dominik Livaković. Skida tri jedanaesterca i postaje heroj nacije. Polufinale. Negdje u zvijezdama je bilo zapisano. Argentina će postati svjetski prvak. Leo Messi će zauvijek zasjesti na tron najboljega svih vremena. Hrvatska je izgubila 3 : 0. Svega je bilo u toj utakmici. Finale. Najbolje finale Svjetskih prvenstava u povijesti. Velikani Argentina i Francuska. Messi i Kylian Mbappe. Argentina je vodila 2 : 1 i 3 : 2, Francuska izjednačila na 3 : 3. Sva tri pogotka zabio je Mbappe. Pobjednik Svjetskog prvenstva odlučivao se s bijele točke. Coman i Tchuameni nisu bili precizni i Gauchosi su uzeli trofej.',
         Champ: {
           Winner: 'Argentina',
           TopScorer: {
@@ -1495,39 +2649,38 @@ export const STORIES = [
             'https://player.vimeo.com/video/881628351?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=5847',
         },
         {
-          Title: 'Reportaža Gol Brune Petkovića za izjednačenje protiv Brazila',
+          Title: 'Gol Brune Petkovića za izjednačenje protiv Brazila',
           imgUrl:
             'https://hns.family/files/images/_resized/0000040888_660_375_cut.jpg',
           Description:
-            'Genijalni Bruno zabija lijevom nogom za izjednačenje protiv Brazila',
+            'Četvrtfinale. Brazil je bio favorit. Sambom su ispraćali protivnike. Plesali nakon svakog pogotka. Peleovo teško zdravstveno stanje bio im je dodatni motiv. Poveli su preko Neymara u produžetku. Kad je izgledalo da će završiti katarska priča Hrvatske, Bruno Petković je zabio.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275715/2022_HRV_BRA_PETKOVIC_j2jxfj.mp4',
         },
         {
-          Title: 'Reportaža Penal Mislava Oršića protiv Brazila',
+          Title: 'Penal Mislava Oršića protiv Brazila',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698914348/ors%CC%8Cic%CC%81_slavi_jqjag9.jpg',
           Description:
-            'Mislav Orišić pogodio je malu mrežicu i osigurao važan pogodak u ključnome trenutku u utakmici s Brazilom.',
+            'Golčina za novu nadu, za novi triler. Za novo kidanje živaca. Iako, Livaković je bio na golu. Obranio je udarac Rodrygu. Marquinhos je zadrhtao, a Hrvatska odletjela u polufinale. Drugo za redom na Svjetskim prvenstvima. Nevjerojatna snaga jedne momčadi. Hrvatska je znala pobjeđivati.',
           videoLink:
             'https://onedrive.live.com/?authkey=%21ALmYniBABhzYmt4&cid=E0D40198DCF58846&id=E0D40198DCF58846%2177921&parId=E0D40198DCF58846%2177911&o=OneUp',
         },
 
         {
-          Title: 'Reportaža Penal Maria Pašsalića za pobjedu nad Japanom',
+          Title: 'Penal Maria Pašsalića za pobjedu nad Japanom',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698916441/pas%CC%8Calic%CC%81_neymar_hz7nf7.jpg',
           Description:
-            'Fantastični Mario Pašalić zabija penal za pobjedu i odlazak u četvrtfinale.',
+            'Osmina finala. Japan je u osmini finala bio izuzetno opasan protivnik. Majstori povrataka. U skupini su pokazali da se nikad ne predaju. Odluka je morala pasti udarcima s bijele točke. A tada na scenu stupa Dominik Livaković. Skida tri jedanaesterca i postaje heroj nacije.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275706/2022_HRV_JAP_PASALIC_vdiuxn.mp4',
         },
         {
-          Title:
-            'Reportaža Pogodak Mislava Oršića za ponovno vodstvo nad Portugalom',
+          Title: 'Pogodak Oršića protiv Maroka',
           imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/1877746.jpeg',
           Description:
-            'U 42 minuti Oršić zabija fenomenalan gol Portugalu za vraćenu prednost od 2:1!',
+            'Utakmica za 3. mjesto. Ponovno Maroko. Utakmica u kojoj je psihološka snaga ključ uspjeha. Zlatko Dalić uveo je neke svježe igrače. Gvardiol je zabio vrlo rano za 1 : 0. Marokanci su izjednačili, ali tada Mislav Oršić zabija gol, golčinu! Hrvatska ponovno osvaja medalju na Svjetskom prvenstvu.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275718/2022_HRV_MAR_ORSIC_jfheps.mp4',
         },
@@ -1555,11 +2708,134 @@ export const STORIES = [
 
   {
     storyTitle: '2023',
-    storyId: 12,
+    storyId: 14,
     story: {
-      storyTitle: 'Liga nacija 2023',
+      storyTitle: 'Liga nacija 2023.',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308308/2023_unl_tihk1t.png',
+      Championship: {
+        Group: [
+          {
+            TeamName: 'Hrvatska',
+            MatchesPlayed: 5,
+            Wins: 4,
+            Draws: 1,
+            Losses: 1,
+            Points: 13,
+          },
+          {
+            TeamName: 'Danska',
+            MatchesPlayed: 5,
+            Wins: 4,
+            Draws: 0,
+            Losses: 2,
+            Points: 12,
+          },
+          {
+            TeamName: 'Francuska',
+            MatchesPlayed: 5,
+            Wins: 1,
+            Draws: 2,
+            Losses: 3,
+            Points: 5,
+          },
+          {
+            TeamName: 'Austrija',
+            MatchesPlayed: 5,
+            Wins: 1,
+            Draws: 1,
+            Losses: 4,
+            Points: 4,
+          },
+        ],
+        Matches: {
+          GroupStage: {
+            matches: [
+              {
+                Teams: 'HRVATSKA - AUSTRIJA',
+                Score: '0 : 3',
+              },
+              {
+                Teams: 'HRVATSKA - FRANCUSKA',
+                Score: '1 : 1',
+                Scorers: ['Kramarić 83` pen'],
+              },
+              {
+                Teams: 'HRVATSKA - DANSKA',
+                Score: '1 : 0',
+                Scorers: ['Pašalić 69`'],
+              },
+              {
+                Teams: 'HRVATSKA - FRANCUSKA',
+                Score: '1 : 0',
+                Scorers: ['Modrić 5` pen'],
+              },
+              {
+                Teams: 'HRVATSKA - DANSKA',
+                Score: '2 : 1',
+                Scorers: ['Sosa49`', 'Majer79`'],
+              },
+              {
+                Teams: 'HRVATSKA - AUSTRIJA',
+                Score: '3 : 1',
+                Scorers: ['Modrić 6`', 'Livaja 69`', 'Lovren72`'],
+              },
+            ],
+          },
+          Finals: {
+            SemiFinal: {
+              Match: 'HRVATSKA - NIZOZEMSKA',
+              Score: '4 : 2 ',
+              GoalScorers: [
+                'Kramarić 55` pen',
+                'Pašalić 72`',
+                'Petković 98`',
+                'Modrić 116` pen',
+              ],
+            },
+            Final: {
+              Match: 'HRVATSKA – ŠPANJOLSKA',
+              Score: '0 : 0',
+              Penalties: '4 : 5',
+              PenaltyShootout: [
+                { Player: 'Vlašić', Result: '+' },
+                { Player: 'Brozović', Result: '+' },
+                { Player: 'Modrić', Result: '+' },
+                { Player: 'Majer', Result: '-' },
+                { Player: 'Perišić', Result: '+' },
+                { Player: 'Petković', Result: '-' },
+              ],
+            },
+          },
+        },
+        Summary:
+          'Novo veliko natjecanje, novi veliki uspjeh. Hrvatska je još jednom pokazala snagu i moć. Zlatko Dalić na raspolaganju je imao uigranu momčad koja je svjesna svoje snage. S druge strane, protivnici više Hrvatskoj ne pristupaju kao možebitnom iznenađenju jer je Hrvatska postala favorit za medalju, za naslov. Start Lige nacija bio je loš. Opijeni uspjesima naši igrači ušli su u susret protiv Austrije u Osijeku slabo, bez poznatog stila i odgovornosti u igri. Hrvatska je potučena 3 : 0. Kasnije je bilo jasno – to je bio dobar razvoj situacije. Brojne kritike ponovno su galvanizirale našu reprezentacije i uslijedile su pobjede u Danskoj i Francuskoj te vraćanje duga Austrijancima u Beču. Hrvatska je kao prva u skupini osigurala plasman na završni turnir u Rotterdamu. U polufinalu je čekala Nizozemska i još jedna utakmica za sva vremena. Rotterdam je osvojila "vojska" hrvatskih navijača. Na tribinama su dominirale hrvatske pjesme, a na travnjaku nova predstava Dalićevih jurišnika. I novi dokaz o nevjerojatnoj unutarnjoj moći. Hrvatska je vodila 2 : 1 u 96. minuti kad su Nizozemci izjednačili. Mnoge bi momčadi tada pale, izgubile fokus, izgubile utakmicu. Ne i Hrvatska. Zlatko Dalić poseže za sigurnim "jokerom". Bruno Petković je ponovno briljirao. Fantastičan pogodak u 98. minuti odveo je Hrvatsku u finale. Modrić je na kraju potvrdio pobjedu za konačnih 4 : 2. Na finalnu utakmicu došlo je 35 tisuća hrvatskih navijača. A ondje, ponovno triler. Ponovno Španjolska. Teška utakmica bez pogodaka. Raspucavanje je i ovaj put odlučilo pobjednika. Ovaj put su se nogometni bogovi naklonili Španjolskoj. Tuga je bila očita. Hrvatski igrači teško su podnijeli poraz. Luka Modrić želio je titulu s Hrvatskom. Došla su prelijepa vremena. Hrvatska redovito igra za medalje i naslove.',
+        // Champ: {
+        //   Winner: '',
+        //   TopScorer: {
+        //     Player: '',
+        //     Team: '',
+        //     Goals: 0,
+        //   },
+        // },
+      },
+      Highlights: [],
+      Coach: {
+        Name: 'ZLATKO DALIĆ',
+        DOB: '26. listopada 1966.',
+        CoachingCareer: '2017. –',
+        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
+        imgUrl:
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
+        StoryText:
+          'Liga nacija u proljeće 2023. nova je potvrda sjajnog posla Zlatka Dalića na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
+      },
+      Facts: [
+        '3 medalje u 5 godina za Hrvatsku! Tko bi u to vjerovao početkom 2018.? Hrvatska ima 3 medalje (2 srebra, 1 broncu) u petogodišnjem razdoblju. To je NEVJEROJATNO!',
+        "Hrvatski navijači! Apsolutno nestvaran njihov nastup. Napunili su stadion u Rotterdamu i obojali ga 'kockicama'. Pjevali su tijekom produžetaka i u polufinalu i finalu! Bila je to praktično domaća utakmica za Vatrene.",
+        'Hrvatska je u 2 utakmice primila samo dva pogotka od domaćina – Nizozemske. Nakon toga, Hrvatska je sačuvala čistu mrežu protiv Španjolske u 120 minuta. Sve to bez Joška Gvardiola.',
+        '„Ostani tu!“- orilo se s tribina.',
+      ],
     },
   },
 

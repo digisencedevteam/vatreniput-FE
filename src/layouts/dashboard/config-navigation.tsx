@@ -72,6 +72,10 @@ export function useNavData() {
                 path: paths.dashboard.story.sp98,
               },
               {
+                title: 'Euro 2000',
+                path: paths.dashboard.story.sp98,
+              },
+              {
                 title: 'Svjetsko prvenstvo 2002',
                 path: paths.dashboard.story.sp02,
               },
@@ -88,7 +92,11 @@ export function useNavData() {
                 path: paths.dashboard.story.euro08,
               },
               {
-                title: 'Svjetsko prvenstvo 2012',
+                title: 'Svjetsko prvenstvo 2010',
+                path: paths.dashboard.story.euro08,
+              },
+              {
+                title: 'Euro 2012',
                 path: paths.dashboard.story.sp12,
               },
               {

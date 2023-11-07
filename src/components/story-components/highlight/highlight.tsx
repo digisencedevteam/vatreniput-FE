@@ -15,8 +15,8 @@ import { HighlightProps } from 'src/types/story';
 const Highlight = ({ data }: HighlightProps) => {
   const isDesktop = useResponsive('up', 'md');
   const [open, setOpen] = useState(false);
-  const imageHeight = isDesktop ? '375' : '200';
-  const isVideoHighlight = data.Title.includes('Reportaža');
+  const imageHeight = isDesktop ? '375' : '250';
+  const isVideoHighlight = !!data.videoLink;
   const videoHref = data.videoLink;
 
   const handleOpen = () => {
@@ -28,7 +28,7 @@ const Highlight = ({ data }: HighlightProps) => {
   };
 
   return (
-    <Card style={{ marginBottom: '20px', minHeight: 700 }}>
+    <Card style={{ marginBottom: '20px', minHeight: 620 }}>
       <div style={{ position: 'relative' }}>
         <CardMedia
           component='img'
