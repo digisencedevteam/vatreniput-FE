@@ -84,11 +84,14 @@ const useVoting = (): UseVotingReturn => {
   };
 
   const fetchVotingResult = async (votingId: string): Promise<VotingResultStat | null>  => {
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get(`${endpoints.votings.all}${votingId}/results`)
+      setIsLoading(false);
       return response.data;
     } catch (error) {
       console.error('Error fetching result data by ID:', error);
+      setIsLoading(false);
       return null;
     }
   }

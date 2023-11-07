@@ -1,20 +1,10 @@
-import {
-  Box,
-  Card,
-  Skeleton,
-  Typography,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Card, Skeleton, Typography } from '@mui/material';
 
 type SkeletonProps = {
   message?: string;
 };
 
 const SkeletonOverviewResults = ({ message }: SkeletonProps) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   return (
     <Card
       sx={{

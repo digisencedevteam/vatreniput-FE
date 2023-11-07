@@ -162,12 +162,12 @@ const useFetchQuizzes = (
         const response = await axios.get(
           `${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
-
+        setIsLoadingResolved(false);
         setResolvedQuizzes(response.data.resolvedQuizzes);
       } catch (error) {
         setResolvedQuizzes([]);
+        setIsLoadingResolved(false);
       }
-      setIsLoadingResolved(false);
     };
 
     fetchResolvedQuizzes();

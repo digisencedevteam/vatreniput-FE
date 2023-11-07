@@ -90,12 +90,6 @@ const DesktopNewsSkeleton = ({
           animation='wave'
           sx={{ marginTop: '8px' }}
         />
-        <Skeleton
-          variant='rectangular'
-          height='10px'
-          animation='wave'
-          sx={{ marginTop: '8px' }}
-        />
       </Box>
     </Card>
   );
