@@ -15,6 +15,7 @@ import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton
 import useDashboardData from 'src/hooks/use-dashboard-data';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { paths } from 'src/routes/paths';
+import DesktopNewsSkeleton from 'src/components/skeleton-loader/desktop-news-skeleton';
 
 export const DesktopViewOne = () => {
   const settings = useSettingsContext();
@@ -68,12 +69,9 @@ export const DesktopViewOne = () => {
           {quizzes?.length && votings?.length ? (
             <AppFeatured list={featuredAppsList} />
           ) : (
-            <SkeletonDashboardLoader
-              count={1}
+            <DesktopNewsSkeleton
+              imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
               message='Trenutačno nema novih izazova u obliku kvizova i glasanja!'
-              height='250px'
-              width='350px'
-              maxWidth='350px'
             />
           )}
         </Grid>
