@@ -16,9 +16,12 @@ import useDashboardData from 'src/hooks/use-dashboard-data';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { paths } from 'src/routes/paths';
 import DesktopNewsSkeleton from 'src/components/skeleton-loader/desktop-news-skeleton';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 export const DesktopViewOne = () => {
   const settings = useSettingsContext();
+  const isMobile = useResponsive('down', 'md');
+
   const {
     chartData,
     fetchDashboardData,
@@ -91,7 +94,11 @@ export const DesktopViewOne = () => {
           >
             <ScrollableContainer childrenCount={cards.length}>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={5} width='100%' />
+                <SkeletonDashboardLoader
+                  count={5}
+                  width='100%'
+                  maxWidth={isMobile ? '90px' : '180px'}
+                />
               ) : cards.length === 0 ? (
                 <Box
                   sx={{
@@ -102,7 +109,8 @@ export const DesktopViewOne = () => {
                   <SkeletonDashboardLoader
                     isMobileCount={3}
                     isTabletCount={4}
-                    count={5}
+                    count={4}
+                    maxWidth={isMobile ? '90px' : '200px'}
                     width='100%'
                     message={`Trenutno nema skupljenih, skeniraj QR kod sa jedne od sličica kako bi započeo ispunjavanje digitalnog albuma.`}
                   />
@@ -167,7 +175,11 @@ export const DesktopViewOne = () => {
           <DashboardSectionWrapper title='Kvizovi' link={paths.dashboard.three}>
             <Grid container justifyContent='center' alignItems='center'>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={3} />
+                <SkeletonDashboardLoader
+                  count={3}
+                  isMobileCount={3}
+                  isTabletCount={4}
+                />
               ) : quizzes?.length ? (
                 quizzes.map((quiz, index) => (
                   <Grid item md={6} key={index}>
@@ -183,7 +195,7 @@ export const DesktopViewOne = () => {
                 <SkeletonDashboardLoader
                   isMobileCount={3}
                   isTabletCount={4}
-                  count={5}
+                  count={4}
                   message='Trenutno nema dostupnih kvizova, ali ne brini - uskoro dolaze novi. Pripremi se za nadmetanje uma!'
                 />
               )}
@@ -202,7 +214,7 @@ export const DesktopViewOne = () => {
           <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
             <Grid container>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={5} width='100%' />
+                <SkeletonDashboardLoader count={4} width='100%' />
               ) : notVotedVotings?.length ? (
                 notVotedVotings.map((voting, index) => (
                   <Grid item md={6} key={index}>
@@ -219,7 +231,7 @@ export const DesktopViewOne = () => {
                 ))
               ) : (
                 <SkeletonDashboardLoader
-                  count={5}
+                  count={4}
                   isMobileCount={3}
                   isTabletCount={4}
                   width='100%'

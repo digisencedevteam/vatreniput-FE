@@ -213,7 +213,7 @@ const ThreeView = () => {
           {isLoadingUnresolved ? (
             <SkeletonDashboardLoader
               isMobileCount={2}
-              count={5}
+              count={4}
               isTabletCount={3}
             />
           ) : !!unresolvedQuizzes?.length ? (
@@ -254,25 +254,26 @@ const ThreeView = () => {
             ))
           ) : (
             <SkeletonDashboardLoader
-              message='Čestitam! Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz. Pripremi se za novo nadmetanje uma!'
-              count={6}
+              message='Svi kvizovi su riješeni! Obavjestiti ćemo te čim izađe novi kviz. Pripremi se za novo nadmetanje uma!'
+              count={4}
               isMobileCount={3}
               isTabletCount={4}
-              maxWidth={isMobile ? '100px' : '200px'}
+              maxWidth={isMobile ? '90px' : '200px'}
             />
           )}
         </Grid>
       </SectionWrapper>
       <SectionWrapper title='Riješeni'>
-        <ScrollableContainer childrenCount={resolvedQuizzes?.length ?? 0}>
-          {isLoadingResolved ? (
-            <SkeletonDashboardLoader
-              isMobileCount={3}
-              isTabletCount={4}
-              count={5}
-            />
-          ) : !!resolvedQuizzes?.length ? (
-            resolvedQuizzes.map((data: any, index) => (
+        {isLoadingResolved ? (
+          // Display SkeletonDashboardLoader while the quizzes are loading
+          <SkeletonDashboardLoader
+            isMobileCount={3}
+            isTabletCount={4}
+            count={5}
+          />
+        ) : !!resolvedQuizzes?.length ? (
+          <ScrollableContainer childrenCount={resolvedQuizzes.length}>
+            {resolvedQuizzes.map((data: any, index) => (
               <Box
                 key={index}
                 sx={{
@@ -294,16 +295,16 @@ const ThreeView = () => {
                   onCardClick={() => openModal(data)}
                 />
               </Box>
-            ))
-          ) : (
-            <SkeletonDashboardLoader
-              message='Još nije riješen nijedan kviz! Pokaži što znaš i osvoji fantastične nagrade koje te čekaju.'
-              count={6}
-              isMobileCount={3}
-              maxWidth={isMobile ? '100px' : '200px'}
-            />
-          )}
-        </ScrollableContainer>
+            ))}
+          </ScrollableContainer>
+        ) : (
+          <SkeletonDashboardLoader
+            message='Još nije riješen nijedan kviz! Pokaži što znaš i osvoji fantastične nagrade koje te čekaju.'
+            count={6}
+            isMobileCount={3}
+            maxWidth={isMobile ? '90px' : '200px'}
+          />
+        )}
         {totalPages > 1 && (
           <PagingComponent
             currentPage={currentPage}

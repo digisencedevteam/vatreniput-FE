@@ -12,7 +12,6 @@ import {
   MenuItem,
   Avatar,
   Pagination,
-  CircularProgress,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -21,6 +20,7 @@ import useFetchQuizzes from 'src/hooks/use-quiz-data';
 import { QuizResult } from 'src/types';
 import icon from '../../assets/illustrations/vatroslav_upute_2.jpg';
 import duration from 'dayjs/plugin/duration';
+import TableSkeleton from 'src/components/skeleton-loader/table-skeleton';
 dayjs.extend(duration);
 
 const NoResultLayout = ({ message }: { message: string }) => (
@@ -86,7 +86,7 @@ const QuizResults = () => {
         sx={{ my: 2 }}
       >
         <MenuItem value='' disabled>
-          Izaberi svoj kviz
+          Izaberi kviz
         </MenuItem>
         {allQuizzes?.map((quiz) => (
           <MenuItem key={quiz._id} value={quiz._id}>
@@ -94,76 +94,71 @@ const QuizResults = () => {
           </MenuItem>
         ))}
       </Select>
-
       <Box sx={{ mt: 2 }}>
-        {isResultsLoading ? (
-          <CircularProgress />
-        ) : (
-          <TableContainer>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell>Korisničko Ime</TableCell>
-                  <TableCell>Rezultat</TableCell>
-                  <TableCell>Riješen na datum</TableCell>
-                  <TableCell>Prolazno vrijeme</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {selectedQuiz ? (
-                  resultsById && resultsById.length > 0 ? (
-                    resultsById.map((result: QuizResult) => (
-                      <TableRow key={result._id}>
-                        <TableCell>
-                          <Box display={'flex'} justifyContent={'center'}>
-                            <Avatar
-                              src={
-                                result.userId.photoURL
-                                  ? result.userId.photoURL
-                                  : icon
-                              }
-                              alt='User Image'
-                              sx={{
-                                width: 65,
-                                height: 65,
-                                border: '2px solid white',
-                              }}
-                            />
-                          </Box>
-                        </TableCell>
-                        <TableCell>{result.userId.username}</TableCell>
-                        <TableCell>{Math.round(result.score)} %</TableCell>
-                        <TableCell>
-                          {dayjs(result.dateTaken).format('DD/MM/YYYY')}
-                        </TableCell>
-                        <TableCell>
-                          {dayjs
-                            .duration(result.duration * 1000)
-                            .format('m:ss')}{' '}
-                          minuta
-                        </TableCell>
+        {isResultsLoading && <TableSkeleton />}
+        {!isResultsLoading && (
+          <>
+            {selectedQuiz ? (
+              resultsById && resultsById.length > 0 ? (
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell>Korisničko Ime</TableCell>
+                        <TableCell>Rezultat</TableCell>
+                        <TableCell>Riješen na datum</TableCell>
+                        <TableCell>Prolazno vrijeme</TableCell>
                       </TableRow>
-                    ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={5} align='center'>
-                        <NoResultLayout message='Kviz nema rezultate' />
-                      </TableCell>
-                    </TableRow>
-                  )
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={5} align='center'>
-                      <NoResultLayout message='Izaberi kviz da vidiš rezultate' />
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                      {resultsById.map((result: QuizResult) => (
+                        <TableRow key={result._id}>
+                          <TableCell>
+                            <Box display={'flex'} justifyContent={'center'}>
+                              <Avatar
+                                src={
+                                  result.userId.photoURL
+                                    ? result.userId.photoURL
+                                    : icon
+                                }
+                                alt='User Image'
+                                sx={{
+                                  width: 65,
+                                  height: 65,
+                                  border: '2px solid white',
+                                }}
+                              />
+                            </Box>
+                          </TableCell>
+                          <TableCell>{result.userId.username}</TableCell>
+                          <TableCell>{Math.round(result.score)} %</TableCell>
+                          <TableCell>
+                            {dayjs(result.dateTaken).format('DD/MM/YYYY')}
+                          </TableCell>
+                          <TableCell>
+                            {dayjs
+                              .duration(result.duration * 1000)
+                              .format('m:ss')}{' '}
+                            minuta
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              ) : (
+                <NoResultLayout message='Kviz nema rezultate' />
+              )
+            ) : (
+              <TableSkeleton
+                imageURL='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
+                message='Izaberi kviz da vidiš rezultate!'
+              />
+            )}
+          </>
         )}
-        {resultsById && resultsById.length > 0 && (
+        {resultsById && resultsById.length > 4 && (
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             <Pagination
               count={totalPages}

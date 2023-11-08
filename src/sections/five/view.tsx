@@ -89,13 +89,20 @@ const FiveView = () => {
           )}
           <SectionWrapper title='Dostupna'>
             <Grid container>
-              {!notVotedVotings?.length ? (
+              {isLoading ? (
                 <SkeletonDashboardLoader
-                  message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
-                  count={6}
+                  count={4}
                   isMobileCount={3}
                   isTabletCount={4}
-                  maxWidth={isMobile ? '100px' : '200px'}
+                  maxWidth={isMobile ? '90px' : '200px'}
+                />
+              ) : !notVotedVotings?.length ? (
+                <SkeletonDashboardLoader
+                  message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
+                  count={4}
+                  isMobileCount={3}
+                  isTabletCount={4}
+                  maxWidth={isMobile ? '90px' : '200px'}
                 />
               ) : (
                 <Grid container spacing={2}>
@@ -118,13 +125,20 @@ const FiveView = () => {
           </SectionWrapper>
 
           <SectionWrapper title='Ispunjena'>
-            {!votedVotings?.length ? (
+            {isLoading ? (
+              <SkeletonDashboardLoader
+                count={6}
+                isMobileCount={3}
+                isTabletCount={4}
+                maxWidth={isMobile ? '90px' : '200px'}
+              />
+            ) : !votedVotings?.length ? (
               <SkeletonDashboardLoader
                 message='Za sada nema ispunjenih glasanja! Tvoje mišljenje nam je važno, stoga ne propusti priliku izjasniti se o najboljih 11 svih vremena!'
                 count={6}
                 isMobileCount={3}
                 isTabletCount={4}
-                maxWidth={isMobile ? '100px' : '200px'}
+                maxWidth={isMobile ? '90px' : '200px'}
               />
             ) : (
               <ScrollableContainer childrenCount={votedVotings.length}>

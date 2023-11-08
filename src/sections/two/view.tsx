@@ -29,12 +29,15 @@ export const CollectionView = () => {
   const [totalPages, setTotalPages] = useState(1);
   const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
-  const itemsPerPage = 9;
+  const itemsPerPage = 12;
   const [collectedStatistic, setCollectedStatistic] =
     useState<CollectedStatistic | null>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const [isCategoryLoading, setIsCategoryLoading] = useState(false);
+  const showSkeletonLoader = isCategoryLoading || isLoading;
+  const showNoDataMessage =
+    !isCategoryLoading && !isLoading && collectedCards.length === 0;
 
   const fetchCategories = async () => {
     try {
@@ -174,6 +177,7 @@ export const CollectionView = () => {
           <StatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
       </Grid>
+
       <div ref={myRef}>
         <Grid container spacing={1}>
           <Grid item xs={12} mt={3}>
@@ -191,7 +195,7 @@ export const CollectionView = () => {
                 <ArrowLeftIcon />
               </IconButton>
               <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
-                {currentCategory.name}
+                {currentCategory?.name}
               </Typography>
               <IconButton
                 color='primary'
@@ -201,42 +205,46 @@ export const CollectionView = () => {
               </IconButton>
             </Box>
           </Grid>
-          {isCategoryLoading ? (
-            <Grid item xs={12} style={{ textAlign: 'center' }}>
-              <SkeletonDashboardLoader
-                isMobileCount={3}
-                isTabletCount={4}
-                count={5}
-                width='100%'
-              />
-            </Grid>
-          ) : (
+
+          {showSkeletonLoader && (
+            <SkeletonDashboardLoader
+              isMobileCount={9}
+              maxWidth={isMobile ? '90px' : '200px'}
+              isTabletCount={4}
+              count={12}
+            />
+          )}
+
+          {!showSkeletonLoader &&
             collectedCards.map((item, index) => (
               <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
                 <CollectionStickerItem item={item} />
               </Grid>
-            ))
+            ))}
+
+          {showNoDataMessage && (
+            <Typography
+              variant='subtitle1'
+              color='text.secondary'
+              textAlign='center'
+              sx={{ width: '100%', mt: 2 }}
+            >
+              Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je
+              skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju
+              digitalnog albuma!
+            </Typography>
           )}
         </Grid>
-        {collectedCards.length > 0 ? (
-          <PagingComponent
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        ) : (
-          <SkeletonDashboardLoader
-            count={6}
-            isMobileCount={6}
-            isTabletCount={4}
-            maxWidth={isMobile ? '100px' : '200px'}
-            message={
-              isCategoryLoading
-                ? undefined
-                : 'Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju digitalnog albuma!'
-            }
-          />
-        )}
+
+        {!showSkeletonLoader &&
+          !showNoDataMessage &&
+          collectedCards.length > 0 && (
+            <PagingComponent
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          )}
       </div>
     </Container>
   );
