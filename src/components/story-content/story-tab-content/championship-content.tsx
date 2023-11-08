@@ -1,12 +1,15 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
 import { StoryContentProps } from 'src/types/story';
 import QualificationMatchDetails from '../../story-components/match-details/qualification-match-details';
 import MatchTable from '../../story-components/match-table/match-table';
 import MatchDetails from '../../story-components/match-details/match-details';
 import ChampionCard from '../../story-components/champ-card/champion-card';
+import { useTruncatedText } from 'src/hooks/use-text-utils';
 
 export const ChampionshipContent = ({ story }: StoryContentProps) => {
+  const { expanded, toggleLines, truncatedText, isTruncated, less, more } =
+    useTruncatedText(story?.Championship?.Summary || '');
   return (
     <>
       {story?.Championship?.Summary && (
@@ -15,7 +18,14 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
             variant='body1'
             mt={2}
           >
-            {story?.Championship.Summary}
+            {truncatedText}
+            {isTruncated && (
+              <Button onClick={toggleLines}>
+                <Typography color='primary'>
+                  {expanded ? less : more}
+                </Typography>
+              </Button>
+            )}
           </Typography>
         </StorySectionWrapper>
       )}
