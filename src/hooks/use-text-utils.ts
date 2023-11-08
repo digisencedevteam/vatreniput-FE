@@ -1,10 +1,6 @@
-// hooks/useTruncatedText.ts
 import { useState } from 'react';
 
-export const useTruncatedText = (
-  initialText: string
-  // truncateLength: number
-) => {
+export const useTruncatedText = (initialText: string) => {
   const [text, setText] = useState(initialText);
   const [expanded, setExpanded] = useState(false);
   const truncateLength = 400;

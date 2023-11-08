@@ -27,6 +27,11 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
               </Button>
             )}
           </Typography>
+          {story?.Championship?.Champ &&
+            story?.Championship?.Champ.Winner &&
+            story?.Championship?.Champ.TopScorer && (
+              <ChampionCard data={story.Championship.Champ} />
+            )}
         </StorySectionWrapper>
       )}
       {story?.Championship && (
@@ -74,11 +79,6 @@ export const ChampionshipContent = ({ story }: StoryContentProps) => {
           <MatchDetails matchData={story?.Championship.Matches.Finals.Final} />
         </StorySectionWrapper>
       )}
-      {story?.Championship?.Champ &&
-        story?.Championship?.Champ.Winner &&
-        story?.Championship?.Champ.TopScorer && (
-          <ChampionCard data={story.Championship.Champ} />
-        )}
     </>
   );
 };

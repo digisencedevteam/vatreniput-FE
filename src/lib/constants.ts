@@ -144,16 +144,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'TURSKA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Vlaović 86`'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – DANSKA',
                 Score: '3 : 0',
                 Scorers: ['Šuker 54`', 'Šuker 90`', 'Boban 81`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – PORTUGAL',
                 Score: '0 : 3',
               },
@@ -310,16 +313,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'JAMAJKA  – HRVATSKA',
                 Score: '1 : 3',
                 Scorers: ['Stanić 27` ', 'Prosinečki 53`', 'Šuker 68`'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'JAPAN – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Šuker 77`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ARGENTINA - HRVATSKA',
                 Score: '1 : 0',
               },
@@ -625,15 +631,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'Meksiko - Hrvatska',
                 Score: '1 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'Italija - Hrvatska',
                 Score: '1 : 2',
-                Scorers: ['Olić 73`, Rapaić 76`'],
+                Scorers: ['Olić 73`', 'Rapaić 76`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'Hrvatska - Ekvador',
                 Score: '0 : 1',
               },
@@ -778,15 +787,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'ŠVICARSKA – HRVATSKA',
                 Score: '0 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – FRANCUSKA',
                 Score: '2 : 2',
                 Scorers: ['Rapaić 48` pen', 'Pršo 52`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: ' HRVATSKA – ENGLESKA',
                 Score: '2 : 4',
                 Scorers: ['N. Kovač 5`', 'Tudor 73'],
@@ -972,15 +984,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'BRAZIL – HRVATSKA',
                 Score: '1 : 0',
                 Scorers: ["Kaká 44'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'JAPAN – HRVATSKA',
                 Score: '0 : 0',
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – AUSTRALIJA',
                 Score: '2 : 2',
                 Scorers: ["Srna 2'", "Kovac 56'"],
@@ -1118,16 +1133,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'AUSTRIA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ["Modrić 4' (pen)"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – NJEMAČKA',
                 Score: '2 : 1',
                 Scorers: ["Srna 24'", "Olić 62'"],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'POLJSKA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ["Klasnić 52'"],
@@ -1353,16 +1371,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – IRSKA',
                 Score: '3 : 1',
                 Scorers: ["Mandžukić 3', 48'", "Jelavić 43'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ITALIJA – HRVATSKA',
                 Score: '1 : 1',
                 Scorers: ["Pirlo 39'", "Mandžukić 72'"],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – ŠPANJOLSKA',
                 Score: '0 : 1',
                 Scorers: ["Navas 88'"],
@@ -1479,7 +1500,6 @@ export const STORIES = [
         {
           Teams: 'Island – Hrvatska',
           Score: '0 : 0',
-          Scorers: [],
         },
         {
           Teams: 'Hrvatska – Island',
@@ -1526,11 +1546,13 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'Brazil – Hrvatska',
                 Score: '3 : 1',
                 Scorers: ["Marcelo (a.g.) - 12'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'Kamerun – Hrvatska',
                 Score: '0 : 4',
                 Scorers: [
@@ -1541,6 +1563,7 @@ export const STORIES = [
                 ],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'Hrvatska – Meksiko',
                 Score: '1 : 3',
                 Scorers: ["Ivan Perišić - 87'"],
@@ -1683,19 +1706,22 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'TURSKA  – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Modrić 41` '],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ČEŠKA – HRVATSKA',
                 Score: '2 : 2',
-                Scorers: ['Perišić 37`, Rakitić 59`'],
+                Scorers: ['Perišić 37`', 'Rakitić 59`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ŠPANJOLSKA - HRVATSKA',
                 Score: '1 : 2',
-                Scorers: ['N. Kalinić 45`, Perišić  87`'],
+                Scorers: ['N. Kalinić 45`', 'Perišić  87`'],
               },
             ],
           },
@@ -1941,16 +1967,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – NIGERIJA',
                 Score: '2 : 0',
                 Scorers: ['Etebo 32` (a.g.)', 'Modrić 71` pen'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ARGENTINA – HRVATSKA',
                 Score: '0 : 3',
                 Scorers: ['Rebić 53`', 'Modrić 80`', 'Rakitić 90+1`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ISLAND – HRVATSKA',
                 Score: '1 : 2',
                 Scorers: ['Badelj 53`', 'Perišić 90`'],
@@ -2293,15 +2322,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'ENGLESKA – HRVATSKA',
                 Score: '1 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – ČEŠKA',
                 Score: '1 : 1',
                 Scorers: ['Perišić 47`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – ŠKOTSKA',
                 Score: '3 : 1',
                 Scorers: ['Vlašić 17`', 'Modrić 62`', 'Perišić 77`'],
@@ -2448,15 +2480,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – MAROKO',
                 Score: '0 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – KANADA',
                 Score: '4 : 1',
-                Scorers: ['Kramarić 36`, 70`, Livaja 44`, Majer 90+4'],
+                Scorers: ['Kramarić 36`, 70`', 'Livaja 44`', 'Majer 90+4'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – BELGIJA',
                 Score: '0 : 0',
               },
@@ -2483,7 +2518,7 @@ export const STORIES = [
               Description:
                 'Četvrtfinale. Brazil je bio favorit. Sambom su ispraćali protivnike. Plesali nakon svakog pogotka. Peleovo teško zdravstveno stanje bio im je dodatni motiv. Poveli su preko Neymara u produžetku. Kad je izgledalo da će završiti katarska priča Hrvatske, Bruno Petković je zabio. Golčina za novu nadu, za novi triler. Za novo kidanje živaca. Iako, Livaković je bio na golu. Obranio je udarac Rodrygu. Marquinhos je zadrhtao, a Hrvatska odletjela u polufinale. Drugo za redom na Svjetskim prvenstvima.  Nevjerojatna snaga jedne momčadi. Hrvatska je znala pobjeđivati.',
               Score: '1 : 1',
-              GoalScorers: ['Neymar 105+1` , Petković 117`'],
+              GoalScorers: ['Neymar 105+1`', 'Petković 117`'],
               Penalties: '4 : 2',
               PenaltyShootout: [
                 { Player: 'Vlašić', Result: '+' },
@@ -2752,30 +2787,36 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA - AUSTRIJA',
                 Score: '0 : 3',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA - FRANCUSKA',
                 Score: '1 : 1',
                 Scorers: ['Kramarić 83` pen'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA - DANSKA',
                 Score: '1 : 0',
                 Scorers: ['Pašalić 69`'],
               },
               {
+                Round: '4. Kolo',
                 Teams: 'HRVATSKA - FRANCUSKA',
                 Score: '1 : 0',
                 Scorers: ['Modrić 5` pen'],
               },
               {
+                Round: '5. Kolo',
                 Teams: 'HRVATSKA - DANSKA',
                 Score: '2 : 1',
                 Scorers: ['Sosa49`', 'Majer79`'],
               },
               {
+                Round: '6. Kolo',
                 Teams: 'HRVATSKA - AUSTRIJA',
                 Score: '3 : 1',
                 Scorers: ['Modrić 6`', 'Livaja 69`', 'Lovren72`'],
@@ -2810,14 +2851,6 @@ export const STORIES = [
         },
         Summary:
           'Novo veliko natjecanje, novi veliki uspjeh. Hrvatska je još jednom pokazala snagu i moć. Zlatko Dalić na raspolaganju je imao uigranu momčad koja je svjesna svoje snage. S druge strane, protivnici više Hrvatskoj ne pristupaju kao možebitnom iznenađenju jer je Hrvatska postala favorit za medalju, za naslov. Start Lige nacija bio je loš. Opijeni uspjesima naši igrači ušli su u susret protiv Austrije u Osijeku slabo, bez poznatog stila i odgovornosti u igri. Hrvatska je potučena 3 : 0. Kasnije je bilo jasno – to je bio dobar razvoj situacije. Brojne kritike ponovno su galvanizirale našu reprezentacije i uslijedile su pobjede u Danskoj i Francuskoj te vraćanje duga Austrijancima u Beču. Hrvatska je kao prva u skupini osigurala plasman na završni turnir u Rotterdamu. U polufinalu je čekala Nizozemska i još jedna utakmica za sva vremena. Rotterdam je osvojila "vojska" hrvatskih navijača. Na tribinama su dominirale hrvatske pjesme, a na travnjaku nova predstava Dalićevih jurišnika. I novi dokaz o nevjerojatnoj unutarnjoj moći. Hrvatska je vodila 2 : 1 u 96. minuti kad su Nizozemci izjednačili. Mnoge bi momčadi tada pale, izgubile fokus, izgubile utakmicu. Ne i Hrvatska. Zlatko Dalić poseže za sigurnim "jokerom". Bruno Petković je ponovno briljirao. Fantastičan pogodak u 98. minuti odveo je Hrvatsku u finale. Modrić je na kraju potvrdio pobjedu za konačnih 4 : 2. Na finalnu utakmicu došlo je 35 tisuća hrvatskih navijača. A ondje, ponovno triler. Ponovno Španjolska. Teška utakmica bez pogodaka. Raspucavanje je i ovaj put odlučilo pobjednika. Ovaj put su se nogometni bogovi naklonili Španjolskoj. Tuga je bila očita. Hrvatski igrači teško su podnijeli poraz. Luka Modrić želio je titulu s Hrvatskom. Došla su prelijepa vremena. Hrvatska redovito igra za medalje i naslove.',
-        // Champ: {
-        //   Winner: '',
-        //   TopScorer: {
-        //     Player: '',
-        //     Team: '',
-        //     Goals: 0,
-        //   },
-        // },
       },
       Highlights: [],
       Coach: {
