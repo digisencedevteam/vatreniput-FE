@@ -156,9 +156,16 @@ export const CollectionView = () => {
         Kolekcija
       </Typography>
 
-      <Grid container spacing={1}>
+      <Grid
+        container
+        spacing={1}
+      >
         {!isMobile && (
-          <Grid item xs={12} md={7}>
+          <Grid
+            item
+            xs={12}
+            md={7}
+          >
             <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
@@ -173,7 +180,11 @@ export const CollectionView = () => {
           </Grid>
         )}
 
-        <Grid item xs={12} md={5}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+        >
           <StatisticCards collectedStatistic={collectedStatistic} />
         </Grid>
       </Grid>
@@ -217,7 +228,14 @@ export const CollectionView = () => {
 
           {!showSkeletonLoader &&
             collectedCards.map((item, index) => (
-              <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+              <Grid
+                key={index}
+                item
+                xs={4}
+                sm={3}
+                md={3}
+                lg={2}
+              >
                 <CollectionStickerItem item={item} />
               </Grid>
             ))}
