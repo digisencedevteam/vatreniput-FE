@@ -163,11 +163,20 @@ const ThreeView = () => {
             </Button>
           ))}
       </Box>
-      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        lg={8}
+        sx={{ marginY: 5 }}
+      >
         {isLoadingResolved ? (
           <SkeletonOverviewResults />
         ) : resolvedQuiz && resolvedQuiz.length > 0 ? (
-          <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
+          <QuizBestOverview
+            title='Najnoviji rezultati'
+            data={resolvedQuiz}
+          />
         ) : (
           <SkeletonOverviewResults message='Trenutno nema riješenih kvizova. Riješi neki od dostupnih kako bi vidio svoje rezultate!' />
         )}
@@ -209,7 +218,10 @@ const ThreeView = () => {
         />
       </Box>
       <SectionWrapper title='Dostupni'>
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+        >
           {isLoadingUnresolved ? (
             <SkeletonDashboardLoader
               isMobileCount={2}
@@ -218,15 +230,15 @@ const ThreeView = () => {
             />
           ) : !!unresolvedQuizzes?.length ? (
             unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <Box
-                  sx={{
-                    transition: 'transform .2s',
-                    '&:hover': {
-                      transform: 'scale(1.05)',
-                    },
-                  }}
-                >
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={4}
+              >
+                <Box>
                   <CustomCard
                     quizId={data._id}
                     onDelete={deleteQuiz}
