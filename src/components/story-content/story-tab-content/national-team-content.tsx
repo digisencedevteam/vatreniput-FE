@@ -14,7 +14,6 @@ export const NationalTeamContent = ({ story }: StoryContentProps) => {
             {category}
           </Typography>
           <Divider sx={{ my: 2 }} />
-          {/* Replace ScrollableContainer with Grid */}
           <Grid
             container
             spacing={2}

@@ -9,9 +9,9 @@ interface StoryContextType {
 }
 const StoryContext = createContext<StoryContextType>({
   currentStoryIndex: 0,
-  setCurrentStoryIndex: () => {},
+  setCurrentStoryIndex: (index: number) => {},
   currentTab: 0,
-  setCurrentTab: () => {},
+  setCurrentTab: (tabIndex: number) => {},
   childrenCount: 0,
 });
 
