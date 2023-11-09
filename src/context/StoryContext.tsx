@@ -3,11 +3,15 @@ import { createContext, useContext, useState } from 'react';
 interface StoryContextType {
   currentStoryIndex: number;
   setCurrentStoryIndex: (index: number) => void;
+  currentTab: number;
+  setCurrentTab: (index: number) => void;
   childrenCount: number;
 }
 const StoryContext = createContext<StoryContextType>({
   currentStoryIndex: 0,
   setCurrentStoryIndex: () => {},
+  currentTab: 0,
+  setCurrentTab: () => {},
   childrenCount: 0,
 });
 
@@ -21,10 +25,17 @@ export const StoryProvider = ({
   childrenCount,
 }: StoryProviderProps) => {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+  const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <StoryContext.Provider
-      value={{ currentStoryIndex, setCurrentStoryIndex, childrenCount }}
+      value={{
+        currentStoryIndex,
+        setCurrentStoryIndex,
+        currentTab,
+        setCurrentTab,
+        childrenCount,
+      }}
     >
       {children}
     </StoryContext.Provider>

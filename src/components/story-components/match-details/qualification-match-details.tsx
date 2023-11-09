@@ -56,7 +56,7 @@ const QualificationMatchDetails = ({
                 </Typography>
               )}
               <Typography
-                variant='h6'
+                variant='button'
                 mb={2}
               >
                 {matchData.Teams} {matchData.Score}
