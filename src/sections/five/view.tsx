@@ -75,7 +75,7 @@ const FiveView = () => {
             <Grid item xs={12} md={7}>
               <WelcomeComponent
                 title={`Pozdrav 👋`}
-                description='Dobrodošli natrag na svoju kolekciju. Pogledaj koje imaš i koji ti još nedostaju kako bi ih skupio sve!'
+                description='Dobrodošli na stranicu glasanja! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
                 img={
                   <img
                     src={
