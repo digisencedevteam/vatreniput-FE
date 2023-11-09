@@ -1,3 +1,5 @@
+import { Question } from "src/sections/quiz/types";
+
 export type FAQ = {
   question: string;
   answer: string;
@@ -182,3 +184,11 @@ export type ScrollableContainerProps = {
   children: React.ReactNode;
   childrenCount: number;
 };
+
+export type QuizFormValues = {
+  title: string;
+  description: string;
+  thumbnail: string;
+  availableUntil: string;
+  questions: Question[];
+}
