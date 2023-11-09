@@ -12,7 +12,8 @@ import { Story, TimelineProps } from 'src/types/story';
 import { useStoryContext } from 'src/context/StoryContext';
 
 const Timeline = ({ stories }: TimelineProps) => {
-  const { currentStoryIndex, setCurrentStoryIndex } = useStoryContext();
+  const { currentStoryIndex, setCurrentStoryIndex, setCurrentTab } =
+    useStoryContext();
   const router = useRouter();
   const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
   const currentStory = stories[currentStoryIndex];
@@ -28,6 +29,7 @@ const Timeline = ({ stories }: TimelineProps) => {
 
   const nextStory = () => {
     const nextIndex = currentStoryIndex + 1;
+    setCurrentTab(0);
     setCurrentStoryIndex(nextIndex);
     if (nextIndex < stories.length) {
       router.push(`/dashboard/story/${stories[nextIndex].storyId}`);
@@ -36,6 +38,7 @@ const Timeline = ({ stories }: TimelineProps) => {
 
   const prevStory = () => {
     const prevIndex = currentStoryIndex - 1;
+    setCurrentTab(0);
     setCurrentStoryIndex(prevIndex);
     if (prevIndex >= 0) {
       router.push(`/dashboard/story/${stories[prevIndex].storyId}`);
@@ -49,27 +52,29 @@ const Timeline = ({ stories }: TimelineProps) => {
       position='relative'
       width='100%'
     >
-      <Tooltip title='Prošla priča'>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={prevStory}
-          disabled={currentStoryIndex === 0}
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: 0,
-            transform: 'translateY(-50%)',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            minWidth: 'auto',
-            padding: 0,
-          }}
-        >
-          <NavigateBeforeOutlinedIcon sx={{ fontSize: '25px' }} />
-        </Button>
-      </Tooltip>
+      {currentStoryIndex > 0 && (
+        <Tooltip title='Prošla priča'>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={prevStory}
+            disabled={currentStoryIndex === 0}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: 0,
+              transform: 'translateY(-50%)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              minWidth: 'auto',
+              padding: 0,
+            }}
+          >
+            <NavigateBeforeOutlinedIcon sx={{ fontSize: '25px' }} />
+          </Button>
+        </Tooltip>
+      )}
       <Box
         position='relative'
         width='85%'
@@ -136,27 +141,29 @@ const Timeline = ({ stories }: TimelineProps) => {
             )}
           </Box>
         ))}
-      <Tooltip title='Sljedeća priča'>
-        <Button
-          variant='contained'
-          color='primary'
-          onClick={nextStory}
-          disabled={currentStoryIndex === stories.length - 1}
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            right: 0,
-            transform: 'translateY(-50%)',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
-            minWidth: 'auto',
-            padding: 0,
-          }}
-        >
-          <NavigateNextOutlinedIcon sx={{ fontSize: '25px' }} />
-        </Button>
-      </Tooltip>
+      {currentStoryIndex < stories.length - 1 && (
+        <Tooltip title='Sljedeća priča'>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={nextStory}
+            disabled={currentStoryIndex === stories.length - 1}
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              right: 0,
+              transform: 'translateY(-50%)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              minWidth: 'auto',
+              padding: 0,
+            }}
+          >
+            <NavigateNextOutlinedIcon sx={{ fontSize: '25px' }} />
+          </Button>
+        </Tooltip>
+      )}
     </Box>
   );
 };
