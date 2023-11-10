@@ -24,7 +24,10 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
       margin={0}
       height={'100%'}
     >
-      <Grid item mb={2}>
+      <Grid
+        item
+        mb={2}
+      >
         <CollectedStatisticWidget
           chart={{
             series: [

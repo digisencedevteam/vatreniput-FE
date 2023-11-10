@@ -23,28 +23,6 @@ import duration from 'dayjs/plugin/duration';
 import TableSkeleton from 'src/components/skeleton-loader/table-skeleton';
 dayjs.extend(duration);
 
-const NoResultLayout = ({ message }: { message: string }) => (
-  <Box
-    display='flex'
-    flexDirection='column'
-    alignItems='center'
-    justifyContent='center'
-    height='100%'
-    padding={2}
-  >
-    <Box mb={2}>
-      <img
-        src='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
-        alt='Instruction'
-        style={{ width: '200px', height: 'auto' }}
-      />
-    </Box>
-    <Typography variant='h3' color='primary'>
-      {message}
-    </Typography>
-  </Box>
-);
-
 const QuizResults = () => {
   const settings = useSettingsContext();
   const [currentPage, setCurrentPage] = useState(1);
@@ -74,7 +52,10 @@ const QuizResults = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant='h3' color={'primary'}>
+      <Typography
+        variant='h3'
+        color={'primary'}
+      >
         Rezultati Kvizova
       </Typography>
       <Select
@@ -85,11 +66,17 @@ const QuizResults = () => {
         size='small'
         sx={{ my: 2 }}
       >
-        <MenuItem value='' disabled>
+        <MenuItem
+          value=''
+          disabled
+        >
           Izaberi kviz
         </MenuItem>
         {allQuizzes?.map((quiz) => (
-          <MenuItem key={quiz._id} value={quiz._id}>
+          <MenuItem
+            key={quiz._id}
+            value={quiz._id}
+          >
             {quiz.title}
           </MenuItem>
         ))}
@@ -115,7 +102,10 @@ const QuizResults = () => {
                       {resultsById.map((result: QuizResult) => (
                         <TableRow key={result._id}>
                           <TableCell>
-                            <Box display={'flex'} justifyContent={'center'}>
+                            <Box
+                              display={'flex'}
+                              justifyContent={'center'}
+                            >
                               <Avatar
                                 src={
                                   result.userId.photoURL
@@ -148,7 +138,10 @@ const QuizResults = () => {
                   </Table>
                 </TableContainer>
               ) : (
-                <NoResultLayout message='Kviz nema rezultate' />
+                <TableSkeleton
+                  imageURL='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
+                  message='Kviz nema rezultate'
+                />
               )
             ) : (
               <TableSkeleton

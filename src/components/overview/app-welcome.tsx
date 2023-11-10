@@ -2,15 +2,27 @@ import { useTheme, alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack, { StackProps } from '@mui/material/Stack';
 import { bgGradient } from 'src/theme/css';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface Props extends StackProps {
   title?: string;
   description?: string;
   img?: React.ReactNode;
   action?: React.ReactNode;
+  buttonLabel?: string;
+  buttonLink?: string;
 }
 
-const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
+const AppWelcome = ({
+  title,
+  description,
+  action,
+  img,
+  buttonLabel,
+  buttonLink,
+  ...other
+}: Props) => {
   const theme = useTheme();
 
   return (
@@ -32,7 +44,7 @@ const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
     >
       <Stack
         flexGrow={1}
-        justifyContent="center"
+        justifyContent='center'
         alignItems={{ xs: 'center', md: 'flex-start' }}
         sx={{
           p: {
@@ -42,11 +54,14 @@ const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
           textAlign: { xs: 'center', md: 'left' },
         }}
       >
-        <Typography variant="h4" sx={{ mb: 2, whiteSpace: 'pre-line' }}>
+        <Typography
+          variant='h4'
+          sx={{ mb: 2, whiteSpace: 'pre-line' }}
+        >
           {title}
         </Typography>
         <Typography
-          variant="body2"
+          variant='body2'
           sx={{
             opacity: 0.8,
             maxWidth: 360,
@@ -54,13 +69,24 @@ const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
           }}
         >
           {description}
+          {buttonLabel && buttonLink && (
+            <Button
+              variant='contained'
+              component={Link}
+              color='primary'
+              sx={{ mt: 2 }}
+              to={buttonLink}
+            >
+              {buttonLabel}
+            </Button>
+          )}
         </Typography>
         {action && action}
       </Stack>
       {img && (
         <Stack
-          component="span"
-          justifyContent="center"
+          component='span'
+          justifyContent='center'
           sx={{
             p: { xs: 5, md: 3 },
             maxWidth: 360,
@@ -72,6 +98,6 @@ const AppWelcome = ({ title, description, action, img, ...other }: Props) => {
       )}
     </Stack>
   );
-}
+};
 
 export default AppWelcome;

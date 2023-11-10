@@ -222,7 +222,7 @@ export const DesktopViewOne = () => {
                   >
                     <CustomCardSmall
                       imgUrl={quiz.thumbnail}
-                      width='100%'
+                      width='90%'
                       cardText={quiz.title}
                       linkTo={`/dashboard/quiz/${quiz._id}`}
                     />
