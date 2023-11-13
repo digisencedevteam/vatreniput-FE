@@ -36,11 +36,11 @@ const InstallPWA: FC = () => {
     promptInstall.prompt();
   };
 
-  if (!supportsPWA) {
-    console.log('ne radi');
+  // if (!supportsPWA) {
+  //   console.log('ne radi');
 
-    return null;
-  }
+  //   return null;
+  // }
 
   return (
     <Button
