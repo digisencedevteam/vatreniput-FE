@@ -37,6 +37,8 @@ const InstallPWA: FC = () => {
   };
 
   if (!supportsPWA) {
+    console.log('ne radi');
+
     return null;
   }
 

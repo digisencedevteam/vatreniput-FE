@@ -16,6 +16,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
+import InstallPWA from 'src/components/install-pwa-modal/install-pwa';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -148,6 +149,7 @@ export const CollectionView = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
+      <InstallPWA />
       {isMobile && (
         <Typography
           color={theme.palette.primary.main}
