@@ -176,7 +176,7 @@ function SeoIllustration({ imageUrl, ...other }: SeoIllustrationProps) {
         href={imageUrl}
         height='400'
         x='100'
-        y='-50'
+        y='0'
       />
     </Box>
   );
