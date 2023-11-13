@@ -1,57 +1,114 @@
-import React, { useEffect, useState, FC } from 'react';
-import { Button } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from '@mui/material';
 
-// Extend global WindowEventMap to include 'beforeinstallprompt'
+// Interface for the beforeinstallprompt event
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+}
 declare global {
   interface WindowEventMap {
     beforeinstallprompt: BeforeInstallPromptEvent;
   }
 }
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => void;
-}
-
-const InstallPWA: FC = () => {
+const InstallPWA: React.FC = () => {
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] =
     useState<BeforeInstallPromptEvent | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    const handler = (e: BeforeInstallPromptEvent) => {
+    const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
+    setIsAppInstalled(isInstalled);
+
+    const beforeInstallPromptHandler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
-      console.log('we are being triggered :D');
       setSupportsPWA(true);
       setPromptInstall(e);
+      if (!isInstalled) {
+        setDialogOpen(true);
+      }
     };
 
-    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler);
 
-    return () => window.removeEventListener('beforeinstallprompt', handler);
+    return () =>
+      window.removeEventListener(
+        'beforeinstallprompt',
+        beforeInstallPromptHandler
+      );
   }, []);
 
-  const onClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    evt.preventDefault();
-    if (!promptInstall) return;
-    promptInstall.prompt();
+  const onClickInstall = () => {
+    if (promptInstall) {
+      promptInstall.prompt();
+      promptInstall.userChoice.then(
+        (choiceResult: {
+          outcome: 'accepted' | 'dismissed';
+          platform: string;
+        }) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          } else {
+            console.log('User dismissed the install prompt');
+          }
+          setDialogOpen(false);
+        }
+      );
+    }
   };
 
-  // if (!supportsPWA) {
-  //   console.log('ne radi');
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
 
-  //   return null;
-  // }
+  if (isAppInstalled) {
+    return null;
+  }
 
   return (
-    <Button
-      fullWidth
-      color='inherit'
-      size='large'
-      variant='contained'
-      onClick={onClick}
+    <Dialog
+      open={dialogOpen}
+      onClose={closeDialog}
     >
-      Install
-    </Button>
+      <DialogTitle>Instalirajte Web Aplikaciju</DialogTitle>
+      <DialogContent>
+        {supportsPWA ? (
+          <DialogContentText>
+            Kliknite ispod da instalirate aplikaciju na vaš uređaj.
+          </DialogContentText>
+        ) : (
+          <DialogContentText>
+            Vaš preglednik ne podržava automatiziranu instalaciju. Slijedite
+            upute za ručnu instalaciju.
+          </DialogContentText>
+        )}
+      </DialogContent>
+      <DialogActions>
+        {supportsPWA && (
+          <Button
+            onClick={onClickInstall}
+            color='primary'
+          >
+            Instaliraj
+          </Button>
+        )}
+        <Button
+          onClick={closeDialog}
+          color='primary'
+        >
+          Zatvori
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
