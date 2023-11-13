@@ -159,7 +159,10 @@ export const CollectionView = () => {
       )}
       <Grid container>
         {!isMobile ? (
-          <Grid item>
+          <Grid
+            item
+            lg={12}
+          >
             <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
@@ -173,18 +176,14 @@ export const CollectionView = () => {
             />
           </Grid>
         ) : (
-          <Grid item>
+          <Grid
+            item
+            xs={12}
+            mr={3}
+          >
             <StatisticCards collectedStatistic={collectedStatistic} />
           </Grid>
         )}
-
-        {/* <Grid
-          item
-          xs={12}
-          md={5}
-        >
-          <StatisticCards collectedStatistic={collectedStatistic} />
-        </Grid> */}
       </Grid>
 
       <div ref={myRef}>
