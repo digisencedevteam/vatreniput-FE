@@ -4,10 +4,22 @@ import { StoryContentProps } from 'src/types/story';
 import MatchTable from '../../story-components/match-table/match-table';
 import QualificationMatchDetails from '../../story-components/match-details/qualification-match-details';
 import { useTruncatedText } from 'src/hooks/use-text-utils';
+import { useEffect } from 'react';
 
 export const QualificationsContent = ({ story }: StoryContentProps) => {
-  const { expanded, toggleLines, truncatedText, isTruncated, less, more } =
-    useTruncatedText(story?.Qualifications?.Description || '');
+  const {
+    expanded,
+    toggleLines,
+    truncatedText,
+    isTruncated,
+    less,
+    more,
+    setText,
+  } = useTruncatedText(story?.Qualifications?.Description || '');
+
+  useEffect(() => {
+    setText(story?.Qualifications?.Description || '');
+  }, [story, setText]);
   return (
     <>
       {story?.Qualifications?.Description && (
