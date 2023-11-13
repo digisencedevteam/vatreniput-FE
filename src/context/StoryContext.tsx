@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface StoryContextType {
   currentStoryIndex: number;
@@ -26,7 +26,6 @@ export const StoryProvider = ({
 }: StoryProviderProps) => {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const [currentTab, setCurrentTab] = useState(0);
-  const [callback, setCallback] = useState(false);
 
   return (
     <StoryContext.Provider

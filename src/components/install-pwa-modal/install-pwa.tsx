@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Dialog,
@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const InstallPWA: React.FC = () => {
+const InstallPWA = () => {
   const [isAppInstalled, setIsAppInstalled] = useState(false);
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] =

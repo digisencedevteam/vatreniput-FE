@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import useVoting from 'src/hooks/use-voting-data';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useContext, useEffect } from 'react';
