@@ -21,8 +21,7 @@ import { useParams } from 'src/routes/hooks';
 
 const StoryContent = ({ story }: StoryContentProps) => {
   const { storyId } = useParams();
-  const { setCurrentStoryIndex, currentTab, setCurrentTab, currentStoryIndex } =
-    useStoryContext();
+  const { setCurrentStoryIndex, currentTab, setCurrentTab } = useStoryContext();
   const slideVariants = varFade();
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setCurrentTab(newValue);
