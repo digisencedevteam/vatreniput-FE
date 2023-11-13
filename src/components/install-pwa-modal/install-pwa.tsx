@@ -17,6 +17,7 @@ declare global {
     beforeinstallprompt: BeforeInstallPromptEvent;
   }
 }
+
 const InstallPWA: React.FC = () => {
   const [isAppInstalled, setIsAppInstalled] = useState(false);
   const [supportsPWA, setSupportsPWA] = useState(false);
@@ -32,9 +33,6 @@ const InstallPWA: React.FC = () => {
       e.preventDefault();
       setSupportsPWA(true);
       setPromptInstall(e);
-      if (!isInstalled) {
-        setDialogOpen(true);
-      }
     };
 
     window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler);
@@ -65,6 +63,10 @@ const InstallPWA: React.FC = () => {
     }
   };
 
+  const openDialog = () => {
+    setDialogOpen(true);
+  };
+
   const closeDialog = () => {
     setDialogOpen(false);
   };
@@ -74,40 +76,51 @@ const InstallPWA: React.FC = () => {
   }
 
   return (
-    <Dialog
-      open={dialogOpen}
-      onClose={closeDialog}
-    >
-      <DialogTitle>Instalirajte Web Aplikaciju</DialogTitle>
-      <DialogContent>
-        {supportsPWA ? (
-          <DialogContentText>
-            Kliknite ispod da instalirate aplikaciju na vaš uređaj.
-          </DialogContentText>
-        ) : (
-          <DialogContentText>
-            Vaš preglednik ne podržava automatiziranu instalaciju. Slijedite
-            upute za ručnu instalaciju.
-          </DialogContentText>
-        )}
-      </DialogContent>
-      <DialogActions>
-        {supportsPWA && (
+    <>
+      {!isAppInstalled && (
+        <Button
+          onClick={openDialog}
+          color='primary'
+          size='small'
+        >
+          Instaliraj
+        </Button>
+      )}
+      <Dialog
+        open={dialogOpen}
+        onClose={closeDialog}
+      >
+        <DialogTitle>Instalirajte Web Aplikaciju</DialogTitle>
+        <DialogContent>
+          {supportsPWA ? (
+            <DialogContentText>
+              Kliknite ispod da instalirate aplikaciju na vaš uređaj.
+            </DialogContentText>
+          ) : (
+            <DialogContentText>
+              Vaš preglednik ne podržava automatiziranu instalaciju. Slijedite
+              upute za ručnu instalaciju.
+            </DialogContentText>
+          )}
+        </DialogContent>
+        <DialogActions>
+          {supportsPWA && (
+            <Button
+              onClick={onClickInstall}
+              color='primary'
+            >
+              Instaliraj
+            </Button>
+          )}
           <Button
-            onClick={onClickInstall}
+            onClick={closeDialog}
             color='primary'
           >
-            Instaliraj
+            Zatvori
           </Button>
-        )}
-        <Button
-          onClick={closeDialog}
-          color='primary'
-        >
-          Zatvori
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 

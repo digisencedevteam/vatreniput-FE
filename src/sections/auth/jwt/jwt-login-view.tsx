@@ -22,7 +22,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import InstallPWA from 'src/components/install-pwa-modal/install-pwa';
 
 export default function JwtLoginView() {
@@ -111,15 +111,26 @@ export default function JwtLoginView() {
         }}
       />
 
-      <Link
-        variant='body2'
-        color='inherit'
-        underline='always'
-        sx={{ alignSelf: 'flex-end', cursor: 'pointer' }}
-        href='/forgot-password'
+      <Grid
+        container
+        direction={'row'}
+        justifyContent={'space-between'}
       >
-        Zaboravili ste lozinku?
-      </Link>
+        <Grid item>
+          <InstallPWA />
+        </Grid>
+        <Grid item>
+          <Link
+            variant='body2'
+            color='inherit'
+            underline='always'
+            sx={{ alignSelf: 'flex-end', cursor: 'pointer' }}
+            href='/forgot-password'
+          >
+            Zaboravili ste lozinku?
+          </Link>
+        </Grid>
+      </Grid>
 
       <LoadingButton
         fullWidth
@@ -136,7 +147,6 @@ export default function JwtLoginView() {
 
   return (
     <>
-      <InstallPWA />
       <Box>
         <FormProvider
           methods={methods}
