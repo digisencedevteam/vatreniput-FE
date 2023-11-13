@@ -1,87 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Button,
-} from '@mui/material';
+import React, { useEffect, useState, FC } from 'react';
+import { Button } from '@mui/material';
 
-// Define a type for the BeforeInstallPromptEvent
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed'; platform: string }>;
+// Extend global WindowEventMap to include 'beforeinstallprompt'
+declare global {
+  interface WindowEventMap {
+    beforeinstallprompt: BeforeInstallPromptEvent;
+  }
 }
 
-const InstallPWA: React.FC = () => {
-  const [installPrompt, setInstallPrompt] =
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => void;
+}
+
+const InstallPWA: FC = () => {
+  const [supportsPWA, setSupportsPWA] = useState(false);
+  const [promptInstall, setPromptInstall] =
     useState<BeforeInstallPromptEvent | null>(null);
-  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    const handleBeforeInstallPrompt = (e: BeforeInstallPromptEvent) => {
-      // Prevent the mini-infobar from appearing on mobile
+    const handler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault();
-      // Save the event for later (to trigger the prompt)
-      setInstallPrompt(e);
-      // Show the install button
-      setOpenDialog(true);
+      console.log('we are being triggered :D');
+      setSupportsPWA(true);
+      setPromptInstall(e);
     };
 
-    window.addEventListener(
-      'beforeinstallprompt',
-      handleBeforeInstallPrompt as EventListener
-    );
+    window.addEventListener('beforeinstallprompt', handler);
 
-    return () => {
-      window.removeEventListener(
-        'beforeinstallprompt',
-        handleBeforeInstallPrompt as EventListener
-      );
-    };
+    return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
-  const handleInstallClick = async () => {
-    // Hide the dialog
-    setOpenDialog(false);
-    // Show the install prompt
-    if (installPrompt) {
-      await installPrompt.prompt();
-      const choiceResult = await installPrompt.userChoice;
-      if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      } else {
-        console.log('User dismissed the install prompt');
-      }
-      // Clear the saved prompt since it can't be used again
-      setInstallPrompt(null);
-    }
+  const onClick = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    evt.preventDefault();
+    if (!promptInstall) return;
+    promptInstall.prompt();
   };
 
+  if (!supportsPWA) {
+    return null;
+  }
+
   return (
-    <Dialog
-      open={openDialog}
-      onClose={() => setOpenDialog(false)}
+    <Button
+      fullWidth
+      color='inherit'
+      size='large'
+      variant='contained'
+      onClick={onClick}
     >
-      <DialogTitle>Install App</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Install our app on your home screen for faster access and exclusive
-          features.
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => setOpenDialog(false)}>Close</Button>
-        <Button
-          onClick={handleInstallClick}
-          color='primary'
-          variant='contained'
-        >
-          Install
-        </Button>
-      </DialogActions>
-    </Dialog>
+      Install
+    </Button>
   );
 };
 
