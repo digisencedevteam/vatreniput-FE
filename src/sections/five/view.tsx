@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import useVoting from 'src/hooks/use-voting-data';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useContext, useEffect } from 'react';
@@ -68,8 +67,8 @@ const FiveView = () => {
               md={7}
             >
               <AppWelcome
-                title={`Pozdrav 👋`}
-                description='Dobrodošli na stranicu glasanja! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
+                title={`Dobrodošli na stranicu glasanja! `}
+                description='Zaronite u uzbudljivi svijet glasanja i otkrij koji su igrači tvojim prijateljima najdraži! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
                 img={
                   <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png' />
                 }
