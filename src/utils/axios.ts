@@ -4,14 +4,37 @@ import { apiExpress } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: apiExpress });
+const axiosInstance = axios.create({ baseURL: apiExpress, withCredentials: true });
+
+axios.defaults.withCredentials = true;
+
 
 axiosInstance.interceptors.response.use(
-  (res) => res,
-  (error) =>
-    Promise.reject(
-      (error.response && error.response.data) || 'Something went wrong'
-    )
+  (response) => response, 
+  async (error) => {
+    const originalRequest = error.config;
+
+    if (error.response.status === 401 && originalRequest.url === '/auth/refresh') {
+      return Promise.reject(error);
+    }
+
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      try {
+        const response = await axiosInstance.post('/auth/refresh');
+        const { accessToken } = response.data;
+        
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+        
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
+    }
+
+    return Promise.reject((error.response && error.response.data) || 'Something went wrong');
+  }
 );
 
 export default axiosInstance;
@@ -37,6 +60,7 @@ export const endpoints = {
     me: '/auth/user',
     login: '/user/login',
     register: '/user/register/',
+    refreshToken: '/auth/refresh'
   },
   mail: {
     list: '/api/mail/list',

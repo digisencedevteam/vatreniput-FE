@@ -17,7 +17,6 @@ import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 // auth
 import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
 
-
 export default function App() {
   useScrollToTop();
 
@@ -31,7 +30,8 @@ export default function App() {
           themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
           themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
           themeStretch: false,
-        }}>
+        }}
+      >
         <ThemeProvider>
           <MotionLazy>
             <SettingsDrawer />

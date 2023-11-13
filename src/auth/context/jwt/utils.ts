@@ -1,7 +1,7 @@
-// routes
 import { paths } from 'src/routes/paths';
-// utils
-import axios from 'src/utils/axios';
+import axios, { endpoints } from 'src/utils/axios';
+// import { useRouter } from 'src/routes/hooks';
+// const router = useRouter();
 
 // ----------------------------------------------------------------------
 
@@ -35,8 +35,8 @@ export const isValidToken = (accessToken: string) => {
 
 // ----------------------------------------------------------------------
 
-export const tokenExpired = (exp: number) => {
-  // eslint-disable-next-line prefer-const
+export const tokenExpired = async (exp: number) => {
+  // eslint-disable-next-line prefer-const 
   let expiredTimer;
 
   const currentTime = Date.now();
@@ -58,18 +58,30 @@ export const tokenExpired = (exp: number) => {
 
 // ----------------------------------------------------------------------
 
-export const setSession = (accessToken: string | null) => {
+export const setSession = async (accessToken: string | null) => {
   if (accessToken) {
     sessionStorage.setItem('accessToken', accessToken);
 
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
+    const { exp } = jwtDecode(accessToken);
     tokenExpired(exp);
   } else {
     sessionStorage.removeItem('accessToken');
-
     delete axios.defaults.headers.common.Authorization;
+  }
+};
+
+export const refreshAccessToken = async () => {
+  try {
+    const response = await axios.post(endpoints.auth.refreshToken);
+    const { accessToken } = response.data;
+
+    setSession(accessToken);
+  } catch (error) {
+    console.error('Error during token refresh:', error);
+
+    setSession(null);
+    // window.location.href = paths.auth.jwt.login;
   }
 };
