@@ -1,51 +1,63 @@
 import axios, { AxiosRequestConfig } from 'axios';
-// config
 import { apiExpress } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
 const axiosInstance = axios.create({ baseURL: apiExpress, withCredentials: true });
-
-axios.defaults.withCredentials = true;
-
+axiosInstance.defaults.withCredentials = true;
 
 axiosInstance.interceptors.response.use(
-  (response) => response, 
+  response => response,
   async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status === 401 && originalRequest.url === '/auth/refresh') {
-      return Promise.reject(error);
+    if (!error.response) {
+      console.error('Network error or server is not responding');
+      return Promise.reject(new Error('Network error or server down'));
     }
-
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const response = await axiosInstance.post('/auth/refresh');
-        const { accessToken } = response.data;
-        
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-        originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-        
-        return axiosInstance(originalRequest);
-      } catch (refreshError) {
-        return Promise.reject(refreshError);
+    if (error.response.status === 401) {
+      if (originalRequest.url === endpoints.auth.refreshToken) {
+        sessionStorage.removeItem('accessToken');
+        return Promise.reject(error);
+      }
+      if (!originalRequest._retry) {
+        originalRequest._retry = true;
+        try {
+          const refreshResponse = await axiosInstance.get(endpoints.auth.refreshToken);
+          if (refreshResponse.data.accessToken) {
+            const { accessToken } = refreshResponse.data;
+            sessionStorage.setItem('accessToken', accessToken);
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+            return axiosInstance(originalRequest);
+          }
+        } catch (refreshError) {
+          sessionStorage.removeItem('accessToken');
+          return Promise.reject(refreshError);
+        }
       }
     }
-
+    if (error.response.status === 403) {
+      console.error('You do not have permission to access this resource.');
+      return Promise.reject(error);
+    }
+    if (error.response.status === 404) {
+      console.error('Requested resource not found.');
+      return Promise.reject(error);
+    }
+    if (error.response.status === 500) {
+      console.error('Internal server error. Please try again later.');
+      return Promise.reject(error);
+    }
+    console.error(`An error occurred: ${error.response.status}`);
     return Promise.reject((error.response && error.response.data) || 'Something went wrong');
   }
 );
-
 export default axiosInstance;
-
-// ----------------------------------------------------------------------
 
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
-
   const res = await axiosInstance.get(url, { ...config });
-
   return res.data;
 };
 
@@ -60,7 +72,8 @@ export const endpoints = {
     me: '/auth/user',
     login: '/user/login',
     register: '/user/register/',
-    refreshToken: '/auth/refresh'
+    refreshToken: '/auth/refresh',
+    logout: '/auth/logout'
   },
   mail: {
     list: '/api/mail/list',

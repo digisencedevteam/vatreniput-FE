@@ -50,7 +50,7 @@ const useFetchQuizzes = (
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
     try {
-      const response = await axios.get(`${endpoints.quiz.details}${quizId}`);
+      const response = await axiosInstance.get(`${endpoints.quiz.details}${quizId}`);
       setUnresolvedQuiz(response.data || null);
     } catch (error) {
       setUnresolvedQuiz(null);
@@ -61,7 +61,7 @@ const useFetchQuizzes = (
   const fetchAllQuizzes = async () => {
     setIsLoadingResolved(true);
     try {
-      const response = await axios.get(`${endpoints.quiz.all}`);
+      const response = await axiosInstance.get(`${endpoints.quiz.all}`);
       setAllQuizzes(response.data);
     } catch (error) {
       setAllQuizzes([]);
@@ -145,7 +145,7 @@ const useFetchQuizzes = (
     const fetchUnresolvedQuizzes = async () => {
       setIsLoadingUnresolved(true);
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
 
@@ -159,7 +159,7 @@ const useFetchQuizzes = (
     const fetchResolvedQuizzes = async () => {
       setIsLoadingResolved(true);
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
         setIsLoadingResolved(false);

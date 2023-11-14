@@ -13,7 +13,7 @@ const AuthGuard = ({ children }: Props) => {
   const { authenticated, method, initializing } = useAuthContext();
 
   useEffect(() => {
-    if (!authenticated) {
+    if (!authenticated && !initializing) {
       const loginPath = method === 'jwt' ? paths.auth.jwt.login : '/login';
       const searchParams = new URLSearchParams({
         returnTo: window.location.pathname,

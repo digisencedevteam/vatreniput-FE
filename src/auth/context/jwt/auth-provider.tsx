@@ -1,46 +1,48 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { AuthContext } from './auth-context';
 import { isValidToken, setSession } from './utils';
 import { AuthUserType } from '../../types';
 import { FormValues } from 'src/types';
 import { LoadingScreen } from 'src/components/loading-screen';
-
-const STORAGE_KEY = 'accessToken';
+import axiosInstance from 'src/utils/axios';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export function AuthProvider({ children }: Props) {
+export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<AuthUserType | null>(null);
   const [loading, setLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
 
   const initialize = async () => {
     try {
-      console.log('Initializing...');
-      let accessToken = sessionStorage.getItem(STORAGE_KEY);
+      let accessToken = sessionStorage.getItem('accessToken');
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
-        const response = await axios.get(endpoints.auth.me);
+        const response = await axiosInstance.get(endpoints.auth.me);
         setUser(response.data.user);
-        console.log('User set after valid access token', response.data.user);
       } else {
-        const refreshResponse = await axios.post(endpoints.auth.refreshToken);
-        accessToken = refreshResponse.data.accessToken;
-        setSession(accessToken);
-        setUser(refreshResponse.data.user);
-        console.log('User set after refresh token', refreshResponse.data.user);
+        const refreshResponse = await axiosInstance.get(
+          endpoints.auth.refreshToken
+        );
+        if (refreshResponse.data.accessToken) {
+          accessToken = refreshResponse.data.accessToken;
+          setSession(accessToken);
+          const userResponse = await axiosInstance.get(endpoints.auth.me);
+          updateUserContext(userResponse.data.user);
+        } else {
+          setUser(null);
+        }
       }
     } catch (error) {
       console.error('Initialization error:', error);
-      sessionStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem('accessToken');
       setUser(null);
     } finally {
       setLoading(false);
       setIsInitialized(true);
-      console.log('Initialization finally block reached');
     }
   };
 
@@ -48,12 +50,20 @@ export function AuthProvider({ children }: Props) {
     initialize();
   }, []);
 
+  useEffect(() => {
+    setSession(user?.accessToken);
+  }, [user]);
+
   const login = useCallback(async (email: string, password: string) => {
     const data = { email, password };
-    const response = await axios.post(endpoints.auth.login, data);
+    const response = await axiosInstance.post(endpoints.auth.login, data);
     setSession(response.data.accessToken);
     setUser(response.data.user);
   }, []);
+
+  const updateUserContext = (newUser: any) => {
+    setUser(newUser);
+  };
 
   const register = useCallback(
     async (
@@ -65,22 +75,30 @@ export function AuthProvider({ children }: Props) {
       code: string
     ) => {
       const data = { email, password, firstName, lastName, username, code };
-      const response = await axios.post(endpoints.auth.register + code, data);
-      sessionStorage.setItem(STORAGE_KEY, response.data.accessToken);
+      const response = await axiosInstance.post(
+        endpoints.auth.register + code,
+        data
+      );
+      sessionStorage.setItem('accessToken', response.data.accessToken);
       setUser(response.data.user);
     },
     []
   );
 
   const logout = useCallback(async () => {
-    setSession(null);
-    setUser(null);
+    try {
+      await axiosInstance.post(endpoints.auth.logout);
+      setSession(null);
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }, []);
 
   const updateUser = useCallback(
     async (userData: FormValues) => {
       if (user) {
-        const response = await axios.put(
+        const response = await axiosInstance.put(
           `${endpoints.user.user}${user._id}`,
           userData
         );
@@ -98,12 +116,22 @@ export function AuthProvider({ children }: Props) {
       authenticated: !!user,
       unauthenticated: !user,
       initializing: !isInitialized,
+      updateUserContext,
       login,
       register,
       logout,
       updateUser,
     }),
-    [user, loading, login, register, logout, updateUser, isInitialized]
+    [
+      user,
+      loading,
+      login,
+      register,
+      logout,
+      updateUser,
+      isInitialized,
+      updateUserContext,
+    ]
   );
 
   if (loading) {
@@ -115,4 +143,4 @@ export function AuthProvider({ children }: Props) {
       {children}
     </AuthContext.Provider>
   );
-}
+};
