@@ -9,134 +9,66 @@ import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import axios, { endpoints } from 'src/utils/axios';
-import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
+import useCardData from 'src/hooks/use-card-data';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const {
+    collectedStatistic,
+    collectedCards,
+    categories,
+    isLoading,
+    totalPages,
+    fetchCollectedCards,
+    fetchCategories,
+    fetchCollectedStatistics,
+  } = useCardData(); // Use the custom hook
+
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [categories, setCategories] = useState<CollectionEvent[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [totalPages, setTotalPages] = useState(1);
-  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('md'));
   const currentCategory = categories[categoryIndex];
   const itemsPerPage = 12;
-  const [collectedStatistic, setCollectedStatistic] =
-    useState<CollectedStatistic | null>(null);
   const myRef = React.useRef<HTMLDivElement>(null);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
-  const [isCategoryLoading, setIsCategoryLoading] = useState(false);
-  const showSkeletonLoader = isCategoryLoading || isLoading;
-  const showNoDataMessage =
-    !isCategoryLoading && !isLoading && collectedCards.length === 0;
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(endpoints.event.all);
-      const myCards = { _id: 9, name: 'Moje Skupljene sličice' };
-      setCategories([myCards, ...response.data]);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching categories' + error);
-      setCategories([]);
-      setIsLoading(false);
-    }
-  };
-
-  const fetchCollectedCards = async () => {
-    setIsCategoryLoading(true);
-    try {
-      let response;
-      if (categoryIndex === 0) {
-        response = await axios.get(
-          `${endpoints.card.collected}?page=${currentPage}&limit=${itemsPerPage}`
-        );
-      } else {
-        const categoryId = categories[categoryIndex]?._id;
-        if (categoryId) {
-          response = await axios.get(
-            `${endpoints.card.event}/${categoryId}?page=${currentPage}&limit=${itemsPerPage}`
-          );
-        }
-      }
-      if (response) {
-        const totalPages = Math.ceil(response.data.totalCount / itemsPerPage);
-        setTotalPages(totalPages);
-        setCollectedCards(response.data.cards);
-        setIsDataLoaded(true);
-      }
-    } catch (error) {
-      console.error(error);
-      setCollectedCards([]);
-    }
-    setIsCategoryLoading(false);
-  };
-
-  const fetchCollectedStatistic = async () => {
-    try {
-      const response = await axios.get(endpoints.card.stats);
-      setCollectedStatistic(response.data);
-    } catch (error) {
-      console.error('Error fetching collected statistic: ' + error);
-      setCollectedStatistic(null);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories()
-      .then(() => {
-        fetchCollectedStatistic();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const showSkeletonLoader = isLoading;
+  const showNoDataMessage = !isLoading && collectedCards.length === 0;
 
   useEffect(() => {
     if (categories.length > 0) {
-      fetchCollectedCards();
+      fetchCollectedCards(categoryIndex, currentPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, categoryIndex, categories]);
 
   useEffect(() => {
-    if (myRef.current && isDataLoaded) {
+    if (myRef.current && !isLoading) {
       if (!isFirstVisit) {
         myRef.current.scrollIntoView();
       } else {
         setIsFirstVisit(false);
       }
-      setIsDataLoaded(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryIndex, isDataLoaded]);
+  }, [categoryIndex, isLoading]);
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   const handleArrowClick = (direction: string) => {
-    setIsCategoryLoading(true);
-    setCollectedCards([]);
-    if (categories.length > 0) {
-      setCurrentPage(1);
-      if (direction === 'left') {
-        setCategoryIndex(
-          (prevIndex) => (prevIndex - 1 + categories.length) % categories.length
-        );
-      } else if (direction === 'right') {
-        setCategoryIndex((prevIndex) => (prevIndex + 1) % categories.length);
-      }
-    }
+    const newIndex =
+      direction === 'left'
+        ? (categoryIndex - 1 + categories.length) % categories.length
+        : (categoryIndex + 1) % categories.length;
+    setCategoryIndex(newIndex);
+    fetchCollectedCards(newIndex, currentPage); // Fetch new category cards
   };
 
   const handlePageChange = (
@@ -144,8 +76,8 @@ export const CollectionView = () => {
     page: number
   ) => {
     setCurrentPage(page);
+    fetchCollectedCards(categoryIndex, page); // Fetch cards for new page
   };
-
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       {isMobile && (
