@@ -22,7 +22,8 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
+import InstallPWA from 'src/components/install-pwa-modal/install-pwa';
 
 export default function JwtLoginView() {
   const { login } = useAuthContext();
@@ -73,28 +74,35 @@ export default function JwtLoginView() {
   });
 
   const renderHead = (
-    <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">Prijavi se na platformu!</Typography>
+    <Stack
+      spacing={2}
+      sx={{ mb: 5 }}
+    >
+      <Typography variant='h4'>Prijavi se na platformu!</Typography>
     </Stack>
   );
 
   const renderForm = (
     <Stack spacing={2.5}>
-      {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
-      <RHFTextField name="email" label="Email" />
+      {!!errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
       <RHFTextField
-        name="password"
-        label="Lozinka"
+        name='email'
+        label='Email'
+      />
+      <RHFTextField
+        name='password'
+        label='Lozinka'
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
+            <InputAdornment position='end'>
+              <IconButton
+                onClick={password.onToggle}
+                edge='end'
+              >
                 <Iconify
                   icon={
-                    password.value
-                      ? 'solar:eye-bold'
-                      : 'solar:eye-closed-bold'
+                    password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'
                   }
                 />
               </IconButton>
@@ -103,22 +111,33 @@ export default function JwtLoginView() {
         }}
       />
 
-      <Link
-        variant="body2"
-        color="inherit"
-        underline="always"
-        sx={{ alignSelf: 'flex-end', cursor: 'pointer' }}
-        href='/forgot-password'
+      <Grid
+        container
+        direction={'row'}
+        justifyContent={'space-between'}
       >
-        Zaboravili ste lozinku?
-      </Link>
+        <Grid item>
+          <InstallPWA />
+        </Grid>
+        <Grid item>
+          <Link
+            variant='body2'
+            color='inherit'
+            underline='always'
+            sx={{ alignSelf: 'flex-end', cursor: 'pointer' }}
+            href='/forgot-password'
+          >
+            Zaboravili ste lozinku?
+          </Link>
+        </Grid>
+      </Grid>
 
       <LoadingButton
         fullWidth
-        color="inherit"
-        size="large"
-        type="submit"
-        variant="contained"
+        color='inherit'
+        size='large'
+        type='submit'
+        variant='contained'
         loading={isSubmitting}
       >
         Prijava
@@ -127,12 +146,17 @@ export default function JwtLoginView() {
   );
 
   return (
-    <Box>
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        {renderHead}
-        {renderForm}
-      </FormProvider>
-      <ContactUsForm />
-    </Box>
+    <>
+      <Box>
+        <FormProvider
+          methods={methods}
+          onSubmit={onSubmit}
+        >
+          {renderHead}
+          {renderForm}
+        </FormProvider>
+        <ContactUsForm />
+      </Box>
+    </>
   );
 }

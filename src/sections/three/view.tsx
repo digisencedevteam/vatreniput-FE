@@ -1,12 +1,5 @@
 import { useSettingsContext } from 'src/components/settings';
-import {
-  Container,
-  Typography,
-  Box,
-  Grid,
-  Button,
-  useMediaQuery,
-} from '@mui/material';
+import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,11 +23,14 @@ import { userRoles } from 'src/lib/constants';
 import { paths } from 'src/routes/paths';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';
+import { useResponsive } from 'src/hooks/use-responsive';
+import AppWelcome from 'src/components/overview/app-welcome';
+import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useResponsive('down', 'md');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 5;
@@ -57,6 +53,17 @@ const ThreeView = () => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
+
+  const buttonProps =
+    auth.user && auth.user.role === userRoles.admin
+      ? {
+          buttonLabel: 'Kreiraj novi kviz',
+          buttonLink: `${paths.dashboard.quizGroup.createQuiz}`, // Path to create quiz
+        }
+      : {
+          buttonLabel: 'Pravila i Nagrade Kvizova',
+          buttonLink: `${paths.quizRewardInfo}`, // Path to quiz rules and rewards
+        };
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -116,58 +123,82 @@ const ThreeView = () => {
         quizResults={selectedQuizResult}
         formattedDateTaken={formattedDateTaken}
       />
-      <Box
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
-        sx={{ marginTop: 1 }}
-      >
-        <Typography
-          sx={{ margin: 1 }}
-          variant='h2'
-          color={theme.palette.primary.main}
+      {isMobile ? (
+        <Box
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
+          sx={{ marginTop: 1 }}
         >
-          Kvizovi
-        </Typography>
+          <Typography
+            sx={{ margin: 1 }}
+            variant='h2'
+            color={theme.palette.primary.main}
+          >
+            Kvizovi
+          </Typography>
 
-        {auth.user &&
-          (auth.user.role === userRoles.admin ? (
-            <Button
-              variant='contained'
-              color='primary'
-              component={Link}
-              to={`${paths.dashboard.quizGroup.createQuiz}`}
-            >
-              Kreiraj novi kviz
-            </Button>
-          ) : (
-            <Button
-              variant='contained'
-              component={Link}
-              to={`${paths.quizRewardInfo}`}
-              sx={{
-                backgroundColor: (theme) => theme.palette.background.default,
-                textDecoration: 'underline',
-                textUnderlineOffset: '3px',
-                color:
-                  theme.palette.mode === 'dark'
-                    ? theme.palette.text.primary
-                    : theme.palette.text.primary,
-                '&:hover': {
+          {auth.user &&
+            (auth.user.role === userRoles.admin ? (
+              <Button
+                variant='contained'
+                color='primary'
+                component={Link}
+                to={`${paths.dashboard.quizGroup.createQuiz}`}
+              >
+                Kreiraj novi kviz
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                component={Link}
+                to={`${paths.quizRewardInfo}`}
+                sx={{
                   backgroundColor: (theme) => theme.palette.background.default,
-                  opacity: 0.8,
-                },
-              }}
-            >
-              Pravila i Nagrade Kvizova
-            </Button>
-          ))}
-      </Box>
-      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
+                  textDecoration: 'underline',
+                  textUnderlineOffset: '3px',
+                  color:
+                    theme.palette.mode === 'dark'
+                      ? theme.palette.text.primary
+                      : theme.palette.text.primary,
+                  '&:hover': {
+                    backgroundColor: (theme) =>
+                      theme.palette.background.default,
+                    opacity: 0.8,
+                  },
+                }}
+              >
+                Pravila i Nagrade Kvizova
+              </Button>
+            ))}
+        </Box>
+      ) : (
+        <Grid item>
+          <AppWelcome
+            title={`Dobrodošli na kvizove`}
+            description={`Zaronite u uzbudljivi svijet naših kvizova! Jeste li spremni testirati svoje vještine i zauzeti mjesto među pobjednicima? Pridružite se sada i neka igre počnu!`}
+            img={
+              <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png' />
+            }
+            buttonLabel={buttonProps.buttonLabel}
+            buttonLink={buttonProps.buttonLink}
+          />
+        </Grid>
+      )}
+      <Grid
+        item
+        xs={12}
+        md={6}
+        lg={8}
+        sx={{ marginY: 5 }}
+      >
         {isLoadingResolved ? (
           <SkeletonOverviewResults />
         ) : resolvedQuiz && resolvedQuiz.length > 0 ? (
-          <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
+          <QuizBestOverview
+            title='Najnoviji rezultati'
+            data={resolvedQuiz}
+          />
         ) : (
           <SkeletonOverviewResults message='Trenutno nema riješenih kvizova. Riješi neki od dostupnih kako bi vidio svoje rezultate!' />
         )}
@@ -209,7 +240,10 @@ const ThreeView = () => {
         />
       </Box>
       <SectionWrapper title='Dostupni'>
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+        >
           {isLoadingUnresolved ? (
             <SkeletonDashboardLoader
               isMobileCount={2}
@@ -218,15 +252,15 @@ const ThreeView = () => {
             />
           ) : !!unresolvedQuizzes?.length ? (
             unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
-                <Box
-                  sx={{
-                    transition: 'transform .2s',
-                    '&:hover': {
-                      transform: 'scale(1.05)',
-                    },
-                  }}
-                >
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={4}
+              >
+                <Box>
                   <CustomCard
                     quizId={data._id}
                     onDelete={deleteQuiz}
@@ -281,10 +315,6 @@ const ThreeView = () => {
                   m: 0,
                   width: '100%',
                   maxWidth: '250px',
-                  transition: 'transform .2s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                  },
                 }}
               >
                 <CustomCardSmall

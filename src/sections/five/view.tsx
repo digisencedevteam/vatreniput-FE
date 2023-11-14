@@ -7,7 +7,6 @@ import { useTheme } from '@mui/material/styles';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import WelcomeComponent from 'src/components/welcome-component/welcome-component';
 import useVoting from 'src/hooks/use-voting-data';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useContext, useEffect } from 'react';
@@ -19,6 +18,8 @@ import CustomCard from 'src/components/custom-card/custom-card';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { paths } from 'src/routes/paths';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
+import AppWelcome from 'src/components/overview/app-welcome';
+import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 
 const FiveView = () => {
   const settings = useSettingsContext();
@@ -27,8 +28,17 @@ const FiveView = () => {
   const isMobile = useResponsive('down', 'md');
   const { votings, fetchAllVotings, deleteVoting, isLoading } = useVoting();
   const auth = useContext(AuthContext);
-
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
+  const welcomeButtonProps = isAdmin
+    ? {
+        buttonLabel: 'Novo glasanje',
+        buttonLink: `${paths.dashboard.voting.createVoting}`,
+      }
+    : {
+        buttonLabel: 'Pregled glasanja',
+        buttonLink: `${paths.dashboard.voting.votingResults}`,
+      };
+
   const votedVotings = votings
     ? votings.filter((voting) => voting.isVoted === true)
     : [];
@@ -50,42 +60,47 @@ const FiveView = () => {
         <LoadingScreen sx={{ mt: '50%' }} />
       ) : (
         <>
-          <Box
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-            sx={{ m: 1 }}
-          >
-            <Typography variant='h2' color={theme.palette.primary.main}>
-              Glasanja
-            </Typography>
-
-            {isAdmin && (
-              <Button
-                variant='contained'
-                color='primary'
-                component={Link}
-                to={`${paths.dashboard.voting.createVoting}`}
-              >
-                Novo glasanje
-              </Button>
-            )}
-          </Box>
-          {!isMobile && (
-            <Grid item xs={12} md={7}>
-              <WelcomeComponent
-                title={`Pozdrav 👋`}
-                description='Dobrodošli na stranicu glasanja! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
+          {!isMobile ? (
+            <Grid
+              item
+              xs={12}
+              md={7}
+            >
+              <AppWelcome
+                title={`Dobrodošli na stranicu glasanja! `}
+                description='Zaronite u uzbudljivi svijet glasanja i otkrij koji su igrači tvojim prijateljima najdraži! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
                 img={
-                  <img
-                    src={
-                      'https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png'
-                    }
-                    alt='Vesela'
-                  />
+                  <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png' />
                 }
+                buttonLabel={welcomeButtonProps.buttonLabel}
+                buttonLink={welcomeButtonProps.buttonLink}
               />
             </Grid>
+          ) : (
+            <Box
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
+              sx={{ m: 1 }}
+            >
+              <Typography
+                variant='h2'
+                color={theme.palette.primary.main}
+              >
+                Glasanja
+              </Typography>
+
+              {isAdmin && (
+                <Button
+                  variant='contained'
+                  color='primary'
+                  component={Link}
+                  to={`${paths.dashboard.voting.createVoting}`}
+                >
+                  Novo glasanje
+                </Button>
+              )}
+            </Box>
           )}
           <SectionWrapper title='Dostupna'>
             <Grid container>
@@ -105,9 +120,19 @@ const FiveView = () => {
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
               ) : (
-                <Grid container spacing={2}>
+                <Grid
+                  container
+                  spacing={2}
+                >
                   {notVotedVotings.map((voting, index) => (
-                    <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                    <Grid
+                      key={index}
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={4}
+                    >
                       <CustomCard
                         cardId={voting._id}
                         votingId={voting._id}

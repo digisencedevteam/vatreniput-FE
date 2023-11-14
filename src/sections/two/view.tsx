@@ -149,17 +149,21 @@ export const CollectionView = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography
-        color={theme.palette.primary.main}
-        variant='h2'
-        sx={{ paddingY: 5 }}
-      >
-        Kolekcija
-      </Typography>
-
-      <Grid container spacing={1}>
-        {!isMobile && (
-          <Grid item xs={12} md={7}>
+      {isMobile && (
+        <Typography
+          color={theme.palette.primary.main}
+          variant='h2'
+          sx={{ paddingY: 5 }}
+        >
+          Kolekcija
+        </Typography>
+      )}
+      <Grid container>
+        {!isMobile ? (
+          <Grid
+            item
+            lg={12}
+          >
             <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
@@ -172,16 +176,27 @@ export const CollectionView = () => {
               }
             />
           </Grid>
+        ) : (
+          <Grid
+            item
+            xs={12}
+            mr={3}
+          >
+            <StatisticCards collectedStatistic={collectedStatistic} />
+          </Grid>
         )}
-
-        <Grid item xs={12} md={5}>
-          <StatisticCards collectedStatistic={collectedStatistic} />
-        </Grid>
       </Grid>
 
       <div ref={myRef}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} mt={3}>
+        <Grid
+          container
+          spacing={1}
+        >
+          <Grid
+            item
+            xs={12}
+            mt={3}
+          >
             <Box
               sx={{
                 display: 'flex',
@@ -195,7 +210,10 @@ export const CollectionView = () => {
               >
                 <ArrowLeftIcon />
               </IconButton>
-              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+              <Typography
+                variant='h6'
+                sx={{ mx: 4, textAlign: 'center' }}
+              >
                 {currentCategory?.name}
               </Typography>
               <IconButton

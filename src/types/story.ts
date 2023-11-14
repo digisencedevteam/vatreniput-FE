@@ -74,6 +74,7 @@ export interface NationalTeam {
 }
 
 export interface QualificationMatch {
+  Round?: string;
   Teams: string;
   Score: string;
   Scorers?: string[];

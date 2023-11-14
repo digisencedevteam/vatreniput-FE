@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'src/utils/axios';
 import axiosInstance, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard } from 'src/types';
 

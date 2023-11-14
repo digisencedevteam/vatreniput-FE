@@ -144,16 +144,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'TURSKA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Vlaović 86`'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – DANSKA',
                 Score: '3 : 0',
                 Scorers: ['Šuker 54`', 'Šuker 90`', 'Boban 81`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – PORTUGAL',
                 Score: '0 : 3',
               },
@@ -204,6 +207,116 @@ export const STORIES = [
         'Finalisti iz 1996. također su se susreli u grupnoj fazi. Njemačka je pobijedila Češku 2 : 0 u grupnoj fazi i 2 : 1 u finalu.',
         'Idealna momčad EURA: Kopke (Njemačka) – Maldini (Italija), Blanc (Francuska), Desailly (Francuska) – Poborsky (Češka), Elits (Njemačka), Sammer (Njemačka), Gascoigne (Engleska) – Stoičkov (Bugarska) – Shearer (Engleska)',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Dražen Ladić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001199_556_400_cut.jpg',
+          },
+          {
+            name: 'Marjan Mrmić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011918_556_400_cut.jpg',
+          },
+          {
+            name: 'Tonči Gabrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009455_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Slaven Bilić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000006491_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikola Jerkan',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001249_556_400_cut.jpg',
+          },
+          {
+            name: 'Zvonimir Soldo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001211_556_400_cut.jpg',
+          },
+          {
+            name: 'Igor Štimac',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004817_556_400_cut.jpg',
+          },
+          {
+            name: 'Dubravko Pavličić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001226_556_400_cut.jpg',
+          },
+          {
+            name: 'Dario Šimić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001222_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Aljoša Asanović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000006490_556_400_cut.jpg',
+          },
+          {
+            name: 'Zvonimir Boban',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001209_556_400_cut.jpg',
+          },
+          {
+            name: 'Robert Jarni',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001204_556_400_cut.jpg',
+          },
+          {
+            name: 'Mladen Mladenović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001248_556_400_cut.jpg',
+          },
+          {
+            name: 'Robert Prosinečki',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004595_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Stanić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001202_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Davor Šuker',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001198_556_400_cut.jpg',
+          },
+          {
+            name: 'Goran Vlaović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001230_556_400_cut.jpg',
+          },
+          {
+            name: 'Alen Bokšić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004816_556_400_cut.jpg',
+          },
+          {
+            name: 'Igor Pamić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001233_556_400_cut.jpg',
+          },
+          {
+            name: 'Igor Cvitanović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000006503_556_400_cut.jpg',
+          },
+        ],
+      },
     },
   },
   {
@@ -310,16 +423,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'JAMAJKA  – HRVATSKA',
                 Score: '1 : 3',
                 Scorers: ['Stanić 27` ', 'Prosinečki 53`', 'Šuker 68`'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'JAPAN – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Šuker 77`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ARGENTINA - HRVATSKA',
                 Score: '1 : 0',
               },
@@ -343,7 +459,7 @@ export const STORIES = [
             },
           },
         },
-        Summary: '',
+
         Champ: {
           Winner: 'FRANCUSKA',
           TopScorer: {
@@ -352,6 +468,8 @@ export const STORIES = [
             Goals: 6,
           },
         },
+        Summary:
+          ' Nevjerojatna snaga momčadi nosila je Hrvatsku. Od Vittela gdje je bio kamp naše reprezentacije do Pariza i Parka prinčeva gdje je Hrvatska osvojila prvu veliku medalju - broncu za sva vremena',
       },
       NationalTeam: {
         Vratari: [
@@ -456,8 +574,8 @@ export const STORIES = [
         DOB: '9. veljače, 1935.',
         CoachingCareer: '1968. - 2015.',
         MajorAchievements: [
-          'Najveći uspjeh Čire Blaževića uslijedio je kada je Hrvatsku vodio do trećeg mjesta na SP-u u Francuskoj.',
-          'Ćiro s kapom stradalog francuskog policajca 1998. primjer je njegovog izvrsnog osjećaja za trenutak. Mase su ga obožavale. A, Ćiro se u tome izvrsno snalazio. Preminuo je 8. veljače 2023.',
+          'Najveći uspjeh Ćire Blaževića uslijedio je kada je Hrvatsku vodio do trećeg mjesta na SP-u u Francuskoj.' +
+            ' Ćiro s kapom stradalog francuskog policajca 1998. primjer je njegovog izvrsnog osjećaja za trenutak. Mase su ga obožavale. A, Ćiro se u tome izvrsno snalazio. Preminuo je 8. veljače 2023.',
         ],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698705071/HRV31207_copy_l7simf.jpg',
@@ -625,15 +743,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'Meksiko - Hrvatska',
                 Score: '1 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'Italija - Hrvatska',
                 Score: '1 : 2',
-                Scorers: ['Olić 73`, Rapaić 76`'],
+                Scorers: ['Olić 73`', 'Rapaić 76`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'Hrvatska - Ekvador',
                 Score: '0 : 1',
               },
@@ -656,15 +777,140 @@ export const STORIES = [
         'Sjeverna Koreja je na bizaran način prenosila Svjetsko prvenstvo tako da je emitirala samo prvo poluvrijeme utakmice SAD-a i Poljske, u kojem su Amerikanci gubili.',
         'Ovo prvenstvo je dobilo puno kritika zbog katastrofalnog suđenja. Domaćin, Južna Koreja je na krilima čudnih odluka došla do polufinala.',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Stipe Pletikosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004795_556_400_cut.jpg',
+          },
+          {
+            name: 'Tomislav Butina',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001257_556_400_cut.jpg',
+          },
+          {
+            name: 'Vladimir Vasilj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001259_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Robert Kovac',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011664_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Šimunić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004808_556_400_cut.jpg',
+          },
+          {
+            name: 'Stjepan Tomas',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009410_556_400_cut.jpg',
+          },
+          {
+            name: 'Zvonimir Soldo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001211_556_400_cut.jpg',
+          },
+          {
+            name: 'Dario Šimić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001222_556_400_cut.jpg',
+          },
+          {
+            name: 'Boris Živković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000006497_556_400_cut.jpg',
+          },
+          {
+            name: 'Anthony Šerić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001218_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Robert Jarni',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001204_556_400_cut.jpg',
+          },
+          {
+            name: 'Niko Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011460_556_400_cut.jpg',
+          },
+          {
+            name: 'Milan Rapaić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001203_556_400_cut.jpg',
+          },
+          {
+            name: 'Daniel Šarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001541_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Stanić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001202_556_400_cut.jpg',
+          },
+          {
+            name: 'Jurica Vranješ',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001555_556_400_cut.jpg',
+          },
+          {
+            name: 'Robert Prosinečki',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004595_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Alen Bokšić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004816_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivica Olić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004782_556_400_cut.jpg',
+          },
+          {
+            name: 'Davor Vugrinec',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001224_556_400_cut.jpg',
+          },
+          {
+            name: 'Davor Šuker',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001198_556_400_cut.jpg',
+          },
+          {
+            name: 'Boško Balaban',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001221_556_400_cut.jpg',
+          },
+          {
+            name: 'Goran Vlaović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001230_556_400_cut.jpg',
+          },
+        ],
+      },
 
       Coach: {
         Name: 'Mirko Jozić',
         DOB: 'Datum rođenja nije dostupan',
         CoachingCareer: 'Hrvatska (2000 - 2002)',
         MajorAchievements: [
-          'Uspješno vođenje hrvatske nogometne reprezentacije tijekom kvalifikacija za Svjetsko prvenstvo 2002.',
-          'Plasman na Svjetsko prvenstvo 2002. godine.',
-          'Vođenje i mentorstvo momčadi koja je uključivala istaknute igrače poput Davora Šukera, Zvonimira Bobana, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog.',
+          'Uspješno vođenje hrvatske nogometne reprezentacije tijekom kvalifikacija za Svjetsko prvenstvo 2002. ' +
+            'Plasman na Svjetsko prvenstvo 2002. godine. ' +
+            'Vođenje i mentorstvo momčadi koja je uključivala istaknute igrače poput Davora Šukera, Zvonimira Bobana, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog.',
         ],
         imgUrl: 'URL slike Mirka Jozića',
         StoryText:
@@ -778,15 +1024,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'ŠVICARSKA – HRVATSKA',
                 Score: '0 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – FRANCUSKA',
                 Score: '2 : 2',
                 Scorers: ['Rapaić 48` pen', 'Pršo 52`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: ' HRVATSKA – ENGLESKA',
                 Score: '2 : 4',
                 Scorers: ['N. Kovač 5`', 'Tudor 73'],
@@ -808,9 +1057,14 @@ export const STORIES = [
       NationalTeam: {
         Vratari: [
           {
-            name: 'Dražen Ladić',
+            name: 'Tomislav Butina',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698699632/HRV52006_copy_fhkd8k.jpg',
+              'https://hns.family/files/images/_resized/0000001257_556_400_cut.jpg',
+          },
+          {
+            name: 'Joseph Anthony Didulica',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001216_556_400_cut.jpg',
           },
           {
             name: 'Vladimir Vasilj',
@@ -820,52 +1074,108 @@ export const STORIES = [
         ],
         Braniči: [
           {
+            name: 'Robert Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011664_556_400_cut.jpg',
+          },
+          {
             name: 'Dario Šimić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698699947/simic0306_y4gox2.jpg',
+              'https://hns.family/files/images/_resized/0000001222_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Šimunić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004808_556_400_cut.jpg',
+          },
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
           },
           {
             name: 'Igor Tudor',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698700040/desailly_tudor1706_tspdtf.jpg',
+              'https://hns.family/files/images/_resized/0000004818_556_400_cut.jpg',
           },
           {
-            name: 'Slaven Bilić',
+            name: 'Boris Živković',
             imgurl:
-              'https://img.24sata.hr/cs8rHXI8rihrnt-l25IJHkHfflk=/622x0/smart/media/images/2020-29/pxl-120612-1349.jpg',
+              'https://hns.family/files/images/_resized/0000006497_556_400_cut.jpg',
+          },
+          {
+            name: 'Mato Neretljak',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001560_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Tokić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009409_556_400_cut.jpg',
+          },
+          {
+            name: 'Stjepan Tomas',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009410_556_400_cut.jpg',
           },
         ],
         Vezni: [
           {
-            name: 'Robert Prosinečki',
+            name: 'Niko Kovač',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693923578/SLAVLJE4_copy_frghmj.jpg',
+              'https://hns.family/files/images/_resized/0000011460_556_400_cut.jpg',
           },
           {
-            name: 'Mario Stanić',
+            name: 'Milan Rapaić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698703499/HRJA5150_copy_sww5bu.jpg',
+              'https://hns.family/files/images/_resized/0000001203_556_400_cut.jpg',
           },
           {
-            name: 'Aljoša Asanović',
+            name: 'Đovani Roso',
             imgurl:
-              'https://ip.index.hr/remote/bucket.index.hr/b/index/GettyImages-52923716.jpg',
+              'https://hns.family/files/images/_resized/0000001545_556_400_cut.jpg',
           },
           {
-            name: 'Silvio Marić',
-            imgurl: 'https://www.tportal.hr/media/thumbnail/w1000/1577709.jpeg',
+            name: 'Nenad Bjelica',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000010107_556_400_cut.jpg',
+          },
+          {
+            name: 'Jerko Leko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001236_556_400_cut.jpg',
+          },
+          {
+            name: 'Marko Babić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000005853_556_400_cut.jpg',
           },
         ],
         Napadači: [
           {
-            name: 'Davor Šuker',
+            name: 'Ivica Mornar',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1691679493/suker_x9j3w8.jpg',
+              'https://hns.family/files/images/_resized/0000001553_556_400_cut.jpg',
           },
           {
-            name: 'Goran Vlaović',
+            name: 'Ivica Olić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698703944/vlaovic2_copy_anvup3.jpg',
+              'https://hns.family/files/images/_resized/0000004782_556_400_cut.jpg',
+          },
+          {
+            name: 'Dado Pršo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001264_556_400_cut.jpg',
+          },
+          {
+            name: 'Tomo Šokota',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009408_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Klasnić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009363_556_400_cut.jpg',
           },
         ],
       },
@@ -972,20 +1282,31 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'BRAZIL – HRVATSKA',
                 Score: '1 : 0',
                 Scorers: ["Kaká 44'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'JAPAN – HRVATSKA',
                 Score: '0 : 0',
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – AUSTRALIJA',
                 Score: '2 : 2',
                 Scorers: ["Srna 2'", "Kovac 56'"],
               },
             ],
+          },
+        },
+        Champ: {
+          Winner: 'ITALIJA',
+          TopScorer: {
+            Player: ' Miroslav Klose ',
+            Team: 'Njemačka',
+            Goals: 5,
           },
         },
         Summary:
@@ -1007,6 +1328,131 @@ export const STORIES = [
         'Utakmica protiv Australije ostala je upamćena i po bizarnoj situaciji. Engleski sudac Graham Poll isključio je Šimunića tek nakon trećeg žutog kartona.',
         'Zinedine Zidane nasrnuo je na talijanskog braniča Marca Materazzija tijekom finalne utakmice udarivši ga glavom. Zidane, koji je alžirskog podrijetla, šokirao je gledatelje i komentatore bizarnim napadom, zbog čega su neki povjerovali da je igrač odgovarao na rasistički napad. Nekoliko dana kasnije, Materazzi je priznao da je vrijeđao Francuzovu sestru.',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Stipe Pletikosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004795_556_400_cut.jpg',
+          },
+          {
+            name: 'Tomislav Butina',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001257_556_400_cut.jpg',
+          },
+          {
+            name: 'Joseph Anthony Didulica',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001216_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
+          },
+          {
+            name: 'Dario Šimić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001222_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Šimunić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004808_556_400_cut.jpg',
+          },
+          {
+            name: 'Igor Tudor',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004818_556_400_cut.jpg',
+          },
+          {
+            name: 'Robert Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011664_556_400_cut.jpg',
+          },
+          {
+            name: 'Stjepan Tomas',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009410_556_400_cut.jpg',
+          },
+          {
+            name: 'Anthony Šerić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001218_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Tokić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009409_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Marko Babić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000005853_556_400_cut.jpg',
+          },
+          {
+            name: 'Niko Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011460_556_400_cut.jpg',
+          },
+          {
+            name: 'Niko Kranjčar',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004810_556_400_cut.jpg',
+          },
+          {
+            name: 'Jerko Leko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001236_556_400_cut.jpg',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Ivan Leko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001235_556_400_cut.jpg',
+          },
+          {
+            name: 'Jurica Vranješ',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001555_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Ivan Klasnić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009363_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivica Olić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004782_556_400_cut.jpg',
+          },
+          {
+            name: 'Dado Pršo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001264_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Bošnjak',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001550_556_400_cut.jpg',
+          },
+          {
+            name: 'Boško Balaban',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001221_556_400_cut.jpg',
+          },
+        ],
+      },
     },
   },
   //2008
@@ -1118,16 +1564,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'AUSTRIA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ["Modrić 4' (pen)"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – NJEMAČKA',
                 Score: '2 : 1',
                 Scorers: ["Srna 24'", "Olić 62'"],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'POLJSKA – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ["Klasnić 52'"],
@@ -1171,6 +1620,131 @@ export const STORIES = [
         'Više od 100.000 nizozemskih navijača došlo je u Bern na utakmicu Oranjea protiv Francuske, čime se u tom trenutku udvostručio broj stanovnika glavnog grada Švicarske.',
         'Izbornik Luis Aragonés nije baš odobravao novi španjolski žuti dres, objasnivši: "Ne sviđa mi se ova nova boja, ali sve dok je ja ne moram nositi, igrači mogu. U svakom slučaju, nije žuta, to je senf."',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Stipe Pletikosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004795_556_400_cut.jpg',
+          },
+          {
+            name: 'Vedran Runje',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001573_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Galinović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000010108_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Vedran Ćorluka',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016196_556_400_cut.jpg',
+          },
+          {
+            name: 'Danijel Pranjić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004767_556_400_cut.jpg',
+          },
+          {
+            name: 'Dario Knežević',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001542_556_400_cut.jpg',
+          },
+          {
+            name: 'Robert Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011664_556_400_cut.jpg',
+          },
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Šimunić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004808_556_400_cut.jpg',
+          },
+          {
+            name: 'Dario Šimić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001222_556_400_cut.jpg',
+          },
+          {
+            name: 'Hrvoje Vejić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001548_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Niko Kranjčar',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004810_556_400_cut.jpg',
+          },
+          {
+            name: 'Niko Kovač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000011460_556_400_cut.jpg',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Ivan Rakitić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023572_556_400_cut.jpg',
+          },
+          {
+            name: 'Jerko Leko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001236_556_400_cut.jpg',
+          },
+          {
+            name: 'Ognjen Vukojević',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004793_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikola Pokrivač',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001564_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Mladen Petrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000000861_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivica Olić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004782_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Klasnić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000009363_556_400_cut.jpg',
+          },
+          {
+            name: 'Igor Budan',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001549_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikola Kalinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016188_556_400_cut.jpg',
+          },
+        ],
+      },
 
       Highlights: [
         {
@@ -1353,16 +1927,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – IRSKA',
                 Score: '3 : 1',
                 Scorers: ["Mandžukić 3', 48'", "Jelavić 43'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ITALIJA – HRVATSKA',
                 Score: '1 : 1',
                 Scorers: ["Pirlo 39'", "Mandžukić 72'"],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – ŠPANJOLSKA',
                 Score: '0 : 1',
                 Scorers: ["Navas 88'"],
@@ -1411,6 +1988,131 @@ export const STORIES = [
         'Španjolska je postala prva momčad koja je obranila naslov i zadržala Henri Delaunay kup. U međuvremenu je osvojila i Svjetsko prvenstvo 2010. i postala prva koja je osvojila tri uzastopna velika naslova.',
         'Fernando Torres postao je prvi igrač koji je postigao pogodak u dva finala EURA.',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Stipe Pletikosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004795_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Kelava',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000010109_556_400_cut.jpg',
+          },
+          {
+            name: 'Danijel Subašić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016132_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Vedran Ćorluka',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016196_556_400_cut.jpg',
+          },
+          {
+            name: 'Gordon Schildenfeld',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016152_556_400_cut.jpg',
+          },
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Strinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016507_556_400_cut.jpg',
+          },
+          {
+            name: 'Danijel Pranjić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004767_556_400_cut.jpg',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+          {
+            name: 'Jurica Buljat',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001238_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Šimunić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004808_556_400_cut.jpg',
+          },
+          {
+            name: 'Šime Vrsaljko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Ivan Rakitić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023572_556_400_cut.jpg',
+          },
+          {
+            name: 'Ognjen Vukojević',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004793_556_400_cut.jpg',
+          },
+          {
+            name: 'Niko Kranjčar',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004810_556_400_cut.jpg',
+          },
+          {
+            name: 'Tomislav Dujmović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000001570_556_400_cut.jpg',
+          },
+          {
+            name: 'Milan Badelj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032741_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Eduardo Alves da Silva',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004774_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikica Jelavić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004791_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Mandžukić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016176_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Nikola Kalinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016188_556_400_cut.jpg',
+          },
+        ],
+      },
     },
   },
   //2014
@@ -1479,7 +2181,6 @@ export const STORIES = [
         {
           Teams: 'Island – Hrvatska',
           Score: '0 : 0',
-          Scorers: [],
         },
         {
           Teams: 'Hrvatska – Island',
@@ -1526,11 +2227,13 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'Brazil – Hrvatska',
                 Score: '3 : 1',
                 Scorers: ["Marcelo (a.g.) - 12'"],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'Kamerun – Hrvatska',
                 Score: '0 : 4',
                 Scorers: [
@@ -1541,6 +2244,7 @@ export const STORIES = [
                 ],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'Hrvatska – Meksiko',
                 Score: '1 : 3',
                 Scorers: ["Ivan Perišić - 87'"],
@@ -1572,13 +2276,138 @@ export const STORIES = [
         CoachingCareer:
           'Počeo kao menadžer 2013. s hrvatskom U21 reprezentacijom, zatim preuzeo seniorsku reprezentaciju Hrvatske, Eintracht Frankfurt, Bayern München i AS Monaco',
         MajorAchievements: [
-          'Osvojio Bundesligu i DFB-Pokal s Bayernom u sezoni 2018./2019.',
-          'Osvojio Hrvatski nogometni kup s reprezentacijom Hrvatske kao menadžer 2013. godine',
+          'Osvojio Bundesligu i DFB-Pokal s Bayernom u sezoni 2018./2019. ' +
+            'Osvojio Hrvatski nogometni kup s reprezentacijom Hrvatske kao menadžer 2013. godine',
         ],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709446/c%CC%8Cac%CC%8Cic%CC%81_klupa_igrac%CC%8Ci_ouch2k.jpg',
         StoryText:
           'Bivši kapetan reprezentacije. Igrač i čovjek neograničene ljubavi prema Hrvatskoj. Borac i veliki radnik. Metodičan i pedantan. Niko Kovač preuzima "A" selekciju u doigravanju za SP u Brazilu. Hrvatska je u dvije utakmice doigravanja protiv Islanda izborila odlazak na Mundijal. Ondje je bila dijelom svečanog otvaranja i velikog sudara protiv domaćina, Brazila koji je pobijedio 3 : 1. Hrvatska je nakon toga bla bolja od Kameruna, ali kobni su bili ponovno Meksikanci kao i u Japanu 2002., pobijedivši 3 : 1.',
+      },
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Stipe Pletikosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004795_556_400_cut.jpg',
+          },
+          {
+            name: 'Danijel Subašić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016132_556_400_cut.jpg',
+          },
+          {
+            name: 'Oliver Zelenika',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000005142_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Vedran Ćorluka',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016196_556_400_cut.jpg',
+          },
+          {
+            name: 'Dejan Lovren',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040889_556_400_cut.jpg',
+          },
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
+          },
+          {
+            name: 'Danijel Pranjić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004767_556_400_cut.jpg',
+          },
+          {
+            name: 'Šime Vrsaljko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+          {
+            name: 'Gordon Schildenfeld',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016152_556_400_cut.jpg',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Mateo Kovačić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044727_0_380.png',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Ivan Rakitić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023572_556_400_cut.jpg',
+          },
+          {
+            name: 'Marcelo Brozović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044723_0_380.png',
+          },
+          {
+            name: 'Jorge Sammir Cruz Campos',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000005138_556_400_cut.jpg',
+          },
+          {
+            name: 'Milan Badelj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032741_556_400_cut.jpg',
+          },
+          {
+            name: 'Ognjen Vukojević',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004793_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Ivica Olić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004782_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Ante Rebić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032712_556_400_cut.jpg',
+          },
+          {
+            name: 'Nikica Jelavić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004791_556_400_cut.jpg',
+          },
+          {
+            name: 'Mario Mandžukić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016176_556_400_cut.jpg',
+          },
+          {
+            name: 'Eduardo Alves da Silva',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000004774_556_400_cut.jpg',
+          },
+        ],
       },
     },
   },
@@ -1683,19 +2512,22 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'TURSKA  – HRVATSKA',
                 Score: '0 : 1',
                 Scorers: ['Modrić 41` '],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ČEŠKA – HRVATSKA',
                 Score: '2 : 2',
-                Scorers: ['Perišić 37`, Rakitić 59`'],
+                Scorers: ['Perišić 37`', 'Rakitić 59`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ŠPANJOLSKA - HRVATSKA',
                 Score: '1 : 2',
-                Scorers: ['N. Kalinić 45`, Perišić  87`'],
+                Scorers: ['N. Kalinić 45`', 'Perišić  87`'],
               },
             ],
           },
@@ -1723,63 +2555,123 @@ export const STORIES = [
           {
             name: 'Danijel Subašić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698708079/subas%CC%8Cic%CC%81_zastava_hembmm.jpg',
+              'https://hns.family/files/images/_resized/0000016132_556_400_cut.jpg',
           },
           {
             name: 'Lovre Kalinić',
             imgurl:
-              'https://hns.family/files/images/_resized/0000028032_800_0.jpg',
+              'https://hns.family/files/images/_resized/0000040898_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Vargić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016162_556_400_cut.jpg',
           },
         ],
         Braniči: [
           {
-            name: 'Dario Srna',
-            imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543607/srna_pozdrav_navija%C4%8Di_tcpljm.jpg',
-          },
-          {
             name: 'Vedran Ćorluka',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543637/%C4%87orluka_nolito_2_es3b4c.jpg',
+              'https://hns.family/files/images/_resized/0000016196_556_400_cut.jpg',
+          },
+          {
+            name: 'Darijo Srna',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016136_556_400_cut.jpg',
+          },
+          {
+            name: 'Ivan Strinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016507_556_400_cut.jpg',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+          {
+            name: 'Gordon Schildenfeld',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000016152_556_400_cut.jpg',
           },
           {
             name: 'Šime Vrsaljko',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698708516/vrsaljko_c%CC%8Ces%CC%8Cka_1_nkhh6x.jpg',
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+          {
+            name: 'Tin Jedvaj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032751_556_400_cut.jpg',
           },
         ],
         Vezni: [
           {
-            name: 'Luka Modrić',
+            name: 'Milan Badelj',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698708586/modric%CC%81_c%CC%8Ces%CC%8Cka_3_rjy7re.jpg',
+              'https://hns.family/files/images/_resized/0000032741_556_400_cut.jpg',
           },
           {
             name: 'Ivan Rakitić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698708640/rakitic%CC%81_pique_kkmt38.jpg',
-          },
-          {
-            name: 'Milan Badelj',
-            imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698708900/milan_badelj_qnk2du.jpg',
+              'https://hns.family/files/images/_resized/0000023572_556_400_cut.jpg',
           },
           {
             name: 'Marcelo Brozović',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709049/brozovic%CC%81_pariz_turska_1_xcxhtm.jpg',
+              'https://hns.family/files/images/_resized/0000044723_0_380.png',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Mateo Kovačić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044727_0_380.png',
+          },
+          {
+            name: 'Marko Rog',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000033472_556_400_cut.jpg',
+          },
+          {
+            name: 'Ante Ćorić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000021086_556_400_cut.jpg',
           },
         ],
         Napadači: [
           {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Andrej Kramarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044707_0_380.png',
+          },
+          {
             name: 'Mario Mandžukić',
             imgurl:
-              'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698709155/mandz%CC%8Cukic%CC%81_walker_moskva_xaqemz.jpg',
+              'https://hns.family/files/images/_resized/0000016176_556_400_cut.jpg',
+          },
+          {
+            name: 'Marko Pjaca',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000023583_556_400_cut.jpg',
           },
           {
             name: 'Nikola Kalinić',
             imgurl:
-              'https://hns.family/files/images/_resized/0000021775_800_0.jpg',
+              'https://hns.family/files/images/_resized/0000016188_556_400_cut.jpg',
+          },
+          {
+            name: 'Duje Čop',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000024785_556_400_cut.jpg',
           },
         ],
       },
@@ -1941,16 +2833,19 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – NIGERIJA',
                 Score: '2 : 0',
                 Scorers: ['Etebo 32` (a.g.)', 'Modrić 71` pen'],
               },
               {
+                Round: '2. Kolo',
                 Teams: 'ARGENTINA – HRVATSKA',
                 Score: '0 : 3',
                 Scorers: ['Rebić 53`', 'Modrić 80`', 'Rakitić 90+1`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'ISLAND – HRVATSKA',
                 Score: '1 : 2',
                 Scorers: ['Badelj 53`', 'Perišić 90`'],
@@ -2183,7 +3078,7 @@ export const STORIES = [
         Name: 'Zlatko Dalić',
         DOB: '26. listopada 1966.',
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
-        MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
+        MajorAchievements: ['2. mjesto na SP 2018 ', 'Prvak Azije s Al Ainom'],
         imgUrl:
           'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
@@ -2293,15 +3188,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'ENGLESKA – HRVATSKA',
                 Score: '1 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – ČEŠKA',
                 Score: '1 : 1',
                 Scorers: ['Perišić 47`'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – ŠKOTSKA',
                 Score: '3 : 1',
                 Scorers: ['Vlašić 17`', 'Modrić 62`', 'Perišić 77`'],
@@ -2345,6 +3243,146 @@ export const STORIES = [
         'Na Euru 2020. postignuta su 142 gola – najviše od svih prvenstava do tada – s prosjekom od 2,78 golova po utakmici također rekordno visokim.',
         '7 od 16 jedanaesteraca bilo je obranjeno ili promašeno – ne računajući raspucavanja.',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Dominik Livaković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044714_0_380.png',
+          },
+          {
+            name: 'Lovre Kalinić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040898_556_400_cut.jpg',
+          },
+          {
+            name: 'Simon Sluga',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032749_556_400_cut.jpg',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Joško Gvardiol',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044720_0_380.png',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+          {
+            name: 'Duje Ćaleta-Car',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032723_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Jurano',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044717_0_380.png',
+          },
+          {
+            name: 'Dejan Lovren',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040889_556_400_cut.jpg',
+          },
+          {
+            name: 'Šime Vrsaljko',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032750_556_400_cut.jpg',
+          },
+          {
+            name: 'Borna Barišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044709_0_380.png',
+          },
+          {
+            name: 'Domagoj Bradarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000034629_556_400_cut.jpg',
+          },
+          {
+            name: 'Mile Škorić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032742_556_400_cut.jpg',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Marcelo Brozović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044723_0_380.png',
+          },
+          {
+            name: 'Mateo Kovačić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044727_0_380.png',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Nikola Vlašić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044730_0_380.png',
+          },
+          {
+            name: 'Luka Ivanušec',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044722_0_380.png',
+          },
+          {
+            name: 'Mario Pašalić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044724_0_380.png',
+          },
+          {
+            name: 'Milan Badelj',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032741_556_400_cut.jpg',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Andrej Kramarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044707_0_380.png',
+          },
+          {
+            name: 'Bruno Petković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044711_0_380.png',
+          },
+          {
+            name: 'Ante Rebić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032712_556_400_cut.jpg',
+          },
+          {
+            name: 'Josip Brekalo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000032732_556_400_cut.jpg',
+          },
+          {
+            name: 'Ante Budimir',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040893_556_400_cut.jpg',
+          },
+          {
+            name: 'Mislav Oršić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000040906_556_400_cut.jpg',
+          },
+        ],
+      },
     },
   },
   {
@@ -2448,15 +3486,18 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA – MAROKO',
                 Score: '0 : 0',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA – KANADA',
                 Score: '4 : 1',
-                Scorers: ['Kramarić 36`, 70`, Livaja 44`, Majer 90+4'],
+                Scorers: ['Kramarić 36`, 70`', 'Livaja 44`', 'Majer 90+4'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA – BELGIJA',
                 Score: '0 : 0',
               },
@@ -2483,7 +3524,7 @@ export const STORIES = [
               Description:
                 'Četvrtfinale. Brazil je bio favorit. Sambom su ispraćali protivnike. Plesali nakon svakog pogotka. Peleovo teško zdravstveno stanje bio im je dodatni motiv. Poveli su preko Neymara u produžetku. Kad je izgledalo da će završiti katarska priča Hrvatske, Bruno Petković je zabio. Golčina za novu nadu, za novi triler. Za novo kidanje živaca. Iako, Livaković je bio na golu. Obranio je udarac Rodrygu. Marquinhos je zadrhtao, a Hrvatska odletjela u polufinale. Drugo za redom na Svjetskim prvenstvima.  Nevjerojatna snaga jedne momčadi. Hrvatska je znala pobjeđivati.',
               Score: '1 : 1',
-              GoalScorers: ['Neymar 105+1` , Petković 117`'],
+              GoalScorers: ['Neymar 105+1`', 'Petković 117`'],
               Penalties: '4 : 2',
               PenaltyShootout: [
                 { Player: 'Vlašić', Result: '+' },
@@ -2752,30 +3793,36 @@ export const STORIES = [
           GroupStage: {
             matches: [
               {
+                Round: '1. Kolo',
                 Teams: 'HRVATSKA - AUSTRIJA',
                 Score: '0 : 3',
               },
               {
+                Round: '2. Kolo',
                 Teams: 'HRVATSKA - FRANCUSKA',
                 Score: '1 : 1',
                 Scorers: ['Kramarić 83` pen'],
               },
               {
+                Round: '3. Kolo',
                 Teams: 'HRVATSKA - DANSKA',
                 Score: '1 : 0',
                 Scorers: ['Pašalić 69`'],
               },
               {
+                Round: '4. Kolo',
                 Teams: 'HRVATSKA - FRANCUSKA',
                 Score: '1 : 0',
                 Scorers: ['Modrić 5` pen'],
               },
               {
+                Round: '5. Kolo',
                 Teams: 'HRVATSKA - DANSKA',
                 Score: '2 : 1',
                 Scorers: ['Sosa49`', 'Majer79`'],
               },
               {
+                Round: '6. Kolo',
                 Teams: 'HRVATSKA - AUSTRIJA',
                 Score: '3 : 1',
                 Scorers: ['Modrić 6`', 'Livaja 69`', 'Lovren72`'],
@@ -2810,14 +3857,6 @@ export const STORIES = [
         },
         Summary:
           'Novo veliko natjecanje, novi veliki uspjeh. Hrvatska je još jednom pokazala snagu i moć. Zlatko Dalić na raspolaganju je imao uigranu momčad koja je svjesna svoje snage. S druge strane, protivnici više Hrvatskoj ne pristupaju kao možebitnom iznenađenju jer je Hrvatska postala favorit za medalju, za naslov. Start Lige nacija bio je loš. Opijeni uspjesima naši igrači ušli su u susret protiv Austrije u Osijeku slabo, bez poznatog stila i odgovornosti u igri. Hrvatska je potučena 3 : 0. Kasnije je bilo jasno – to je bio dobar razvoj situacije. Brojne kritike ponovno su galvanizirale našu reprezentacije i uslijedile su pobjede u Danskoj i Francuskoj te vraćanje duga Austrijancima u Beču. Hrvatska je kao prva u skupini osigurala plasman na završni turnir u Rotterdamu. U polufinalu je čekala Nizozemska i još jedna utakmica za sva vremena. Rotterdam je osvojila "vojska" hrvatskih navijača. Na tribinama su dominirale hrvatske pjesme, a na travnjaku nova predstava Dalićevih jurišnika. I novi dokaz o nevjerojatnoj unutarnjoj moći. Hrvatska je vodila 2 : 1 u 96. minuti kad su Nizozemci izjednačili. Mnoge bi momčadi tada pale, izgubile fokus, izgubile utakmicu. Ne i Hrvatska. Zlatko Dalić poseže za sigurnim "jokerom". Bruno Petković je ponovno briljirao. Fantastičan pogodak u 98. minuti odveo je Hrvatsku u finale. Modrić je na kraju potvrdio pobjedu za konačnih 4 : 2. Na finalnu utakmicu došlo je 35 tisuća hrvatskih navijača. A ondje, ponovno triler. Ponovno Španjolska. Teška utakmica bez pogodaka. Raspucavanje je i ovaj put odlučilo pobjednika. Ovaj put su se nogometni bogovi naklonili Španjolskoj. Tuga je bila očita. Hrvatski igrači teško su podnijeli poraz. Luka Modrić želio je titulu s Hrvatskom. Došla su prelijepa vremena. Hrvatska redovito igra za medalje i naslove.',
-        // Champ: {
-        //   Winner: '',
-        //   TopScorer: {
-        //     Player: '',
-        //     Team: '',
-        //     Goals: 0,
-        //   },
-        // },
       },
       Highlights: [],
       Coach: {
@@ -2836,6 +3875,126 @@ export const STORIES = [
         'Hrvatska je u 2 utakmice primila samo dva pogotka od domaćina – Nizozemske. Nakon toga, Hrvatska je sačuvala čistu mrežu protiv Španjolske u 120 minuta. Sve to bez Joška Gvardiola.',
         '„Ostani tu!“- orilo se s tribina.',
       ],
+      NationalTeam: {
+        Vratari: [
+          {
+            name: 'Dominik Livaković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044714_0_380.png',
+          },
+          {
+            name: 'Ivica Ivušić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044716_0_380.png',
+          },
+          {
+            name: 'Nediljko Labrović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044729_0_380.png',
+          },
+        ],
+        Braniči: [
+          {
+            name: 'Martin Erlić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044726_0_380.png',
+          },
+          {
+            name: 'Josip Juranović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044717_0_380.png',
+          },
+          {
+            name: 'Josip Stanišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044718_0_380.png',
+          },
+          {
+            name: 'Josip Šutalo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044719_0_380.png',
+          },
+          {
+            name: 'Borna Barišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044709_0_380.png',
+          },
+          {
+            name: 'Domagoj Vida',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044713_0_380.png',
+          },
+          {
+            name: 'Borna Sosa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044710_0_380.png',
+          },
+        ],
+        Vezni: [
+          {
+            name: 'Marcelo Brozović',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044723_0_380.png',
+          },
+          {
+            name: 'Luka Ivanušec',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044722_0_380.png',
+          },
+          {
+            name: 'Mateo Kovačić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044727_0_380.png',
+          },
+          {
+            name: 'Lovro Majer',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044721_0_380.png',
+          },
+          {
+            name: 'Luka Modrić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043387_0_380.png',
+          },
+          {
+            name: 'Mario Pašalić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044724_0_380.png',
+          },
+          {
+            name: 'Nikola Vlašić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044730_0_380.png',
+          },
+        ],
+        Napadači: [
+          {
+            name: 'Andrej Kramarić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044707_0_380.png',
+          },
+          {
+            name: 'Ivan Perišić',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044715_0_380.png',
+          },
+          {
+            name: 'Bruno Petković',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044711_0_380.png',
+          },
+          {
+            name: 'Dion Drena Beljo',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000043855_556_400_cut.jpg',
+          },
+          {
+            name: 'Petar Musa',
+            imgurl:
+              'https://hns.family/files/images/_resized/0000044731_0_380.png',
+          },
+        ],
+      },
     },
   },
 

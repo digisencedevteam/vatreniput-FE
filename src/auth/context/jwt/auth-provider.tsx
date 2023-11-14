@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }: Props) => {
 
   useEffect(() => {
     initialize();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -61,9 +62,9 @@ export const AuthProvider = ({ children }: Props) => {
     setUser(response.data.user);
   }, []);
 
-  const updateUserContext = (newUser: any) => {
+  const updateUserContext = useCallback((newUser: any) => {
     setUser(newUser);
-  };
+  }, []);
 
   const register = useCallback(
     async (

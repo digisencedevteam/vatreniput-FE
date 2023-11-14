@@ -126,6 +126,7 @@ const ManageVoting = () => {
       },
       false
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const formikErrors = formik.errors as FormikErrors<{
@@ -336,8 +337,8 @@ const ManageVoting = () => {
               }}
               severity='success'
             >
-              Kviz uspješno {votingId ? ' azuriran' : ' kreiran'}!🎉🎉🥳 <br />{' '}
-              Zatvori me za povratak na glasanja
+              Glasanje uspješno {votingId ? ' ažurirano' : ' kreirano'}!🎉🎉🥳{' '}
+              <br /> Zatvori me za povratak na glasanja
             </Alert>
           </Snackbar>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Box, Container, Grid, Tab, Tabs, Typography } from '@mui/material';
 import { MotionContainer, varFade } from '../animate';
 import { StoryContentProps, TabComponents } from 'src/types/story';
@@ -21,8 +21,7 @@ import { useParams } from 'src/routes/hooks';
 
 const StoryContent = ({ story }: StoryContentProps) => {
   const { storyId } = useParams();
-  const { setCurrentStoryIndex } = useStoryContext();
-  const [currentTab, setCurrentTab] = useState(0);
+  const { setCurrentStoryIndex, currentTab, setCurrentTab } = useStoryContext();
   const slideVariants = varFade();
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setCurrentTab(newValue);
@@ -98,7 +97,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
       },
     ].filter((tab) => tab.active);
   };
-  const activeTabs = getActiveTabs(story);
+  const activeTabs = useMemo(() => getActiveTabs(story), [story]);
 
   const tabContentComponents: TabComponents = {
     Kvalifikacije: <QualificationsContent story={story} />,
@@ -109,6 +108,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
     Zanimljivosti: <FactContent story={story} />,
     Navijači: <FansContent story={story} />,
   };
+
   useEffect(() => {
     if (storyId !== undefined) {
       const index = parseInt(storyId, 10);
@@ -116,7 +116,6 @@ const StoryContent = ({ story }: StoryContentProps) => {
         setCurrentStoryIndex(index);
       }
     }
-    setCurrentTab(0);
   }, [storyId, setCurrentStoryIndex]);
 
   return (

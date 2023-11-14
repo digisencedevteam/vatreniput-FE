@@ -6,17 +6,20 @@ import { DashboardButton } from 'src/components/dashboard-button/dashboard-butto
 import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-section-wrapper';
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
-import { useEffect, useState } from 'react';
-import HorizontalScrollStatisticCards from 'src/components/stats-box/statistic-box-horizontal';
+import { useContext, useEffect, useState } from 'react';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useDashboardData from 'src/hooks/use-dashboard-data';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
+import { AuthContext } from 'src/auth/context/jwt';
+import StatisticCards from 'src/components/stats-box/statistic-box';
 
 export default function OneView() {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [isScanning, setIsScanning] = useState(false);
+  const auth = useContext(AuthContext);
+  const userName = auth.user && auth.user.firstName;
   const {
     fetchDashboardData,
     quizzes,
@@ -50,42 +53,65 @@ export default function OneView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant='h3' sx={{ marginY: 1, paddingTop: 2 }}>
+      <Typography
+        variant='h3'
+        sx={{ marginY: 1, paddingTop: 2 }}
+      >
         {' '}
-        Bok, Pero 👋{' '}
+        Bok, {userName} 👋{' '}
       </Typography>
-      <Grid container spacing={2} sx={{ marginTop: 5 }}>
-        <Grid item xs={6}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ marginTop: 5 }}
+      >
+        <Grid
+          item
+          xs={6}
+        >
           <DashboardButton
             imageSrc={imageSrc}
             title={isScanning ? 'Stop Scanning' : 'Skeniraj novu'}
             onClick={toggleScanning}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid
+          item
+          xs={6}
+        >
           <DashboardButton
             imageSrc={mojaKolekcijaImageSrc}
             title='Moja Kolekcija'
             link='/dashboard/two'
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           {isScanning && <QRScanner />}
         </Grid>
-        <Grid item xs={12}>
-          <Box>
-            <HorizontalScrollStatisticCards
-              collectedStatistic={collectedStatistic}
-            />
+        <Grid
+          item
+          xs={12}
+        >
+          <Box width={'93%'}>
+            <StatisticCards collectedStatistic={collectedStatistic} />
           </Box>
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           <DashboardSectionWrapper
             title='Najviše skupljenih'
             link='dashboard/two'
           >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+              />
             ) : !collectedStatistic?.topEvents?.length ? (
               <SkeletonDashboardLoader
                 count={1}
@@ -111,12 +137,18 @@ export default function OneView() {
               </>
             )}
           </DashboardSectionWrapper>
-          <DashboardSectionWrapper title='Kvizovi' link='dashboard/three'>
+          <DashboardSectionWrapper
+            title='Kvizovi'
+            link='dashboard/three'
+          >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+              />
             ) : quizzes?.length ? (
-              quizzes.map((quiz, index) => (
-                <ScrollableContainer childrenCount={quizzes?.length}>
+              <ScrollableContainer childrenCount={quizzes?.length}>
+                {quizzes.map((quiz, index) => (
                   <CustomCardSmall
                     key={index}
                     imgUrl={quiz.thumbnail}
@@ -125,8 +157,8 @@ export default function OneView() {
                     cardText={quiz.title}
                     linkTo={`/dashboard/quiz/${quiz._id}`}
                   />
-                </ScrollableContainer>
-              ))
+                ))}
+              </ScrollableContainer>
             ) : (
               <SkeletonDashboardLoader
                 count={1}
@@ -135,12 +167,18 @@ export default function OneView() {
               />
             )}
           </DashboardSectionWrapper>
-          <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
+          <DashboardSectionWrapper
+            title='Glasanja'
+            link='dashboard/five'
+          >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+              />
             ) : notVotedVotings?.length ? (
-              notVotedVotings.map((voting, index) => (
-                <ScrollableContainer childrenCount={notVotedVotings?.length}>
+              <ScrollableContainer childrenCount={notVotedVotings?.length}>
+                {notVotedVotings.map((voting, index) => (
                   <CustomCardSmall
                     key={index}
                     width='96%'
@@ -149,8 +187,8 @@ export default function OneView() {
                     cardText={voting.title}
                     linkTo={`/dashboard/voting/${voting._id}`}
                   />
-                </ScrollableContainer>
-              ))
+                ))}
+              </ScrollableContainer>
             ) : (
               <SkeletonDashboardLoader
                 count={1}

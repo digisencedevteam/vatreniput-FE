@@ -15,7 +15,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import InvalidAlbumPage from 'src/pages/InvalidAlbum';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { LoadingScreen } from 'src/components/loading-screen';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 import { paths } from 'src/routes/paths';

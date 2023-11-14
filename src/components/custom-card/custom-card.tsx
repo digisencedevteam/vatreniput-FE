@@ -110,6 +110,10 @@ const CustomCard = ({
           margin: '5px',
           position: 'relative',
           bgcolor: theme.palette.background.neutral,
+          transition: 'transform .2s',
+          '&:hover': {
+            transform: 'scale(1.05)',
+          },
         }}
       >
         {isAdmin && (
@@ -258,7 +262,10 @@ const CustomCard = ({
             )}`}</Typography>
           )}
           {availableUntil && (
-            <Typography variant='subtitle2' sx={{ color: '#999' }}>
+            <Typography
+              variant='subtitle2'
+              sx={{ color: '#999' }}
+            >
               Nagradan do {formattedRewarded}
             </Typography>
           )}

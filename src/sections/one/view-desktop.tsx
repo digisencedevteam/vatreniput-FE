@@ -3,9 +3,7 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import AppFeatured, {
-  ItemProps,
-} from 'src/components/feautred-carousel/app-featured';
+import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
 import { useEffect } from 'react';
 import AppWelcome from 'src/components/overview/app-welcome';
@@ -34,32 +32,39 @@ export const DesktopViewOne = () => {
   } = useDashboardData();
 
   const featuredAppsList = [
-    quizzes?.length > 0 && {
-      id: quizzes?.[0]._id,
-      title: quizzes?.[0].title,
-      coverUrl: quizzes?.[0].thumbnail,
+    ...quizzes.slice(0, 2).map((quiz) => ({
+      id: quiz._id,
+      title: quiz.title,
+      coverUrl: quiz.thumbnail,
       description: 'Novi Kviz je dostupan!!!!',
-    },
-    votings?.length > 0 && {
-      id: votings?.[0]._id,
-      title: votings?.[0].title,
-      coverUrl: votings?.[0].thumbnail,
+    })),
+    ...votings.slice(0, 2).map((voting) => ({
+      id: voting._id,
+      title: voting.title,
+      coverUrl: voting.thumbnail,
       description: 'Novo Glasanje je dostupno!!',
-    },
-  ].filter(Boolean) as ItemProps[];
+    })),
+  ];
 
   const notVotedVotings = votings
     ? votings.filter((voting) => voting.isVoted === false)
     : [];
 
+  const hasFeaturedContent = featuredAppsList.length > 0;
   useEffect(() => {
     fetchDashboardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Grid container spacing={3}>
-        <Grid item xs={8}>
+      <Grid
+        container
+        spacing={3}
+      >
+        <Grid
+          item
+          xs={8}
+        >
           <AppWelcome
             title={`Dobrodošli na digitalnu platformu Vatrenog Almanaha!`}
             description={`Saznaj što ima novog u Vatrenom svijetu! \n Ne propusti priliku osvojiti vrijedne nagrade.`}
@@ -68,8 +73,12 @@ export const DesktopViewOne = () => {
             }
           />
         </Grid>
-        <Grid item xs={4} md={4}>
-          {quizzes?.length && votings?.length ? (
+        <Grid
+          item
+          xs={4}
+          md={4}
+        >
+          {hasFeaturedContent ? (
             <AppFeatured list={featuredAppsList} />
           ) : (
             <DesktopNewsSkeleton
@@ -87,7 +96,11 @@ export const DesktopViewOne = () => {
         justifyContent='center'
         borderRadius={1}
       >
-        <Grid item xl={12} container>
+        <Grid
+          item
+          xl={12}
+          container
+        >
           <DashboardSectionWrapper
             title={'Najnoviji iz digitalnog albuma'}
             link={paths.dashboard.two}
@@ -138,8 +151,16 @@ export const DesktopViewOne = () => {
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
-      <DashboardSectionWrapper title={'Statistika'} link='dashboard/two'>
-        <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
+      <DashboardSectionWrapper
+        title={'Statistika'}
+        link='dashboard/two'
+      >
+        <Grid
+          container
+          spacing={3}
+          mt={3}
+          sx={{ justifyContent: 'center' }}
+        >
           <Grid
             item
             xs={12}
@@ -163,7 +184,12 @@ export const DesktopViewOne = () => {
           </Grid>
         </Grid>
       </DashboardSectionWrapper>
-      <Grid container spacing={3} mt={3} sx={{ justifyContent: 'center' }}>
+      <Grid
+        container
+        spacing={3}
+        mt={3}
+        sx={{ justifyContent: 'center' }}
+      >
         <Grid
           item
           xs={12}
@@ -172,8 +198,15 @@ export const DesktopViewOne = () => {
             m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Kvizovi' link={paths.dashboard.three}>
-            <Grid container justifyContent='center' alignItems='center'>
+          <DashboardSectionWrapper
+            title='Kvizovi'
+            link={paths.dashboard.three}
+          >
+            <Grid
+              container
+              justifyContent='center'
+              alignItems='center'
+            >
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader
                   count={3}
@@ -182,10 +215,14 @@ export const DesktopViewOne = () => {
                 />
               ) : quizzes?.length ? (
                 quizzes.map((quiz, index) => (
-                  <Grid item md={6} key={index}>
+                  <Grid
+                    item
+                    md={6}
+                    key={index}
+                  >
                     <CustomCardSmall
                       imgUrl={quiz.thumbnail}
-                      width='100%'
+                      width='90%'
                       cardText={quiz.title}
                       linkTo={`/dashboard/quiz/${quiz._id}`}
                     />
@@ -211,13 +248,23 @@ export const DesktopViewOne = () => {
             m: '4px',
           }}
         >
-          <DashboardSectionWrapper title='Glasanja' link='dashboard/five'>
+          <DashboardSectionWrapper
+            title='Glasanja'
+            link='dashboard/five'
+          >
             <Grid container>
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={4} width='100%' />
+                <SkeletonDashboardLoader
+                  count={4}
+                  width='100%'
+                />
               ) : notVotedVotings?.length ? (
                 notVotedVotings.map((voting, index) => (
-                  <Grid item md={6} key={index}>
+                  <Grid
+                    item
+                    md={6}
+                    key={index}
+                  >
                     <CustomCard
                       cardId={voting._id}
                       votingId={voting._id}

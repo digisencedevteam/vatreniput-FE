@@ -5,7 +5,7 @@ import QuestionScreen from './QuestionScreen';
 import StartQuizScreen from './StartQuizScreen';
 import EndQuizScreen from './EndQuizScreen';
 import { useSettingsContext } from 'src/components/settings';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from 'src/auth/hooks';
 import { LoadingScreen } from 'src/components/loading-screen';

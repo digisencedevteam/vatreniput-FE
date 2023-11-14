@@ -14,7 +14,6 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
   return (
     <Grid
       container
-      direction='column'
       bgcolor={theme.palette.background.neutral}
       spacing={3}
       borderRadius={'16px'}
@@ -24,7 +23,11 @@ const StatisticCards = ({ collectedStatistic }: StatisticCardsProps) => {
       margin={0}
       height={'100%'}
     >
-      <Grid item mb={2}>
+      <Grid
+        item
+        mb={2}
+        xs={12}
+      >
         <CollectedStatisticWidget
           chart={{
             series: [
