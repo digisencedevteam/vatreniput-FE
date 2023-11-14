@@ -10,6 +10,14 @@ export const avatarOptions = [
   'https://res.cloudinary.com/dzg5kxbau/image/upload/v1691140208/jo%C5%A1ko_gvardiol_3_tcgdcz.jpg',
 ];
 
+export const svetiDresovi = [
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966512/2000_Croatia_Away_FINAL_lqqqyu.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966510/2004_Croatia_Home_FINAL_n57ypc.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966509/2002_Croatia_Home_FINAL_zak3nk.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966509/2004_Croatia_Away_FINAL_qttoep.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966506/2000_Croatia_Home_FINAL_rxrify.png',
+];
+
 export const FAQs = [
   {
     question: 'Koja je svrha ove platforme?',

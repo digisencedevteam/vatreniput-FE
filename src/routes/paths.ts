@@ -25,6 +25,7 @@ export const paths = {
     three: `${ROOTS.DASHBOARD}/three`,
     four: `${ROOTS.DASHBOARD}/four`,
     five: `${ROOTS.DASHBOARD}/five`,
+    nine: `${ROOTS.DASHBOARD}/nine`,
     story: {
       root: `${ROOTS.DASHBOARD}/story/0`,
       sp98: `${ROOTS.DASHBOARD}/story/1`,

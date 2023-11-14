@@ -16,6 +16,7 @@ export const HighlightContent = ({ story }: StoryContentProps) => {
               <Grid
                 item
                 xs={12}
+                md={6}
                 lg={6}
                 key={index}
               >

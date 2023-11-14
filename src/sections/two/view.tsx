@@ -90,6 +90,7 @@ export const CollectionView = () => {
         {!isMobile ? (
           <Grid
             item
+            md={12}
             lg={12}
           >
             <AppWelcome
