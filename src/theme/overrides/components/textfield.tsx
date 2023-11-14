@@ -15,7 +15,7 @@ export function textField(theme: Theme) {
 
   const font = {
     label: theme.typography.body1,
-    value: theme.typography.body2,
+    value: theme.typography.body1,
   };
 
   return {
