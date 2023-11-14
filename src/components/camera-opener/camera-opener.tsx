@@ -44,27 +44,12 @@ const CameraOpener: React.FC = () => {
       <Dialog
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          style: {
-            minHeight: '90vh', // 90% of viewport height
-            maxHeight: '90vh',
-            width: '90%', // adjust the width as needed
-            overflow: 'hidden', // to ensure no scrollbars appear
-          },
-        }}
       >
-        <DialogContent
-          style={{
-            height: '100%', // fill the height of the dialog
-            width: '100%', // fill the width of the dialog
-            padding: 0, // remove padding if necessary
-            overflow: 'hidden', // to ensure no scrollbars appear
-          }}
-        >
+        <DialogContent>
           <video
             ref={videoRef}
             autoPlay
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100%' }}
           />
         </DialogContent>
       </Dialog>
