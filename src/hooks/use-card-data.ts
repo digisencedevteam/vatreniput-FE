@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import axios from 'src/utils/axios';
-import { endpoints } from 'src/utils/axios';
+import axiosInstance, { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard } from 'src/types';
 
 export interface CardData {
@@ -19,7 +18,7 @@ const useCardData = (): CardData => {
 
   const fetchCollectedStatistics = async () => {
     try {
-      const response = await axios.get(endpoints.card.statsDashboard);
+      const response = await axiosInstance.get(endpoints.card.statsDashboard);
       setCollectedStatistic(response.data);
     } catch (error) {
       console.error('Error fetching collected statistic: ' + error);
@@ -29,7 +28,7 @@ const useCardData = (): CardData => {
 
   const fetchCollectedCards = async () => {
     try {
-      const response = await axios.get(
+      const response = await axiosInstance.get(
         `${endpoints.card.collected}?page=1&limit=6`
       );
       setCollectedCards(response.data.cards);

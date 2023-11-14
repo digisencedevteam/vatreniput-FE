@@ -1,53 +1,31 @@
-import { useEffect, useCallback, useState } from 'react';
-// routes
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-//
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks';
-
-// ----------------------------------------------------------------------
-
-const loginPaths: Record<string, string> = {
-  jwt: paths.auth.jwt.login,
-};
-
-// ----------------------------------------------------------------------
+import { paths } from 'src/routes/paths';
+import { LoadingScreen } from 'src/components/loading-screen';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export default function AuthGuard({ children }: Props) {
-  const router = useRouter();
+const AuthGuard = ({ children }: Props) => {
+  const navigate = useNavigate();
+  const { authenticated, method, initializing } = useAuthContext();
 
-  const { authenticated, method } = useAuthContext();
-
-  const [checked, setChecked] = useState(false);
-
-  const check = useCallback(() => {
-    if (!authenticated) {
+  useEffect(() => {
+    if (!authenticated && !initializing) {
+      const loginPath = method === 'jwt' ? paths.auth.jwt.login : '/login';
       const searchParams = new URLSearchParams({
         returnTo: window.location.pathname,
       }).toString();
-
-      const loginPath = loginPaths[method];
-
-      const href = `${loginPath}?${searchParams}`;
-
-      router.replace(href);
-    } else {
-      setChecked(true);
+      navigate(`${loginPath}?${searchParams}`, { replace: true });
     }
-  }, [authenticated, method, router]);
+  }, [authenticated, initializing, method, navigate]);
 
-  useEffect(() => {
-    check();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!checked) {
-    return null;
+  if (initializing) {
+    return <LoadingScreen />;
   }
 
   return <>{children}</>;
-}
+};
+export default AuthGuard;

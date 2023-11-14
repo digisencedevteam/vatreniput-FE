@@ -1,17 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-// auth
 import { GuestGuard } from 'src/auth/guard';
-// layouts
 import AuthClassicLayout from 'src/layouts/auth/classic';
-// components
 import { SplashScreen } from 'src/components/loading-screen';
 
-// JWT
 const JwtLoginPage = lazy(() => import('src/pages/auth/jwt/login'));
-const JwtRegisterPage = lazy(
-  () => import('src/pages/auth/jwt/register')
-);
+const JwtRegisterPage = lazy(() => import('src/pages/auth/jwt/register'));
 
 const authJwt = {
   path: 'jwt',
@@ -27,8 +21,8 @@ const authJwt = {
       path: 'login',
       element: (
         <AuthClassicLayout
-          title="Dobrodošli na Platformu Vatrenog Puta!"
-          image="/assets/images/vrsaljkoZastava.jpg"
+          title='Dobrodošli na Platformu Vatrenog Puta!'
+          image='/assets/images/vrsaljkoZastava.jpg'
         >
           <JwtLoginPage />
         </AuthClassicLayout>
@@ -38,8 +32,8 @@ const authJwt = {
       path: 'register',
       element: (
         <AuthClassicLayout
-          title="Registracija na Vatreni Put"
-          image="/assets/images/vrsaljkoZastava.jpg"
+          title='Registracija na Vatreni Put'
+          image='/assets/images/vrsaljkoZastava.jpg'
         >
           <JwtRegisterPage />
         </AuthClassicLayout>

@@ -1,160 +1,71 @@
-import { useEffect, useReducer, useCallback, useMemo } from 'react';
-// utils
-import axios, { endpoints } from 'src/utils/axios';
-//
+import { useEffect, useState, useCallback, useMemo } from 'react';
+import { endpoints } from 'src/utils/axios';
 import { AuthContext } from './auth-context';
 import { isValidToken, setSession } from './utils';
-import { ActionMapType, AuthStateType, AuthUserType } from '../../types';
+import { AuthUserType } from '../../types';
 import { FormValues } from 'src/types';
-
-// ----------------------------------------------------------------------
-
-// NOTE:
-// We only build demo at basic level.
-// Customer will need to do some extra handling yourself if you want to extend the logic and other features...
-
-// ----------------------------------------------------------------------
-
-enum Types {
-  INITIAL = 'INITIAL',
-  LOGIN = 'LOGIN',
-  REGISTER = 'REGISTER',
-  LOGOUT = 'LOGOUT',
-  UPDATE_USER = 'UPDATE_USER',
-}
-
-type Payload = {
-  [Types.INITIAL]: {
-    user: AuthUserType;
-  };
-  [Types.LOGIN]: {
-    user: AuthUserType;
-  };
-  [Types.REGISTER]: {
-    user: AuthUserType;
-  };
-  [Types.LOGOUT]: undefined;
-  [Types.UPDATE_USER]: {
-    user: AuthUserType;
-  };
-};
-
-type ActionsType = ActionMapType<Payload>[keyof ActionMapType<Payload>];
-
-// ----------------------------------------------------------------------
-
-const initialState: AuthStateType = {
-  user: null,
-  loading: true,
-};
-
-const reducer = (state: AuthStateType, action: ActionsType) => {
-  if (action.type === Types.INITIAL) {
-    return {
-      loading: false,
-      user: action.payload.user,
-    };
-  }
-  if (action.type === Types.LOGIN) {
-    return {
-      ...state,
-      user: action.payload.user,
-    };
-  }
-  if (action.type === Types.REGISTER) {
-    return {
-      ...state,
-      user: action.payload.user,
-    };
-  }
-  if (action.type === Types.LOGOUT) {
-    return {
-      ...state,
-      user: null,
-    };
-  }
-  if (action.type === Types.UPDATE_USER) {
-    return {
-      ...state,
-      user: action.payload.user,
-    };
-  }
-  return state;
-};
-
-// ----------------------------------------------------------------------
-
-const STORAGE_KEY = 'accessToken';
+import { LoadingScreen } from 'src/components/loading-screen';
+import axiosInstance from 'src/utils/axios';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export function AuthProvider({ children }: Props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
+export const AuthProvider = ({ children }: Props) => {
+  const [user, setUser] = useState<AuthUserType | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  const initialize = useCallback(async () => {
+  const initialize = async () => {
     try {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
-
+      let accessToken = sessionStorage.getItem('accessToken');
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
-
-        const response = await axios.get(endpoints.auth.me);
-
-        const { user } = response.data;
-
-        dispatch({
-          type: Types.INITIAL,
-          payload: {
-            user,
-          },
-        });
+        const response = await axiosInstance.get(endpoints.auth.me);
+        setUser(response.data.user);
       } else {
-        dispatch({
-          type: Types.INITIAL,
-          payload: {
-            user: null,
-          },
-        });
+        const refreshResponse = await axiosInstance.get(
+          endpoints.auth.refreshToken
+        );
+        if (refreshResponse.data.accessToken) {
+          accessToken = refreshResponse.data.accessToken;
+          setSession(accessToken);
+          const userResponse = await axiosInstance.get(endpoints.auth.me);
+          updateUserContext(userResponse.data.user);
+        } else {
+          setUser(null);
+        }
       }
     } catch (error) {
-      console.error(error);
-      dispatch({
-        type: Types.INITIAL,
-        payload: {
-          user: null,
-        },
-      });
+      console.error('Initialization error:', error);
+      sessionStorage.removeItem('accessToken');
+      setUser(null);
+    } finally {
+      setLoading(false);
+      setIsInitialized(true);
     }
-  }, []);
+  };
 
   useEffect(() => {
     initialize();
-  }, [initialize]);
-
-  // LOGIN
-  const login = useCallback(async (email: string, password: string) => {
-    const data = {
-      email,
-      password,
-    };
-
-    const response = await axios.post(endpoints.auth.login, data);
-
-    const { accessToken, user } = response.data;
-
-    setSession(accessToken);
-
-    dispatch({
-      type: Types.LOGIN,
-      payload: {
-        user,
-      },
-    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // REGISTER
+  useEffect(() => {
+    setSession(user?.accessToken);
+  }, [user]);
+
+  const login = useCallback(async (email: string, password: string) => {
+    const data = { email, password };
+    const response = await axiosInstance.post(endpoints.auth.login, data);
+    setSession(response.data.accessToken);
+    setUser(response.data.user);
+  }, []);
+
+  const updateUserContext = useCallback((newUser: any) => {
+    setUser(newUser);
+  }, []);
+
   const register = useCallback(
     async (
       email: string,
@@ -164,89 +75,73 @@ export function AuthProvider({ children }: Props) {
       username: string,
       code: string
     ) => {
-      const data = {
-        email,
-        password,
-        firstName,
-        lastName,
-        username,
-        code,
-      };
-
-      const response = await axios.post(endpoints.auth.register + code, data);
-
-      const { accessToken, user } = response.data;
-
-      sessionStorage.setItem(STORAGE_KEY, accessToken);
-
-      dispatch({
-        type: Types.REGISTER,
-        payload: {
-          user,
-        },
-      });
+      const data = { email, password, firstName, lastName, username, code };
+      const response = await axiosInstance.post(
+        endpoints.auth.register + code,
+        data
+      );
+      sessionStorage.setItem('accessToken', response.data.accessToken);
+      setUser(response.data.user);
     },
     []
   );
 
-  // LOGOUT
   const logout = useCallback(async () => {
-    setSession(null);
-    dispatch({
-      type: Types.LOGOUT,
-    });
+    try {
+      await axiosInstance.post(endpoints.auth.logout);
+      setSession(null);
+      setUser(null);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   }, []);
 
-  // UPDATE
   const updateUser = useCallback(
     async (userData: FormValues) => {
-      if (state.user) {
-        try {
-          const response = await axios.put(
-            `${endpoints.user.user}${state.user._id}`,
-            userData
-          );
-          const { user } = response.data;
-
-          dispatch({
-            type: Types.UPDATE_USER,
-            payload: {
-              user,
-            },
-          });
-        } catch (error) {
-          console.error(error);
-        }
+      if (user) {
+        const response = await axiosInstance.put(
+          `${endpoints.user.user}${user._id}`,
+          userData
+        );
+        setUser(response.data.user);
       }
     },
-    [state.user]
+    [user]
   );
-
-  // ----------------------------------------------------------------------
-
-  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
-
-  const status = state.loading ? 'loading' : checkAuthenticated;
 
   const memoizedValue = useMemo(
     () => ({
-      user: state.user,
+      user,
       method: 'jwt',
-      loading: status === 'loading',
-      authenticated: status === 'authenticated',
-      unauthenticated: status === 'unauthenticated',
-      //
+      loading,
+      authenticated: !!user,
+      unauthenticated: !user,
+      initializing: !isInitialized,
+      updateUserContext,
       login,
       register,
       logout,
       updateUser,
     }),
-    [login, logout, register, state.user, status, updateUser]
+    [
+      user,
+      loading,
+      login,
+      register,
+      logout,
+      updateUser,
+      isInitialized,
+      updateUserContext,
+    ]
   );
+
+  if (loading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <AuthContext.Provider value={memoizedValue}>
       {children}
     </AuthContext.Provider>
   );
-}
+};

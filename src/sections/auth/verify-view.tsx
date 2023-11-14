@@ -15,13 +15,10 @@ export const VerifyEmailView = () => {
         <Typography variant='h3'>Email Adresa Potvrđena!</Typography>
 
         <Typography variant='body2' sx={{ color: 'text.secondary' }}>
-          Hvala vam na uspiješnoj registraciji email-a.Sada sljedi
-          zabavan dio - uživajte u našoj plaftofmi
+          Hvala vam na uspješnoj registraciji email-a. Sada sljedi zabavan dio -
+          uživajte u našoj plaftofmi!
         </Typography>
-        <Button
-          color='inherit'
-          onClick={() => navigate(paths.auth.jwt.login)}
-        >
+        <Button color='inherit' onClick={() => navigate(paths.auth.jwt.login)}>
           Prijavi Se
         </Button>
       </Stack>

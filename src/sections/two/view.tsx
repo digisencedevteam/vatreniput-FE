@@ -9,13 +9,14 @@ import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
+import axiosInstance from 'src/utils/axios';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -41,7 +42,7 @@ export const CollectionView = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(endpoints.event.all);
+      const response = await axiosInstance.get(endpoints.event.all);
       const myCards = { _id: 9, name: 'Moje Skupljene sličice' };
       setCategories([myCards, ...response.data]);
       setIsLoading(false);
@@ -57,13 +58,13 @@ export const CollectionView = () => {
     try {
       let response;
       if (categoryIndex === 0) {
-        response = await axios.get(
+        response = await axiosInstance.get(
           `${endpoints.card.collected}?page=${currentPage}&limit=${itemsPerPage}`
         );
       } else {
         const categoryId = categories[categoryIndex]?._id;
         if (categoryId) {
-          response = await axios.get(
+          response = await axiosInstance.get(
             `${endpoints.card.event}/${categoryId}?page=${currentPage}&limit=${itemsPerPage}`
           );
         }
@@ -83,7 +84,7 @@ export const CollectionView = () => {
 
   const fetchCollectedStatistic = async () => {
     try {
-      const response = await axios.get(endpoints.card.stats);
+      const response = await axiosInstance.get(endpoints.card.stats);
       setCollectedStatistic(response.data);
     } catch (error) {
       console.error('Error fetching collected statistic: ' + error);
@@ -235,14 +236,7 @@ export const CollectionView = () => {
 
           {!showSkeletonLoader &&
             collectedCards.map((item, index) => (
-              <Grid
-                key={index}
-                item
-                xs={4}
-                sm={3}
-                md={3}
-                lg={2}
-              >
+              <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
                 <CollectionStickerItem item={item} />
               </Grid>
             ))}
