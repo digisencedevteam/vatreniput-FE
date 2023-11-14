@@ -27,14 +27,11 @@ export const CollectionView = () => {
     isLoading,
     totalPages,
     fetchCollectedCards,
-    fetchCategories,
-    fetchCollectedStatistics,
-  } = useCardData(); // Use the custom hook
+  } = useCardData();
 
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const currentCategory = categories[categoryIndex];
-  const itemsPerPage = 12;
   const myRef = React.useRef<HTMLDivElement>(null);
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const showSkeletonLoader = isLoading;
@@ -68,7 +65,7 @@ export const CollectionView = () => {
         ? (categoryIndex - 1 + categories.length) % categories.length
         : (categoryIndex + 1) % categories.length;
     setCategoryIndex(newIndex);
-    fetchCollectedCards(newIndex, currentPage); // Fetch new category cards
+    fetchCollectedCards(newIndex, currentPage);
   };
 
   const handlePageChange = (
@@ -76,7 +73,7 @@ export const CollectionView = () => {
     page: number
   ) => {
     setCurrentPage(page);
-    fetchCollectedCards(categoryIndex, page); // Fetch cards for new page
+    fetchCollectedCards(categoryIndex, page);
   };
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
