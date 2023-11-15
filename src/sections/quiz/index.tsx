@@ -5,12 +5,13 @@ import QuestionScreen from './QuestionScreen';
 import StartQuizScreen from './StartQuizScreen';
 import EndQuizScreen from './EndQuizScreen';
 import { useSettingsContext } from 'src/components/settings';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from 'src/auth/hooks';
 import { LoadingScreen } from 'src/components/loading-screen';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'src/routes/paths';
+import axiosInstance from 'src/utils/axios';
 
 const QuizApp = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -33,7 +34,7 @@ const QuizApp = () => {
     setCurrentQuestionIndex(0);
     setAnswers([]);
     try {
-      await axios.post(`${endpoints.quiz.details}${quizId}/start`);
+      await axiosInstance.post(`${endpoints.quiz.details}${quizId}/start`);
       setFinalScore(0);
       setFinalDuration(0);
       setIsQuizCompleted(false);
@@ -45,7 +46,7 @@ const QuizApp = () => {
 
   const fetchQuizData = async () => {
     try {
-      const response = await axios.get(endpoints.quiz.details + quizId);
+      const response = await axiosInstance.get(endpoints.quiz.details + quizId);
       setSelectedQuiz(response.data);
 
       if (response.data?.status?.status === 'inProgress') {
@@ -96,7 +97,7 @@ const QuizApp = () => {
     isCorrect: boolean
   ) => {
     try {
-      await axios.post(endpoints.quiz.inProgressQuizUpdate, {
+      await axiosInstance.post(endpoints.quiz.inProgressQuizUpdate, {
         quizId,
         questionId,
         selectedOption,
@@ -178,7 +179,7 @@ const QuizApp = () => {
     setFinalDuration(durationInSeconds);
 
     try {
-      await axios.post(endpoints.quiz.details, {
+      await axiosInstance.post(endpoints.quiz.details, {
         userId,
         quizId,
         score,

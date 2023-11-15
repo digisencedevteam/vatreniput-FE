@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { useSettingsContext } from 'src/components/settings';
 import { useMediaQuery, useTheme } from '@mui/material';
+import axiosInstance from 'src/utils/axios';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -25,7 +26,7 @@ export const CardView = () => {
 
   const fetchCardData = async () => {
     try {
-      const response = await axios.get(endpoints.card.details + cardId);
+      const response = await axiosInstance.get(endpoints.card.details + cardId);
       setCardData(response.data);
     } catch (error) {
       setIsError(true);
@@ -39,7 +40,7 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     try {
-      const res = await axios.patch(endpoints.card.add, {
+      const res = await axiosInstance.patch(endpoints.card.add, {
         cardId,
       });
       res.data === 'ok'

@@ -5,8 +5,6 @@ import {
 } from '@auth0/auth0-react';
 import { FormValues } from 'src/types';
 
-// ----------------------------------------------------------------------
-
 export type ActionMapType<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -26,8 +24,6 @@ export type AuthStateType = {
   user: AuthUserType;
 };
 
-// ----------------------------------------------------------------------
-
 type CanRemove = {
   login?: (email: string, password: string) => Promise<void>;
   register?: (
@@ -38,16 +34,13 @@ type CanRemove = {
     username: string,
     code: string
   ) => Promise<void>;
-  //
   loginWithGoogle?: () => Promise<void>;
   loginWithGithub?: () => Promise<void>;
   loginWithTwitter?: () => Promise<void>;
-  //
   loginWithPopup?: (options?: PopupLoginOptions) => Promise<void>;
   loginWithRedirect?: (
     options?: RedirectLoginOptions
   ) => Promise<void>;
-  //
   confirmRegister?: (email: string, code: string) => Promise<void>;
   forgotPassword?: (email: string) => Promise<void>;
   resendCodeRegister?: (email: string) => Promise<void>;
@@ -64,6 +57,7 @@ export type JWTContextType = CanRemove & {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
+  initializing: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (
     email: string,
@@ -74,6 +68,7 @@ export type JWTContextType = CanRemove & {
     code: string
   ) => Promise<void>;
   logout: () => Promise<void>;
+  updateUserContext: (user: AuthUserType) => void;
   updateUser: (userData: FormValues) => Promise<void>;
 };
 
@@ -121,8 +116,6 @@ export type AmplifyContextType = CanRemove & {
     password: string
   ) => Promise<void>;
 };
-
-// ----------------------------------------------------------------------
 
 export type Auth0ContextType = CanRemove & {
   user: AuthUserType;

@@ -1,9 +1,6 @@
-// routes
 import { paths } from 'src/routes/paths';
-// utils
-import axios from 'src/utils/axios';
-
-// ----------------------------------------------------------------------
+import axiosInstance from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 
 function jwtDecode(token: string) {
   const base64Url = token.split('.')[1];
@@ -15,61 +12,52 @@ function jwtDecode(token: string) {
       .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
       .join('')
   );
-
   return JSON.parse(jsonPayload);
 }
-
-// ----------------------------------------------------------------------
 
 export const isValidToken = (accessToken: string) => {
   if (!accessToken) {
     return false;
   }
-
   const decoded = jwtDecode(accessToken);
-
   const currentTime = Date.now() / 1000;
-
+  
   return decoded.exp > currentTime;
 };
 
-// ----------------------------------------------------------------------
-
-export const tokenExpired = (exp: number) => {
-  // eslint-disable-next-line prefer-const
+export const tokenExpired = async (exp: number) => {
+  // eslint-disable-next-line prefer-const 
   let expiredTimer;
-
   const currentTime = Date.now();
-
-  // Test token expires after 10s
-  // const timeLeft = currentTime + 10000 - currentTime; // ~10s
   const timeLeft = exp * 1000 - currentTime;
-
   clearTimeout(expiredTimer);
-
   expiredTimer = setTimeout(() => {
     alert('Token expired');
-
     sessionStorage.removeItem('accessToken');
-
     window.location.href = paths.auth.jwt.login;
   }, timeLeft);
 };
 
-// ----------------------------------------------------------------------
-
 export const setSession = (accessToken: string | null) => {
   if (accessToken) {
     sessionStorage.setItem('accessToken', accessToken);
-
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-
-    // This function below will handle when token is expired
-    const { exp } = jwtDecode(accessToken); // ~3 days by minimals server
-    tokenExpired(exp);
+    axiosInstance.defaults.headers.Authorization = `Bearer ${accessToken}`;
+    const { exp } = jwtDecode(accessToken); 
+    tokenExpired(exp);    
   } else {
     sessionStorage.removeItem('accessToken');
+    delete axiosInstance.defaults.headers.common.Authorization;
+  }
+};
 
-    delete axios.defaults.headers.common.Authorization;
+export const refreshAccessToken = async () => {
+  try {
+    const response = await axiosInstance.get(endpoints.auth.refreshToken);
+    const { accessToken } = response.data;
+    setSession(accessToken);
+  } catch (error) {
+    console.error('Error during token refresh:', error);
+    setSession(null);
+    window.location.href = paths.auth.jwt.login;
   }
 };

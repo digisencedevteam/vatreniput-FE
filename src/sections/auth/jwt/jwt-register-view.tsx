@@ -15,10 +15,11 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import InvalidAlbumPage from 'src/pages/InvalidAlbum';
-import axios, { endpoints } from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { LoadingScreen } from 'src/components/loading-screen';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 import { paths } from 'src/routes/paths';
+import axiosInstance from 'src/utils/axios';
 
 export default function JwtRegisterView() {
   const { register } = useAuthContext();
@@ -82,7 +83,7 @@ export default function JwtRegisterView() {
 
   const isAlbumCodeValid = async (code: string) => {
     setIsLoading(true);
-    const response = await axios.get(endpoints.album.validate + code);
+    const response = await axiosInstance.get(endpoints.album.validate + code);
     setIsAlbumValid(response.data.isAlbumValid);
     setIsLoading(false);
   };
@@ -95,10 +96,7 @@ export default function JwtRegisterView() {
       <Typography variant='h4'>Registriraj se</Typography>
 
       <Stack direction='row' spacing={0.5}>
-        <Typography variant='body2'>
-          {' '}
-          I pokrenite svoj vatreni put!{' '}
-        </Typography>
+        <Typography variant='body2'> I pokrenite svoj vatreni put! </Typography>
       </Stack>
     </Stack>
   );
@@ -176,9 +174,7 @@ export default function JwtRegisterView() {
   );
 
   useEffect(() => {
-    paramValue
-      ? isAlbumCodeValid(paramValue || '')
-      : router.push('/');
+    paramValue ? isAlbumCodeValid(paramValue || '') : router.push('/');
   }, [paramValue, router]);
 
   if (isLoading) {
