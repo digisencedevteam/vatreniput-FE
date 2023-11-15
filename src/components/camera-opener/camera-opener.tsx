@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button, Dialog, DialogContent } from '@mui/material';
 
-const CameraOpener: React.FC = () => {
+const CameraOpener = () => {
   const [open, setOpen] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -17,7 +17,6 @@ const CameraOpener: React.FC = () => {
         }
       } catch (err) {
         console.error(err);
-        // Handle the error of not being able to access the camera
       }
     }
   };
@@ -35,7 +34,7 @@ const CameraOpener: React.FC = () => {
     <div>
       <Button
         fullWidth
-        color='inherit'
+        color='error'
         size='large'
         onClick={handleCapture}
       >
