@@ -98,7 +98,7 @@ const ManageQuiz = () => {
 
   useEffect(() => {
     if (!auth.user || auth.user.role !== userRoles.admin) {
-      router.push(`${paths.dashboard.five}`);
+      router.push(`${paths.dashboard.quizzes}`);
     }
     if (unresolvedQuiz) {
       const transformedQuestions = (unresolvedQuiz.questions || []).map(
@@ -196,12 +196,16 @@ const ManageQuiz = () => {
               edge='start'
               color='primary'
               aria-label='back to dashboard'
-              onClick={() => router.push(paths.dashboard.three)}
+              onClick={() => router.push(paths.dashboard.quizzes)}
             >
               <ArrowBackIcon />
             </IconButton>
           </Box>
-          <Typography variant='h4' textAlign='center' m={1}>
+          <Typography
+            variant='h4'
+            textAlign='center'
+            m={1}
+          >
             {quizId ? 'Ažuriraj' : 'Stvori novi'} kviz
           </Typography>
           <Box
@@ -263,7 +267,10 @@ const ManageQuiz = () => {
               />
             </LocalizationProvider>
             {formik.touched.availableUntil && formik.errors.availableUntil && (
-              <Typography variant='caption' color='error'>
+              <Typography
+                variant='caption'
+                color='error'
+              >
                 {formik.errors.availableUntil}
               </Typography>
             )}
@@ -385,13 +392,20 @@ const ManageQuiz = () => {
                 </Box>
               ))}
 
-              <FormControl component='fieldset' fullWidth>
+              <FormControl
+                component='fieldset'
+                fullWidth
+              >
                 <FormLabel
                   color={quizId ? 'secondary' : 'primary'}
                   component='legend'
                   sx={{ textAlign: 'center' }}
                 >
-                  <Typography mt={2} mb={1} variant='h6'>
+                  <Typography
+                    mt={2}
+                    mb={1}
+                    variant='h6'
+                  >
                     Točan odgovor za ovo pitanje
                   </Typography>
                 </FormLabel>
@@ -462,7 +476,7 @@ const ManageQuiz = () => {
             <Alert
               onClose={() => {
                 setSubmitted(false);
-                router.push(paths.dashboard.three);
+                router.push(paths.dashboard.quizzes);
               }}
               severity='success'
             >
@@ -476,7 +490,10 @@ const ManageQuiz = () => {
             onClose={() => setErrorSnackbar(null)}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           >
-            <Alert onClose={() => setErrorSnackbar(null)} severity='error'>
+            <Alert
+              onClose={() => setErrorSnackbar(null)}
+              severity='error'
+            >
               {errorSnackbar}
             </Alert>
           </Snackbar>

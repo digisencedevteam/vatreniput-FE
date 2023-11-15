@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { formatTime } from 'src/utils/format-time';
 import DeleteModal from 'src/components/delete-modal/deleteModal';
+import { paths } from 'src/routes/paths';
 
 interface QuestionScreenProps {
   currentQuestion: Question;
@@ -98,7 +99,7 @@ const QuestionScreen = ({
 
   const handleExitConfirmation = () => {
     setShowModal(false);
-    navigate('/dashboard/three');
+    navigate(paths.dashboard.quizzes);
   };
 
   return (
@@ -111,9 +112,21 @@ const QuestionScreen = ({
       m={0}
       maxWidth={'500px'}
     >
-      <Grid container direction='column' alignItems='center' spacing={1}>
-        <Grid item width={'100%'} padding={0}>
-          <Grid container alignItems='center'>
+      <Grid
+        container
+        direction='column'
+        alignItems='center'
+        spacing={1}
+      >
+        <Grid
+          item
+          width={'100%'}
+          padding={0}
+        >
+          <Grid
+            container
+            alignItems='center'
+          >
             <Grid item>
               <IconButton
                 edge='start'
@@ -127,12 +140,20 @@ const QuestionScreen = ({
                 <ArrowBackIcon />
               </IconButton>
             </Grid>
-            <Grid item xs>
+            <Grid
+              item
+              xs
+            >
               <Typography variant='h4'>{title}</Typography>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item width={'100%'} m={1} padding={0}>
+        <Grid
+          item
+          width={'100%'}
+          m={1}
+          padding={0}
+        >
           <Typography
             variant='h6'
             style={{
@@ -144,7 +165,12 @@ const QuestionScreen = ({
             Preostalo vrijeme: {formatTime(elapsedTime)}
           </Typography>
         </Grid>
-        <Grid item width={'100%'} m={1} padding={0}>
+        <Grid
+          item
+          width={'100%'}
+          m={1}
+          padding={0}
+        >
           <Typography variant='h5'>
             Pitanje {currentQuestionIndex + 1} / {totalQuestions}
           </Typography>
@@ -169,14 +195,23 @@ const QuestionScreen = ({
           borderRadius: 1,
         }}
       >
-        <Grid item textAlign={'center'}>
-          <Typography variant='h6' style={{ fontWeight: 'bold' }}>
+        <Grid
+          item
+          textAlign={'center'}
+        >
+          <Typography
+            variant='h6'
+            style={{ fontWeight: 'bold' }}
+          >
             {currentQuestion.text}
           </Typography>
         </Grid>
         <Box sx={{ mt: '3%' }}>
           {currentQuestion.options.map((option, index) => (
-            <Grid item key={option}>
+            <Grid
+              item
+              key={option}
+            >
               <Button
                 variant={
                   selectedOption === index.toString() ? 'contained' : 'outlined'
@@ -193,7 +228,10 @@ const QuestionScreen = ({
                 onClick={() => handleAnswerSelection(index.toString())}
               >
                 {selectedOption === index.toString() ? (
-                  <Fade in={true} timeout={650}>
+                  <Fade
+                    in={true}
+                    timeout={650}
+                  >
                     <SportsSoccerIcon
                       sx={{ marginRight: 1, fontSize: '20px' }}
                     />
@@ -205,7 +243,10 @@ const QuestionScreen = ({
           ))}
         </Box>
 
-        <Grid item sx={{ marginTop: 2 }}>
+        <Grid
+          item
+          sx={{ marginTop: 2 }}
+        >
           <img
             src={'/assets/images/kviz.png'}
             alt='Question Illustration'

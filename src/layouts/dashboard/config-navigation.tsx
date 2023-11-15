@@ -22,7 +22,7 @@ export function useNavData() {
           },
           {
             title: 'Moja Kolekcija',
-            path: paths.dashboard.two,
+            path: paths.dashboard.collection,
             icon: <CollectionsIcon />,
           },
           {
@@ -112,7 +112,7 @@ export function useNavData() {
         items: [
           {
             title: 'Glasanje',
-            path: paths.dashboard.five,
+            path: paths.dashboard.votings,
             icon: <HowToVoteIcon />,
           },
           {

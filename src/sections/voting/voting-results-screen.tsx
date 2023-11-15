@@ -45,21 +45,30 @@ const VotingResultsScreen = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Grid container alignItems='center'>
-        <Grid item sx={{ m: 1 }}>
+      <Grid
+        container
+        alignItems='center'
+      >
+        <Grid
+          item
+          sx={{ m: 1 }}
+        >
           <IconButton
             edge='start'
             color='primary'
             aria-label='back to votings page'
             onClick={() => {
-              router.push(paths.dashboard.five);
+              router.push(paths.dashboard.votings);
             }}
           >
             <ArrowBackIcon />
           </IconButton>
         </Grid>
       </Grid>
-      <Typography variant='h4' sx={{ my: 3 }}>
+      <Typography
+        variant='h4'
+        sx={{ my: 3 }}
+      >
         Rezultat kviza: {votingTitle}
       </Typography>
       {renderContent()}

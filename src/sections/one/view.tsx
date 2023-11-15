@@ -14,6 +14,7 @@ import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton
 import { AuthContext } from 'src/auth/context/jwt';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { MotionContainer, varFade } from 'src/components/animate';
+import { paths } from 'src/routes/paths';
 
 export default function OneView() {
   const settings = useSettingsContext();
@@ -84,7 +85,7 @@ export default function OneView() {
           <DashboardButton
             imageSrc={mojaKolekcijaImageSrc}
             title='Moja Kolekcija'
-            link='/dashboard/two'
+            link={paths.dashboard.collection}
           />
         </Grid>
         <Grid
@@ -108,7 +109,7 @@ export default function OneView() {
           <MotionContainer variants={slideVariants.inUp}>
             <DashboardSectionWrapper
               title='Najviše skupljenih'
-              link='dashboard/two'
+              link={paths.dashboard.collection}
             >
               {isDashboardLoading ? (
                 <SkeletonDashboardLoader
@@ -143,7 +144,7 @@ export default function OneView() {
           </MotionContainer>
           <DashboardSectionWrapper
             title='Kvizovi'
-            link='dashboard/three'
+            link={paths.dashboard.quizzes}
           >
             {isDashboardLoading ? (
               <SkeletonDashboardLoader
@@ -173,7 +174,7 @@ export default function OneView() {
           </DashboardSectionWrapper>
           <DashboardSectionWrapper
             title='Glasanja'
-            link='dashboard/five'
+            link={paths.dashboard.votings}
           >
             {isDashboardLoading ? (
               <SkeletonDashboardLoader

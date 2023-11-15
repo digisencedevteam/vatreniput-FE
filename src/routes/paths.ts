@@ -21,10 +21,10 @@ export const paths = {
   dashboard: {
     root: ROOTS.DASHBOARD,
     one: `${ROOTS.DASHBOARD}/one`,
-    two: `${ROOTS.DASHBOARD}/two`,
-    three: `${ROOTS.DASHBOARD}/three`,
+    collection: `${ROOTS.DASHBOARD}/collection`,
+    quizzes: `${ROOTS.DASHBOARD}/quizzes`,
     four: `${ROOTS.DASHBOARD}/four`,
-    five: `${ROOTS.DASHBOARD}/five`,
+    votings: `${ROOTS.DASHBOARD}/votings`,
     nine: `${ROOTS.DASHBOARD}/nine`,
     story: {
       root: `${ROOTS.DASHBOARD}/story/0`,
@@ -44,7 +44,7 @@ export const paths = {
       ligaNacija2023: `${ROOTS.DASHBOARD}/story/14`,
     },
     quizGroup: {
-      root: `${ROOTS.DASHBOARD}/three`,
+      root: `${ROOTS.DASHBOARD}/quizzes`,
       seven: `${ROOTS.DASHBOARD}/group/svi-kvizovi`,
       results: `${ROOTS.DASHBOARD}/quizGroup/results`,
       quiz: `${ROOTS.DASHBOARD}/quiz`,
