@@ -159,7 +159,6 @@ const QuizApp = () => {
 
   const handleSubmitQuiz = async (localAnswers: Answer[]) => {
     setIsSubmitting(true);
-
     setCurrentQuestionIndex(null);
     setAnswers(localAnswers);
 

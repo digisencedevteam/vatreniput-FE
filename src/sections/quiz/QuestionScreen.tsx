@@ -43,6 +43,7 @@ const QuestionScreen = ({
   quizId,
   startedTime,
 }: QuestionScreenProps) => {
+  const quizDuration = 15 * 60;
   const theme = useTheme();
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const [showModal, setShowModal] = useState(false);
@@ -61,36 +62,35 @@ const QuestionScreen = ({
 
   useEffect(() => {
     if (quizStartTime) {
-      const initialElapsedTime = Math.floor(
-        (Date.now() - quizStartTime) / 1000
-      );
-      setElapsedTime(initialElapsedTime);
-
       const intervalId = setInterval(() => {
-        const newElapsedTime = Math.floor((Date.now() - quizStartTime) / 1000);
-        setElapsedTime(newElapsedTime);
+        const currentTime = Date.now();
+        const timeElapsed = Math.floor((currentTime - quizStartTime) / 1000);
+        const timeRemaining = quizDuration - timeElapsed;
+        if (timeRemaining >= 0) {
+          setElapsedTime(timeRemaining);
+        } else {
+          clearInterval(intervalId);
+          // TODO: Handle quiz timeout logic here (e.g., navigate to a different page or show a message)
+        }
       }, 1000);
-
-      return () => {
-        clearInterval(intervalId);
-      };
+      return () => clearInterval(intervalId);
     }
-  }, [quizStartTime]);
+  }, [quizStartTime, quizDuration]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const elapsedTime = calculateElapsedTime(startedTime);
-      setElapsedTime(elapsedTime);
-    }, 1000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     const elapsedTime = calculateElapsedTime(startedTime);
+  //     setElapsedTime(elapsedTime);
+  //   }, 1000);
 
-    return () => clearInterval(intervalId);
-  }, [startedTime]);
+  //   return () => clearInterval(intervalId);
+  // }, [startedTime]);
 
-  const calculateElapsedTime = (startedTime: number) => {
-    const currentTime = new Date().getTime();
-    const elapsedTime = Math.floor((currentTime - startedTime) / 60000);
-    return elapsedTime;
-  };
+  // const calculateElapsedTime = (startedTime: number) => {
+  //   const currentTime = new Date().getTime();
+  //   const elapsedTime = Math.floor((currentTime - startedTime) / 60000);
+  //   return elapsedTime;
+  // };
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -141,7 +141,7 @@ const QuestionScreen = ({
               marginBottom: 10,
             }}
           >
-            Vrijeme proteklo {formatTime(elapsedTime)}
+            Preostalo vrijeme: {formatTime(elapsedTime)}
           </Typography>
         </Grid>
         <Grid item width={'100%'} m={1} padding={0}>

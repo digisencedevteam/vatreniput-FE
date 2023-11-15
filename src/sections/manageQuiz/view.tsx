@@ -126,18 +126,20 @@ const ManageQuiz = () => {
   }, [unresolvedQuiz]);
 
   const handleAddQuestion = () => {
-    formik.setValues({
-      ...formik.values,
-      questions: [
-        ...formik.values.questions,
-        {
-          text: '',
-          options: [''],
-          image: '',
-          correctOption: 0,
-        },
-      ],
-    });
+    if (formik.values.questions.length < 10) {
+      formik.setValues({
+        ...formik.values,
+        questions: [
+          ...formik.values.questions,
+          {
+            text: '',
+            options: [''],
+            image: '',
+            correctOption: 0,
+          },
+        ],
+      });
+    }
   };
 
   const handleQuestionChange = (
@@ -278,12 +280,14 @@ const ManageQuiz = () => {
                   Pitanje {index + 1} / {formik.values.questions.length}
                 </Typography>
                 <Box display='flex' alignItems='center'>
-                  <Button
-                    color={quizId ? 'secondary' : 'primary'}
-                    onClick={handleAddQuestion}
-                  >
-                    <Typography variant='h2'>+</Typography>
-                  </Button>
+                  {formik.values.questions.length < 10 && (
+                    <Button
+                      color={quizId ? 'secondary' : 'primary'}
+                      onClick={handleAddQuestion}
+                    >
+                      <Typography variant='h2'>+</Typography>
+                    </Button>
+                  )}
                   {formik.values.questions.length > 1 && (
                     <Button
                       color={quizId ? 'secondary' : 'primary'}
@@ -427,15 +431,17 @@ const ManageQuiz = () => {
               </FormControl>
             </Box>
           ))}
-          <Box display='flex' justifyContent='center'>
-            <Button
-              variant='outlined'
-              sx={{ my: 2 }}
-              onClick={handleAddQuestion}
-            >
-              Dodaj Pitanje
-            </Button>
-          </Box>
+          {formik.values.questions.length < 10 && (
+            <Box display='flex' justifyContent='center'>
+              <Button
+                variant='outlined'
+                sx={{ my: 2 }}
+                onClick={handleAddQuestion}
+              >
+                Dodaj Pitanje
+              </Button>
+            </Box>
+          )}
           <Button
             variant='contained'
             color={quizId ? 'secondary' : 'primary'}

@@ -58,12 +58,13 @@ const ThreeView = () => {
     auth.user && auth.user.role === userRoles.admin
       ? {
           buttonLabel: 'Kreiraj novi kviz',
-          buttonLink: `${paths.dashboard.quizGroup.createQuiz}`, // Path to create quiz
+          buttonLink: `${paths.dashboard.quizGroup.createQuiz}`,
         }
       : {
           buttonLabel: 'Pravila i Nagrade Kvizova',
-          buttonLink: `${paths.quizRewardInfo}`, // Path to quiz rules and rewards
+          buttonLink: `${paths.quizRewardInfo}`,
         };
+
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -80,6 +81,7 @@ const ThreeView = () => {
       setRewardStatus(newRewardStatus);
     }
   }, [unresolvedQuizzes]);
+
   const resolvedQuiz = resolvedQuizzes?.map((quiz, index) => ({
     label: quiz,
     totalAmount: quiz.score,
@@ -185,20 +187,11 @@ const ThreeView = () => {
           />
         </Grid>
       )}
-      <Grid
-        item
-        xs={12}
-        md={6}
-        lg={8}
-        sx={{ marginY: 5 }}
-      >
+      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
         {isLoadingResolved ? (
           <SkeletonOverviewResults />
         ) : resolvedQuiz && resolvedQuiz.length > 0 ? (
-          <QuizBestOverview
-            title='Najnoviji rezultati'
-            data={resolvedQuiz}
-          />
+          <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
         ) : (
           <SkeletonOverviewResults message='Trenutno nema riješenih kvizova. Riješi neki od dostupnih kako bi vidio svoje rezultate!' />
         )}
@@ -240,10 +233,7 @@ const ThreeView = () => {
         />
       </Box>
       <SectionWrapper title='Dostupni'>
-        <Grid
-          container
-          spacing={2}
-        >
+        <Grid container spacing={2}>
           {isLoadingUnresolved ? (
             <SkeletonDashboardLoader
               isMobileCount={2}
@@ -252,14 +242,7 @@ const ThreeView = () => {
             />
           ) : !!unresolvedQuizzes?.length ? (
             unresolvedQuizzes.map((data, index) => (
-              <Grid
-                key={index}
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={4}
-              >
+              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
                 <Box>
                   <CustomCard
                     quizId={data._id}
@@ -299,7 +282,6 @@ const ThreeView = () => {
       </SectionWrapper>
       <SectionWrapper title='Riješeni'>
         {isLoadingResolved ? (
-          // Display SkeletonDashboardLoader while the quizzes are loading
           <SkeletonDashboardLoader
             isMobileCount={3}
             isTabletCount={4}

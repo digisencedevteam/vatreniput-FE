@@ -3,6 +3,7 @@ import { endpoints } from 'src/utils/axios';
 import { Quiz } from 'src/sections/quiz/types';
 import axiosInstance from 'src/utils/axios';
 import { QuizResult } from 'src/types';
+import { useAuthContext } from 'src/auth/hooks';
 
 type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
@@ -35,6 +36,7 @@ const useFetchQuizzes = (
   currentPage?: number,
   itemsPerPage?: number
 ): FetchQuizzesReturn => {
+  const currentUser = useAuthContext();
   const [isLoadingResolved, setIsLoadingResolved] = useState(false);
   const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
