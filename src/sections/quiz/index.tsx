@@ -192,7 +192,7 @@ const QuizApp = () => {
     setIsSubmitting(false);
     setIsQuizCompleted(true);
   };
-  if (selectedQuiz?.isResolved) navigate(paths.dashboard.three);
+  if (selectedQuiz?.isResolved) navigate(paths.dashboard.quizzes);
 
   return (
     <Container

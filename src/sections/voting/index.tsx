@@ -32,7 +32,7 @@ const VotingApp = () => {
   const handleSubmit = async () => {
     if (votingId && selectedOption) {
       await submitVote(votingId, selectedOption);
-      router.push(`${paths.dashboard.five}`);
+      router.push(`${paths.dashboard.votings}`);
     }
   };
 
@@ -50,7 +50,7 @@ const VotingApp = () => {
 
   useEffect(() => {
     if (voting && voting.isVoted) {
-      router.push(paths.dashboard.five);
+      router.push(paths.dashboard.votings);
     }
   }, [voting, router]);
 
@@ -68,14 +68,20 @@ const VotingApp = () => {
         <LoadingScreen />
       ) : (
         <>
-          <Grid container alignItems='center'>
-            <Grid item sx={{ m: 5 }}>
+          <Grid
+            container
+            alignItems='center'
+          >
+            <Grid
+              item
+              sx={{ m: 5 }}
+            >
               <IconButton
                 edge='start'
                 color='primary'
                 aria-label='back to previous page'
                 onClick={() => {
-                  router.push(paths.dashboard.five);
+                  router.push(paths.dashboard.votings);
                 }}
               >
                 <ArrowBackIcon />
@@ -94,13 +100,24 @@ const VotingApp = () => {
               textAlign: 'center',
             }}
           >
-            <Typography sx={{ marginTop: 2 }} variant='h3' gutterBottom>
+            <Typography
+              sx={{ marginTop: 2 }}
+              variant='h3'
+              gutterBottom
+            >
               {voting && voting.title}
             </Typography>
-            <Typography variant='body1' gutterBottom>
+            <Typography
+              variant='body1'
+              gutterBottom
+            >
               {voting && voting.description}
             </Typography>
-            <Grid container spacing={2} sx={{ my: 5, p: isMobile ? 0 : 3 }}>
+            <Grid
+              container
+              spacing={2}
+              sx={{ my: 5, p: isMobile ? 0 : 3 }}
+            >
               {voting &&
                 voting.votingOptions &&
                 voting.votingOptions.map((option: any) => (
