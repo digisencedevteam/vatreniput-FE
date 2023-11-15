@@ -103,7 +103,7 @@ export const DesktopViewOne = () => {
         >
           <DashboardSectionWrapper
             title={'Najnoviji iz digitalnog albuma'}
-            link={paths.dashboard.two}
+            link={paths.dashboard.collection}
           >
             <ScrollableContainer childrenCount={cards.length}>
               {isDashboardLoading ? (
@@ -153,7 +153,7 @@ export const DesktopViewOne = () => {
       </Grid>
       <DashboardSectionWrapper
         title={'Statistika'}
-        link='dashboard/two'
+        link={paths.dashboard.collection}
       >
         <Grid
           container
@@ -200,7 +200,7 @@ export const DesktopViewOne = () => {
         >
           <DashboardSectionWrapper
             title='Kvizovi'
-            link={paths.dashboard.three}
+            link={paths.dashboard.quizzes}
           >
             <Grid
               container
@@ -250,7 +250,7 @@ export const DesktopViewOne = () => {
         >
           <DashboardSectionWrapper
             title='Glasanja'
-            link='dashboard/five'
+            link={paths.dashboard.votings}
           >
             <Grid container>
               {isDashboardLoading ? (

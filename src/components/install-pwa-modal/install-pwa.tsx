@@ -10,7 +10,6 @@ import {
 } from '@mui/material';
 import IosShareIcon from '@mui/icons-material/IosShare';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import addToHomeScreen from '/src/assets/images/addToHomeScreen.jpeg';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;

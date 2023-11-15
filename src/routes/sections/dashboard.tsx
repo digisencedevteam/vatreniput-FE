@@ -8,10 +8,10 @@ import ManageQuiz from 'src/sections/manageQuiz/view';
 import ManageVoting from 'src/sections/manageVoting/view';
 
 const IndexPage = lazy(() => import('src/pages/dashboard/one'));
-const PageTwo = lazy(() => import('src/pages/dashboard/collections'));
-const PageThree = lazy(() => import('src/pages/dashboard/three'));
+const CollectionPage = lazy(() => import('src/pages/dashboard/collections'));
+const QuizzesPage = lazy(() => import('src/pages/dashboard/three'));
 const PageFour = lazy(() => import('src/pages/dashboard/four'));
-const PageFive = lazy(() => import('src/pages/dashboard/five'));
+const VotingsPage = lazy(() => import('src/pages/dashboard/five'));
 const PageSix = lazy(() => import('src/pages/dashboard/six'));
 const PageNine = lazy(() => import('src/pages/dashboard/nine'));
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
@@ -35,10 +35,10 @@ export const dashboardRoutes = [
     ),
     children: [
       { element: <IndexPage />, index: true },
-      { path: 'two', element: <PageTwo /> },
-      { path: 'three', element: <PageThree /> },
+      { path: 'collection', element: <CollectionPage /> },
+      { path: 'quizzes', element: <QuizzesPage /> },
       { path: 'four', element: <PageFour /> },
-      { path: 'five', element: <PageFive /> },
+      { path: 'votings', element: <VotingsPage /> },
       { path: 'nine', element: <PageNine /> },
       { path: 'profile', element: <ProfileView /> },
       { path: 'quiz/:quizId', element: <QuizPage /> },
@@ -56,8 +56,8 @@ export const dashboardRoutes = [
       {
         path: 'quizGroup',
         children: [
-          { element: <PageThree />, index: true },
-          { path: 'three', element: <PageThree /> },
+          { element: <QuizzesPage />, index: true },
+          { path: 'three', element: <QuizzesPage /> },
           { path: 'results', element: <QuizResults /> },
         ],
       },
