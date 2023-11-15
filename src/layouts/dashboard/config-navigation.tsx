@@ -26,30 +26,9 @@ export function useNavData() {
             icon: <CollectionsIcon />,
           },
           {
-            title: 'Glasanje',
-            path: paths.dashboard.five,
-            icon: <HowToVoteIcon />,
-          },
-        ],
-      },
-
-      {
-        subheader: '',
-        items: [
-          {
-            title: 'Kvizovi',
-            path: paths.dashboard.quizGroup.root,
-            icon: <QuizIcon />,
-            children: [
-              {
-                title: `Svi Kvizovi`,
-                path: paths.dashboard.quizGroup.root,
-              },
-              {
-                title: 'Rezultati',
-                path: paths.dashboard.quizGroup.results,
-              },
-            ],
+            title: 'Sveti Dres',
+            path: paths.dashboard.nine,
+            icon: <CollectionsIcon />,
           },
         ],
       },
@@ -122,6 +101,32 @@ export function useNavData() {
               {
                 title: 'Liga Nacija 2023',
                 path: paths.dashboard.story.ligaNacija2023,
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        subheader: 'Zabava',
+        items: [
+          {
+            title: 'Glasanje',
+            path: paths.dashboard.five,
+            icon: <HowToVoteIcon />,
+          },
+          {
+            title: 'Kvizovi',
+            path: paths.dashboard.quizGroup.root,
+            icon: <QuizIcon />,
+            children: [
+              {
+                title: `Svi Kvizovi`,
+                path: paths.dashboard.quizGroup.root,
+              },
+              {
+                title: 'Rezultati',
+                path: paths.dashboard.quizGroup.results,
               },
             ],
           },

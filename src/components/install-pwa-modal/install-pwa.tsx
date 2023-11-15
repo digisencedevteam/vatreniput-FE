@@ -6,7 +6,11 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Box,
 } from '@mui/material';
+import IosShareIcon from '@mui/icons-material/IosShare';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import addToHomeScreen from '/src/assets/images/addToHomeScreen.jpeg';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -86,28 +90,64 @@ const InstallPWA = () => {
           Instaliraj
         </Button>
       )}
+
       <Dialog
         open={dialogOpen}
         onClose={closeDialog}
       >
-        <DialogTitle>Instalirajte Web Aplikaciju</DialogTitle>
+        <DialogTitle color={'primary'}>Instalirajte Web Aplikaciju</DialogTitle>
         <DialogContent>
           {supportsPWA ? (
             <DialogContentText>
               Kliknite ispod da instalirate aplikaciju na vaš uređaj.
             </DialogContentText>
           ) : (
-            <DialogContentText>
-              Vaš preglednik ne podržava automatiziranu instalaciju. Slijedite
-              upute za ručnu instalaciju.
-            </DialogContentText>
+            <>
+              <DialogContentText style={{ marginBottom: '20px' }}>
+                <strong style={{ color: 'primary' }}>
+                  Vaš preglednik ne podržava automatsku instalaciju.
+                </strong>
+              </DialogContentText>
+              <Box
+                sx={{
+                  padding: '20px',
+                  border: '1px solid ',
+                  borderRadius: '4px',
+                  margin: '5px',
+                }}
+              >
+                <DialogContentText>
+                  {' '}
+                  Slijedite ove upute za ručnu instalaciju:
+                </DialogContentText>
+                <ol style={{ paddingLeft: '20px' }}>
+                  <li>
+                    <DialogContentText my={1}>
+                      Kliknite na{' '}
+                      <IosShareIcon style={{ verticalAlign: 'middle' }} /> ili
+                      <MoreVertIcon /> zatim nađite gumb
+                    </DialogContentText>
+                  </li>
+                  <li>
+                    <DialogContentText my={1}>
+                      'Add to Home Screen' / 'Dodaj na početni zaslon'{' '}
+                      <img
+                        src={'/assets/images/addToHomeScreen.jpeg'}
+                        alt='Add to Home Screen'
+                        style={{ verticalAlign: 'middle' }}
+                      />
+                    </DialogContentText>
+                  </li>
+                </ol>
+              </Box>
+            </>
           )}
         </DialogContent>
         <DialogActions>
           {supportsPWA && (
             <Button
               onClick={onClickInstall}
-              color='primary'
+              style={{ fontWeight: 'bold' }}
             >
               Instaliraj
             </Button>
@@ -115,6 +155,7 @@ const InstallPWA = () => {
           <Button
             onClick={closeDialog}
             color='primary'
+            style={{ fontWeight: 'bold' }}
           >
             Zatvori
           </Button>

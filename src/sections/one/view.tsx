@@ -13,6 +13,7 @@ import useDashboardData from 'src/hooks/use-dashboard-data';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import { AuthContext } from 'src/auth/context/jwt';
 import StatisticCards from 'src/components/stats-box/statistic-box';
+import { MotionContainer, varFade } from 'src/components/animate';
 
 export default function OneView() {
   const settings = useSettingsContext();
@@ -27,6 +28,7 @@ export default function OneView() {
     isDashboardLoading,
     collectedStatistic,
   } = useDashboardData();
+  const slideVariants = varFade();
 
   const imageSrc =
     theme.palette.mode === 'dark'
@@ -103,40 +105,42 @@ export default function OneView() {
           item
           xs={12}
         >
-          <DashboardSectionWrapper
-            title='Najviše skupljenih'
-            link='dashboard/two'
-          >
-            {isDashboardLoading ? (
-              <SkeletonDashboardLoader
-                count={1}
-                maxWidth='375px'
-              />
-            ) : !collectedStatistic?.topEvents?.length ? (
-              <SkeletonDashboardLoader
-                count={1}
-                maxWidth='375px'
-                message='Tvoj digitalni album još je prazan. Započnite svoju avanturu skeniranjem QR koda s bilo koje sličice i spremite u digitalni album kako bi se prikazala statistika!'
-              />
-            ) : (
-              <>
-                <DashboardCollectionCategory
-                  imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
-                  name={collectedStatistic.topEvents[0]?.name}
-                  percentageCollected={Math.round(
-                    collectedStatistic.topEvents[0]?.percentageCollected || 0
-                  )}
+          <MotionContainer variants={slideVariants.inUp}>
+            <DashboardSectionWrapper
+              title='Najviše skupljenih'
+              link='dashboard/two'
+            >
+              {isDashboardLoading ? (
+                <SkeletonDashboardLoader
+                  count={1}
+                  maxWidth='375px'
                 />
-                <DashboardCollectionCategory
-                  imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
-                  name={collectedStatistic.topEvents[1]?.name}
-                  percentageCollected={Math.round(
-                    collectedStatistic.topEvents[1]?.percentageCollected || 0
-                  )}
+              ) : !collectedStatistic?.topEvents?.length ? (
+                <SkeletonDashboardLoader
+                  count={1}
+                  maxWidth='375px'
+                  message='Tvoj digitalni album još je prazan. Započnite svoju avanturu skeniranjem QR koda s bilo koje sličice i spremite u digitalni album kako bi se prikazala statistika!'
                 />
-              </>
-            )}
-          </DashboardSectionWrapper>
+              ) : (
+                <>
+                  <DashboardCollectionCategory
+                    imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443453/hrvatska_momc%CC%8Cadska_2_ruhebv.jpg'
+                    name={collectedStatistic.topEvents[0]?.name}
+                    percentageCollected={Math.round(
+                      collectedStatistic.topEvents[0]?.percentageCollected || 0
+                    )}
+                  />
+                  <DashboardCollectionCategory
+                    imageSrc='https://res.cloudinary.com/dzg5kxbau/image/upload/v1694443581/zajednic%CC%8Cka_2018_a_svqtdz.jpg'
+                    name={collectedStatistic.topEvents[1]?.name}
+                    percentageCollected={Math.round(
+                      collectedStatistic.topEvents[1]?.percentageCollected || 0
+                    )}
+                  />
+                </>
+              )}
+            </DashboardSectionWrapper>
+          </MotionContainer>
           <DashboardSectionWrapper
             title='Kvizovi'
             link='dashboard/three'
