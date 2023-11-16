@@ -30,6 +30,7 @@ interface QuestionScreenProps {
   handleNextQuestion: () => void;
   quizId: string;
   startedTime: number;
+  handleAutoSubmitQuiz: () => void;
 }
 
 const QuestionScreen = ({
@@ -43,8 +44,9 @@ const QuestionScreen = ({
   handleNextQuestion,
   quizId,
   startedTime,
+  handleAutoSubmitQuiz,
 }: QuestionScreenProps) => {
-  const quizDuration = 15 * 60;
+  const quizDuration = 10 * 60;
   const theme = useTheme();
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
   const [showModal, setShowModal] = useState(false);
@@ -71,27 +73,12 @@ const QuestionScreen = ({
           setElapsedTime(timeRemaining);
         } else {
           clearInterval(intervalId);
-          // TODO: Handle quiz timeout logic here (e.g., navigate to a different page or show a message)
+          handleAutoSubmitQuiz();
         }
       }, 1000);
       return () => clearInterval(intervalId);
     }
   }, [quizStartTime, quizDuration]);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     const elapsedTime = calculateElapsedTime(startedTime);
-  //     setElapsedTime(elapsedTime);
-  //   }, 1000);
-
-  //   return () => clearInterval(intervalId);
-  // }, [startedTime]);
-
-  // const calculateElapsedTime = (startedTime: number) => {
-  //   const currentTime = new Date().getTime();
-  //   const elapsedTime = Math.floor((currentTime - startedTime) / 60000);
-  //   return elapsedTime;
-  // };
 
   const handleModalClose = () => {
     setShowModal(false);
@@ -112,21 +99,9 @@ const QuestionScreen = ({
       m={0}
       maxWidth={'500px'}
     >
-      <Grid
-        container
-        direction='column'
-        alignItems='center'
-        spacing={1}
-      >
-        <Grid
-          item
-          width={'100%'}
-          padding={0}
-        >
-          <Grid
-            container
-            alignItems='center'
-          >
+      <Grid container direction='column' alignItems='center' spacing={1}>
+        <Grid item width={'100%'} padding={0}>
+          <Grid container alignItems='center'>
             <Grid item>
               <IconButton
                 edge='start'
@@ -140,20 +115,12 @@ const QuestionScreen = ({
                 <ArrowBackIcon />
               </IconButton>
             </Grid>
-            <Grid
-              item
-              xs
-            >
+            <Grid item xs>
               <Typography variant='h4'>{title}</Typography>
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          item
-          width={'100%'}
-          m={1}
-          padding={0}
-        >
+        <Grid item width={'100%'} m={1} padding={0}>
           <Typography
             variant='h6'
             style={{
@@ -165,12 +132,7 @@ const QuestionScreen = ({
             Preostalo vrijeme: {formatTime(elapsedTime)}
           </Typography>
         </Grid>
-        <Grid
-          item
-          width={'100%'}
-          m={1}
-          padding={0}
-        >
+        <Grid item width={'100%'} m={1} padding={0}>
           <Typography variant='h5'>
             Pitanje {currentQuestionIndex + 1} / {totalQuestions}
           </Typography>
@@ -195,23 +157,14 @@ const QuestionScreen = ({
           borderRadius: 1,
         }}
       >
-        <Grid
-          item
-          textAlign={'center'}
-        >
-          <Typography
-            variant='h6'
-            style={{ fontWeight: 'bold' }}
-          >
+        <Grid item textAlign={'center'}>
+          <Typography variant='h6' style={{ fontWeight: 'bold' }}>
             {currentQuestion.text}
           </Typography>
         </Grid>
         <Box sx={{ mt: '3%' }}>
           {currentQuestion.options.map((option, index) => (
-            <Grid
-              item
-              key={option}
-            >
+            <Grid item key={option}>
               <Button
                 variant={
                   selectedOption === index.toString() ? 'contained' : 'outlined'
@@ -228,10 +181,7 @@ const QuestionScreen = ({
                 onClick={() => handleAnswerSelection(index.toString())}
               >
                 {selectedOption === index.toString() ? (
-                  <Fade
-                    in={true}
-                    timeout={650}
-                  >
+                  <Fade in={true} timeout={650}>
                     <SportsSoccerIcon
                       sx={{ marginRight: 1, fontSize: '20px' }}
                     />
@@ -243,10 +193,7 @@ const QuestionScreen = ({
           ))}
         </Box>
 
-        <Grid
-          item
-          sx={{ marginTop: 2 }}
-        >
+        <Grid item sx={{ marginTop: 2 }}>
           <img
             src={'/assets/images/kviz.png'}
             alt='Question Illustration'

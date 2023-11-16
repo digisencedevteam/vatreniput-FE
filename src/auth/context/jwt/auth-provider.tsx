@@ -19,29 +19,36 @@ export const AuthProvider = ({ children }: Props) => {
   const initialize = async () => {
     try {
       let accessToken = sessionStorage.getItem('accessToken');
+      // Check if there is an existing access token and it's valid
       if (accessToken && isValidToken(accessToken)) {
-        setSession(accessToken);
+        // Load user data using the existing token
         const response = await axiosInstance.get(endpoints.auth.me);
-        setUser(response.data.user);
+        updateUserContext(response.data.user);
       } else {
+        // Attempt to refresh the token
         const refreshResponse = await axiosInstance.get(
           endpoints.auth.refreshToken
         );
         if (refreshResponse.data.accessToken) {
+          // Use the new access token to load user data
           accessToken = refreshResponse.data.accessToken;
           setSession(accessToken);
           const userResponse = await axiosInstance.get(endpoints.auth.me);
           updateUserContext(userResponse.data.user);
         } else {
-          setUser(null);
+          // If refresh fails or no valid access token, remove token and set user to null
+          sessionStorage.removeItem('accessToken');
+          updateUserContext(null);
         }
       }
     } catch (error) {
       console.error('Initialization error:', error);
+      // Handle errors gracefully, e.g., show an error message to the user
+      // You can also redirect the user to a login page if needed
       sessionStorage.removeItem('accessToken');
-      setUser(null);
+      updateUserContext(null);
     } finally {
-      setLoading(false);
+      // Set initialization flag
       setIsInitialized(true);
     }
   };

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { endpoints } from 'src/utils/axios';
-import { Quiz } from 'src/sections/quiz/types';
+import { Answer, Quiz } from 'src/sections/quiz/types';
 import axiosInstance from 'src/utils/axios';
 import { QuizResult } from 'src/types';
 import { useAuthContext } from 'src/auth/hooks';
 
-type FetchQuizzesReturn = {
+export type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
   isLoadingUnresolved: boolean;
   isResultsLoading: boolean;
@@ -48,6 +48,7 @@ const useFetchQuizzes = (
   const [totalPages, setTotalPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
   const [isResultsLoading, setIsResultsLoading] = useState(false);
+  const [answers, setAnswers] = useState<Answer[]>([]);
 
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
@@ -144,15 +145,49 @@ const useFetchQuizzes = (
   };
 
   const fetchQuizzes = async () => {
+    const userId = currentUser.user && currentUser.user._id;
     const fetchUnresolvedQuizzes = async () => {
       setIsLoadingUnresolved(true);
       try {
         const response = await axiosInstance.get(
           `${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`
         );
-
+        const timeLimit = 10 * 60 * 1000; 
+        const quizzesToFetch = [];
+        for (const quiz of response.data.unresolvedQuizzes) {
+          if (quiz && quiz.status && quiz.status.length > 0 && quiz.status[0].status === 'inProgress') {
+            const startTime = new Date(quiz.status[0].startTime).getTime();
+            const currentTime = new Date().getTime();
+            var elapsedTime = currentTime - startTime;
+            if (elapsedTime > timeLimit) {
+              quizzesToFetch.push(quiz._id);
+            }
+          }
+        }
+        const quizDetailsPromises = quizzesToFetch.map(quizId => axiosInstance.get(endpoints.quiz.details + quizId));
+        const quizDetailsResponses = await Promise.all(quizDetailsPromises);
+        quizDetailsResponses.forEach(response => {
+          const quizData = response.data;
+          setAnswers(quizData.quizzAnswers)
+          const score =
+            (answers.reduce((count, answer) => {
+            return answer.correct ? count + 1 : count;
+          }, 0) / (quizData ? quizData!.questions!.length : 1)) * 100;
+          try {
+             axiosInstance.post(endpoints.quiz.details, {
+              userId: userId,
+              quizId: quizData._id,
+              score,
+              duration: elapsedTime ,
+              answers: answers,
+            });
+          } catch (error) {
+            console.error('Error submitting quiz results:', error);
+          }
+        });
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
       } catch (error) {
+        console.error(error);
         setUnresolvedQuizzes([]);
       }
       setIsLoadingUnresolved(false);

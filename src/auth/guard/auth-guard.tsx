@@ -28,4 +28,5 @@ const AuthGuard = ({ children }: Props) => {
 
   return <>{children}</>;
 };
+
 export default AuthGuard;
