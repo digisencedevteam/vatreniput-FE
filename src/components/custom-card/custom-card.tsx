@@ -55,6 +55,7 @@ const CustomCard = ({
   isRewarded,
   linkToEdit,
 }: CustomCardProps) => {
+  const duration = 15;
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [timer, setTimer] = useState<number>(0);
@@ -64,25 +65,25 @@ const CustomCard = ({
   const rewardedUntil = dayjs(createdAt).add(3, 'day');
   const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [remainingTime, setRemainingTime] = useState<number>(duration * 60);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (status === 'inProgress') {
-      const startTimeStamp = startTime ? new Date(startTime).getTime() : 0;
-      const currentTime = new Date().getTime();
-      setTimer(Math.floor((currentTime - startTimeStamp) / 1000));
-      interval = setInterval(() => {
-        const currentTime = new Date().getTime();
-        setTimer(Math.floor((currentTime - startTimeStamp) / 1000));
-      }, 1000);
-    }
+    const startTimestamp = startTime ? new Date(startTime).getTime() : 0;
+    const currentTime = new Date().getTime();
+    const elapsedTimeInSeconds = Math.floor(
+      (currentTime - startTimestamp) / 1000
+    );
+    const newRemainingTime = Math.max(duration * 60 - elapsedTimeInSeconds, 0);
+    setRemainingTime(newRemainingTime);
+
+    const interval = setInterval(() => {
+      setRemainingTime((prevTime) => Math.max(prevTime - 1, 0));
+    }, 1000);
+
     return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
+      clearInterval(interval);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, [startTime, duration]);
 
   const handleConfirmDelete = () => {
     if (onDelete) {
@@ -257,15 +258,12 @@ const CustomCard = ({
             )}
           </Box>
           {status === 'inProgress' && (
-            <Typography variant='subtitle2'>{`Vrijeme proteklo ${formatTime(
-              timer
+            <Typography variant='subtitle1'>{`Vrijeme preostalo ${formatTime(
+              remainingTime
             )}`}</Typography>
           )}
           {availableUntil && (
-            <Typography
-              variant='subtitle2'
-              sx={{ color: '#999' }}
-            >
+            <Typography variant='subtitle2' sx={{ color: '#999' }}>
               Nagradan do {formattedRewarded}
             </Typography>
           )}

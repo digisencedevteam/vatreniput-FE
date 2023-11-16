@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: Props) => {
           const userResponse = await axiosInstance.get(endpoints.auth.me);
           updateUserContext(userResponse.data.user);
         } else {
+          sessionStorage.removeItem('accessToken');
           setUser(null);
         }
       }

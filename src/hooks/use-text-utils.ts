@@ -18,7 +18,7 @@ export const useTruncatedText = (initialText: string) => {
     toggleLines,
     truncatedText,
     isTruncated,
-    less: 'Sakri',
+    less: 'Sakrij',
     more: 'Proširi',
   };
 };

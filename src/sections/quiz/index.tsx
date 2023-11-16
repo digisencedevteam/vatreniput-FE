@@ -48,11 +48,9 @@ const QuizApp = () => {
     try {
       const response = await axiosInstance.get(endpoints.quiz.details + quizId);
       setSelectedQuiz(response.data);
-
       if (response.data?.status?.status === 'inProgress') {
         const answeredQuestions = response.data.quizzAnswers || [];
         const lastAnsweredQuestionIndex = answeredQuestions.length - 1;
-
         if (lastAnsweredQuestionIndex >= 0) {
           setCurrentQuestionIndex(lastAnsweredQuestionIndex + 1);
           setAnswers(
@@ -150,6 +148,10 @@ const QuizApp = () => {
     }
   };
 
+  const handleAutoSubmitQuiz = () => {
+    handleSubmitQuiz(answers);
+  };
+
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex !== null && currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
@@ -159,7 +161,6 @@ const QuizApp = () => {
 
   const handleSubmitQuiz = async (localAnswers: Answer[]) => {
     setIsSubmitting(true);
-
     setCurrentQuestionIndex(null);
     setAnswers(localAnswers);
 
@@ -219,6 +220,7 @@ const QuizApp = () => {
             handleAnswerSelection={handleAnswerSelection}
             handlePreviousQuestion={handlePreviousQuestion}
             handleNextQuestion={handleNextQuestion}
+            handleAutoSubmitQuiz={handleAutoSubmitQuiz}
             quizId={quizId}
             startedTime={startedTime}
           />
