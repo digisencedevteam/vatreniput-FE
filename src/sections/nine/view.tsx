@@ -70,12 +70,12 @@ export default function NineView() {
         onClose={handleCloseTutorial}
         aria-labelledby='tutorial-dialog-title'
         aria-describedby='tutorial-dialog-description'
-        sx={{ '& .MuiDialog-paper': { margin: 2, padding: 3 } }} // Add custom margin and padding
+        sx={{ '& .MuiDialog-paper': { margin: 2, padding: 3 } }}
       >
         <DialogContent>
           <DialogContentText
             id='tutorial-dialog-description'
-            sx={{ mb: 2 }}
+            sx={{ mb: 2, color: 'white' }}
           >
             {' '}
             Dobrodošli! Molimo odaberite dres i kliknite na gumb 'Otvori
