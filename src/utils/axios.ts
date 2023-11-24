@@ -31,7 +31,8 @@ axiosInstance.interceptors.response.use(
             originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
             return axiosInstance(originalRequest);
           }
-        } catch (refreshError) {
+        } catch (refreshError) {          
+          console.error('Error refreshing token:', refreshError);
           sessionStorage.removeItem('accessToken');
           return Promise.reject(refreshError);
         }

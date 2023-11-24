@@ -77,7 +77,7 @@ export type FormValues = {
   lastName: string;
   username: string
   email: string;
-  avatarUrl: string;
+  photoURL: string;
   [key: string]: string;
 };
 
