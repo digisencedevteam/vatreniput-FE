@@ -11,11 +11,11 @@ export const avatarOptions = [
 ];
 
 export const svetiDresovi = [
-  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966512/2000_Croatia_Away_FINAL_lqqqyu.png',
-  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966510/2004_Croatia_Home_FINAL_n57ypc.png',
-  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966509/2002_Croatia_Home_FINAL_zak3nk.png',
-  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966509/2004_Croatia_Away_FINAL_qttoep.png',
-  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1699966506/2000_Croatia_Home_FINAL_rxrify.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1700488830/Away2_1998_immv19.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1700488830/Home_2022_oukhdi.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1700488829/Away_2022_hy3erc.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1700488829/2018_Croatia_Home_FINAL_cdapey.png',
+  'https://res.cloudinary.com/dzg5kxbau/image/upload/v1700488829/2018_Croatia_Away_FINAL_jmpub5.png',
 ];
 
 export const FAQs = [
