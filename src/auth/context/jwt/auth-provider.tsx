@@ -15,15 +15,22 @@ export const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<AuthUserType | null>(null);
   const [loading, setLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [isUpdatingUser, setIsUpdatingUser] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
 
   const initialize = async () => {
+    setLoading(true);
+
     try {
       let accessToken = sessionStorage.getItem('accessToken');
+
       if (accessToken && isValidToken(accessToken)) {
         setSession(accessToken);
         const response = await axiosInstance.get(endpoints.auth.me);
         setUser(response.data.user);
+        setIsUserAuthenticated(true);
       } else {
+        setIsUserAuthenticated(false);
         const refreshResponse = await axiosInstance.get(
           endpoints.auth.refreshToken
         );
@@ -32,15 +39,16 @@ export const AuthProvider = ({ children }: Props) => {
           setSession(accessToken);
           const userResponse = await axiosInstance.get(endpoints.auth.me);
           updateUserContext(userResponse.data.user);
+          setIsUserAuthenticated(true);
         } else {
-          sessionStorage.removeItem('accessToken');
-          setUser(null);
+          throw new Error('Unable to refresh token');
         }
       }
     } catch (error) {
       console.error('Initialization error:', error);
       sessionStorage.removeItem('accessToken');
       setUser(null);
+      setIsUserAuthenticated(false);
     } finally {
       setLoading(false);
       setIsInitialized(true);
@@ -52,15 +60,12 @@ export const AuthProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setSession(user?.accessToken);
-  }, [user]);
-
   const login = useCallback(async (email: string, password: string) => {
     const data = { email, password };
     const response = await axiosInstance.post(endpoints.auth.login, data);
     setSession(response.data.accessToken);
     setUser(response.data.user);
+    setIsUserAuthenticated(true);
   }, []);
 
   const updateUserContext = useCallback((newUser: any) => {
@@ -92,6 +97,7 @@ export const AuthProvider = ({ children }: Props) => {
       await axiosInstance.post(endpoints.auth.logout);
       setSession(null);
       setUser(null);
+      setIsUserAuthenticated(false);
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -99,25 +105,43 @@ export const AuthProvider = ({ children }: Props) => {
 
   const updateUser = useCallback(
     async (userData: FormValues) => {
+      setIsUpdatingUser(true);
       if (user) {
-        const response = await axiosInstance.put(
-          `${endpoints.user.user}${user._id}`,
-          userData
-        );
-        setUser(response.data.user);
+        try {
+          const response = await axiosInstance.put(
+            `${endpoints.user.user}${user._id}`,
+            userData
+          );
+          setUser(response.data.user);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          setIsUpdatingUser(false);
+        }
       }
     },
     [user]
   );
+
+  const refreshUserData = useCallback(async () => {
+    try {
+      const response = await axiosInstance.get(endpoints.auth.me);
+      setUser(response.data.user);
+    } catch (error) {
+      console.error('Error refreshing user data:', error);
+    }
+  }, []);
 
   const memoizedValue = useMemo(
     () => ({
       user,
       method: 'jwt',
       loading,
-      authenticated: !!user,
+      authenticated: isUserAuthenticated,
       unauthenticated: !user,
       initializing: !isInitialized,
+      isUpdatingUser: isUpdatingUser,
+      refreshUserData,
       updateUserContext,
       login,
       register,
@@ -126,13 +150,16 @@ export const AuthProvider = ({ children }: Props) => {
     }),
     [
       user,
+      isUserAuthenticated,
       loading,
+      isUpdatingUser,
+      isInitialized,
       login,
       register,
       logout,
       updateUser,
-      isInitialized,
       updateUserContext,
+      refreshUserData,
     ]
   );
 

@@ -58,6 +58,7 @@ export type JWTContextType = CanRemove & {
   authenticated: boolean;
   unauthenticated: boolean;
   initializing: boolean;
+  isUpdatingUser: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (
     email: string,
@@ -68,6 +69,7 @@ export type JWTContextType = CanRemove & {
     code: string
   ) => Promise<void>;
   logout: () => Promise<void>;
+  refreshUserData: () => Promise<void>;
   updateUserContext: (user: AuthUserType) => void;
   updateUser: (userData: FormValues) => Promise<void>;
 };
@@ -78,6 +80,7 @@ export type FirebaseContextType = CanRemove & {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
+  isUpdatingUser: boolean;
   logout: () => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   loginWithGithub: () => Promise<void>;
@@ -99,6 +102,7 @@ export type AmplifyContextType = CanRemove & {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
+  isUpdatingUser: boolean;
   login: (email: string, password: string) => Promise<unknown>;
   register: (
     email: string,
@@ -123,6 +127,7 @@ export type Auth0ContextType = CanRemove & {
   loading: boolean;
   authenticated: boolean;
   unauthenticated: boolean;
+  isUpdatingUser: boolean;
   loginWithPopup: (options?: PopupLoginOptions) => Promise<void>;
   loginWithRedirect: (
     options?: RedirectLoginOptions

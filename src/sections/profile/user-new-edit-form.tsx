@@ -12,7 +12,6 @@ import AvatarModal from 'src/components/avatar-modal/AvatarModal';
 import Box from '@mui/material/Box';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Alert } from '@mui/material';
 import { FormValues } from 'src/types';
 import { useAuthContext } from 'src/auth/hooks';
 
@@ -32,10 +31,10 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
     lastName: '',
     username: '',
     email: '',
-    avatarUrl: '',
+    photoURL: '',
   });
   const [isFormChanged, setIsFormChanged] = useState(false);
-  const { updateUser } = useAuthContext();
+  const { updateUser, refreshUserData } = useAuthContext();
 
   useEffect(() => {
     setOriginalValues({
@@ -43,9 +42,9 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
       lastName: currentUser?.lastName || '',
       username: currentUser?.username || '',
       email: currentUser?.email || '',
-      avatarUrl: currentUser?.avatarUrl || '',
+      photoURL: currentUser?.photoURL || '',
     });
-    setIsFormChanged(false); // Reset the form changed flag
+    setIsFormChanged(false);
   }, [currentUser]);
 
   const NewUserSchema = Yup.object().shape({
@@ -59,7 +58,7 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
     email: Yup.string()
       .required('Email is required')
       .email('Email must be a valid address'),
-    avatarUrl: Yup.string().required('Avatar is required'),
+    photoURL: Yup.string(),
     status: Yup.string(),
     isVerified: Yup.boolean(),
   });
@@ -70,7 +69,7 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
       lastName: currentUser?.lastName || '',
       username: currentUser?.username || '',
       email: currentUser?.email || '',
-      avatarUrl: currentUser?.photoURL || '',
+      photoURL: currentUser?.photoURL || '',
       status: currentUser?.status || '',
       isVerified: currentUser?.isVerified || true,
     }),
@@ -99,12 +98,12 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
         lastName: data.lastName,
         username: data.username,
         email: data.email,
-        avatarUrl: data.avatarUrl,
+        photoURL: selectedAvatar || currentUser?.photoURL,
       };
       await updateUser?.(payload);
       setSubmitted(true);
-
       setIsFormChanged(false);
+      refreshUserData();
     } catch (error) {
       console.error(error);
     }
@@ -118,9 +117,13 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
     setModalOpen(false);
   };
 
+  const handleCloseSnackbar = () => {
+    setSubmitted(false);
+  };
+
   const handleSelectAvatar = (url: string) => {
     setSelectedAvatar(url);
-    setValue('avatarUrl', url, { shouldValidate: true });
+    setValue('photoURL', url, { shouldValidate: true });
     handleCloseModal();
     setIsFormChanged(true);
   };
@@ -275,7 +278,6 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
           </Grid>
         </Grid>
       </FormProvider>
-
       <AvatarModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
@@ -286,13 +288,10 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
       <Snackbar
         open={submitted}
         autoHideDuration={6000}
-        onClose={() => setSubmitted(false)}
+        onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert onClose={() => setSubmitted(false)} severity='success'>
-          Korisnički podatci su uspješno promjenjeni!
-        </Alert>
-      </Snackbar>
+        message='Korisnički podatci su uspješno promjenjeni!'
+      />
     </>
   );
 };
