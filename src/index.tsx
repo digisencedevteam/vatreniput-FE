@@ -12,21 +12,6 @@ root.render(
   <HelmetProvider>
     <BrowserRouter>
       <Suspense>
-        <Helmet>
-          <meta
-            name='apple-mobile-web-app-status-bar-style'
-            content='black'
-          />
-          <meta
-            name='apple-mobile-web-app-title'
-            content='Vatreni Put'
-          />
-          <link
-            rel='apple-touch-icon'
-            sizes='180x180'
-            href='https://res.cloudinary.com/dzg5kxbau/image/upload/v1701169772/180_gpoe2r.png'
-          />
-        </Helmet>
         <App />
       </Suspense>
     </BrowserRouter>
