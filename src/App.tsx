@@ -14,28 +14,12 @@ import MotionLazy from 'src/components/animate/motion-lazy';
 import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 // auth
 import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
-import { Helmet } from 'react-helmet-async';
 
 export default function App() {
   useScrollToTop();
 
   return (
     <AuthProvider>
-      <Helmet>
-        <meta
-          name='apple-mobile-web-app-status-bar-style'
-          content='black'
-        />
-        <meta
-          name='apple-mobile-web-app-title'
-          content='Vatreni Put'
-        />
-        <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='https://res.cloudinary.com/dzg5kxbau/image/upload/v1701169772/180_gpoe2r.png'
-        />
-      </Helmet>
       <SettingsProvider
         defaultSettings={{
           themeMode: 'dark', // 'light' | 'dark'

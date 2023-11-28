@@ -16,8 +16,8 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
     // using local png image for the logo
     const logo = (
       <Box
-        component="img"
-        src="/logo/logoHNS.png"
+        component='img'
+        src='/logo/logoHNS.png'
         sx={{ width: 40, height: 50, cursor: 'pointer', ...sx }}
       />
     );
@@ -29,7 +29,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
     return (
       <Link
         component={RouterLink}
-        href="/"
+        href='/'
         sx={{ display: 'contents' }}
       >
         {logo}
