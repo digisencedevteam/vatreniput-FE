@@ -33,7 +33,7 @@ export default function App() {
         <link
           rel='apple-touch-icon'
           sizes='180x180'
-          href='https://res.cloudinary.com/dzg5kxbau/image/upload/v1701169772/180_gpoe2r.png'
+          href='public/logo/180.png'
         />
       </Helmet>
       <SettingsProvider
