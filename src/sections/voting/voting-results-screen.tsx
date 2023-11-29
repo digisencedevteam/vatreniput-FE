@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useVoting from 'src/hooks/use-voting-data';
 import { useSettingsContext } from 'src/components/settings';
 import { useParams } from 'react-router';
-import { VotingOverview } from 'src/components/voting-overview/voting-overview';
+import { QuizOverview } from 'src/components/voting-overview/quiz-overview';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';
@@ -35,7 +35,7 @@ const VotingResultsScreen = () => {
     if (isLoading) {
       return <SkeletonOverviewResults />;
     } else if (result) {
-      return <VotingOverview data={result.results} />;
+      return <QuizOverview data={result.results} />;
     } else {
       return (
         <SkeletonOverviewResults message='Podaci o rezultatima glasanja nisu dostupni.' />

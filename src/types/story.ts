@@ -15,6 +15,7 @@ export interface PenaltyShootout {
 export interface FinalMatchDetail {
   Match: string;
   Score: string;
+  Description?: string;
   GoalScorers?: string[];
   Penalties?: string;
   PenaltyShootout?: PenaltyShootout[];

@@ -559,7 +559,7 @@ export const STORIES = [
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917360/HRV21107_copy_tvmokl.jpg',
           Description:
-            'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
+            'U jednom od najupečatljivijih trenutaka Svjetskog prvenstva 1998., hrvatski nogometni čarobnjak, Robert Prosinečki, postiže fantastičan gol protiv moćne Nizozemske. U 13. minuti, Prosinečki demonstrira svoju tehničku vještinu i taktičku inteligenciju, probijajući obranu Nizozemske i smireno šalje loptu u mrežu, ostavljajući gledatelje i protivnike u čudu. Ovaj gol ne samo da je postavio Hrvatsku u vodstvo s 1:0, već je i simbolizirao snagu i talent hrvatskog tima, koji je tada bio na svom prvom Svjetskom prvenstvu kao neovisna država.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275704/1998_HRV_NIZ_PROSINECKI_npjfyq.mp4',
         },
@@ -2901,7 +2901,7 @@ export const STORIES = [
           },
         },
         Summary:
-          'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su. Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom',
+          'Hrvatska nogometna reprezentacija ostvarila je povijesni uspjeh na Svjetskom prvenstvu 2018. u Rusiji, stigavši sve do finala turnira. Predvođeni kapetanom Lukom Modrićem, pokazali su izvanrednu tehničku vještinu, timski duh i izdržljivost, posebno istaknuvši se u grupnoj fazi s tri pobjede, uključujući impresivnu 3-0 pobjedu nad Argentinom. U nokaut fazi, uspjeli su proći Dansku, Rusiju i Englesku, pokazujući iznimnu mentalnu snagu, posebno u pobjedama na penale protiv Danske i Rusije. Iako su poraženi od Francuske u finalu, njihova neustrašiva igra i nacionalni ponos osigurali su im status nacionalnih heroja i simbol otpornosti i sportske izvrsnosti, potvrđujući da i mali narodi mogu postići velike stvari na svjetskoj nogometnoj pozornici.',
 
         Champ: {
           Winner: 'FRANCUSKA',
@@ -3048,16 +3048,16 @@ export const STORIES = [
             'https://player.vimeo.com/video/881655897?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
-          Title: 'Reportaža Pogodak Luke Modrića protiv Argentine',
+          Title: 'Pogodak Luke Modrića protiv Argentine',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
           Description:
-            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
+            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom. Bijes i muka Gauchosa bili su šećer na kraju jedne predivne pobjede.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275695/2018_HRV_ARG_MODRIC_ior0ju.mp4',
         },
         {
-          Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
+          Title: 'Pobjednički 11-erac protiv Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
