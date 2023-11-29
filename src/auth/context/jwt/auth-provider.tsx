@@ -23,32 +23,56 @@ export const AuthProvider = ({ children }: Props) => {
 
     try {
       let accessToken = sessionStorage.getItem('accessToken');
-
-      if (accessToken && isValidToken(accessToken)) {
+      if (accessToken && !isValidToken(accessToken)) {
+        try {
+          const refreshResponse = await axiosInstance.get(
+            endpoints.auth.refreshToken
+          );
+          if (refreshResponse.data.accessToken) {
+            accessToken = refreshResponse.data.accessToken;
+            setSession(accessToken);
+            const userResponse = await axiosInstance.get(endpoints.auth.me);
+            setUser(userResponse.data.user);
+            setIsUserAuthenticated(true);
+          } else {
+            setIsUserAuthenticated(false);
+            sessionStorage.removeItem('accessToken');
+          }
+        } catch (refreshError) {
+          setIsUserAuthenticated(false);
+          sessionStorage.removeItem('accessToken');
+          console.error('Refresh token error:', refreshError);
+        }
+      } else if (accessToken) {
         setSession(accessToken);
-        const response = await axiosInstance.get(endpoints.auth.me);
-        setUser(response.data.user);
+        const userResponse = await axiosInstance.get(endpoints.auth.me);
+        setUser(userResponse.data.user);
         setIsUserAuthenticated(true);
       } else {
-        setIsUserAuthenticated(false);
-        const refreshResponse = await axiosInstance.get(
-          endpoints.auth.refreshToken
-        );
-        if (refreshResponse.data.accessToken) {
-          accessToken = refreshResponse.data.accessToken;
-          setSession(accessToken);
-          const userResponse = await axiosInstance.get(endpoints.auth.me);
-          updateUserContext(userResponse.data.user);
-          setIsUserAuthenticated(true);
-        } else {
-          throw new Error('Unable to refresh token');
+        try {
+          const refreshResponse = await axiosInstance.get(
+            endpoints.auth.refreshToken
+          );
+          if (refreshResponse.data.accessToken) {
+            accessToken = refreshResponse.data.accessToken;
+            setSession(accessToken);
+            const userResponse = await axiosInstance.get(endpoints.auth.me);
+            setUser(userResponse.data.user);
+            setIsUserAuthenticated(true);
+          } else {
+            setIsUserAuthenticated(false);
+            sessionStorage.removeItem('accessToken');
+          }
+        } catch (refreshError) {
+          setIsUserAuthenticated(false);
+          sessionStorage.removeItem('accessToken');
+          console.error('Refresh token error:', refreshError);
         }
       }
     } catch (error) {
       console.error('Initialization error:', error);
-      sessionStorage.removeItem('accessToken');
-      setUser(null);
       setIsUserAuthenticated(false);
+      sessionStorage.removeItem('accessToken');
     } finally {
       setLoading(false);
       setIsInitialized(true);

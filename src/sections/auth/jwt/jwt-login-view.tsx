@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-// @mui
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
@@ -10,51 +9,39 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
-// routes
 import { useSearchParams, useRouter } from 'src/routes/hooks';
-// config
 import { PATH_AFTER_LOGIN } from 'src/config-global';
-// hooks
 import { useBoolean } from 'src/hooks/use-boolean';
-// auth
 import { useAuthContext } from 'src/auth/hooks';
-// components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Snackbar } from '@mui/material';
 import InstallPWA from 'src/components/install-pwa-modal/install-pwa';
 
-export default function JwtLoginView() {
+const JwtLoginView = () => {
   const { login } = useAuthContext();
-
   const router = useRouter();
-
   const [errorMsg, setErrorMsg] = useState('');
-
   const searchParams = useSearchParams();
-
   const returnTo = searchParams.get('returnTo');
-
   const password = useBoolean();
-
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .required('Email is required')
       .email('Email must be a valid email address'),
     password: Yup.string().required('Password is required'),
   });
-
   const defaultValues = {
     email: '',
     password: '',
   };
-
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
     defaultValues,
   });
-
   const {
     reset,
     handleSubmit,
@@ -64,20 +51,19 @@ export default function JwtLoginView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await login?.(data.email, data.password);
-
       router.push(returnTo || PATH_AFTER_LOGIN);
     } catch (error) {
       console.error(error);
       reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      const message =
+        error.response?.data?.message || 'An error occurred during login.';
+      setSnackbarMessage(message);
+      setOpenSnackbar(true);
     }
   });
 
   const renderHead = (
-    <Stack
-      spacing={2}
-      sx={{ mb: 5 }}
-    >
+    <Stack spacing={2} sx={{ mb: 5 }}>
       <Typography variant='h4'>Prijavi se na platformu!</Typography>
     </Stack>
   );
@@ -85,10 +71,7 @@ export default function JwtLoginView() {
   const renderForm = (
     <Stack spacing={2.5}>
       {!!errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
-      <RHFTextField
-        name='email'
-        label='Email'
-      />
+      <RHFTextField name='email' label='Email' />
       <RHFTextField
         name='password'
         label='Lozinka'
@@ -96,10 +79,7 @@ export default function JwtLoginView() {
         InputProps={{
           endAdornment: (
             <InputAdornment position='end'>
-              <IconButton
-                onClick={password.onToggle}
-                edge='end'
-              >
+              <IconButton onClick={password.onToggle} edge='end'>
                 <Iconify
                   icon={
                     password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'
@@ -110,12 +90,7 @@ export default function JwtLoginView() {
           ),
         }}
       />
-
-      <Grid
-        container
-        direction={'row'}
-        justifyContent={'space-between'}
-      >
+      <Grid container direction={'row'} justifyContent={'space-between'}>
         <Grid item>
           <InstallPWA />
         </Grid>
@@ -131,7 +106,6 @@ export default function JwtLoginView() {
           </Link>
         </Grid>
       </Grid>
-
       <LoadingButton
         fullWidth
         color='inherit'
@@ -148,15 +122,26 @@ export default function JwtLoginView() {
   return (
     <>
       <Box>
-        <FormProvider
-          methods={methods}
-          onSubmit={onSubmit}
-        >
+        <FormProvider methods={methods} onSubmit={onSubmit}>
           {renderHead}
           {renderForm}
         </FormProvider>
         <ContactUsForm />
       </Box>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity='error'
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
-}
+};
+export default JwtLoginView;

@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import StatisticCards from 'src/components/stats-box/statistic-box';
-import { LoadingScreen } from 'src/components/loading-screen';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
@@ -28,14 +27,13 @@ export const CollectionView = () => {
     totalPages,
     fetchCollectedCards,
   } = useCardData();
-
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const currentCategory = categories[categoryIndex];
   const myRef = React.useRef<HTMLDivElement>(null);
-  const [isFirstVisit, setIsFirstVisit] = useState(true);
   const showSkeletonLoader = isLoading;
   const showNoDataMessage = !isLoading && collectedCards.length === 0;
+  const [hasCategoryChanged, setHasCategoryChanged] = useState(false);
 
   useEffect(() => {
     if (categories.length > 0) {
@@ -45,19 +43,10 @@ export const CollectionView = () => {
   }, [currentPage, categoryIndex, categories]);
 
   useEffect(() => {
-    if (myRef.current && !isLoading) {
-      if (!isFirstVisit) {
-        myRef.current.scrollIntoView();
-      } else {
-        setIsFirstVisit(false);
-      }
+    if (hasCategoryChanged && myRef.current && !isLoading) {
+      myRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIndex, isLoading]);
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   const handleArrowClick = (direction: string) => {
     const newIndex =
@@ -65,6 +54,7 @@ export const CollectionView = () => {
         ? (categoryIndex - 1 + categories.length) % categories.length
         : (categoryIndex + 1) % categories.length;
     setCategoryIndex(newIndex);
+    setHasCategoryChanged(true);
     fetchCollectedCards(newIndex, currentPage);
   };
 
@@ -88,11 +78,7 @@ export const CollectionView = () => {
       )}
       <Grid container>
         {!isMobile ? (
-          <Grid
-            item
-            md={12}
-            lg={12}
-          >
+          <Grid item md={12} lg={12}>
             <AppWelcome
               title={`Tvoja digitalna kolekcija nezaboravnih trenutaka!`}
               description='Skupi neprocjenjive trenutke iz povijesti Vatrenih u digitalnom izdanju!'
@@ -106,26 +92,15 @@ export const CollectionView = () => {
             />
           </Grid>
         ) : (
-          <Grid
-            item
-            xs={12}
-            mr={3}
-          >
+          <Grid item xs={12} mr={3}>
             <StatisticCards collectedStatistic={collectedStatistic} />
           </Grid>
         )}
       </Grid>
 
       <div ref={myRef}>
-        <Grid
-          container
-          spacing={1}
-        >
-          <Grid
-            item
-            xs={12}
-            mt={3}
-          >
+        <Grid container spacing={1}>
+          <Grid item xs={12} mt={3}>
             <Box
               sx={{
                 display: 'flex',
@@ -139,10 +114,7 @@ export const CollectionView = () => {
               >
                 <ArrowLeftIcon />
               </IconButton>
-              <Typography
-                variant='h6'
-                sx={{ mx: 4, textAlign: 'center' }}
-              >
+              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
                 {currentCategory?.name}
               </Typography>
               <IconButton
@@ -165,29 +137,19 @@ export const CollectionView = () => {
 
           {!showSkeletonLoader &&
             collectedCards.map((item, index) => (
-              <Grid
-                key={index}
-                item
-                xs={4}
-                sm={3}
-                md={3}
-                lg={2}
-              >
+              <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
                 <CollectionStickerItem item={item} />
               </Grid>
             ))}
 
           {showNoDataMessage && (
-            <Typography
-              variant='subtitle1'
-              color='text.secondary'
-              textAlign='center'
-              sx={{ width: '100%', mt: 2 }}
-            >
-              Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je
-              skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju
-              digitalnog albuma!
-            </Typography>
+            <SkeletonDashboardLoader
+              message='Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju digitalnog albuma!'
+              count={6}
+              isMobileCount={3}
+              isTabletCount={4}
+              maxWidth={isMobile ? '90px' : '200px'}
+            />
           )}
         </Grid>
 
