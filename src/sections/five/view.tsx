@@ -78,10 +78,6 @@ const FiveView = () => {
     console.log(userVotedVotings);
   }, [auth.user]);
 
-  useEffect(() => {
-    console.log(userVotedVotings);
-  }, [userVotedVotings]);
-
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       {isLoading ? (
@@ -130,20 +126,6 @@ const FiveView = () => {
               )}
             </Box>
           )}
-          <SectionWrapper title='Najjaci'>
-            {isLoading ? (
-              <SkeletonDashboardLoader
-                count={6}
-                isMobileCount={3}
-                isTabletCount={4}
-                maxWidth={isMobile ? '90px' : '200px'}
-              />
-            ) : !userVotedVotings.length ? (
-              <Typography>Nema ispunjenih glasanja.</Typography>
-            ) : (
-              <VotingOverview data={transformVotingResults()} />
-            )}
-          </SectionWrapper>
 
           <SectionWrapper title='Dostupna'>
             <Grid container>
@@ -190,6 +172,21 @@ const FiveView = () => {
                 </Grid>
               )}
             </Grid>
+          </SectionWrapper>
+
+          <SectionWrapper title='Najboljih 11'>
+            {isLoading ? (
+              <SkeletonDashboardLoader
+                count={6}
+                isMobileCount={3}
+                isTabletCount={4}
+                maxWidth={isMobile ? '90px' : '200px'}
+              />
+            ) : !userVotedVotings.length ? (
+              <Typography>Nema ispunjenih glasanja.</Typography>
+            ) : (
+              <VotingOverview data={transformVotingResults()} />
+            )}
           </SectionWrapper>
 
           <SectionWrapper title='Ispunjena'>

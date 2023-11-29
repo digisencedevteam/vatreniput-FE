@@ -35,13 +35,18 @@ type ProgressItemProps = {
 export const ProgressItem = ({ progress }: ProgressItemProps) => {
   return (
     <Stack spacing={1}>
-      <Typography variant='h6'>{progress.votingName}</Typography>
+      <Typography
+        variant='h4'
+        color={'primary'}
+      >
+        {progress.votingName}
+      </Typography>
       <Stack
         direction='row'
         alignItems='center'
       >
         <Typography
-          variant='subtitle2'
+          variant='body1'
           sx={{ flexGrow: 1 }}
         >
           {progress.optionName}
@@ -53,6 +58,10 @@ export const ProgressItem = ({ progress }: ProgressItemProps) => {
           Broj glasova: {progress.votes}
         </Typography>
       </Stack>
+      <LinearProgress
+        variant='determinate'
+        value={progress.votes}
+      />
     </Stack>
   );
 };

@@ -43,8 +43,16 @@ export function useNavData() {
             icon: <LocalFireDepartmentIcon />,
             children: [
               {
-                title: `Euro 1996`,
+                title: `Prijateljska utakmica 1990`,
                 path: paths.dashboard.story.root,
+              },
+              {
+                title: `Prijateljska utakmica 1994`,
+                path: paths.dashboard.story.ut94,
+              },
+              {
+                title: `Euro 1996`,
+                path: paths.dashboard.story.euro96,
               },
               {
                 title: 'Svjetsko prvenstvo 1998',
