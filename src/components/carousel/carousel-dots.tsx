@@ -44,14 +44,14 @@ const StyledDot = styled('span')(({ theme }) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.short,
   }),
-}))
+}));
 
 export interface Props extends BoxProps {
   rounded?: boolean;
   sx?: SxProps<Theme>;
 }
 
-export default function CarouselDots(props?: Props) {
+const CarouselDots = (props?: Props) => {
   const rounded = props?.rounded || false;
 
   const sx = props?.sx;
@@ -59,16 +59,16 @@ export default function CarouselDots(props?: Props) {
   return {
     appendDots: (dots: React.ReactNode) => (
       <>
-        <StyledRoot component="ul" rounded={rounded} sx={{ ...sx }} {...props}>
+        <StyledRoot component='ul' rounded={rounded} sx={{ ...sx }} {...props}>
           {dots}
         </StyledRoot>
       </>
     ),
     customPaging: () => (
       <Stack
-        component="div"
-        alignItems="center"
-        justifyContent="center"
+        component='div'
+        alignItems='center'
+        justifyContent='center'
         sx={{ width: 1, height: 1 }}
       >
         <StyledDot
@@ -79,4 +79,5 @@ export default function CarouselDots(props?: Props) {
       </Stack>
     ),
   };
-}
+};
+export default CarouselDots;

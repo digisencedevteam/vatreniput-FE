@@ -39,7 +39,7 @@ type Props = {
   sx?: SxProps<Theme>;
 };
 
-export default function CarouselArrowIndex({
+const CarouselArrowIndex = ({
   index,
   total,
   onNext,
@@ -47,24 +47,25 @@ export default function CarouselArrowIndex({
   icon,
   sx,
   ...other
-}: Props) {
+}: Props) => {
   const theme = useTheme();
 
   const isRTL = theme.direction === 'rtl';
 
   return (
     <StyledRoot sx={sx} {...other}>
-      <StyledIconButton color="inherit" onClick={onPrev}>
+      <StyledIconButton color='inherit' onClick={onPrev}>
         <LeftIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>
 
-      <Typography variant="subtitle2" component="span" sx={{ mx: 0.25 }}>
+      <Typography variant='subtitle2' component='span' sx={{ mx: 0.25 }}>
         {index + 1}/{total}
       </Typography>
 
-      <StyledIconButton color="inherit" onClick={onNext}>
+      <StyledIconButton color='inherit' onClick={onNext}>
         <RightIcon icon={icon} isRTL={isRTL} />
       </StyledIconButton>
     </StyledRoot>
   );
-}
+};
+export default CarouselArrowIndex;

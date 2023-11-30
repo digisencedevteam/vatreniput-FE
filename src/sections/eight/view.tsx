@@ -1,19 +1,15 @@
-// @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-// components
 import { useSettingsContext } from 'src/components/settings';
 
-// ----------------------------------------------------------------------
-
-export default function EightView() {
+const EightView = () => {
   const settings = useSettingsContext();
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h4"> Page Eight </Typography>
+      <Typography variant='h4'> Page Eight </Typography>
 
       <Box
         sx={{
@@ -27,4 +23,5 @@ export default function EightView() {
       />
     </Container>
   );
-}
+};
+export default EightView;

@@ -10,15 +10,14 @@ interface Props extends StackProps {
   action?: React.ReactNode;
 }
 
-export default function WelcomeComponent({
+const WelcomeComponent = ({
   title,
   description,
   action,
   img,
   ...other
-}: Props) {
+}: Props) => {
   const theme = useTheme();
-
   return (
     <Stack
       flexDirection={{ xs: 'column', md: 'row' }}
@@ -51,7 +50,6 @@ export default function WelcomeComponent({
         <Typography variant='h4' sx={{ mb: 2, whiteSpace: 'pre-line' }}>
           {title}
         </Typography>
-
         <Typography
           variant='body2'
           sx={{
@@ -62,10 +60,8 @@ export default function WelcomeComponent({
         >
           {description}
         </Typography>
-
         {action && action}
       </Stack>
-
       {img && (
         <Stack
           component='span'
@@ -82,4 +78,5 @@ export default function WelcomeComponent({
       )}
     </Stack>
   );
-}
+};
+export default WelcomeComponent;

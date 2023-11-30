@@ -1,19 +1,12 @@
-// @mui
 import { useTheme } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-// hooks
 import { useResponsive } from 'src/hooks/use-responsive';
-// theme
 import { bgBlur } from 'src/theme/css';
-// components
 import Iconify from 'src/components/iconify';
 import { useSettingsContext } from 'src/components/settings';
-//
 import { NAV } from '../config-layout';
 
-// ----------------------------------------------------------------------
-
-export default function NavToggleButton({ sx, ...other }: IconButtonProps) {
+const NavToggleButton = ({ sx, ...other }: IconButtonProps) => {
   const theme = useTheme();
 
   const settings = useSettingsContext();
@@ -26,9 +19,12 @@ export default function NavToggleButton({ sx, ...other }: IconButtonProps) {
 
   return (
     <IconButton
-      size="small"
+      size='small'
       onClick={() =>
-        settings.onUpdate('themeLayout', settings.themeLayout === 'vertical' ? 'mini' : 'vertical')
+        settings.onUpdate(
+          'themeLayout',
+          settings.themeLayout === 'vertical' ? 'mini' : 'vertical'
+        )
       }
       sx={{
         p: 0.5,
@@ -55,4 +51,5 @@ export default function NavToggleButton({ sx, ...other }: IconButtonProps) {
       />
     </IconButton>
   );
-}
+};
+export default NavToggleButton;

@@ -1,21 +1,14 @@
-// @mui
 import { useTheme } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-// theme
 import { bgBlur } from 'src/theme/css';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
-// components
 import Logo from 'src/components/logo';
-//
 import { HEADER } from '../config-layout';
 import HeaderShadow from './header-shadow';
 
-// ----------------------------------------------------------------------
-
-export default function HeaderSimple() {
+const HeaderSimple = () => {
   const theme = useTheme();
-
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
   return (
@@ -43,8 +36,8 @@ export default function HeaderSimple() {
       >
         <Logo />
       </Toolbar>
-
       {offsetTop && <HeaderShadow />}
     </AppBar>
   );
-}
+};
+export default HeaderSimple;

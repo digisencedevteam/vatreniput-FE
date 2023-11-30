@@ -8,7 +8,7 @@ import { lazy } from 'react';
 
 const CardPage = lazy(() => import('src/pages/card/card'));
 
-export default function Router() {
+const Router = () => {
   return useRoutes([
     {
       path: '/',
@@ -31,4 +31,5 @@ export default function Router() {
     // No match 404
     { path: '*', element: <Navigate to='/404' replace /> },
   ]);
-}
+};
+export default Router;

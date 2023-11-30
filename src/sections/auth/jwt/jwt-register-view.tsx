@@ -22,23 +22,24 @@ import { paths } from 'src/routes/paths';
 import axiosInstance from 'src/utils/axios';
 import { Snackbar } from '@mui/material';
 
-export default function JwtRegisterView() {
+const JwtRegisterView = () => {
   const { register } = useAuthContext();
   const router = useRouter();
-  const [errorMsg, setErrorMsg] = useState('');
   const [isAlbumValid, setIsAlbumValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-
   const searchParams = useSearchParams();
-
   const password = useBoolean();
   const paramValue = searchParams.get('code');
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string().required('Ime je obvezno.'),
-    lastName: Yup.string().required('Prezime je obvezno.'),
+    firstName: Yup.string()
+      .matches(/^[A-Za-z\s'-]+$/, 'Ime može sadržavati samo slova.')
+      .required('Ime je obvezno.'),
+    lastName: Yup.string()
+      .matches(/^[A-Za-z\s'-]+$/, 'Ime može sadržavati samo slova.')
+      .required('Prezime je obvezno.'),
     username: Yup.string().required('Korisničko ime je obvezno.'),
     email: Yup.string()
       .required('Email je obvezan.')
@@ -107,12 +108,11 @@ export default function JwtRegisterView() {
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
       <Alert severity='success' sx={{ mb: 3 }}>
-        Vaš album je ispravan i spreman za registraciju!
+        Tvoj album je ispravan i spreman za registraciju!
       </Alert>
       <Typography variant='h4'>Registriraj se</Typography>
-
       <Stack direction='row' spacing={0.5}>
-        <Typography variant='body2'> I pokrenite svoj vatreni put! </Typography>
+        <Typography variant='body2'> I pokreni svoj Vatreni Put! </Typography>
       </Stack>
     </Stack>
   );
@@ -142,17 +142,12 @@ export default function JwtRegisterView() {
   const renderForm = (
     <FormProvider methods={methods} onSubmit={onSubmit}>
       <Stack spacing={2.5}>
-        {!!errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
-
         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
           <RHFTextField name='firstName' label='Ime' />
           <RHFTextField name='lastName' label='Prezime' />
         </Stack>
-
         <RHFTextField name='email' label='Email adresa' />
-
         <RHFTextField name='username' label='Korisničko Ime' />
-
         <RHFTextField
           name='password'
           label='Lozinka'
@@ -210,11 +205,8 @@ export default function JwtRegisterView() {
   return (
     <>
       {renderHead}
-
       {renderForm}
-
       {renderTerms}
-
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
@@ -231,4 +223,5 @@ export default function JwtRegisterView() {
       </Snackbar>
     </>
   );
-}
+};
+export default JwtRegisterView;

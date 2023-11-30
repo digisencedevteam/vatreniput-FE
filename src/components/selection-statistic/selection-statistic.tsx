@@ -8,7 +8,7 @@ interface Props extends CardProps {
   icon: React.ReactElement;
 }
 
-export default function SelectionStatistic({ title, total, icon, sx, ...other }: Props) {
+const SelectionStatistic = ({ title, total, icon, sx, ...other }: Props) => {
   const theme = useTheme();
   return (
     <Card
@@ -24,9 +24,10 @@ export default function SelectionStatistic({ title, total, icon, sx, ...other }:
     >
       <Box>
         <Box sx={{ mb: 1, px: 5, typography: 'h3' }}>{total}</Box>
-        <Box sx={{ color: 'text.secondary', px: 5, typography: 'subtitle2' }}>{title}</Box>
+        <Box sx={{ color: 'text.secondary', px: 5, typography: 'subtitle2' }}>
+          {title}
+        </Box>
       </Box>
-
       <Box
         sx={{
           width: 150,
@@ -38,11 +39,11 @@ export default function SelectionStatistic({ title, total, icon, sx, ...other }:
           alignItems: 'center',
           justifyContent: 'center',
           m: 2,
-
         }}
       >
         {icon}
       </Box>
     </Card>
   );
-}
+};
+export default SelectionStatistic;

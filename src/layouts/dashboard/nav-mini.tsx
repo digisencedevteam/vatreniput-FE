@@ -1,28 +1,20 @@
-// @mui
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-// theme
 import { hideScroll } from 'src/theme/css';
-// hooks
 import { useMockedUser } from 'src/hooks/use-mocked-user';
-// components
 import Logo from 'src/components/logo';
 import { NavSectionMini } from 'src/components/nav-section';
-//
 import { NAV } from '../config-layout';
 import { useNavData } from './config-navigation';
 import { NavToggleButton } from '../_common';
 
-// ----------------------------------------------------------------------
-
-export default function NavMini() {
+const NavMini = () => {
   const { user } = useMockedUser();
-
   const navData = useNavData();
 
   return (
     <Box
-      component="nav"
+      component='nav'
       sx={{
         flexShrink: { lg: 0 },
         width: { lg: NAV.W_MINI },
@@ -34,7 +26,6 @@ export default function NavMini() {
           left: NAV.W_MINI - 12,
         }}
       />
-
       <Stack
         sx={{
           pb: 2,
@@ -46,7 +37,6 @@ export default function NavMini() {
         }}
       >
         <Logo sx={{ mx: 'auto', my: 2 }} />
-
         <NavSectionMini
           data={navData}
           config={{
@@ -56,4 +46,5 @@ export default function NavMini() {
       </Stack>
     </Box>
   );
-}
+};
+export default NavMini;

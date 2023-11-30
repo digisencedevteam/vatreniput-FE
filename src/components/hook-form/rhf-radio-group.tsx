@@ -1,13 +1,10 @@
 import { useFormContext, Controller } from 'react-hook-form';
-// @mui
 import Radio from '@mui/material/Radio';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import RadioGroup, { RadioGroupProps } from '@mui/material/RadioGroup';
-
-// ----------------------------------------------------------------------
 
 type Props = RadioGroupProps & {
   name: string;
@@ -17,7 +14,7 @@ type Props = RadioGroupProps & {
   helperText?: React.ReactNode;
 };
 
-export default function RHFRadioGroup({
+const RHFRadioGroup = ({
   row,
   name,
   label,
@@ -25,9 +22,8 @@ export default function RHFRadioGroup({
   spacing,
   helperText,
   ...other
-}: Props) {
+}: Props) => {
   const { control } = useFormContext();
-
   const labelledby = label ? `${name}-${label}` : '';
 
   return (
@@ -35,14 +31,23 @@ export default function RHFRadioGroup({
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <FormControl component="fieldset">
+        <FormControl component='fieldset'>
           {label && (
-            <FormLabel component="legend" id={labelledby} sx={{ typography: 'body2' }}>
+            <FormLabel
+              component='legend'
+              id={labelledby}
+              sx={{ typography: 'body2' }}
+            >
               {label}
             </FormLabel>
           )}
 
-          <RadioGroup {...field} aria-labelledby={labelledby} row={row} {...other}>
+          <RadioGroup
+            {...field}
+            aria-labelledby={labelledby}
+            row={row}
+            {...other}
+          >
             {options.map((option) => (
               <FormControlLabel
                 key={option.value}
@@ -73,4 +78,5 @@ export default function RHFRadioGroup({
       )}
     />
   );
-}
+};
+export default RHFRadioGroup;

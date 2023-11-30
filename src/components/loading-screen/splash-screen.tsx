@@ -1,13 +1,9 @@
 import { m } from 'framer-motion';
-// @mui
 import { alpha } from '@mui/material/styles';
 import Box, { BoxProps } from '@mui/material/Box';
-//
 import Logo from '../logo';
 
-// ----------------------------------------------------------------------
-
-export default function SplashScreen({ sx, ...other }: BoxProps) {
+const SplashScreen = ({ sx, ...other }: BoxProps) => {
   return (
     <Box
       sx={{
@@ -40,7 +36,6 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
         >
           <Logo disabledLink sx={{ width: 64, height: 64 }} />
         </m.div>
-
         <Box
           component={m.div}
           animate={{
@@ -54,10 +49,10 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
             width: 100,
             height: 100,
             position: 'absolute',
-            border: (theme) => `solid 3px ${alpha(theme.palette.primary.dark, 0.24)}`,
+            border: (theme) =>
+              `solid 3px ${alpha(theme.palette.primary.dark, 0.24)}`,
           }}
         />
-
         <Box
           component={m.div}
           animate={{
@@ -75,10 +70,12 @@ export default function SplashScreen({ sx, ...other }: BoxProps) {
             width: 120,
             height: 120,
             position: 'absolute',
-            border: (theme) => `solid 8px ${alpha(theme.palette.primary.dark, 0.24)}`,
+            border: (theme) =>
+              `solid 8px ${alpha(theme.palette.primary.dark, 0.24)}`,
           }}
         />
       </>
     </Box>
   );
-}
+};
+export default SplashScreen;

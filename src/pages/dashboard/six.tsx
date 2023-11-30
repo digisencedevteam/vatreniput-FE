@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import SixView from 'src/sections/six/view';
 
-export default function Page() {
+const Page = () => {
   return (
     <>
       <Helmet>
@@ -11,4 +11,5 @@ export default function Page() {
       <SixView />
     </>
   );
-}
+};
+export default Page;

@@ -1,7 +1,11 @@
 import merge from 'lodash/merge';
 import { useMemo } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider as MuiThemeProvider, ThemeOptions } from '@mui/material/styles';
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+  ThemeOptions,
+} from '@mui/material/styles';
 import { useSettingsContext } from 'src/components/settings';
 import { palette } from './palette';
 import { shadows } from './shadows';
@@ -13,22 +17,19 @@ import { darkMode } from './options/dark-mode';
 import { contrast } from './options/contrast';
 import RTL, { direction } from './options/right-to-left';
 
-
 type Props = {
   children: React.ReactNode;
 };
 
-export default function ThemeProvider({ children }: Props) {
+const ThemeProvider = ({ children }: Props) => {
   const settings = useSettingsContext();
-
   const darkModeOption = darkMode(settings.themeMode);
-
   const presetsOption = presets(settings.themeColorPresets);
-
-  const contrastOption = contrast(settings.themeContrast === 'bold', settings.themeMode);
-
+  const contrastOption = contrast(
+    settings.themeContrast === 'bold',
+    settings.themeMode
+  );
   const directionOption = direction(settings.themeDirection);
-
   const baseOption = useMemo(
     () => ({
       palette: palette('light'),
@@ -39,27 +40,29 @@ export default function ThemeProvider({ children }: Props) {
     }),
     []
   );
-
   const memoizedValue = useMemo(
     () =>
       merge(
-        // Base
         baseOption,
-        // Direction: remove if not in use
         directionOption,
-        // Dark mode: remove if not in use
         darkModeOption,
-        // Presets: remove if not in use
         presetsOption,
-        // Contrast: remove if not in use
         contrastOption.theme
       ),
-    [baseOption, directionOption, darkModeOption, presetsOption, contrastOption.theme]
+    [
+      baseOption,
+      directionOption,
+      darkModeOption,
+      presetsOption,
+      contrastOption.theme,
+    ]
   );
 
   const theme = createTheme(memoizedValue as ThemeOptions);
-
-  theme.components = merge(componentsOverrides(theme), contrastOption.components);
+  theme.components = merge(
+    componentsOverrides(theme),
+    contrastOption.components
+  );
 
   return (
     <MuiThemeProvider theme={theme}>
@@ -69,4 +72,5 @@ export default function ThemeProvider({ children }: Props) {
       </RTL>
     </MuiThemeProvider>
   );
-}
+};
+export default ThemeProvider;

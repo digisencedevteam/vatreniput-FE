@@ -16,7 +16,7 @@ import StatisticCards from 'src/components/stats-box/statistic-box';
 import { MotionContainer, varFade } from 'src/components/animate';
 import { paths } from 'src/routes/paths';
 
-export default function OneView() {
+const OneView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const [isScanning, setIsScanning] = useState(false);
@@ -56,66 +56,41 @@ export default function OneView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography
-        variant='h3'
-        sx={{ marginY: 1, paddingTop: 2 }}
-      >
+      <Typography variant='h3' sx={{ marginY: 1, paddingTop: 2 }}>
         {' '}
         Bok, {userName} 👋{' '}
       </Typography>
-      <Grid
-        container
-        spacing={2}
-        sx={{ marginTop: 5 }}
-      >
-        <Grid
-          item
-          xs={6}
-        >
+      <Grid container spacing={2} sx={{ marginTop: 5 }}>
+        <Grid item xs={6}>
           <DashboardButton
             imageSrc={imageSrc}
             title={isScanning ? 'Stop Scanning' : 'Skeniraj novu'}
             onClick={toggleScanning}
           />
         </Grid>
-        <Grid
-          item
-          xs={6}
-        >
+        <Grid item xs={6}>
           <DashboardButton
             imageSrc={mojaKolekcijaImageSrc}
             title='Moja Kolekcija'
             link={paths.dashboard.collection}
           />
         </Grid>
-        <Grid
-          item
-          xs={12}
-        >
+        <Grid item xs={12}>
           {isScanning && <QRScanner />}
         </Grid>
-        <Grid
-          item
-          xs={12}
-        >
+        <Grid item xs={12}>
           <Box width={'93%'}>
             <StatisticCards collectedStatistic={collectedStatistic} />
           </Box>
         </Grid>
-        <Grid
-          item
-          xs={12}
-        >
+        <Grid item xs={12}>
           <MotionContainer variants={slideVariants.inUp}>
             <DashboardSectionWrapper
               title='Najviše skupljenih'
               link={paths.dashboard.collection}
             >
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader
-                  count={1}
-                  maxWidth='375px'
-                />
+                <SkeletonDashboardLoader count={1} maxWidth='375px' />
               ) : !collectedStatistic?.topEvents?.length ? (
                 <SkeletonDashboardLoader
                   count={1}
@@ -147,10 +122,7 @@ export default function OneView() {
             link={paths.dashboard.quizzes}
           >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader
-                count={1}
-                maxWidth='375px'
-              />
+              <SkeletonDashboardLoader count={1} maxWidth='375px' />
             ) : quizzes?.length ? (
               <ScrollableContainer childrenCount={quizzes?.length}>
                 {quizzes.map((quiz, index) => (
@@ -177,10 +149,7 @@ export default function OneView() {
             link={paths.dashboard.votings}
           >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader
-                count={1}
-                maxWidth='375px'
-              />
+              <SkeletonDashboardLoader count={1} maxWidth='375px' />
             ) : notVotedVotings?.length ? (
               <ScrollableContainer childrenCount={notVotedVotings?.length}>
                 {notVotedVotings.map((voting, index) => (
@@ -206,4 +175,5 @@ export default function OneView() {
       </Grid>
     </Container>
   );
-}
+};
+export default OneView;

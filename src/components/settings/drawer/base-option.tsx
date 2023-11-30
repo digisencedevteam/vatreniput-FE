@@ -1,11 +1,7 @@
-// @mui
 import { alpha } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import ButtonBase from '@mui/material/ButtonBase';
-//
 import SvgColor from '../../svg-color';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   icons: string[];
@@ -14,9 +10,9 @@ type Props = {
   onChange: (newValue: string) => void;
 };
 
-export default function BaseOptions({ icons, options, value, onChange }: Props) {
+const BaseOptions = ({ icons, options, value, onChange }: Props) => {
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction='row' spacing={2}>
       {options.map((option, index) => {
         const selected = value === option;
 
@@ -28,7 +24,8 @@ export default function BaseOptions({ icons, options, value, onChange }: Props) 
               width: 1,
               height: 80,
               borderRadius: 1,
-              border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
+              border: (theme) =>
+                `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
               ...(selected && {
                 bgcolor: 'background.paper',
                 boxShadow: (theme) =>
@@ -49,10 +46,15 @@ export default function BaseOptions({ icons, options, value, onChange }: Props) 
               },
             }}
           >
-            <SvgColor src={`/assets/icons/setting/ic_${index === 0 ? icons[0] : icons[1]}.svg`} />
+            <SvgColor
+              src={`/assets/icons/setting/ic_${
+                index === 0 ? icons[0] : icons[1]
+              }.svg`}
+            />
           </ButtonBase>
         );
       })}
     </Stack>
   );
-}
+};
+export default BaseOptions;
