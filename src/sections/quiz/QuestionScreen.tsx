@@ -100,7 +100,7 @@ const QuestionScreen = ({
       maxWidth={'500px'}
     >
       <Grid container direction='column' alignItems='center' spacing={1}>
-        <Grid item width={'100%'} padding={0}>
+        <Grid item width={'100%'}>
           <Grid container alignItems='center'>
             <Grid item>
               <IconButton
@@ -125,8 +125,8 @@ const QuestionScreen = ({
             variant='h6'
             style={{
               fontWeight: 'bold',
-              marginTop: 10,
-              marginBottom: 10,
+              marginTop: 5,
+              marginBottom: 5,
             }}
           >
             Preostalo vrijeme: {formatTime(elapsedTime)}
@@ -158,7 +158,15 @@ const QuestionScreen = ({
         }}
       >
         <Grid item textAlign={'center'}>
-          <Typography variant='h6' style={{ fontWeight: 'bold' }}>
+          <Typography
+            variant='h6'
+            style={{
+              fontWeight: 'bold',
+              padding: 5,
+              marginTop: 10,
+              marginBottom: 10,
+            }}
+          >
             {currentQuestion.text}
           </Typography>
         </Grid>
@@ -192,24 +200,16 @@ const QuestionScreen = ({
             </Grid>
           ))}
         </Box>
-
-        <Grid item sx={{ marginTop: 2 }}>
-          <img
-            src={'/assets/images/kviz.png'}
-            alt='Question Illustration'
-            style={{
-              width: '100%',
-              maxHeight: '200px',
-              objectFit: 'contain',
-            }}
-          />
-        </Grid>
-
         <Grid
           container
           item
           justifyContent='space-between'
-          style={{ width: '60%', margin: '20px' }}
+          style={{
+            width: '60%',
+            margin: '20px',
+            marginTop: 50,
+            marginBottom: 50,
+          }}
         >
           <Hidden smDown>
             <Button
@@ -254,7 +254,7 @@ const QuestionScreen = ({
         isOpen={showModal}
         onClose={handleModalClose}
         onConfirmDelete={handleExitConfirmation}
-        modalText='Jeste li sigurni da želite izaći iz kviza? Vrijeme nastavlja teći iako izađeš!'
+        modalText='Jeste li sigurni da želite izaći iz kviza? Vrijeme svejedno nastavlja teći!'
         confirmButtonText='Izađi'
       />
     </Grid>

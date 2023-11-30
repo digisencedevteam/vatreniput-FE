@@ -11,8 +11,9 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { useSettingsContext } from 'src/components/settings';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
 import axiosInstance from 'src/utils/axios';
+import { paths } from 'src/routes/paths';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -23,16 +24,26 @@ export const CardView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const fetchCardData = async () => {
     try {
-      const response = await axiosInstance.get(endpoints.card.details + cardId);
+      const response = await axiosInstance.get(
+        `${endpoints.card.details}${cardId}`
+      );
       setCardData(response.data);
+      setIsError(false);
     } catch (error) {
+      console.error('Fetch card data error:', error);
       setIsError(true);
-      setCardData([]);
+      setErrorMessage(
+        error.response?.data?.message ||
+          'Dogodila se greška prilikom dobivanja podataka o sličici!'
+      );
     }
   };
+
   useEffect(() => {
     fetchCardData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,16 +51,28 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     try {
-      const res = await axiosInstance.patch(endpoints.card.add, {
+      const res = await axiosInstance.patch(`${endpoints.card.add}`, {
         cardId,
       });
-      res.data === 'ok'
-        ? navigate('/dashboard/two')
-        : setErrorMessage(res.data);
+      if (res.data.message !== 'ok') {
+        setErrorMessage(res.data.message);
+      } else {
+        setSnackbarMessage('Sličica uspješno dodana u album!');
+        setSnackbarOpen(true);
+        navigate(paths.dashboard.collection);
+      }
     } catch (error) {
+      console.error('Add card to album error:', error);
       setIsError(true);
-      setCardData([]);
+      setErrorMessage(
+        error.response?.data?.message ||
+          'Dogodila se greška prilikom dodavanja sličice u album!'
+      );
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -62,25 +85,17 @@ export const CardView = () => {
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
         <Grid container spacing={5}>
-          {/* Image */}
-          <Grid item xs={12} md={6}>
-            <CardMedia
-              component='img'
-              height='auto'
-              image={
-                cardData
-                  ? Array.isArray(cardData.imageURLs) &&
-                    cardData.imageURLs.length > 0
-                    ? cardData.imageURLs[0]
-                    : ''
-                  : ''
-              }
-              alt='Sličica'
-              sx={{ borderRadius: 2 }}
-            />
-          </Grid>
-
-          {/* Card Content */}
+          {cardData && (
+            <Grid item xs={12} md={6}>
+              <CardMedia
+                component='img'
+                height='auto'
+                image={cardData.imageURLs[0]}
+                alt='Sličica'
+                sx={{ borderRadius: 2 }}
+              />
+            </Grid>
+          )}
           <Grid item xs={12} md={6}>
             <Card
               sx={{
@@ -106,9 +121,8 @@ export const CardView = () => {
               <Divider />
               {isError ? (
                 <Box p={2}>
-                  <Typography variant='h4' component='div'>
-                    Sličica sa ovog QR koda nije pronađena ili je već
-                    iskorištena.
+                  <Typography variant='subtitle1' component='div'>
+                    {errorMessage}
                   </Typography>
                 </Box>
               ) : (
@@ -161,6 +175,20 @@ export const CardView = () => {
           </Grid>
         </Grid>
       </Container>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

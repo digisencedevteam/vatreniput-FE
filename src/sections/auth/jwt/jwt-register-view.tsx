@@ -20,6 +20,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 import { paths } from 'src/routes/paths';
 import axiosInstance from 'src/utils/axios';
+import { Snackbar } from '@mui/material';
 
 export default function JwtRegisterView() {
   const { register } = useAuthContext();
@@ -27,6 +28,8 @@ export default function JwtRegisterView() {
   const [errorMsg, setErrorMsg] = useState('');
   const [isAlbumValid, setIsAlbumValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const searchParams = useSearchParams();
 
@@ -77,7 +80,11 @@ export default function JwtRegisterView() {
     } catch (error) {
       console.error(error);
       reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      let message = 'Došlo je do greške prilikom registracije.';
+      if (error.response) {
+        message = error.response.data.message || message;
+      }
+      handleOpenSnackbar(message);
     }
   });
 
@@ -86,6 +93,15 @@ export default function JwtRegisterView() {
     const response = await axiosInstance.get(endpoints.album.validate + code);
     setIsAlbumValid(response.data.isAlbumValid);
     setIsLoading(false);
+  };
+
+  const handleOpenSnackbar = (message: string) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   const renderHead = (
@@ -157,7 +173,6 @@ export default function JwtRegisterView() {
             ),
           }}
         />
-
         <LoadingButton
           fullWidth
           color='inherit'
@@ -199,6 +214,21 @@ export default function JwtRegisterView() {
       {renderForm}
 
       {renderTerms}
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity='error'
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
