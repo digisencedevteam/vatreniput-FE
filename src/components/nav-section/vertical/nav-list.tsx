@@ -1,14 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-// @mui
 import Collapse from '@mui/material/Collapse';
-// routes
 import { usePathname } from 'src/routes/hooks';
 import { useActiveLink } from 'src/routes/hooks/use-active-link';
-//
 import { NavListProps, NavConfigProps } from '../types';
 import NavItem from './nav-item';
-
-// ----------------------------------------------------------------------
 
 type NavListRootProps = {
   data: NavListProps;
@@ -17,13 +12,10 @@ type NavListRootProps = {
   config: NavConfigProps;
 };
 
-export default function NavList({ data, depth, hasChild, config }: NavListRootProps) {
+const NavList = ({ data, depth, hasChild, config }: NavListRootProps) => {
   const pathname = usePathname();
-
   const active = useActiveLink(data.path, hasChild);
-
   const externalLink = data.path.includes('http');
-
   const [open, setOpen] = useState(active);
 
   useEffect(() => {
@@ -52,7 +44,6 @@ export default function NavList({ data, depth, hasChild, config }: NavListRootPr
         onClick={handleToggle}
         config={config}
       />
-
       {hasChild && (
         <Collapse in={open} unmountOnExit>
           <NavSubList data={data.children} depth={depth} config={config} />
@@ -60,9 +51,8 @@ export default function NavList({ data, depth, hasChild, config }: NavListRootPr
       )}
     </>
   );
-}
-
-// ----------------------------------------------------------------------
+};
+export default NavList;
 
 type NavListSubProps = {
   data: NavListProps[];
@@ -70,7 +60,7 @@ type NavListSubProps = {
   config: NavConfigProps;
 };
 
-function NavSubList({ data, depth, config }: NavListSubProps) {
+const NavSubList = ({ data, depth, config }: NavListSubProps) => {
   return (
     <>
       {data.map((list) => (
@@ -84,4 +74,4 @@ function NavSubList({ data, depth, config }: NavListSubProps) {
       ))}
     </>
   );
-}
+};

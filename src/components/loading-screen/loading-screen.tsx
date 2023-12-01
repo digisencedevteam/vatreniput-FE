@@ -1,10 +1,7 @@
-// @mui
 import Box, { BoxProps } from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
-// ----------------------------------------------------------------------
-
-export default function LoadingScreen({ sx, ...other }: BoxProps) {
+const LoadingScreen = ({ sx, ...other }: BoxProps) => {
   return (
     <Box
       sx={{
@@ -19,7 +16,8 @@ export default function LoadingScreen({ sx, ...other }: BoxProps) {
       }}
       {...other}
     >
-      <LinearProgress color="inherit" sx={{ width: 1, maxWidth: 360 }} />
+      <LinearProgress color='inherit' sx={{ width: 1, maxWidth: 360 }} />
     </Box>
   );
-}
+};
+export default LoadingScreen;

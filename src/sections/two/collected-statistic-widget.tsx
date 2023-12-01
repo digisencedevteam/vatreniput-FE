@@ -19,7 +19,7 @@ interface Props extends CardProps {
   };
 }
 
-export default function CollectedStatisticWidget({ chart, ...other }: Props) {
+const CollectedStatisticWidget = ({ chart, ...other }: Props) => {
   const theme = useTheme();
   const smUp = useResponsive('up', 'sm');
 
@@ -84,7 +84,7 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
   };
 
   return (
-    <Card {...other} >
+    <Card {...other}>
       <Stack
         direction={{ xs: 'column', sm: 'row' }}
         divider={
@@ -130,4 +130,5 @@ export default function CollectedStatisticWidget({ chart, ...other }: Props) {
       </Stack>
     </Card>
   );
-}
+};
+export default CollectedStatisticWidget;

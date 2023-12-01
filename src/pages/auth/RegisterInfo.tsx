@@ -5,7 +5,7 @@ const RegisterInfo = () => {
   return (
     <>
       <Helmet>
-        <title>Potvrdita Registracije</title>
+        <title>Potvrda Registracije</title>
       </Helmet>
 
       <RegisterInfoView />

@@ -1,40 +1,28 @@
 import { m, AnimatePresence } from 'framer-motion';
-// @mui
 import { alpha } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import ListItemText from '@mui/material/ListItemText';
-// utils
 import Iconify from '../iconify';
 import { varFade } from '../animate';
 import FileThumbnail, { fileData } from '../file-thumbnail';
-//
 import { UploadProps } from './types';
 
-// ----------------------------------------------------------------------
-
-export default function MultiFilePreview({
-  thumbnail,
-  files,
-  onRemove,
-  sx,
-}: UploadProps) {
+const MultiFilePreview = ({ thumbnail, files, onRemove, sx }: UploadProps) => {
   return (
     <AnimatePresence initial={false}>
       {files?.map((file) => {
         const { key, name = '' } = fileData(file);
-
         const isNotFormatFile = typeof file === 'string';
-
         if (thumbnail) {
           return (
             <Stack
               key={key}
               component={m.div}
               {...varFade().inUp}
-              alignItems="center"
-              display="inline-flex"
-              justifyContent="center"
+              alignItems='center'
+              display='inline-flex'
+              justifyContent='center'
               sx={{
                 m: 0.5,
                 width: 80,
@@ -54,10 +42,9 @@ export default function MultiFilePreview({
                 sx={{ position: 'absolute' }}
                 imgSx={{ position: 'absolute' }}
               />
-
               {onRemove && (
                 <IconButton
-                  size="small"
+                  size='small'
                   onClick={() => onRemove(file)}
                   sx={{
                     p: 0.5,
@@ -65,15 +52,13 @@ export default function MultiFilePreview({
                     right: 4,
                     position: 'absolute',
                     color: 'common.white',
-                    bgcolor: (theme) =>
-                      alpha(theme.palette.grey[900], 0.48),
+                    bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48),
                     '&:hover': {
-                      bgcolor: (theme) =>
-                        alpha(theme.palette.grey[900], 0.72),
+                      bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
                     },
                   }}
                 >
-                  <Iconify icon="mingcute:close-line" width={14} />
+                  <Iconify icon='mingcute:close-line' width={14} />
                 </IconButton>
               )}
             </Stack>
@@ -86,8 +71,8 @@ export default function MultiFilePreview({
             component={m.div}
             {...varFade().inUp}
             spacing={2}
-            direction="row"
-            alignItems="center"
+            direction='row'
+            alignItems='center'
             sx={{
               my: 1,
               py: 1,
@@ -99,7 +84,6 @@ export default function MultiFilePreview({
             }}
           >
             <FileThumbnail file={file} />
-
             <ListItemText
               primary={isNotFormatFile ? file : name}
               secondary={''}
@@ -108,10 +92,9 @@ export default function MultiFilePreview({
                 typography: 'caption',
               }}
             />
-
             {onRemove && (
-              <IconButton size="small" onClick={() => onRemove(file)}>
-                <Iconify icon="mingcute:close-line" width={16} />
+              <IconButton size='small' onClick={() => onRemove(file)}>
+                <Iconify icon='mingcute:close-line' width={16} />
               </IconButton>
             )}
           </Stack>
@@ -119,4 +102,5 @@ export default function MultiFilePreview({
       })}
     </AnimatePresence>
   );
-}
+};
+export default MultiFilePreview;

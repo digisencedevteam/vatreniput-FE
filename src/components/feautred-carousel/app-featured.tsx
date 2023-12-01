@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Card,
   Typography,
@@ -25,7 +25,7 @@ interface Props {
   list: ItemProps[];
 }
 
-export default function AppFeatured({ list }: Props) {
+const AppFeatured = ({ list }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
   const item = list[currentIndex];
@@ -55,9 +55,9 @@ export default function AppFeatured({ list }: Props) {
     <Card sx={{ position: 'relative', overflow: 'hidden' }}>
       <m.div
         key={currentIndex}
-        initial={{ x: '100%' }} // starts from the right
-        animate={{ x: '0%' }} // animates to the center
-        exit={{ x: '-100%' }} // exits to the left
+        initial={{ x: '100%' }}
+        animate={{ x: '0%' }}
+        exit={{ x: '-100%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <AnimatePresence mode='wait'>
@@ -69,7 +69,6 @@ export default function AppFeatured({ list }: Props) {
           />
         </AnimatePresence>
       </m.div>
-
       <Stack
         spacing={1}
         sx={{
@@ -147,4 +146,5 @@ export default function AppFeatured({ list }: Props) {
       </Stack>
     </Card>
   );
-}
+};
+export default AppFeatured;

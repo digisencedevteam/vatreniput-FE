@@ -3,15 +3,9 @@ import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-
-// hooks
 import { useResponsive } from 'src/hooks/use-responsive';
-// theme
 import { bgGradient } from 'src/theme/css';
-// components
 import Logo from 'src/components/logo';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   title?: string;
@@ -19,7 +13,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function AuthClassicLayout({ children, image, title }: Props) {
+const AuthClassicLayout = ({ children, image, title }: Props) => {
   const theme = useTheme();
 
   const upMd = useResponsive('up', 'md');
@@ -51,23 +45,28 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
   const renderSection = (
     <Stack
       flexGrow={1}
-      alignItems="center"
-      justifyContent="center"
+      alignItems='center'
+      justifyContent='center'
       spacing={10}
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor: theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 1.0)' : 'rgba(0, 0, 0, 1.0)', // Setting dark background color with opacity for light mode also
+        backgroundColor:
+          theme.palette.mode === 'light'
+            ? 'rgba(0, 0, 0, 1.0)'
+            : 'rgba(0, 0, 0, 1.0)',
         '&::before': {
           content: '""',
           position: 'absolute',
           width: '100%',
           height: '100%',
-          backgroundImage: `url(${image || '/assets/background/overlay_2.jpg'})`,
+          backgroundImage: `url(${
+            image || '/assets/background/overlay_2.jpg'
+          })`,
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center center',
-          opacity: 0.3, 
+          opacity: 0.3,
         },
         ...bgGradient({
           color: alpha(
@@ -87,7 +86,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
           color: '#fff',
         }}
       >
-        <Typography variant="h2" sx={{ maxWidth: 600 }}>
+        <Typography variant='h2' sx={{ maxWidth: 600 }}>
           {title || 'Dobrodošli na Platformu Vatrenog Puta!'}
         </Typography>
       </Box>
@@ -96,17 +95,16 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
 
   return (
     <Stack
-      component="main"
-      direction="row"
+      component='main'
+      direction='row'
       sx={{
         minHeight: '100vh',
       }}
     >
       {renderLogo}
-
       {upMd && renderSection}
-
       {renderContent}
     </Stack>
   );
-}
+};
+export default AuthClassicLayout;

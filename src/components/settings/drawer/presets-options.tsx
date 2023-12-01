@@ -1,25 +1,26 @@
-// @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
-// theme
 import { primaryPresets } from 'src/theme/options/presets';
-
-// ----------------------------------------------------------------------
 
 type PresetsOptionsProps = {
   value: string;
   onChange: (newValue: string) => void;
 };
 
-export default function PresetsOptions({ value, onChange }: PresetsOptionsProps) {
+const PresetsOptions = ({ value, onChange }: PresetsOptionsProps) => {
   const options = primaryPresets.map((color) => ({
     name: color.name,
     value: color.main,
   }));
 
   return (
-    <Box columnGap={2} rowGap={1.5} display="grid" gridTemplateColumns="repeat(3, 1fr)">
+    <Box
+      columnGap={2}
+      rowGap={1.5}
+      display='grid'
+      gridTemplateColumns='repeat(3, 1fr)'
+    >
       {options.map((option) => {
         const selected = value === option.name;
 
@@ -30,7 +31,8 @@ export default function PresetsOptions({ value, onChange }: PresetsOptionsProps)
             sx={{
               height: 56,
               borderRadius: 1,
-              border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
+              border: (theme) =>
+                `solid 1px ${alpha(theme.palette.grey[500], 0.08)}`,
               ...(selected && {
                 borderColor: 'transparent',
                 bgcolor: alpha(option.value, 0.08),
@@ -57,4 +59,5 @@ export default function PresetsOptions({ value, onChange }: PresetsOptionsProps)
       })}
     </Box>
   );
-}
+};
+export default PresetsOptions;

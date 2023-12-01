@@ -6,7 +6,7 @@ import { StoryProvider } from 'src/context/StoryContext';
 import { STORIES } from 'src/lib/constants';
 import { useParams } from 'src/routes/hooks';
 
-export default function SixView() {
+const SixView = () => {
   let { storyId } = useParams();
   const currentStory = STORIES.find(
     (story) => story.storyId === Number(storyId)
@@ -22,4 +22,5 @@ export default function SixView() {
       </Container>
     </StoryProvider>
   );
-}
+};
+export default SixView;

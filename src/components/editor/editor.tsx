@@ -4,14 +4,14 @@ import { EditorProps } from './types';
 import { StyledEditor } from './styles';
 import Toolbar, { formats } from './toolbar';
 
-export default function Editor({
+const Editor = ({
   id = 'minimal-quill',
   error,
   simple = false,
   helperText,
   sx,
   ...other
-}: EditorProps) {
+}: EditorProps) => {
   const modules = {
     toolbar: {
       container: `#${id}`,
@@ -32,27 +32,24 @@ export default function Editor({
       <StyledEditor
         sx={{
           ...(error && {
-            border: (theme) =>
-              `solid 1px ${theme.palette.error.main}`,
+            border: (theme) => `solid 1px ${theme.palette.error.main}`,
             '& .ql-editor': {
-              bgcolor: (theme) =>
-                alpha(theme.palette.error.main, 0.08),
+              bgcolor: (theme) => alpha(theme.palette.error.main, 0.08),
             },
           }),
           ...sx,
         }}
       >
         <Toolbar id={id} isSimple={simple} />
-
         <ReactQuill
           modules={modules}
           formats={formats}
-          placeholder="Write something awesome..."
+          placeholder='Write something awesome...'
           {...other}
         />
       </StyledEditor>
-
       {helperText && helperText}
     </>
   );
-}
+};
+export default Editor;

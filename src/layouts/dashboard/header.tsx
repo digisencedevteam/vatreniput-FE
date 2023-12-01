@@ -16,7 +16,7 @@ type Props = {
   onOpenNav?: VoidFunction;
 };
 
-export default function Header({ onOpenNav }: Props) {
+const Header = ({ onOpenNav }: Props) => {
   const theme = useTheme();
   const settings = useSettingsContext();
   const isNavHorizontal = settings.themeLayout === 'horizontal';
@@ -27,7 +27,6 @@ export default function Header({ onOpenNav }: Props) {
   const renderContent = (
     <>
       {lgUp && isNavHorizontal && <Logo sx={{ mr: 2.5 }} />}
-
       {!lgUp && (
         <IconButton onClick={onOpenNav}>
           <SvgColor src='/assets/icons/navbar/ic_menu_item.svg' />
@@ -85,4 +84,5 @@ export default function Header({ onOpenNav }: Props) {
       </Toolbar>
     </AppBar>
   );
-}
+};
+export default Header;

@@ -5,7 +5,7 @@ const VerifyEmailPage = () => {
   return (
     <>
       <Helmet>
-        <title> Potvrda Email Adrese</title>
+        <title>Potvrda Email Adrese</title>
       </Helmet>
 
       <VerifyEmailView />

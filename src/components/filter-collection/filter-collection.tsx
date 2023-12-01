@@ -10,7 +10,7 @@ interface FilterOption {
   label: string;
 }
 
-export default function FilterCollection() {
+const FilterCollection = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const filterOptions: FilterOption[] = [
@@ -69,7 +69,7 @@ export default function FilterCollection() {
           <MenuItem
             key={option.value}
             onClick={() => {
-            handleClose();
+              handleClose();
             }}
             sx={{
               display: 'flex',
@@ -85,4 +85,5 @@ export default function FilterCollection() {
       </Popover>
     </>
   );
-}
+};
+export default FilterCollection;

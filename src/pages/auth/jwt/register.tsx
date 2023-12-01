@@ -1,17 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-// sections
 import { JwtRegisterView } from 'src/sections/auth/jwt';
 
-// ----------------------------------------------------------------------
-
-export default function RegisterPage() {
+const RegisterPage = () => {
   return (
     <>
       <Helmet>
-        <title> Jwt: Register</title>
+        <title>Registracija na Vatreni Put</title>
       </Helmet>
 
       <JwtRegisterView />
     </>
   );
-}
+};
+export default RegisterPage;

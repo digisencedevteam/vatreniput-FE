@@ -15,15 +15,11 @@ type ReturnType = {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function useCarousel(props?: Settings): ReturnType {
+const useCarousel = (props?: Settings): ReturnType => {
   const theme = useTheme();
-
   const carouselRef = useRef<Carousel | null>(null);
-
   const [currentIndex, setCurrentIndex] = useState(props?.initialSlide || 0);
-
   const [nav, setNav] = useState<Carousel | undefined>(undefined);
-
   const rtl = theme.direction === 'rtl';
 
   const carouselSettings = {
@@ -72,3 +68,4 @@ export default function useCarousel(props?: Settings): ReturnType {
     setCurrentIndex,
   };
 }
+export default useCarousel

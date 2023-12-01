@@ -1,4 +1,5 @@
-// ----------------------------------------------------------------------
+import { BoxProps } from "@mui/material";
+import { MotionProps } from "framer-motion";
 
 type EaseType =
   | 'linear'
@@ -42,3 +43,10 @@ export type BackgroundType = {
   duration?: number;
   ease?: EaseType;
 };
+
+type IProps = BoxProps & MotionProps;
+
+export interface MotionViewportProps extends IProps {
+  children: React.ReactNode;
+  disableAnimatedMobile?: boolean;
+}

@@ -1,18 +1,13 @@
-// @mui
 import { useTheme } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
-// theme
 import { bgBlur } from 'src/theme/css';
-//
 import Iconify from '../iconify';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   onDownload?: VoidFunction;
 };
 
-export default function DownloadButton({ onDownload }: Props) {
+const DownloadButton = ({ onDownload }: Props) => {
   const theme = useTheme();
 
   return (
@@ -32,7 +27,6 @@ export default function DownloadButton({ onDownload }: Props) {
         bgcolor: 'grey.800',
         color: 'common.white',
         transition: theme.transitions.create(['opacity']),
-
         '&:hover': {
           opacity: 1,
           ...bgBlur({
@@ -42,7 +36,8 @@ export default function DownloadButton({ onDownload }: Props) {
         },
       }}
     >
-      <Iconify icon="eva:arrow-circle-down-fill" width={24} />
+      <Iconify icon='eva:arrow-circle-down-fill' width={24} />
     </IconButton>
   );
-}
+};
+export default DownloadButton;

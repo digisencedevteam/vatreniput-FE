@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { CardView } from 'src/sections/card/card.view';
 
-export default function CardPage() {
+const CardPage = () => {
   return (
     <>
       <Helmet>
@@ -11,4 +11,5 @@ export default function CardPage() {
       <CardView />
     </>
   );
-}
+};
+export default CardPage;

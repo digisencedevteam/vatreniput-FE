@@ -1,11 +1,8 @@
 import merge from 'lodash/merge';
 import { ApexOptions } from 'apexcharts';
-// @mui
 import { useTheme, alpha } from '@mui/material/styles';
 
-// ----------------------------------------------------------------------
-
-export default function useChart(options?: ApexOptions) {
+const useChart = (options?: ApexOptions) => {
   const theme = useTheme();
 
   const LABEL_TOTAL = {
@@ -26,7 +23,6 @@ export default function useChart(options?: ApexOptions) {
   };
 
   const baseOptions = {
-    // Colors
     colors: [
       theme.palette.primary.main,
       theme.palette.warning.main,
@@ -38,16 +34,12 @@ export default function useChart(options?: ApexOptions) {
       theme.palette.info.dark,
       theme.palette.info.darker,
     ],
-
-    // Chart
     chart: {
       toolbar: { show: false },
       zoom: { enabled: false },
       foreColor: theme.palette.text.disabled,
       fontFamily: theme.typography.fontFamily,
     },
-
-    // States
     states: {
       hover: {
         filter: {
@@ -62,8 +54,6 @@ export default function useChart(options?: ApexOptions) {
         },
       },
     },
-
-    // Fill
     fill: {
       opacity: 1,
       gradient: {
@@ -74,20 +64,14 @@ export default function useChart(options?: ApexOptions) {
         stops: [0, 100],
       },
     },
-
-    // Datalabels
     dataLabels: {
       enabled: false,
     },
-
-    // Stroke
     stroke: {
       width: 3,
       curve: 'smooth',
       lineCap: 'round',
     },
-
-    // Grid
     grid: {
       strokeDashArray: 3,
       borderColor: theme.palette.divider,
@@ -97,28 +81,20 @@ export default function useChart(options?: ApexOptions) {
         },
       },
     },
-
-    // Xaxis
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { show: false },
     },
-
-    // Markers
     markers: {
       size: 0,
       strokeColors: theme.palette.background.paper,
     },
-
-    // Tooltip
     tooltip: {
       theme: false,
       x: {
         show: true,
       },
     },
-
-    // Legend
     legend: {
       show: true,
       fontSize: 13,
@@ -135,18 +111,13 @@ export default function useChart(options?: ApexOptions) {
         colors: theme.palette.text.primary,
       },
     },
-
-    // plotOptions
     plotOptions: {
-      // Bar
       bar: {
         borderRadius: 4,
         columnWidth: '28%',
         borderRadiusApplication: 'end',
         borderRadiusWhenStacked: 'last',
       },
-
-      // Pie + Donut
       pie: {
         donut: {
           labels: {
@@ -156,8 +127,6 @@ export default function useChart(options?: ApexOptions) {
           },
         },
       },
-
-      // Radialbar
       radialBar: {
         track: {
           strokeWidth: '100%',
@@ -168,8 +137,6 @@ export default function useChart(options?: ApexOptions) {
           total: LABEL_TOTAL,
         },
       },
-
-      // Radar
       radar: {
         polygons: {
           fill: { colors: ['transparent'] },
@@ -177,8 +144,6 @@ export default function useChart(options?: ApexOptions) {
           connectorColors: theme.palette.divider,
         },
       },
-
-      // polarArea
       polarArea: {
         rings: {
           strokeColor: theme.palette.divider,
@@ -188,18 +153,14 @@ export default function useChart(options?: ApexOptions) {
         },
       },
     },
-
-    // Responsive
     responsive: [
       {
-        // sm
         breakpoint: theme.breakpoints.values.sm,
         options: {
           plotOptions: { bar: { columnWidth: '40%' } },
         },
       },
       {
-        // md
         breakpoint: theme.breakpoints.values.md,
         options: {
           plotOptions: { bar: { columnWidth: '32%' } },
@@ -210,3 +171,4 @@ export default function useChart(options?: ApexOptions) {
 
   return merge(baseOptions, options);
 }
+export default useChart
