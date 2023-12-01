@@ -55,9 +55,9 @@ export default function AppFeatured({ list }: Props) {
     <Card sx={{ position: 'relative', overflow: 'hidden' }}>
       <m.div
         key={currentIndex}
-        initial={{ x: '100%' }} // starts from the right
-        animate={{ x: '0%' }} // animates to the center
-        exit={{ x: '-100%' }} // exits to the left
+        initial={{ x: '100%' }}
+        animate={{ x: '0%' }}
+        exit={{ x: '-100%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <AnimatePresence mode='wait'>
@@ -83,15 +83,27 @@ export default function AppFeatured({ list }: Props) {
           background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
         }}
       >
-        <Typography variant='overline' sx={{ color: 'primary.dark' }}>
+        <Typography
+          variant='overline'
+          sx={{ color: 'primary.dark' }}
+        >
           NOVO
         </Typography>
-        <Link color='inherit' underline='none'>
-          <Typography variant='h5' noWrap>
+        <Link
+          color='inherit'
+          underline='none'
+        >
+          <Typography
+            variant='h5'
+            noWrap
+          >
             {item.title}
           </Typography>
         </Link>
-        <Typography variant='body2' noWrap>
+        <Typography
+          variant='body2'
+          noWrap
+        >
           {item.description}
         </Typography>
         <Stack

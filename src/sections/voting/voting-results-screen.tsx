@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useVoting from 'src/hooks/use-voting-data';
 import { useSettingsContext } from 'src/components/settings';
 import { useParams } from 'react-router';
-import { QuizOverview } from 'src/components/voting-overview/quiz-overview';
+import QuizOverview from 'src/components/voting-overview/quiz-overview';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';

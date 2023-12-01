@@ -13,6 +13,7 @@ import { useSettingsContext } from 'src/components/settings';
 import { useMediaQuery, useTheme } from '@mui/material';
 import axiosInstance from 'src/utils/axios';
 import { endpoints } from 'src/utils/axios';
+import { paths } from 'src/routes/paths';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -42,7 +43,7 @@ export const CardView = () => {
     try {
       const res = await axiosInstance.patch(endpoints.card.add, { cardId });
       if (res.data === 'ok') {
-        navigate('/dashboard/two');
+        navigate(paths.dashboard.collection);
       } else {
         setErrorMessage(res.data);
       }
@@ -65,7 +66,6 @@ export const CardView = () => {
           container
           spacing={5}
         >
-          {/* Image or Video */}
           <Grid
             item
             xs={12}
@@ -83,7 +83,7 @@ export const CardView = () => {
                     height: '100%',
                     border: '0',
                   }}
-                  allow='autoplay; fullscreen; picture-in-picture'
+                  allow='fullscreen; picture-in-picture'
                   title={cardData?.title}
                 />
               </div>
@@ -104,8 +104,6 @@ export const CardView = () => {
               />
             )}
           </Grid>
-
-          {/* Card Content */}
           <Grid
             item
             xs={12}

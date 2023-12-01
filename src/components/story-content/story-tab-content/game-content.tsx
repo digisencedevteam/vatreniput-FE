@@ -10,12 +10,12 @@ interface DetailItemProps {
   text: string;
 }
 
-export const GameContent = ({ story }: StoryContentProps) => {
+const GameContent = ({ story }: StoryContentProps) => {
   const game = story.Game;
   const theme = useTheme();
 
   if (!game || !game.GameDetails) {
-    return null; // or some placeholder if no game data is provided
+    return null;
   }
 
   const { GameDetails, Summary } = game;
@@ -60,14 +60,14 @@ export const GameContent = ({ story }: StoryContentProps) => {
             )}
             {GameDetails.Score && (
               <DetailItem
-                icon={<ScoreboardIcon color='primary' />} // Replace with appropriate icon
+                icon={<ScoreboardIcon color='primary' />}
                 label='Rezultat'
                 text={GameDetails.Score}
               />
             )}
             {GameDetails.Scorers && (
               <DetailItem
-                icon={<SportsSoccerIcon color='primary' />} // Replace with appropriate icon
+                icon={<SportsSoccerIcon color='primary' />}
                 label='Golove zabili'
                 text={GameDetails.Scorers.join(', ')}
               />
@@ -89,3 +89,5 @@ export const GameContent = ({ story }: StoryContentProps) => {
     </>
   );
 };
+
+export default GameContent;

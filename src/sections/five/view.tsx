@@ -59,8 +59,17 @@ const FiveView = () => {
   };
 
   const transformVotingResults = () => {
+    if (
+      !userVotedVotings ||
+      userVotedVotings.length === 0 ||
+      !votings ||
+      votings.length === 0
+    ) {
+      return [];
+    }
+
     return userVotedVotings.map((voting) => {
-      const votingDetail = votings?.find((v) => v._id === voting.votingId);
+      const votingDetail = votings.find((v) => v._id === voting.votingId);
       return {
         votingName: votingDetail?.title || 'Unknown Voting',
         optionName: voting.topOption || 'Unknown Option',
@@ -75,7 +84,6 @@ const FiveView = () => {
     if (auth.user) {
       fetchUserVotedVotingsWithTopOption(auth.user._id);
     }
-    console.log(userVotedVotings);
   }, [auth.user]);
 
   return (
@@ -183,7 +191,7 @@ const FiveView = () => {
                 maxWidth={isMobile ? '90px' : '200px'}
               />
             ) : !userVotedVotings.length ? (
-              <Typography>Nema ispunjenih glasanja.</Typography>
+              <Typography>Glasajte za svoje najdraže igrače!</Typography>
             ) : (
               <VotingOverview data={transformVotingResults()} />
             )}
@@ -232,6 +240,3 @@ const FiveView = () => {
   );
 };
 export default FiveView;
-function fetchUserVotedVotingsWithTopOption(_id: any) {
-  throw new Error('Function not implemented.');
-}

@@ -12,17 +12,24 @@ type Voting = {
   isVoted: boolean;
 };
 
+type UserVotedVoting = Voting & {
+  userVotedOptionId: string;
+  votingId: string;
+  topOption: string;
+  votes: number;
+};
+
 type UseVotingReturn = {
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
   votings: Voting[] | undefined;
-  userVotedVotings: any[]; // Define the type of userVotedVotings
+  userVotedVotings: UserVotedVoting[];
   createOrUpdateVoting: (
     voting: Partial<Voting>,
     votingId?: string
   ) => Promise<{ success: boolean; error?: string }>;
   fetchAllVotings: () => void;
-  fetchUserVotedVotingsWithTopOption: (userId: any) => Promise<void>; // Include this function in your type
+  fetchUserVotedVotingsWithTopOption: (userId: string) => Promise<void>;
   submitVote: (votingId: string, votingOptionId: string) => Promise<void>;
   deleteVoting: (votingId: string) => Promise<void>;
   updateVoting: (voting: Partial<Voting>, votingId: string) => Promise<void>;
@@ -35,7 +42,9 @@ type UseVotingReturn = {
 const useVoting = (): UseVotingReturn => {
   const [isLoading, setIsLoading] = useState(false);
   const [votings, setVotings] = useState<Voting[]>();
-  const [userVotedVotings, setUserVotedVotings] = useState([]);
+  const [userVotedVotings, setUserVotedVotings] = useState<UserVotedVoting[]>(
+    []
+  );
 
   const fetchAllVotings = async () => {
     setIsLoading(true);
@@ -48,7 +57,7 @@ const useVoting = (): UseVotingReturn => {
     setIsLoading(false);
   };
 
-  const fetchUserVotedVotingsWithTopOption = async (userId: any) => {
+  const fetchUserVotedVotingsWithTopOption = async (userId: string) => {
     setIsLoading(true);
     try {
       const response = await axiosInstance.get(

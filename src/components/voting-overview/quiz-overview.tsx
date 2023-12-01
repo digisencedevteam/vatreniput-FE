@@ -9,7 +9,7 @@ interface Props extends CardProps {
   data: VotingResult[] | undefined;
 }
 
-export const QuizOverview = ({ data }: Props) => {
+const QuizOverview = ({ data }: Props) => {
   const theme = useTheme();
   return (
     <Card sx={{ mt: 2, bgcolor: theme.palette.background.neutral }}>
@@ -74,3 +74,4 @@ export const ProgressItem = ({ progress }: ProgressItemProps) => {
     </Stack>
   );
 };
+export default QuizOverview;

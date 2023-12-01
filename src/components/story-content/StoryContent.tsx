@@ -16,7 +16,7 @@ import { CoachContent } from './story-tab-content/coach-content';
 import { NationalTeamContent } from './story-tab-content/national-team-content';
 import { useStoryContext } from 'src/context/StoryContext';
 import { useParams } from 'src/routes/hooks';
-import { GameContent } from './story-tab-content/game-content';
+import GameContent from './story-tab-content/game-content';
 
 const StoryContent = ({ story }: StoryContentProps) => {
   const { storyId } = useParams();
