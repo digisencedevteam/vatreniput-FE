@@ -113,11 +113,9 @@ export const CardView = () => {
                 component='img'
                 height='auto'
                 image={
-                  cardData
-                    ? Array.isArray(cardData.imageURLs) &&
-                      cardData.imageURLs.length > 0
-                      ? cardData.imageURLs[0]
-                      : ''
+                  Array.isArray(cardData?.imageURLs) &&
+                  cardData.imageURLs.length > 0
+                    ? cardData.imageURLs[0]
                     : ''
                 }
                 alt='Sličica'
@@ -159,110 +157,41 @@ export const CardView = () => {
                 </Typography>
               </CardContent>
               <Divider />
-  {isError ? (
-                <Box p={2}>
-                  <Typography variant='subtitle1' component='div'>
-                    {errorMessage}
-                  </Typography>
-                </Box>
-              ) : (
-   <Box p={3}>
-                <Typography
-                  variant='subtitle2'
-                  component='div'
-                >
-                  {cardData?.description}
-                </Typography>
-                {cardData?.videoLink && (
-                  <Button
-                    variant='contained'
-                    color='primary'
-                    href='/dashboard'
-                    sx={{ mt: 2 }}
-                  >
-                    Prijavi se
-                  </Button>
-                )}
-              </Box>
               {isError ? (
                 <Box p={2}>
                   <Typography
                     variant='h4'
                     component='div'
+                    color='error'
                   >
                     {errorMessage}
                   </Typography>
                 </Box>
               ) : (
-                !cardData?.videoLink && (
-                  <Box p={3}>
-                    <Button
-                      variant='contained'
-                      color='success'
-                      onClick={handleAddCardToAlbum}
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Dodaj U Album
-                    </Button>
-                    <Button
-                      variant='contained'
-                      color='inherit'
-                      href='/dashboard'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Prijavi se
-                    </Button>
-                  </Box>
-                )
-
-              <Box p={3}>
-                <Typography
-                  variant='subtitle2'
-                  component='div'
-                >
-                  {cardData?.description}
-                </Typography>
-                {cardData?.videoLink && (
+                <Box p={3}>
+                  <Typography
+                    variant='subtitle2'
+                    component='div'
+                  >
+                    {cardData?.description}
+                  </Typography>
                   <Button
                     variant='contained'
-                    color='primary'
+                    color='success'
+                    onClick={handleAddCardToAlbum}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                  >
+                    Dodaj U Album
+                  </Button>
+                  <Button
+                    variant='contained'
+                    color='inherit'
                     href='/dashboard'
-                    sx={{ mt: 2 }}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
                   >
                     Prijavi se
                   </Button>
-                )}
-              </Box>
-              {isError ? (
-                <Box p={2}>
-                  <Typography
-                    variant='h4'
-                    component='div'
-                  >
-                    {errorMessage}
-                  </Typography>
                 </Box>
-              ) : (
-                !cardData?.videoLink && (
-                  <Box p={3}>
-                    <Button
-                      variant='contained'
-                      color='success'
-                      onClick={handleAddCardToAlbum}
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Dodaj U Album
-                    </Button>
-                    <Button
-                      variant='contained'
-                      color='inherit'
-                      href='/dashboard'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Prijavi se
-                    </Button>
-                  </Box>
-                )
               )}
             </Card>
           </Grid>
