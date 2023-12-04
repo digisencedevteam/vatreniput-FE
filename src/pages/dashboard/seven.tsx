@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import SevenView from 'src/sections/seven/view';
 
-export default function Page() {
+const Page = () => {
   return (
     <>
       <Helmet>
@@ -11,4 +11,5 @@ export default function Page() {
       <SevenView />
     </>
   );
-}
+};
+export default Page;

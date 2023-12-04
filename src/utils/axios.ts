@@ -11,6 +11,9 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
+    if (originalRequest.url === endpoints.auth.login) {
+      return Promise.reject(error);
+    }
     if (!error.response) {
       console.error('Network error or server is not responding');
       return Promise.reject(new Error('Network error or server down'));

@@ -14,11 +14,9 @@ import BaseOptions from './base-option';
 import PresetsOptions from './presets-options';
 import FullScreenOption from './fullscreen-option';
 
-export default function SettingsDrawer() {
+const SettingsDrawer = () => {
   const theme = useTheme();
-
   const settings = useSettingsContext();
-
   const labelStyles = {
     mb: 1.5,
     color: 'text.disabled',
@@ -35,7 +33,6 @@ export default function SettingsDrawer() {
       <Typography variant='h6' sx={{ flexGrow: 1 }}>
         Postavke
       </Typography>
-
       <Tooltip title='Reset'>
         <IconButton onClick={settings.onReset}>
           <Badge color='error' variant='dot' invisible={!settings.canReset}>
@@ -43,7 +40,6 @@ export default function SettingsDrawer() {
           </Badge>
         </IconButton>
       </Tooltip>
-
       <IconButton onClick={settings.onClose}>
         <Iconify icon='mingcute:close-line' />
       </IconButton>
@@ -55,7 +51,6 @@ export default function SettingsDrawer() {
       <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
         Način rada
       </Typography>
-
       <BaseOptions
         value={settings.themeMode}
         onChange={(newValue: string) =>
@@ -66,66 +61,6 @@ export default function SettingsDrawer() {
       />
     </div>
   );
-
-  // TODO: remove this from usage throughout the app
-  // const renderDirection = (
-  //   <div>
-  //     <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
-  //       Direction
-  //     </Typography>
-
-  //     <BaseOptions
-  //       value={settings.themeDirection}
-  //       onChange={(newValue: string) =>
-  //         settings.onUpdate('themeDirection', newValue)
-  //       }
-  //       options={['ltr', 'rtl']}
-  //       icons={['align_left', 'align_right']}
-  //     />
-  //   </div>
-  // );
-
-  // const renderLayout = (
-  //   <div>
-  //     <Typography variant='caption' component='div' sx={{ ...labelStyles }}>
-  //       Layout
-  //     </Typography>
-
-  //     <LayoutOptions
-  //       value={settings.themeLayout}
-  //       onChange={(newValue: string) =>
-  //         settings.onUpdate('themeLayout', newValue)
-  //       }
-  //       options={['vertical', 'horizontal', 'mini']}
-  //     />
-  //   </div>
-  // );
-
-  // const renderStretch = (
-  //   <div>
-  //     <Typography
-  //       variant='caption'
-  //       component='div'
-  //       sx={{
-  //         ...labelStyles,
-  //         display: 'inline-flex',
-  //         alignItems: 'center',
-  //       }}
-  //     >
-  //       Rastegnutost
-  //       <Tooltip title='Dostupno na velikim rezolucijama > 1600px (xl)'>
-  //         <Iconify icon='eva:info-outline' width={16} sx={{ ml: 0.5 }} />
-  //       </Tooltip>
-  //     </Typography>
-
-  //     <StretchOptions
-  //       value={settings.themeStretch}
-  //       onChange={() =>
-  //         settings.onUpdate('themeStretch', !settings.themeStretch)
-  //       }
-  //     />
-  //   </div>
-  // );
 
   const renderPresets = (
     <div>
@@ -161,21 +96,10 @@ export default function SettingsDrawer() {
       }}
     >
       {renderHead}
-
       <Divider sx={{ borderStyle: 'dashed' }} />
-
       <Scrollbar>
         <Stack spacing={3} sx={{ p: 3 }}>
           {renderMode}
-
-          {/* {renderContrast} */}
-
-          {/* {renderDirection} */}
-
-          {/* {renderLayout} */}
-
-          {/* {renderStretch} */}
-
           {renderPresets}
         </Stack>
       </Scrollbar>
@@ -183,4 +107,5 @@ export default function SettingsDrawer() {
       <FullScreenOption />
     </Drawer>
   );
-}
+};
+export default SettingsDrawer;

@@ -84,10 +84,8 @@ const useFetchQuizzes = (
         `${endpoints.quiz.results}?quizId=${quizId}&page=${page}&limit=${limit}`
       );
       const { quizResults, count } = response.data;
-
       const computedTotalPages = Math.ceil(count / limit);
       setTotalPages(computedTotalPages);
-
       setResultsById(quizResults || null);
     } catch (error) {
       setError('Failed to fetch quiz results. Please try again.');
@@ -109,12 +107,9 @@ const useFetchQuizzes = (
   };
 
   const createOrUpdateQuiz = async (quiz: Partial<Quiz>, quizId?: string) => {
-    const quizToSend = {
-      ...quiz,
-    };
-
-    let response;
+    const quizToSend = { ...quiz };
     try {
+      let response;
       if (quizId) {
         response = await axiosInstance.put(
           endpoints.quiz.deleteAndUpdate + quizId,
@@ -123,26 +118,29 @@ const useFetchQuizzes = (
       } else {
         response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
       }
-
+  
       if ([200, 201].includes(response.status)) {
         return { success: true };
       } else {
         return {
           success: false,
-          error: `Error ${
-            quizId ? 'updating' : 'creating'
-          } quiz: ${JSON.stringify(response.data)}`,
+          error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${response.data.message || JSON.stringify(response.data)}`,
         };
       }
     } catch (error) {
+      let errorMessage = 'An unexpected error occurred.';
+      if (error.response && error.response.data) {
+        errorMessage = error.response.data.message || JSON.stringify(error.response.data);
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
       return {
         success: false,
-        error: `Error ${
-          quizId ? 'updating' : 'creating'
-        } quiz: ${JSON.stringify(error.message)}`,
+        error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${errorMessage}`,
       };
     }
   };
+  
 
   const fetchQuizzes = async () => {
     const userId = currentUser.user && currentUser.user._id;
@@ -206,7 +204,6 @@ const useFetchQuizzes = (
         setIsLoadingResolved(false);
       }
     };
-
     fetchResolvedQuizzes();
     fetchUnresolvedQuizzes();
   };

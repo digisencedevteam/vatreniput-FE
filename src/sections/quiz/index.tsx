@@ -30,6 +30,10 @@ const QuizApp = () => {
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setSelectedOption(null);
+  }, [currentQuestionIndex]);
+
   const startQuiz = async () => {
     setCurrentQuestionIndex(0);
     setAnswers([]);

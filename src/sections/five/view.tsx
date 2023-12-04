@@ -54,6 +54,7 @@ const FiveView = () => {
   const notVotedVotings = votings
     ? votings.filter((voting) => voting.isVoted === false)
     : [];
+
   const fetchData = async () => {
     await fetchAllVotings();
   };
@@ -93,11 +94,7 @@ const FiveView = () => {
       ) : (
         <>
           {!isMobile ? (
-            <Grid
-              item
-              xs={12}
-              md={7}
-            >
+            <Grid item xs={12} md={7}>
               <AppWelcome
                 title={`Dobrodošli na stranicu glasanja! `}
                 description='Zaronite u uzbudljivi svijet glasanja i otkrij koji su igrači tvojim prijateljima najdraži! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
@@ -115,10 +112,7 @@ const FiveView = () => {
               alignItems='center'
               sx={{ m: 1 }}
             >
-              <Typography
-                variant='h2'
-                color={theme.palette.primary.main}
-              >
+              <Typography variant='h2' color={theme.palette.primary.main}>
                 Glasanja
               </Typography>
 
@@ -153,19 +147,9 @@ const FiveView = () => {
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
               ) : (
-                <Grid
-                  container
-                  spacing={2}
-                >
+                <Grid container spacing={2}>
                   {notVotedVotings.map((voting, index) => (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={4}
-                    >
+                    <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
                       <CustomCard
                         cardId={voting._id}
                         votingId={voting._id}

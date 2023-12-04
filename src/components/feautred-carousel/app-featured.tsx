@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Card,
   Typography,
@@ -25,7 +25,7 @@ interface Props {
   list: ItemProps[];
 }
 
-export default function AppFeatured({ list }: Props) {
+const AppFeatured = ({ list }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
   const item = list[currentIndex];
@@ -69,7 +69,6 @@ export default function AppFeatured({ list }: Props) {
           />
         </AnimatePresence>
       </m.div>
-
       <Stack
         spacing={1}
         sx={{
@@ -159,4 +158,5 @@ export default function AppFeatured({ list }: Props) {
       </Stack>
     </Card>
   );
-}
+};
+export default AppFeatured;

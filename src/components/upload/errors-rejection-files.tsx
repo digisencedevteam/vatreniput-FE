@@ -1,27 +1,22 @@
 import { FileRejection } from 'react-dropzone';
-// @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-// utils
-//
 import { fileData } from '../file-thumbnail';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   fileRejections: FileRejection[];
 };
 
-export default function RejectionFiles({ fileRejections }: Props) {
+const RejectionFiles = ({ fileRejections }: Props) => {
   if (!fileRejections.length) {
     return null;
   }
 
   return (
     <Paper
-      variant="outlined"
+      variant='outlined'
       sx={{
         py: 1,
         px: 2,
@@ -35,14 +30,14 @@ export default function RejectionFiles({ fileRejections }: Props) {
 
         return (
           <Box key={path} sx={{ my: 1 }}>
-            <Typography variant="subtitle2" noWrap>
+            <Typography variant='subtitle2' noWrap>
               {path} - {''}
             </Typography>
 
             {errors.map((error) => (
               <Box
                 key={error.code}
-                component="span"
+                component='span'
                 sx={{ typography: 'caption' }}
               >
                 - {error.message}
@@ -53,4 +48,5 @@ export default function RejectionFiles({ fileRejections }: Props) {
       })}
     </Paper>
   );
-}
+};
+export default RejectionFiles;

@@ -1,23 +1,17 @@
-// @mui
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Tooltip from '@mui/material/Tooltip';
 import ListItemText from '@mui/material/ListItemText';
-// routes
 import { RouterLink } from 'src/routes/components';
-//
 import Iconify from '../../iconify';
-//
 import { NavItemProps, NavConfigProps } from '../types';
 import { StyledItem, StyledIcon, StyledDotIcon } from './styles';
-
-// ----------------------------------------------------------------------
 
 type Props = NavItemProps & {
   config: NavConfigProps;
 };
 
-export default function NavItem({
+const NavItem = ({
   item,
   open,
   depth,
@@ -25,11 +19,9 @@ export default function NavItem({
   config,
   externalLink,
   ...other
-}: Props) {
+}: Props) => {
   const { title, path, icon, info, children, disabled, caption, roles } = item;
-
   const subItem = depth !== 1;
-
   const renderContent = (
     <StyledItem
       disableGutters
@@ -48,13 +40,12 @@ export default function NavItem({
           </StyledIcon>
         )}
       </>
-
       {!(config.hiddenLabel && !subItem) && (
         <ListItemText
           primary={title}
           secondary={
             caption ? (
-              <Tooltip title={caption} placement="top-start">
+              <Tooltip title={caption} placement='top-start'>
                 <span>{caption}</span>
               </Tooltip>
             ) : null
@@ -73,37 +64,35 @@ export default function NavItem({
           }}
         />
       )}
-
       {info && (
-        <Box component="span" sx={{ ml: 1, lineHeight: 0 }}>
+        <Box component='span' sx={{ ml: 1, lineHeight: 0 }}>
           {info}
         </Box>
       )}
-
       {!!children && (
         <Iconify
           width={16}
-          icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
+          icon={
+            open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'
+          }
           sx={{ ml: 1, flexShrink: 0 }}
         />
       )}
     </StyledItem>
   );
 
-  // Hidden item by role
   if (roles && !roles.includes(`${config.currentRole}`)) {
     return null;
   }
 
-  // External link
   if (externalLink)
     return (
       <Link
         href={path}
-        target="_blank"
-        rel="noopener"
-        underline="none"
-        color="inherit"
+        target='_blank'
+        rel='noopener'
+        underline='none'
+        color='inherit'
         sx={{
           ...(disabled && {
             cursor: 'default',
@@ -114,18 +103,16 @@ export default function NavItem({
       </Link>
     );
 
-  // Has child
   if (children) {
     return renderContent;
   }
 
-  // Default
   return (
     <Link
       component={RouterLink}
       href={path}
-      underline="none"
-      color="inherit"
+      underline='none'
+      color='inherit'
       sx={{
         ...(disabled && {
           cursor: 'default',
@@ -135,4 +122,5 @@ export default function NavItem({
       {renderContent}
     </Link>
   );
-}
+};
+export default NavItem;

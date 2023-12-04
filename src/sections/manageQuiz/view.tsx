@@ -46,7 +46,7 @@ const validationSchema = Yup.object().shape({
           .of(Yup.string().required('Tekst opcije je obavezan')),
       })
     )
-    .min(1, 'Morate unijeti barem jedno pitanje'),
+    .min(2, 'Morate unijeti barem dva pitanja'),
 });
 
 const ManageQuiz = () => {
@@ -70,7 +70,13 @@ const ManageQuiz = () => {
     questions: [
       {
         text: '',
-        options: [''],
+        options: ['', ''],
+        image: '',
+        correctOption: 0,
+      },
+      {
+        text: '',
+        options: ['', ''],
         image: '',
         correctOption: 0,
       },
@@ -133,7 +139,7 @@ const ManageQuiz = () => {
           ...formik.values.questions,
           {
             text: '',
-            options: [''],
+            options: ['', ''],
             image: '',
             correctOption: 0,
           },
@@ -160,12 +166,14 @@ const ManageQuiz = () => {
   };
 
   const handleRemoveQuestion = (index: number) => {
-    const newQuestions = [...formik.values.questions];
-    newQuestions.splice(index, 1);
-    formik.setValues({
-      ...formik.values,
-      questions: newQuestions,
-    });
+    if (formik.values.questions.length > 2) {
+      const newQuestions = [...formik.values.questions];
+      newQuestions.splice(index, 1);
+      formik.setValues({
+        ...formik.values,
+        questions: newQuestions,
+      });
+    }
   };
 
   const handleAddOption = (index: number) => {
@@ -201,11 +209,7 @@ const ManageQuiz = () => {
               <ArrowBackIcon />
             </IconButton>
           </Box>
-          <Typography
-            variant='h4'
-            textAlign='center'
-            m={1}
-          >
+          <Typography variant='h4' textAlign='center' m={1}>
             {quizId ? 'Ažuriraj' : 'Stvori novi'} kviz
           </Typography>
           <Box
@@ -267,10 +271,7 @@ const ManageQuiz = () => {
               />
             </LocalizationProvider>
             {formik.touched.availableUntil && formik.errors.availableUntil && (
-              <Typography
-                variant='caption'
-                color='error'
-              >
+              <Typography variant='caption' color='error'>
                 {formik.errors.availableUntil}
               </Typography>
             )}
@@ -330,15 +331,6 @@ const ManageQuiz = () => {
                     : ''
                 }
               />
-              <TextField
-                label='URL slike pitanja (neobvezni)'
-                fullWidth
-                sx={{ p: 1 }}
-                value={question.image || ''}
-                onChange={(e) =>
-                  handleQuestionChange(index, 'image', e.target.value)
-                }
-              />
               {question.options.map((option, optIndex) => (
                 <Box
                   key={optIndex}
@@ -392,20 +384,13 @@ const ManageQuiz = () => {
                 </Box>
               ))}
 
-              <FormControl
-                component='fieldset'
-                fullWidth
-              >
+              <FormControl component='fieldset' fullWidth>
                 <FormLabel
                   color={quizId ? 'secondary' : 'primary'}
                   component='legend'
                   sx={{ textAlign: 'center' }}
                 >
-                  <Typography
-                    mt={2}
-                    mb={1}
-                    variant='h6'
-                  >
+                  <Typography mt={2} mb={1} variant='h6'>
                     Točan odgovor za ovo pitanje
                   </Typography>
                 </FormLabel>
@@ -490,10 +475,7 @@ const ManageQuiz = () => {
             onClose={() => setErrorSnackbar(null)}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           >
-            <Alert
-              onClose={() => setErrorSnackbar(null)}
-              severity='error'
-            >
+            <Alert onClose={() => setErrorSnackbar(null)} severity='error'>
               {errorSnackbar}
             </Alert>
           </Snackbar>

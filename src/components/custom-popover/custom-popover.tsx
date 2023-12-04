@@ -1,23 +1,18 @@
-// @mui
 import { menuItemClasses } from '@mui/material/MenuItem';
 import Popover, { PopoverOrigin } from '@mui/material/Popover';
-//
 import { getPosition } from './utils';
 import { StyledArrow } from './styles';
 import { MenuPopoverProps } from './types';
 
-// ----------------------------------------------------------------------
-
-export default function CustomPopover({
+const CustomPopover = ({
   open,
   children,
   arrow = 'top-right',
   hiddenArrow,
   sx,
   ...other
-}: MenuPopoverProps) {
+}: MenuPopoverProps) => {
   const { style, anchorOrigin, transformOrigin } = getPosition(arrow);
-
   return (
     <Popover
       open={Boolean(open)}
@@ -43,8 +38,8 @@ export default function CustomPopover({
       {...other}
     >
       {!hiddenArrow && <StyledArrow arrow={arrow} />}
-
       {children}
     </Popover>
   );
-}
+};
+export default CustomPopover;

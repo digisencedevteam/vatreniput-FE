@@ -10,12 +10,12 @@ type Props = {
   children: React.ReactNode;
 };
 
-export default function CompactLayout({ children }: Props) {
+const CompactLayout = ({ children }: Props) => {
   return (
     <>
       <Header />
 
-      <Container component="main">
+      <Container component='main'>
         <Stack
           sx={{
             py: 12,
@@ -31,4 +31,5 @@ export default function CompactLayout({ children }: Props) {
       </Container>
     </>
   );
-}
+};
+export default CompactLayout;

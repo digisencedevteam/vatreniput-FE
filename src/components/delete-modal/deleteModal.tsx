@@ -13,13 +13,13 @@ interface Props {
   confirmButtonText: string;
 }
 
-export default function DeleteModal({
+const DeleteModal = ({
   modalText,
   isOpen,
   onClose,
   onConfirmDelete,
   confirmButtonText,
-}: Props) {
+}: Props) => {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Box
@@ -70,4 +70,5 @@ export default function DeleteModal({
       </Box>
     </Modal>
   );
-}
+};
+export default DeleteModal;

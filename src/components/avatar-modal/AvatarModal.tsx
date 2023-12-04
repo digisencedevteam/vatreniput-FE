@@ -14,13 +14,12 @@ interface Props {
   onSelectAvatar: (url: string) => void;
 }
 
-export default function AvatarModal({
+const AvatarModal = ({
   isOpen,
   onClose,
   avatarOptions,
-  selectedAvatar,
   onSelectAvatar,
-}: Props) {
+}: Props) => {
   const handleAvatarSelect = (url: string) => {
     onSelectAvatar(url);
   };
@@ -103,4 +102,5 @@ export default function AvatarModal({
       </Box>
     </Modal>
   );
-}
+};
+export default AvatarModal;

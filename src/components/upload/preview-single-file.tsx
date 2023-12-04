@@ -1,15 +1,11 @@
-// @mui
 import Box from '@mui/material/Box';
-//
 import Image from '../image';
-
-// ----------------------------------------------------------------------
 
 type Props = {
   imgUrl?: string;
 };
 
-export default function SingleFilePreview({ imgUrl = '' }: Props) {
+const SingleFilePreview = ({ imgUrl = '' }: Props) => {
   return (
     <Box
       sx={{
@@ -22,7 +18,7 @@ export default function SingleFilePreview({ imgUrl = '' }: Props) {
       }}
     >
       <Image
-        alt="file preview"
+        alt='file preview'
         src={imgUrl}
         sx={{
           width: 1,
@@ -32,4 +28,5 @@ export default function SingleFilePreview({ imgUrl = '' }: Props) {
       />
     </Box>
   );
-}
+};
+export default SingleFilePreview;

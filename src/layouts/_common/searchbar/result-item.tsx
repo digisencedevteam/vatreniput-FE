@@ -21,7 +21,7 @@ type Props = {
   onClickItem: VoidFunction;
 };
 
-export default function ResultItem({ title, path, groupLabel, onClickItem }: Props) {
+const ResultItem = ({ title, path, groupLabel, onClickItem }: Props) => {
   return (
     <ListItemButton
       onClick={onClickItem}
@@ -34,7 +34,10 @@ export default function ResultItem({ title, path, groupLabel, onClickItem }: Pro
           borderRadius: 1,
           borderColor: (theme) => theme.palette.primary.main,
           backgroundColor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.hoverOpacity),
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.hoverOpacity
+            ),
         },
       }}
     >
@@ -47,7 +50,7 @@ export default function ResultItem({ title, path, groupLabel, onClickItem }: Pro
         primary={title.map((part, index) => (
           <Box
             key={index}
-            component="span"
+            component='span'
             sx={{
               color: part.highlight ? 'primary.main' : 'text.primary',
             }}
@@ -58,7 +61,7 @@ export default function ResultItem({ title, path, groupLabel, onClickItem }: Pro
         secondary={path.map((part, index) => (
           <Box
             key={index}
-            component="span"
+            component='span'
             sx={{
               color: part.highlight ? 'primary.main' : 'text.secondary',
             }}
@@ -68,7 +71,8 @@ export default function ResultItem({ title, path, groupLabel, onClickItem }: Pro
         ))}
       />
 
-      {groupLabel && <Label color="info">{groupLabel}</Label>}
+      {groupLabel && <Label color='info'>{groupLabel}</Label>}
     </ListItemButton>
   );
-}
+};
+export default ResultItem;

@@ -1,7 +1,5 @@
 import { useCallback, useState } from 'react';
 
-// ----------------------------------------------------------------------
-
 type ReturnType = {
   onClose: VoidFunction;
   open: HTMLElement | null;
@@ -9,7 +7,7 @@ type ReturnType = {
   setOpen: React.Dispatch<React.SetStateAction<HTMLElement | null>>;
 };
 
-export default function usePopover(): ReturnType {
+const usePopover = (): ReturnType => {
   const [open, setOpen] = useState<HTMLElement | null>(null);
 
   const onOpen = useCallback((event: React.MouseEvent<HTMLElement>) => {
@@ -27,3 +25,4 @@ export default function usePopover(): ReturnType {
     setOpen,
   };
 }
+export default usePopover

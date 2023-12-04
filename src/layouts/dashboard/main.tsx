@@ -1,29 +1,20 @@
-// @mui
 import Box, { BoxProps } from '@mui/material/Box';
-// hooks
 import { useResponsive } from 'src/hooks/use-responsive';
-// components
 import { useSettingsContext } from 'src/components/settings';
-//
 import { HEADER, NAV } from '../config-layout';
-
-// ----------------------------------------------------------------------
 
 const SPACING = 8;
 
-export default function Main({ children, sx, ...other }: BoxProps) {
+const Main = ({ children, sx, ...other }: BoxProps) => {
   const settings = useSettingsContext();
-
   const lgUp = useResponsive('up', 'lg');
-
   const isNavHorizontal = settings.themeLayout === 'horizontal';
-
   const isNavMini = settings.themeLayout === 'mini';
 
   if (isNavHorizontal) {
     return (
       <Box
-        component="main"
+        component='main'
         sx={{
           minHeight: 1,
           display: 'flex',
@@ -43,7 +34,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
 
   return (
     <Box
-      component="main"
+      component='main'
       sx={{
         flexGrow: 1,
         minHeight: 1,
@@ -65,4 +56,5 @@ export default function Main({ children, sx, ...other }: BoxProps) {
       {children}
     </Box>
   );
-}
+};
+export default Main;

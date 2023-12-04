@@ -1,17 +1,15 @@
 import { Helmet } from 'react-helmet-async';
-// sections
 import { JwtLoginView } from 'src/sections/auth/jwt';
 
-// ----------------------------------------------------------------------
-
-export default function LoginPage() {
+const LoginPage = () => {
   return (
     <>
       <Helmet>
-        <title> Jwt: Login</title>
+        <title>Prijava na Vatreni Put</title>
       </Helmet>
 
       <JwtLoginView />
     </>
   );
-}
+};
+export default LoginPage;

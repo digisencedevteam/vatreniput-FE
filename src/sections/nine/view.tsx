@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Container,
   Typography,
@@ -14,37 +14,25 @@ import {
 import CameraOpener from 'src/components/camera-opener/camera-opener';
 import { svetiDresovi } from 'src/lib/constants';
 
-export default function NineView() {
+const NineView = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [openTutorial, setOpenTutorial] = useState<boolean>(true);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
   };
-
   const handleCloseTutorial = () => {
     setOpenTutorial(false);
   };
 
   return (
     <Container maxWidth='xl'>
-      <Typography
-        variant='h2'
-        my={2}
-      >
+      <Typography variant='h2' my={2}>
         Sveti Dres
       </Typography>
-      <Grid
-        container
-        spacing={2}
-      >
+      <Grid container spacing={2}>
         {svetiDresovi.map((image, index) => (
-          <Grid
-            item
-            xs={12}
-            sm={4}
-            key={index}
-          >
+          <Grid item xs={12} sm={4} key={index}>
             <Card
               sx={{
                 border: selectedImage === image ? 'solid 2px red' : '',
@@ -64,7 +52,6 @@ export default function NineView() {
           </Grid>
         ))}
       </Grid>
-
       <Dialog
         open={openTutorial}
         onClose={handleCloseTutorial}
@@ -95,4 +82,5 @@ export default function NineView() {
       </Dialog>
     </Container>
   );
-}
+};
+export default NineView;

@@ -23,15 +23,11 @@ const OPTIONS = [
   },
 ];
 
-export default function AccountPopover() {
+const AccountPopover = () => {
   const router = useRouter();
-
   const { user } = useAuthContext();
-
   const { logout } = useAuthContext();
-
   const popover = usePopover();
-
   const handleLogout = async () => {
     try {
       await logout();
@@ -41,7 +37,6 @@ export default function AccountPopover() {
       console.error(error);
     }
   };
-
   const handleClickItem = (path: string) => {
     popover.onClose();
     router.push(path);
@@ -75,7 +70,6 @@ export default function AccountPopover() {
           }}
         />
       </IconButton>
-
       <CustomPopover
         open={popover.open}
         onClose={popover.onClose}
@@ -90,9 +84,7 @@ export default function AccountPopover() {
             {user?.email}
           </Typography>
         </Box>
-
         <Divider sx={{ borderStyle: 'dashed' }} />
-
         <Stack sx={{ p: 1 }}>
           {OPTIONS.map((option) => (
             <MenuItem
@@ -103,9 +95,7 @@ export default function AccountPopover() {
             </MenuItem>
           ))}
         </Stack>
-
         <Divider sx={{ borderStyle: 'dashed' }} />
-
         <MenuItem
           onClick={handleLogout}
           sx={{
@@ -119,4 +109,5 @@ export default function AccountPopover() {
       </CustomPopover>
     </>
   );
-}
+};
+export default AccountPopover;

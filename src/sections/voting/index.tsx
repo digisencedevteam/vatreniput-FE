@@ -68,14 +68,8 @@ const VotingApp = () => {
         <LoadingScreen />
       ) : (
         <>
-          <Grid
-            container
-            alignItems='center'
-          >
-            <Grid
-              item
-              sx={{ m: 5 }}
-            >
+          <Grid container alignItems='center'>
+            <Grid item sx={{ m: 3, ml: 1 }}>
               <IconButton
                 edge='start'
                 color='primary'
@@ -100,24 +94,13 @@ const VotingApp = () => {
               textAlign: 'center',
             }}
           >
-            <Typography
-              sx={{ marginTop: 2 }}
-              variant='h3'
-              gutterBottom
-            >
+            <Typography sx={{ marginTop: 5 }} variant='h4' gutterBottom>
               {voting && voting.title}
             </Typography>
-            <Typography
-              variant='body1'
-              gutterBottom
-            >
+            <Typography variant='body1' gutterBottom>
               {voting && voting.description}
             </Typography>
-            <Grid
-              container
-              spacing={2}
-              sx={{ my: 5, p: isMobile ? 0 : 3 }}
-            >
+            <Grid container spacing={2} sx={{ my: 5, p: isMobile ? 0 : 3 }}>
               {voting &&
                 voting.votingOptions &&
                 voting.votingOptions.map((option: any) => (

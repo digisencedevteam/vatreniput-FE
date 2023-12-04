@@ -14,6 +14,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { FormValues } from 'src/types';
 import { useAuthContext } from 'src/auth/hooks';
+import { Alert } from '@mui/material';
 
 type Props = {
   currentUser?: any;
@@ -290,8 +291,15 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
         autoHideDuration={6000}
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        message='Korisnički podatci su uspješno promjenjeni!'
-      />
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          Korisnički podatci su uspješno promjenjeni!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

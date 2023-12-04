@@ -1,10 +1,7 @@
-// @mui
 import { useTheme } from '@mui/material/styles';
 import GlobalStyles from '@mui/material/GlobalStyles';
 
-// ----------------------------------------------------------------------
-
-export default function StyledProgressBar() {
+const StyledProgressBar = () => {
   const theme = useTheme();
 
   const inputGlobalStyles = (
@@ -38,4 +35,5 @@ export default function StyledProgressBar() {
   );
 
   return inputGlobalStyles;
-}
+};
+export default StyledProgressBar;

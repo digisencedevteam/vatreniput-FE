@@ -5,7 +5,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import { Typography, useTheme } from '@mui/material';
 import { avatarOptions } from 'src/lib/constants';
 
-export default function ProfileView() {
+const ProfileView = () => {
   const settings = useSettingsContext();
   const currentUser = useAuthContext();
   const theme = useTheme();
@@ -25,4 +25,5 @@ export default function ProfileView() {
       />
     </Container>
   );
-}
+};
+export default ProfileView;

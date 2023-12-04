@@ -10,7 +10,7 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { useSettingsContext } from 'src/components/settings';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
 import axiosInstance from 'src/utils/axios';
 import { endpoints } from 'src/utils/axios';
 import { paths } from 'src/routes/paths';
@@ -24,14 +24,23 @@ export const CardView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const fetchCardData = async () => {
     try {
-      const response = await axiosInstance.get(endpoints.card.details + cardId);
+      const response = await axiosInstance.get(
+        `${endpoints.card.details}${cardId}`
+      );
       setCardData(response.data);
+      setIsError(false);
     } catch (error) {
+      console.error('Fetch card data error:', error);
       setIsError(true);
-      setErrorMessage('Error fetching card data.');
+      setErrorMessage(
+        error.response?.data?.message ||
+          'Dogodila se greška prilikom dobivanja podataka o sličici!'
+      );
     }
   };
 
@@ -41,16 +50,28 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     try {
-      const res = await axiosInstance.patch(endpoints.card.add, { cardId });
-      if (res.data === 'ok') {
-        navigate(paths.dashboard.collection);
+      const res = await axiosInstance.patch(`${endpoints.card.add}`, {
+        cardId,
+      });
+      if (res.data.message !== 'ok') {
+        setErrorMessage(res.data.message);
       } else {
-        setErrorMessage(res.data);
+        setSnackbarMessage('Sličica uspješno dodana u album!');
+        setSnackbarOpen(true);
+        navigate(paths.dashboard.collection);
       }
     } catch (error) {
+      console.error('Add card to album error:', error);
       setIsError(true);
-      setErrorMessage('Error adding card to album.' + error);
+      setErrorMessage(
+        error.response?.data?.message ||
+          'Dogodila se greška prilikom dodavanja sličice u album!'
+      );
     }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   return (
@@ -138,6 +159,62 @@ export const CardView = () => {
                 </Typography>
               </CardContent>
               <Divider />
+  {isError ? (
+                <Box p={2}>
+                  <Typography variant='subtitle1' component='div'>
+                    {errorMessage}
+                  </Typography>
+                </Box>
+              ) : (
+   <Box p={3}>
+                <Typography
+                  variant='subtitle2'
+                  component='div'
+                >
+                  {cardData?.description}
+                </Typography>
+                {cardData?.videoLink && (
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    href='/dashboard'
+                    sx={{ mt: 2 }}
+                  >
+                    Prijavi se
+                  </Button>
+                )}
+              </Box>
+              {isError ? (
+                <Box p={2}>
+                  <Typography
+                    variant='h4'
+                    component='div'
+                  >
+                    {errorMessage}
+                  </Typography>
+                </Box>
+              ) : (
+                !cardData?.videoLink && (
+                  <Box p={3}>
+                    <Button
+                      variant='contained'
+                      color='success'
+                      onClick={handleAddCardToAlbum}
+                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                    >
+                      Dodaj U Album
+                    </Button>
+                    <Button
+                      variant='contained'
+                      color='inherit'
+                      href='/dashboard'
+                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                    >
+                      Prijavi se
+                    </Button>
+                  </Box>
+                )
+
               <Box p={3}>
                 <Typography
                   variant='subtitle2'
@@ -191,6 +268,20 @@ export const CardView = () => {
           </Grid>
         </Grid>
       </Container>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

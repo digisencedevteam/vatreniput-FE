@@ -8,11 +8,11 @@ interface PagingComponentProps {
   onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
 }
 
-export default function PagingComponent({
+const PagingComponent = ({
   currentPage,
   totalPages,
   onPageChange,
-}: PagingComponentProps) {
+}: PagingComponentProps) => {
   return (
     <Box
       sx={{
@@ -29,4 +29,5 @@ export default function PagingComponent({
       />
     </Box>
   );
-}
+};
+export default PagingComponent;

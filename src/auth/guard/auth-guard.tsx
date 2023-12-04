@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../hooks';
 import { paths } from 'src/routes/paths';
-import { LoadingScreen } from 'src/components/loading-screen';
 
 type Props = {
   children: React.ReactNode;
@@ -21,10 +20,6 @@ const AuthGuard = ({ children }: Props) => {
       navigate(`${loginPath}?${searchParams}`, { replace: true });
     }
   }, [authenticated, initializing, method, navigate]);
-
-  if (initializing) {
-    return <LoadingScreen />;
-  }
 
   return <>{children}</>;
 };

@@ -1,13 +1,11 @@
 import Typography from '@mui/material/Typography';
 import Paper, { PaperProps } from '@mui/material/Paper';
 
-// ----------------------------------------------------------------------
-
 interface Props extends PaperProps {
   query?: string;
 }
 
-export default function SearchNotFound({ query, sx, ...other }: Props) {
+const SearchNotFound = ({ query, sx, ...other }: Props) => {
   return query ? (
     <Paper
       sx={{
@@ -17,19 +15,20 @@ export default function SearchNotFound({ query, sx, ...other }: Props) {
       }}
       {...other}
     >
-      <Typography variant="h6" gutterBottom>
+      <Typography variant='h6' gutterBottom>
         Not Found
       </Typography>
 
-      <Typography variant="body2">
+      <Typography variant='body2'>
         No results found for &nbsp;
         <strong>&quot;{query}&quot;</strong>.
         <br /> Try checking for typos or using complete words.
       </Typography>
     </Paper>
   ) : (
-    <Typography variant="body2" sx={sx}>
+    <Typography variant='body2' sx={sx}>
       Please enter keywords
     </Typography>
   );
-}
+};
+export default SearchNotFound;

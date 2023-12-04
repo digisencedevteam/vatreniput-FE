@@ -10,7 +10,6 @@ import ManageVoting from 'src/sections/manageVoting/view';
 const IndexPage = lazy(() => import('src/pages/dashboard/one'));
 const CollectionPage = lazy(() => import('src/pages/dashboard/collections'));
 const QuizzesPage = lazy(() => import('src/pages/dashboard/three'));
-const PageFour = lazy(() => import('src/pages/dashboard/four'));
 const VotingsPage = lazy(() => import('src/pages/dashboard/five'));
 const PageSix = lazy(() => import('src/pages/dashboard/six'));
 const PageNine = lazy(() => import('src/pages/dashboard/nine'));
@@ -37,7 +36,6 @@ export const dashboardRoutes = [
       { element: <IndexPage />, index: true },
       { path: 'collection', element: <CollectionPage /> },
       { path: 'quizzes', element: <QuizzesPage /> },
-      { path: 'four', element: <PageFour /> },
       { path: 'votings', element: <VotingsPage /> },
       { path: 'nine', element: <PageNine /> },
       { path: 'profile', element: <ProfileView /> },

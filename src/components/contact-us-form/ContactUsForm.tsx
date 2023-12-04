@@ -33,7 +33,7 @@ interface ContactFormData {
   email: string;
 }
 
-export default function ContactUsForm() {
+const ContactUsForm = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -58,17 +58,11 @@ export default function ContactUsForm() {
 
   return (
     <Box mt={2}>
-      <Button
-        color='inherit'
-        onClick={() => setOpen(true)}
-      >
+      <Button color='inherit' onClick={() => setOpen(true)}>
         Kontaktirajte nas
       </Button>
       <Button color='inherit'>
-        <Link
-          href='/faq'
-          underline='none'
-        >
+        <Link href='/faq' underline='none'>
           Česta Pitanja
         </Link>
       </Button>
@@ -146,17 +140,10 @@ export default function ContactUsForm() {
           </DialogContent>
 
           <DialogActions sx={{ background: theme.palette.background.default }}>
-            <LoadingButton
-              color='inherit'
-              type='submit'
-              loading={isSubmitting}
-            >
+            <LoadingButton color='inherit' type='submit' loading={isSubmitting}>
               Pošalji
             </LoadingButton>
-            <Button
-              onClick={handleClose}
-              color='primary'
-            >
+            <Button onClick={handleClose} color='primary'>
               Odustani
             </Button>
           </DialogActions>
@@ -169,13 +156,11 @@ export default function ContactUsForm() {
         onClose={() => setSubmitted(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert
-          onClose={() => setSubmitted(false)}
-          severity='success'
-        >
+        <Alert onClose={() => setSubmitted(false)} severity='success'>
           Vaša poruka je uspješno poslana podršci Vatrenog Puta!
         </Alert>
       </Snackbar>
     </Box>
   );
-}
+};
+export default ContactUsForm;

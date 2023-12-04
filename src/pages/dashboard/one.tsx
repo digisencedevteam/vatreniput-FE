@@ -3,16 +3,17 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import OneView from 'src/sections/one/view';
 import { DesktopViewOne } from 'src/sections/one/view-desktop';
 
-export default function Page() {
+const Page = () => {
   const isDesktop = useResponsive('up', 'md');
 
   return (
     <>
       <Helmet>
-        <title> Dashboard: One</title>
+        <title>Dashboard: One</title>
       </Helmet>
 
       {isDesktop ? <DesktopViewOne /> : <OneView />}
     </>
   );
-}
+};
+export default Page;
