@@ -19,7 +19,7 @@ export const StorySectionWrapper = ({
       p={2}
       pl={0}
       mt={2}
-      mb={1}
+      mb={2}
     >
       <Box
         display='flex'
