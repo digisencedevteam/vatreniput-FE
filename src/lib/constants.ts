@@ -53,8 +53,82 @@ export const LEGEND_HEIGHT = 72;
 
 export const STORIES = [
   {
-    storyTitle: '1996',
+    storyTitle: '1990',
     storyId: 0,
+    story: {
+      storyTitle: '1990. prva utakmica Hrvatske',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701268270/Flag_of_the_United_States_c0r08r.png',
+
+      Game: {
+        GameDetails: {
+          Teams: 'HRVATSKA – SAD',
+          Score: '2 : 1',
+          Scorers: ['Asanović  27`', 'Cvjetković  31`', 'Dayak `80'],
+          Judge: 'Sergio Coppetelli',
+          Stadium: 'Stadion Maksimir, Zagreb',
+          Date: '17. listopada 1990., 19:00 sati',
+          Viewers: '30.000 gledatelja',
+        },
+        Summary:
+          'Prva utakmica Hrvatske nakon  konstituiranja prvog demokratskog i višestranačkog Sabora.  Utakmica je odigrana u sklopu proslave vraćanja spomenika bana Josipa Jelačića na glavni zagrebački trg. Odigrana je pred 30-ak tisuća gledatelja na stadionu Maksimir. Kapetan hrvatske reprezentacije bio je Zlatko Kranjčar, a najboljim igračem utakmice bio je proglašen Marko Mlinarić kojemu je nagradu uručio doajen hrvatskoga sportskoga novinarstva Mladen Delić.',
+      },
+      Coach: {
+        Name: 'Dražan Jerković',
+        DOB: '6. kolovoza 1936. – 9. prosinca 2008.',
+        CoachingCareer:
+          'Prvi hrvatski izbornik. Velika čast. Povijest. Bio je na klupi u susretu protiv SAD-a 17. listopada 1990. na premijernom nastupu Hrvatske i pobjedi protiv SAD-a s 2 : 1. Imao je priliku i čast povesti hrvatske izabranike na europsku i svjetsku scenu pod vlastitom zastavom i himnom. Vodio je Hrvatsku i u sljedeća dva susreta: protiv Rumunjske u Rijeci (pobjeda 2 : 0), te u Murskoj Soboti u gostujućem slavlju protiv Slovenije  1 : 0.',
+        MajorAchievements: [
+          'Nakon igračke nastavio je s trenerskom karijerom. Bio je tehnički direktor i trener klubova NK Dinamo Zagreb, austrijskih INCO Klagenfurt i Villach, NK Dinamo Vinkovci, te NK Zagreb.',
+        ],
+        StoryText: '',
+        imgUrl: '',
+      },
+      Facts: [
+        'Vlado Kasalo je došao na utakmicu iz Nürnberga bez dozvole svoga kluba i za to je po povratku platio klupsku kaznu od 25 tisuća njemačkih maraka.  Aljoša Asanović, strijelac povijesnog prvog pogotka, također je imao problem s klubom, francuskim  Metzom, koji je imao važnu utakmicu četiri dana poslije. Ipak je uspio nagovoriti vlasnika kluba da mu ustupi privatni zrakoplov kako bi došao na utakmicu. Morao je izaći u 58. minuti susreta  da bi stigao na zrakoplov koji je morao sletjeti nazad u Francusku do ponoći.',
+      ],
+    },
+  },
+  {
+    storyTitle: '1994',
+    storyId: 1,
+    story: {
+      storyTitle: '1994. prijateljska utakmica',
+      storyLogo:
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701268269/Argentina_Flag_hghtos.png',
+
+      Game: {
+        GameDetails: {
+          Teams: 'HRVATSKA – ARGENTINA',
+          Score: '0 : 0',
+          Judge: 'Gerd Grabher',
+          Stadium: 'Stadion Maksimir, Zagreb',
+          Date: '6. travanj 1994., 21:00 sati',
+          Viewers: '40.000 gledatelja',
+        },
+        Summary:
+          'Bila su to teška vremena borbe za slobodu. Hrvatska je tražila prijatelje po svijetu. I našla ih je puno. Kako na političkom tako i na sportskom planu. Redale su se prijateljske utakmice i čekao se nastup u prvim kvalifikacijama za Euro 1996. Onda je odjeknulo. U Hrvatsku dolazi on. Mali zeleni. Maradona je poveo jaki sastav Argentinaca u prijateljskom srazu protiv Zvonimira Bobana i ostatka naše reprezentacije na Maksimiru. U Zagrebu. Maradona, Batistuta, Caniggia, Simeone bili su samo dio južnoameričkih majstora. S druge strane uz Bobana stajali su Šuker, Prosinečki, Asanović, Jarni, Štimac, Bilić... Rezultat je bio 0 : 0, ali ta utakmica ostaje spremljena u sve nogometne almanahe i zauvijek će imati posebno mjesto u našoj nogometnoj povijesti.  Tom prilikom Maradona je sa svojim suigračem, Davorom Šukerom, posjetio grob i odao počast hrvatskom ekvivalentu svoje sportske veličine - Draženu Petroviću.',
+      },
+      Coach: {
+        Name: 'Miroslav Blažević',
+        DOB: '6. kolovoza 1936. – 9. prosinca 2008.',
+        CoachingCareer:
+          'Trener svih trenera. Jedan i jedini, neponovljivi, Ćiro. Izbornik s kojim je Hrvatska dobila identitet.  Na klupu reprezentacije došao je  1994. godine.  Ondje je proveo 72 utakmice. Ostvario je 33 pobjede, 24 remija i 15 poraza.  Bio je izbornik na prvom velikom natjecanju – Euru 1996. gdje je Hrvatska došla do četvrtfinala',
+        MajorAchievements: [
+          'Miroslav Blazević, poznat kao "Ćiro", najpoznatiji je po vođenju hrvatske nogometne reprezentacije do trećeg mjesta na Svjetskom prvenstvu 1998. godine i osvajanju više naslova s Dinamom Zagreb.',
+        ],
+        StoryText: '',
+        imgUrl: '',
+      },
+      Facts: [
+        'Vlado Kasalo je došao na utakmicu iz Nürnberga bez dozvole svoga kluba i za to je po povratku platio klupsku kaznu od 25 tisuća njemačkih maraka.  Aljoša Asanović, strijelac povijesnog prvog pogotka, također je imao problem s klubom, francuskim  Metzom, koji je imao važnu utakmicu četiri dana poslije. Ipak je uspio nagovoriti vlasnika kluba da mu ustupi privatni zrakoplov kako bi došao na utakmicu. Morao je izaći u 58. minuti susreta  da bi stigao na zrakoplov koji je morao sletjeti nazad u Francusku do ponoći.',
+      ],
+    },
+  },
+
+  {
+    storyTitle: '1996',
+    storyId: 2,
     story: {
       storyTitle: 'Euro 1996.',
       storyLogo:
@@ -329,7 +403,7 @@ export const STORIES = [
   },
   {
     storyTitle: '1998',
-    storyId: 1,
+    storyId: 3,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 1998.',
       storyLogo:
@@ -559,7 +633,7 @@ export const STORIES = [
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917360/HRV21107_copy_tvmokl.jpg',
           Description:
-            'Stanić zabija prvi gol na svjetskom prvenstvu u 27. minuti!',
+            'U jednom od najupečatljivijih trenutaka Svjetskog prvenstva 1998., hrvatski nogometni čarobnjak, Robert Prosinečki, postiže fantastičan gol protiv moćne Nizozemske. U 13. minuti, Prosinečki demonstrira svoju tehničku vještinu i taktičku inteligenciju, probijajući obranu Nizozemske i smireno šalje loptu u mrežu, ostavljajući gledatelje i protivnike u čudu. Ovaj gol ne samo da je postavio Hrvatsku u vodstvo s 1:0, već je i simbolizirao snagu i talent hrvatskog tima, koji je tada bio na svom prvom Svjetskom prvenstvu kao neovisna država.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275704/1998_HRV_NIZ_PROSINECKI_npjfyq.mp4',
         },
@@ -593,7 +667,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2000',
-    storyId: 2,
+    storyId: 4,
     story: {
       storyTitle: 'Euro 2000.',
       storyLogo:
@@ -661,7 +735,7 @@ export const STORIES = [
   // 2002
   {
     storyTitle: '2002',
-    storyId: 3,
+    storyId: 5,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2002.',
       storyLogo:
@@ -930,7 +1004,7 @@ export const STORIES = [
   //2004
   {
     storyTitle: '2004',
-    storyId: 4,
+    storyId: 6,
     story: {
       storyTitle: 'Euro 2004.',
       storyLogo:
@@ -1216,7 +1290,7 @@ export const STORIES = [
   //2006
   {
     storyTitle: '2006',
-    storyId: 5,
+    storyId: 7,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2006.',
       storyLogo:
@@ -1466,7 +1540,7 @@ export const STORIES = [
   //2008
   {
     storyTitle: '2008',
-    storyId: 6,
+    storyId: 8,
     story: {
       storyTitle: 'Europsko Prvenstvo 2008.',
       storyLogo:
@@ -1768,7 +1842,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2010',
-    storyId: 7,
+    storyId: 9,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2010.',
       storyLogo:
@@ -1837,7 +1911,7 @@ export const STORIES = [
   // 2012
   {
     storyTitle: '2012',
-    storyId: 8,
+    storyId: 10,
     story: {
       storyTitle: 'Europsko Prvenstvo 2012.',
       storyLogo:
@@ -2126,7 +2200,7 @@ export const STORIES = [
   //2014
   {
     storyTitle: '2014',
-    storyId: 9,
+    storyId: 11,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2014.',
       storyLogo:
@@ -2422,7 +2496,7 @@ export const STORIES = [
   //2016
   {
     storyTitle: '2016.',
-    storyId: 10,
+    storyId: 12,
     story: {
       storyTitle: 'Europsko Prvenstvo 2016.',
       storyLogo:
@@ -2725,7 +2799,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2018',
-    storyId: 11,
+    storyId: 13,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2018.',
       storyLogo:
@@ -2901,7 +2975,7 @@ export const STORIES = [
           },
         },
         Summary:
-          'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su. Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom',
+          'Hrvatska nogometna reprezentacija ostvarila je povijesni uspjeh na Svjetskom prvenstvu 2018. u Rusiji, stigavši sve do finala turnira. Predvođeni kapetanom Lukom Modrićem, pokazali su izvanrednu tehničku vještinu, timski duh i izdržljivost, posebno istaknuvši se u grupnoj fazi s tri pobjede, uključujući impresivnu 3-0 pobjedu nad Argentinom. U nokaut fazi, uspjeli su proći Dansku, Rusiju i Englesku, pokazujući iznimnu mentalnu snagu, posebno u pobjedama na penale protiv Danske i Rusije. Iako su poraženi od Francuske u finalu, njihova neustrašiva igra i nacionalni ponos osigurali su im status nacionalnih heroja i simbol otpornosti i sportske izvrsnosti, potvrđujući da i mali narodi mogu postići velike stvari na svjetskoj nogometnoj pozornici.',
 
         Champ: {
           Winner: 'FRANCUSKA',
@@ -3048,16 +3122,16 @@ export const STORIES = [
             'https://player.vimeo.com/video/881655897?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
-          Title: 'Reportaža Pogodak Luke Modrića protiv Argentine',
+          Title: 'Pogodak Luke Modrića protiv Argentine',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926829/Messi_Modric%CC%81_2_ubx2uz.jpg',
           Description:
-            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom.',
+            'Ispraćeni s puno upitnika, dočekani kao pobjednici za sva vremena. Ljeto snova, ljeto za pamćenje. Rusija 2018. Siguran ulazak u turnir i pobjeda nad Nigerijom. Mnogi su još uvijek sumnjali. "Nije ta Nigerija mjerilo" – govorili su.  Nakon drugog kola pale su maske. Postalo je jasno da se "kuha" nešto posebno. Pobjeda 3:0 nad Argentinom. Bijes i muka Gauchosa bili su šećer na kraju jedne predivne pobjede.',
           videoLink:
             'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275695/2018_HRV_ARG_MODRIC_ior0ju.mp4',
         },
         {
-          Title: 'Reportaža pobjednički 11-erac protiv Danske (Rakitić) ',
+          Title: 'Pobjednički 11-erac protiv Danske (Rakitić) ',
           imgUrl:
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693926833/rakitic%CC%81_messi_0_vy8u5u.jpg',
           Description:
@@ -3104,7 +3178,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2020',
-    storyId: 12,
+    storyId: 14,
     story: {
       storyTitle: 'Euro 2020.',
       storyLogo:
@@ -3395,7 +3469,7 @@ export const STORIES = [
   },
   {
     storyTitle: '2022',
-    storyId: 13,
+    storyId: 15,
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2022.',
       storyLogo:
@@ -3757,7 +3831,7 @@ export const STORIES = [
 
   {
     storyTitle: '2023',
-    storyId: 14,
+    storyId: 16,
     story: {
       storyTitle: 'Liga nacija 2023.',
       storyLogo:

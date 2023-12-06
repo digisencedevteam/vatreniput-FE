@@ -43,8 +43,16 @@ export function useNavData() {
             icon: <LocalFireDepartmentIcon />,
             children: [
               {
-                title: `Euro 1996`,
+                title: `Prijateljska utakmica 1990`,
                 path: paths.dashboard.story.root,
+              },
+              {
+                title: `Prijateljska utakmica 1994`,
+                path: paths.dashboard.story.ut94,
+              },
+              {
+                title: `Euro 1996`,
+                path: paths.dashboard.story.euro96,
               },
               {
                 title: 'Svjetsko prvenstvo 1998',
@@ -52,7 +60,7 @@ export function useNavData() {
               },
               {
                 title: 'Euro 2000',
-                path: paths.dashboard.story.sp98,
+                path: paths.dashboard.story.euro00,
               },
               {
                 title: 'Svjetsko prvenstvo 2002',
@@ -72,7 +80,7 @@ export function useNavData() {
               },
               {
                 title: 'Svjetsko prvenstvo 2010',
-                path: paths.dashboard.story.euro08,
+                path: paths.dashboard.story.sp10,
               },
               {
                 title: 'Euro 2012',

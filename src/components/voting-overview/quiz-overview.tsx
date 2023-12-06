@@ -3,13 +3,13 @@ import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useTheme } from '@mui/material/styles';
-import { VotingsResult } from 'src/types';
+import { VotingResult } from 'src/types';
 
 interface Props extends CardProps {
-  data: VotingsResult[] | undefined;
+  data: VotingResult[] | undefined;
 }
 
-export const VotingOverview = ({ data }: Props) => {
+const QuizOverview = ({ data }: Props) => {
   const theme = useTheme();
   return (
     <Card sx={{ mt: 2, bgcolor: theme.palette.background.neutral }}>
@@ -17,51 +17,61 @@ export const VotingOverview = ({ data }: Props) => {
         spacing={4}
         sx={{ px: 3, pt: 3, pb: 5 }}
       >
-        {data?.map((votingResult, index) => (
+        {data?.map((progress) => (
           <ProgressItem
-            key={`${votingResult.votingName}-${index}`}
-            progress={votingResult}
+            key={progress.votingOptionText}
+            progress={progress}
           />
         ))}
       </Stack>
+      <Stack
+        direction='row'
+        justifyContent='flex-end'
+        paddingRight={2}
+        paddingBottom={2}
+      ></Stack>
     </Card>
   );
 };
 
 type ProgressItemProps = {
-  progress: VotingsResult;
+  progress: VotingResult;
 };
 
 export const ProgressItem = ({ progress }: ProgressItemProps) => {
   return (
     <Stack spacing={1}>
-      <Typography
-        variant='h4'
-        color={'primary'}
-      >
-        {progress.votingName}
-      </Typography>
       <Stack
         direction='row'
         alignItems='center'
       >
         <Typography
-          variant='body1'
+          variant='subtitle2'
           sx={{ flexGrow: 1 }}
         >
-          {progress.optionName}
+          {progress.votingOptionText}
         </Typography>
+
         <Typography
           sx={{ mx: 3 }}
           variant='subtitle2'
         >
-          Broj glasova: {progress.votes}
+          {progress.count}
+        </Typography>
+
+        <Typography
+          variant='body2'
+          sx={{ color: 'text.secondary' }}
+        >
+          {progress.percentage}%
         </Typography>
       </Stack>
+
       <LinearProgress
         variant='determinate'
-        value={progress.votes}
+        value={parseInt(progress.percentage, 10)}
       />
     </Stack>
   );
 };
+export default QuizOverview;

@@ -1,4 +1,4 @@
-import { Question } from "src/sections/quiz/types";
+import { Question } from 'src/sections/quiz/types';
 
 export type FAQ = {
   question: string;
@@ -75,7 +75,7 @@ export type DashboardStats = {
 export type FormValues = {
   firstName: string;
   lastName: string;
-  username: string
+  username: string;
   email: string;
   photoURL: string;
   [key: string]: string;
@@ -117,7 +117,7 @@ export type LabelInfo = {
 export type VotingOption = {
   _id?: string;
   text?: string;
-  thumbnail?: string
+  thumbnail?: string;
 };
 
 export type Voting = {
@@ -147,6 +147,11 @@ export type VotingResult = {
   percentage: string;
 };
 
+export interface VotingsResult {
+  votingName: string;
+  optionName: string;
+  votes: number;
+}
 export type VotingResultStat = {
   totalVotes: number;
   results: VotingResult[];
@@ -191,4 +196,4 @@ export type QuizFormValues = {
   thumbnail: string;
   availableUntil: string;
   questions: Question[];
-}
+};

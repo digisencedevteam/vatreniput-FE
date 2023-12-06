@@ -7,6 +7,12 @@ import PenaltyShootoutTable from '../penalty-table/penatly-table';
 const MatchDetails = ({ matchData }: MatchDetailsProps) => {
   return (
     <Box>
+      <Typography
+        variant='body1'
+        m={1}
+      >
+        {matchData.Description}
+      </Typography>
       <Box
         bgcolor={'background.paper'}
         p={1}

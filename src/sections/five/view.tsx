@@ -20,13 +20,23 @@ import { paths } from 'src/routes/paths';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
+import { VotingOverview } from 'src/components/voting-overview/voting-overview';
+import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
 
 const FiveView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-  const { votings, fetchAllVotings, deleteVoting, isLoading } = useVoting();
+
+  const {
+    votings,
+    fetchAllVotings,
+    deleteVoting,
+    isLoading,
+    fetchUserVotedVotingsWithTopOption,
+    userVotedVotings,
+  } = useVoting();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
   const welcomeButtonProps = isAdmin
@@ -50,10 +60,33 @@ const FiveView = () => {
     await fetchAllVotings();
   };
 
+  const transformVotingResults = () => {
+    if (
+      !userVotedVotings ||
+      userVotedVotings.length === 0 ||
+      !votings ||
+      votings.length === 0
+    ) {
+      return [];
+    }
+
+    return userVotedVotings.map((voting) => {
+      const votingDetail = votings.find((v) => v._id === voting.votingId);
+      return {
+        votingName: votingDetail?.title || 'Unknown Voting',
+        optionName: voting.topOption || 'Unknown Option',
+        votes: voting.votes,
+      };
+    });
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (auth.user) {
+      fetchUserVotedVotingsWithTopOption(auth.user._id);
+    }
+  }, [auth.user]);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -62,7 +95,11 @@ const FiveView = () => {
       ) : (
         <>
           {!isMobile ? (
-            <Grid item xs={12} md={7}>
+            <Grid
+              item
+              xs={12}
+              md={7}
+            >
               <AppWelcome
                 title={`Dobrodošli na stranicu glasanja! `}
                 description='Zaronite u uzbudljivi svijet glasanja i otkrij koji su igrači tvojim prijateljima najdraži! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
@@ -80,7 +117,10 @@ const FiveView = () => {
               alignItems='center'
               sx={{ m: 1 }}
             >
-              <Typography variant='h2' color={theme.palette.primary.main}>
+              <Typography
+                variant='h2'
+                color={theme.palette.primary.main}
+              >
                 Glasanja
               </Typography>
 
@@ -96,6 +136,7 @@ const FiveView = () => {
               )}
             </Box>
           )}
+
           <SectionWrapper title='Dostupna'>
             <Grid container>
               {isLoading ? (
@@ -114,9 +155,19 @@ const FiveView = () => {
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
               ) : (
-                <Grid container spacing={2}>
+                <Grid
+                  container
+                  spacing={2}
+                >
                   {notVotedVotings.map((voting, index) => (
-                    <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+                    <Grid
+                      key={index}
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={4}
+                    >
                       <CustomCard
                         cardId={voting._id}
                         votingId={voting._id}
@@ -132,6 +183,24 @@ const FiveView = () => {
               )}
             </Grid>
           </SectionWrapper>
+
+          <StorySectionWrapper
+            title='Najboljih 11'
+            isCollapsable={true}
+          >
+            {isLoading ? (
+              <SkeletonDashboardLoader
+                count={6}
+                isMobileCount={3}
+                isTabletCount={4}
+                maxWidth={isMobile ? '90px' : '200px'}
+              />
+            ) : !userVotedVotings.length ? (
+              <Typography>Glasajte za svoje najdraže igrače!</Typography>
+            ) : (
+              <VotingOverview data={transformVotingResults()} />
+            )}
+          </StorySectionWrapper>
 
           <SectionWrapper title='Ispunjena'>
             {isLoading ? (

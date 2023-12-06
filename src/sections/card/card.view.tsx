@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { endpoints } from 'src/utils/axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
@@ -13,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import { useSettingsContext } from 'src/components/settings';
 import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
 import axiosInstance from 'src/utils/axios';
+import { endpoints } from 'src/utils/axios';
 import { paths } from 'src/routes/paths';
 
 export const CardView = () => {
@@ -46,7 +46,6 @@ export const CardView = () => {
 
   useEffect(() => {
     fetchCardData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardId]);
 
   const handleAddCardToAlbum = async () => {
@@ -84,19 +83,51 @@ export const CardView = () => {
       sx={isMobile ? { marginTop: '20px' } : null}
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-        <Grid container spacing={5}>
-          {cardData && (
-            <Grid item xs={12} md={6}>
+        <Grid
+          container
+          spacing={5}
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+            {cardData?.videoLink ? (
+              <div style={{ position: 'relative', paddingTop: '56.25%' }}>
+                <iframe
+                  src={`${cardData.videoLink}?dnt=1`}
+                  style={{
+                    position: 'absolute',
+                    top: '0',
+                    left: '0',
+                    width: '100%',
+                    height: '100%',
+                    border: '0',
+                  }}
+                  allow='fullscreen; picture-in-picture'
+                  title={cardData?.title}
+                />
+              </div>
+            ) : (
               <CardMedia
                 component='img'
                 height='auto'
-                image={cardData.imageURLs[0]}
+                image={
+                  Array.isArray(cardData?.imageURLs) &&
+                  cardData.imageURLs.length > 0
+                    ? cardData.imageURLs[0]
+                    : ''
+                }
                 alt='Sličica'
                 sx={{ borderRadius: 2 }}
               />
-            </Grid>
-          )}
-          <Grid item xs={12} md={6}>
+            )}
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <Card
               sx={{
                 height: '100%',
@@ -108,63 +139,54 @@ export const CardView = () => {
                   variant='caption'
                   sx={{ my: 2, color: theme.palette.primary.main }}
                 >
-                  218
+                  {cardData?.number}
                 </Typography>
-                <Typography gutterBottom variant='h4' component='div'>
-                  {cardData?.number ? cardData.number + ' ' : ''}{' '}
+                <Typography
+                  gutterBottom
+                  variant='h4'
+                  component='div'
+                >
                   {cardData?.title}
                 </Typography>
-                <Typography gutterBottom variant='h6' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='h6'
+                  component='div'
+                >
                   {cardData?.event?.name}
                 </Typography>
               </CardContent>
               <Divider />
               {isError ? (
                 <Box p={2}>
-                  <Typography variant='subtitle1' component='div'>
+                  <Typography
+                    variant='h4'
+                    component='div'
+                    color='error'
+                  >
                     {errorMessage}
                   </Typography>
                 </Box>
               ) : (
                 <Box p={3}>
-                  {errorMessage === '' ? (
-                    <>
-                      <Typography variant='subtitle2' component='div'>
-                        Kapetan Hrvatske, Luka Modrić, nedvojbeno je postigao
-                        vrhunac svoje karijere osvojivši prestižnu titulu
-                        najboljeg igrača Svjetskog prvenstva, gdje je Hrvatska
-                        ostvarila zapaženi uspjeh osvajanjem srebrne medalje.{' '}
-                        <br />
-                        <br />
-                        Luka je predvodio svoju reprezentaciju do finala
-                        Mundijala. <br />
-                        <br />
-                        Nakon Svjetskog prvenstva u Rusiji, postalo je očigledno
-                        da je Luka Modrić postao najveći hrvatski nogometaš u
-                        povijesti.
-                      </Typography>
-                      <Button
-                        variant='contained'
-                        color='success'
-                        onClick={handleAddCardToAlbum}
-                        sx={{
-                          p: 2,
-                          mx: isMobile ? 1 : 5,
-                          ml: 0,
-                          mt: 3,
-                        }}
-                      >
-                        Dodaj U Album
-                      </Button>
-                    </>
-                  ) : (
-                    <Typography variant='h4' component='div' color='error'>
-                      {errorMessage}
-                    </Typography>
-                  )}
+                  <Typography
+                    variant='subtitle2'
+                    component='div'
+                  >
+                    {cardData?.description}
+                  </Typography>
+                  <Button
+                    variant='contained'
+                    color='success'
+                    onClick={handleAddCardToAlbum}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                  >
+                    Dodaj U Album
+                  </Button>
                   <Button
                     variant='contained'
                     color='inherit'
+                    href='/dashboard'
                     sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
                   >
                     Prijavi se

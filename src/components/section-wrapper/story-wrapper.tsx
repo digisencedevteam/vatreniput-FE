@@ -14,9 +14,23 @@ export const StorySectionWrapper = ({
   };
 
   return (
-    <Box borderRadius={2} p={2} pl={0} mt={2} mb={1}>
-      <Box display='flex' justifyContent='space-between' alignItems='center'>
-        <Typography variant='h3' color={'primary'} py={1}>
+    <Box
+      borderRadius={2}
+      p={2}
+      pl={0}
+      mt={2}
+      mb={1}
+    >
+      <Box
+        display='flex'
+        justifyContent='space-between'
+        alignItems='center'
+      >
+        <Typography
+          variant='h3'
+          color={'primary'}
+          py={1}
+        >
           {title}
         </Typography>
         {isCollapsable && (
