@@ -25,6 +25,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setCurrentTab(newValue);
   };
+  const { overFiftyPercent } = useStoryContext();
 
   const getActiveTabs = (story: StoryContentProps['story']) => {
     return [
@@ -101,7 +102,12 @@ const StoryContent = ({ story }: StoryContentProps) => {
   const tabContentComponents: TabComponents = {
     Kvalifikacije: <QualificationsContent story={story} />,
     Prvenstvo: <ChampionshipContent story={story} />,
-    Highlights: <HighlightContent story={story} />,
+    Highlights: (
+      <HighlightContent
+        story={story}
+        overFiftyPercent={overFiftyPercent}
+      />
+    ),
     Izbornik: <CoachContent story={story} />,
     Reprezentacija: <NationalTeamContent story={story} />,
     Zanimljivosti: <FactContent story={story} />,

@@ -165,6 +165,7 @@ export interface PenaltyShootoutProps {
 interface TimelineStory {
   storyId: number;
   storyTitle: string;
+  eventId?: string;
 }
 
 export interface TimelineProps {

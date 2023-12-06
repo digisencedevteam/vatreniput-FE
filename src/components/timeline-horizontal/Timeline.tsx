@@ -10,13 +10,21 @@ import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import { useRouter } from 'src/routes/hooks';
 import { Story, TimelineProps } from 'src/types/story';
 import { useStoryContext } from 'src/context/StoryContext';
+import { useEffect } from 'react';
+import { useStoryData } from 'src/hooks/use-story-data';
 
 const Timeline = ({ stories }: TimelineProps) => {
   const { currentStoryIndex, setCurrentStoryIndex, setCurrentTab } =
     useStoryContext();
   const router = useRouter();
-  const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
   const currentStory = stories[currentStoryIndex];
+  const { overFiftyPercent } = useStoryData(currentStory?.eventId);
+  const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
+  const { setOverFiftyPercent } = useStoryContext();
+
+  useEffect(() => {
+    setOverFiftyPercent(overFiftyPercent);
+  }, [currentStory, overFiftyPercent, setOverFiftyPercent]);
 
   const generateFillPositions = (length: number): number[] => {
     const sequence = [20, 50, 80];

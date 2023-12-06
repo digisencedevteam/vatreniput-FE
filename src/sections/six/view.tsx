@@ -15,8 +15,16 @@ const SixView = () => {
   return (
     <StoryProvider childrenCount={STORIES.length}>
       <Container maxWidth='xl'>
-        <Box mt={3} display='flex' flexDirection='column' alignItems='center'>
-          <Timeline stories={STORIES} />
+        <Box
+          mt={3}
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+        >
+          <Timeline
+            stories={STORIES}
+            key={currentStory?.storyId}
+          />
           {currentStory && <StoryContent story={currentStory.story} />}
         </Box>
       </Container>
