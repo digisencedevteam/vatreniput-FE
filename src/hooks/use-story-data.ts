@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import axiosInstance from 'src/utils/axios';
 
 interface CardProgressData {
-  // Define the structure of your data here
   overFiftyPercent: boolean;
-  // ... other properties
 }
 
 export const useStoryData = (eventId: string | undefined) => {
