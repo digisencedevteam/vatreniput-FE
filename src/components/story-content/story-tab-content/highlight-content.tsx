@@ -2,16 +2,11 @@ import { Grid } from '@mui/material';
 import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
 import { HighlightData, StoryContentProps } from 'src/types/story';
 import Highlight from '../../story-components/highlight/highlight';
-import { useEffect } from 'react';
 
 export const HighlightContent = ({
   story,
   overFiftyPercent,
 }: StoryContentProps & { overFiftyPercent: boolean }) => {
-  useEffect(() => {
-    console.log(overFiftyPercent);
-  }, [overFiftyPercent]);
-
   return (
     <StorySectionWrapper title='Highlights'>
       {story?.Highlights && (

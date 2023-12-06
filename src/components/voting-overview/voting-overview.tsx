@@ -1,9 +1,9 @@
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Card, { CardProps } from '@mui/material/Card';
-import LinearProgress from '@mui/material/LinearProgress';
 import { useTheme } from '@mui/material/styles';
 import { VotingsResult } from 'src/types';
+import { Divider } from '@mui/material';
 
 interface Props extends CardProps {
   data: VotingsResult[] | undefined;
@@ -52,16 +52,19 @@ export const ProgressItem = ({ progress }: ProgressItemProps) => {
           {progress.optionName}
         </Typography>
         <Typography
-          sx={{ mx: 3 }}
+          sx={{ mx: 1 }}
           variant='subtitle2'
         >
-          Broj glasova: {progress.votes}
+          Broj glasova:
+        </Typography>
+        <Typography
+          variant='subtitle2'
+          color='primary'
+        >
+          {progress.votes}
         </Typography>
       </Stack>
-      <LinearProgress
-        variant='determinate'
-        value={progress.votes}
-      />
+      <Divider />
     </Stack>
   );
 };
