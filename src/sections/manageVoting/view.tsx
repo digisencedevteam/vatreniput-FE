@@ -56,6 +56,9 @@ const ManageVoting = () => {
   if (!isAdmin) {
     router.push(`${paths.dashboard.one}`);
   }
+  const isDateValid = (date: string | null): boolean => {
+    return date ? dayjs(date).isValid() : false;
+  };
 
   const initialValues = {
     title: '',
@@ -138,7 +141,10 @@ const ManageVoting = () => {
   }>;
 
   const isButtonDisabled =
-    formik.isSubmitting || !formik.dirty || !formik.isValid;
+    formik.isSubmitting ||
+    !formik.dirty ||
+    !formik.isValid ||
+    !isDateValid(formik.values.availableUntil);
 
   const handleAddOption = () => {
     formik.setFieldValue('votingOptions', [
@@ -159,10 +165,7 @@ const ManageVoting = () => {
         <LoadingScreen />
       ) : (
         <>
-          <Grid
-            item
-            sx={{ m: 1, alignSelf: 'start' }}
-          >
+          <Grid item sx={{ m: 1, alignSelf: 'start' }}>
             <IconButton
               edge='start'
               color='primary'
@@ -175,11 +178,7 @@ const ManageVoting = () => {
             </IconButton>
           </Grid>
           <Box>
-            <Typography
-              variant='h4'
-              textAlign={'center'}
-              m={3}
-            >
+            <Typography variant='h4' textAlign={'center'} m={3}>
               {votingId ? 'Ažuriraj' : 'Stvori novo'} glasanje
             </Typography>
             <Divider />
@@ -246,20 +245,12 @@ const ManageVoting = () => {
               </LocalizationProvider>
               {formik.touched.availableUntil &&
                 formik.errors.availableUntil && (
-                  <Typography
-                    variant='caption'
-                    color='error'
-                  >
+                  <Typography variant='caption' color='error'>
                     {formik.errors.availableUntil}
                   </Typography>
                 )}
               {formik.values.votingOptions.map((option, index) => (
-                <Box
-                  key={index}
-                  display='flex'
-                  flexDirection='column'
-                  mb={2}
-                >
+                <Box key={index} display='flex' flexDirection='column' mb={2}>
                   <TextField
                     label={`Opcija ${index + 1}`}
                     fullWidth
@@ -363,10 +354,7 @@ const ManageVoting = () => {
             onClose={() => setErrorSnackbar(null)}
             anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           >
-            <Alert
-              onClose={() => setErrorSnackbar(null)}
-              severity='error'
-            >
+            <Alert onClose={() => setErrorSnackbar(null)} severity='error'>
               {errorSnackbar}
             </Alert>
           </Snackbar>

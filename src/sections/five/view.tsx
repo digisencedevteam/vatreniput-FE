@@ -64,8 +64,8 @@ const FiveView = () => {
           {!isMobile ? (
             <Grid item xs={12} md={7}>
               <AppWelcome
-                title={`Dobrodošli na stranicu glasanja! `}
-                description='Zaronite u uzbudljivi svijet glasanja i otkrij koji su igrači tvojim prijateljima najdraži! Izrazite svoje mišljenje i budite aktivni sudionik u svijetu nogometa koji svi toliko volimo. Vaš glas je važan, podijelite ga sa nama!'
+                title={`Glasaj za Vatrenu Elitu!`}
+                description='Zaviri u srce nogometne strasti i daj svoj glas za najbolje od najboljih Vatrenih. Tko su tvoji nogometni junaci? Svaki glas se računa, svako mišljenje odzvanja - zajedno kreiramo nogometnu povijest!'
                 img={
                   <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1696250575/WhatsApp_Image_2023-09-26_at_20.25.25_rqlsao-modified_le1wt5.png' />
                 }

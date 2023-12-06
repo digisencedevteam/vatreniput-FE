@@ -14,6 +14,7 @@ import { useSettingsContext } from 'src/components/settings';
 import { Alert, Snackbar, useMediaQuery, useTheme } from '@mui/material';
 import axiosInstance from 'src/utils/axios';
 import { paths } from 'src/routes/paths';
+import { useAuthContext } from 'src/auth/hooks';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -26,6 +27,7 @@ export const CardView = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const currentUser = useAuthContext();
 
   const fetchCardData = async () => {
     try {
@@ -35,10 +37,9 @@ export const CardView = () => {
       setCardData(response.data);
       setIsError(false);
     } catch (error) {
-      console.error('Fetch card data error:', error);
       setIsError(true);
       setErrorMessage(
-        error.response?.data?.message ||
+        error.response.data.message ||
           'Dogodila se greška prilikom dobivanja podataka o sličici!'
       );
     }
@@ -50,6 +51,9 @@ export const CardView = () => {
   }, [cardId]);
 
   const handleAddCardToAlbum = async () => {
+    if (currentUser.user == null) {
+      navigate(`${paths.auth.jwt.login}?returnTo=${window.location.pathname}`);
+    }
     try {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
         cardId,
@@ -62,7 +66,6 @@ export const CardView = () => {
         navigate(paths.dashboard.collection);
       }
     } catch (error) {
-      console.error('Add card to album error:', error);
       setIsError(true);
       setErrorMessage(
         error.response?.data?.message ||
@@ -130,45 +133,37 @@ export const CardView = () => {
                   {errorMessage === '' ? (
                     <>
                       <Typography variant='subtitle2' component='div'>
-                        Kapetan Hrvatske, Luka Modrić, nedvojbeno je postigao
-                        vrhunac svoje karijere osvojivši prestižnu titulu
-                        najboljeg igrača Svjetskog prvenstva, gdje je Hrvatska
-                        ostvarila zapaženi uspjeh osvajanjem srebrne medalje.{' '}
-                        <br />
-                        <br />
-                        Luka je predvodio svoju reprezentaciju do finala
-                        Mundijala. <br />
-                        <br />
-                        Nakon Svjetskog prvenstva u Rusiji, postalo je očigledno
-                        da je Luka Modrić postao najveći hrvatski nogometaš u
-                        povijesti.
+                        Ovo je dummy data opis detalja jedne slicice!
                       </Typography>
-                      <Button
-                        variant='contained'
-                        color='success'
-                        onClick={handleAddCardToAlbum}
-                        sx={{
-                          p: 2,
-                          mx: isMobile ? 1 : 5,
-                          ml: 0,
-                          mt: 3,
-                        }}
-                      >
-                        Dodaj U Album
-                      </Button>
+                      {cardData && cardData.isScanned ? (
+                        <Typography variant='subtitle1' color='error'>
+                          {errorMessage}
+                        </Typography>
+                      ) : (
+                        <Button
+                          variant='contained'
+                          color='success'
+                          onClick={handleAddCardToAlbum}
+                          sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                        >
+                          Dodaj U Album
+                        </Button>
+                      )}
                     </>
                   ) : (
                     <Typography variant='h4' component='div' color='error'>
                       {errorMessage}
                     </Typography>
                   )}
-                  <Button
-                    variant='contained'
-                    color='inherit'
-                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                  >
-                    Prijavi se
-                  </Button>
+                  {!currentUser && (
+                    <Button
+                      variant='contained'
+                      color='inherit'
+                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                    >
+                      Prijavi se
+                    </Button>
+                  )}
                 </Box>
               )}
             </Card>
