@@ -22,7 +22,6 @@ import InstallPWA from 'src/components/install-pwa-modal/install-pwa';
 const JwtLoginView = () => {
   const { login } = useAuthContext();
   const router = useRouter();
-  const [errorMsg, setErrorMsg] = useState('');
   const searchParams = useSearchParams();
   const returnTo = searchParams.get('returnTo');
   const password = useBoolean();
@@ -70,7 +69,6 @@ const JwtLoginView = () => {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      {!!errorMsg && <Alert severity='error'>{errorMsg}</Alert>}
       <RHFTextField name='email' label='Email' />
       <RHFTextField
         name='password'
