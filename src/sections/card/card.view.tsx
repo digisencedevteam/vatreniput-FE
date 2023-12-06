@@ -47,6 +47,7 @@ export const CardView = () => {
 
   useEffect(() => {
     fetchCardData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardId]);
 
   const handleAddCardToAlbum = async () => {
@@ -86,15 +87,8 @@ export const CardView = () => {
       sx={isMobile ? { marginTop: '20px' } : null}
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-        <Grid
-          container
-          spacing={5}
-        >
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
+        <Grid container spacing={5}>
+          <Grid item xs={12} md={6}>
             {cardData?.videoLink ? (
               <div style={{ position: 'relative', paddingTop: '56.25%' }}>
                 <iframe
@@ -126,11 +120,7 @@ export const CardView = () => {
               />
             )}
           </Grid>
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
+          <Grid item xs={12} md={6}>
             <Card
               sx={{
                 height: '100%',
@@ -144,29 +134,17 @@ export const CardView = () => {
                 >
                   {cardData?.number}
                 </Typography>
-                <Typography
-                  gutterBottom
-                  variant='h4'
-                  component='div'
-                >
+                <Typography gutterBottom variant='h4' component='div'>
                   {cardData?.title}
                 </Typography>
-                <Typography
-                  gutterBottom
-                  variant='h6'
-                  component='div'
-                >
+                <Typography gutterBottom variant='h6' component='div'>
                   {cardData?.event?.name}
                 </Typography>
               </CardContent>
               <Divider />
               {isError ? (
                 <Box p={2}>
-                  <Typography
-                    variant='h4'
-                    component='div'
-                    color='error'
-                  >
+                  <Typography variant='h4' component='div' color='error'>
                     {errorMessage}
                   </Typography>
                 </Box>

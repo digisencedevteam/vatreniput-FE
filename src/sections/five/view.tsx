@@ -82,10 +82,10 @@ const FiveView = () => {
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     if (auth.user) {
       fetchUserVotedVotingsWithTopOption(auth.user._id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user]);
 
   return (
@@ -95,11 +95,7 @@ const FiveView = () => {
       ) : (
         <>
           {!isMobile ? (
-            <Grid
-              item
-              xs={12}
-              md={7}
-            >
+            <Grid item xs={12} md={7}>
               <AppWelcome
                 title={`Glasaj za Vatrenu Elitu!`}
                 description='Zaviri u srce nogometne strasti i daj svoj glas za najbolje od najboljih Vatrenih. Tko su tvoji nogometni junaci? Svaki glas se računa, svako mišljenje odzvanja - zajedno kreiramo nogometnu povijest!'
@@ -117,10 +113,7 @@ const FiveView = () => {
               alignItems='center'
               sx={{ m: 1 }}
             >
-              <Typography
-                variant='h2'
-                color={theme.palette.primary.main}
-              >
+              <Typography variant='h2' color={theme.palette.primary.main}>
                 Glasanja
               </Typography>
 
@@ -155,19 +148,9 @@ const FiveView = () => {
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
               ) : (
-                <Grid
-                  container
-                  spacing={2}
-                >
+                <Grid container spacing={2}>
                   {notVotedVotings.map((voting, index) => (
-                    <Grid
-                      key={index}
-                      item
-                      xs={12}
-                      sm={6}
-                      md={4}
-                      lg={4}
-                    >
+                    <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
                       <CustomCard
                         cardId={voting._id}
                         votingId={voting._id}
@@ -184,10 +167,7 @@ const FiveView = () => {
             </Grid>
           </SectionWrapper>
 
-          <StorySectionWrapper
-            title='Najboljih 11'
-            isCollapsable={true}
-          >
+          <StorySectionWrapper title='Najboljih 11' isCollapsable={true}>
             {isLoading ? (
               <SkeletonDashboardLoader
                 count={6}

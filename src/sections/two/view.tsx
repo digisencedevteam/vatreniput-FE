@@ -9,7 +9,6 @@ import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import StatisticCards from 'src/components/stats-box/statistic-box';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
@@ -20,7 +19,6 @@ export const CollectionView = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const {
-    collectedStatistic,
     collectedCards,
     categories,
     isLoading,
@@ -46,6 +44,7 @@ export const CollectionView = () => {
     if (hasCategoryChanged && myRef.current && !isLoading) {
       myRef.current.scrollIntoView({ behavior: 'smooth' });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIndex, isLoading]);
 
   const handleArrowClick = (direction: string) => {

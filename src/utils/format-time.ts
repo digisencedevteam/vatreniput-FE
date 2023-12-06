@@ -1,4 +1,5 @@
 import { format, getTime, formatDistanceToNow } from 'date-fns';
+import dayjs from 'dayjs';
 
 // ----------------------------------------------------------------------
 
@@ -32,4 +33,8 @@ export const formatTime = (timeInSeconds: number) => {
   const minutes = Math.floor(timeInSeconds / 60);
   const seconds = timeInSeconds % 60;
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
+
+export const isDateValid = (date: string | null): boolean => {
+  return date ? dayjs(date).isValid() : false;
 };

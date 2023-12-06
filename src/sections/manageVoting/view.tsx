@@ -25,6 +25,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import { paths } from 'src/routes/paths';
 import { FormikErrors, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { isDateValid } from 'src/utils/format-time';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Naslov je obavezan'),
@@ -56,9 +57,6 @@ const ManageVoting = () => {
   if (!isAdmin) {
     router.push(`${paths.dashboard.one}`);
   }
-  const isDateValid = (date: string | null): boolean => {
-    return date ? dayjs(date).isValid() : false;
-  };
 
   const initialValues = {
     title: '',
