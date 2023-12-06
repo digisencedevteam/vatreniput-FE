@@ -9,10 +9,14 @@ import {
 } from '@mui/material';
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
+import HttpsIcon from '@mui/icons-material/Https';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { HighlightProps } from 'src/types/story';
 
-const Highlight = ({ data }: HighlightProps) => {
+const Highlight = ({
+  data,
+  overFiftyPercent,
+}: HighlightProps & { overFiftyPercent: boolean }) => {
   const isDesktop = useResponsive('up', 'md');
   const [open, setOpen] = useState(false);
   const imageHeight = isDesktop ? '375' : '250';
@@ -20,7 +24,9 @@ const Highlight = ({ data }: HighlightProps) => {
   const videoHref = data.videoLink;
 
   const handleOpen = () => {
-    setOpen(true);
+    if (overFiftyPercent) {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -46,16 +52,31 @@ const Highlight = ({ data }: HighlightProps) => {
               bottom: 0,
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
               display: 'flex',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+              textAlign: 'center',
             }}
           >
-            <IconButton
-              color='primary'
-              onClick={handleOpen}
-            >
-              <PlayCircleOutlineIcon sx={{ fontSize: '250%' }} />
-            </IconButton>
+            {!overFiftyPercent && (
+              <>
+                <HttpsIcon sx={{ fontSize: '250%', color: 'primary' }} />
+                <Typography
+                  variant='body2'
+                  sx={{ color: 'white', mt: 2, width: '75%' }}
+                >
+                  Skupi 50% sličica ovog prvenstva da otključaš reportaže.
+                </Typography>
+              </>
+            )}
+            {overFiftyPercent && (
+              <IconButton
+                color='primary'
+                onClick={handleOpen}
+              >
+                <PlayCircleOutlineIcon sx={{ fontSize: '250%' }} />
+              </IconButton>
+            )}
           </div>
         )}
       </div>
@@ -73,36 +94,38 @@ const Highlight = ({ data }: HighlightProps) => {
           {data.Description}
         </Typography>
       </CardContent>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        maxWidth='md'
-        fullWidth
-      >
-        <IconButton
-          onClick={handleClose}
-          style={{ position: 'absolute', right: 0, top: 0 }}
+      {overFiftyPercent && (
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          maxWidth='md'
+          fullWidth
         >
-          <CloseIcon />
-        </IconButton>
-        {videoHref && (
-          <div style={{ position: 'relative', paddingTop: '56.25%' }}>
-            <iframe
-              src={`${videoHref}?dnt=1`}
-              style={{
-                position: 'absolute',
-                top: '0',
-                left: '0',
-                width: '100%',
-                height: '100%',
-                border: '0',
-              }}
-              allow='autoplay; fullscreen; picture-in-picture'
-              title={data.Title}
-            />
-          </div>
-        )}
-      </Dialog>
+          <IconButton
+            onClick={handleClose}
+            style={{ position: 'absolute', right: 0, top: 0 }}
+          >
+            <CloseIcon />
+          </IconButton>
+          {videoHref && (
+            <div style={{ position: 'relative', paddingTop: '56.25%' }}>
+              <iframe
+                src={`${videoHref}?dnt=1`}
+                style={{
+                  position: 'absolute',
+                  top: '0',
+                  left: '0',
+                  width: '100%',
+                  height: '100%',
+                  border: '0',
+                }}
+                allow='autoplay; fullscreen; picture-in-picture'
+                title={data.Title}
+              />
+            </div>
+          )}
+        </Dialog>
+      )}
     </Card>
   );
 };

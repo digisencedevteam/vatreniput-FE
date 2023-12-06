@@ -404,8 +404,9 @@ export const STORIES = [
   {
     storyTitle: '1998',
     storyId: 3,
+    eventId: '653fb350385c72b01bcd9bed',
     story: {
-      storyTitle: 'Svjetsko Prvenstvo 1998.',
+      storyTitle: 'Svjetsko prvenstvo - Francuska 1998',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308305/1998_wc_pdsxag.png',
       Qualifications: {
@@ -2800,8 +2801,9 @@ export const STORIES = [
   {
     storyTitle: '2018',
     storyId: 13,
+    eventId: '653fb350385c72b01bcd9beb',
     story: {
-      storyTitle: 'Svjetsko Prvenstvo 2018.',
+      storyTitle: 'Svjetsko prvenstvo Rusija 2018',
       storyLogo:
         'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2018_wc_byzpqe.png',
       Qualifications: {
@@ -3470,6 +3472,7 @@ export const STORIES = [
   {
     storyTitle: '2022',
     storyId: 15,
+    eventId: '653fb350385c72b01bcd9bec',
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2022.',
       storyLogo:

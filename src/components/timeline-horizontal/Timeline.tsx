@@ -10,6 +10,9 @@ import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import { useRouter } from 'src/routes/hooks';
 import { Story, TimelineProps } from 'src/types/story';
 import { useStoryContext } from 'src/context/StoryContext';
+import axios from 'src/utils/axios';
+import { useEffect, useState } from 'react';
+import axiosInstance from 'src/utils/axios';
 
 const Timeline = ({ stories }: TimelineProps) => {
   const { currentStoryIndex, setCurrentStoryIndex, setCurrentTab } =
@@ -17,6 +20,34 @@ const Timeline = ({ stories }: TimelineProps) => {
   const router = useRouter();
   const startDisplayIndex = Math.floor(currentStoryIndex / 3) * 3;
   const currentStory = stories[currentStoryIndex];
+
+  const [cardProgressData, setCardProgressData] = useState(null);
+  const { setOverFiftyPercent } = useStoryContext();
+
+  const fetchCardProgress = async (eventId: string) => {
+    console.log('Event ID:', eventId); // Log the Event ID
+    try {
+      const response = await axios.get(`/event/user-cards/${eventId}`);
+      console.log('Response Data:', response.data); // Log the full response
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error); // Log any errors
+      return null;
+    }
+  };
+  useEffect(() => {
+    const fetchProgress = async () => {
+      if (currentStory && currentStory.eventId) {
+        const progressData = await fetchCardProgress(currentStory.eventId);
+        setCardProgressData(progressData);
+        setOverFiftyPercent(progressData.overFiftyPercent);
+      } else {
+        setOverFiftyPercent(false);
+      }
+    };
+
+    fetchProgress();
+  }, [currentStory]);
 
   const generateFillPositions = (length: number): number[] => {
     const sequence = [20, 50, 80];
