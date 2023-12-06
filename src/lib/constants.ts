@@ -270,8 +270,8 @@ export const STORIES = [
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
           Description:
             'Prvo veliko natjecanje hrvatske nogometne reprezentacije. Nacija je „disala“ s momčadi Miroslava Ćire Blaževića. Pratio se svaki korak, gledale su se svake vijesti, čekale novosti s Otoka. Prvi pogodak na nekom velikom natjecanju zabio je Goran Vlaović. Njegov bijeg nakon sjajnog proigravanja Aljoše Asanovića ostao je upamćen kao jedan od najvećih trenutaka našeg reprezentativnog nogometa. Cijela Hrvatska je utihnula, a kad je lopta završila u mreži prolomio se usklik pobjede.',
-          // videoLink:
-          //   'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+          videoLink:
+            'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
         {
           Title: 'Lob Davora Šukera protiv Danske',
@@ -279,8 +279,8 @@ export const STORIES = [
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698917199/HRJA5150_copy_jn7lw6.jpg',
           Description:
             '„Lomljenje“ Danske u 2. kolu dovelo je Hrvatsku na nogometnu kartu velikana i utjecajnih reprezentacija. Ondje je ostala zauvijek. Posebno pamtimo lob kojim je Davor Šuker matirao Petera Schmeichela i ostavio mu biljeg za sva vremena.',
-          // videoLink:
-          //   'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
+          videoLink:
+            'https://res.cloudinary.com/dzg5kxbau/video/upload/v1699275657/1998_HRV_JAM_STANIC_odo6vw.mp4',
         },
       ],
       Facts: [
@@ -726,8 +726,8 @@ export const STORIES = [
           imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Šukerova genijalnost protiv Irske dovela nas je u situaciju da 9. listopada 1999., protiv Jugoslavije na prepunom Maksimiru tražimo pobjedu za izravan prolaz. I onda bolni remi, 2 : 2. Oni koji su gledali, sjećaju se i danas. Ludnica nakon pogotka Bokšića, dva gola gostiju, crveni karton Mirkoviću, izjednačenje Stanića. Sjećamo se i udarca Šukera za koji smo i dan danas sigurni da je prešao crtu. Nažalost, spektakularna utakmica rezultirala je ostankom bez EURA u Nizozemskoj i Belgiji. Mnogi taj susret označavaju kao početak osipanja legendarne „brončane“ generacije.',
-          // videoLink:
-          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
       ],
     },
@@ -1270,8 +1270,8 @@ export const STORIES = [
             'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698785606/WhatsApp_Image_2023-10-31_at_4.20.29_PM_fimva3.jpg',
           Description:
             'Godina 2003. pamti se po povijesnom trenutku kada je Dado Pršo zauvijek ušao u hrvatsku nogometnu legendu. Na dan 19. studenog 2003. na stadionu Bežigrad u Sloveniji, Dado Pršo postigao je nevjerojatan pogodak protiv Slovenije tijekom dodatnih kvalifikacija. Taj trenutak postao je ikoničan, obilježavajući jedan od najvažnijih trenutaka u povijesti hrvatskog nogometa. Pršo je svojim golom donio radost i ponos svim navijačima Hrvatske te ostavio neizbrisiv trag u kolektivnom pamćenju',
-          // videoLink:
-          //   'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
+          videoLink:
+            'https://player.vimeo.com/video/881654129?badge=0&amp;autopause=0&amp;quality_selector=1&amp;player_id=0&amp;app_id=58479',
         },
       ],
       Coach: {
@@ -1835,8 +1835,8 @@ export const STORIES = [
           imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Ivan Klasnić je zabio u pretposljednjoj minuti produžetka. Slavila je cijela Hrvatska. Mnogi nisu ni vidjeli trenutak kada je Semih Senturk izjednačio. U depresiju je pala i domovina, ali nažalost i igrači koji nisu mogli dobiti rulet raspucavanja. Ogromna tuga okupala je naciju.',
-          // videoLink:
-          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
       ],
     },
@@ -2060,8 +2060,8 @@ export const STORIES = [
           imgUrl: 'https://www.tportal.hr/media/thumbnail/w1000/59224.jpeg',
           Description:
             'Casillas je izvrsno obranio šut Rakitića i spasio gol. Taj trenutak bio je presudan za hrvatsku momčad, jer je očuvao našu nadu u pobjedu protiv Španjolske. Ovaj nevjerojatan trenutak obrane pokazao je Casillasovu briljantnost kao vratara i svu hrabrost naše reprezentacije. Hrvatski navijači pamte ovu situaciju kao jedan od najuzbudljivijih trenutaka u povijesti našeg nogometa',
-          // videoLink:
-          //   'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
+          videoLink:
+            'https://photos.onedrive.com/share/E0D40198DCF58846!79103?cid=E0D40198DCF58846&resId=E0D40198DCF58846!79103&authkey=!AJAhPPhCw_Ov1RA&ithint=video',
         },
       ],
       Facts: [
