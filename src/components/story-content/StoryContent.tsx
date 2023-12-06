@@ -16,6 +16,7 @@ import { CoachContent } from './story-tab-content/coach-content';
 import { NationalTeamContent } from './story-tab-content/national-team-content';
 import { useStoryContext } from 'src/context/StoryContext';
 import { useParams } from 'src/routes/hooks';
+import GameContent from './story-tab-content/game-content';
 
 const StoryContent = ({ story }: StoryContentProps) => {
   const { storyId } = useParams();
@@ -24,6 +25,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
   const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setCurrentTab(newValue);
   };
+  const { overFiftyPercent } = useStoryContext();
 
   const getActiveTabs = (story: StoryContentProps['story']) => {
     return [
@@ -35,6 +37,15 @@ const StoryContent = ({ story }: StoryContentProps) => {
           </Box>
         ),
         active: !!story?.Qualifications || !!story?.AdditionalQualifications,
+      },
+      {
+        label: 'Utakmica',
+        icon: (
+          <Box m={1}>
+            <SportsSoccerIcon color='error' />{' '}
+          </Box>
+        ),
+        active: !!story?.Game,
       },
       {
         label: 'Prvenstvo',
@@ -73,6 +84,7 @@ const StoryContent = ({ story }: StoryContentProps) => {
         ),
         active: !!story?.NationalTeam,
       },
+
       {
         label: 'Zanimljivosti',
         icon: (
@@ -90,10 +102,16 @@ const StoryContent = ({ story }: StoryContentProps) => {
   const tabContentComponents: TabComponents = {
     Kvalifikacije: <QualificationsContent story={story} />,
     Prvenstvo: <ChampionshipContent story={story} />,
-    Highlights: <HighlightContent story={story} />,
+    Highlights: (
+      <HighlightContent
+        story={story}
+        overFiftyPercent={overFiftyPercent}
+      />
+    ),
     Izbornik: <CoachContent story={story} />,
     Reprezentacija: <NationalTeamContent story={story} />,
     Zanimljivosti: <FactContent story={story} />,
+    Utakmica: <GameContent story={story} />,
   };
 
   useEffect(() => {

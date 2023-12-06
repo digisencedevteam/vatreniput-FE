@@ -136,7 +136,7 @@ export const DesktopViewOne = () => {
                       sx={{
                         flex: '0 0 auto',
                         maxWidth: '200px',
-                        height: '32vh',
+                        height: '38vh',
                         m: 1,
                       }}
                     >

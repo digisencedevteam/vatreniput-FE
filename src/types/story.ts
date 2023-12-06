@@ -12,9 +12,25 @@ export interface PenaltyShootout {
   Result: string;
 }
 
+export interface GameDetails {
+  Teams?: string;
+  Score?: string;
+  Scorers?: string[];
+  Judge?: string;
+  Stadium?: string;
+  Date?: string;
+  Viewers?: string;
+}
+
+export interface Game {
+  GameDetails?: GameDetails;
+  Summary?: string;
+}
+
 export interface FinalMatchDetail {
   Match: string;
   Score: string;
+  Description?: string;
   GoalScorers?: string[];
   Penalties?: string;
   PenaltyShootout?: PenaltyShootout[];
@@ -94,6 +110,7 @@ export interface Story {
   Facts?: (string | number | boolean)[];
   AdditionalQualifications?: QualificationMatch[];
   Fans?: Fan[];
+  Game?: Game;
 }
 
 export interface StoryContentProps {
@@ -148,6 +165,7 @@ export interface PenaltyShootoutProps {
 interface TimelineStory {
   storyId: number;
   storyTitle: string;
+  eventId?: string;
 }
 
 export interface TimelineProps {

@@ -82,15 +82,27 @@ const AppFeatured = ({ list }: Props) => {
           background: 'linear-gradient(transparent, rgba(0,0,0,0.8))',
         }}
       >
-        <Typography variant='overline' sx={{ color: 'primary.dark' }}>
+        <Typography
+          variant='overline'
+          sx={{ color: 'primary.dark' }}
+        >
           NOVO
         </Typography>
-        <Link color='inherit' underline='none'>
-          <Typography variant='h5' noWrap>
+        <Link
+          color='inherit'
+          underline='none'
+        >
+          <Typography
+            variant='h5'
+            noWrap
+          >
             {item.title}
           </Typography>
         </Link>
-        <Typography variant='body2' noWrap>
+        <Typography
+          variant='body2'
+          noWrap
+        >
           {item.description}
         </Typography>
         <Stack

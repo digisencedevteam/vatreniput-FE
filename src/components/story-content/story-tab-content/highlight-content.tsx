@@ -3,7 +3,10 @@ import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrappe
 import { HighlightData, StoryContentProps } from 'src/types/story';
 import Highlight from '../../story-components/highlight/highlight';
 
-export const HighlightContent = ({ story }: StoryContentProps) => {
+export const HighlightContent = ({
+  story,
+  overFiftyPercent,
+}: StoryContentProps & { overFiftyPercent: boolean }) => {
   return (
     <StorySectionWrapper title='Highlights'>
       {story?.Highlights && (
@@ -20,7 +23,10 @@ export const HighlightContent = ({ story }: StoryContentProps) => {
                 lg={6}
                 key={index}
               >
-                <Highlight data={highlight} />
+                <Highlight
+                  data={highlight}
+                  overFiftyPercent={overFiftyPercent}
+                />
               </Grid>
             )
           )}

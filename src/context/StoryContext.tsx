@@ -6,6 +6,8 @@ interface StoryContextType {
   currentTab: number;
   setCurrentTab: (index: number) => void;
   childrenCount: number;
+  overFiftyPercent: boolean;
+  setOverFiftyPercent: (value: boolean) => void;
 }
 const StoryContext = createContext<StoryContextType>({
   currentStoryIndex: 0,
@@ -13,6 +15,8 @@ const StoryContext = createContext<StoryContextType>({
   currentTab: 0,
   setCurrentTab: (tabIndex: number) => {},
   childrenCount: 0,
+  overFiftyPercent: false,
+  setOverFiftyPercent: () => {},
 });
 
 interface StoryProviderProps {
@@ -26,6 +30,7 @@ export const StoryProvider = ({
 }: StoryProviderProps) => {
   const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
   const [currentTab, setCurrentTab] = useState(0);
+  const [overFiftyPercent, setOverFiftyPercent] = useState(false);
 
   return (
     <StoryContext.Provider
@@ -35,6 +40,8 @@ export const StoryProvider = ({
         currentTab,
         setCurrentTab,
         childrenCount,
+        overFiftyPercent,
+        setOverFiftyPercent,
       }}
     >
       {children}
