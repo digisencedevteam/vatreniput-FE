@@ -87,8 +87,15 @@ export const CardView = () => {
       sx={isMobile ? { marginTop: '20px' } : null}
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={6}>
+        <Grid
+          container
+          spacing={5}
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             {cardData?.videoLink ? (
               <div style={{ position: 'relative', paddingTop: '56.25%' }}>
                 <iframe
@@ -120,7 +127,11 @@ export const CardView = () => {
               />
             )}
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <Card
               sx={{
                 height: '100%',
@@ -134,58 +145,50 @@ export const CardView = () => {
                 >
                   {cardData?.number}
                 </Typography>
-                <Typography gutterBottom variant='h4' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='h4'
+                  component='div'
+                >
                   {cardData?.title}
                 </Typography>
-                <Typography gutterBottom variant='h6' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='h6'
+                  component='div'
+                >
                   {cardData?.event?.name}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant='h6'
+                  component='div'
+                >
+                  {cardData?.description}
                 </Typography>
               </CardContent>
               <Divider />
-              {isError ? (
-                <Box p={2}>
-                  <Typography variant='h4' component='div' color='error'>
-                    {errorMessage}
+              <Box p={3}>
+                {!cardData?.isScanned && errorMessage === '' ? (
+                  <Button
+                    variant='contained'
+                    color='success'
+                    onClick={handleAddCardToAlbum}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                  >
+                    Dodaj U Album
+                  </Button>
+                ) : (
+                  <Typography
+                    variant='subtitle1'
+                    color='error'
+                    sx={{ mt: 2 }}
+                  >
+                    {errorMessage ||
+                      'Ova sličica je već skenirana i ne može se ponovno dodati.'}
                   </Typography>
-                </Box>
-              ) : (
-                <Box p={3}>
-                  {errorMessage === '' ? (
-                    <>
-                      <Typography variant='subtitle2' component='div'>
-                        Ovo je dummy data opis detalja jedne slicice!
-                      </Typography>
-                      {cardData && cardData.isScanned ? (
-                        <Typography variant='subtitle1' color='error'>
-                          {errorMessage}
-                        </Typography>
-                      ) : (
-                        <Button
-                          variant='contained'
-                          color='success'
-                          onClick={handleAddCardToAlbum}
-                          sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                        >
-                          Dodaj U Album
-                        </Button>
-                      )}
-                    </>
-                  ) : (
-                    <Typography variant='h4' component='div' color='error'>
-                      {errorMessage}
-                    </Typography>
-                  )}
-                  {!currentUser && (
-                    <Button
-                      variant='contained'
-                      color='inherit'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Prijavi se
-                    </Button>
-                  )}
-                </Box>
-              )}
+                )}
+              </Box>
             </Card>
           </Grid>
         </Grid>
