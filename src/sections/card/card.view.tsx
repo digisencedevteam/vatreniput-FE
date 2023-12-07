@@ -15,13 +15,14 @@ import axiosInstance from 'src/utils/axios';
 import { endpoints } from 'src/utils/axios';
 import { paths } from 'src/routes/paths';
 import { useAuthContext } from 'src/auth/hooks';
+import { useRouter } from 'src/routes/hooks';
 
 export const CardView = () => {
   const { cardId } = useParams();
   const [cardData, setCardData] = useState<any>(null);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const settings = useSettingsContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -52,7 +53,9 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     if (currentUser.user == null) {
-      navigate(`${paths.auth.jwt.login}?returnTo=${window.location.pathname}`);
+      navigate.push(
+        `${paths.auth.jwt.login}?returnTo=${window.location.pathname}`
+      );
     }
     try {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
@@ -63,7 +66,7 @@ export const CardView = () => {
       } else {
         setSnackbarMessage('Sličica uspješno dodana u album!');
         setSnackbarOpen(true);
-        navigate(paths.dashboard.collection);
+        navigate.push(paths.dashboard.collection);
       }
     } catch (error) {
       setIsError(true);
@@ -169,25 +172,43 @@ export const CardView = () => {
               </CardContent>
               <Divider />
               <Box p={3}>
-                {!cardData?.isScanned && errorMessage === '' ? (
+                <Box
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='flex-start'
+                  gap={2}
+                >
+                  {!cardData?.isScanned && errorMessage === '' && (
+                    <Button
+                      variant='contained'
+                      color='success'
+                      onClick={handleAddCardToAlbum}
+                      sx={{ p: 2 }}
+                    >
+                      Dodaj U Album
+                    </Button>
+                  )}
+
                   <Button
                     variant='contained'
-                    color='success'
-                    onClick={handleAddCardToAlbum}
-                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                  >
-                    Dodaj U Album
-                  </Button>
-                ) : (
-                  <Typography
-                    variant='subtitle1'
                     color='error'
-                    sx={{ mt: 2 }}
+                    onClick={() => navigate.back()}
+                    sx={{ p: 2 }}
                   >
-                    {errorMessage ||
-                      'Ova sličica je već skenirana i ne može se ponovno dodati.'}
-                  </Typography>
-                )}
+                    Natrag
+                  </Button>
+
+                  {cardData?.isScanned && (
+                    <Typography
+                      variant='subtitle1'
+                      color='error'
+                      sx={{ mt: 2 }}
+                    >
+                      {errorMessage ||
+                        'Ova sličica je već skenirana i ne može se ponovno dodati.'}
+                    </Typography>
+                  )}
+                </Box>
               </Box>
             </Card>
           </Grid>
