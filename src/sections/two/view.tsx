@@ -13,7 +13,6 @@ import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import useCardData from 'src/hooks/use-card-data';
-import { useRouter } from 'src/routes/hooks';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -36,17 +35,19 @@ export const CollectionView = () => {
 
   useEffect(() => {
     if (categories.length > 0) {
+      fetchCollectedCards(categoryIndex, 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryIndex, categories.length]);
+
+  useEffect(() => {
+    if (hasCategoryChanged) {
+      setHasCategoryChanged(false);
+    } else if (categories.length > 0) {
       fetchCollectedCards(categoryIndex, currentPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, categoryIndex, categories]);
-
-  useEffect(() => {
-    if (hasCategoryChanged && myRef.current && !isLoading) {
-      myRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryIndex, isLoading]);
+  }, [currentPage, categoryIndex, categories.length, hasCategoryChanged]);
 
   const handleArrowClick = (direction: string) => {
     const newIndex =
@@ -55,6 +56,7 @@ export const CollectionView = () => {
         : (categoryIndex + 1) % categories.length;
     setCategoryIndex(newIndex);
     setHasCategoryChanged(true);
+    setCurrentPage(1);
   };
 
   const handlePageChange = (

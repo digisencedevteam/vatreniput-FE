@@ -16,7 +16,9 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
   const navigate = useRouter();
 
   const handleClick = () => {
-    navigate.push(`/card/${item.printedCardId}`);
+    if (item.isCollected) {
+      navigate.push(`/card/${item.printedCardId}`);
+    }
   };
 
   const renderImg = (
