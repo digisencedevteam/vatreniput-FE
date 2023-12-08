@@ -15,6 +15,7 @@ export type CollectionEvent = {
 };
 
 export type CollectionCard = {
+  printedCardId: string;
   _id: string;
   code: string;
   title: string;

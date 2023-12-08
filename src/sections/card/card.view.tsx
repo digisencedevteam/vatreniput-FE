@@ -15,13 +15,14 @@ import axiosInstance from 'src/utils/axios';
 import { endpoints } from 'src/utils/axios';
 import { paths } from 'src/routes/paths';
 import { useAuthContext } from 'src/auth/hooks';
+import { useRouter } from 'src/routes/hooks';
 
 export const CardView = () => {
   const { cardId } = useParams();
   const [cardData, setCardData] = useState<any>(null);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const navigate = useRouter();
   const settings = useSettingsContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -52,7 +53,9 @@ export const CardView = () => {
 
   const handleAddCardToAlbum = async () => {
     if (currentUser.user == null) {
-      navigate(`${paths.auth.jwt.login}?returnTo=${window.location.pathname}`);
+      navigate.push(
+        `${paths.auth.jwt.login}?returnTo=${window.location.pathname}`
+      );
     }
     try {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
@@ -63,7 +66,7 @@ export const CardView = () => {
       } else {
         setSnackbarMessage('Sličica uspješno dodana u album!');
         setSnackbarOpen(true);
-        navigate(paths.dashboard.collection);
+        navigate.push(paths.dashboard.collection);
       }
     } catch (error) {
       setIsError(true);
@@ -87,8 +90,15 @@ export const CardView = () => {
       sx={isMobile ? { marginTop: '20px' } : null}
     >
       <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-        <Grid container spacing={5}>
-          <Grid item xs={12} md={6}>
+        <Grid
+          container
+          spacing={5}
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             {cardData?.videoLink ? (
               <div style={{ position: 'relative', paddingTop: '56.25%' }}>
                 <iframe
@@ -120,7 +130,11 @@ export const CardView = () => {
               />
             )}
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <Card
               sx={{
                 height: '100%',
@@ -134,58 +148,68 @@ export const CardView = () => {
                 >
                   {cardData?.number}
                 </Typography>
-                <Typography gutterBottom variant='h4' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='h4'
+                  component='div'
+                >
                   {cardData?.title}
                 </Typography>
-                <Typography gutterBottom variant='h6' component='div'>
+                <Typography
+                  gutterBottom
+                  variant='h6'
+                  component='div'
+                >
                   {cardData?.event?.name}
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant='h6'
+                  component='div'
+                >
+                  {cardData?.description}
                 </Typography>
               </CardContent>
               <Divider />
-              {isError ? (
-                <Box p={2}>
-                  <Typography variant='h4' component='div' color='error'>
-                    {errorMessage}
-                  </Typography>
-                </Box>
-              ) : (
-                <Box p={3}>
-                  {errorMessage === '' ? (
-                    <>
-                      <Typography variant='subtitle2' component='div'>
-                        Ovo je dummy data opis detalja jedne slicice!
-                      </Typography>
-                      {cardData && cardData.isScanned ? (
-                        <Typography variant='subtitle1' color='error'>
-                          {errorMessage}
-                        </Typography>
-                      ) : (
-                        <Button
-                          variant='contained'
-                          color='success'
-                          onClick={handleAddCardToAlbum}
-                          sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                        >
-                          Dodaj U Album
-                        </Button>
-                      )}
-                    </>
-                  ) : (
-                    <Typography variant='h4' component='div' color='error'>
-                      {errorMessage}
-                    </Typography>
-                  )}
-                  {!currentUser && (
+              <Box p={3}>
+                <Box
+                  display='flex'
+                  alignItems='center'
+                  justifyContent='flex-start'
+                  gap={2}
+                >
+                  {!cardData?.isScanned && errorMessage === '' && (
                     <Button
                       variant='contained'
-                      color='inherit'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                      color='success'
+                      onClick={handleAddCardToAlbum}
+                      sx={{ p: 2 }}
                     >
-                      Prijavi se
+                      Dodaj U Album
                     </Button>
                   )}
+
+                  <Button
+                    variant='contained'
+                    color='error'
+                    onClick={() => navigate.back()}
+                    sx={{ p: 2 }}
+                  >
+                    Natrag
+                  </Button>
+
+                  {cardData?.isScanned && (
+                    <Typography
+                      variant='subtitle1'
+                      color='error'
+                      sx={{ mt: 2 }}
+                    >
+                      {errorMessage ||
+                        'Ova sličica je već skenirana i ne može se ponovno dodati.'}
+                    </Typography>
+                  )}
                 </Box>
-              )}
+              </Box>
             </Card>
           </Grid>
         </Grid>

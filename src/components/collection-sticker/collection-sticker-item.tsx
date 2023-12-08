@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import Image from 'src/components/image';
 import { CollectionCard } from 'src/types/';
+import { useRouter } from 'src/routes/hooks';
 
 type CollectionStickerItemProps = {
   item: CollectionCard;
@@ -12,6 +13,12 @@ type CollectionStickerItemProps = {
 
 export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
   const theme = useTheme();
+  const navigate = useRouter();
+
+  const handleClick = () => {
+    navigate.push(`/card/${item.printedCardId}`);
+  };
+
   const renderImg = (
     <Image
       alt={item.title}
@@ -38,9 +45,11 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
         transition: 'transform 0.2s',
         '&:hover': {
           transform: 'scale(1.05)',
+          cursor: 'pointer',
         },
         top: 20,
       }}
+      onClick={handleClick}
     >
       <Box sx={{ position: 'relative' }}>
         <CardContent
