@@ -15,7 +15,7 @@ const Router = () => {
       element: <Navigate to={PATH_AFTER_LOGIN} replace />,
     },
     {
-      path: 'card/:cardId',
+      path: 'card/:cardId/:printedCountNumber',
       element: <CardPage />,
     },
 
