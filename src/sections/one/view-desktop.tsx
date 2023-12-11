@@ -59,7 +59,6 @@ export const DesktopViewOne = () => {
   const hasFeaturedContent = featuredAppsList.length > 0;
   useEffect(() => {
     fetchDashboardData();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
