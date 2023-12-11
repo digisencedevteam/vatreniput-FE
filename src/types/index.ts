@@ -15,11 +15,12 @@ export type CollectionEvent = {
 };
 
 export type CollectionCard = {
-  printedCardId: string;
+  printedCardId: string | null;
   _id: string;
   code: string;
   title: string;
   description: string;
+  ordinalNumber: number;
   event: CollectionEvent;
   imageURLs: string[];
   isScanned: boolean;
@@ -43,6 +44,7 @@ export type CardTemplate = {
   description: string;
   videoLink?: string;
   imageURLS: string[];
+  author: string;
   event: CollectionEvent;
   number?: number;
 };

@@ -1,11 +1,11 @@
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
 import Image from 'src/components/image';
 import { CollectionCard } from 'src/types/';
 import { useRouter } from 'src/routes/hooks';
+import { useResponsive } from 'src/hooks/use-responsive';
 
 type CollectionStickerItemProps = {
   item: CollectionCard;
@@ -14,9 +14,12 @@ type CollectionStickerItemProps = {
 export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
   const theme = useTheme();
   const navigate = useRouter();
+  const isMobile = useResponsive('down', 'md');
 
   const handleClick = () => {
-    navigate.push(`/card/${item.printedCardId}`);
+    if (!!item.printedCardId) {
+      navigate.push(`/card/${item.printedCardId}?isPreview=true`);
+    }
   };
 
   const renderImg = (
@@ -24,50 +27,65 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
       alt={item.title}
       src={
         item.isCollected === undefined
-          ? item.imageURLs[0]
+          ? item.imageURLs[1]
           : item.isCollected
-          ? item.imageURLs[0]
+          ? item.imageURLs[1]
           : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'
       }
-      overlay={`linear-gradient(to bottom, ${alpha(
-        theme.palette.grey[900],
-        0
-      )} 0%, ${theme.palette.grey[900]} 95%)`}
       sx={{
         height: { xs: 160, sm: 200, md: 250, lg: 250, xl: 300 },
+        width: '100%',
+        maxWidth: '100%',
       }}
     />
   );
 
   return (
-    <Card
-      sx={{
-        transition: 'transform 0.2s',
-        '&:hover': {
-          transform: 'scale(1.05)',
-          cursor: 'pointer',
-        },
-        top: 20,
-      }}
-      onClick={handleClick}
-    >
-      <Box sx={{ position: 'relative' }}>
-        <CardContent
-          sx={{
-            px: 0,
-            left: 0,
-            width: 1,
-            bottom: 0,
-            zIndex: 9,
-            position: 'absolute',
-            color: 'common.white',
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant='subtitle2'>{item.title}</Typography>
-        </CardContent>
-        {renderImg}
-      </Box>
-    </Card>
+    <Box sx={{ maxWidth: 520, mx: 'auto' }}>
+      <Card
+        sx={{
+          maxWidth: 520,
+          transition: 'transform 0.2s',
+          '&:hover': {
+            transform: 'scale(1.05)',
+            cursor: 'pointer',
+          },
+          top: 20,
+          position: 'relative',
+          width: '100%',
+        }}
+        onClick={handleClick}
+      >
+        <Box sx={{ position: 'relative', maxWidth: 520 }}>
+          {renderImg}
+
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              zIndex: 10,
+              borderTopLeftRadius: 10,
+              width: isMobile ? '30%' : '20%',
+              height: isMobile ? '30%' : '20%',
+              backgroundColor: alpha(theme.palette.common.black, 0.5),
+              backdropFilter: 'blur(4px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography
+              variant='h4'
+              sx={{
+                color: 'common.white',
+              }}
+            >
+              {item.ordinalNumber}
+            </Typography>
+          </Box>
+        </Box>
+      </Card>
+    </Box>
   );
 };

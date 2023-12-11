@@ -50,7 +50,7 @@ const useCardData = (): CardData => {
       }
 
       if (response) {
-        const totalPages = Math.ceil(response.data.totalCount / 12); // Update as necessary
+        const totalPages = Math.ceil(response.data.totalCount / 12);
         setCollectedCards(response.data.cards);
         setTotalPages(totalPages);
       }

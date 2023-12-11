@@ -9,7 +9,7 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import useVoting from 'src/hooks/use-voting-data';
 import { useResponsive } from 'src/hooks/use-responsive';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from 'src/auth/context/jwt';
 import { Link } from 'react-router-dom';
 import { useRouter } from 'src/routes/hooks';
@@ -22,13 +22,18 @@ import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import { VotingOverview } from 'src/components/voting-overview/voting-overview';
 import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
+import PagingComponent from 'src/components/paging/paging-component';
+import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';
 
 const FiveView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const {
     votings,
     fetchAllVotings,
@@ -55,6 +60,17 @@ const FiveView = () => {
   const notVotedVotings = votings
     ? votings.filter((voting) => voting.isVoted === false)
     : [];
+
+  const currentNotVotedVotings = notVotedVotings.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(notVotedVotings.length / itemsPerPage);
+
+  const handlePageChange = (event: any, newPage: any) => {
+    setCurrentPage(newPage);
+  };
 
   const fetchData = async () => {
     await fetchAllVotings();
@@ -139,7 +155,7 @@ const FiveView = () => {
                   isTabletCount={4}
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
-              ) : !notVotedVotings?.length ? (
+              ) : !currentNotVotedVotings?.length ? (
                 <SkeletonDashboardLoader
                   message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
                   count={4}
@@ -149,7 +165,7 @@ const FiveView = () => {
                 />
               ) : (
                 <Grid container spacing={2}>
-                  {notVotedVotings.map((voting, index) => (
+                  {currentNotVotedVotings.map((voting, index) => (
                     <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
                       <CustomCard
                         cardId={voting._id}
@@ -165,8 +181,14 @@ const FiveView = () => {
                 </Grid>
               )}
             </Grid>
+            {totalPages > 1 && (
+              <PagingComponent
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            )}
           </SectionWrapper>
-
           <StorySectionWrapper title='Najboljih 11' isCollapsable={true}>
             {isLoading ? (
               <SkeletonDashboardLoader
@@ -176,12 +198,11 @@ const FiveView = () => {
                 maxWidth={isMobile ? '90px' : '200px'}
               />
             ) : !userVotedVotings.length ? (
-              <Typography>Glasajte za svoje najdraže igrače!</Typography>
+              <SkeletonOverviewResults message='Glasaj i saznaj mišljenje ostalih o najboljim Vatrenima!' />
             ) : (
               <VotingOverview data={transformVotingResults()} />
             )}
           </StorySectionWrapper>
-
           <SectionWrapper title='Ispunjena'>
             {isLoading ? (
               <SkeletonDashboardLoader
