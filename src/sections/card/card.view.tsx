@@ -42,7 +42,7 @@ export const CardView = () => {
   const [isSingle, setIsSingle] = useState(true);
   const router = useRouter();
 
-  const fetchCardData = async (test: boolean) => {
+  const fetchCardData = async (isMultiple: boolean) => {
     const targetApiSingle = `${endpoints.card.details}${cardId}`;
     const targetApiMultiple = `${endpoints.card.details}${cardId}?userId=${
       currentUser.user && currentUser.user._id
@@ -50,7 +50,7 @@ export const CardView = () => {
 
     try {
       const response = await axiosInstance.get(
-        test ? targetApiMultiple : targetApiSingle
+        isMultiple ? targetApiMultiple : targetApiSingle
       );
       setCardData(response.data);
       setIsError(false);
@@ -61,18 +61,16 @@ export const CardView = () => {
         error?.message ||
           'Dogodila se greška prilikom dobivanja podataka o sličici!'
       );
-      setSnackbarSeverity('error'); // Set severity to 'error'
+      setSnackbarSeverity('error');
       setSnackbarOpen(true);
     }
   };
 
   useEffect(() => {
-    console.log(searchParams.get('isPreview'));
     const isPreview = searchParams.get('isPreview');
     const isLoggedIn = !!currentUser?.user;
     if (isPreview === 'true' && isLoggedIn) {
       setIsSingle(false);
-      console.log('ttreu');
       fetchCardData(true);
       return;
     }

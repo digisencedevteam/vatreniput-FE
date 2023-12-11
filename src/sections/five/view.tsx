@@ -68,7 +68,7 @@ const FiveView = () => {
 
   const totalPages = Math.ceil(notVotedVotings.length / itemsPerPage);
 
-  const handlePageChange = (event: any, newPage: any) => {
+  const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
   };
 
@@ -185,7 +185,7 @@ const FiveView = () => {
               <PagingComponent
                 currentPage={currentPage}
                 totalPages={totalPages}
-                onPageChange={handlePageChange}
+                onPageChange={(e, index) => handlePageChange(index)}
               />
             )}
           </SectionWrapper>
