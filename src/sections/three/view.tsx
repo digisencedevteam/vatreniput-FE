@@ -33,7 +33,7 @@ const ThreeView = () => {
   const isMobile = useResponsive('down', 'md');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
   const auth = useContext(AuthContext);
   const [selectedQuizResult, setSelectedQuizResult] =
     useState<QuizResultsModalProps['quizResults']>();
@@ -177,8 +177,8 @@ const ThreeView = () => {
       ) : (
         <Grid item>
           <AppWelcome
-            title={`Dobrodošli na kvizove`}
-            description={`Zaronite u uzbudljivi svijet naših kvizova! Jeste li spremni testirati svoje vještine i zauzeti mjesto među pobjednicima? Pridružite se sada i neka igre počnu!`}
+            title={`Vatreni Kvizovi: Osvoji Slavu i Nagrade!`}
+            description={`Zaroni u uzbudljivi svijet Vatrenih kvizova! Jesi li spreman/a testirati svoje znanje i osvojiti sjajne nagrade? Pridruži nam se sada i neka igra započne! Svaki točan odgovor te vodi bliže vrijednim nagradama.`}
             img={
               <SeoIllustration imageUrl='https://res.cloudinary.com/dzg5kxbau/image/upload/v1698661449/VATROSLAV-vatrene_price-removebg-preview_pa5j2e.png' />
             }

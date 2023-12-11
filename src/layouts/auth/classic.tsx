@@ -15,8 +15,7 @@ type Props = {
 
 const AuthClassicLayout = ({ children, image, title }: Props) => {
   const theme = useTheme();
-
-  const upMd = useResponsive('up', 'md');
+  const upLg = useResponsive('up', 'lg');
 
   const renderLogo = (
     <Logo
@@ -51,10 +50,7 @@ const AuthClassicLayout = ({ children, image, title }: Props) => {
       sx={{
         position: 'relative',
         overflow: 'hidden',
-        backgroundColor:
-          theme.palette.mode === 'light'
-            ? 'rgba(0, 0, 0, 1.0)'
-            : 'rgba(0, 0, 0, 1.0)',
+        backgroundColor: 'rgba(0, 0, 0, 1.0)',
         '&::before': {
           content: '""',
           position: 'absolute',
@@ -86,7 +82,7 @@ const AuthClassicLayout = ({ children, image, title }: Props) => {
           color: '#fff',
         }}
       >
-        <Typography variant='h2' sx={{ maxWidth: 600 }}>
+        <Typography variant='h3' sx={{ maxWidth: 600 }}>
           {title || 'Dobrodošli na Platformu Vatrenog Puta!'}
         </Typography>
       </Box>
@@ -102,7 +98,7 @@ const AuthClassicLayout = ({ children, image, title }: Props) => {
       }}
     >
       {renderLogo}
-      {upMd && renderSection}
+      {upLg && renderSection}
       {renderContent}
     </Stack>
   );

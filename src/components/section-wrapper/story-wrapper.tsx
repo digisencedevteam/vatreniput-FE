@@ -18,19 +18,13 @@ export const StorySectionWrapper = ({
       borderRadius={2}
       p={2}
       pl={0}
+      pr={0}
       mt={2}
       mb={1}
+      sx={{ marginLeft: 0, paddingLeft: 0 }}
     >
-      <Box
-        display='flex'
-        justifyContent='space-between'
-        alignItems='center'
-      >
-        <Typography
-          variant='h3'
-          color={'primary'}
-          py={1}
-        >
+      <Box display='flex' justifyContent='space-between' alignItems='center'>
+        <Typography variant='h4' p={1}>
           {title}
         </Typography>
         {isCollapsable && (
