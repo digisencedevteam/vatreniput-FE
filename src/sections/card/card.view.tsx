@@ -11,6 +11,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import {
   Alert,
+  AlertColor,
   IconButton,
   Snackbar,
   alpha,
@@ -35,6 +36,7 @@ export const CardView = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('info');
   const currentUser = useAuthContext();
   const isCardDataArray = Array.isArray(cardData);
   const [isSingle, setIsSingle] = useState(true);
@@ -50,15 +52,17 @@ export const CardView = () => {
       const response = await axiosInstance.get(
         test ? targetApiMultiple : targetApiSingle
       );
-      console.log(response.data);
       setCardData(response.data);
       setIsError(false);
+      setSnackbarOpen(false);
     } catch (error) {
       setIsError(true);
       setErrorMessage(
-        error.response.data.message ||
+        error?.message ||
           'Dogodila se greška prilikom dobivanja podataka o sličici!'
       );
+      setSnackbarSeverity('error'); // Set severity to 'error'
+      setSnackbarOpen(true);
     }
   };
 
@@ -76,26 +80,32 @@ export const CardView = () => {
   }, []);
 
   const handleAddCardToAlbum = async () => {
-    if (currentUser.user == null) {
+    if (!currentUser.user) {
       navigate(`${paths.auth.jwt.login}?returnTo=${window.location.pathname}`);
+      return;
     }
+
     try {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
         cardId,
       });
+
       if (res.data.message !== 'ok') {
-        setErrorMessage(res.data.message);
+        setSnackbarMessage(res.data.message);
+        setSnackbarSeverity('error');
       } else {
         setSnackbarMessage('Sličica uspješno dodana u album!');
-        setSnackbarOpen(true);
+        setSnackbarSeverity('success');
         navigate(paths.dashboard.collection);
       }
+      setSnackbarOpen(true);
     } catch (error) {
-      setIsError(true);
       setErrorMessage(
-        error.response?.data?.message ||
-          'Dogodila se greška prilikom dodavanja sličice u album!'
+        error?.message ||
+          'Dogodila se greška prilikom dobivanja podataka o sličici!'
       );
+      setSnackbarSeverity('error');
+      setSnackbarOpen(true);
     }
   };
 
@@ -292,7 +302,6 @@ export const CardView = () => {
                   }}
                 >
                   <Divider />
-
                   <CardContent>
                     <Typography
                       variant='caption'
@@ -312,15 +321,9 @@ export const CardView = () => {
                   <Divider />
                 </Card>
               </Grid>
-              {isError ? (
-                <Box p={2}>
-                  <Typography variant='caption' component='div' color='error'>
-                    {errorMessage}
-                  </Typography>
-                </Box>
-              ) : (
+              {!isError && (
                 <Box p={3}>
-                  {errorMessage === '' ? (
+                  {errorMessage === '' && (
                     <>
                       {cardData && cardData.isScanned ? (
                         <Typography variant='subtitle1' color='error'>
@@ -337,10 +340,6 @@ export const CardView = () => {
                         </Button>
                       )}
                     </>
-                  ) : (
-                    <Typography variant='h4' component='div' color='error'>
-                      {errorMessage}
-                    </Typography>
                   )}
                   {!currentUser && (
                     <Button
@@ -365,10 +364,10 @@ export const CardView = () => {
       >
         <Alert
           onClose={handleCloseSnackbar}
-          severity='success'
+          severity={snackbarSeverity}
           sx={{ width: '100%' }}
         >
-          {snackbarMessage}
+          {snackbarSeverity === 'error' ? errorMessage : snackbarMessage}
         </Alert>
       </Snackbar>
     </Box>
