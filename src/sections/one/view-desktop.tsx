@@ -2,10 +2,9 @@ import { Box, Container, Divider, Grid } from '@mui/material';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-section-wrapper';
 import CustomCard from 'src/components/custom-card/custom-card';
-import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import AppFeatured from 'src/components/feautred-carousel/app-featured';
 import { useSettingsContext } from 'src/components/settings';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import AppCurrentDownload from 'src/components/collection-chart/app-current-download';
@@ -15,10 +14,15 @@ import { CollectionStickerItem } from 'src/components/collection-sticker/collect
 import { paths } from 'src/routes/paths';
 import DesktopNewsSkeleton from 'src/components/skeleton-loader/desktop-news-skeleton';
 import { useResponsive } from 'src/hooks/use-responsive';
+import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import dayjs from 'dayjs';
+import { RewardStatus } from 'src/types';
+import { Quiz } from '../quiz/types';
 
 export const DesktopViewOne = () => {
   const settings = useSettingsContext();
   const isMobile = useResponsive('down', 'md');
+  const [rewardStatus, setRewardStatus] = useState<RewardStatus>({});
 
   const {
     chartData,
@@ -30,6 +34,8 @@ export const DesktopViewOne = () => {
     deleteVoting,
     cards,
   } = useDashboardData();
+
+  const { deleteQuiz } = useFetchQuizzes();
 
   const featuredAppsList = [
     ...quizzes.slice(0, 2).map((quiz) => ({
@@ -53,8 +59,25 @@ export const DesktopViewOne = () => {
   const hasFeaturedContent = featuredAppsList.length > 0;
   useEffect(() => {
     fetchDashboardData();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (quizzes.length > 0) {
+      calculateRewardStatus(quizzes);
+    }
+  }, [quizzes]);
+
+  const calculateRewardStatus = (quizzes: Quiz[]) => {
+    const newRewardStatus: RewardStatus = {};
+    quizzes.forEach((quiz) => {
+      const createdAt = dayjs(quiz.createdAt);
+      const diffInDays = dayjs().diff(createdAt, 'day');
+      newRewardStatus[quiz._id] = diffInDays <= 3;
+    });
+    setRewardStatus(newRewardStatus);
+  };
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Grid
@@ -220,11 +243,27 @@ export const DesktopViewOne = () => {
                     md={6}
                     key={index}
                   >
-                    <CustomCardSmall
+                    <CustomCard
+                      quizId={quiz._id}
+                      onDelete={deleteQuiz}
                       imgUrl={quiz.thumbnail}
-                      width='90%'
                       cardText={quiz.title}
-                      linkTo={`/dashboard/quiz/${quiz._id}`}
+                      cardId={quiz._id}
+                      availableUntil={quiz.availableUntil}
+                      linkTo={`${paths.dashboard.quizGroup.quiz}/${quiz._id}`}
+                      linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${quiz._id}`}
+                      createdAt={quiz.createdAt}
+                      status={
+                        quiz.status && quiz.status.length > 0
+                          ? quiz.status[0].status
+                          : undefined
+                      }
+                      startTime={
+                        quiz.status && quiz.status.length > 0
+                          ? quiz.status[0].startTime
+                          : undefined
+                      }
+                      isRewarded={rewardStatus}
                     />
                   </Grid>
                 ))
