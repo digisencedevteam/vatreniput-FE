@@ -127,7 +127,9 @@ export const CardView = () => {
               aria-label='back to dashboard'
               onClick={() => router.push(paths.dashboard.root)}
             >
-              <ArrowBackIcon />
+              <ArrowBackIcon
+                sx={{ width: isMobile ? 30 : 50, height: isMobile ? 30 : 50 }}
+              />
             </IconButton>
           </Grid>
         </Grid>
@@ -152,7 +154,7 @@ export const CardView = () => {
                         image={
                           card?.isCollected
                             ? card?.imageURLs[0]
-                            : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'
+                            : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702329314/LogoHNS_j974kk.png'
                         }
                         alt={`Sličica ${card.ordinalNumber}`}
                         sx={{
@@ -194,7 +196,6 @@ export const CardView = () => {
                   ))}
                 </Box>
               </Grid>
-
               <Grid item xs={12} md={12}>
                 <Card
                   sx={{
@@ -250,43 +251,13 @@ export const CardView = () => {
                       />
                     </div>
                   ) : (
-                    <>
-                      <CardMedia
-                        component='img'
-                        height='auto'
-                        image={cardData?.imageURLs[0]}
-                        alt='Sličica'
-                        sx={{ borderRadius: 2, width: '100%' }}
-                      />
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          bottom: 0,
-                          right: 0,
-                          zIndex: 10,
-                          width: isMobile ? '20%' : '15%',
-                          height: isMobile ? '20%' : '15%',
-                          borderTopLeftRadius: 10,
-                          backgroundColor: alpha(
-                            theme.palette.common.black,
-                            0.5
-                          ),
-                          backdropFilter: 'blur(4px)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Typography
-                          variant={isMobile ? 'h3' : 'h2'}
-                          sx={{
-                            color: 'common.white',
-                          }}
-                        >
-                          {cardData?.ordinalNumber}
-                        </Typography>
-                      </Box>
-                    </>
+                    <CardMedia
+                      component='img'
+                      height='auto'
+                      image={cardData?.imageURLs[0]}
+                      alt='Sličica'
+                      sx={{ borderRadius: 2, width: '100%' }}
+                    />
                   )}
                 </Box>
               </Grid>
@@ -318,38 +289,17 @@ export const CardView = () => {
                   </CardContent>
                   <Divider />
                 </Card>
+                {!isError && (
+                  <Button
+                    variant='contained'
+                    color='success'
+                    onClick={handleAddCardToAlbum}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                  >
+                    Dodaj U Album
+                  </Button>
+                )}
               </Grid>
-              {!isError && (
-                <Box p={3}>
-                  {errorMessage === '' && (
-                    <>
-                      {cardData && cardData.isScanned ? (
-                        <Typography variant='subtitle1' color='error'>
-                          {errorMessage}
-                        </Typography>
-                      ) : (
-                        <Button
-                          variant='contained'
-                          color='success'
-                          onClick={handleAddCardToAlbum}
-                          sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                        >
-                          Dodaj U Album
-                        </Button>
-                      )}
-                    </>
-                  )}
-                  {!currentUser && (
-                    <Button
-                      variant='contained'
-                      color='inherit'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Prijavi se
-                    </Button>
-                  )}
-                </Box>
-              )}
             </>
           )}
         </Grid>

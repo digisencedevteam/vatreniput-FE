@@ -1,7 +1,7 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Box, Grid, IconButton } from '@mui/material';
+import { Box, Divider, Grid, IconButton } from '@mui/material';
 import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
@@ -13,6 +13,8 @@ import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import useCardData from 'src/hooks/use-card-data';
+import ArrowCircleLeftSharpIcon from '@mui/icons-material/ArrowCircleLeftSharp';
+import ArrowCircleRightSharpIcon from '@mui/icons-material/ArrowCircleRightSharp';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -97,13 +99,14 @@ export const CollectionView = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              mb: isMobile ? 3 : 5,
             }}
           >
             <IconButton
-              color='primary'
+              color='inherit'
               onClick={() => handleArrowClick('left')}
             >
-              <ArrowLeftIcon />
+              <ArrowCircleLeftSharpIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
             <div ref={titleRef}>
               <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
@@ -111,12 +114,13 @@ export const CollectionView = () => {
               </Typography>
             </div>
             <IconButton
-              color='primary'
+              color='inherit'
               onClick={() => handleArrowClick('right')}
             >
-              <ArrowRightIcon />
+              <ArrowCircleRightSharpIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
           </Box>
+          <Divider />
         </Grid>
 
         {showSkeletonLoader && (
