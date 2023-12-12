@@ -263,7 +263,10 @@ const CustomCard = ({
             )}`}</Typography>
           )}
           {availableUntil && (
-            <Typography variant='subtitle2' sx={{ color: '#999' }}>
+            <Typography
+              variant='subtitle2'
+              sx={{ color: '#999' }}
+            >
               Nagradan do {formattedRewarded}
             </Typography>
           )}

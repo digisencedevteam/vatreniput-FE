@@ -27,6 +27,8 @@ export type CollectionCard = {
   isCollected: boolean;
 };
 
+export type RewardStatus = Record<string, boolean>;
+
 export type CardApiResponse = {
   cards: CollectionCard[];
   totalCount: number;
