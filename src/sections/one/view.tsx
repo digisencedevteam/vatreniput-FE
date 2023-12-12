@@ -15,6 +15,11 @@ import { AuthContext } from 'src/auth/context/jwt';
 import StatisticCards from 'src/components/stats-box/statistic-box';
 import { MotionContainer, varFade } from 'src/components/animate';
 import { paths } from 'src/routes/paths';
+import useFetchQuizzes from 'src/hooks/use-quiz-data';
+import { RewardStatus } from 'src/types';
+import { Quiz } from '../quiz/types';
+import dayjs from 'dayjs';
+import CustomCard from 'src/components/custom-card/custom-card';
 
 const OneView = () => {
   const settings = useSettingsContext();
@@ -30,6 +35,9 @@ const OneView = () => {
     collectedStatistic,
   } = useDashboardData();
   const slideVariants = varFade();
+  const [rewardStatus, setRewardStatus] = useState<RewardStatus>({});
+
+  const { deleteQuiz } = useFetchQuizzes();
 
   const imageSrc =
     theme.palette.mode === 'dark'
@@ -54,43 +62,84 @@ const OneView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    if (quizzes.length > 0) {
+      calculateRewardStatus(quizzes);
+    }
+  }, [quizzes]);
+
+  const calculateRewardStatus = (quizzes: Quiz[]) => {
+    const newRewardStatus: RewardStatus = {};
+    quizzes.forEach((quiz) => {
+      const createdAt = dayjs(quiz.createdAt);
+      const diffInDays = dayjs().diff(createdAt, 'day');
+      newRewardStatus[quiz._id] = diffInDays <= 3;
+    });
+    setRewardStatus(newRewardStatus);
+  };
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant='h3' sx={{ marginY: 1, paddingTop: 2 }}>
+      <Typography
+        variant='h3'
+        sx={{ marginY: 1, paddingTop: 2 }}
+      >
         {' '}
         Bok, {userName} 👋{' '}
       </Typography>
-      <Grid container spacing={2} sx={{ marginTop: 5 }}>
-        <Grid item xs={6}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ marginTop: 5 }}
+      >
+        <Grid
+          item
+          xs={6}
+        >
           <DashboardButton
             imageSrc={imageSrc}
             title={isScanning ? 'Stop Scanning' : 'Skeniraj novu'}
             onClick={toggleScanning}
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid
+          item
+          xs={6}
+        >
           <DashboardButton
             imageSrc={mojaKolekcijaImageSrc}
             title='Moja Kolekcija'
             link={paths.dashboard.collection}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           {isScanning && <QRScanner />}
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           <Box width={'93%'}>
             <StatisticCards collectedStatistic={collectedStatistic} />
           </Box>
         </Grid>
-        <Grid item xs={12}>
+        <Grid
+          item
+          xs={12}
+        >
           <MotionContainer variants={slideVariants.inUp}>
             <DashboardSectionWrapper
               title='Najviše skupljenih'
               link={paths.dashboard.collection}
             >
               {isDashboardLoading ? (
-                <SkeletonDashboardLoader count={1} maxWidth='375px' />
+                <SkeletonDashboardLoader
+                  count={1}
+                  maxWidth='375px'
+                />
               ) : !collectedStatistic?.topEvents?.length ? (
                 <SkeletonDashboardLoader
                   count={1}
@@ -122,17 +171,34 @@ const OneView = () => {
             link={paths.dashboard.quizzes}
           >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+              />
             ) : quizzes?.length ? (
               <ScrollableContainer childrenCount={quizzes?.length}>
                 {quizzes.map((quiz, index) => (
-                  <CustomCardSmall
-                    key={index}
+                  <CustomCard
+                    quizId={quiz._id}
+                    onDelete={deleteQuiz}
                     imgUrl={quiz.thumbnail}
-                    width='96%'
-                    height='100%'
                     cardText={quiz.title}
-                    linkTo={`/dashboard/quiz/${quiz._id}`}
+                    cardId={quiz._id}
+                    availableUntil={quiz.availableUntil}
+                    linkTo={`${paths.dashboard.quizGroup.quiz}/${quiz._id}`}
+                    linkToEdit={`${paths.dashboard.quizGroup.editQuiz}/${quiz._id}`}
+                    createdAt={quiz.createdAt}
+                    status={
+                      quiz.status && quiz.status.length > 0
+                        ? quiz.status[0].status
+                        : undefined
+                    }
+                    startTime={
+                      quiz.status && quiz.status.length > 0
+                        ? quiz.status[0].startTime
+                        : undefined
+                    }
+                    isRewarded={rewardStatus}
                   />
                 ))}
               </ScrollableContainer>
@@ -149,7 +215,10 @@ const OneView = () => {
             link={paths.dashboard.votings}
           >
             {isDashboardLoading ? (
-              <SkeletonDashboardLoader count={1} maxWidth='375px' />
+              <SkeletonDashboardLoader
+                count={1}
+                maxWidth='375px'
+              />
             ) : notVotedVotings?.length ? (
               <ScrollableContainer childrenCount={notVotedVotings?.length}>
                 {notVotedVotings.map((voting, index) => (
