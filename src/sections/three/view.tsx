@@ -8,7 +8,7 @@ import ScrollableContainer from 'src/components/scrollable-container/scrollable-
 import StatusCard from 'src/components/status-card/status-card';
 import SectionWrapper from 'src/components/section-wrapper/section-wrapper';
 import CustomCardSmall from 'src/components/custom-card/custom-card-small';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import PagingComponent from 'src/components/paging/paging-component';
 import { AuthContext } from 'src/auth/context/jwt';
 import { useContext } from 'react';
@@ -32,20 +32,31 @@ const ThreeView = () => {
   const theme = useTheme();
   const isMobile = useResponsive('down', 'md');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  // const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 6;
   const auth = useContext(AuthContext);
   const [selectedQuizResult, setSelectedQuizResult] =
     useState<QuizResultsModalProps['quizResults']>();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPageUnresolved, setCurrentPageUnresolved] = useState(1);
+  const [currentPageResolved, setCurrentPageResolved] = useState(1);
+
   const {
     isLoadingResolved,
     isLoadingUnresolved,
     resolvedQuizzes,
     unresolvedQuizzes,
     deleteQuiz,
-    fetchQuizzes,
-  } = useFetchQuizzes(currentPage, itemsPerPage);
+    fetchUnresolvedQuizzes,
+    fetchResolvedQuizzes,
+    totalPagesUnresolved,
+    totalPagesResolved,
+  } = useFetchQuizzes(
+    currentPageUnresolved,
+    itemsPerPage,
+    currentPageResolved,
+    itemsPerPage
+  );
   const [rewardStatus, setRewardStatus] = useState<Record<string, boolean>>({});
   const totalResolved = resolvedQuizzes ? resolvedQuizzes.length : 0;
   const totalUnresolved = unresolvedQuizzes ? unresolvedQuizzes.length : 0;
@@ -89,9 +100,15 @@ const ThreeView = () => {
   }));
 
   useEffect(() => {
-    fetchQuizzes();
+    fetchUnresolvedQuizzes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPageUnresolved]);
+
+  // useEffect hook for resolved quizzes
+  useEffect(() => {
+    fetchResolvedQuizzes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPageResolved]);
 
   const formattedDateTaken = selectedQuizResult
     ? new Date(selectedQuizResult.dateTaken).toLocaleString('en-GB', {
@@ -103,18 +120,28 @@ const ThreeView = () => {
       })
     : '';
 
-  useEffect(() => {
-    if (resolvedQuizzes) {
-      const totalResolvedQuizzes = resolvedQuizzes.length;
-      setTotalPages(Math.ceil(totalResolvedQuizzes / itemsPerPage));
-    }
-  }, [resolvedQuizzes]);
+  // TODO: PROVJERITI ZASTO BACKEND NE VRATI NA PAGE 3 6 KVIZOVA NEGO SAMO 1
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    page: number
+  // useEffect(() => {
+  //   if (resolvedQuizzes) {
+  //     const totalResolvedQuizzes = resolvedQuizzes.length;
+  //     setTotalPages(Math.ceil(totalResolvedQuizzes / itemsPerPage));
+  //   }
+  // }, [resolvedQuizzes]);
+
+  // Handlers for page changes
+  const handlePageChangeUnresolved = (
+    event: any,
+    page: SetStateAction<number>
   ) => {
-    setCurrentPage(page);
+    setCurrentPageUnresolved(page);
+  };
+
+  const handlePageChangeResolved = (
+    event: any,
+    page: SetStateAction<number>
+  ) => {
+    setCurrentPageResolved(page);
   };
 
   return (
@@ -187,11 +214,20 @@ const ThreeView = () => {
           />
         </Grid>
       )}
-      <Grid item xs={12} md={6} lg={8} sx={{ marginY: 5 }}>
+      <Grid
+        item
+        xs={12}
+        md={6}
+        lg={8}
+        sx={{ marginY: 5 }}
+      >
         {isLoadingResolved ? (
           <SkeletonOverviewResults />
         ) : resolvedQuiz && resolvedQuiz.length > 0 ? (
-          <QuizBestOverview title='Najnoviji rezultati' data={resolvedQuiz} />
+          <QuizBestOverview
+            title='Najnoviji rezultati'
+            data={resolvedQuiz}
+          />
         ) : (
           <SkeletonOverviewResults message='Trenutno nema riješenih kvizova. Riješi neki od dostupnih kako bi vidio svoje rezultate!' />
         )}
@@ -233,7 +269,10 @@ const ThreeView = () => {
         />
       </Box>
       <SectionWrapper title='Dostupni'>
-        <Grid container spacing={2}>
+        <Grid
+          container
+          spacing={2}
+        >
           {isLoadingUnresolved ? (
             <SkeletonDashboardLoader
               isMobileCount={2}
@@ -242,7 +281,14 @@ const ThreeView = () => {
             />
           ) : !!unresolvedQuizzes?.length ? (
             unresolvedQuizzes.map((data, index) => (
-              <Grid key={index} item xs={12} sm={6} md={4} lg={4}>
+              <Grid
+                key={index}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                lg={4}
+              >
                 <Box>
                   <CustomCard
                     quizId={data._id}
@@ -279,7 +325,21 @@ const ThreeView = () => {
             />
           )}
         </Grid>
+        {totalPagesUnresolved > 1 && (
+          <Box
+            display='flex'
+            justifyContent='center'
+            my={2}
+          >
+            <PagingComponent
+              currentPage={currentPageUnresolved}
+              totalPages={totalPagesUnresolved}
+              onPageChange={handlePageChangeUnresolved}
+            />
+          </Box>
+        )}
       </SectionWrapper>
+
       <SectionWrapper title='Riješeni'>
         {isLoadingResolved ? (
           <SkeletonDashboardLoader
@@ -317,12 +377,18 @@ const ThreeView = () => {
             maxWidth={isMobile ? '90px' : '200px'}
           />
         )}
-        {totalPages > 1 && (
-          <PagingComponent
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+        {totalPagesResolved > 1 && (
+          <Box
+            display='flex'
+            justifyContent='center'
+            my={2}
+          >
+            <PagingComponent
+              currentPage={currentPageResolved}
+              totalPages={totalPagesResolved}
+              onPageChange={handlePageChangeResolved}
+            />
+          </Box>
         )}
       </SectionWrapper>
     </Container>

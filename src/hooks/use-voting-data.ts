@@ -37,6 +37,12 @@ type UseVotingReturn = {
   fetchVotingResult: (
     votingId: string
   ) => Promise<Partial<VotingResultStat> | null>;
+  fetchVotedVotings: (page: number, limit: number) => Promise<void>;
+  fetchUnvotedVotings: (page: number, limit: number) => Promise<void>;
+  votedVotings: Voting[];
+  unvotedVotings: Voting[];
+  totalVotedCount: number;
+  totalUnvotedCount: number;
 };
 
 const useVoting = (): UseVotingReturn => {
@@ -45,6 +51,10 @@ const useVoting = (): UseVotingReturn => {
   const [userVotedVotings, setUserVotedVotings] = useState<UserVotedVoting[]>(
     []
   );
+  const [votedVotings, setVotedVotings] = useState<Voting[]>([]);
+  const [unvotedVotings, setUnvotedVotings] = useState<Voting[]>([]);
+  const [totalVotedCount, setTotalVotedCount] = useState(0);
+  const [totalUnvotedCount, setTotalUnvotedCount] = useState(0);
 
   const fetchAllVotings = async () => {
     setIsLoading(true);
@@ -104,6 +114,36 @@ const useVoting = (): UseVotingReturn => {
           votingId ? 'updating' : 'creating'
         } voting: ${JSON.stringify(error.message)}`,
       };
+    }
+  };
+
+  const fetchVotedVotings = async (page: number, limit: number) => {
+    setIsLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/votings/voted/${page}/${limit}`
+      );
+      setVotedVotings(response.data.votings);
+      setTotalVotedCount(response.data.totalCount); // Update the total count here
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching voted votings:', error);
+      setIsLoading(false);
+    }
+  };
+
+  const fetchUnvotedVotings = async (page: number, limit: number) => {
+    setIsLoading(true);
+    try {
+      const response = await axiosInstance.get(
+        `/votings/unvoted/${page}/${limit}`
+      );
+      setUnvotedVotings(response.data.votings);
+      setTotalUnvotedCount(response.data.totalCount); // Update the total count here
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching unvoted votings:', error);
+      setIsLoading(false);
     }
   };
 
@@ -188,6 +228,12 @@ const useVoting = (): UseVotingReturn => {
     fetchVotingResult,
     userVotedVotings,
     fetchUserVotedVotingsWithTopOption,
+    fetchVotedVotings,
+    fetchUnvotedVotings,
+    votedVotings,
+    unvotedVotings,
+    totalUnvotedCount,
+    totalVotedCount,
   };
 };
 

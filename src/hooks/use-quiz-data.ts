@@ -19,6 +19,7 @@ export type FetchQuizzesReturn = {
   fetchQuizzes: () => void;
   fetchUnresolvedQuizById: (quizId: string) => Promise<void>;
   deleteQuiz: (quizId: string) => Promise<void>;
+  totalPagesUnresolved: number;
   createOrUpdateQuiz: (
     quiz: Partial<Quiz>,
     quizId?: string
@@ -30,18 +31,25 @@ export type FetchQuizzesReturn = {
     limit: number
   ) => Promise<void>;
   totalPages: number;
+  currentPage?: number;
+  itemsPerPage?: number;
+  currentPageUnresolved?: number;
+  itemsPerPageUnresolved?: number;
+  currentPageResolved?: number;
+  itemsPerPageResolved?: number;
+  fetchUnresolvedQuizzes: () => Promise<void>;
+  fetchResolvedQuizzes: () => Promise<void>;
+  totalPagesResolved: number;
 };
 
 const useFetchQuizzes = (
-  currentPage?: number,
-  itemsPerPage?: number
+  currentPageUnresolved = 1,
+  itemsPerPageUnresolved = 6,
+  currentPageResolved = 1,
+  itemsPerPageResolved = 6
 ): FetchQuizzesReturn => {
   const currentUser = useAuthContext();
-  const [isLoadingResolved, setIsLoadingResolved] = useState(false);
-  const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
-  const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
   const [allQuizzes, setAllQuizzes] = useState<Quiz[]>();
-  const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const [unresolvedQuiz, setUnresolvedQuiz] = useState<Quiz | null>();
   const [isDeleting, setIsDeleting] = useState(false);
   const [resultsById, setResultsById] = useState<QuizResult[] | null>(null);
@@ -50,15 +58,63 @@ const useFetchQuizzes = (
   const [isResultsLoading, setIsResultsLoading] = useState(false);
   const [answers, setAnswers] = useState<Answer[]>([]);
 
+  // States for unresolved quizzes
+  const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
+  const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
+  const [totalPagesUnresolved, setTotalPagesUnresolved] = useState<number>(0);
+
+  // States for resolved quizzes
+  const [isLoadingResolved, setIsLoadingResolved] = useState(false);
+  const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
+  const [totalPagesResolved, setTotalPagesResolved] = useState<number>(0);
+
+  // Function to fetch unresolved quizzes
+  const fetchUnresolvedQuizzes = async () => {
+    setIsLoadingUnresolved(true);
+    try {
+      const response = await axiosInstance.get(
+        `${endpoints.quiz.unresolved}?page=${currentPageUnresolved}&limit=${itemsPerPageUnresolved}`
+      );
+      setUnresolvedQuizzes(response.data.unresolvedQuizzes);
+      setTotalPagesUnresolved(
+        Math.ceil(response.data.count / itemsPerPageUnresolved)
+      );
+    } catch (error) {
+      setUnresolvedQuizzes([]);
+      setError(error.message);
+    }
+    setIsLoadingUnresolved(false);
+  };
+
   const fetchUnresolvedQuizById = async (quizId: string) => {
     setIsLoadingUnresolved(true);
     try {
-      const response = await axiosInstance.get(`${endpoints.quiz.details}${quizId}`);
+      const response = await axiosInstance.get(
+        `${endpoints.quiz.details}${quizId}`
+      );
       setUnresolvedQuiz(response.data || null);
     } catch (error) {
       setUnresolvedQuiz(null);
     }
     setIsLoadingUnresolved(false);
+  };
+
+  // Function to fetch resolved quizzes
+  const fetchResolvedQuizzes = async () => {
+    setIsLoadingResolved(true);
+    try {
+      const response = await axiosInstance.get(
+        `${endpoints.quiz.resolved}?page=${currentPageResolved}&limit=${itemsPerPageResolved}`
+      );
+      setResolvedQuizzes(response.data.resolvedQuizzes);
+      setTotalPagesResolved(
+        Math.ceil(response.data.count / itemsPerPageResolved)
+      );
+    } catch (error) {
+      setResolvedQuizzes([]);
+      setError(error.message);
+    }
+    setIsLoadingResolved(false);
   };
 
   const fetchAllQuizzes = async () => {
@@ -118,29 +174,33 @@ const useFetchQuizzes = (
       } else {
         response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
       }
-  
+
       if ([200, 201].includes(response.status)) {
         return { success: true };
       } else {
         return {
           success: false,
-          error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${response.data.message || JSON.stringify(response.data)}`,
+          error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${
+            response.data.message || JSON.stringify(response.data)
+          }`,
         };
       }
     } catch (error) {
       let errorMessage = 'An unexpected error occurred.';
       if (error.response && error.response.data) {
-        errorMessage = error.response.data.message || JSON.stringify(error.response.data);
+        errorMessage =
+          error.response.data.message || JSON.stringify(error.response.data);
       } else if (error.message) {
         errorMessage = error.message;
       }
       return {
         success: false,
-        error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${errorMessage}`,
+        error: `Error ${
+          quizId ? 'updating' : 'creating'
+        } quiz: ${errorMessage}`,
       };
     }
   };
-  
 
   const fetchQuizzes = async () => {
     const userId = currentUser.user && currentUser.user._id;
@@ -148,12 +208,17 @@ const useFetchQuizzes = (
       setIsLoadingUnresolved(true);
       try {
         const response = await axiosInstance.get(
-          `${endpoints.quiz.unresolved}?page=${currentPage}&limit=${itemsPerPage}`
+          `${endpoints.quiz.unresolved}?page=${currentPageUnresolved}&limit=${itemsPerPageUnresolved}`
         );
-        const timeLimit = 10 * 60 * 1000; 
+        const timeLimit = 10 * 60 * 1000;
         const quizzesToFetch = [];
         for (const quiz of response.data.unresolvedQuizzes) {
-          if (quiz && quiz.status && quiz.status.length > 0 && quiz.status[0].status === 'inProgress') {
+          if (
+            quiz &&
+            quiz.status &&
+            quiz.status.length > 0 &&
+            quiz.status[0].status === 'inProgress'
+          ) {
             const startTime = new Date(quiz.status[0].startTime).getTime();
             const currentTime = new Date().getTime();
             var elapsedTime = currentTime - startTime;
@@ -162,21 +227,25 @@ const useFetchQuizzes = (
             }
           }
         }
-        const quizDetailsPromises = quizzesToFetch.map(quizId => axiosInstance.get(endpoints.quiz.details + quizId));
+        const quizDetailsPromises = quizzesToFetch.map((quizId) =>
+          axiosInstance.get(endpoints.quiz.details + quizId)
+        );
         const quizDetailsResponses = await Promise.all(quizDetailsPromises);
-        quizDetailsResponses.forEach(response => {
+        quizDetailsResponses.forEach((response) => {
           const quizData = response.data;
-          setAnswers(quizData.quizzAnswers)
+          setAnswers(quizData.quizzAnswers);
           const score =
             (answers.reduce((count, answer) => {
-            return answer.correct ? count + 1 : count;
-          }, 0) / (quizData ? quizData!.questions!.length : 1)) * 100;
+              return answer.correct ? count + 1 : count;
+            }, 0) /
+              (quizData ? quizData!.questions!.length : 1)) *
+            100;
           try {
-             axiosInstance.post(endpoints.quiz.details, {
+            axiosInstance.post(endpoints.quiz.details, {
               userId: userId,
               quizId: quizData._id,
               score,
-              duration: elapsedTime ,
+              duration: elapsedTime,
               answers: answers,
             });
           } catch (error) {
@@ -184,6 +253,15 @@ const useFetchQuizzes = (
           }
         });
         setUnresolvedQuizzes(response.data.unresolvedQuizzes);
+        if (itemsPerPageUnresolved) {
+          setTotalPages(
+            Math.ceil(response.data.count / itemsPerPageUnresolved)
+          ); // Use the totalCount for pagination
+        }
+        console.log(
+          'Total quizzes fetched:',
+          unresolvedQuizzes && unresolvedQuizzes.length
+        );
       } catch (error) {
         console.error(error);
         setUnresolvedQuizzes([]);
@@ -195,7 +273,7 @@ const useFetchQuizzes = (
       setIsLoadingResolved(true);
       try {
         const response = await axiosInstance.get(
-          `${endpoints.quiz.resolved}?page=${currentPage}&limit=${itemsPerPage}`
+          `${endpoints.quiz.resolved}?page=${currentPageResolved}&limit=${itemsPerPageUnresolved}`
         );
         setIsLoadingResolved(false);
         setResolvedQuizzes(response.data.resolvedQuizzes);
@@ -208,28 +286,34 @@ const useFetchQuizzes = (
     fetchUnresolvedQuizzes();
   };
 
-  useEffect(() => {
-    fetchAllQuizzes();
-  }, [currentPage]);
+  // useEffect(() => {
+  //   fetchAllQuizzes();
+  // }, [currentPageUnresolved]);
 
   return {
-    isLoadingResolved,
     isLoadingUnresolved,
-    isResultsLoading,
-    resolvedQuizzes,
     unresolvedQuizzes,
-    allQuizzes,
-    fetchQuizzes,
-    fetchUnresolvedQuizById,
-    unresolvedQuiz,
+    totalPagesUnresolved,
+    fetchUnresolvedQuizzes,
+
+    isLoadingResolved,
+    resolvedQuizzes,
+    totalPagesResolved,
+    fetchResolvedQuizzes,
+
     isDeleting,
     deleteQuiz,
     createOrUpdateQuiz,
-    fetchAllQuizzes,
-    resultsById,
-    getResultsById,
-    totalPages,
     error,
+    getResultsById,
+    fetchUnresolvedQuizById,
+    isResultsLoading,
+    allQuizzes,
+    unresolvedQuiz,
+    fetchAllQuizzes,
+    fetchQuizzes,
+    resultsById,
+    totalPages,
   };
 };
 
