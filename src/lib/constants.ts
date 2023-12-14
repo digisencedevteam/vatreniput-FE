@@ -83,7 +83,7 @@ export const STORIES = [
         ],
         StoryText: '',
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950560/slicice-velike/10_ukd5z1.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701945700/thumb_10_usumpk.png',
       },
       Facts: [
         'Vlado Kasalo je došao na utakmicu iz Nürnberga bez dozvole svoga kluba i za to je po povratku platio klupsku kaznu od 25 tisuća njemačkih maraka.  Aljoša Asanović, strijelac povijesnog prvog pogotka, također je imao problem s klubom, francuskim  Metzom, koji je imao važnu utakmicu četiri dana poslije. Ipak je uspio nagovoriti vlasnika kluba da mu ustupi privatni zrakoplov kako bi došao na utakmicu. Morao je izaći u 58. minuti susreta  da bi stigao na zrakoplov koji je morao sletjeti nazad u Francusku do ponoći.',
@@ -120,7 +120,7 @@ export const STORIES = [
         ],
         StoryText: '',
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950513/slicice-velike/18_dsfnxv.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702029279/thumbnails/thumb_18_q5qwow.png',
       },
       Facts: [
         'Vlado Kasalo je došao na utakmicu iz Nürnberga bez dozvole svoga kluba i za to je po povratku platio klupsku kaznu od 25 tisuća njemačkih maraka.  Aljoša Asanović, strijelac povijesnog prvog pogotka, također je imao problem s klubom, francuskim  Metzom, koji je imao važnu utakmicu četiri dana poslije. Ipak je uspio nagovoriti vlasnika kluba da mu ustupi privatni zrakoplov kako bi došao na utakmicu. Morao je izaći u 58. minuti susreta  da bi stigao na zrakoplov koji je morao sletjeti nazad u Francusku do ponoći.',
@@ -269,7 +269,7 @@ export const STORIES = [
         {
           Title: 'Pogodak Gorana Vlaovića protiv Turske',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950552/slicice-velike/33_fkikmj.png',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698703944/vlaovic2_copy_anvup3.jpg',
           Description:
             'Prvo veliko natjecanje hrvatske nogometne reprezentacije. Nacija je „disala“ s momčadi Miroslava Ćire Blaževića. Pratio se svaki korak, gledale su se svake vijesti, čekale novosti s Otoka. Prvi pogodak na nekom velikom natjecanju zabio je Goran Vlaović. Njegov bijeg nakon sjajnog proigravanja Aljoše Asanovića ostao je upamćen kao jedan od najvećih trenutaka našeg reprezentativnog nogometa. Cijela Hrvatska je utihnula, a kad je lopta završila u mreži prolomio se usklik pobjede.',
           videoLink:
@@ -278,7 +278,7 @@ export const STORIES = [
         {
           Title: 'Lob Davora Šukera protiv Danske',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950499/slicice-velike/34_nuwyet.png',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702550710/euro96_23_copy_mrvely.jpg',
           Description:
             '„Lomljenje“ Danske u 2. kolu dovelo je Hrvatsku na nogometnu kartu velikana i utjecajnih reprezentacija. Ondje je ostala zauvijek. Posebno pamtimo lob kojim je Davor Šuker matirao Petera Schmeichela i ostavio mu biljeg za sva vremena.',
           videoLink:
@@ -634,7 +634,7 @@ export const STORIES = [
         {
           Title: 'Prosinečki zabija za 1:0 protiv Nizozemske u 13. minuti!',
           imgUrl:
-            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701937860/80_hporsq.png',
+            'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702551037/HRV21107_copy_lc9hzq.jpg',
           Description:
             'U jednom od najupečatljivijih trenutaka Svjetskog prvenstva 1998., hrvatski nogometni čarobnjak, Robert Prosinečki, postiže fantastičan gol protiv moćne Nizozemske. U 13. minuti, Prosinečki demonstrira svoju tehničku vještinu i taktičku inteligenciju, probijajući obranu Nizozemske i smireno šalje loptu u mrežu, ostavljajući gledatelje i protivnike u čudu. Ovaj gol ne samo da je postavio Hrvatsku u vodstvo s 1:0, već je i simbolizirao snagu i talent hrvatskog tima, koji je tada bio na svom prvom Svjetskom prvenstvu kao neovisna država.',
           videoLink:
@@ -663,7 +663,7 @@ export const STORIES = [
             ' Ćiro s kapom stradalog francuskog policajca 1998. primjer je njegovog izvrsnog osjećaja za trenutak. Mase su ga obožavale. A, Ćiro se u tome izvrsno snalazio. Preminuo je 8. veljače 2023.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950506/slicice-velike/87_eekmzk.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702551071/DOCEK405_copy_xa8mpm.jpg',
         StoryText: '',
       },
     },
@@ -999,7 +999,7 @@ export const STORIES = [
             'Vođenje i mentorstvo momčadi koja je uključivala istaknute igrače poput Davora Šukera, Zvonimira Bobana, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950415/slicice-velike/111_s107ji.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702029297/thumbnails/thumb_111_ztq3y0.png',
         StoryText:
           'Mirko Jozić je preuzeo ulogu izbornika Hrvatske nogometne reprezentacije od 2000. do 2002. godine. Prije toga, stekao je ugled osvajanjem Svjetskog nogometnog prvenstva za mlade reprezentacije 1987. godine u Čileu s selekcijom Jugoslavije, u kojoj su igrali igrači poput Zvonimira Bobana, Davora Šukera, Igora Štimca, Roberta Jarnija i Roberta Prosinečkog. Jozićeva era kao izbornika seniorske reprezentacije Hrvatske obilježena je nastojanjima u kvalifikacijama za Svjetsko prvenstvo 2002. godine, no nažalost, Hrvatska nije uspjela proći skupinu na tom turniru. Ova era je počela porazom od Meksika, a uslijedila je pobjeda protiv Italije te poraz od Ekvadora, što je rezultiralo eliminacijom iz turnira.',
       },
@@ -1286,7 +1286,7 @@ export const STORIES = [
           'Brončana medalja sa Svjetskog Prvenstva u Francuskoj 1998.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950510/slicice-velike/120_ksohyt.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702551713/baric2206_wwn94e.jpg',
         StoryText:
           'Herr Otto. Vrsni stručnjak sjajne karijere. Pod Barićevim vodstvom Hrvatska je prošla teške kvalifikacije za Euro 2004. Najviše se pamti dodatno razigravanje protiv Slovenije. Dado Pršo postigao je odlučujući pogodak u gostima u uzvratnom susretu. Na samom Euru u Portugalu Hrvatska je odigrala 0 : 0 sa Švicarskom, remizirala i s braniteljima naslova Francuzima (2 : 2), ali zbog poraza od Engleza 4 : 2 nije prošla u četvrtfinale. Barićev dvogodišnji ugovor istekao je u srpnju 2004.',
       },
@@ -1408,7 +1408,7 @@ export const STORIES = [
           'Kao igrač, Kranjčar je bio dio jugoslavenske reprezentacije koja je osvojila Europsko prvenstvo za igrače do 21 godine 1978. godine. Kao trener, vodio je Hrvatsku na Svjetskom prvenstvu 2006.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950557/slicice-velike/121_r7htks.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702029298/thumbnails/thumb_121_igmrxd.png',
         StoryText:
           'Cico. Omiljeni nogometni velikan zaraznog osmijeha na klupu Hrvatske sjeo je 2004. Bio je izbornik Lijepe naše na Svjetskom prvenstvu u Njemačkoj 2006. Hrvatska je izgubila prvu utakmicu od Brazila 1 : 0, odigrala neodlučeno s Japanom (0 : 0). Treća utakmica, neriješeno s Australijom 2 : 2, u kojoj su čak tri igrača zaradila crvene kartone, značila je ispadanje Hrvatske s još jednog velikog natjecanja u prvom krugu.',
       },
@@ -1699,7 +1699,7 @@ export const STORIES = [
           'Pod vodstvom Bilića, Hrvatska je ostvarila svoj najbolji rezultat na Europskom prvenstvu do tada, dosegnuvši četvrtfinale 2008. godine.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950428/slicice-velike/133_nsryj2.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702552089/rb_bilic-120608_copy_zicx0a.jpg',
         StoryText:
           'Veliki igrač, vrstan trener i sjajan izbornik. Donio je novi način rada i odnosa u Hrvatskoj reprezentaciji. Moderni izbornik koji je stvorio sjajnu „klapu“ i u kojoj su svi davali svoj maksimum. Reprezentacija je pod Slavenom Bilićem igrala odlično. Imala je prepoznatljivi napadački stil. Pobjede poput one na Wembleyu protiv Engleske 3 : 2 ostaju zauvijek u sjećanju. Na Euru 2008. u Austriji i Švicarskoj Hrvatska je djelovala izuzetno snažno, ali traumatični poraz od Turske u četvrtfinalu ostavile su rane koje nikada nisu zacijelile.',
       },
@@ -2058,7 +2058,7 @@ export const STORIES = [
           'Pod vodstvom Bilića, Hrvatska je dosegla grupnu fazu Europskog prvenstva 2012., ali nije uspjela proći u nokaut fazu.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950464/slicice-velike/163_hmt9nn.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702552177/bilic_mandzukic_bsd1c2.jpg',
         StoryText:
           'U Poljskoj i Ukrajini Hrvatska je također igrala jako dobro, ali nije prošla izuzetno tešku skupinu u kojoj su bile Italija, Španjolska i Irska. Na ta dva velika natjecanja nedostajalo je samo malo sreće. Slaven Bilić, kao izbornik, vodio je Hrvatsku na 65 utakmica. Ostvario je učinak od čak 42 pobjede, 15 remija i samo 8 poraza.',
       },
@@ -2372,7 +2372,7 @@ export const STORIES = [
             'Osvojio Hrvatski nogometni kup s reprezentacijom Hrvatske kao menadžer 2013. godine',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701937386/186_fq62hj.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1693927996/Niko_Kovac%CC%8C_12_i3ct1j.jpg',
         StoryText:
           'Bivši kapetan reprezentacije. Igrač i čovjek neograničene ljubavi prema Hrvatskoj. Borac i veliki radnik. Metodičan i pedantan. Niko Kovač preuzima "A" selekciju u doigravanju za SP u Brazilu. Hrvatska je u dvije utakmice doigravanja protiv Islanda izborila odlazak na Mundijal. Ondje je bila dijelom svečanog otvaranja i velikog sudara protiv domaćina, Brazila koji je pobijedio 3 : 1. Hrvatska je nakon toga bla bolja od Kameruna, ali kobni su bili ponovno Meksikanci kao i u Japanu 2002., pobijedivši 3 : 1.',
       },
@@ -2785,7 +2785,7 @@ export const STORIES = [
           'Osmina Finala na Svjetskom prvenstvu u Francuskoj, 2016.',
         ],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701937388/187_ngvxms.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702552318/%C4%8Da%C4%8Di%C4%87_klupa_igra%C4%8Di_vxyawy.jpg',
         StoryText:
           'Naslijedio je Niku Kovača u vrijeme kvalifikacija za  Euro 2016. i uspješno odradio posao te se s Hrvatskom plasirao na to veliko natjecanje kojemu je domaćin bila Francuska. Ondje je naša reprezentacija igrala jako dobro. Pobijedila je Tursku, odigrala 2 : 2 protiv Češke u susretu koji su obilježili neredi huligana i prekid utakmice. Ali, nakon toga Hrvatska je pokazala moć pobjedom nad Španjolcima.  U osmini finala teška utakmica protiv Portugala i bolan poraz u produžetku.',
       },
@@ -3173,7 +3173,7 @@ export const STORIES = [
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
         MajorAchievements: ['2. mjesto na SP 2018 ', 'Prvak Azije s Al Ainom'],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950555/slicice-velike/213_he4dox.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1690543420/dali%C4%87_slavlje_1_mwyhvm.jpg',
         StoryText:
           'Najveći i najuspješniji trener u povijesti  hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa.  Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva.  Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih.  Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce.   Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
@@ -3826,7 +3826,7 @@ export const STORIES = [
         CoachingCareer: 'Hrvatska, Al Ain (UAE), Al Hilal (KSA)',
         MajorAchievements: ['2. mjesto na SP 2018', 'Prvak Azije s Al Ainom'],
         imgUrl:
-          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1701950471/slicice-velike/288_uywwgo.png',
+          'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702552525/modri%C4%87_dali%C4%87_medalje_odnra4.jpg',
         StoryText:
           'Najveći i najuspješniji trener u povijesti hrvatske reprezentacije. Era Zlatka Dalića obilježena je nevjerojatnim rezultatima i uspjesima koji su Hrvatsku doveli u sami vrh svjetskog nogometa. Skromni trener velikog znanja uveo je u selekciju Hrvatske novi način rada. Pristupao je svakom igraču na poseban način, stvorio momčad koja je bila toliko puna samopouzdanja da je postala gotovo nepobjediva. Zlatko Dalić stvorio je stroj koji je u svaku utakmicu ulazios pristupom pobjednika. Stroj koji je pobjeđivao velike protivnike, na velikim natjecanjima u velikim serijama. „Dalićevi dečki“ preokretali su rezultate snagom volje i snagom kolektiva. Njegov opus na klupi stavlja ga na pijedestal nedodirljivosti za sva vremena. Ruski kazačok 2018. donio je Hrvatskoj neopisivo slavlje i ujedinjenje navijačkihmasa. Rusko srebro iskovano nevjerojatnom snagom volje i naravno kvalitetom,stavilo je Hrvatsku u društvo najvećih. Doček „srebrnih jurišnika“ pokazao je jedinstvo Hrvatske neviđeno od početka devedesetih. Treće mjesto na SP-u u Kataru 2022. potvrdilo je snagu Hrvatske. Pobjede i preokreti, unutarnja moć ove selekcije još su jednom zadivili svijet. I rasplakali mnoge. Najviše Brazilce. Liga nacija u proljeće 2023. nova je potvrda sjajnog posla na izborničkom mjestu. Fantastična polufinalna pobjeda protiv domaćina Nizozemaca donijela je novu količinu sreće i euforije.',
       },
