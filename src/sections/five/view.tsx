@@ -31,10 +31,9 @@ const FiveView = () => {
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
   const {
     votings,
     fetchAllVotings,
@@ -42,18 +41,9 @@ const FiveView = () => {
     isLoading,
     fetchUserVotedVotingsWithTopOption,
     userVotedVotings,
-    fetchVotedVotings,
-    fetchUnvotedVotings,
-    votedVotings,
-    unvotedVotings,
-    totalUnvotedCount,
-    totalVotedCount,
   } = useVoting();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
-  const [currentPageVoted, setCurrentPageVoted] = useState(1);
-  const [currentPageUnvoted, setCurrentPageUnvoted] = useState(1);
-
   const welcomeButtonProps = isAdmin
     ? {
         buttonLabel: 'Novo glasanje',
@@ -64,32 +54,26 @@ const FiveView = () => {
         buttonLink: `${paths.dashboard.voting.votingResults}`,
       };
 
-  // const votedVotings = votings
-  //   ? votings.filter((voting) => voting.isVoted === true)
-  //   : [];
-  // const notVotedVotings = votings
-  //   ? votings.filter((voting) => voting.isVoted === false)
-  //   : [];
+  const votedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === true)
+    : [];
+  const notVotedVotings = votings
+    ? votings.filter((voting) => voting.isVoted === false)
+    : [];
 
-  // const currentNotVotedVotings = notVotedVotings.slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem
-  // );
+  const currentNotVotedVotings = notVotedVotings.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-  const handlePageChangeVoted = (newPage: number) => {
-    setCurrentPageVoted(newPage);
+  const totalPages = Math.ceil(notVotedVotings.length / itemsPerPage);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
   };
 
-  const handlePageChangeUnvoted = (newPage: number) => {
-    setCurrentPageUnvoted(newPage);
-  };
   const fetchData = async () => {
     await fetchAllVotings();
-    await fetchVotedVotings(currentPageVoted, itemsPerPage);
-    await fetchUnvotedVotings(currentPageUnvoted, itemsPerPage);
-    if (auth.user) {
-      await fetchUserVotedVotingsWithTopOption(auth.user._id);
-    }
   };
 
   const transformVotingResults = () => {
@@ -113,22 +97,12 @@ const FiveView = () => {
   };
 
   useEffect(() => {
-    fetchAllVotings();
+    fetchData();
     if (auth.user) {
       fetchUserVotedVotingsWithTopOption(auth.user._id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user]);
-
-  useEffect(() => {
-    fetchVotedVotings(currentPageVoted, itemsPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageVoted, itemsPerPage]);
-
-  useEffect(() => {
-    fetchUnvotedVotings(currentPageUnvoted, itemsPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPageUnvoted, itemsPerPage]);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -188,7 +162,7 @@ const FiveView = () => {
                   isTabletCount={4}
                   maxWidth={isMobile ? '90px' : '200px'}
                 />
-              ) : !unvotedVotings?.length ? (
+              ) : !currentNotVotedVotings?.length ? (
                 <SkeletonDashboardLoader
                   message='Čestitam! Sva glasanja su ispunjena! Obavjestiti ćemo te čim izađe novo glasanje.'
                   count={4}
@@ -201,7 +175,7 @@ const FiveView = () => {
                   container
                   spacing={2}
                 >
-                  {unvotedVotings.map((voting, index) => (
+                  {currentNotVotedVotings.map((voting, index) => (
                     <Grid
                       key={index}
                       item
@@ -224,12 +198,13 @@ const FiveView = () => {
                 </Grid>
               )}
             </Grid>
-
-            <PagingComponent
-              currentPage={currentPageUnvoted}
-              totalPages={Math.ceil(totalUnvotedCount / itemsPerPage)}
-              onPageChange={(e, index) => handlePageChangeUnvoted(index)}
-            />
+            {totalPages > 1 && (
+              <PagingComponent
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(e, index) => handlePageChange(index)}
+              />
+            )}
           </SectionWrapper>
           <StorySectionWrapper
             title='Najboljih 11'
@@ -284,11 +259,6 @@ const FiveView = () => {
                 ))}
               </ScrollableContainer>
             )}
-            <PagingComponent
-              currentPage={currentPageVoted}
-              totalPages={Math.ceil(totalVotedCount / itemsPerPage)}
-              onPageChange={(e, index) => handlePageChangeVoted(index)}
-            />
           </SectionWrapper>
         </>
       )}
