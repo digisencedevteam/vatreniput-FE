@@ -36,7 +36,8 @@ export const CardView = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('info');
+  const [snackbarSeverity, setSnackbarSeverity] =
+    useState<AlertColor>('success');
   const currentUser = useAuthContext();
   const isCardDataArray = Array.isArray(cardData);
   const [isSingle, setIsSingle] = useState(true);
@@ -88,22 +89,20 @@ export const CardView = () => {
         cardId,
       });
 
-      if (res.data.message !== 'ok') {
+      if (res.data !== 'ok') {
         setSnackbarMessage(res.data.message);
         setSnackbarSeverity('error');
       } else {
         setSnackbarMessage('Sličica uspješno dodana u album!');
         setSnackbarSeverity('success');
-        navigate(paths.dashboard.collection);
       }
       setSnackbarOpen(true);
     } catch (error) {
-      setErrorMessage(
+      setSnackbarMessage(
         error?.message ||
-          'Dogodila se greška prilikom dobivanja podataka o sličici!'
+          'Dogodila se greška prilikom dodavanja sličice u album!'
       );
       setSnackbarSeverity('error');
-      setSnackbarOpen(true);
     }
   };
 
@@ -128,7 +127,7 @@ export const CardView = () => {
               onClick={() => router.push(paths.dashboard.root)}
             >
               <ArrowBackIcon
-                sx={{ width: isMobile ? 30 : 50, height: isMobile ? 30 : 50 }}
+                sx={{ width: isMobile ? 30 : 40, height: isMobile ? 30 : 40 }}
               />
             </IconButton>
           </Grid>
@@ -219,7 +218,6 @@ export const CardView = () => {
                         <Typography variant='caption' component='div'>
                           {cardData[0]?.title}
                         </Typography>
-                        <Divider />
                       </>
                     )}
                     <Typography gutterBottom variant='h6' component='div'>
@@ -251,13 +249,44 @@ export const CardView = () => {
                       />
                     </div>
                   ) : (
-                    <CardMedia
-                      component='img'
-                      height='auto'
-                      image={cardData?.imageURLs[0]}
-                      alt='Sličica'
-                      sx={{ borderRadius: 2, width: '100%' }}
-                    />
+                    <>
+                      <CardMedia
+                        component='img'
+                        height='auto'
+                        image={cardData?.imageURLs[0]}
+                        alt='Sličica'
+                        sx={{ borderRadius: 2, width: '100%' }}
+                      />
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: 0,
+                          right: 0,
+                          zIndex: 10,
+                          borderTopLeftRadius: 5,
+                          borderBottomRightRadius: 10,
+                          width: isMobile ? '20%' : '10%',
+                          height: isMobile ? '20%' : '10%',
+                          backgroundColor: alpha(
+                            theme.palette.common.black,
+                            0.5
+                          ),
+                          backdropFilter: 'blur(4px)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Typography
+                          variant='h4'
+                          sx={{
+                            color: 'common.white',
+                          }}
+                        >
+                          {cardData?.ordinalNumber}
+                        </Typography>
+                      </Box>
+                    </>
                   )}
                 </Box>
               </Grid>
@@ -274,22 +303,27 @@ export const CardView = () => {
                   <CardContent>
                     <Typography
                       variant='caption'
-                      sx={{ my: 2, color: theme.palette.primary.main }}
+                      sx={{ color: theme.palette.primary.main }}
                     >
                       {cardData?.author}
                     </Typography>
+                    <Typography
+                      gutterBottom
+                      variant='h5'
+                      component='div'
+                      my={3}
+                    >
+                      {cardData?.event?.name}
+                    </Typography>
                     {!!cardData?.title && (
-                      <Typography variant='subtitle2' component='div'>
+                      <Typography variant='subtitle1' component='div'>
                         {cardData?.title}
                       </Typography>
                     )}
-                    <Typography gutterBottom variant='h6' component='div'>
-                      {cardData?.event?.name}
-                    </Typography>
                   </CardContent>
                   <Divider />
                 </Card>
-                {!isError && (
+                {!isError && !cardData?.isScanned && (
                   <Button
                     variant='contained'
                     color='success'

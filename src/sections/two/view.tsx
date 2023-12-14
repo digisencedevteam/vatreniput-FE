@@ -2,8 +2,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
 import { Box, Divider, Grid, IconButton } from '@mui/material';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState, useRef } from 'react';
@@ -30,7 +28,6 @@ export const CollectionView = () => {
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const currentCategory = categories[categoryIndex];
-  const myRef = React.useRef<HTMLDivElement>(null);
   const showSkeletonLoader = isLoading;
   const showNoDataMessage = !isLoading && collectedCards.length === 0;
   const titleRef = useRef<HTMLDivElement | null>(null);
@@ -122,7 +119,6 @@ export const CollectionView = () => {
           </Box>
           <Divider />
         </Grid>
-
         {showSkeletonLoader && (
           <SkeletonDashboardLoader
             isMobileCount={9}
@@ -131,14 +127,12 @@ export const CollectionView = () => {
             count={12}
           />
         )}
-
         {!showSkeletonLoader &&
           collectedCards.slice(0, itemsToShow).map((item, index) => (
             <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
               <CollectionStickerItem item={item} />
             </Grid>
           ))}
-
         {showNoDataMessage && (
           <SkeletonDashboardLoader
             message='Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju digitalnog albuma!'
@@ -149,7 +143,6 @@ export const CollectionView = () => {
           />
         )}
       </Grid>
-
       {!showSkeletonLoader &&
         !showNoDataMessage &&
         collectedCards.length > 0 && (
