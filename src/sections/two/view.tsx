@@ -75,7 +75,11 @@ export const CollectionView = () => {
       )}
       <Grid container>
         {!isMobile && (
-          <Grid item md={12} lg={12}>
+          <Grid
+            item
+            md={12}
+            lg={12}
+          >
             <AppWelcome
               title={`Digitalna kolekcija legendarnih Vatrenih trenutaka!`}
               description='Otključaj vremensku kapsulu i skupi digitalne sličice koje oživljavaju nezaboravne trenutke Vatrenih. Svaka sličica je prozor u povijest, priča o slavi i strasti. Stvori svoju jedinstvenu kolekciju i podijeli je s prijateljima!'
@@ -90,8 +94,15 @@ export const CollectionView = () => {
           </Grid>
         )}
       </Grid>
-      <Grid container spacing={1}>
-        <Grid item xs={12} mt={3}>
+      <Grid
+        container
+        spacing={1}
+      >
+        <Grid
+          item
+          xs={12}
+          mt={3}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -107,7 +118,10 @@ export const CollectionView = () => {
               <ArrowCircleLeftSharpIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
             <div ref={titleRef}>
-              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+              <Typography
+                variant='h6'
+                sx={{ mx: 4, textAlign: 'center' }}
+              >
                 {currentCategory?.name}
               </Typography>
             </div>
@@ -130,7 +144,14 @@ export const CollectionView = () => {
         )}
         {!showSkeletonLoader &&
           collectedCards.slice(0, itemsToShow).map((item, index) => (
-            <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+            <Grid
+              key={index}
+              item
+              xs={4}
+              sm={3}
+              md={3}
+              lg={2}
+            >
               <CollectionStickerItem item={item} />
             </Grid>
           ))}

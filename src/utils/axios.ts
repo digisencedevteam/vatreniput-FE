@@ -3,11 +3,14 @@ import { apiExpress } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: apiExpress, withCredentials: true });
+const axiosInstance = axios.create({
+  baseURL: apiExpress,
+  withCredentials: true,
+});
 axiosInstance.defaults.withCredentials = true;
 
 axiosInstance.interceptors.response.use(
-  response => response,
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
@@ -26,15 +29,19 @@ axiosInstance.interceptors.response.use(
       if (!originalRequest._retry) {
         originalRequest._retry = true;
         try {
-          const refreshResponse = await axiosInstance.get(endpoints.auth.refreshToken);
+          const refreshResponse = await axiosInstance.get(
+            endpoints.auth.refreshToken
+          );
           if (refreshResponse.data.accessToken) {
             const { accessToken } = refreshResponse.data;
             sessionStorage.setItem('accessToken', accessToken);
-            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+            axiosInstance.defaults.headers.common[
+              'Authorization'
+            ] = `Bearer ${accessToken}`;
             originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
             return axiosInstance(originalRequest);
           }
-        } catch (refreshError) {          
+        } catch (refreshError) {
           console.error('Error refreshing token:', refreshError);
           sessionStorage.removeItem('accessToken');
           return Promise.reject(refreshError);
@@ -54,7 +61,9 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
     console.error(`An error occurred: ${error.response.status}`);
-    return Promise.reject((error.response && error.response.data) || 'Something went wrong');
+    return Promise.reject(
+      (error.response && error.response.data) || 'Something went wrong'
+    );
   }
 );
 export default axiosInstance;
@@ -77,7 +86,7 @@ export const endpoints = {
     login: '/user/login',
     register: '/user/register/',
     refreshToken: '/auth/refresh',
-    logout: '/auth/logout'
+    logout: '/auth/logout',
   },
   mail: {
     list: '/api/mail/list',
@@ -117,11 +126,13 @@ export const endpoints = {
     deleteAndUpdate: '/quizzes/',
     results: '/quizzes/results',
     all: '/quizzes/all',
-    inProgressQuizUpdate: '/quizzes/update-answer'
+    inProgressQuizUpdate: '/quizzes/update-answer',
   },
   votings: {
     all: '/votings/',
-    submitAndDelete: '/votings/vote'
+    submitAndDelete: '/votings/vote',
+    voted: '/votings/voted',
+    unvoted: '/votings/unvoted',
   },
   passwordReset: {
     reqest: '/password-reset/request',
