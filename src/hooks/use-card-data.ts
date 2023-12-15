@@ -11,7 +11,7 @@ export interface CardData {
   totalPages: number;
   fetchCollectedCards: (categoryIndex: number, currentPage: number) => void;
   fetchCategories: () => void;
-  fetchCollectedStatistics: () => void;
+  error: string;
 }
 
 const useCardData = (): CardData => {
@@ -21,16 +21,8 @@ const useCardData = (): CardData => {
   const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
   const [categories, setCategories] = useState<CollectionEvent[]>([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [error, setError] = useState('');
 
-  const fetchCollectedStatistics = async () => {
-    try {
-      const response = await axios.get(endpoints.card.statsDashboard);
-      setCollectedStatistic(response.data);
-    } catch (error) {
-      console.error('Error fetching collected statistic: ' + error);
-      setCollectedStatistic(null);
-    }
-  };
   const fetchCollectedCards = async (
     categoryIndex: number,
     currentPage: number
@@ -56,7 +48,11 @@ const useCardData = (): CardData => {
       }
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching collected cards: ' + error);
+      if (error.response) {
+        setError(error.response.data.message || 'Interna greška servera');
+      } else {
+        setError('Interna greška servera');
+      }
       setCollectedCards([]);
       setIsLoading(false);
     }
@@ -76,24 +72,21 @@ const useCardData = (): CardData => {
   };
 
   useEffect(() => {
-    fetchCategories()
-      .then(() => {
-        fetchCollectedStatistics();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchCategories().catch((error) => {
+      console.error(error);
+    });
   }, []);
 
   return {
     fetchCollectedCards,
-    fetchCollectedStatistics,
+
     fetchCategories,
     collectedStatistic,
     isLoading,
     collectedCards,
     categories,
     totalPages,
+    error,
   };
 };
 

@@ -28,7 +28,6 @@ export const CollectionView = () => {
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const currentCategory = categories[categoryIndex];
-  const myRef = React.useRef<HTMLDivElement>(null);
   const showSkeletonLoader = isLoading;
   const showNoDataMessage = !isLoading && collectedCards.length === 0;
   const titleRef = useRef<HTMLDivElement | null>(null);
@@ -75,7 +74,11 @@ export const CollectionView = () => {
       )}
       <Grid container>
         {!isMobile && (
-          <Grid item md={12} lg={12}>
+          <Grid
+            item
+            md={12}
+            lg={12}
+          >
             <AppWelcome
               title={`Digitalna kolekcija legendarnih Vatrenih trenutaka!`}
               description='Otključaj vremensku kapsulu i skupi digitalne sličice koje oživljavaju nezaboravne trenutke Vatrenih. Svaka sličica je prozor u povijest, priča o slavi i strasti. Stvori svoju jedinstvenu kolekciju i podijeli je s prijateljima!'
@@ -90,8 +93,15 @@ export const CollectionView = () => {
           </Grid>
         )}
       </Grid>
-      <Grid container spacing={1}>
-        <Grid item xs={12} mt={3}>
+      <Grid
+        container
+        spacing={1}
+      >
+        <Grid
+          item
+          xs={12}
+          mt={3}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -106,7 +116,10 @@ export const CollectionView = () => {
               <ArrowLeftIcon />
             </IconButton>
             <div ref={titleRef}>
-              <Typography variant='h6' sx={{ mx: 4, textAlign: 'center' }}>
+              <Typography
+                variant='h6'
+                sx={{ mx: 4, textAlign: 'center' }}
+              >
                 {currentCategory?.name}
               </Typography>
             </div>
@@ -130,7 +143,14 @@ export const CollectionView = () => {
 
         {!showSkeletonLoader &&
           collectedCards.slice(0, itemsToShow).map((item, index) => (
-            <Grid key={index} item xs={4} sm={3} md={3} lg={2}>
+            <Grid
+              key={index}
+              item
+              xs={4}
+              sm={3}
+              md={3}
+              lg={2}
+            >
               <CollectionStickerItem item={item} />
             </Grid>
           ))}

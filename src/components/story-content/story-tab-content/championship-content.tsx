@@ -9,7 +9,7 @@ import { useTruncatedText } from 'src/hooks/use-text-utils';
 
 export const ChampionshipContent = ({ story }: StoryContentProps) => {
   const { expanded, toggleLines, truncatedText, isTruncated, less, more } =
-    useTruncatedText(story?.Championship?.Summary || '');
+    useTruncatedText(story?.Championship?.Summary || '', 400);
   return (
     <>
       {story?.Championship?.Summary && (

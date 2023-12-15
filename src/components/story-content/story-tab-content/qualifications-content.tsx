@@ -15,7 +15,7 @@ export const QualificationsContent = ({ story }: StoryContentProps) => {
     less,
     more,
     setText,
-  } = useTruncatedText(story?.Qualifications?.Description || '');
+  } = useTruncatedText(story?.Qualifications?.Description || '', 400);
 
   useEffect(() => {
     setText(story?.Qualifications?.Description || '');

@@ -1,14 +1,21 @@
 import { useState } from 'react';
 
-export const useTruncatedText = (initialText: string) => {
+export const useTruncatedText = (
+  initialText: string,
+  truncateLength: number
+) => {
   const [text, setText] = useState(initialText);
   const [expanded, setExpanded] = useState(false);
-  const truncateLength = 400;
 
   const toggleLines = () => setExpanded(!expanded);
 
   const truncatedText = expanded ? text : text.slice(0, truncateLength) + '...';
   const isTruncated = text.length > truncateLength;
+  const truncate = (inputText: string, maxLength: number) => {
+    return inputText.length > maxLength
+      ? inputText.slice(0, maxLength) + '...'
+      : inputText;
+  };
 
   return {
     text,
@@ -20,5 +27,6 @@ export const useTruncatedText = (initialText: string) => {
     isTruncated,
     less: 'Sakrij',
     more: 'Proširi',
+    truncate,
   };
 };
