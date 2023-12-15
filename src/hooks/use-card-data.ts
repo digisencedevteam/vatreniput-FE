@@ -11,6 +11,7 @@ export interface CardData {
   totalPages: number;
   fetchCollectedCards: (categoryIndex: number, currentPage: number) => void;
   fetchCategories: () => void;
+  error: string;
 }
 
 const useCardData = (): CardData => {
@@ -20,6 +21,7 @@ const useCardData = (): CardData => {
   const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
   const [categories, setCategories] = useState<CollectionEvent[]>([]);
   const [totalPages, setTotalPages] = useState(1);
+  const [error, setError] = useState('');
 
   const fetchCollectedCards = async (
     categoryIndex: number,
@@ -46,7 +48,11 @@ const useCardData = (): CardData => {
       }
       setIsLoading(false);
     } catch (error) {
-      console.error('Error fetching collected cards: ' + error);
+      if (error.response) {
+        setError(error.response.data.message || 'Interna greška servera');
+      } else {
+        setError('Interna greška servera');
+      }
       setCollectedCards([]);
       setIsLoading(false);
     }
@@ -80,6 +86,7 @@ const useCardData = (): CardData => {
     collectedCards,
     categories,
     totalPages,
+    error,
   };
 };
 

@@ -58,17 +58,14 @@ const useFetchQuizzes = (
   const [isResultsLoading, setIsResultsLoading] = useState(false);
   const [answers, setAnswers] = useState<Answer[]>([]);
 
-  // States for unresolved quizzes
   const [isLoadingUnresolved, setIsLoadingUnresolved] = useState(false);
   const [unresolvedQuizzes, setUnresolvedQuizzes] = useState<Quiz[]>();
   const [totalPagesUnresolved, setTotalPagesUnresolved] = useState<number>(0);
 
-  // States for resolved quizzes
   const [isLoadingResolved, setIsLoadingResolved] = useState(false);
   const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
   const [totalPagesResolved, setTotalPagesResolved] = useState<number>(0);
 
-  // Function to fetch unresolved quizzes
   const fetchUnresolvedQuizzes = async () => {
     setIsLoadingUnresolved(true);
     try {
@@ -99,7 +96,6 @@ const useFetchQuizzes = (
     setIsLoadingUnresolved(false);
   };
 
-  // Function to fetch resolved quizzes
   const fetchResolvedQuizzes = async () => {
     setIsLoadingResolved(true);
     try {
@@ -256,7 +252,7 @@ const useFetchQuizzes = (
         if (itemsPerPageUnresolved) {
           setTotalPages(
             Math.ceil(response.data.count / itemsPerPageUnresolved)
-          ); // Use the totalCount for pagination
+          );
         }
         console.log(
           'Total quizzes fetched:',
@@ -285,10 +281,6 @@ const useFetchQuizzes = (
     fetchResolvedQuizzes();
     fetchUnresolvedQuizzes();
   };
-
-  // useEffect(() => {
-  //   fetchAllQuizzes();
-  // }, [currentPageUnresolved]);
 
   return {
     isLoadingUnresolved,

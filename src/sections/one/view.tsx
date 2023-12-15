@@ -20,6 +20,7 @@ import { RewardStatus } from 'src/types';
 import { Quiz } from '../quiz/types';
 import dayjs from 'dayjs';
 import CustomCard from 'src/components/custom-card/custom-card';
+import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
 
 const OneView = () => {
   const settings = useSettingsContext();
@@ -33,9 +34,11 @@ const OneView = () => {
     votings,
     isDashboardLoading,
     collectedStatistic,
+    error,
   } = useDashboardData();
   const slideVariants = varFade();
   const [rewardStatus, setRewardStatus] = useState<RewardStatus>({});
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const { deleteQuiz } = useFetchQuizzes();
 
@@ -51,6 +54,16 @@ const OneView = () => {
 
   const toggleScanning = () => {
     setIsScanning(!isScanning);
+  };
+
+  useEffect(() => {
+    if (error) {
+      setSnackbarOpen(true);
+    }
+  }, [error]);
+
+  const handleCloseSnackbar = () => {
+    setSnackbarOpen(false);
   };
 
   const notVotedVotings = votings
@@ -179,6 +192,7 @@ const OneView = () => {
               <ScrollableContainer childrenCount={quizzes?.length}>
                 {quizzes.map((quiz, index) => (
                   <CustomCard
+                    key={quiz._id}
                     quizId={quiz._id}
                     onDelete={deleteQuiz}
                     imgUrl={quiz.thumbnail}
@@ -242,6 +256,12 @@ const OneView = () => {
           </DashboardSectionWrapper>
         </Grid>
       </Grid>
+      <ErrorSnackbar
+        trigger={snackbarOpen}
+        severity='error'
+        message={error}
+        onClose={handleCloseSnackbar}
+      />
     </Container>
   );
 };

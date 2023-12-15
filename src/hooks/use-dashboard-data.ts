@@ -18,9 +18,13 @@ const useDashboardData = () => {
   const [votings, setVotings] = useState<Voting[]>([]);
   const [collectedStatistic, setCollectedStatistic] =
     useState<CollectedStatistic | null>(null);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
 
   const fetchDashboardData = async () => {
     setIsDashboardLoading(true);
+    setIsError(false);
     try {
       const response = await axiosInstance.get(endpoints.card.statsDashboard);
       setCardCount(response.data.numberOfCollectedCards);
@@ -49,6 +53,11 @@ const useDashboardData = () => {
       setChartData({ categories, series });
     } catch (error) {
       console.error(error);
+      if (error.response) {
+        setError(error.response.data.message || 'Unknown error occurred');
+      } else {
+        setError('Network error or server is not responding');
+      }
     } finally {
       setIsDashboardLoading(false);
     }
@@ -63,6 +72,10 @@ const useDashboardData = () => {
       );
     } catch (error) {
       console.error(error);
+      setIsError(true);
+      setErrorMessage(
+        error.message || 'Došlo je do greške prilikom brisanja glasanja'
+      );
     }
   };
 
@@ -76,6 +89,7 @@ const useDashboardData = () => {
     quizzes,
     cardCount,
     cards,
+    error,
   };
 };
 

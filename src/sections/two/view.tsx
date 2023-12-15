@@ -28,7 +28,6 @@ export const CollectionView = () => {
   const [categoryIndex, setCategoryIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const currentCategory = categories[categoryIndex];
-  const myRef = React.useRef<HTMLDivElement>(null);
   const showSkeletonLoader = isLoading;
   const showNoDataMessage = !isLoading && collectedCards.length === 0;
   const titleRef = useRef<HTMLDivElement | null>(null);

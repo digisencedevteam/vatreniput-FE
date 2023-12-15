@@ -3485,7 +3485,7 @@ export const STORIES = [
     story: {
       storyTitle: 'Svjetsko Prvenstvo 2022.',
       storyLogo:
-        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1698308307/2018_wc_byzpqe.png',
+        'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702560911/2022_FIFA_World_Cup.svg_zb5zus.png',
       Qualifications: {
         Description:
           'Počelo je s velikim upozorenjem. Porazom od Slovenije 1 : 0. Nakon toga minimalna pobjeda nad Maltom i pojavili su se brojni upitnici. Kritičari su izašli iz skrovišta, a u reprezentaciji Hrvatske panike nije bilo. Vjera u mogućnosti i siguran prolazak bila je neupitna. Igrači nisu bili u punoj formi. Ozljede i duge sezone uzimale su danak, ali kad je bilo najvažnije Hrvatska je pobijedila Rusiju na Poljudu s 1 : 0 autogolom dragog nam Kudryasova. Sreća je važan dio velikih uspjeha. ',

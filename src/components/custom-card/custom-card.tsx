@@ -20,6 +20,7 @@ import dayjs from 'dayjs';
 import DeleteModal from '../delete-modal/deleteModal';
 import { formatTime } from 'src/utils/format-time';
 import { userRoles } from 'src/lib/constants';
+import { useTruncatedText } from 'src/hooks/use-text-utils';
 
 interface CustomCardProps {
   width?: string;
@@ -66,6 +67,8 @@ const CustomCard = ({
   const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [remainingTime, setRemainingTime] = useState<number>(duration * 60);
+  const { text, truncate } = useTruncatedText(cardText, 1);
+  const truncatedOtherText = truncate(cardText, 17);
 
   useEffect(() => {
     const startTimestamp = startTime ? new Date(startTime).getTime() : 0;
@@ -103,7 +106,7 @@ const CustomCard = ({
         sx={{
           borderRadius: '16px',
           maxWidth: '500px',
-          minWidth: '98%',
+          minWidth: '90%',
           overflow: 'hidden',
           width: width,
           flexShrink: 0,
@@ -279,7 +282,19 @@ const CustomCard = ({
               width: '100%',
             }}
           >
-            <Typography variant='h6'>{cardText}</Typography>
+            <Box sx={{ flexGrow: 1, overflow: 'hidden' }}>
+              <Typography
+                variant='h6'
+                noWrap
+                sx={{
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  mt: 1,
+                }}
+              >
+                {truncatedOtherText}
+              </Typography>
+            </Box>
             {linkTo && (
               <Button
                 component={Link}
@@ -287,7 +302,7 @@ const CustomCard = ({
                 endIcon={<ArrowForwardIcon />}
                 variant='contained'
                 color='primary'
-                sx={{ mt: 2 }}
+                sx={{ mt: 2, mx: 1 }}
               >
                 Otvori
               </Button>
