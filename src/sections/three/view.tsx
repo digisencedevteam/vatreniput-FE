@@ -26,13 +26,7 @@ import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-ove
 import { useResponsive } from 'src/hooks/use-responsive';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
-import {
-  Quiz,
-  QuizResult,
-  ResolvedQuiz,
-  ResolvedQuizItem,
-  UnresolvedQuiz,
-} from '../quiz/types';
+import { ResolvedQuizItem } from '../quiz/types';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
