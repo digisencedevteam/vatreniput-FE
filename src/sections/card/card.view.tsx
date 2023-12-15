@@ -29,7 +29,7 @@ export const CardView = () => {
   const { cardId } = useParams();
   const [searchParams] = useSearchParams();
   const [cardData, setCardData] = useState<any>(null);
-  const [isError, setIsError] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const theme = useTheme();
@@ -48,16 +48,14 @@ export const CardView = () => {
     const targetApiMultiple = `${endpoints.card.details}${cardId}?userId=${
       currentUser.user && currentUser.user._id
     }`;
-
     try {
       const response = await axiosInstance.get(
         isMultiple ? targetApiMultiple : targetApiSingle
       );
       setCardData(response.data);
-      setIsError(false);
-      setSnackbarOpen(false);
+      setIsOpen(true);
     } catch (error) {
-      setIsError(true);
+      setIsOpen(false);
       setErrorMessage(
         error?.message ||
           'Dogodila se greška prilikom dobivanja podataka o sličici!'
@@ -84,19 +82,13 @@ export const CardView = () => {
       navigate(`${paths.auth.jwt.login}?returnTo=${window.location.pathname}`);
       return;
     }
-
     try {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
         cardId,
       });
-
-      if (res.data !== 'ok') {
-        setSnackbarMessage(res.data.message);
-        setSnackbarSeverity('error');
-      } else {
-        setSnackbarMessage('Sličica uspješno dodana u album!');
-        setSnackbarSeverity('success');
-      }
+      setSnackbarMessage(res.data.message);
+      setSnackbarSeverity('error');
+      setIsOpen(false);
       setSnackbarOpen(true);
     } catch (error) {
       setSnackbarMessage(
@@ -104,6 +96,8 @@ export const CardView = () => {
           'Dogodila se greška prilikom dodavanja sličice u album!'
       );
       setSnackbarSeverity('error');
+      setIsOpen(false);
+      setSnackbarOpen(true);
     }
   };
 
@@ -324,7 +318,7 @@ export const CardView = () => {
                   </CardContent>
                   <Divider />
                 </Card>
-                {!isError && !cardData?.isScanned && (
+                {isOpen && !cardData?.isScanned && (
                   <Button
                     variant='contained'
                     color='success'

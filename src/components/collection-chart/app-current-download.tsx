@@ -105,7 +105,12 @@ const AppCurrentDownload = ({
           alignItems='center'
           height={CHART_HEIGHT}
         >
-          <Skeleton variant='circular' width={300} height={300} />
+          <Skeleton
+            variant='circular'
+            animation='wave'
+            width={300}
+            height={300}
+          />
           <Box
             position='absolute'
             top='50%'

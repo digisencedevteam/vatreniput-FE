@@ -52,6 +52,7 @@ const DesktopNewsSkeleton = ({
       ) : (
         <Skeleton
           variant='rectangular'
+          animation='wave'
           width='100%'
           height='150px'
           sx={{
@@ -71,6 +72,7 @@ const DesktopNewsSkeleton = ({
       ) : (
         <Skeleton
           variant='text'
+          animation='wave'
           width='80%'
           sx={{
             marginBottom: theme.spacing(1),

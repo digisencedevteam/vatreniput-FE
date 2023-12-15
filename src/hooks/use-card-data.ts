@@ -4,7 +4,6 @@ import { endpoints } from 'src/utils/axios';
 import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
 
 export interface CardData {
-  collectedStatistic: CollectedStatistic | null;
   collectedCards: CollectionCard[];
   categories: CollectionEvent[];
   isLoading: boolean;
@@ -16,8 +15,6 @@ export interface CardData {
 
 const useCardData = (): CardData => {
   const [isLoading, setIsLoading] = useState(true);
-  const [collectedStatistic, setCollectedStatistic] =
-    useState<CollectedStatistic | null>(null);
   const [collectedCards, setCollectedCards] = useState<CollectionCard[]>([]);
   const [categories, setCategories] = useState<CollectionEvent[]>([]);
   const [totalPages, setTotalPages] = useState(1);
@@ -79,9 +76,7 @@ const useCardData = (): CardData => {
 
   return {
     fetchCollectedCards,
-
     fetchCategories,
-    collectedStatistic,
     isLoading,
     collectedCards,
     categories,
