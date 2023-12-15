@@ -254,10 +254,6 @@ const useFetchQuizzes = (
             Math.ceil(response.data.count / itemsPerPageUnresolved)
           );
         }
-        console.log(
-          'Total quizzes fetched:',
-          unresolvedQuizzes && unresolvedQuizzes.length
-        );
       } catch (error) {
         console.error(error);
         setUnresolvedQuizzes([]);
