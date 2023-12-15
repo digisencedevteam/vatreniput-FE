@@ -52,10 +52,7 @@ const QuizResults = () => {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography
-        variant='h3'
-        color={'primary'}
-      >
+      <Typography variant='h3' color={'primary'}>
         Rezultati Kvizova
       </Typography>
       <Select
@@ -66,17 +63,11 @@ const QuizResults = () => {
         size='small'
         sx={{ my: 2 }}
       >
-        <MenuItem
-          value=''
-          disabled
-        >
+        <MenuItem value='' disabled>
           Izaberi kviz
         </MenuItem>
         {allQuizzes?.map((quiz) => (
-          <MenuItem
-            key={quiz._id}
-            value={quiz._id}
-          >
+          <MenuItem key={quiz._id} value={quiz._id}>
             {quiz.title}
           </MenuItem>
         ))}
@@ -102,10 +93,7 @@ const QuizResults = () => {
                       {resultsById.map((result: QuizResult) => (
                         <TableRow key={result._id}>
                           <TableCell>
-                            <Box
-                              display={'flex'}
-                              justifyContent={'center'}
-                            >
+                            <Box display={'flex'} justifyContent={'center'}>
                               <Avatar
                                 src={
                                   result.userId.photoURL

@@ -16,7 +16,12 @@ const SkeletonOverviewResults = ({ message }: SkeletonProps) => {
         justifyContent: 'center',
       }}
     >
-      <Skeleton variant='rectangular' width='100%' height={118} />
+      <Skeleton
+        variant='rectangular'
+        width='100%'
+        height={118}
+        animation='wave'
+      />
       {message && (
         <Box
           sx={{

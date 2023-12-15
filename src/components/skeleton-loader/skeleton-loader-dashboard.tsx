@@ -61,6 +61,7 @@ export const SkeletonDashboardLoader = ({
         >
           <Skeleton
             variant='rectangular'
+            animation='wave'
             width='100%'
             height='100%'
             sx={{ borderRadius: 2 }}
