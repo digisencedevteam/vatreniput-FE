@@ -7,7 +7,6 @@ import DashboardSectionWrapper from 'src/components/section-wrapper/dashboard-se
 import DashboardCollectionCategory from 'src/components/dashboard-collection-category/dashboard-collection-category';
 import ScrollableContainer from 'src/components/scrollable-container/scrollable-container';
 import { useContext, useEffect, useState } from 'react';
-import CustomCardSmall from 'src/components/custom-card/custom-card-small';
 import QRScanner from 'src/components/qr-scanner/QRScanner';
 import useDashboardData from 'src/hooks/use-dashboard-data';
 import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { endpoints } from 'src/utils/axios';
 import { Answer, Quiz, ResolvedQuizItem } from 'src/sections/quiz/types';
 import axiosInstance from 'src/utils/axios';
