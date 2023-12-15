@@ -236,9 +236,10 @@ const OneView = () => {
             ) : notVotedVotings?.length ? (
               <ScrollableContainer childrenCount={notVotedVotings?.length}>
                 {notVotedVotings.map((voting, index) => (
-                  <CustomCardSmall
+                  <CustomCard
+                    cardId={voting._id}
                     key={index}
-                    width='96%'
+                    width='90%'
                     height='100%'
                     imgUrl={voting.thumbnail}
                     cardText={voting.title}
