@@ -76,6 +76,7 @@ export const CardView = () => {
       return;
     }
     fetchCardData(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddCardToAlbum = async () => {
@@ -124,7 +125,7 @@ export const CardView = () => {
               edge='start'
               color='primary'
               aria-label='back to dashboard'
-              onClick={() => router.push(paths.dashboard.root)}
+              onClick={() => router.push(paths.dashboard.collection)}
             >
               <ArrowBackIcon
                 sx={{ width: isMobile ? 30 : 40, height: isMobile ? 30 : 40 }}

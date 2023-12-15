@@ -37,6 +37,7 @@ export const CollectionView = () => {
     if (categories.length > 0) {
       fetchCollectedCards(categoryIndex, currentPage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIndex, currentPage, categories.length]);
 
   const handleArrowClick = (direction: string) => {
