@@ -37,12 +37,6 @@ type UseVotingReturn = {
   fetchVotingResult: (
     votingId: string
   ) => Promise<Partial<VotingResultStat> | null>;
-  fetchVotedVotings: (page: number, limit: number) => Promise<void>;
-  fetchUnvotedVotings: (page: number, limit: number) => Promise<void>;
-  votedVotings: Voting[];
-  unvotedVotings: Voting[];
-  totalVotedCount: number;
-  totalUnvotedCount: number;
 };
 
 const useVoting = (): UseVotingReturn => {
@@ -51,10 +45,6 @@ const useVoting = (): UseVotingReturn => {
   const [userVotedVotings, setUserVotedVotings] = useState<UserVotedVoting[]>(
     []
   );
-  const [votedVotings, setVotedVotings] = useState<Voting[]>([]);
-  const [unvotedVotings, setUnvotedVotings] = useState<Voting[]>([]);
-  const [totalVotedCount, setTotalVotedCount] = useState(0);
-  const [totalUnvotedCount, setTotalUnvotedCount] = useState(0);
 
   const fetchAllVotings = async () => {
     setIsLoading(true);
@@ -78,36 +68,6 @@ const useVoting = (): UseVotingReturn => {
       console.error('Error fetching user voted votings:', error);
     }
     setIsLoading(false);
-  };
-
-  const fetchVotedVotings = async (page: number, limit: number) => {
-    setIsLoading(true);
-    try {
-      const response = await axiosInstance.get(endpoints.votings.voted, {
-        params: { page, limit },
-      });
-      setVotedVotings(response.data.votings);
-      setTotalVotedCount(response.data.totalCount);
-    } catch (error) {
-      console.error('Error fetching voted votings:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchUnvotedVotings = async (page: number, limit: number) => {
-    setIsLoading(true);
-    try {
-      const response = await axiosInstance.get(endpoints.votings.unvoted, {
-        params: { page, limit },
-      });
-      setUnvotedVotings(response.data.votings);
-      setTotalUnvotedCount(response.data.totalCount);
-    } catch (error) {
-      console.error('Error fetching unvoted votings:', error);
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   const createOrUpdateVoting = async (
@@ -228,12 +188,6 @@ const useVoting = (): UseVotingReturn => {
     fetchVotingResult,
     userVotedVotings,
     fetchUserVotedVotingsWithTopOption,
-    fetchVotedVotings,
-    fetchUnvotedVotings,
-    votedVotings,
-    unvotedVotings,
-    totalUnvotedCount,
-    totalVotedCount,
   };
 };
 
