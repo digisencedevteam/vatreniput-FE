@@ -30,10 +30,7 @@ const FiveView = () => {
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-  // const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const [currentPageVoted, setCurrentPageVoted] = useState(1);
   const [currentPageUnvoted, setCurrentPageUnvoted] = useState(1);
   const {

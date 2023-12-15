@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { endpoints } from 'src/utils/axios';
-import { Answer, Quiz } from 'src/sections/quiz/types';
+import { Answer, Quiz, ResolvedQuizItem } from 'src/sections/quiz/types';
 import axiosInstance from 'src/utils/axios';
 import { QuizResult } from 'src/types';
 import { useAuthContext } from 'src/auth/hooks';
@@ -9,7 +9,7 @@ export type FetchQuizzesReturn = {
   isLoadingResolved: boolean;
   isLoadingUnresolved: boolean;
   isResultsLoading: boolean;
-  resolvedQuizzes: Quiz[] | undefined;
+  resolvedQuizzes: ResolvedQuizItem[] | undefined;
   isDeleting: boolean;
   unresolvedQuizzes: Quiz[] | undefined;
   allQuizzes: Quiz[] | undefined;
@@ -63,7 +63,7 @@ const useFetchQuizzes = (
   const [totalPagesUnresolved, setTotalPagesUnresolved] = useState<number>(0);
 
   const [isLoadingResolved, setIsLoadingResolved] = useState(false);
-  const [resolvedQuizzes, setResolvedQuizzes] = useState<Quiz[]>();
+  const [resolvedQuizzes, setResolvedQuizzes] = useState<ResolvedQuizItem[]>();
   const [totalPagesResolved, setTotalPagesResolved] = useState<number>(0);
 
   const fetchUnresolvedQuizzes = async () => {

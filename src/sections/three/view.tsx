@@ -26,6 +26,13 @@ import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-ove
 import { useResponsive } from 'src/hooks/use-responsive';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
+import {
+  Quiz,
+  QuizResult,
+  ResolvedQuiz,
+  ResolvedQuizItem,
+  UnresolvedQuiz,
+} from '../quiz/types';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
@@ -91,7 +98,7 @@ const ThreeView = () => {
     }
   }, [unresolvedQuizzes]);
 
-  const resolvedQuiz = resolvedQuizzes?.map((quiz, index) => ({
+  const resolvedQuiz = resolvedQuizzes?.map((quiz) => ({
     label: quiz,
     totalAmount: quiz.score,
     value: quiz.duration,
@@ -117,14 +124,14 @@ const ThreeView = () => {
     : '';
 
   const handlePageChangeUnresolved = (
-    event: any,
+    event: React.ChangeEvent<unknown>,
     page: SetStateAction<number>
   ) => {
     setCurrentPageUnresolved(page);
   };
 
   const handlePageChangeResolved = (
-    event: any,
+    event: React.ChangeEvent<unknown>,
     page: SetStateAction<number>
   ) => {
     setCurrentPageResolved(page);
@@ -335,7 +342,7 @@ const ThreeView = () => {
           />
         ) : !!resolvedQuizzes?.length ? (
           <ScrollableContainer childrenCount={resolvedQuizzes.length}>
-            {resolvedQuizzes.map((data: any, index) => (
+            {resolvedQuizzes.map((data: ResolvedQuizItem, index: number) => (
               <Box
                 key={index}
                 sx={{

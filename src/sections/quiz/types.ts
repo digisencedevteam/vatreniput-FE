@@ -1,5 +1,5 @@
 export type Question = {
-  _id?: string
+  _id?: string;
   text: string;
   options: string[];
   image?: string;
@@ -27,8 +27,20 @@ export type Quiz = {
   isExpired?: boolean;
   availableUntil?: string;
   createdAt?: string;
-  status?: QuizStatus[] | any
-  isResolved?: boolean; 
+  status?: QuizStatus[] | any;
+  isResolved?: boolean;
+};
+
+export type ResolvedQuizItem = {
+  score: number;
+  duration: number;
+  dateTaken: string;
+  quiz: Quiz;
+};
+
+export type ResolvedQuizzesResponse = {
+  count: number;
+  resolvedQuizzes: ResolvedQuizItem[];
 };
 
 export type Answer = {
