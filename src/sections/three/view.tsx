@@ -31,8 +31,6 @@ const ThreeView = () => {
   const settings = useSettingsContext();
   const theme = useTheme();
   const isMobile = useResponsive('down', 'md');
-  const [currentPage, setCurrentPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 6;
   const auth = useContext(AuthContext);
   const [selectedQuizResult, setSelectedQuizResult] =
@@ -103,8 +101,6 @@ const ThreeView = () => {
     fetchUnresolvedQuizzes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPageUnresolved]);
-
-  // useEffect hook for resolved quizzes
   useEffect(() => {
     fetchResolvedQuizzes();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,16 +116,6 @@ const ThreeView = () => {
       })
     : '';
 
-  // TODO: PROVJERITI ZASTO BACKEND NE VRATI NA PAGE 3 6 KVIZOVA NEGO SAMO 1
-
-  // useEffect(() => {
-  //   if (resolvedQuizzes) {
-  //     const totalResolvedQuizzes = resolvedQuizzes.length;
-  //     setTotalPages(Math.ceil(totalResolvedQuizzes / itemsPerPage));
-  //   }
-  // }, [resolvedQuizzes]);
-
-  // Handlers for page changes
   const handlePageChangeUnresolved = (
     event: any,
     page: SetStateAction<number>

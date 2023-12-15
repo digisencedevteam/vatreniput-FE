@@ -30,10 +30,10 @@ const FiveView = () => {
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useResponsive('down', 'md');
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const [currentPageVoted, setCurrentPageVoted] = useState(1);
   const [currentPageUnvoted, setCurrentPageUnvoted] = useState(1);
   const {
@@ -62,34 +62,12 @@ const FiveView = () => {
         buttonLink: `${paths.dashboard.voting.votingResults}`,
       };
 
-  // const votedVotings = votings
-  //   ? votings.filter((voting) => voting.isVoted === true)
-  //   : [];
-  // const notVotedVotings = votings
-  //   ? votings.filter((voting) => voting.isVoted === false)
-  //   : [];
-
-  // const currentNotVotedVotings = notVotedVotings.slice(
-  //   indexOfFirstItem,
-  //   indexOfLastItem
-  // );
-
-  // const totalPages = Math.ceil(notVotedVotings.length / itemsPerPage);
-
   const handlePageChangeVoted = (newPage: number) => {
     setCurrentPageVoted(newPage);
   };
 
   const handlePageChangeUnvoted = (newPage: number) => {
     setCurrentPageUnvoted(newPage);
-  };
-  const fetchData = async () => {
-    await fetchAllVotings();
-    await fetchVotedVotings(currentPageVoted, itemsPerPage);
-    await fetchUnvotedVotings(currentPageUnvoted, itemsPerPage);
-    if (auth.user) {
-      await fetchUserVotedVotingsWithTopOption(auth.user._id);
-    }
   };
 
   const transformVotingResults = () => {

@@ -54,9 +54,9 @@ const useDashboardData = () => {
     } catch (error) {
       console.error(error);
       if (error.response) {
-        setError(error.response.data.message || 'Unknown error occurred');
+        setError(error.response.data.message || 'Interna greška servera');
       } else {
-        setError('Network error or server is not responding');
+        setError('Interna greška servera');
       }
     } finally {
       setIsDashboardLoading(false);
@@ -90,6 +90,8 @@ const useDashboardData = () => {
     cardCount,
     cards,
     error,
+    isError,
+    errorMessage,
   };
 };
 

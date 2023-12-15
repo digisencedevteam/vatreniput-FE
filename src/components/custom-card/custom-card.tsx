@@ -59,7 +59,6 @@ const CustomCard = ({
   const duration = 15;
   const auth = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [timer, setTimer] = useState<number>(0);
   const theme = useTheme();
   const handleToggleMenu = () => setMenuOpen((prev) => !prev);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
@@ -67,7 +66,7 @@ const CustomCard = ({
   const formattedRewarded = dayjs(rewardedUntil).format('DD/MM/YYYY-hh:mm');
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [remainingTime, setRemainingTime] = useState<number>(duration * 60);
-  const { text, truncate } = useTruncatedText(cardText, 1);
+  const { truncate } = useTruncatedText(cardText, 20);
   const truncatedOtherText = truncate(cardText, 17);
 
   useEffect(() => {
