@@ -76,7 +76,7 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
             }}
           >
             <Typography
-              variant='h4'
+              variant='h6'
               sx={{
                 color: 'common.white',
               }}
