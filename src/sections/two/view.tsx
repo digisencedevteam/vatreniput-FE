@@ -1,9 +1,7 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
-import { Box, Grid, IconButton } from '@mui/material';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { Box, Divider, Grid, IconButton } from '@mui/material';
 import { CollectionStickerItem } from 'src/components/collection-sticker/collection-sticker-item';
 import { useTheme } from '@mui/material/styles';
 import React, { useEffect, useState, useRef } from 'react';
@@ -13,6 +11,8 @@ import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import useCardData from 'src/hooks/use-card-data';
+import ArrowCircleLeftSharpIcon from '@mui/icons-material/ArrowCircleLeftSharp';
+import ArrowCircleRightSharpIcon from '@mui/icons-material/ArrowCircleRightSharp';
 
 export const CollectionView = () => {
   const settings = useSettingsContext();
@@ -37,6 +37,7 @@ export const CollectionView = () => {
     if (categories.length > 0) {
       fetchCollectedCards(categoryIndex, currentPage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryIndex, currentPage, categories.length]);
 
   const handleArrowClick = (direction: string) => {
@@ -107,13 +108,14 @@ export const CollectionView = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              mb: isMobile ? 3 : 5,
             }}
           >
             <IconButton
-              color='primary'
+              color='inherit'
               onClick={() => handleArrowClick('left')}
             >
-              <ArrowLeftIcon />
+              <ArrowCircleLeftSharpIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
             <div ref={titleRef}>
               <Typography
@@ -124,14 +126,14 @@ export const CollectionView = () => {
               </Typography>
             </div>
             <IconButton
-              color='primary'
+              color='inherit'
               onClick={() => handleArrowClick('right')}
             >
-              <ArrowRightIcon />
+              <ArrowCircleRightSharpIcon sx={{ width: 40, height: 40 }} />
             </IconButton>
           </Box>
+          <Divider />
         </Grid>
-
         {showSkeletonLoader && (
           <SkeletonDashboardLoader
             isMobileCount={9}
@@ -140,7 +142,6 @@ export const CollectionView = () => {
             count={12}
           />
         )}
-
         {!showSkeletonLoader &&
           collectedCards.slice(0, itemsToShow).map((item, index) => (
             <Grid
@@ -154,7 +155,6 @@ export const CollectionView = () => {
               <CollectionStickerItem item={item} />
             </Grid>
           ))}
-
         {showNoDataMessage && (
           <SkeletonDashboardLoader
             message='Čini se da tvoja digitalna kolekcija tek treba nastati. Oživi je skeniranjem QR koda s tvoje prve sličice i uživaj u ispunjavanju digitalnog albuma!'
@@ -165,7 +165,6 @@ export const CollectionView = () => {
           />
         )}
       </Grid>
-
       {!showSkeletonLoader &&
         !showNoDataMessage &&
         collectedCards.length > 0 && (

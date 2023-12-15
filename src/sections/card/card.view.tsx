@@ -36,7 +36,8 @@ export const CardView = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState<AlertColor>('info');
+  const [snackbarSeverity, setSnackbarSeverity] =
+    useState<AlertColor>('success');
   const currentUser = useAuthContext();
   const isCardDataArray = Array.isArray(cardData);
   const [isSingle, setIsSingle] = useState(true);
@@ -75,6 +76,7 @@ export const CardView = () => {
       return;
     }
     fetchCardData(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddCardToAlbum = async () => {
@@ -88,22 +90,20 @@ export const CardView = () => {
         cardId,
       });
 
-      if (res.data.message !== 'ok') {
+      if (res.data !== 'ok') {
         setSnackbarMessage(res.data.message);
         setSnackbarSeverity('error');
       } else {
         setSnackbarMessage('Sličica uspješno dodana u album!');
         setSnackbarSeverity('success');
-        navigate(paths.dashboard.collection);
       }
       setSnackbarOpen(true);
     } catch (error) {
-      setErrorMessage(
+      setSnackbarMessage(
         error?.message ||
-          'Dogodila se greška prilikom dobivanja podataka o sličici!'
+          'Dogodila se greška prilikom dodavanja sličice u album!'
       );
       setSnackbarSeverity('error');
-      setSnackbarOpen(true);
     }
   };
 
@@ -125,9 +125,11 @@ export const CardView = () => {
               edge='start'
               color='primary'
               aria-label='back to dashboard'
-              onClick={() => router.push(paths.dashboard.root)}
+              onClick={() => router.push(paths.dashboard.collection)}
             >
-              <ArrowBackIcon />
+              <ArrowBackIcon
+                sx={{ width: isMobile ? 30 : 40, height: isMobile ? 30 : 40 }}
+              />
             </IconButton>
           </Grid>
         </Grid>
@@ -152,7 +154,7 @@ export const CardView = () => {
                         image={
                           card?.isCollected
                             ? card?.imageURLs[0]
-                            : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'
+                            : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702329314/LogoHNS_j974kk.png'
                         }
                         alt={`Sličica ${card.ordinalNumber}`}
                         sx={{
@@ -194,7 +196,6 @@ export const CardView = () => {
                   ))}
                 </Box>
               </Grid>
-
               <Grid item xs={12} md={12}>
                 <Card
                   sx={{
@@ -218,7 +219,6 @@ export const CardView = () => {
                         <Typography variant='caption' component='div'>
                           {cardData[0]?.title}
                         </Typography>
-                        <Divider />
                       </>
                     )}
                     <Typography gutterBottom variant='h6' component='div'>
@@ -264,9 +264,10 @@ export const CardView = () => {
                           bottom: 0,
                           right: 0,
                           zIndex: 10,
-                          width: isMobile ? '20%' : '15%',
-                          height: isMobile ? '20%' : '15%',
-                          borderTopLeftRadius: 10,
+                          borderTopLeftRadius: 5,
+                          borderBottomRightRadius: 10,
+                          width: isMobile ? '20%' : '10%',
+                          height: isMobile ? '20%' : '10%',
                           backgroundColor: alpha(
                             theme.palette.common.black,
                             0.5
@@ -278,7 +279,7 @@ export const CardView = () => {
                         }}
                       >
                         <Typography
-                          variant={isMobile ? 'h3' : 'h2'}
+                          variant='h4'
                           sx={{
                             color: 'common.white',
                           }}
@@ -303,53 +304,37 @@ export const CardView = () => {
                   <CardContent>
                     <Typography
                       variant='caption'
-                      sx={{ my: 2, color: theme.palette.primary.main }}
+                      sx={{ color: theme.palette.primary.main }}
                     >
                       {cardData?.author}
                     </Typography>
+                    <Typography
+                      gutterBottom
+                      variant='h5'
+                      component='div'
+                      my={3}
+                    >
+                      {cardData?.event?.name}
+                    </Typography>
                     {!!cardData?.title && (
-                      <Typography variant='subtitle2' component='div'>
+                      <Typography variant='subtitle1' component='div'>
                         {cardData?.title}
                       </Typography>
                     )}
-                    <Typography gutterBottom variant='h6' component='div'>
-                      {cardData?.event?.name}
-                    </Typography>
                   </CardContent>
                   <Divider />
                 </Card>
+                {!isError && !cardData?.isScanned && (
+                  <Button
+                    variant='contained'
+                    color='success'
+                    onClick={handleAddCardToAlbum}
+                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                  >
+                    Dodaj U Album
+                  </Button>
+                )}
               </Grid>
-              {!isError && (
-                <Box p={3}>
-                  {errorMessage === '' && (
-                    <>
-                      {cardData && cardData.isScanned ? (
-                        <Typography variant='subtitle1' color='error'>
-                          {errorMessage}
-                        </Typography>
-                      ) : (
-                        <Button
-                          variant='contained'
-                          color='success'
-                          onClick={handleAddCardToAlbum}
-                          sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                        >
-                          Dodaj U Album
-                        </Button>
-                      )}
-                    </>
-                  )}
-                  {!currentUser && (
-                    <Button
-                      variant='contained'
-                      color='inherit'
-                      sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
-                    >
-                      Prijavi se
-                    </Button>
-                  )}
-                </Box>
-              )}
             </>
           )}
         </Grid>

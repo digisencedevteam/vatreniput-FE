@@ -18,7 +18,7 @@ const PagingComponent = ({
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        marginTop: 10,
+        marginTop: 5,
       }}
     >
       <Pagination

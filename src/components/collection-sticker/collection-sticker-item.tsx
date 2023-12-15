@@ -18,7 +18,7 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
 
   const handleClick = () => {
     if (!!item.printedCardId) {
-      navigate.push(`/card/${item.printedCardId}?isPreview=true`);
+      navigate.push(`/card/${item.printedCardId}/1928?isPreview=true`);
     }
   };
 
@@ -30,7 +30,7 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
           ? item.imageURLs[1]
           : item.isCollected
           ? item.imageURLs[1]
-          : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1694697860/logoHNS_ukf2xs.jpg'
+          : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702329314/LogoHNS_j974kk.png'
       }
       sx={{
         height: { xs: 160, sm: 200, md: 250, lg: 250, xl: 300 },
@@ -76,7 +76,7 @@ export const CollectionStickerItem = ({ item }: CollectionStickerItemProps) => {
             }}
           >
             <Typography
-              variant='h4'
+              variant='h6'
               sx={{
                 color: 'common.white',
               }}
