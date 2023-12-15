@@ -91,7 +91,7 @@ export const CardView = () => {
       setIsOpen(false);
       setSnackbarOpen(true);
     } catch (error) {
-      setErrorMessage(
+      setSnackbarMessage(
         error?.message ||
           'Dogodila se greška prilikom dodavanja sličice u album!'
       );
