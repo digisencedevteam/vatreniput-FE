@@ -35,7 +35,6 @@ const FiveView = () => {
   const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
   const {
     votings,
     fetchAllVotings,
@@ -97,16 +96,6 @@ const FiveView = () => {
         votes: voting.votes,
       };
     });
-  };
-
-  useEffect(() => {
-    if (error) {
-      setIsErrorSnackbarOpen(true);
-    }
-  }, [error]);
-
-  const handleCloseErrorSnackbar = () => {
-    setIsErrorSnackbarOpen(false);
   };
 
   useEffect(() => {
