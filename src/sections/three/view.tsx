@@ -27,6 +27,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import AppWelcome from 'src/components/overview/app-welcome';
 import SeoIllustration from 'src/assets/illustrations/seo-illustration';
 import { ResolvedQuizItem } from '../quiz/types';
+import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
 
 const ThreeView = () => {
   const settings = useSettingsContext();
@@ -50,6 +51,7 @@ const ThreeView = () => {
     fetchResolvedQuizzes,
     totalPagesUnresolved,
     totalPagesResolved,
+    fetchQuizzesError,
   } = useFetchQuizzes(
     currentPageUnresolved,
     itemsPerPage,
@@ -63,6 +65,10 @@ const ThreeView = () => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
+
+  // const [error, setError] = useState<string>('');
+  // const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] =
+  //   useState<boolean>(false);
 
   const buttonProps =
     auth.user && auth.user.role === userRoles.admin
@@ -378,6 +384,11 @@ const ThreeView = () => {
           </Box>
         )}
       </SectionWrapper>
+      <ErrorSnackbar
+        trigger={!!fetchQuizzesError}
+        severity='error'
+        message={fetchQuizzesError}
+      />
     </Container>
   );
 };

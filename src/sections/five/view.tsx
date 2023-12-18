@@ -24,6 +24,7 @@ import { VotingOverview } from 'src/components/voting-overview/voting-overview';
 import { StorySectionWrapper } from 'src/components/section-wrapper/story-wrapper';
 import PagingComponent from 'src/components/paging/paging-component';
 import SkeletonOverviewResults from 'src/components/skeleton-loader/skeleton-overview-results';
+import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
 
 const FiveView = () => {
   const settings = useSettingsContext();
@@ -34,6 +35,7 @@ const FiveView = () => {
   const itemsPerPage = 6;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] = useState(false);
   const {
     votings,
     fetchAllVotings,
@@ -41,6 +43,7 @@ const FiveView = () => {
     isLoading,
     fetchUserVotedVotingsWithTopOption,
     userVotedVotings,
+    error,
   } = useVoting();
   const auth = useContext(AuthContext);
   const isAdmin = auth.user && auth.user.role === userRoles.admin;
@@ -94,6 +97,16 @@ const FiveView = () => {
         votes: voting.votes,
       };
     });
+  };
+
+  useEffect(() => {
+    if (error) {
+      setIsErrorSnackbarOpen(true);
+    }
+  }, [error]);
+
+  const handleCloseErrorSnackbar = () => {
+    setIsErrorSnackbarOpen(false);
   };
 
   useEffect(() => {
@@ -262,6 +275,11 @@ const FiveView = () => {
           </SectionWrapper>
         </>
       )}
+      <ErrorSnackbar
+        trigger={!!error}
+        severity='error'
+        message={error}
+      />
     </Container>
   );
 };

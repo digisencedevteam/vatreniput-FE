@@ -260,7 +260,6 @@ const OneView = () => {
         trigger={snackbarOpen}
         severity='error'
         message={error}
-        onClose={handleCloseSnackbar}
       />
     </Container>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'src/utils/axios';
 import { endpoints } from 'src/utils/axios';
-import { CollectedStatistic, CollectionCard, CollectionEvent } from 'src/types';
+import { CollectionCard, CollectionEvent } from 'src/types';
 
 export interface CardData {
   collectedCards: CollectionCard[];
