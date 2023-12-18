@@ -54,7 +54,7 @@ const FiveView = () => {
       }
     : {
         buttonLabel: 'Pregled glasanja',
-        buttonLink: `${paths.dashboard.voting.votingResults}`,
+        buttonLink: `${paths.dashboard.voting.votingInfo}`,
       };
 
   const votedVotings = votings

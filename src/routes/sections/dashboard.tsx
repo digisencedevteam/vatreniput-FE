@@ -6,6 +6,7 @@ import { LoadingScreen } from 'src/components/loading-screen';
 import ProfileView from 'src/sections/profile/view';
 import ManageQuiz from 'src/sections/manageQuiz/view';
 import ManageVoting from 'src/sections/manageVoting/view';
+import VotingRewardInfo from 'src/sections/voting/voting-info';
 
 const IndexPage = lazy(() => import('src/pages/dashboard/one'));
 const CollectionPage = lazy(() => import('src/pages/dashboard/collections'));
@@ -49,6 +50,10 @@ export const dashboardRoutes = [
       {
         path: 'votingResults/:votingId/:votingTitle',
         element: <VotingResults />,
+      },
+      {
+        path: 'votingInfo',
+        element: <VotingRewardInfo />,
       },
 
       {

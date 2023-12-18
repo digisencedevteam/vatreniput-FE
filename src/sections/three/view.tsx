@@ -65,11 +65,6 @@ const ThreeView = () => {
     setSelectedQuizResult(quizData);
     setIsModalOpen(true);
   };
-
-  // const [error, setError] = useState<string>('');
-  // const [isErrorSnackbarOpen, setIsErrorSnackbarOpen] =
-  //   useState<boolean>(false);
-
   const buttonProps =
     auth.user && auth.user.role === userRoles.admin
       ? {
