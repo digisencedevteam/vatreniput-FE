@@ -10,10 +10,8 @@ import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import {
-  Alert,
   AlertColor,
   IconButton,
-  Snackbar,
   alpha,
   useMediaQuery,
   useTheme,
@@ -24,6 +22,7 @@ import { paths } from 'src/routes/paths';
 import { useAuthContext } from 'src/auth/hooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
+import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -86,8 +85,8 @@ export const CardView = () => {
       const res = await axiosInstance.patch(`${endpoints.card.add}`, {
         cardId,
       });
-      setSnackbarMessage(res.data.message);
-      setSnackbarSeverity('error');
+      setSnackbarMessage('Sličica uspješno dodana u album!');
+      setSnackbarSeverity('success');
       setIsOpen(false);
       setSnackbarOpen(true);
     } catch (error) {
@@ -101,10 +100,6 @@ export const CardView = () => {
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
-
   return (
     <Box
       display='flex'
@@ -113,8 +108,14 @@ export const CardView = () => {
       sx={{ padding: isMobile ? theme.spacing(1) : theme.spacing(5) }}
     >
       <Container maxWidth='lg'>
-        <Grid container alignItems='center'>
-          <Grid item sx={{ my: 3 }}>
+        <Grid
+          container
+          alignItems='center'
+        >
+          <Grid
+            item
+            sx={{ my: 3 }}
+          >
             <IconButton
               edge='start'
               color='primary'
@@ -127,10 +128,16 @@ export const CardView = () => {
             </IconButton>
           </Grid>
         </Grid>
-        <Grid container spacing={5}>
+        <Grid
+          container
+          spacing={5}
+        >
           {isCardDataArray && !isSingle ? (
             <>
-              <Grid item xs={12}>
+              <Grid
+                item
+                xs={12}
+              >
                 <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                   {cardData.map((card, index) => (
                     <Box
@@ -190,7 +197,11 @@ export const CardView = () => {
                   ))}
                 </Box>
               </Grid>
-              <Grid item xs={12} md={12}>
+              <Grid
+                item
+                xs={12}
+                md={12}
+              >
                 <Card
                   sx={{
                     height: 'auto',
@@ -210,12 +221,19 @@ export const CardView = () => {
                   <CardContent>
                     {!!cardData[0]?.title && (
                       <>
-                        <Typography variant='caption' component='div'>
+                        <Typography
+                          variant='caption'
+                          component='div'
+                        >
                           {cardData[0]?.title}
                         </Typography>
                       </>
                     )}
-                    <Typography gutterBottom variant='h6' component='div'>
+                    <Typography
+                      gutterBottom
+                      variant='h6'
+                      component='div'
+                    >
                       {cardData[0]?.event?.name}
                     </Typography>
                   </CardContent>
@@ -225,7 +243,11 @@ export const CardView = () => {
             </>
           ) : (
             <>
-              <Grid item xs={12} md={6}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+              >
                 <Box sx={{ position: 'relative' }}>
                   {cardData?.videoLink ? (
                     <div style={{ position: 'relative', paddingTop: '56.25%' }}>
@@ -285,7 +307,11 @@ export const CardView = () => {
                   )}
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid
+                item
+                xs={12}
+                md={6}
+              >
                 <Card
                   sx={{
                     height: 'auto',
@@ -311,7 +337,10 @@ export const CardView = () => {
                       {cardData?.event?.name}
                     </Typography>
                     {!!cardData?.title && (
-                      <Typography variant='subtitle1' component='div'>
+                      <Typography
+                        variant='subtitle1'
+                        component='div'
+                      >
                         {cardData?.title}
                       </Typography>
                     )}
@@ -333,20 +362,11 @@ export const CardView = () => {
           )}
         </Grid>
       </Container>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={snackbarSeverity}
-          sx={{ width: '100%' }}
-        >
-          {snackbarSeverity === 'error' ? errorMessage : snackbarMessage}
-        </Alert>
-      </Snackbar>
+      <ErrorSnackbar
+        trigger={snackbarOpen}
+        severity={snackbarSeverity}
+        message={snackbarMessage}
+      />
     </Box>
   );
 };
