@@ -48,7 +48,10 @@ const useVoting = (): UseVotingReturn => {
   );
   const [error, setError] = useState<string>('');
 
-  const handleError = (error: any, defaultMessage: string) => {
+  const handleError = (
+    error: { response: { data: { message: string } } },
+    defaultMessage: string
+  ) => {
     const message = error.response?.data?.message || defaultMessage;
     setError(message);
   };

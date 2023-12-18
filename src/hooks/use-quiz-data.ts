@@ -189,7 +189,7 @@ const useFetchQuizzes = (
           error: response.data.message || JSON.stringify(response.data),
         };
       }
-    } catch (error: any) {
+    } catch (error) {
       let errorMessage = 'Greška';
       if (error.response && error.response.data) {
         errorMessage =
