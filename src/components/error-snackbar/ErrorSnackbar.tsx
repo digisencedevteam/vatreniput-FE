@@ -7,11 +7,7 @@ interface ErrorSnackbarProps {
   message: string;
 }
 
-const ErrorSnackbar: React.FC<ErrorSnackbarProps> = ({
-  trigger,
-  severity,
-  message,
-}) => {
+const ErrorSnackbar = ({ trigger, severity, message }: ErrorSnackbarProps) => {
   const [isOpen, setIsOpen] = useState(trigger);
 
   useEffect(() => {
