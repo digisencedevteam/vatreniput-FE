@@ -30,7 +30,6 @@ export const CardView = () => {
   const [searchParams] = useSearchParams();
   const [cardData, setCardData] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -46,12 +45,12 @@ export const CardView = () => {
   const router = useRouter();
 
   const fetchCardData = async (isMultiple: boolean) => {
-    setIsLoading(true);
     const targetApiSingle = `${endpoints.card.details}${cardId}`;
     const targetApiMultiple = `${endpoints.card.details}${cardId}?userId=${
       currentUser.user && currentUser.user._id
     }`;
     try {
+      setIsLoading(true);
       const response = await axiosInstance.get(
         isMultiple ? targetApiMultiple : targetApiSingle
       );
@@ -59,11 +58,10 @@ export const CardView = () => {
       setIsOpen(true);
     } catch (error) {
       setIsOpen(false);
-      const message =
-        error.response?.data?.message ||
-        error?.message ||
-        'Dogodila se greška prilikom dobivanja podataka o sličici!';
-      setErrorMessage(message);
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Dogodila se greška';
+      console.error('Error fetching card data:', errorMessage);
+      setSnackbarMessage(errorMessage);
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
     } finally {
