@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import { formatTime } from 'src/utils/format-time';
 import DeleteModal from 'src/components/delete-modal/deleteModal';
 import { paths } from 'src/routes/paths';
+import { useTruncatedText } from 'src/hooks/use-text-utils';
 
 interface QuestionScreenProps {
   currentQuestion: Question;
@@ -53,6 +54,9 @@ const QuestionScreen = ({
   const navigate = useNavigate();
   const [quizStartTime, setQuizStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const topSpacing = theme.breakpoints.up('sm') ? '15%' : '56px';
+  const { truncatedText, isTruncated, expanded, toggleLines, less, more } =
+    useTruncatedText(currentQuestion.text, 175, false);
 
   useEffect(() => {
     if (startedTime) {
@@ -98,10 +102,22 @@ const QuestionScreen = ({
       justifyContent='center'
       m={0}
       maxWidth={'500px'}
+      sx={{ pt: topSpacing }}
     >
-      <Grid container direction='column' alignItems='center' spacing={1}>
-        <Grid item width={'100%'}>
-          <Grid container alignItems='center'>
+      <Grid
+        container
+        direction='column'
+        alignItems='center'
+        spacing={1}
+      >
+        <Grid
+          item
+          width={'100%'}
+        >
+          <Grid
+            container
+            alignItems='center'
+          >
             <Grid item>
               <IconButton
                 edge='start'
@@ -115,24 +131,35 @@ const QuestionScreen = ({
                 <ArrowBackIcon />
               </IconButton>
             </Grid>
-            <Grid item xs>
+            <Grid
+              item
+              xs
+            >
               <Typography variant='h4'>{title}</Typography>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item width={'100%'} m={1} padding={0}>
+        <Grid
+          item
+          width={'100%'}
+          m={1}
+          padding={0}
+        >
           <Typography
             variant='h6'
             style={{
               fontWeight: 'bold',
-              marginTop: 5,
-              marginBottom: 5,
             }}
           >
             Preostalo vrijeme: {formatTime(elapsedTime)}
           </Typography>
         </Grid>
-        <Grid item width={'100%'} m={1} padding={0}>
+        <Grid
+          item
+          width={'100%'}
+          m={1}
+          padding={0}
+        >
           <Typography variant='h5'>
             Pitanje {currentQuestionIndex + 1} / {totalQuestions}
           </Typography>
@@ -157,7 +184,10 @@ const QuestionScreen = ({
           borderRadius: 1,
         }}
       >
-        <Grid item textAlign={'center'}>
+        {/* <Grid
+          item
+          textAlign={'center'}
+        >
           <Typography
             variant='h6'
             style={{
@@ -169,10 +199,36 @@ const QuestionScreen = ({
           >
             {currentQuestion.text}
           </Typography>
+        </Grid> */}
+        <Grid item>
+          <Typography
+            variant='h6'
+            style={{ fontWeight: 'bold' }}
+          >
+            {truncatedText}
+            {isTruncated && (
+              <Button
+                onClick={toggleLines}
+                color='primary'
+              >
+                {expanded ? less : more}
+              </Button>
+            )}
+          </Typography>
         </Grid>
-        <Box sx={{ mt: '3%' }}>
+        <Box
+          sx={{
+            maxHeight: '400px', // Adjust this value based on your layout
+            overflowY: 'auto', // Makes this section specifically scrollable
+            width: '100%',
+            textAlign: 'center',
+          }}
+        >
           {currentQuestion.options.map((option, index) => (
-            <Grid item key={option}>
+            <Grid
+              item
+              key={option}
+            >
               <Button
                 variant={
                   selectedOption === index.toString() ? 'contained' : 'outlined'
@@ -189,7 +245,10 @@ const QuestionScreen = ({
                 onClick={() => handleAnswerSelection(index.toString())}
               >
                 {selectedOption === index.toString() ? (
-                  <Fade in={true} timeout={650}>
+                  <Fade
+                    in={true}
+                    timeout={650}
+                  >
                     <SportsSoccerIcon
                       sx={{ marginRight: 1, fontSize: '20px' }}
                     />

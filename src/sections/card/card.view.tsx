@@ -23,6 +23,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
+import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -40,9 +41,12 @@ export const CardView = () => {
   const currentUser = useAuthContext();
   const isCardDataArray = Array.isArray(cardData);
   const [isSingle, setIsSingle] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
 
   const fetchCardData = async (isMultiple: boolean) => {
+    setIsLoading(true);
     const targetApiSingle = `${endpoints.card.details}${cardId}`;
     const targetApiMultiple = `${endpoints.card.details}${cardId}?userId=${
       currentUser.user && currentUser.user._id
@@ -55,12 +59,15 @@ export const CardView = () => {
       setIsOpen(true);
     } catch (error) {
       setIsOpen(false);
-      setErrorMessage(
+      const message =
+        error.response?.data?.message ||
         error?.message ||
-          'Dogodila se greška prilikom dobivanja podataka o sličici!'
-      );
+        'Dogodila se greška prilikom dobivanja podataka o sličici!';
+      setErrorMessage(message);
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -108,259 +115,281 @@ export const CardView = () => {
       sx={{ padding: isMobile ? theme.spacing(1) : theme.spacing(5) }}
     >
       <Container maxWidth='lg'>
-        <Grid
-          container
-          alignItems='center'
-        >
-          <Grid
-            item
-            sx={{ my: 3 }}
+        {isLoading ? (
+          <Box
+            display={'flex'}
+            justifyContent={'center'}
+            alignContent={'center'}
+            height='100vh'
           >
-            <IconButton
-              edge='start'
-              color='primary'
-              aria-label='back to dashboard'
-              onClick={() => router.push(paths.dashboard.collection)}
+            <SkeletonDashboardLoader
+              count={6}
+              message='Učitavanje podataka o sličici...'
+            />
+          </Box>
+        ) : (
+          <>
+            {' '}
+            <Grid
+              container
+              alignItems='center'
             >
-              <ArrowBackIcon
-                sx={{ width: isMobile ? 30 : 40, height: isMobile ? 30 : 40 }}
-              />
-            </IconButton>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          spacing={5}
-        >
-          {isCardDataArray && !isSingle ? (
-            <>
               <Grid
                 item
-                xs={12}
+                sx={{ my: 3 }}
               >
-                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {cardData.map((card, index) => (
-                    <Box
-                      key={index}
+                <IconButton
+                  edge='start'
+                  color='primary'
+                  aria-label='back to dashboard'
+                  onClick={() => router.push(paths.dashboard.collection)}
+                >
+                  <ArrowBackIcon
+                    sx={{
+                      width: isMobile ? 30 : 40,
+                      height: isMobile ? 30 : 40,
+                    }}
+                  />
+                </IconButton>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              spacing={5}
+            >
+              {isCardDataArray && !isSingle ? (
+                <>
+                  <Grid
+                    item
+                    xs={12}
+                  >
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                      {cardData.map((card, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            width:
+                              cardData.length === 4
+                                ? '50%'
+                                : `${100 / cardData.length}%`,
+                            position: 'relative',
+                          }}
+                        >
+                          <CardMedia
+                            component='img'
+                            image={
+                              card?.isCollected
+                                ? card?.imageURLs[0]
+                                : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702329314/LogoHNS_j974kk.png'
+                            }
+                            alt={`Sličica ${card.ordinalNumber}`}
+                            sx={{
+                              borderRadius: isMobile ? 1 : 3,
+                              width: '100%',
+                              height: '100%',
+                            }}
+                          />
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              bottom: 0,
+                              right: 0,
+                              zIndex: 10,
+                              borderTopLeftRadius: 5,
+                              borderBottomRightRadius: 10,
+                              width: isMobile ? '20%' : '10%',
+                              height: isMobile ? '20%' : '10%',
+                              backgroundColor: alpha(
+                                theme.palette.common.black,
+                                0.5
+                              ),
+                              backdropFilter: 'blur(4px)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <Typography
+                              variant='h4'
+                              sx={{
+                                color: 'common.white',
+                              }}
+                            >
+                              {card.ordinalNumber}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={12}
+                  >
+                    <Card
                       sx={{
-                        width:
-                          cardData.length === 4
-                            ? '50%'
-                            : `${100 / cardData.length}%`,
-                        position: 'relative',
+                        height: 'auto',
+                        bgcolor: theme.palette.background.neutral,
+                        boxShadow: 3,
+                        padding: theme.spacing(2),
                       }}
                     >
-                      <CardMedia
-                        component='img'
-                        image={
-                          card?.isCollected
-                            ? card?.imageURLs[0]
-                            : 'https://res.cloudinary.com/dzg5kxbau/image/upload/v1702329314/LogoHNS_j974kk.png'
-                        }
-                        alt={`Sličica ${card.ordinalNumber}`}
-                        sx={{
-                          borderRadius: isMobile ? 1 : 3,
-                          width: '100%',
-                          height: '100%',
-                        }}
-                      />
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          bottom: 0,
-                          right: 0,
-                          zIndex: 10,
-                          borderTopLeftRadius: 5,
-                          borderBottomRightRadius: 10,
-                          width: isMobile ? '20%' : '10%',
-                          height: isMobile ? '20%' : '10%',
-                          backgroundColor: alpha(
-                            theme.palette.common.black,
-                            0.5
-                          ),
-                          backdropFilter: 'blur(4px)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
+                      <Typography
+                        variant='caption'
+                        sx={{ color: theme.palette.primary.main }}
                       >
-                        <Typography
-                          variant='h4'
-                          sx={{
-                            color: 'common.white',
-                          }}
-                        >
-                          {card.ordinalNumber}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  ))}
-                </Box>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={12}
-              >
-                <Card
-                  sx={{
-                    height: 'auto',
-                    bgcolor: theme.palette.background.neutral,
-                    boxShadow: 3,
-                    padding: theme.spacing(2),
-                  }}
-                >
-                  <Typography
-                    variant='caption'
-                    sx={{ color: theme.palette.primary.main }}
-                  >
-                    {cardData[0]?.author}
-                  </Typography>
-                  <Divider sx={{ marginY: 1 }} />
+                        {cardData[0]?.author}
+                      </Typography>
+                      <Divider sx={{ marginY: 1 }} />
 
-                  <CardContent>
-                    {!!cardData[0]?.title && (
-                      <>
+                      <CardContent>
+                        {!!cardData[0]?.title && (
+                          <>
+                            <Typography
+                              variant='caption'
+                              component='div'
+                            >
+                              {cardData[0]?.title}
+                            </Typography>
+                          </>
+                        )}
                         <Typography
-                          variant='caption'
+                          gutterBottom
+                          variant='h6'
                           component='div'
                         >
-                          {cardData[0]?.title}
+                          {cardData[0]?.event?.name}
                         </Typography>
-                      </>
-                    )}
-                    <Typography
-                      gutterBottom
-                      variant='h6'
-                      component='div'
-                    >
-                      {cardData[0]?.event?.name}
-                    </Typography>
-                  </CardContent>
-                  <Divider />
-                </Card>
-              </Grid>
-            </>
-          ) : (
-            <>
-              <Grid
-                item
-                xs={12}
-                md={6}
-              >
-                <Box sx={{ position: 'relative' }}>
-                  {cardData?.videoLink ? (
-                    <div style={{ position: 'relative', paddingTop: '56.25%' }}>
-                      <iframe
-                        src={`${cardData.videoLink}?dnt=1`}
-                        style={{
-                          position: 'absolute',
-                          top: '0',
-                          left: '0',
-                          width: '100%',
-                          height: '100%',
-                          border: '0',
-                        }}
-                        allow='fullscreen; picture-in-picture'
-                        title={cardData?.title}
-                      />
-                    </div>
-                  ) : (
-                    <>
-                      <CardMedia
-                        component='img'
-                        height='auto'
-                        image={cardData?.imageURLs[0]}
-                        alt='Sličica'
-                        sx={{ borderRadius: 2, width: '100%' }}
-                      />
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          bottom: 0,
-                          right: 0,
-                          zIndex: 10,
-                          borderTopLeftRadius: 5,
-                          borderBottomRightRadius: 10,
-                          width: isMobile ? '20%' : '10%',
-                          height: isMobile ? '20%' : '10%',
-                          backgroundColor: alpha(
-                            theme.palette.common.black,
-                            0.5
-                          ),
-                          backdropFilter: 'blur(4px)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Typography
-                          variant='h4'
-                          sx={{
-                            color: 'common.white',
-                          }}
-                        >
-                          {cardData?.ordinalNumber}
-                        </Typography>
-                      </Box>
-                    </>
-                  )}
-                </Box>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                md={6}
-              >
-                <Card
-                  sx={{
-                    height: 'auto',
-                    bgcolor: theme.palette.background.neutral,
-                    boxShadow: 3,
-                    padding: theme.spacing(2),
-                  }}
-                >
-                  <Divider />
-                  <CardContent>
-                    <Typography
-                      variant='caption'
-                      sx={{ color: theme.palette.primary.main }}
-                    >
-                      {cardData?.author}
-                    </Typography>
-                    <Typography
-                      gutterBottom
-                      variant='h5'
-                      component='div'
-                      my={3}
-                    >
-                      {cardData?.event?.name}
-                    </Typography>
-                    {!!cardData?.title && (
-                      <Typography
-                        variant='subtitle1'
-                        component='div'
-                      >
-                        {cardData?.title}
-                      </Typography>
-                    )}
-                  </CardContent>
-                  <Divider />
-                </Card>
-                {isOpen && !cardData?.isScanned && (
-                  <Button
-                    variant='contained'
-                    color='success'
-                    onClick={handleAddCardToAlbum}
-                    sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                      </CardContent>
+                      <Divider />
+                    </Card>
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
                   >
-                    Dodaj U Album
-                  </Button>
-                )}
-              </Grid>
-            </>
-          )}
-        </Grid>
+                    <Box sx={{ position: 'relative' }}>
+                      {cardData?.videoLink ? (
+                        <div
+                          style={{ position: 'relative', paddingTop: '56.25%' }}
+                        >
+                          <iframe
+                            src={`${cardData.videoLink}?dnt=1`}
+                            style={{
+                              position: 'absolute',
+                              top: '0',
+                              left: '0',
+                              width: '100%',
+                              height: '100%',
+                              border: '0',
+                            }}
+                            allow='fullscreen; picture-in-picture'
+                            title={cardData?.title}
+                          />
+                        </div>
+                      ) : (
+                        <>
+                          <CardMedia
+                            component='img'
+                            height='auto'
+                            image={cardData?.imageURLs[0]}
+                            alt='Sličica'
+                            sx={{ borderRadius: 2, width: '100%' }}
+                          />
+                          <Box
+                            sx={{
+                              position: 'absolute',
+                              bottom: 0,
+                              right: 0,
+                              zIndex: 10,
+                              borderTopLeftRadius: 5,
+                              borderBottomRightRadius: 10,
+                              width: isMobile ? '20%' : '10%',
+                              height: isMobile ? '20%' : '10%',
+                              backgroundColor: alpha(
+                                theme.palette.common.black,
+                                0.5
+                              ),
+                              backdropFilter: 'blur(4px)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <Typography
+                              variant='h4'
+                              sx={{
+                                color: 'common.white',
+                              }}
+                            >
+                              {cardData?.ordinalNumber}
+                            </Typography>
+                          </Box>
+                        </>
+                      )}
+                    </Box>
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                  >
+                    <Card
+                      sx={{
+                        height: 'auto',
+                        bgcolor: theme.palette.background.neutral,
+                        boxShadow: 3,
+                        padding: theme.spacing(2),
+                      }}
+                    >
+                      <Divider />
+                      <CardContent>
+                        <Typography
+                          variant='caption'
+                          sx={{ color: theme.palette.primary.main }}
+                        >
+                          {cardData?.author}
+                        </Typography>
+                        <Typography
+                          gutterBottom
+                          variant='h5'
+                          component='div'
+                          my={3}
+                        >
+                          {cardData?.event?.name}
+                        </Typography>
+                        {!!cardData?.title && (
+                          <Typography
+                            variant='subtitle1'
+                            component='div'
+                          >
+                            {cardData?.title}
+                          </Typography>
+                        )}
+                      </CardContent>
+                      <Divider />
+                    </Card>
+                    {isOpen && !cardData?.isScanned && (
+                      <Button
+                        variant='contained'
+                        color='success'
+                        onClick={handleAddCardToAlbum}
+                        sx={{ p: 2, mx: isMobile ? 1 : 5, ml: 0, mt: 3 }}
+                      >
+                        Dodaj U Album
+                      </Button>
+                    )}
+                  </Grid>
+                </>
+              )}
+            </Grid>
+          </>
+        )}
       </Container>
       <ErrorSnackbar
         trigger={snackbarOpen}
