@@ -19,7 +19,9 @@ axiosInstance.interceptors.response.use(
     }
     if (!error.response) {
       console.error('Network error or server is not responding');
-      return Promise.reject(new Error('Network error or server down'));
+      return Promise.reject(
+        new Error('Network error or server down')
+      );
     }
     if (error.response.status === 401) {
       if (originalRequest.url === endpoints.auth.refreshToken) {
@@ -38,7 +40,9 @@ axiosInstance.interceptors.response.use(
             axiosInstance.defaults.headers.common[
               'Authorization'
             ] = `Bearer ${accessToken}`;
-            originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
+            originalRequest.headers[
+              'Authorization'
+            ] = `Bearer ${accessToken}`;
             return axiosInstance(originalRequest);
           }
         } catch (refreshError) {
@@ -49,7 +53,9 @@ axiosInstance.interceptors.response.use(
       }
     }
     if (error.response.status === 403) {
-      console.error('You do not have permission to access this resource.');
+      console.error(
+        'You do not have permission to access this resource.'
+      );
       return Promise.reject(error);
     }
     if (error.response.status === 404) {
@@ -62,13 +68,16 @@ axiosInstance.interceptors.response.use(
     }
     console.error(`An error occurred: ${error.response.status}`);
     return Promise.reject(
-      (error.response && error.response.data) || 'Something went wrong'
+      (error.response && error.response.data) ||
+        'Something went wrong'
     );
   }
 );
 export default axiosInstance;
 
-export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
+export const fetcher = async (
+  args: string | [string, AxiosRequestConfig]
+) => {
   const [url, config] = Array.isArray(args) ? args : [args];
   const res = await axiosInstance.get(url, { ...config });
   return res.data;
@@ -78,9 +87,6 @@ export const endpoints = {
   chat: '/api/chat',
   kanban: '/api/kanban',
   calendar: '/api/calendar',
-  album: {
-    validate: '/album/validate/',
-  },
   auth: {
     me: '/auth/user',
     login: '/user/login',

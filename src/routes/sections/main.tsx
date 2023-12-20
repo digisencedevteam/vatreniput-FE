@@ -8,6 +8,12 @@ import ResetPassword from 'src/pages/ResetPassword';
 
 const Page404 = lazy(() => import('src/pages/404'));
 const Faq = lazy(() => import('src/pages/Faq'));
+const PrivacyPolicyPage = lazy(
+  () => import('src/pages/PrivacyPolicyPage')
+);
+const UsagePolicyPage = lazy(
+  () => import('src/pages/UsagePolicyPage')
+);
 const QuizPage = lazy(() => import('src/sections/quiz/index'));
 const RewardPage = lazy(() => import('src/pages/QuizRewardInfo'));
 
@@ -21,6 +27,8 @@ export const mainRoutes = [
     children: [
       { path: '404', element: <Page404 /> },
       { path: 'faq', element: <Faq /> },
+      { path: 'privacy', element: <PrivacyPolicyPage /> },
+      { path: 'usage', element: <UsagePolicyPage /> },
       { path: 'forgot-password', element: <ForgotPassword /> },
       { path: 'reset-password/:tokenId', element: <ResetPassword /> },
       { path: 'email-verified', element: <VerifyEmailPage /> },

@@ -5,6 +5,9 @@ const ROOTS = {
 
 export const paths = {
   emailVerification: '/email-verification',
+  policy: {
+    privacy: '',
+  },
   // AUTH
   auth: {
     jwt: {
