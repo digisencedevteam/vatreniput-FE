@@ -47,6 +47,29 @@ export const FAQs = [
   },
 ];
 
+export const votingInfoData = [
+  {
+    title: 'Upoznajte Vatreni Glasanje',
+    content:
+      'Vatreni Glasanje omogućuje vam da glasate za svoje omiljene igrače u Hrvatskoj nogometnoj reprezentaciji. Ovdje možete izraziti svoje mišljenje i vidjeti koji igrači su najpopularniji među navijačima za svaku poziciju na terenu.',
+  },
+  {
+    title: 'Kako sudjelovati u glasanju?',
+    content:
+      'Da biste sudjelovali u glasanju, potrebno je biti registriran član digitalne platforme Vatrenog Almanaha. Nakon prijave, možete pristupiti sekciji za glasanje i izraziti svoj glas za igrače po vašem izboru.',
+  },
+  {
+    title: 'Pravila glasanja',
+    content:
+      'Svaki korisnik može glasati samo jednom po glasanju. Odaberite igrača za svaku poziciju i potvrdite svoj izbor. Jednom kada glasate, ne možete promijeniti svoj izbor. Rezultati glasanja se ažuriraju u stvarnom vremenu i vidljivi su svim korisnicima.',
+  },
+  {
+    title: 'Značaj vašeg glasa',
+    content:
+      'Vaš glas pomaže u kreiranju najpopularnije postave Vatrenih. Kroz glasanje, zajednica navijača zajedno odlučuje koji su igrači zaslužili posebno priznanje. Uživajte u sudjelovanju i vidite kako vaši favoriti stoje među ostalim navijačima.',
+  },
+];
+
 export const CHART_HEIGHT = 400;
 
 export const LEGEND_HEIGHT = 72;

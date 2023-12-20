@@ -1,28 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Snackbar, Alert } from '@mui/material';
 
 interface ErrorSnackbarProps {
   trigger: boolean;
   severity: 'error' | 'warning' | 'info' | 'success';
   message: string;
-  onClose: () => void;
 }
 
-const ErrorSnackbar: React.FC<ErrorSnackbarProps> = ({
-  trigger,
-  severity,
-  message,
-  onClose,
-}) => {
+const ErrorSnackbar = ({ trigger, severity, message }: ErrorSnackbarProps) => {
+  const [isOpen, setIsOpen] = useState(trigger);
+
+  useEffect(() => {
+    setIsOpen(trigger);
+  }, [trigger]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Snackbar
-      open={trigger}
+      open={isOpen}
       autoHideDuration={6000}
-      onClose={onClose}
+      onClose={handleClose}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
       <Alert
-        onClose={onClose}
+        onClose={handleClose}
         severity={severity}
         sx={{ width: '100%' }}
       >

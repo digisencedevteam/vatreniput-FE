@@ -37,6 +37,7 @@ type UseVotingReturn = {
   fetchVotingResult: (
     votingId: string
   ) => Promise<Partial<VotingResultStat> | null>;
+  error: string;
 };
 
 const useVoting = (): UseVotingReturn => {
@@ -45,6 +46,15 @@ const useVoting = (): UseVotingReturn => {
   const [userVotedVotings, setUserVotedVotings] = useState<UserVotedVoting[]>(
     []
   );
+  const [error, setError] = useState<string>('');
+
+  const handleError = (
+    error: { response: { data: { message: string } } },
+    defaultMessage: string
+  ) => {
+    const message = error.response?.data?.message || defaultMessage;
+    setError(message);
+  };
 
   const fetchAllVotings = async () => {
     setIsLoading(true);
@@ -53,6 +63,7 @@ const useVoting = (): UseVotingReturn => {
       setVotings(response.data);
     } catch (error) {
       setVotings([]);
+      handleError(error, 'Greška pri dohvaćanju svih glasanja.');
     }
     setIsLoading(false);
   };
@@ -65,7 +76,7 @@ const useVoting = (): UseVotingReturn => {
       );
       setUserVotedVotings(response.data);
     } catch (error) {
-      console.error('Error fetching user voted votings:', error);
+      handleError(error, 'Greška pri dohvaćanju glasova korisnika.');
     }
     setIsLoading(false);
   };
@@ -92,17 +103,13 @@ const useVoting = (): UseVotingReturn => {
       } else {
         return {
           success: false,
-          error: `Error ${
-            votingId ? 'updating' : 'creating'
-          } voting: ${JSON.stringify(response.data)}`,
+          error: JSON.stringify(response.data),
         };
       }
     } catch (error) {
       return {
         success: false,
-        error: `Error ${
-          votingId ? 'updating' : 'creating'
-        } voting: ${JSON.stringify(error.message)}`,
+        error: JSON.stringify(error.message),
       };
     }
   };
@@ -118,7 +125,7 @@ const useVoting = (): UseVotingReturn => {
       setIsLoading(false);
       return response.data;
     } catch (error) {
-      console.error('Error fetching voting data by ID:', error);
+      handleError(error, 'Greška pri dohvaćanju detalja glasanja.');
       setIsLoading(false);
       return null;
     }
@@ -135,7 +142,7 @@ const useVoting = (): UseVotingReturn => {
       setIsLoading(false);
       return response.data;
     } catch (error) {
-      console.error('Error fetching result data by ID:', error);
+      handleError(error, 'Greška pri dohvaćanju rezultata glasanja.');
       setIsLoading(false);
       return null;
     }
@@ -148,7 +155,7 @@ const useVoting = (): UseVotingReturn => {
         votingId,
       });
     } catch (error) {
-      console.error(error);
+      handleError(error, 'Greška pri ažuriranju  glasanja.');
     }
   };
 
@@ -159,7 +166,7 @@ const useVoting = (): UseVotingReturn => {
         votingOptionId,
       });
     } catch (error) {
-      console.error(error);
+      handleError(error, 'Greška pri slanju glasanja.');
     }
   };
 
@@ -171,7 +178,7 @@ const useVoting = (): UseVotingReturn => {
           prevVotings?.filter((voting) => voting._id !== votingId)
       );
     } catch (error) {
-      console.error(error);
+      handleError(error, 'Greška prilikom brisanja glasanja');
     }
   };
 
@@ -188,6 +195,7 @@ const useVoting = (): UseVotingReturn => {
     fetchVotingResult,
     userVotedVotings,
     fetchUserVotedVotingsWithTopOption,
+    error,
   };
 };
 

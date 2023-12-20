@@ -1,4 +1,3 @@
-
 const ROOTS = {
   AUTH: '/auth',
   DASHBOARD: '/dashboard',
@@ -56,6 +55,7 @@ export const paths = {
       editVoting: `${ROOTS.DASHBOARD}/editVoting`,
       votingResults: `${ROOTS.DASHBOARD}/votingResults`,
       createVoting: `${ROOTS.DASHBOARD}/createVoting`,
+      votingInfo: `${ROOTS.DASHBOARD}/votingInfo`,
     },
   },
 };

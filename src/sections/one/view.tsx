@@ -61,10 +61,6 @@ const OneView = () => {
     }
   }, [error]);
 
-  const handleCloseSnackbar = () => {
-    setSnackbarOpen(false);
-  };
-
   const notVotedVotings = votings
     ? votings.filter((voting) => voting.isVoted === false)
     : [];
@@ -260,7 +256,6 @@ const OneView = () => {
         trigger={snackbarOpen}
         severity='error'
         message={error}
-        onClose={handleCloseSnackbar}
       />
     </Container>
   );

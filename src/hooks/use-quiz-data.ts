@@ -31,6 +31,7 @@ export type FetchQuizzesReturn = {
     limit: number
   ) => Promise<void>;
   totalPages: number;
+  fetchQuizzesError: string;
   currentPage?: number;
   itemsPerPage?: number;
   currentPageUnresolved?: number;
@@ -65,6 +66,7 @@ const useFetchQuizzes = (
   const [isLoadingResolved, setIsLoadingResolved] = useState(false);
   const [resolvedQuizzes, setResolvedQuizzes] = useState<ResolvedQuizItem[]>();
   const [totalPagesResolved, setTotalPagesResolved] = useState<number>(0);
+  const [fetchQuizzesError, setFetchQuizzesError] = useState<string>('');
 
   const fetchUnresolvedQuizzes = async () => {
     setIsLoadingUnresolved(true);
@@ -78,7 +80,9 @@ const useFetchQuizzes = (
       );
     } catch (error) {
       setUnresolvedQuizzes([]);
-      setError(error.message);
+      setFetchQuizzesError(
+        error.message || 'Greška u dohvačanju svih nejrešenih  kvizova'
+      );
     }
     setIsLoadingUnresolved(false);
   };
@@ -108,7 +112,9 @@ const useFetchQuizzes = (
       );
     } catch (error) {
       setResolvedQuizzes([]);
-      setError(error.message);
+      setFetchQuizzesError(
+        error.message || 'Greška u dohvačanju svih rješenih kvizova'
+      );
     }
     setIsLoadingResolved(false);
   };
@@ -120,6 +126,7 @@ const useFetchQuizzes = (
       setAllQuizzes(response.data);
     } catch (error) {
       setAllQuizzes([]);
+      setFetchQuizzesError(error.message || 'Greška u dohvačanju svih kvizova');
     }
     setIsLoadingResolved(false);
   };
@@ -140,7 +147,7 @@ const useFetchQuizzes = (
       setTotalPages(computedTotalPages);
       setResultsById(quizResults || null);
     } catch (error) {
-      setError('Failed to fetch quiz results. Please try again.');
+      setFetchQuizzesError(error.message || 'Greška u dohvačanju rezultata');
       setResultsById(null);
     } finally {
       setIsResultsLoading(false);
@@ -152,23 +159,26 @@ const useFetchQuizzes = (
     try {
       await axiosInstance.delete(`${endpoints.quiz.deleteAndUpdate}${quizId}`);
     } catch (error) {
+      setFetchQuizzesError('Greška u brisanju kviza');
     } finally {
       setIsDeleting(false);
       fetchQuizzes();
     }
   };
 
-  const createOrUpdateQuiz = async (quiz: Partial<Quiz>, quizId?: string) => {
-    const quizToSend = { ...quiz };
+  const createOrUpdateQuiz = async (
+    quiz: Partial<Quiz>,
+    quizId?: string
+  ): Promise<{ success: boolean; error?: string }> => {
     try {
       let response;
       if (quizId) {
         response = await axiosInstance.put(
-          endpoints.quiz.deleteAndUpdate + quizId,
-          quizToSend
+          `${endpoints.quiz.deleteAndUpdate}${quizId}`,
+          quiz
         );
       } else {
-        response = await axiosInstance.post(endpoints.quiz.new, quizToSend);
+        response = await axiosInstance.post(endpoints.quiz.new, quiz);
       }
 
       if ([200, 201].includes(response.status)) {
@@ -176,13 +186,11 @@ const useFetchQuizzes = (
       } else {
         return {
           success: false,
-          error: `Error ${quizId ? 'updating' : 'creating'} quiz: ${
-            response.data.message || JSON.stringify(response.data)
-          }`,
+          error: response.data.message || JSON.stringify(response.data),
         };
       }
     } catch (error) {
-      let errorMessage = 'An unexpected error occurred.';
+      let errorMessage = 'Greška';
       if (error.response && error.response.data) {
         errorMessage =
           error.response.data.message || JSON.stringify(error.response.data);
@@ -191,9 +199,7 @@ const useFetchQuizzes = (
       }
       return {
         success: false,
-        error: `Error ${
-          quizId ? 'updating' : 'creating'
-        } quiz: ${errorMessage}`,
+        error: errorMessage,
       };
     }
   };
@@ -271,6 +277,9 @@ const useFetchQuizzes = (
         setResolvedQuizzes(response.data.resolvedQuizzes);
       } catch (error) {
         setResolvedQuizzes([]);
+        setFetchQuizzesError(
+          error.message || 'Greška u dohvačanju rješenih kvizova'
+        );
         setIsLoadingResolved(false);
       }
     };
@@ -283,6 +292,7 @@ const useFetchQuizzes = (
     unresolvedQuizzes,
     totalPagesUnresolved,
     fetchUnresolvedQuizzes,
+    fetchQuizzesError,
 
     isLoadingResolved,
     resolvedQuizzes,

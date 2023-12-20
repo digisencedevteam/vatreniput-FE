@@ -50,15 +50,15 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
 
   const NewUserSchema = Yup.object().shape({
     firstName: Yup.string()
-      .required('First name is required')
-      .matches(/^[^0-9]*$/, 'First name cannot contain numbers'),
+      .required('Ime je obavezno')
+      .matches(/^[^0-9]*$/, 'Ime ne može sadržavati brojeve'),
     lastName: Yup.string()
-      .required('Last name is required')
-      .matches(/^[^0-9]*$/, 'Last name cannot contain numbers'),
-    username: Yup.string().required('Last name is required'),
+      .required('Prezime je obavezno')
+      .matches(/^[^0-9]*$/, 'Prezime ne može sadržavati brojeve'),
+    username: Yup.string().required('Prezime je obavezan'),
     email: Yup.string()
-      .required('Email is required')
-      .email('Email must be a valid address'),
+      .required('Email je obavezan')
+      .email('Email adresa mora biti valjana'),
     photoURL: Yup.string(),
     status: Yup.string(),
     isVerified: Yup.boolean(),
@@ -148,9 +148,19 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
 
   return (
     <>
-      <FormProvider methods={methods} onSubmit={onSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
+      <FormProvider
+        methods={methods}
+        onSubmit={onSubmit}
+      >
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            xs={12}
+            md={4}
+          >
             <Card
               sx={{
                 pt: 5,
@@ -208,7 +218,11 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={8}>
+          <Grid
+            item
+            xs={12}
+            md={8}
+          >
             <Card sx={{ p: 3 }}>
               <Box
                 rowGap={3}
@@ -265,7 +279,10 @@ const UserNewEditForm = ({ currentUser, avatarOptions }: Props) => {
                   disabled
                 />
               </Box>
-              <Stack alignItems='flex-end' sx={{ mt: 3 }}>
+              <Stack
+                alignItems='flex-end'
+                sx={{ mt: 3 }}
+              >
                 <LoadingButton
                   type='submit'
                   variant='contained'

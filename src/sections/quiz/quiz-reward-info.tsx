@@ -5,8 +5,12 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Button,
+  CardMedia,
+  useTheme,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useRouter } from 'src/routes/hooks';
 
 const quizInfoData = [
   {
@@ -32,14 +36,41 @@ const quizInfoData = [
 ];
 
 const QuizRewardInfo = () => {
+  const history = useRouter();
+  const theme = useTheme();
+  const handleGoBack = () => {
+    history.back();
+  };
   return (
     <Container maxWidth='md'>
-      <Box mt={4} mb={2} sx={{ textAlign: 'center', marginBottom: 4 }}>
+      <Box
+        mt={4}
+        mb={2}
+        sx={{ textAlign: 'center', marginBottom: 4 }}
+      >
         <Typography variant='h4'>Vatreni Kvizovi</Typography>
+        <CardMedia
+          component='img'
+          image='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
+          alt='Vatreni Kvizovi'
+          sx={{
+            width: '100%',
+            height: 'auto',
+            marginTop: 2,
+            marginBottom: 2,
+            [theme.breakpoints.down('sm')]: {
+              width: '50%',
+              margin: 'auto',
+            },
+          }}
+        />
       </Box>
 
       {quizInfoData.map((item, index) => (
-        <Accordion sx={{ my: 2 }} key={index}>
+        <Accordion
+          sx={{ my: 2 }}
+          key={index}
+        >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant='h6'>{item.title}</Typography>
           </AccordionSummary>
@@ -48,6 +79,14 @@ const QuizRewardInfo = () => {
           </AccordionDetails>
         </Accordion>
       ))}
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={handleGoBack}
+        sx={{ mt: 2 }}
+      >
+        Povratak
+      </Button>
     </Container>
   );
 };
