@@ -3,9 +3,12 @@ import { Outlet } from 'react-router-dom';
 import { GuestGuard } from 'src/auth/guard';
 import AuthClassicLayout from 'src/layouts/auth/classic';
 import { SplashScreen } from 'src/components/loading-screen';
+import { REGISTRATION_TOKEN } from '../paths';
 
 const JwtLoginPage = lazy(() => import('src/pages/auth/jwt/login'));
-const JwtRegisterPage = lazy(() => import('src/pages/auth/jwt/register'));
+const JwtRegisterPage = lazy(
+  () => import('src/pages/auth/jwt/register')
+);
 
 const authJwt = {
   path: 'jwt',
@@ -29,7 +32,7 @@ const authJwt = {
       ),
     },
     {
-      path: 'register',
+      path: `register/${REGISTRATION_TOKEN}`,
       element: (
         <AuthClassicLayout
           title='Registracija na Vatreni Put'

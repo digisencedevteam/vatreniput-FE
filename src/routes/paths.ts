@@ -2,6 +2,8 @@ const ROOTS = {
   AUTH: '/auth',
   DASHBOARD: '/dashboard',
 };
+export const REGISTRATION_TOKEN =
+  '3ca793c2-9f22-11ee-8c90-0242ac120002';
 
 export const paths = {
   emailVerification: '/email-verification',
@@ -12,7 +14,7 @@ export const paths = {
   auth: {
     jwt: {
       login: `${ROOTS.AUTH}/jwt/login`,
-      register: `${ROOTS.AUTH}/jwt/register`,
+      register: `${ROOTS.AUTH}/jwt/register/${REGISTRATION_TOKEN}`,
     },
   },
   quizRewardInfo: '/quiz-reward-info',
