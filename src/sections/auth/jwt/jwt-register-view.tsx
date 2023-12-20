@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Link from '@mui/material/Link';
@@ -10,28 +10,20 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import { useBoolean } from 'src/hooks/use-boolean';
-import { useSearchParams, useRouter } from 'src/routes/hooks';
 import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
-import InvalidAlbumPage from 'src/pages/InvalidAlbum';
-import { endpoints } from 'src/utils/axios';
-import { LoadingScreen } from 'src/components/loading-screen';
 import ContactUsForm from 'src/components/contact-us-form/ContactUsForm';
 import { paths } from 'src/routes/paths';
-import axiosInstance from 'src/utils/axios';
 import { Snackbar } from '@mui/material';
+import { useRouter } from 'src/routes/hooks';
 
 const JwtRegisterView = () => {
   const { register } = useAuthContext();
   const router = useRouter();
-  const [isAlbumValid, setIsAlbumValid] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const searchParams = useSearchParams();
   const password = useBoolean();
-  const paramValue = searchParams.get('code');
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -73,8 +65,7 @@ const JwtRegisterView = () => {
         data.password,
         data.firstName,
         data.lastName,
-        data.username || '',
-        paramValue || ''
+        data.username || ''
       );
 
       router.push(paths.emailVerification);
@@ -89,13 +80,6 @@ const JwtRegisterView = () => {
     }
   });
 
-  const isAlbumCodeValid = async (code: string) => {
-    setIsLoading(true);
-    const response = await axiosInstance.get(endpoints.album.validate + code);
-    setIsAlbumValid(response.data.isAlbumValid);
-    setIsLoading(false);
-  };
-
   const handleOpenSnackbar = (message: string) => {
     setSnackbarMessage(message);
     setSnackbarOpen(true);
@@ -108,11 +92,15 @@ const JwtRegisterView = () => {
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
       <Alert severity='success' sx={{ mb: 3 }}>
-        Tvoj album je ispravan i spreman za registraciju!
+        Dobrodošli na Vatreni Put.U samo nekoliko klikova
+        registrirajte se i krenite u digitalnu avanturu skupljanja
+        sličica!
       </Alert>
       <Typography variant='h4'>Registriraj se</Typography>
       <Stack direction='row' spacing={0.5}>
-        <Typography variant='body2'> I pokreni svoj Vatreni Put! </Typography>
+        <Typography variant='body2'>
+          I pokreni svoj Vatreni Put!
+        </Typography>
       </Stack>
     </Stack>
   );
@@ -132,7 +120,7 @@ const JwtRegisterView = () => {
         Pravilima Korištenja
       </Link>
       {' i '}
-      <Link underline='always' color='text.primary'>
+      <Link underline='always' color='text.primary' href='/privacy'>
         Politikom Privatnosti
       </Link>
       .
@@ -182,25 +170,6 @@ const JwtRegisterView = () => {
       </Stack>
     </FormProvider>
   );
-
-  useEffect(() => {
-    paramValue ? isAlbumCodeValid(paramValue || '') : router.push('/');
-  }, [paramValue, router]);
-
-  if (isLoading) {
-    return (
-      <>
-        <LoadingScreen />
-      </>
-    );
-  }
-  if (!isAlbumValid) {
-    return (
-      <>
-        <InvalidAlbumPage />
-      </>
-    );
-  }
 
   return (
     <>

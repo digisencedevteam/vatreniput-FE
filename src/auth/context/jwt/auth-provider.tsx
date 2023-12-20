@@ -16,7 +16,8 @@ export const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(true);
   const [isInitialized, setIsInitialized] = useState(false);
   const [isUpdatingUser, setIsUpdatingUser] = useState(false);
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
+  const [isUserAuthenticated, setIsUserAuthenticated] =
+    useState(false);
 
   const initialize = async () => {
     setLoading(true);
@@ -31,7 +32,9 @@ export const AuthProvider = ({ children }: Props) => {
           if (refreshResponse.data.accessToken) {
             accessToken = refreshResponse.data.accessToken;
             setSession(accessToken);
-            const userResponse = await axiosInstance.get(endpoints.auth.me);
+            const userResponse = await axiosInstance.get(
+              endpoints.auth.me
+            );
             setUser(userResponse.data.user);
             setIsUserAuthenticated(true);
           } else {
@@ -45,7 +48,9 @@ export const AuthProvider = ({ children }: Props) => {
         }
       } else if (accessToken) {
         setSession(accessToken);
-        const userResponse = await axiosInstance.get(endpoints.auth.me);
+        const userResponse = await axiosInstance.get(
+          endpoints.auth.me
+        );
         setUser(userResponse.data.user);
         setIsUserAuthenticated(true);
       } else {
@@ -56,7 +61,9 @@ export const AuthProvider = ({ children }: Props) => {
           if (refreshResponse.data.accessToken) {
             accessToken = refreshResponse.data.accessToken;
             setSession(accessToken);
-            const userResponse = await axiosInstance.get(endpoints.auth.me);
+            const userResponse = await axiosInstance.get(
+              endpoints.auth.me
+            );
             setUser(userResponse.data.user);
             setIsUserAuthenticated(true);
           } else {
@@ -84,13 +91,19 @@ export const AuthProvider = ({ children }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const login = useCallback(async (email: string, password: string) => {
-    const data = { email, password };
-    const response = await axiosInstance.post(endpoints.auth.login, data);
-    setSession(response.data.accessToken);
-    setUser(response.data.user);
-    setIsUserAuthenticated(true);
-  }, []);
+  const login = useCallback(
+    async (email: string, password: string) => {
+      const data = { email, password };
+      const response = await axiosInstance.post(
+        endpoints.auth.login,
+        data
+      );
+      setSession(response.data.accessToken);
+      setUser(response.data.user);
+      setIsUserAuthenticated(true);
+    },
+    []
+  );
 
   const updateUserContext = useCallback((newUser: any) => {
     setUser(newUser);
@@ -102,15 +115,23 @@ export const AuthProvider = ({ children }: Props) => {
       password: string,
       firstName: string,
       lastName: string,
-      username: string,
-      code: string
+      username: string
     ) => {
-      const data = { email, password, firstName, lastName, username, code };
+      const data = {
+        email,
+        password,
+        firstName,
+        lastName,
+        username,
+      };
       const response = await axiosInstance.post(
-        endpoints.auth.register + code,
+        endpoints.auth.register,
         data
       );
-      sessionStorage.setItem('accessToken', response.data.accessToken);
+      sessionStorage.setItem(
+        'accessToken',
+        response.data.accessToken
+      );
       setUser(response.data.user);
     },
     []
