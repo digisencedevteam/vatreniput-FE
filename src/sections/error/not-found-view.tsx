@@ -9,14 +9,17 @@ const NotFoundView = () => {
   return (
     <MotionContainer>
       <m.div variants={varBounce().in}>
-        <Typography variant='h3' sx={{ mb: 2 }}>
-          Sorry, Page Not Found!
+        <Typography
+          variant='h3'
+          sx={{ mb: 2 }}
+        >
+          Nažalost, stranica nije pronađena!
         </Typography>
       </m.div>
       <m.div variants={varBounce().in}>
         <Typography sx={{ color: 'text.secondary' }}>
-          Sorry, we couldn’t find the page you’re looking for. Perhaps you’ve
-          mistyped the URL? Be sure to check your spelling.
+          Nažalost, nismo mogli pronaći stranicu koju tražite. Možda ste
+          pogrešno utipkali URL?
         </Typography>
       </m.div>
       <m.div variants={varBounce().in}>
@@ -27,8 +30,13 @@ const NotFoundView = () => {
           }}
         />
       </m.div>
-      <Button component={RouterLink} href='/' size='large' variant='contained'>
-        Go to Home
+      <Button
+        component={RouterLink}
+        href='/'
+        size='large'
+        variant='contained'
+      >
+        Povratak na početnu
       </Button>
     </MotionContainer>
   );

@@ -23,7 +23,7 @@ import { useAuthContext } from 'src/auth/hooks';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from 'src/routes/hooks';
 import ErrorSnackbar from 'src/components/error-snackbar/ErrorSnackbar';
-import { SkeletonDashboardLoader } from 'src/components/skeleton-loader/skeleton-loader-dashboard';
+import { SkeletonCardLoader } from 'src/components/skeleton-loader/skeleton-card-vew';
 
 export const CardView = () => {
   const { cardId } = useParams();
@@ -60,12 +60,11 @@ export const CardView = () => {
       setIsOpen(false);
       const errorMessage =
         error.response?.data?.message || error.message || 'Dogodila se greška';
-      console.error('Error fetching card data:', errorMessage);
       setSnackbarMessage(errorMessage);
       setSnackbarSeverity('error');
       setSnackbarOpen(true);
     } finally {
-      setIsLoading(false);
+      setIsLoading(true);
     }
   };
 
@@ -120,10 +119,7 @@ export const CardView = () => {
             alignContent={'center'}
             height='100vh'
           >
-            <SkeletonDashboardLoader
-              count={6}
-              message='Učitavanje podataka o sličici...'
-            />
+            <SkeletonCardLoader message='Učitavanje podataka o sličici...' />
           </Box>
         ) : (
           <>

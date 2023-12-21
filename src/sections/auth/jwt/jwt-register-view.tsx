@@ -90,17 +90,23 @@ const JwtRegisterView = () => {
   };
 
   const renderHead = (
-    <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
-      <Alert severity='success' sx={{ mb: 3 }}>
-        Dobrodošli na Vatreni Put.U samo nekoliko klikova
-        registrirajte se i krenite u digitalnu avanturu skupljanja
-        sličica!
+    <Stack
+      spacing={2}
+      sx={{ mb: 5, position: 'relative' }}
+    >
+      <Alert
+        severity='success'
+        sx={{ mb: 3 }}
+      >
+        Dobrodošli na Vatreni Put.U samo nekoliko klikova registrirajte se i
+        krenite u digitalnu avanturu skupljanja sličica!
       </Alert>
       <Typography variant='h4'>Registriraj se</Typography>
-      <Stack direction='row' spacing={0.5}>
-        <Typography variant='body2'>
-          I pokreni svoj Vatreni Put!
-        </Typography>
+      <Stack
+        direction='row'
+        spacing={0.5}
+      >
+        <Typography variant='body2'>I pokreni svoj Vatreni Put!</Typography>
       </Stack>
     </Stack>
   );
@@ -116,11 +122,19 @@ const JwtRegisterView = () => {
       }}
     >
       {'Kreiranjem računa upoznat sam sa '}
-      <Link underline='always' color='text.primary'>
+      <Link
+        underline='always'
+        color='text.primary'
+        href='/usage'
+      >
         Pravilima Korištenja
       </Link>
       {' i '}
-      <Link underline='always' color='text.primary' href='/privacy'>
+      <Link
+        underline='always'
+        color='text.primary'
+        href='/privacy'
+      >
         Politikom Privatnosti
       </Link>
       .
@@ -128,14 +142,32 @@ const JwtRegisterView = () => {
   );
 
   const renderForm = (
-    <FormProvider methods={methods} onSubmit={onSubmit}>
+    <FormProvider
+      methods={methods}
+      onSubmit={onSubmit}
+    >
       <Stack spacing={2.5}>
-        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-          <RHFTextField name='firstName' label='Ime' />
-          <RHFTextField name='lastName' label='Prezime' />
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={2}
+        >
+          <RHFTextField
+            name='firstName'
+            label='Ime'
+          />
+          <RHFTextField
+            name='lastName'
+            label='Prezime'
+          />
         </Stack>
-        <RHFTextField name='email' label='Email adresa' />
-        <RHFTextField name='username' label='Korisničko Ime' />
+        <RHFTextField
+          name='email'
+          label='Email adresa'
+        />
+        <RHFTextField
+          name='username'
+          label='Korisničko Ime'
+        />
         <RHFTextField
           name='password'
           label='Lozinka'
@@ -143,7 +175,10 @@ const JwtRegisterView = () => {
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
-                <IconButton onClick={password.onToggle} edge='end'>
+                <IconButton
+                  onClick={password.onToggle}
+                  edge='end'
+                >
                   <Iconify
                     icon={
                       password.value
