@@ -29,7 +29,7 @@ function PageNotFoundIllustration({ ...other }: BoxProps) {
     >
       <BackgroundShape />
 
-      <path
+      {/* <path
         fill={PRIMARY_DARKER}
         d='M244.9 182.5c82.3 1.4 82.2 123.8 0 125.2-82.3-1.5-82.3-123.8 0-125.2zm0 23.1c-51.8.9-51.8 77.9 0 78.8 51.8-.9 51.7-77.9 0-78.8z'
       />
@@ -43,7 +43,7 @@ function PageNotFoundIllustration({ ...other }: BoxProps) {
         fill={PRIMARY_MAIN}
         d='M425.6 118.2c0-5-4.6-9-9.6-8.2-2-3.7-6-6-10.2-5.9 4.3-21.4-30-21.4-25.7 0-8.7-.8-15.1 9.4-10.4 16.8 2.1 3.5 5.9 5.6 10 5.5h38.7v-.1c4.1-.4 7.2-3.9 7.2-8.1zM104.3 200c.1-4.2-4.1-7.8-8.2-7-1.7-3.2-5.1-5.1-8.8-5 3.8-18.4-25.8-18.4-22 0-7.4-.7-12.9 8.1-8.9 14.4 1.8 3 5.1 4.8 8.6 4.7h33.2v-.1c3.4-.4 6.1-3.4 6.1-7z'
         opacity='0.08'
-      />
+      /> */}
 
       <image
         href='https://res.cloudinary.com/dzg5kxbau/image/upload/v1695824037/vatroslav_upute_2_xjcpuj.png'
